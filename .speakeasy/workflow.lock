@@ -1,27 +1,27 @@
-speakeasyVersion: 1.700.1
+speakeasyVersion: 1.700.2
 sources:
     latest:
-        sourceNamespace: api-latest
-        sourceRevisionDigest: sha256:e38a420d4ebcffb0a6a3688e8cf934f7e721137db47731f1be483cb280e8112d
-        sourceBlobDigest: sha256:7aba8fc2dfc6035a559bf08ae7a5f5f52f43dd5f0962049fd1dd7b553c25e054
+        sourceNamespace: api-v2025.01.00
+        sourceRevisionDigest: sha256:d5a093cd092d629d3476e059c3cb14400b4dfae45f34803435268f6b0165af37
+        sourceBlobDigest: sha256:1bcfc75f85e6fd842b7c789054e09ec347ec3204eb8028ba33aa8669ce56f435
         tags:
             - latest
-            - speakeasy-sdk-regen-1769560519
+            - speakeasy-sdk-regen-releases-2025.01-1769626839
 targets:
     latest:
         source: latest
-        sourceNamespace: api-latest
-        sourceRevisionDigest: sha256:e38a420d4ebcffb0a6a3688e8cf934f7e721137db47731f1be483cb280e8112d
-        sourceBlobDigest: sha256:7aba8fc2dfc6035a559bf08ae7a5f5f52f43dd5f0962049fd1dd7b553c25e054
+        sourceNamespace: api-v2025.01.00
+        sourceRevisionDigest: sha256:d5a093cd092d629d3476e059c3cb14400b4dfae45f34803435268f6b0165af37
+        sourceBlobDigest: sha256:1bcfc75f85e6fd842b7c789054e09ec347ec3204eb8028ba33aa8669ce56f435
         codeSamplesNamespace: latest-java-code-samples
-        codeSamplesRevisionDigest: sha256:289dba6d345f9cd5d6b7939968d391db254ff3f91a0a194c73017ae1d9d53b67
+        codeSamplesRevisionDigest: sha256:22bafbe1d08aa62cc83f976a95d6b62a1377e03621628301133a3fd1f278b44d
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         latest:
             inputs:
-                - location: registry.speakeasyapi.dev/moov/moov/api-latest
+                - location: registry.speakeasyapi.dev/moov/moov/api-v2025.01.00
             registry:
                 location: registry.speakeasyapi.dev/moov/moov/latest
     targets:

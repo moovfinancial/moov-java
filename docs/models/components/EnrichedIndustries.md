@@ -5,4 +5,4 @@
 
 | Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
 | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `industries`                                                           | List\<[IndustryTaxonomy](../../models/components/IndustryTaxonomy.md)> | :heavy_check_mark:                                                     | N/A                                                                    |
+| `industries`                                                           | List\<[EnrichedIndustry](../../models/components/EnrichedIndustry.md)> | :heavy_check_mark:                                                     | N/A                                                                    |

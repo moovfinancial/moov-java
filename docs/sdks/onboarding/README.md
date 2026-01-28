@@ -61,6 +61,8 @@ public class Application {
                     CapabilityID.TRANSFERS))
                 .feePlanCodes(List.of(
                     "merchant-direct"))
+                .grantScopes(List.of(
+                    ApplicationScope.TRANSFERS_WRITE))
                 .prefill(CreateAccount.builder()
                     .accountType(CreateAccountType.BUSINESS)
                     .profile(CreateProfile.builder()

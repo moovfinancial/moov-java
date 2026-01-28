@@ -52,6 +52,15 @@ public class OnboardingInvite {
     private List<ApplicationScope> scopes;
 
     /**
+     * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+     * by the new account on yourself. These values are used to determine what the account onboarded can
+     * do.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grantScopes")
+    private Optional<? extends List<ApplicationScope>> grantScopes;
+
+    /**
      * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for
      * this
      * account. These values are used to determine what information to collect from the user during
@@ -106,6 +115,7 @@ public class OnboardingInvite {
             @JsonProperty("returnURL") Optional<String> returnURL,
             @JsonProperty("termsOfServiceURL") Optional<String> termsOfServiceURL,
             @JsonProperty("scopes") List<ApplicationScope> scopes,
+            @JsonProperty("grantScopes") Optional<? extends List<ApplicationScope>> grantScopes,
             @JsonProperty("capabilities") List<CapabilityID> capabilities,
             @JsonProperty("feePlanCodes") List<String> feePlanCodes,
             @JsonProperty("redeemedAccountID") Optional<String> redeemedAccountID,
@@ -119,6 +129,7 @@ public class OnboardingInvite {
         Utils.checkNotNull(returnURL, "returnURL");
         Utils.checkNotNull(termsOfServiceURL, "termsOfServiceURL");
         Utils.checkNotNull(scopes, "scopes");
+        Utils.checkNotNull(grantScopes, "grantScopes");
         Utils.checkNotNull(capabilities, "capabilities");
         Utils.checkNotNull(feePlanCodes, "feePlanCodes");
         Utils.checkNotNull(redeemedAccountID, "redeemedAccountID");
@@ -132,6 +143,7 @@ public class OnboardingInvite {
         this.returnURL = returnURL;
         this.termsOfServiceURL = termsOfServiceURL;
         this.scopes = scopes;
+        this.grantScopes = grantScopes;
         this.capabilities = capabilities;
         this.feePlanCodes = feePlanCodes;
         this.redeemedAccountID = redeemedAccountID;
@@ -150,10 +162,10 @@ public class OnboardingInvite {
             List<String> feePlanCodes,
             OffsetDateTime createdOn) {
         this(code, link, Optional.empty(),
-            Optional.empty(), scopes, capabilities,
-            feePlanCodes, Optional.empty(), Optional.empty(),
-            Optional.empty(), createdOn, Optional.empty(),
-            Optional.empty());
+            Optional.empty(), scopes, Optional.empty(),
+            capabilities, feePlanCodes, Optional.empty(),
+            Optional.empty(), Optional.empty(), createdOn,
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -195,6 +207,17 @@ public class OnboardingInvite {
     @JsonIgnore
     public List<ApplicationScope> scopes() {
         return scopes;
+    }
+
+    /**
+     * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+     * by the new account on yourself. These values are used to determine what the account onboarded can
+     * do.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<ApplicationScope>> grantScopes() {
+        return (Optional<List<ApplicationScope>>) grantScopes;
     }
 
     /**
@@ -326,6 +349,29 @@ public class OnboardingInvite {
     }
 
     /**
+     * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+     * by the new account on yourself. These values are used to determine what the account onboarded can
+     * do.
+     */
+    public OnboardingInvite withGrantScopes(List<ApplicationScope> grantScopes) {
+        Utils.checkNotNull(grantScopes, "grantScopes");
+        this.grantScopes = Optional.ofNullable(grantScopes);
+        return this;
+    }
+
+
+    /**
+     * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+     * by the new account on yourself. These values are used to determine what the account onboarded can
+     * do.
+     */
+    public OnboardingInvite withGrantScopes(Optional<? extends List<ApplicationScope>> grantScopes) {
+        Utils.checkNotNull(grantScopes, "grantScopes");
+        this.grantScopes = grantScopes;
+        return this;
+    }
+
+    /**
      * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for
      * this
      * account. These values are used to determine what information to collect from the user during
@@ -444,6 +490,7 @@ public class OnboardingInvite {
             Utils.enhancedDeepEquals(this.returnURL, other.returnURL) &&
             Utils.enhancedDeepEquals(this.termsOfServiceURL, other.termsOfServiceURL) &&
             Utils.enhancedDeepEquals(this.scopes, other.scopes) &&
+            Utils.enhancedDeepEquals(this.grantScopes, other.grantScopes) &&
             Utils.enhancedDeepEquals(this.capabilities, other.capabilities) &&
             Utils.enhancedDeepEquals(this.feePlanCodes, other.feePlanCodes) &&
             Utils.enhancedDeepEquals(this.redeemedAccountID, other.redeemedAccountID) &&
@@ -458,10 +505,10 @@ public class OnboardingInvite {
     public int hashCode() {
         return Utils.enhancedHash(
             code, link, returnURL,
-            termsOfServiceURL, scopes, capabilities,
-            feePlanCodes, redeemedAccountID, prefill,
-            partner, createdOn, revokedOn,
-            redeemedOn);
+            termsOfServiceURL, scopes, grantScopes,
+            capabilities, feePlanCodes, redeemedAccountID,
+            prefill, partner, createdOn,
+            revokedOn, redeemedOn);
     }
     
     @Override
@@ -472,6 +519,7 @@ public class OnboardingInvite {
                 "returnURL", returnURL,
                 "termsOfServiceURL", termsOfServiceURL,
                 "scopes", scopes,
+                "grantScopes", grantScopes,
                 "capabilities", capabilities,
                 "feePlanCodes", feePlanCodes,
                 "redeemedAccountID", redeemedAccountID,
@@ -494,6 +542,8 @@ public class OnboardingInvite {
         private Optional<String> termsOfServiceURL = Optional.empty();
 
         private List<ApplicationScope> scopes;
+
+        private Optional<? extends List<ApplicationScope>> grantScopes = Optional.empty();
 
         private List<CapabilityID> capabilities;
 
@@ -581,6 +631,29 @@ public class OnboardingInvite {
         public Builder scopes(List<ApplicationScope> scopes) {
             Utils.checkNotNull(scopes, "scopes");
             this.scopes = scopes;
+            return this;
+        }
+
+
+        /**
+         * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+         * by the new account on yourself. These values are used to determine what the account onboarded can
+         * do.
+         */
+        public Builder grantScopes(List<ApplicationScope> grantScopes) {
+            Utils.checkNotNull(grantScopes, "grantScopes");
+            this.grantScopes = Optional.ofNullable(grantScopes);
+            return this;
+        }
+
+        /**
+         * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+         * by the new account on yourself. These values are used to determine what the account onboarded can
+         * do.
+         */
+        public Builder grantScopes(Optional<? extends List<ApplicationScope>> grantScopes) {
+            Utils.checkNotNull(grantScopes, "grantScopes");
+            this.grantScopes = grantScopes;
             return this;
         }
 
@@ -695,10 +768,10 @@ public class OnboardingInvite {
 
             return new OnboardingInvite(
                 code, link, returnURL,
-                termsOfServiceURL, scopes, capabilities,
-                feePlanCodes, redeemedAccountID, prefill,
-                partner, createdOn, revokedOn,
-                redeemedOn);
+                termsOfServiceURL, scopes, grantScopes,
+                capabilities, feePlanCodes, redeemedAccountID,
+                prefill, partner, createdOn,
+                revokedOn, redeemedOn);
         }
 
     }

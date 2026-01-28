@@ -43,6 +43,15 @@ public class OnboardingInviteRequest {
     private List<ApplicationScope> scopes;
 
     /**
+     * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+     * by the new account on yourself. These values are used to determine what the account onboarded can
+     * do.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grantScopes")
+    private Optional<? extends List<ApplicationScope>> grantScopes;
+
+    /**
      * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for
      * this
      * account. These values are used to determine what information to collect from the user during
@@ -67,18 +76,21 @@ public class OnboardingInviteRequest {
             @JsonProperty("returnURL") Optional<String> returnURL,
             @JsonProperty("termsOfServiceURL") Optional<String> termsOfServiceURL,
             @JsonProperty("scopes") List<ApplicationScope> scopes,
+            @JsonProperty("grantScopes") Optional<? extends List<ApplicationScope>> grantScopes,
             @JsonProperty("capabilities") List<CapabilityID> capabilities,
             @JsonProperty("feePlanCodes") List<String> feePlanCodes,
             @JsonProperty("prefill") Optional<? extends CreateAccount> prefill) {
         Utils.checkNotNull(returnURL, "returnURL");
         Utils.checkNotNull(termsOfServiceURL, "termsOfServiceURL");
         Utils.checkNotNull(scopes, "scopes");
+        Utils.checkNotNull(grantScopes, "grantScopes");
         Utils.checkNotNull(capabilities, "capabilities");
         Utils.checkNotNull(feePlanCodes, "feePlanCodes");
         Utils.checkNotNull(prefill, "prefill");
         this.returnURL = returnURL;
         this.termsOfServiceURL = termsOfServiceURL;
         this.scopes = scopes;
+        this.grantScopes = grantScopes;
         this.capabilities = capabilities;
         this.feePlanCodes = feePlanCodes;
         this.prefill = prefill;
@@ -89,7 +101,8 @@ public class OnboardingInviteRequest {
             List<CapabilityID> capabilities,
             List<String> feePlanCodes) {
         this(Optional.empty(), Optional.empty(), scopes,
-            capabilities, feePlanCodes, Optional.empty());
+            Optional.empty(), capabilities, feePlanCodes,
+            Optional.empty());
     }
 
     /**
@@ -115,6 +128,17 @@ public class OnboardingInviteRequest {
     @JsonIgnore
     public List<ApplicationScope> scopes() {
         return scopes;
+    }
+
+    /**
+     * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+     * by the new account on yourself. These values are used to determine what the account onboarded can
+     * do.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<ApplicationScope>> grantScopes() {
+        return (Optional<List<ApplicationScope>>) grantScopes;
     }
 
     /**
@@ -196,6 +220,29 @@ public class OnboardingInviteRequest {
     }
 
     /**
+     * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+     * by the new account on yourself. These values are used to determine what the account onboarded can
+     * do.
+     */
+    public OnboardingInviteRequest withGrantScopes(List<ApplicationScope> grantScopes) {
+        Utils.checkNotNull(grantScopes, "grantScopes");
+        this.grantScopes = Optional.ofNullable(grantScopes);
+        return this;
+    }
+
+
+    /**
+     * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+     * by the new account on yourself. These values are used to determine what the account onboarded can
+     * do.
+     */
+    public OnboardingInviteRequest withGrantScopes(Optional<? extends List<ApplicationScope>> grantScopes) {
+        Utils.checkNotNull(grantScopes, "grantScopes");
+        this.grantScopes = grantScopes;
+        return this;
+    }
+
+    /**
      * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for
      * this
      * account. These values are used to determine what information to collect from the user during
@@ -242,6 +289,7 @@ public class OnboardingInviteRequest {
             Utils.enhancedDeepEquals(this.returnURL, other.returnURL) &&
             Utils.enhancedDeepEquals(this.termsOfServiceURL, other.termsOfServiceURL) &&
             Utils.enhancedDeepEquals(this.scopes, other.scopes) &&
+            Utils.enhancedDeepEquals(this.grantScopes, other.grantScopes) &&
             Utils.enhancedDeepEquals(this.capabilities, other.capabilities) &&
             Utils.enhancedDeepEquals(this.feePlanCodes, other.feePlanCodes) &&
             Utils.enhancedDeepEquals(this.prefill, other.prefill);
@@ -251,7 +299,8 @@ public class OnboardingInviteRequest {
     public int hashCode() {
         return Utils.enhancedHash(
             returnURL, termsOfServiceURL, scopes,
-            capabilities, feePlanCodes, prefill);
+            grantScopes, capabilities, feePlanCodes,
+            prefill);
     }
     
     @Override
@@ -260,6 +309,7 @@ public class OnboardingInviteRequest {
                 "returnURL", returnURL,
                 "termsOfServiceURL", termsOfServiceURL,
                 "scopes", scopes,
+                "grantScopes", grantScopes,
                 "capabilities", capabilities,
                 "feePlanCodes", feePlanCodes,
                 "prefill", prefill);
@@ -273,6 +323,8 @@ public class OnboardingInviteRequest {
         private Optional<String> termsOfServiceURL = Optional.empty();
 
         private List<ApplicationScope> scopes;
+
+        private Optional<? extends List<ApplicationScope>> grantScopes = Optional.empty();
 
         private List<CapabilityID> capabilities;
 
@@ -335,6 +387,29 @@ public class OnboardingInviteRequest {
 
 
         /**
+         * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+         * by the new account on yourself. These values are used to determine what the account onboarded can
+         * do.
+         */
+        public Builder grantScopes(List<ApplicationScope> grantScopes) {
+            Utils.checkNotNull(grantScopes, "grantScopes");
+            this.grantScopes = Optional.ofNullable(grantScopes);
+            return this;
+        }
+
+        /**
+         * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+         * by the new account on yourself. These values are used to determine what the account onboarded can
+         * do.
+         */
+        public Builder grantScopes(Optional<? extends List<ApplicationScope>> grantScopes) {
+            Utils.checkNotNull(grantScopes, "grantScopes");
+            this.grantScopes = grantScopes;
+            return this;
+        }
+
+
+        /**
          * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for
          * this
          * account. These values are used to determine what information to collect from the user during
@@ -373,7 +448,8 @@ public class OnboardingInviteRequest {
 
             return new OnboardingInviteRequest(
                 returnURL, termsOfServiceURL, scopes,
-                capabilities, feePlanCodes, prefill);
+                grantScopes, capabilities, feePlanCodes,
+                prefill);
         }
 
     }

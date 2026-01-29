@@ -5,14 +5,14 @@ management:
   docVersion: v2025.01.00
   speakeasyVersion: 1.700.2
   generationVersion: 2.801.2
-  releaseVersion: 25.1.0-dev.1
-  configChecksum: 47b02368942b79a07ade29b9ef4f993d
+  releaseVersion: 25.1.0-dev.2
+  configChecksum: 1bfa4f5f4d854cb2f5fb0ba4ee193232
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 persistentEdits:
-  generation_id: 773d5d54-6923-4ad3-a17c-5e965922ce85
-  pristine_commit_hash: 154ecc47ab16d1d43d991f628c2e3eed85ec7542
-  pristine_tree_hash: 26eb090d7f33b8309a5a6bb0dabf66c5a50f3720
+  generation_id: 61ab64bb-1116-468d-9914-35d669262a88
+  pristine_commit_hash: ecca3bfba6813e3c23cce5a24cf857e1d3325a92
+  pristine_tree_hash: 96c127f0e82bf4a0213fda7cfca03e2386eeacd0
 features:
   java:
     acceptHeaders: 2.81.2
@@ -3817,8 +3817,8 @@ trackedFiles:
     pristine_git_object: 5a1311f65cc22d82e0ed6eafb4b10f581d3ed7c5
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:1480862d984a2ca934cbb7bdd27dbb8137ed288b
-    pristine_git_object: fc26bafaf4f69e49ce1ba4274364e6c0b40cd51b
+    last_write_checksum: sha1:a35982a5dda612ee8a20900e4ecd87fc0e19cd99
+    pristine_git_object: 344be3109499a4a4d21e0d61a2bb2f6237c9fe85
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -3989,8 +3989,8 @@ trackedFiles:
     pristine_git_object: 64047d75ebffa5dbfe6b7461ed4d624f01890a51
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:11dc4d59a2fd7e4a38eafd4315b8bda62510d43a
-    pristine_git_object: e869791b2abd0165a16694832e4e4ba837073653
+    last_write_checksum: sha1:65658e0dcd0229febc2752d08627710bab1ba5d7
+    pristine_git_object: b1ced21e2b1b86a9ba858eb2681694dc102a1fa3
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:f2634b766e3dc03d4f3043aff0565c655dcf17be

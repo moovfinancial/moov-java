@@ -10,12 +10,6 @@ Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-* [save](#save) - Create or update the account's underwriting.
-
-Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 * [upsert](#upsert) - Create or update the account's underwriting.
 
 Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
@@ -81,73 +75,6 @@ public class Application {
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
-
-## save
-
-Create or update the account's underwriting.
-
-Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/profile.write` scope.
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="saveUnderwriting" method="post" path="/accounts/{accountID}/underwriting" -->
-```java
-package hello.world;
-
-import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.components.UpsertUnderwriting;
-import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.UpsertUnderwritingError;
-import io.moov.sdk.models.operations.SaveUnderwritingResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws GenericError, UpsertUnderwritingError, Exception {
-
-        Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
-                .security(Security.builder()
-                    .username("")
-                    .password("")
-                    .build())
-            .build();
-
-        SaveUnderwritingResponse res = sdk.underwriting().save()
-                .accountID("ffe3ca1b-de3f-4305-8d8c-cfd28f279cad")
-                .upsertUnderwriting(UpsertUnderwriting.builder()
-                    .build())
-                .call();
-
-        if (res.underwriting().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `accountID`                                                         | *String*                                                            | :heavy_check_mark:                                                  | N/A                                                                 |
-| `upsertUnderwriting`                                                | [UpsertUnderwriting](../../models/components/UpsertUnderwriting.md) | :heavy_check_mark:                                                  | N/A                                                                 |
-
-### Response
-
-**[SaveUnderwritingResponse](../../models/operations/SaveUnderwritingResponse.md)**
-
-### Errors
-
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| models/errors/GenericError            | 400, 409                              | application/json                      |
-| models/errors/UpsertUnderwritingError | 422                                   | application/json                      |
-| models/errors/APIException            | 4XX, 5XX                              | \*/\*                                 |
 
 ## upsert
 

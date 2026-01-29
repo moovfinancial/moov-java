@@ -64,13 +64,6 @@ public class TransferSource {
     private Optional<? extends ApplePayResponse> applePay;
 
     /**
-     * Describes payment card details captured with tap or in-person payment.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("terminalCard")
-    private Optional<? extends TerminalCard> terminalCard;
-
-    /**
      * Card-specific details about the transaction.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -94,7 +87,6 @@ public class TransferSource {
             @JsonProperty("wallet") Optional<? extends PaymentMethodsWallet> wallet,
             @JsonProperty("card") Optional<? extends PaymentMethodsCard> card,
             @JsonProperty("applePay") Optional<? extends ApplePayResponse> applePay,
-            @JsonProperty("terminalCard") Optional<? extends TerminalCard> terminalCard,
             @JsonProperty("cardDetails") Optional<? extends CardTransactionDetails> cardDetails,
             @JsonProperty("achDetails") Optional<? extends ACHTransactionDetails> achDetails) {
         Utils.checkNotNull(transferID, "transferID");
@@ -105,7 +97,6 @@ public class TransferSource {
         Utils.checkNotNull(wallet, "wallet");
         Utils.checkNotNull(card, "card");
         Utils.checkNotNull(applePay, "applePay");
-        Utils.checkNotNull(terminalCard, "terminalCard");
         Utils.checkNotNull(cardDetails, "cardDetails");
         Utils.checkNotNull(achDetails, "achDetails");
         this.transferID = transferID;
@@ -116,7 +107,6 @@ public class TransferSource {
         this.wallet = wallet;
         this.card = card;
         this.applePay = applePay;
-        this.terminalCard = terminalCard;
         this.cardDetails = cardDetails;
         this.achDetails = achDetails;
     }
@@ -128,7 +118,7 @@ public class TransferSource {
         this(Optional.empty(), paymentMethodID, paymentMethodType,
             account, Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty());
     }
 
     /**
@@ -188,15 +178,6 @@ public class TransferSource {
     @JsonIgnore
     public Optional<ApplePayResponse> applePay() {
         return (Optional<ApplePayResponse>) applePay;
-    }
-
-    /**
-     * Describes payment card details captured with tap or in-person payment.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<TerminalCard> terminalCard() {
-        return (Optional<TerminalCard>) terminalCard;
     }
 
     /**
@@ -333,25 +314,6 @@ public class TransferSource {
     }
 
     /**
-     * Describes payment card details captured with tap or in-person payment.
-     */
-    public TransferSource withTerminalCard(TerminalCard terminalCard) {
-        Utils.checkNotNull(terminalCard, "terminalCard");
-        this.terminalCard = Optional.ofNullable(terminalCard);
-        return this;
-    }
-
-
-    /**
-     * Describes payment card details captured with tap or in-person payment.
-     */
-    public TransferSource withTerminalCard(Optional<? extends TerminalCard> terminalCard) {
-        Utils.checkNotNull(terminalCard, "terminalCard");
-        this.terminalCard = terminalCard;
-        return this;
-    }
-
-    /**
      * Card-specific details about the transaction.
      */
     public TransferSource withCardDetails(CardTransactionDetails cardDetails) {
@@ -407,7 +369,6 @@ public class TransferSource {
             Utils.enhancedDeepEquals(this.wallet, other.wallet) &&
             Utils.enhancedDeepEquals(this.card, other.card) &&
             Utils.enhancedDeepEquals(this.applePay, other.applePay) &&
-            Utils.enhancedDeepEquals(this.terminalCard, other.terminalCard) &&
             Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails) &&
             Utils.enhancedDeepEquals(this.achDetails, other.achDetails);
     }
@@ -417,8 +378,8 @@ public class TransferSource {
         return Utils.enhancedHash(
             transferID, paymentMethodID, paymentMethodType,
             account, bankAccount, wallet,
-            card, applePay, terminalCard,
-            cardDetails, achDetails);
+            card, applePay, cardDetails,
+            achDetails);
     }
     
     @Override
@@ -432,7 +393,6 @@ public class TransferSource {
                 "wallet", wallet,
                 "card", card,
                 "applePay", applePay,
-                "terminalCard", terminalCard,
                 "cardDetails", cardDetails,
                 "achDetails", achDetails);
     }
@@ -455,8 +415,6 @@ public class TransferSource {
         private Optional<? extends PaymentMethodsCard> card = Optional.empty();
 
         private Optional<? extends ApplePayResponse> applePay = Optional.empty();
-
-        private Optional<? extends TerminalCard> terminalCard = Optional.empty();
 
         private Optional<? extends CardTransactionDetails> cardDetails = Optional.empty();
 
@@ -581,25 +539,6 @@ public class TransferSource {
 
 
         /**
-         * Describes payment card details captured with tap or in-person payment.
-         */
-        public Builder terminalCard(TerminalCard terminalCard) {
-            Utils.checkNotNull(terminalCard, "terminalCard");
-            this.terminalCard = Optional.ofNullable(terminalCard);
-            return this;
-        }
-
-        /**
-         * Describes payment card details captured with tap or in-person payment.
-         */
-        public Builder terminalCard(Optional<? extends TerminalCard> terminalCard) {
-            Utils.checkNotNull(terminalCard, "terminalCard");
-            this.terminalCard = terminalCard;
-            return this;
-        }
-
-
-        /**
          * Card-specific details about the transaction.
          */
         public Builder cardDetails(CardTransactionDetails cardDetails) {
@@ -641,8 +580,8 @@ public class TransferSource {
             return new TransferSource(
                 transferID, paymentMethodID, paymentMethodType,
                 account, bankAccount, wallet,
-                card, applePay, terminalCard,
-                cardDetails, achDetails);
+                card, applePay, cardDetails,
+                achDetails);
         }
 
     }

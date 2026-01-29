@@ -15,8 +15,7 @@ import java.util.Optional;
  */
 public enum BankAccountHolderType {
     INDIVIDUAL("individual"),
-    BUSINESS("business"),
-    GUEST("guest");
+    BUSINESS("business");
 
     @JsonValue
     private final String value;

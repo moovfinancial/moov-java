@@ -22,7 +22,7 @@ public class Application {
             .build();
 
         CreateAccount req = CreateAccount.builder()
-                .accountType(CreateAccountType.BUSINESS)
+                .accountType(AccountType.BUSINESS)
                 .profile(CreateProfile.builder()
                     .business(CreateBusinessProfile.builder()
                         .legalBusinessName("Whole Body Fitness LLC")

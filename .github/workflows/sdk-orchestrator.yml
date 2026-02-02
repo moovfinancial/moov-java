@@ -1,0 +1,27 @@
+name: SDK Orchestrator
+
+on:
+  workflow_dispatch:
+
+jobs:
+  trigger-all-versions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get all branches to update
+        id: branches
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BRANCHES=$(gh api repos/${{ github.repository }}/branches \
+            --jq '[.[] | select(.name | test("^versions/v[0-9]{4}\\.[0-9]{2}$")) | .name] | join(" ")')
+          echo "branches=$BRANCHES" >> $GITHUB_OUTPUT
+          echo "Found branches: $BRANCHES"
+
+      - name: Trigger generation on each branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for branch in ${{ steps.branches.outputs.branches }}; do
+            echo "Triggering sdk_generation.yaml on $branch"
+            gh workflow run sdk_generation.yaml --ref "$branch"
+          done

@@ -1,13 +1,17 @@
 name: SDK Orchestrator
 
+permissions:
+  actions: write
+  contents: read
+
 on:
   workflow_dispatch:
 
 jobs:
-  trigger-all-versions:
+  trigger-version-branches:
     runs-on: ubuntu-latest
     steps:
-      - name: Get all branches to update
+      - name: Get version branches
         id: branches
         env:
           GH_TOKEN: ${{ github.token }}
@@ -19,7 +23,7 @@ jobs:
 
       - name: Trigger generation on each branch
         env:
-          GH_TOKEN: ${{ secrets.MOOVBOT_PAT }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           for branch in ${{ steps.branches.outputs.branches }}; do
             echo "Triggering sdk_generation.yaml on $branch"

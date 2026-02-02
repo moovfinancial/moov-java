@@ -16,7 +16,9 @@ public class GetResidualRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
-
+    /**
+     * Unique identifier for this residual payment calculation.
+     */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=residualID")
     private String residualID;
 
@@ -35,6 +37,9 @@ public class GetResidualRequest {
         return accountID;
     }
 
+    /**
+     * Unique identifier for this residual payment calculation.
+     */
     @JsonIgnore
     public String residualID() {
         return residualID;
@@ -51,6 +56,9 @@ public class GetResidualRequest {
         return this;
     }
 
+    /**
+     * Unique identifier for this residual payment calculation.
+     */
     public GetResidualRequest withResidualID(String residualID) {
         Utils.checkNotNull(residualID, "residualID");
         this.residualID = residualID;
@@ -103,6 +111,9 @@ public class GetResidualRequest {
         }
 
 
+        /**
+         * Unique identifier for this residual payment calculation.
+         */
         public Builder residualID(String residualID) {
             Utils.checkNotNull(residualID, "residualID");
             this.residualID = residualID;

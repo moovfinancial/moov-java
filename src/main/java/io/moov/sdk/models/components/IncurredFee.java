@@ -26,44 +26,60 @@ public class IncurredFee {
     @JsonProperty("feeID")
     private Optional<String> feeID;
 
-
+    /**
+     * Account ID the fee belongs to.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("accountID")
     private Optional<String> accountID;
 
-
+    /**
+     * Wallet ID associated with the fee.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("walletID")
     private Optional<String> walletID;
 
-
+    /**
+     * Timestamp when the fee was created.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("createdOn")
     private Optional<OffsetDateTime> createdOn;
 
-
+    /**
+     * Name of the fee.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("feeName")
     private Optional<String> feeName;
 
-
+    /**
+     * The fee amount.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
     private Optional<? extends AmountDecimal> amount;
 
     /**
-     * The entity that generated the fee.
+     * Object indicating what generated the fee (TransferID, CardID, DisputeID, AccountID, or
+     * BankAccountID).
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("generatedBy")
     private Optional<? extends GeneratedBy> generatedBy;
 
-
+    /**
+     * Describes the source of the fee, such as a Moov-set processing fee, a network pass-through fee, or
+     * an interchange or discount fee.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("feeGroup")
     private Optional<String> feeGroup;
 
-
+    /**
+     * Unique identifier for this residual payment calculation.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("residualID")
     private Optional<String> residualID;
@@ -110,26 +126,41 @@ public class IncurredFee {
         return feeID;
     }
 
+    /**
+     * Account ID the fee belongs to.
+     */
     @JsonIgnore
     public Optional<String> accountID() {
         return accountID;
     }
 
+    /**
+     * Wallet ID associated with the fee.
+     */
     @JsonIgnore
     public Optional<String> walletID() {
         return walletID;
     }
 
+    /**
+     * Timestamp when the fee was created.
+     */
     @JsonIgnore
     public Optional<OffsetDateTime> createdOn() {
         return createdOn;
     }
 
+    /**
+     * Name of the fee.
+     */
     @JsonIgnore
     public Optional<String> feeName() {
         return feeName;
     }
 
+    /**
+     * The fee amount.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<AmountDecimal> amount() {
@@ -137,7 +168,8 @@ public class IncurredFee {
     }
 
     /**
-     * The entity that generated the fee.
+     * Object indicating what generated the fee (TransferID, CardID, DisputeID, AccountID, or
+     * BankAccountID).
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -145,11 +177,18 @@ public class IncurredFee {
         return (Optional<GeneratedBy>) generatedBy;
     }
 
+    /**
+     * Describes the source of the fee, such as a Moov-set processing fee, a network pass-through fee, or
+     * an interchange or discount fee.
+     */
     @JsonIgnore
     public Optional<String> feeGroup() {
         return feeGroup;
     }
 
+    /**
+     * Unique identifier for this residual payment calculation.
+     */
     @JsonIgnore
     public Optional<String> residualID() {
         return residualID;
@@ -173,6 +212,9 @@ public class IncurredFee {
         return this;
     }
 
+    /**
+     * Account ID the fee belongs to.
+     */
     public IncurredFee withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = Optional.ofNullable(accountID);
@@ -180,12 +222,18 @@ public class IncurredFee {
     }
 
 
+    /**
+     * Account ID the fee belongs to.
+     */
     public IncurredFee withAccountID(Optional<String> accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
         return this;
     }
 
+    /**
+     * Wallet ID associated with the fee.
+     */
     public IncurredFee withWalletID(String walletID) {
         Utils.checkNotNull(walletID, "walletID");
         this.walletID = Optional.ofNullable(walletID);
@@ -193,12 +241,18 @@ public class IncurredFee {
     }
 
 
+    /**
+     * Wallet ID associated with the fee.
+     */
     public IncurredFee withWalletID(Optional<String> walletID) {
         Utils.checkNotNull(walletID, "walletID");
         this.walletID = walletID;
         return this;
     }
 
+    /**
+     * Timestamp when the fee was created.
+     */
     public IncurredFee withCreatedOn(OffsetDateTime createdOn) {
         Utils.checkNotNull(createdOn, "createdOn");
         this.createdOn = Optional.ofNullable(createdOn);
@@ -206,12 +260,18 @@ public class IncurredFee {
     }
 
 
+    /**
+     * Timestamp when the fee was created.
+     */
     public IncurredFee withCreatedOn(Optional<OffsetDateTime> createdOn) {
         Utils.checkNotNull(createdOn, "createdOn");
         this.createdOn = createdOn;
         return this;
     }
 
+    /**
+     * Name of the fee.
+     */
     public IncurredFee withFeeName(String feeName) {
         Utils.checkNotNull(feeName, "feeName");
         this.feeName = Optional.ofNullable(feeName);
@@ -219,12 +279,18 @@ public class IncurredFee {
     }
 
 
+    /**
+     * Name of the fee.
+     */
     public IncurredFee withFeeName(Optional<String> feeName) {
         Utils.checkNotNull(feeName, "feeName");
         this.feeName = feeName;
         return this;
     }
 
+    /**
+     * The fee amount.
+     */
     public IncurredFee withAmount(AmountDecimal amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = Optional.ofNullable(amount);
@@ -232,6 +298,9 @@ public class IncurredFee {
     }
 
 
+    /**
+     * The fee amount.
+     */
     public IncurredFee withAmount(Optional<? extends AmountDecimal> amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
@@ -239,7 +308,8 @@ public class IncurredFee {
     }
 
     /**
-     * The entity that generated the fee.
+     * Object indicating what generated the fee (TransferID, CardID, DisputeID, AccountID, or
+     * BankAccountID).
      */
     public IncurredFee withGeneratedBy(GeneratedBy generatedBy) {
         Utils.checkNotNull(generatedBy, "generatedBy");
@@ -249,7 +319,8 @@ public class IncurredFee {
 
 
     /**
-     * The entity that generated the fee.
+     * Object indicating what generated the fee (TransferID, CardID, DisputeID, AccountID, or
+     * BankAccountID).
      */
     public IncurredFee withGeneratedBy(Optional<? extends GeneratedBy> generatedBy) {
         Utils.checkNotNull(generatedBy, "generatedBy");
@@ -257,6 +328,10 @@ public class IncurredFee {
         return this;
     }
 
+    /**
+     * Describes the source of the fee, such as a Moov-set processing fee, a network pass-through fee, or
+     * an interchange or discount fee.
+     */
     public IncurredFee withFeeGroup(String feeGroup) {
         Utils.checkNotNull(feeGroup, "feeGroup");
         this.feeGroup = Optional.ofNullable(feeGroup);
@@ -264,12 +339,19 @@ public class IncurredFee {
     }
 
 
+    /**
+     * Describes the source of the fee, such as a Moov-set processing fee, a network pass-through fee, or
+     * an interchange or discount fee.
+     */
     public IncurredFee withFeeGroup(Optional<String> feeGroup) {
         Utils.checkNotNull(feeGroup, "feeGroup");
         this.feeGroup = feeGroup;
         return this;
     }
 
+    /**
+     * Unique identifier for this residual payment calculation.
+     */
     public IncurredFee withResidualID(String residualID) {
         Utils.checkNotNull(residualID, "residualID");
         this.residualID = Optional.ofNullable(residualID);
@@ -277,6 +359,9 @@ public class IncurredFee {
     }
 
 
+    /**
+     * Unique identifier for this residual payment calculation.
+     */
     public IncurredFee withResidualID(Optional<String> residualID) {
         Utils.checkNotNull(residualID, "residualID");
         this.residualID = residualID;
@@ -365,12 +450,18 @@ public class IncurredFee {
         }
 
 
+        /**
+         * Account ID the fee belongs to.
+         */
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = Optional.ofNullable(accountID);
             return this;
         }
 
+        /**
+         * Account ID the fee belongs to.
+         */
         public Builder accountID(Optional<String> accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
@@ -378,12 +469,18 @@ public class IncurredFee {
         }
 
 
+        /**
+         * Wallet ID associated with the fee.
+         */
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
             this.walletID = Optional.ofNullable(walletID);
             return this;
         }
 
+        /**
+         * Wallet ID associated with the fee.
+         */
         public Builder walletID(Optional<String> walletID) {
             Utils.checkNotNull(walletID, "walletID");
             this.walletID = walletID;
@@ -391,12 +488,18 @@ public class IncurredFee {
         }
 
 
+        /**
+         * Timestamp when the fee was created.
+         */
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = Optional.ofNullable(createdOn);
             return this;
         }
 
+        /**
+         * Timestamp when the fee was created.
+         */
         public Builder createdOn(Optional<OffsetDateTime> createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
@@ -404,12 +507,18 @@ public class IncurredFee {
         }
 
 
+        /**
+         * Name of the fee.
+         */
         public Builder feeName(String feeName) {
             Utils.checkNotNull(feeName, "feeName");
             this.feeName = Optional.ofNullable(feeName);
             return this;
         }
 
+        /**
+         * Name of the fee.
+         */
         public Builder feeName(Optional<String> feeName) {
             Utils.checkNotNull(feeName, "feeName");
             this.feeName = feeName;
@@ -417,12 +526,18 @@ public class IncurredFee {
         }
 
 
+        /**
+         * The fee amount.
+         */
         public Builder amount(AmountDecimal amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = Optional.ofNullable(amount);
             return this;
         }
 
+        /**
+         * The fee amount.
+         */
         public Builder amount(Optional<? extends AmountDecimal> amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
@@ -431,7 +546,8 @@ public class IncurredFee {
 
 
         /**
-         * The entity that generated the fee.
+         * Object indicating what generated the fee (TransferID, CardID, DisputeID, AccountID, or
+         * BankAccountID).
          */
         public Builder generatedBy(GeneratedBy generatedBy) {
             Utils.checkNotNull(generatedBy, "generatedBy");
@@ -440,7 +556,8 @@ public class IncurredFee {
         }
 
         /**
-         * The entity that generated the fee.
+         * Object indicating what generated the fee (TransferID, CardID, DisputeID, AccountID, or
+         * BankAccountID).
          */
         public Builder generatedBy(Optional<? extends GeneratedBy> generatedBy) {
             Utils.checkNotNull(generatedBy, "generatedBy");
@@ -449,12 +566,20 @@ public class IncurredFee {
         }
 
 
+        /**
+         * Describes the source of the fee, such as a Moov-set processing fee, a network pass-through fee, or
+         * an interchange or discount fee.
+         */
         public Builder feeGroup(String feeGroup) {
             Utils.checkNotNull(feeGroup, "feeGroup");
             this.feeGroup = Optional.ofNullable(feeGroup);
             return this;
         }
 
+        /**
+         * Describes the source of the fee, such as a Moov-set processing fee, a network pass-through fee, or
+         * an interchange or discount fee.
+         */
         public Builder feeGroup(Optional<String> feeGroup) {
             Utils.checkNotNull(feeGroup, "feeGroup");
             this.feeGroup = feeGroup;
@@ -462,12 +587,18 @@ public class IncurredFee {
         }
 
 
+        /**
+         * Unique identifier for this residual payment calculation.
+         */
         public Builder residualID(String residualID) {
             Utils.checkNotNull(residualID, "residualID");
             this.residualID = Optional.ofNullable(residualID);
             return this;
         }
 
+        /**
+         * Unique identifier for this residual payment calculation.
+         */
         public Builder residualID(Optional<String> residualID) {
             Utils.checkNotNull(residualID, "residualID");
             this.residualID = residualID;

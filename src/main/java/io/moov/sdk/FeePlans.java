@@ -433,7 +433,7 @@ public class FeePlans {
      * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * 
      * @param accountID 
-     * @param residualID 
+     * @param residualID Unique identifier for this residual payment calculation.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */

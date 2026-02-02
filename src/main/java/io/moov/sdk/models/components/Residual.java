@@ -13,55 +13,71 @@ import java.time.OffsetDateTime;
 
 
 public class Residual {
-
+    /**
+     * Unique identifier for this residual payment calculation.
+     */
     @JsonProperty("residualID")
     private String residualID;
 
-
+    /**
+     * The partner account ID this residual belongs to.
+     */
     @JsonProperty("partnerAccountID")
     private String partnerAccountID;
 
-
+    /**
+     * Start date and time of the residual calculation period.
+     */
     @JsonProperty("periodStart")
     private OffsetDateTime periodStart;
 
-
+    /**
+     * End date and time of the residual calculation period.
+     */
     @JsonProperty("periodEnd")
     private OffsetDateTime periodEnd;
 
-
+    /**
+     * Total amount of merchant fees collected during the period. This represents the partner's revenue
+     * from merchant fees.
+     */
     @JsonProperty("merchantFees")
     private AmountDecimal merchantFees;
 
-
+    /**
+     * Partner's total cost (buy rate) during the period.
+     */
     @JsonProperty("partnerCost")
     private AmountDecimal partnerCost;
 
-
+    /**
+     * Net income calculated as merchant fee revenue minus partner costs.
+     */
     @JsonProperty("netIncome")
     private AmountDecimal netIncome;
 
     /**
-     * The decimal-formatted numerical string of the revenue split for partner.
-     * 
-     * <p>For example, 2.25% is '2.25'.
+     * The revenue share percentage the partner receives, expressed as a decimal string (e.g., "25.00" for
+     * 25%).
      */
     @JsonProperty("revenueShare")
     private String revenueShare;
 
-
+    /**
+     * The amount the partner receives as their share of the net income (netIncome × revenueShare).
+     */
     @JsonProperty("residualAmount")
     private AmountDecimal residualAmount;
 
-
-    @JsonProperty("moovShare")
-    private AmountDecimal moovShare;
-
-
+    /**
+     * Timestamp when the residual was created.
+     */
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
 
-
+    /**
+     * Timestamp when the residual was last updated.
+     */
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
 
@@ -76,7 +92,6 @@ public class Residual {
             @JsonProperty("netIncome") AmountDecimal netIncome,
             @JsonProperty("revenueShare") String revenueShare,
             @JsonProperty("residualAmount") AmountDecimal residualAmount,
-            @JsonProperty("moovShare") AmountDecimal moovShare,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
             @JsonProperty("updatedOn") OffsetDateTime updatedOn) {
         Utils.checkNotNull(residualID, "residualID");
@@ -88,7 +103,6 @@ public class Residual {
         Utils.checkNotNull(netIncome, "netIncome");
         Utils.checkNotNull(revenueShare, "revenueShare");
         Utils.checkNotNull(residualAmount, "residualAmount");
-        Utils.checkNotNull(moovShare, "moovShare");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(updatedOn, "updatedOn");
         this.residualID = residualID;
@@ -100,71 +114,95 @@ public class Residual {
         this.netIncome = netIncome;
         this.revenueShare = revenueShare;
         this.residualAmount = residualAmount;
-        this.moovShare = moovShare;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
     }
 
+    /**
+     * Unique identifier for this residual payment calculation.
+     */
     @JsonIgnore
     public String residualID() {
         return residualID;
     }
 
+    /**
+     * The partner account ID this residual belongs to.
+     */
     @JsonIgnore
     public String partnerAccountID() {
         return partnerAccountID;
     }
 
+    /**
+     * Start date and time of the residual calculation period.
+     */
     @JsonIgnore
     public OffsetDateTime periodStart() {
         return periodStart;
     }
 
+    /**
+     * End date and time of the residual calculation period.
+     */
     @JsonIgnore
     public OffsetDateTime periodEnd() {
         return periodEnd;
     }
 
+    /**
+     * Total amount of merchant fees collected during the period. This represents the partner's revenue
+     * from merchant fees.
+     */
     @JsonIgnore
     public AmountDecimal merchantFees() {
         return merchantFees;
     }
 
+    /**
+     * Partner's total cost (buy rate) during the period.
+     */
     @JsonIgnore
     public AmountDecimal partnerCost() {
         return partnerCost;
     }
 
+    /**
+     * Net income calculated as merchant fee revenue minus partner costs.
+     */
     @JsonIgnore
     public AmountDecimal netIncome() {
         return netIncome;
     }
 
     /**
-     * The decimal-formatted numerical string of the revenue split for partner.
-     * 
-     * <p>For example, 2.25% is '2.25'.
+     * The revenue share percentage the partner receives, expressed as a decimal string (e.g., "25.00" for
+     * 25%).
      */
     @JsonIgnore
     public String revenueShare() {
         return revenueShare;
     }
 
+    /**
+     * The amount the partner receives as their share of the net income (netIncome × revenueShare).
+     */
     @JsonIgnore
     public AmountDecimal residualAmount() {
         return residualAmount;
     }
 
-    @JsonIgnore
-    public AmountDecimal moovShare() {
-        return moovShare;
-    }
-
+    /**
+     * Timestamp when the residual was created.
+     */
     @JsonIgnore
     public OffsetDateTime createdOn() {
         return createdOn;
     }
 
+    /**
+     * Timestamp when the residual was last updated.
+     */
     @JsonIgnore
     public OffsetDateTime updatedOn() {
         return updatedOn;
@@ -175,42 +213,64 @@ public class Residual {
     }
 
 
+    /**
+     * Unique identifier for this residual payment calculation.
+     */
     public Residual withResidualID(String residualID) {
         Utils.checkNotNull(residualID, "residualID");
         this.residualID = residualID;
         return this;
     }
 
+    /**
+     * The partner account ID this residual belongs to.
+     */
     public Residual withPartnerAccountID(String partnerAccountID) {
         Utils.checkNotNull(partnerAccountID, "partnerAccountID");
         this.partnerAccountID = partnerAccountID;
         return this;
     }
 
+    /**
+     * Start date and time of the residual calculation period.
+     */
     public Residual withPeriodStart(OffsetDateTime periodStart) {
         Utils.checkNotNull(periodStart, "periodStart");
         this.periodStart = periodStart;
         return this;
     }
 
+    /**
+     * End date and time of the residual calculation period.
+     */
     public Residual withPeriodEnd(OffsetDateTime periodEnd) {
         Utils.checkNotNull(periodEnd, "periodEnd");
         this.periodEnd = periodEnd;
         return this;
     }
 
+    /**
+     * Total amount of merchant fees collected during the period. This represents the partner's revenue
+     * from merchant fees.
+     */
     public Residual withMerchantFees(AmountDecimal merchantFees) {
         Utils.checkNotNull(merchantFees, "merchantFees");
         this.merchantFees = merchantFees;
         return this;
     }
 
+    /**
+     * Partner's total cost (buy rate) during the period.
+     */
     public Residual withPartnerCost(AmountDecimal partnerCost) {
         Utils.checkNotNull(partnerCost, "partnerCost");
         this.partnerCost = partnerCost;
         return this;
     }
 
+    /**
+     * Net income calculated as merchant fee revenue minus partner costs.
+     */
     public Residual withNetIncome(AmountDecimal netIncome) {
         Utils.checkNotNull(netIncome, "netIncome");
         this.netIncome = netIncome;
@@ -218,9 +278,8 @@ public class Residual {
     }
 
     /**
-     * The decimal-formatted numerical string of the revenue split for partner.
-     * 
-     * <p>For example, 2.25% is '2.25'.
+     * The revenue share percentage the partner receives, expressed as a decimal string (e.g., "25.00" for
+     * 25%).
      */
     public Residual withRevenueShare(String revenueShare) {
         Utils.checkNotNull(revenueShare, "revenueShare");
@@ -228,24 +287,27 @@ public class Residual {
         return this;
     }
 
+    /**
+     * The amount the partner receives as their share of the net income (netIncome × revenueShare).
+     */
     public Residual withResidualAmount(AmountDecimal residualAmount) {
         Utils.checkNotNull(residualAmount, "residualAmount");
         this.residualAmount = residualAmount;
         return this;
     }
 
-    public Residual withMoovShare(AmountDecimal moovShare) {
-        Utils.checkNotNull(moovShare, "moovShare");
-        this.moovShare = moovShare;
-        return this;
-    }
-
+    /**
+     * Timestamp when the residual was created.
+     */
     public Residual withCreatedOn(OffsetDateTime createdOn) {
         Utils.checkNotNull(createdOn, "createdOn");
         this.createdOn = createdOn;
         return this;
     }
 
+    /**
+     * Timestamp when the residual was last updated.
+     */
     public Residual withUpdatedOn(OffsetDateTime updatedOn) {
         Utils.checkNotNull(updatedOn, "updatedOn");
         this.updatedOn = updatedOn;
@@ -271,7 +333,6 @@ public class Residual {
             Utils.enhancedDeepEquals(this.netIncome, other.netIncome) &&
             Utils.enhancedDeepEquals(this.revenueShare, other.revenueShare) &&
             Utils.enhancedDeepEquals(this.residualAmount, other.residualAmount) &&
-            Utils.enhancedDeepEquals(this.moovShare, other.moovShare) &&
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
             Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn);
     }
@@ -282,7 +343,7 @@ public class Residual {
             residualID, partnerAccountID, periodStart,
             periodEnd, merchantFees, partnerCost,
             netIncome, revenueShare, residualAmount,
-            moovShare, createdOn, updatedOn);
+            createdOn, updatedOn);
     }
     
     @Override
@@ -297,7 +358,6 @@ public class Residual {
                 "netIncome", netIncome,
                 "revenueShare", revenueShare,
                 "residualAmount", residualAmount,
-                "moovShare", moovShare,
                 "createdOn", createdOn,
                 "updatedOn", updatedOn);
     }
@@ -323,8 +383,6 @@ public class Residual {
 
         private AmountDecimal residualAmount;
 
-        private AmountDecimal moovShare;
-
         private OffsetDateTime createdOn;
 
         private OffsetDateTime updatedOn;
@@ -334,6 +392,9 @@ public class Residual {
         }
 
 
+        /**
+         * Unique identifier for this residual payment calculation.
+         */
         public Builder residualID(String residualID) {
             Utils.checkNotNull(residualID, "residualID");
             this.residualID = residualID;
@@ -341,6 +402,9 @@ public class Residual {
         }
 
 
+        /**
+         * The partner account ID this residual belongs to.
+         */
         public Builder partnerAccountID(String partnerAccountID) {
             Utils.checkNotNull(partnerAccountID, "partnerAccountID");
             this.partnerAccountID = partnerAccountID;
@@ -348,6 +412,9 @@ public class Residual {
         }
 
 
+        /**
+         * Start date and time of the residual calculation period.
+         */
         public Builder periodStart(OffsetDateTime periodStart) {
             Utils.checkNotNull(periodStart, "periodStart");
             this.periodStart = periodStart;
@@ -355,6 +422,9 @@ public class Residual {
         }
 
 
+        /**
+         * End date and time of the residual calculation period.
+         */
         public Builder periodEnd(OffsetDateTime periodEnd) {
             Utils.checkNotNull(periodEnd, "periodEnd");
             this.periodEnd = periodEnd;
@@ -362,6 +432,10 @@ public class Residual {
         }
 
 
+        /**
+         * Total amount of merchant fees collected during the period. This represents the partner's revenue
+         * from merchant fees.
+         */
         public Builder merchantFees(AmountDecimal merchantFees) {
             Utils.checkNotNull(merchantFees, "merchantFees");
             this.merchantFees = merchantFees;
@@ -369,6 +443,9 @@ public class Residual {
         }
 
 
+        /**
+         * Partner's total cost (buy rate) during the period.
+         */
         public Builder partnerCost(AmountDecimal partnerCost) {
             Utils.checkNotNull(partnerCost, "partnerCost");
             this.partnerCost = partnerCost;
@@ -376,6 +453,9 @@ public class Residual {
         }
 
 
+        /**
+         * Net income calculated as merchant fee revenue minus partner costs.
+         */
         public Builder netIncome(AmountDecimal netIncome) {
             Utils.checkNotNull(netIncome, "netIncome");
             this.netIncome = netIncome;
@@ -384,9 +464,8 @@ public class Residual {
 
 
         /**
-         * The decimal-formatted numerical string of the revenue split for partner.
-         * 
-         * <p>For example, 2.25% is '2.25'.
+         * The revenue share percentage the partner receives, expressed as a decimal string (e.g., "25.00" for
+         * 25%).
          */
         public Builder revenueShare(String revenueShare) {
             Utils.checkNotNull(revenueShare, "revenueShare");
@@ -395,6 +474,9 @@ public class Residual {
         }
 
 
+        /**
+         * The amount the partner receives as their share of the net income (netIncome × revenueShare).
+         */
         public Builder residualAmount(AmountDecimal residualAmount) {
             Utils.checkNotNull(residualAmount, "residualAmount");
             this.residualAmount = residualAmount;
@@ -402,13 +484,9 @@ public class Residual {
         }
 
 
-        public Builder moovShare(AmountDecimal moovShare) {
-            Utils.checkNotNull(moovShare, "moovShare");
-            this.moovShare = moovShare;
-            return this;
-        }
-
-
+        /**
+         * Timestamp when the residual was created.
+         */
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
@@ -416,6 +494,9 @@ public class Residual {
         }
 
 
+        /**
+         * Timestamp when the residual was last updated.
+         */
         public Builder updatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
             this.updatedOn = updatedOn;
@@ -428,7 +509,7 @@ public class Residual {
                 residualID, partnerAccountID, periodStart,
                 periodEnd, merchantFees, partnerCost,
                 netIncome, revenueShare, residualAmount,
-                moovShare, createdOn, updatedOn);
+                createdOn, updatedOn);
         }
 
     }

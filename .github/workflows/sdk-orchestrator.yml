@@ -23,5 +23,5 @@ jobs:
         run: |
           for branch in ${{ steps.branches.outputs.branches }}; do
             echo "Triggering sdk_generation.yaml on $branch"
-            gh workflow run sdk_generation.yaml --ref "$branch"
+            gh workflow run sdk_generation.yaml --repo ${{ github.repository }} --ref "$branch"
           done

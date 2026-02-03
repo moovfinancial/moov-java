@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 901eedb2cf769175b2418371990af1ed
+  docChecksum: fe16991a0e880603ece0ddd7107307c9
   docVersion: latest
-  speakeasyVersion: 1.700.1
-  generationVersion: 2.801.0
-  releaseVersion: 0.34.22
-  configChecksum: 2911258dd3a58c41706561b52572945e
+  speakeasyVersion: 1.700.2
+  generationVersion: 2.801.2
+  releaseVersion: 0.34.23
+  configChecksum: c33d15580449ff65f68fffec4e4d3fd9
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 persistentEdits:
-  generation_id: 74b1f3f8-67c7-43af-aefd-5faa3ed17151
-  pristine_commit_hash: 903cc696d1ddb282909aa9b6dda78efb59591551
-  pristine_tree_hash: 7040f098b48a624e391120bf2aebc924abb5dc48
+  generation_id: 13d10102-c023-450a-a252-ba412d802079
+  pristine_commit_hash: faecda63e5d61d5b3b0507d7e2ad3a38f28cb250
+  pristine_tree_hash: 09c4f384c36eb0cac343cb79fafe020d7bf2d4f4
 features:
   java:
     acceptHeaders: 2.81.2
@@ -1165,8 +1165,8 @@ trackedFiles:
     pristine_git_object: 02ad9cf9861218e887175eb5f7a0c4a76031d5b7
   docs/models/components/IncurredFee.md:
     id: 53734c748bd8
-    last_write_checksum: sha1:4daffdeacea516fd38e3436f4446261e2fe07edf
-    pristine_git_object: be50df98815d2454186b8b608a51589a06ad45d1
+    last_write_checksum: sha1:d9f46a7d8987802c066c86029eb36a6cf78d3c4d
+    pristine_git_object: 7cfb2208e399eb34a1b0ee8b5f8250285879a73a
   docs/models/components/IndividualName.md:
     id: ad514c5ddc8e
     last_write_checksum: sha1:8c5cf8df2790705ee34b1d4888ea44fefb441624
@@ -1821,8 +1821,8 @@ trackedFiles:
     pristine_git_object: 9d3564f20b4229cc748b406b69714d3594875fba
   docs/models/components/Residual.md:
     id: 64851f486e11
-    last_write_checksum: sha1:9093016245cf983640312e6bde6d7e8b4ebbe99e
-    pristine_git_object: 9243c820eb2e553d990b9b540d390939f964429b
+    last_write_checksum: sha1:dd0997de4d22ce9028d0f1c88090ad02b9e42efb
+    pristine_git_object: d077b1e22961972d1155cec98b6001b59d91da80
   docs/models/components/Responsibilities.md:
     id: dd95aace7aa3
     last_write_checksum: sha1:6ade2b404a6a07c7a3be3731d95dbebd30aab12e
@@ -3277,8 +3277,8 @@ trackedFiles:
     pristine_git_object: b625972a72af1527b3b76bc7df4fa331fd259acb
   docs/models/operations/GetResidualRequest.md:
     id: 8d73281430b7
-    last_write_checksum: sha1:12f1fbe73f795b306f92174f3037095a6d70cee8
-    pristine_git_object: ea96c15f29cb612fddd524cd2bdbdd87150019f1
+    last_write_checksum: sha1:c0167d6a3dbbf8335167d03db21638e4d2e97231
+    pristine_git_object: f6b5657502138f757a95d3d89cda00b186f603d6
   docs/models/operations/GetResidualResponse.md:
     id: 12952826dc83
     last_write_checksum: sha1:11762ac3285427b635ebffa16a245c0ea89ce3e5
@@ -3729,8 +3729,8 @@ trackedFiles:
     pristine_git_object: 23041567c5c2816b776d985585c58da829d514fb
   docs/models/operations/ListResidualFeesRequest.md:
     id: e60028046365
-    last_write_checksum: sha1:9580833a46e1896701d012736284d5942e992311
-    pristine_git_object: ae882aaa516a6b7470e477c3d022237275d121ac
+    last_write_checksum: sha1:2ebe1b72d10c8ee1562220ab229de4c480becc38
+    pristine_git_object: 1d50853bd261cec595baff263dec5f45d152a2fe
   docs/models/operations/ListResidualFeesResponse.md:
     id: 08121705d1c0
     last_write_checksum: sha1:b064c08e4a7c2c6d1e5d62c68b9b0f88883c1b3a
@@ -4169,8 +4169,8 @@ trackedFiles:
     pristine_git_object: bd4d1a367051729869d96fb4015b7e797c4a16ae
   docs/sdks/feeplans/README.md:
     id: 76d23b0feb7b
-    last_write_checksum: sha1:aef50a56643915fe0c735663284ea4a6d80e5e2e
-    pristine_git_object: 9119c35c442c358f04fced9f3d3b55264222cb91
+    last_write_checksum: sha1:68790d84c87181172bcc2bea2f7fd22fd5e0b729
+    pristine_git_object: 35e0234e90833bc6f6a4660e682f2665afa0eb87
   docs/sdks/files/README.md:
     id: e576d7a117f0
     last_write_checksum: sha1:40bbe266c1734d236d0e97b124e3b6e8b40ae1db
@@ -4265,8 +4265,8 @@ trackedFiles:
     pristine_git_object: 5a1311f65cc22d82e0ed6eafb4b10f581d3ed7c5
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:0c1e85d7ae91c496864c0b7be0884470ade6be1c
-    pristine_git_object: bc5e6f2409214ddff7ac1da749be7bf802f171c1
+    last_write_checksum: sha1:1e5666f8be6a8a0b4c740950c917a3413515fe90
+    pristine_git_object: 344a87e1ce76671b324bb37cc871b8f106cedc60
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4381,8 +4381,8 @@ trackedFiles:
     pristine_git_object: 37bc281cc491997eecc39c50918d2fb6c16b08b9
   src/main/java/io/moov/sdk/FeePlans.java:
     id: 4a2cf662692d
-    last_write_checksum: sha1:62e2655ab1d6f86773081176ff4afbd79a0e04cc
-    pristine_git_object: 5115a1d6ad8fd5adb13b57b7b130ef3fd0f890bc
+    last_write_checksum: sha1:f42dfcf89dcda1319c9972d82a4cac2c00dcfdbd
+    pristine_git_object: 44ffb86a4a94af2a042a27061294e11603ad573c
   src/main/java/io/moov/sdk/Files.java:
     id: 2ddea0f1bde2
     last_write_checksum: sha1:6c50715b10b9b086f5ba2629299026671782f670
@@ -4441,8 +4441,8 @@ trackedFiles:
     pristine_git_object: 64047d75ebffa5dbfe6b7461ed4d624f01890a51
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:a0d91fd98c8946a00388477cc98991eccfa70af3
-    pristine_git_object: 6cd72b9f6844011061ade34116b3aba987adf59b
+    last_write_checksum: sha1:ff1ccb02828b5ad9e3119b4b45b1b0b805f56173
+    pristine_git_object: edbc5800a128de6af8643a3fe668afa5b38eee1d
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:f2634b766e3dc03d4f3043aff0565c655dcf17be
@@ -5605,8 +5605,8 @@ trackedFiles:
     pristine_git_object: 211becd5851ce1b5440d34941c4379726d7cf7ea
   src/main/java/io/moov/sdk/models/components/IncurredFee.java:
     id: aff8444777f6
-    last_write_checksum: sha1:aaf5c6769d0d7528ce160c7ef000b5e061795e62
-    pristine_git_object: 6b8ee5729866644718e3692e6c39780577c6b914
+    last_write_checksum: sha1:9bb23da63dad664748f092be83bcbd96cbad0dec
+    pristine_git_object: 0c878f3243f65d10f73745a4f6b800625e85d941
   src/main/java/io/moov/sdk/models/components/IndividualName.java:
     id: 08c707b3107c
     last_write_checksum: sha1:4fa561b5f9f34e13cd0727f9be5afe387a059fd3
@@ -6265,8 +6265,8 @@ trackedFiles:
     pristine_git_object: b1f747357fa2001176d023d812ccf77c993ddc71
   src/main/java/io/moov/sdk/models/components/Residual.java:
     id: 8bf66d6bfed5
-    last_write_checksum: sha1:8a8e1128edb43a593a7c5141c1778492519fd565
-    pristine_git_object: 1c33c5d35086bd61c49e50b1dcef2d7f79e75382
+    last_write_checksum: sha1:491adfe5221054eff17baba20784675577b5bba3
+    pristine_git_object: 5331049334da29ad87d8c5ba442be639aff58f80
   src/main/java/io/moov/sdk/models/components/Responsibilities.java:
     id: ff6e1a27aada
     last_write_checksum: sha1:e454a8d8c7f69b4ad7bf48fb4f95f1ad01cc6621
@@ -8037,8 +8037,8 @@ trackedFiles:
     pristine_git_object: 5a78db4c666a985498aece24221bbfeb3eee1443
   src/main/java/io/moov/sdk/models/operations/GetResidualRequest.java:
     id: 95fabf7fe041
-    last_write_checksum: sha1:f7cf6ee3634a485fb914ad78c9c0c3c001edd094
-    pristine_git_object: 607ec8e5ecbe0033fe150c65c954e38ccffea9fb
+    last_write_checksum: sha1:3fc887aca46c6daaaea9d4d685ab5935b4dca011
+    pristine_git_object: a04b17dd898145f56acf899146f7acd5cd0d22d6
   src/main/java/io/moov/sdk/models/operations/GetResidualRequestBuilder.java:
     id: 1043c7af5843
     last_write_checksum: sha1:151365b9f2e926755a6d5e73549d9ffd31faf2c9
@@ -8713,8 +8713,8 @@ trackedFiles:
     pristine_git_object: c652c9204608760377109e808a2a9e0b57461e84
   src/main/java/io/moov/sdk/models/operations/ListResidualFeesRequest.java:
     id: a95e8a211078
-    last_write_checksum: sha1:0dff20a216e995b7971e8f394ceb4e74c7f7ee08
-    pristine_git_object: 6312ebaa85ef68ce7a443143e914f1ac72d1de3c
+    last_write_checksum: sha1:7ed203243004da60af12b5224692af514cff4a68
+    pristine_git_object: c2e8a6185ce91dc68920e32769db689f158426ab
   src/main/java/io/moov/sdk/models/operations/ListResidualFeesRequestBuilder.java:
     id: 54a87dd9e29c
     last_write_checksum: sha1:4df58add229084ef162686c79f9e0e329f3b4f87
@@ -12699,7 +12699,7 @@ examples:
           X-Moov-Version: "v2024.01.00"
       responses:
         "200":
-          application/json: [{"residualID": "e0bcab02-96d4-4555-9535-fff6f9fac05c", "partnerAccountID": "59fad78d-485c-4aa0-95e0-b6723b4489a3", "periodStart": "2025-08-23T18:39:55.611Z", "periodEnd": "2024-06-17T17:54:17.689Z", "merchantFees": {"currency": "USD", "valueDecimal": "12.987654321"}, "partnerCost": {"currency": "USD", "valueDecimal": "12.987654321"}, "netIncome": {"currency": "USD", "valueDecimal": "12.987654321"}, "revenueShare": "2.25", "residualAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "moovShare": {"currency": "USD", "valueDecimal": "12.987654321"}, "createdOn": "2023-11-11T13:56:49.759Z", "updatedOn": "2024-07-25T04:59:02.000Z"}]
+          application/json: [{"residualID": "e0bcab02-96d4-4555-9535-fff6f9fac05c", "partnerAccountID": "59fad78d-485c-4aa0-95e0-b6723b4489a3", "periodStart": "2025-08-23T18:39:55.611Z", "periodEnd": "2024-06-17T17:54:17.689Z", "merchantFees": {"currency": "USD", "valueDecimal": "12.987654321"}, "partnerCost": {"currency": "USD", "valueDecimal": "12.987654321"}, "netIncome": {"currency": "USD", "valueDecimal": "12.987654321"}, "revenueShare": "2.25", "residualAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "createdOn": "2023-11-11T13:56:49.759Z", "updatedOn": "2024-07-25T04:59:02.000Z"}]
   getResidual:
     speakeasy-default-get-residual:
       parameters:
@@ -12710,7 +12710,7 @@ examples:
           X-Moov-Version: "v2024.01.00"
       responses:
         "200":
-          application/json: {"residualID": "6969e439-dfcd-42de-bfb2-5c66b1163e3a", "partnerAccountID": "35af6ebf-647d-4b63-b996-dc1bfb4ac6d2", "periodStart": "2025-10-12T20:03:24.360Z", "periodEnd": "2024-10-08T00:08:30.005Z", "merchantFees": {"currency": "USD", "valueDecimal": "12.987654321"}, "partnerCost": {"currency": "USD", "valueDecimal": "12.987654321"}, "netIncome": {"currency": "USD", "valueDecimal": "12.987654321"}, "revenueShare": "2.25", "residualAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "moovShare": {"currency": "USD", "valueDecimal": "12.987654321"}, "createdOn": "2025-05-15T10:09:57.129Z", "updatedOn": "2023-05-10T01:27:08.185Z"}
+          application/json: {"residualID": "6969e439-dfcd-42de-bfb2-5c66b1163e3a", "partnerAccountID": "35af6ebf-647d-4b63-b996-dc1bfb4ac6d2", "periodStart": "2025-10-12T20:03:24.360Z", "periodEnd": "2024-10-08T00:08:30.005Z", "merchantFees": {"currency": "USD", "valueDecimal": "12.987654321"}, "partnerCost": {"currency": "USD", "valueDecimal": "12.987654321"}, "netIncome": {"currency": "USD", "valueDecimal": "12.987654321"}, "revenueShare": "2.25", "residualAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "createdOn": "2025-05-15T10:09:57.129Z", "updatedOn": "2023-05-10T01:27:08.185Z"}
   listResidualFees:
     speakeasy-default-list-residual-fees:
       parameters:
@@ -12973,7 +12973,10 @@ examples:
           application/json: {"secret": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes:\n* `moov.onboarding.createInvite()`: \n  *  `request.grantScopes` **Added**\n  *  `response.grantScopes` **Added**\n* `moov.onboarding.listInvites()`:  `response.[].grantScopes` **Added**\n* `moov.onboarding.getInvite()`:  `response.grantScopes` **Added**\n"
+releaseNotes: |
+  ## Java SDK Changes:
+  * `moov.feePlans.listResiduals()`:  `response.[].moovShare` **Removed** **Breaking** ⚠️
+  * `moov.feePlans.getResidual()`:  `response.moovShare` **Removed** **Breaking** ⚠️
 generatedFiles:
   - .gitattributes
   - USAGE.md

@@ -49,7 +49,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.34.23'
+implementation 'io.moov:sdk:25.4.0'
 ```
 
 Maven:
@@ -57,7 +57,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.34.23</version>
+    <version>25.4.0</version>
 </dependency>
 ```
 
@@ -104,7 +104,7 @@ public class Application {
             .build();
 
         CreateAccount req = CreateAccount.builder()
-                .accountType(CreateAccountType.BUSINESS)
+                .accountType(AccountType.BUSINESS)
                 .profile(CreateProfile.builder()
                     .business(CreateBusinessProfile.builder()
                         .legalBusinessName("Whole Body Fitness LLC")
@@ -159,7 +159,7 @@ public class Application {
             .build();
 
         CreateAccount req = CreateAccount.builder()
-                .accountType(CreateAccountType.BUSINESS)
+                .accountType(AccountType.BUSINESS)
                 .profile(CreateProfile.builder()
                     .business(CreateBusinessProfile.builder()
                         .legalBusinessName("Whole Body Fitness LLC")
@@ -745,34 +745,6 @@ Search for institutions by either their name or routing number.
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/fed.read` scope. :warning: **Deprecated**
 
-### [Invoices](docs/sdks/invoices/README.md)
-
-* [createInvoice](docs/sdks/invoices/README.md#createinvoice) - Create an invoice for a Moov account.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
-* [listInvoices](docs/sdks/invoices/README.md#listinvoices) - List all the invoices created under a Moov account.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
-* [getInvoice](docs/sdks/invoices/README.md#getinvoice) - Retrieve an invoice by ID.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
-* [updateInvoice](docs/sdks/invoices/README.md#updateinvoice) - Updates an invoice.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
-* [createInvoicePayment](docs/sdks/invoices/README.md#createinvoicepayment) - Creates a payment resource to represent that an invoice was paid outside of the Moov platform.
-If a payment link was created for the invoice, the corresponding payment link is canceled, but a receipt is still sent.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
-* [listInvoicePayments](docs/sdks/invoices/README.md#listinvoicepayments) - List all the payments made towards an invoice.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
-
 ### [IssuingTransactions](docs/sdks/issuingtransactions/README.md)
 
 * [listAuthorizations](docs/sdks/issuingtransactions/README.md#listauthorizations) - List issued card authorizations associated with a Moov account.
@@ -965,44 +937,6 @@ Use the `Accept` header to specify the format of the response. Supported formats
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
-### [Support](docs/sdks/support/README.md)
-
-* [createTicket](docs/sdks/support/README.md#createticket) - Create a support ticket for a Moov account.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
-
-If you're creating the ticket on behalf of another account, then you'll need to
-specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
-* [listTickets](docs/sdks/support/README.md#listtickets) - List all the support tickets created under a Moov account.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
-
-If you're listing another account's tickets, then you'll need to
-specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
-* [getTicket](docs/sdks/support/README.md#getticket) - Retrieve a support ticket by ID.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
-
-If you're retrieving another account's ticket, then you'll need to
-specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
-* [updateTicket](docs/sdks/support/README.md#updateticket) - Updates a support ticket.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
-
-If you're updating the ticket on behalf of another account, then you'll need to
-specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
-* [listTicketMessages](docs/sdks/support/README.md#listticketmessages) - List all the messages for a support ticket.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
-
-If you're listing another account's messages, then you'll need to
-specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
-
 ### [Sweeps](docs/sdks/sweeps/README.md)
 
 * [createConfig](docs/sdks/sweeps/README.md#createconfig) - Create a sweep config for a wallet.
@@ -1132,12 +1066,6 @@ Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-* [save](docs/sdks/underwriting/README.md#save) - Create or update the account's underwriting.
-
-Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 * [upsert](docs/sdks/underwriting/README.md#upsert) - Create or update the account's underwriting.
 
 Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
@@ -1245,7 +1173,7 @@ public class Application {
         try {
 
             CreateAccount req = CreateAccount.builder()
-                    .accountType(CreateAccountType.BUSINESS)
+                    .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()
                         .business(CreateBusinessProfile.builder()
                             .legalBusinessName("Whole Body Fitness LLC")
@@ -1299,7 +1227,7 @@ public class Application {
 **Primary error:**
 * [`MoovError`](./src/main/java/models/errors/MoovError.java): The base class for HTTP error responses.
 
-<details><summary>Less common errors (59)</summary>
+<details><summary>Less common errors (52)</summary>
 
 <br />
 
@@ -1309,59 +1237,52 @@ public class Application {
 many more subclasses in the JDK platform).
 
 **Inherit from [`MoovError`](./src/main/java/models/errors/MoovError.java)**:
-* [`io.moov.sdk.models.errors.GenericError`](./src/main/java/models/errors/io.moov.sdk.models.errors.GenericError.java): Applicable to 78 of 178 methods.*
-* [`io.moov.sdk.models.errors.BrandValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.BrandValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 178 methods.*
-* [`io.moov.sdk.models.errors.ImageRequestValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ImageRequestValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 178 methods.*
-* [`io.moov.sdk.models.errors.ProductRequestValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ProductRequestValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 178 methods.*
-* [`io.moov.sdk.models.errors.ScheduleValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ScheduleValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 178 methods.*
-* [`io.moov.sdk.models.errors.TerminalApplicationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.TerminalApplicationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 178 methods.*
-* [`io.moov.sdk.models.errors.Transfer`](./src/main/java/models/errors/io.moov.sdk.models.errors.Transfer.java): Details of a Transfer. Status code `409`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.CardAcquiringRefund`](./src/main/java/models/errors/io.moov.sdk.models.errors.CardAcquiringRefund.java): Details of a card refund. Status code `409`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.CreateAccountError`](./src/main/java/models/errors/io.moov.sdk.models.errors.CreateAccountError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.PatchAccountError`](./src/main/java/models/errors/io.moov.sdk.models.errors.PatchAccountError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.ConnectAccountRequestValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ConnectAccountRequestValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.AssignCountriesError`](./src/main/java/models/errors/io.moov.sdk.models.errors.AssignCountriesError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.LinkApplePayError`](./src/main/java/models/errors/io.moov.sdk.models.errors.LinkApplePayError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.BankAccountValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.BankAccountValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.MicroDepositValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.MicroDepositValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.AddCapabilitiesError`](./src/main/java/models/errors/io.moov.sdk.models.errors.AddCapabilitiesError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.LinkCardError`](./src/main/java/models/errors/io.moov.sdk.models.errors.LinkCardError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.UpdateCardError`](./src/main/java/models/errors/io.moov.sdk.models.errors.UpdateCardError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.FileUploadValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.FileUploadValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.FeePlanAgreementError`](./src/main/java/models/errors/io.moov.sdk.models.errors.FeePlanAgreementError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.FileValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.FileValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.ImageMetadataValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ImageMetadataValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.CreateInvoiceError`](./src/main/java/models/errors/io.moov.sdk.models.errors.CreateInvoiceError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.ListInvoicesValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ListInvoicesValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.UpdateInvoiceError`](./src/main/java/models/errors/io.moov.sdk.models.errors.UpdateInvoiceError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.CreateInvoicePaymentError`](./src/main/java/models/errors/io.moov.sdk.models.errors.CreateInvoicePaymentError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.CreatePaymentLinkError`](./src/main/java/models/errors/io.moov.sdk.models.errors.CreatePaymentLinkError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.UpdatePaymentLinkError`](./src/main/java/models/errors/io.moov.sdk.models.errors.UpdatePaymentLinkError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.RepresentativeValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.RepresentativeValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.CreateSweepConfigError`](./src/main/java/models/errors/io.moov.sdk.models.errors.CreateSweepConfigError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.PatchSweepConfigError`](./src/main/java/models/errors/io.moov.sdk.models.errors.PatchSweepConfigError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.AccountTerminalApplicationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.AccountTerminalApplicationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.CreateTicketError`](./src/main/java/models/errors/io.moov.sdk.models.errors.CreateTicketError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.UpdateTicketError`](./src/main/java/models/errors/io.moov.sdk.models.errors.UpdateTicketError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.TransferOptionsValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.TransferOptionsValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.TransferValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.TransferValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.ListTransfersValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ListTransfersValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.PatchTransferValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.PatchTransferValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.RefundValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.RefundValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.ReversalValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ReversalValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.UpsertUnderwritingError`](./src/main/java/models/errors/io.moov.sdk.models.errors.UpsertUnderwritingError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.UpdateUnderwritingError`](./src/main/java/models/errors/io.moov.sdk.models.errors.UpdateUnderwritingError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.CreateWalletValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.CreateWalletValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.ListWalletsValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ListWalletsValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.PatchWalletValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.PatchWalletValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.ListWalletTransactionsValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ListWalletTransactionsValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.CreateWebhookValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.CreateWebhookValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.UpdateWebhookValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.UpdateWebhookValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.RequestCardError`](./src/main/java/models/errors/io.moov.sdk.models.errors.RequestCardError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.UpdateIssuedCardError`](./src/main/java/models/errors/io.moov.sdk.models.errors.UpdateIssuedCardError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.RevokeTokenRequestError`](./src/main/java/models/errors/io.moov.sdk.models.errors.RevokeTokenRequestError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.AuthTokenRequestError`](./src/main/java/models/errors/io.moov.sdk.models.errors.AuthTokenRequestError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
-* [`io.moov.sdk.models.errors.OnboardingInviteError`](./src/main/java/models/errors/io.moov.sdk.models.errors.OnboardingInviteError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 178 methods.*
+* [`io.moov.sdk.models.errors.GenericError`](./src/main/java/models/errors/io.moov.sdk.models.errors.GenericError.java): Applicable to 72 of 166 methods.*
+* [`io.moov.sdk.models.errors.BrandValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.BrandValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 166 methods.*
+* [`io.moov.sdk.models.errors.ImageRequestValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ImageRequestValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 166 methods.*
+* [`io.moov.sdk.models.errors.ProductRequestValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ProductRequestValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 166 methods.*
+* [`io.moov.sdk.models.errors.ScheduleValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ScheduleValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 166 methods.*
+* [`io.moov.sdk.models.errors.TerminalApplicationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.TerminalApplicationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 166 methods.*
+* [`io.moov.sdk.models.errors.Transfer`](./src/main/java/models/errors/io.moov.sdk.models.errors.Transfer.java): Details of a Transfer. Status code `409`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.CardAcquiringRefund`](./src/main/java/models/errors/io.moov.sdk.models.errors.CardAcquiringRefund.java): Details of a card refund. Status code `409`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.CreateAccountError`](./src/main/java/models/errors/io.moov.sdk.models.errors.CreateAccountError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.PatchAccountError`](./src/main/java/models/errors/io.moov.sdk.models.errors.PatchAccountError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.ConnectAccountRequestValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ConnectAccountRequestValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.AssignCountriesError`](./src/main/java/models/errors/io.moov.sdk.models.errors.AssignCountriesError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.LinkApplePayError`](./src/main/java/models/errors/io.moov.sdk.models.errors.LinkApplePayError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.BankAccountValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.BankAccountValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.MicroDepositValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.MicroDepositValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.AddCapabilitiesError`](./src/main/java/models/errors/io.moov.sdk.models.errors.AddCapabilitiesError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.LinkCardError`](./src/main/java/models/errors/io.moov.sdk.models.errors.LinkCardError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.UpdateCardError`](./src/main/java/models/errors/io.moov.sdk.models.errors.UpdateCardError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.FileUploadValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.FileUploadValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.FeePlanAgreementError`](./src/main/java/models/errors/io.moov.sdk.models.errors.FeePlanAgreementError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.FileValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.FileValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.ImageMetadataValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ImageMetadataValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.CreatePaymentLinkError`](./src/main/java/models/errors/io.moov.sdk.models.errors.CreatePaymentLinkError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.UpdatePaymentLinkError`](./src/main/java/models/errors/io.moov.sdk.models.errors.UpdatePaymentLinkError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.RepresentativeValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.RepresentativeValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.CreateSweepConfigError`](./src/main/java/models/errors/io.moov.sdk.models.errors.CreateSweepConfigError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.PatchSweepConfigError`](./src/main/java/models/errors/io.moov.sdk.models.errors.PatchSweepConfigError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.AccountTerminalApplicationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.AccountTerminalApplicationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.TransferOptionsValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.TransferOptionsValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.TransferValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.TransferValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.ListTransfersValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ListTransfersValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.PatchTransferValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.PatchTransferValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.RefundValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.RefundValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.ReversalValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ReversalValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.UpdateUnderwritingError`](./src/main/java/models/errors/io.moov.sdk.models.errors.UpdateUnderwritingError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.CreateWalletValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.CreateWalletValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.ListWalletsValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ListWalletsValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.PatchWalletValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.PatchWalletValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.ListWalletTransactionsValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ListWalletTransactionsValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.CreateWebhookValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.CreateWebhookValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.UpdateWebhookValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.UpdateWebhookValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.RequestCardError`](./src/main/java/models/errors/io.moov.sdk.models.errors.RequestCardError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.UpdateIssuedCardError`](./src/main/java/models/errors/io.moov.sdk.models.errors.UpdateIssuedCardError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.RevokeTokenRequestError`](./src/main/java/models/errors/io.moov.sdk.models.errors.RevokeTokenRequestError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.AuthTokenRequestError`](./src/main/java/models/errors/io.moov.sdk.models.errors.AuthTokenRequestError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
+* [`io.moov.sdk.models.errors.OnboardingInviteError`](./src/main/java/models/errors/io.moov.sdk.models.errors.OnboardingInviteError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 166 methods.*
 
 
 </details>
@@ -1399,7 +1320,7 @@ public class Application {
             .build();
 
         CreateAccount req = CreateAccount.builder()
-                .accountType(CreateAccountType.BUSINESS)
+                .accountType(AccountType.BUSINESS)
                 .profile(CreateProfile.builder()
                     .business(CreateBusinessProfile.builder()
                         .legalBusinessName("Whole Body Fitness LLC")

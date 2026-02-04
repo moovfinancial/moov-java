@@ -343,17 +343,6 @@ public class SDKAutoConfig {
         return moov.images();
     }
     /**
-     * Creates a Invoices sub-SDK bean if none exists.
-     *
-     * @param moov the main SDK instance
-     * @return A configured Invoices instance
-     */
-    @Bean
-    @ConditionalOnMissingBean
-    public Invoices invoices(Moov moov) {
-        return moov.invoices();
-    }
-    /**
      * Creates a PaymentLinks sub-SDK bean if none exists.
      *
      * @param moov the main SDK instance
@@ -440,17 +429,6 @@ public class SDKAutoConfig {
     @ConditionalOnMissingBean
     public AccountTerminalApplications accountTerminalApplications(Moov moov) {
         return moov.accountTerminalApplications();
-    }
-    /**
-     * Creates a Support sub-SDK bean if none exists.
-     *
-     * @param moov the main SDK instance
-     * @return A configured Support instance
-     */
-    @Bean
-    @ConditionalOnMissingBean
-    public Support support(Moov moov) {
-        return moov.support();
     }
     /**
      * Creates a Transfers sub-SDK bean if none exists.

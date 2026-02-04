@@ -5,9 +5,9 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.moov.sdk.models.components.AccountType;
 import io.moov.sdk.models.components.CapabilityID;
 import io.moov.sdk.models.components.CapabilityStatus;
-import io.moov.sdk.models.components.CreateAccountType;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Boolean;
@@ -59,7 +59,7 @@ public class ListConnectedAccountsForAccountRequest {
      * <p>Filtering by `type=guest` is not currently supported.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=type")
-    private Optional<? extends CreateAccountType> type;
+    private Optional<? extends AccountType> type;
 
     /**
      * Serves as an optional alias from a foreign/external system which can be used to reference this
@@ -101,7 +101,7 @@ public class ListConnectedAccountsForAccountRequest {
             String accountID,
             Optional<String> name,
             Optional<String> email,
-            Optional<? extends CreateAccountType> type,
+            Optional<? extends AccountType> type,
             Optional<String> foreignID,
             Optional<Boolean> includeDisconnected,
             Optional<? extends CapabilityID> capability,
@@ -184,8 +184,8 @@ public class ListConnectedAccountsForAccountRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<CreateAccountType> type() {
-        return (Optional<CreateAccountType>) type;
+    public Optional<AccountType> type() {
+        return (Optional<AccountType>) type;
     }
 
     /**
@@ -319,7 +319,7 @@ public class ListConnectedAccountsForAccountRequest {
      * 
      * <p>Filtering by `type=guest` is not currently supported.
      */
-    public ListConnectedAccountsForAccountRequest withType(CreateAccountType type) {
+    public ListConnectedAccountsForAccountRequest withType(AccountType type) {
         Utils.checkNotNull(type, "type");
         this.type = Optional.ofNullable(type);
         return this;
@@ -337,7 +337,7 @@ public class ListConnectedAccountsForAccountRequest {
      * 
      * <p>Filtering by `type=guest` is not currently supported.
      */
-    public ListConnectedAccountsForAccountRequest withType(Optional<? extends CreateAccountType> type) {
+    public ListConnectedAccountsForAccountRequest withType(Optional<? extends AccountType> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -506,7 +506,7 @@ public class ListConnectedAccountsForAccountRequest {
 
         private Optional<String> email = Optional.empty();
 
-        private Optional<? extends CreateAccountType> type = Optional.empty();
+        private Optional<? extends AccountType> type = Optional.empty();
 
         private Optional<String> foreignID = Optional.empty();
 
@@ -605,7 +605,7 @@ public class ListConnectedAccountsForAccountRequest {
          * 
          * <p>Filtering by `type=guest` is not currently supported.
          */
-        public Builder type(CreateAccountType type) {
+        public Builder type(AccountType type) {
             Utils.checkNotNull(type, "type");
             this.type = Optional.ofNullable(type);
             return this;
@@ -622,7 +622,7 @@ public class ListConnectedAccountsForAccountRequest {
          * 
          * <p>Filtering by `type=guest` is not currently supported.
          */
-        public Builder type(Optional<? extends CreateAccountType> type) {
+        public Builder type(Optional<? extends AccountType> type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;

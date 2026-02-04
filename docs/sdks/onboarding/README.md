@@ -64,7 +64,7 @@ public class Application {
                 .grantScopes(List.of(
                     ApplicationScope.TRANSFERS_WRITE))
                 .prefill(CreateAccount.builder()
-                    .accountType(CreateAccountType.BUSINESS)
+                    .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()
                         .business(CreateBusinessProfile.builder()
                             .legalBusinessName("Whole Body Fitness LLC")

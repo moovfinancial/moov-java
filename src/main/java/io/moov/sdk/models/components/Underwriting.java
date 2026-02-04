@@ -5,16 +5,12 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Deprecated;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
-import java.util.Optional;
 
 /**
  * Underwriting
@@ -23,95 +19,46 @@ import java.util.Optional;
  */
 public class Underwriting {
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("averageTransactionSize")
-    private Optional<Long> averageTransactionSize;
+    private long averageTransactionSize;
 
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("maxTransactionSize")
-    private Optional<Long> maxTransactionSize;
+    private long maxTransactionSize;
 
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("averageMonthlyTransactionVolume")
-    private Optional<Long> averageMonthlyTransactionVolume;
+    private long averageMonthlyTransactionVolume;
 
     /**
      * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
     @Deprecated
-    private Optional<? extends UnderwritingStatus> status;
+    private UnderwritingStatus status;
 
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("volumeByCustomerType")
-    private Optional<? extends VolumeByCustomerType> volumeByCustomerType;
+    private VolumeByCustomerType volumeByCustomerType;
 
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardVolumeDistribution")
-    private Optional<? extends CardVolumeDistribution> cardVolumeDistribution;
+    private CardVolumeDistribution cardVolumeDistribution;
 
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fulfillment")
-    private Optional<? extends FulfillmentDetails> fulfillment;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("geographicReach")
-    private Optional<? extends GeographicReach> geographicReach;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("businessPresence")
-    private Optional<? extends BusinessPresence> businessPresence;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("pendingLitigation")
-    private Optional<? extends PendingLitigation> pendingLitigation;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("volumeShareByCustomerType")
-    private Optional<? extends VolumeShareByCustomerType> volumeShareByCustomerType;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("collectFunds")
-    private Optional<? extends CollectFunds> collectFunds;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("moneyTransfer")
-    private Optional<? extends MoneyTransfer> moneyTransfer;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("sendFunds")
-    private Optional<? extends SendFunds> sendFunds;
+    private FulfillmentDetails fulfillment;
 
     @JsonCreator
     public Underwriting(
-            @JsonProperty("averageTransactionSize") Optional<Long> averageTransactionSize,
-            @JsonProperty("maxTransactionSize") Optional<Long> maxTransactionSize,
-            @JsonProperty("averageMonthlyTransactionVolume") Optional<Long> averageMonthlyTransactionVolume,
-            @JsonProperty("status") Optional<? extends UnderwritingStatus> status,
-            @JsonProperty("volumeByCustomerType") Optional<? extends VolumeByCustomerType> volumeByCustomerType,
-            @JsonProperty("cardVolumeDistribution") Optional<? extends CardVolumeDistribution> cardVolumeDistribution,
-            @JsonProperty("fulfillment") Optional<? extends FulfillmentDetails> fulfillment,
-            @JsonProperty("geographicReach") Optional<? extends GeographicReach> geographicReach,
-            @JsonProperty("businessPresence") Optional<? extends BusinessPresence> businessPresence,
-            @JsonProperty("pendingLitigation") Optional<? extends PendingLitigation> pendingLitigation,
-            @JsonProperty("volumeShareByCustomerType") Optional<? extends VolumeShareByCustomerType> volumeShareByCustomerType,
-            @JsonProperty("collectFunds") Optional<? extends CollectFunds> collectFunds,
-            @JsonProperty("moneyTransfer") Optional<? extends MoneyTransfer> moneyTransfer,
-            @JsonProperty("sendFunds") Optional<? extends SendFunds> sendFunds) {
+            @JsonProperty("averageTransactionSize") long averageTransactionSize,
+            @JsonProperty("maxTransactionSize") long maxTransactionSize,
+            @JsonProperty("averageMonthlyTransactionVolume") long averageMonthlyTransactionVolume,
+            @JsonProperty("status") UnderwritingStatus status,
+            @JsonProperty("volumeByCustomerType") VolumeByCustomerType volumeByCustomerType,
+            @JsonProperty("cardVolumeDistribution") CardVolumeDistribution cardVolumeDistribution,
+            @JsonProperty("fulfillment") FulfillmentDetails fulfillment) {
         Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
         Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
         Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
@@ -119,13 +66,6 @@ public class Underwriting {
         Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
         Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
         Utils.checkNotNull(fulfillment, "fulfillment");
-        Utils.checkNotNull(geographicReach, "geographicReach");
-        Utils.checkNotNull(businessPresence, "businessPresence");
-        Utils.checkNotNull(pendingLitigation, "pendingLitigation");
-        Utils.checkNotNull(volumeShareByCustomerType, "volumeShareByCustomerType");
-        Utils.checkNotNull(collectFunds, "collectFunds");
-        Utils.checkNotNull(moneyTransfer, "moneyTransfer");
-        Utils.checkNotNull(sendFunds, "sendFunds");
         this.averageTransactionSize = averageTransactionSize;
         this.maxTransactionSize = maxTransactionSize;
         this.averageMonthlyTransactionVolume = averageMonthlyTransactionVolume;
@@ -133,35 +73,20 @@ public class Underwriting {
         this.volumeByCustomerType = volumeByCustomerType;
         this.cardVolumeDistribution = cardVolumeDistribution;
         this.fulfillment = fulfillment;
-        this.geographicReach = geographicReach;
-        this.businessPresence = businessPresence;
-        this.pendingLitigation = pendingLitigation;
-        this.volumeShareByCustomerType = volumeShareByCustomerType;
-        this.collectFunds = collectFunds;
-        this.moneyTransfer = moneyTransfer;
-        this.sendFunds = sendFunds;
-    }
-    
-    public Underwriting() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
-    public Optional<Long> averageTransactionSize() {
+    public long averageTransactionSize() {
         return averageTransactionSize;
     }
 
     @JsonIgnore
-    public Optional<Long> maxTransactionSize() {
+    public long maxTransactionSize() {
         return maxTransactionSize;
     }
 
     @JsonIgnore
-    public Optional<Long> averageMonthlyTransactionVolume() {
+    public long averageMonthlyTransactionVolume() {
         return averageMonthlyTransactionVolume;
     }
 
@@ -170,70 +95,24 @@ public class Underwriting {
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<UnderwritingStatus> status() {
-        return (Optional<UnderwritingStatus>) status;
+    public UnderwritingStatus status() {
+        return status;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<VolumeByCustomerType> volumeByCustomerType() {
-        return (Optional<VolumeByCustomerType>) volumeByCustomerType;
+    public VolumeByCustomerType volumeByCustomerType() {
+        return volumeByCustomerType;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<CardVolumeDistribution> cardVolumeDistribution() {
-        return (Optional<CardVolumeDistribution>) cardVolumeDistribution;
+    public CardVolumeDistribution cardVolumeDistribution() {
+        return cardVolumeDistribution;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<FulfillmentDetails> fulfillment() {
-        return (Optional<FulfillmentDetails>) fulfillment;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<GeographicReach> geographicReach() {
-        return (Optional<GeographicReach>) geographicReach;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<BusinessPresence> businessPresence() {
-        return (Optional<BusinessPresence>) businessPresence;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<PendingLitigation> pendingLitigation() {
-        return (Optional<PendingLitigation>) pendingLitigation;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<VolumeShareByCustomerType> volumeShareByCustomerType() {
-        return (Optional<VolumeShareByCustomerType>) volumeShareByCustomerType;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<CollectFunds> collectFunds() {
-        return (Optional<CollectFunds>) collectFunds;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<MoneyTransfer> moneyTransfer() {
-        return (Optional<MoneyTransfer>) moneyTransfer;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<SendFunds> sendFunds() {
-        return (Optional<SendFunds>) sendFunds;
+    public FulfillmentDetails fulfillment() {
+        return fulfillment;
     }
 
     public static Builder builder() {
@@ -243,38 +122,17 @@ public class Underwriting {
 
     public Underwriting withAverageTransactionSize(long averageTransactionSize) {
         Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
-        this.averageTransactionSize = Optional.ofNullable(averageTransactionSize);
-        return this;
-    }
-
-
-    public Underwriting withAverageTransactionSize(Optional<Long> averageTransactionSize) {
-        Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
         this.averageTransactionSize = averageTransactionSize;
         return this;
     }
 
     public Underwriting withMaxTransactionSize(long maxTransactionSize) {
         Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
-        this.maxTransactionSize = Optional.ofNullable(maxTransactionSize);
-        return this;
-    }
-
-
-    public Underwriting withMaxTransactionSize(Optional<Long> maxTransactionSize) {
-        Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
         this.maxTransactionSize = maxTransactionSize;
         return this;
     }
 
     public Underwriting withAverageMonthlyTransactionVolume(long averageMonthlyTransactionVolume) {
-        Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
-        this.averageMonthlyTransactionVolume = Optional.ofNullable(averageMonthlyTransactionVolume);
-        return this;
-    }
-
-
-    public Underwriting withAverageMonthlyTransactionVolume(Optional<Long> averageMonthlyTransactionVolume) {
         Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
         this.averageMonthlyTransactionVolume = averageMonthlyTransactionVolume;
         return this;
@@ -287,30 +145,11 @@ public class Underwriting {
     @Deprecated
     public Underwriting withStatus(UnderwritingStatus status) {
         Utils.checkNotNull(status, "status");
-        this.status = Optional.ofNullable(status);
-        return this;
-    }
-
-
-    /**
-     * 
-     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
-     */
-    @Deprecated
-    public Underwriting withStatus(Optional<? extends UnderwritingStatus> status) {
-        Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
     }
 
     public Underwriting withVolumeByCustomerType(VolumeByCustomerType volumeByCustomerType) {
-        Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
-        this.volumeByCustomerType = Optional.ofNullable(volumeByCustomerType);
-        return this;
-    }
-
-
-    public Underwriting withVolumeByCustomerType(Optional<? extends VolumeByCustomerType> volumeByCustomerType) {
         Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
         this.volumeByCustomerType = volumeByCustomerType;
         return this;
@@ -318,118 +157,13 @@ public class Underwriting {
 
     public Underwriting withCardVolumeDistribution(CardVolumeDistribution cardVolumeDistribution) {
         Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
-        this.cardVolumeDistribution = Optional.ofNullable(cardVolumeDistribution);
-        return this;
-    }
-
-
-    public Underwriting withCardVolumeDistribution(Optional<? extends CardVolumeDistribution> cardVolumeDistribution) {
-        Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
         this.cardVolumeDistribution = cardVolumeDistribution;
         return this;
     }
 
     public Underwriting withFulfillment(FulfillmentDetails fulfillment) {
         Utils.checkNotNull(fulfillment, "fulfillment");
-        this.fulfillment = Optional.ofNullable(fulfillment);
-        return this;
-    }
-
-
-    public Underwriting withFulfillment(Optional<? extends FulfillmentDetails> fulfillment) {
-        Utils.checkNotNull(fulfillment, "fulfillment");
         this.fulfillment = fulfillment;
-        return this;
-    }
-
-    public Underwriting withGeographicReach(GeographicReach geographicReach) {
-        Utils.checkNotNull(geographicReach, "geographicReach");
-        this.geographicReach = Optional.ofNullable(geographicReach);
-        return this;
-    }
-
-
-    public Underwriting withGeographicReach(Optional<? extends GeographicReach> geographicReach) {
-        Utils.checkNotNull(geographicReach, "geographicReach");
-        this.geographicReach = geographicReach;
-        return this;
-    }
-
-    public Underwriting withBusinessPresence(BusinessPresence businessPresence) {
-        Utils.checkNotNull(businessPresence, "businessPresence");
-        this.businessPresence = Optional.ofNullable(businessPresence);
-        return this;
-    }
-
-
-    public Underwriting withBusinessPresence(Optional<? extends BusinessPresence> businessPresence) {
-        Utils.checkNotNull(businessPresence, "businessPresence");
-        this.businessPresence = businessPresence;
-        return this;
-    }
-
-    public Underwriting withPendingLitigation(PendingLitigation pendingLitigation) {
-        Utils.checkNotNull(pendingLitigation, "pendingLitigation");
-        this.pendingLitigation = Optional.ofNullable(pendingLitigation);
-        return this;
-    }
-
-
-    public Underwriting withPendingLitigation(Optional<? extends PendingLitigation> pendingLitigation) {
-        Utils.checkNotNull(pendingLitigation, "pendingLitigation");
-        this.pendingLitigation = pendingLitigation;
-        return this;
-    }
-
-    public Underwriting withVolumeShareByCustomerType(VolumeShareByCustomerType volumeShareByCustomerType) {
-        Utils.checkNotNull(volumeShareByCustomerType, "volumeShareByCustomerType");
-        this.volumeShareByCustomerType = Optional.ofNullable(volumeShareByCustomerType);
-        return this;
-    }
-
-
-    public Underwriting withVolumeShareByCustomerType(Optional<? extends VolumeShareByCustomerType> volumeShareByCustomerType) {
-        Utils.checkNotNull(volumeShareByCustomerType, "volumeShareByCustomerType");
-        this.volumeShareByCustomerType = volumeShareByCustomerType;
-        return this;
-    }
-
-    public Underwriting withCollectFunds(CollectFunds collectFunds) {
-        Utils.checkNotNull(collectFunds, "collectFunds");
-        this.collectFunds = Optional.ofNullable(collectFunds);
-        return this;
-    }
-
-
-    public Underwriting withCollectFunds(Optional<? extends CollectFunds> collectFunds) {
-        Utils.checkNotNull(collectFunds, "collectFunds");
-        this.collectFunds = collectFunds;
-        return this;
-    }
-
-    public Underwriting withMoneyTransfer(MoneyTransfer moneyTransfer) {
-        Utils.checkNotNull(moneyTransfer, "moneyTransfer");
-        this.moneyTransfer = Optional.ofNullable(moneyTransfer);
-        return this;
-    }
-
-
-    public Underwriting withMoneyTransfer(Optional<? extends MoneyTransfer> moneyTransfer) {
-        Utils.checkNotNull(moneyTransfer, "moneyTransfer");
-        this.moneyTransfer = moneyTransfer;
-        return this;
-    }
-
-    public Underwriting withSendFunds(SendFunds sendFunds) {
-        Utils.checkNotNull(sendFunds, "sendFunds");
-        this.sendFunds = Optional.ofNullable(sendFunds);
-        return this;
-    }
-
-
-    public Underwriting withSendFunds(Optional<? extends SendFunds> sendFunds) {
-        Utils.checkNotNull(sendFunds, "sendFunds");
-        this.sendFunds = sendFunds;
         return this;
     }
 
@@ -449,14 +183,7 @@ public class Underwriting {
             Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.volumeByCustomerType, other.volumeByCustomerType) &&
             Utils.enhancedDeepEquals(this.cardVolumeDistribution, other.cardVolumeDistribution) &&
-            Utils.enhancedDeepEquals(this.fulfillment, other.fulfillment) &&
-            Utils.enhancedDeepEquals(this.geographicReach, other.geographicReach) &&
-            Utils.enhancedDeepEquals(this.businessPresence, other.businessPresence) &&
-            Utils.enhancedDeepEquals(this.pendingLitigation, other.pendingLitigation) &&
-            Utils.enhancedDeepEquals(this.volumeShareByCustomerType, other.volumeShareByCustomerType) &&
-            Utils.enhancedDeepEquals(this.collectFunds, other.collectFunds) &&
-            Utils.enhancedDeepEquals(this.moneyTransfer, other.moneyTransfer) &&
-            Utils.enhancedDeepEquals(this.sendFunds, other.sendFunds);
+            Utils.enhancedDeepEquals(this.fulfillment, other.fulfillment);
     }
     
     @Override
@@ -464,9 +191,7 @@ public class Underwriting {
         return Utils.enhancedHash(
             averageTransactionSize, maxTransactionSize, averageMonthlyTransactionVolume,
             status, volumeByCustomerType, cardVolumeDistribution,
-            fulfillment, geographicReach, businessPresence,
-            pendingLitigation, volumeShareByCustomerType, collectFunds,
-            moneyTransfer, sendFunds);
+            fulfillment);
     }
     
     @Override
@@ -478,47 +203,26 @@ public class Underwriting {
                 "status", status,
                 "volumeByCustomerType", volumeByCustomerType,
                 "cardVolumeDistribution", cardVolumeDistribution,
-                "fulfillment", fulfillment,
-                "geographicReach", geographicReach,
-                "businessPresence", businessPresence,
-                "pendingLitigation", pendingLitigation,
-                "volumeShareByCustomerType", volumeShareByCustomerType,
-                "collectFunds", collectFunds,
-                "moneyTransfer", moneyTransfer,
-                "sendFunds", sendFunds);
+                "fulfillment", fulfillment);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<Long> averageTransactionSize = Optional.empty();
+        private Long averageTransactionSize;
 
-        private Optional<Long> maxTransactionSize = Optional.empty();
+        private Long maxTransactionSize;
 
-        private Optional<Long> averageMonthlyTransactionVolume = Optional.empty();
+        private Long averageMonthlyTransactionVolume;
 
         @Deprecated
-        private Optional<? extends UnderwritingStatus> status = Optional.empty();
+        private UnderwritingStatus status;
 
-        private Optional<? extends VolumeByCustomerType> volumeByCustomerType = Optional.empty();
+        private VolumeByCustomerType volumeByCustomerType;
 
-        private Optional<? extends CardVolumeDistribution> cardVolumeDistribution = Optional.empty();
+        private CardVolumeDistribution cardVolumeDistribution;
 
-        private Optional<? extends FulfillmentDetails> fulfillment = Optional.empty();
-
-        private Optional<? extends GeographicReach> geographicReach = Optional.empty();
-
-        private Optional<? extends BusinessPresence> businessPresence = Optional.empty();
-
-        private Optional<? extends PendingLitigation> pendingLitigation = Optional.empty();
-
-        private Optional<? extends VolumeShareByCustomerType> volumeShareByCustomerType = Optional.empty();
-
-        private Optional<? extends CollectFunds> collectFunds = Optional.empty();
-
-        private Optional<? extends MoneyTransfer> moneyTransfer = Optional.empty();
-
-        private Optional<? extends SendFunds> sendFunds = Optional.empty();
+        private FulfillmentDetails fulfillment;
 
         private Builder() {
           // force use of static builder() method
@@ -527,12 +231,6 @@ public class Underwriting {
 
         public Builder averageTransactionSize(long averageTransactionSize) {
             Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
-            this.averageTransactionSize = Optional.ofNullable(averageTransactionSize);
-            return this;
-        }
-
-        public Builder averageTransactionSize(Optional<Long> averageTransactionSize) {
-            Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
             this.averageTransactionSize = averageTransactionSize;
             return this;
         }
@@ -540,24 +238,12 @@ public class Underwriting {
 
         public Builder maxTransactionSize(long maxTransactionSize) {
             Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
-            this.maxTransactionSize = Optional.ofNullable(maxTransactionSize);
-            return this;
-        }
-
-        public Builder maxTransactionSize(Optional<Long> maxTransactionSize) {
-            Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
             this.maxTransactionSize = maxTransactionSize;
             return this;
         }
 
 
         public Builder averageMonthlyTransactionVolume(long averageMonthlyTransactionVolume) {
-            Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
-            this.averageMonthlyTransactionVolume = Optional.ofNullable(averageMonthlyTransactionVolume);
-            return this;
-        }
-
-        public Builder averageMonthlyTransactionVolume(Optional<Long> averageMonthlyTransactionVolume) {
             Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
             this.averageMonthlyTransactionVolume = averageMonthlyTransactionVolume;
             return this;
@@ -571,29 +257,12 @@ public class Underwriting {
         @Deprecated
         public Builder status(UnderwritingStatus status) {
             Utils.checkNotNull(status, "status");
-            this.status = Optional.ofNullable(status);
-            return this;
-        }
-
-        /**
-         * 
-         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
-         */
-        @Deprecated
-        public Builder status(Optional<? extends UnderwritingStatus> status) {
-            Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
 
 
         public Builder volumeByCustomerType(VolumeByCustomerType volumeByCustomerType) {
-            Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
-            this.volumeByCustomerType = Optional.ofNullable(volumeByCustomerType);
-            return this;
-        }
-
-        public Builder volumeByCustomerType(Optional<? extends VolumeByCustomerType> volumeByCustomerType) {
             Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
             this.volumeByCustomerType = volumeByCustomerType;
             return this;
@@ -602,12 +271,6 @@ public class Underwriting {
 
         public Builder cardVolumeDistribution(CardVolumeDistribution cardVolumeDistribution) {
             Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
-            this.cardVolumeDistribution = Optional.ofNullable(cardVolumeDistribution);
-            return this;
-        }
-
-        public Builder cardVolumeDistribution(Optional<? extends CardVolumeDistribution> cardVolumeDistribution) {
-            Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
             this.cardVolumeDistribution = cardVolumeDistribution;
             return this;
         }
@@ -615,104 +278,7 @@ public class Underwriting {
 
         public Builder fulfillment(FulfillmentDetails fulfillment) {
             Utils.checkNotNull(fulfillment, "fulfillment");
-            this.fulfillment = Optional.ofNullable(fulfillment);
-            return this;
-        }
-
-        public Builder fulfillment(Optional<? extends FulfillmentDetails> fulfillment) {
-            Utils.checkNotNull(fulfillment, "fulfillment");
             this.fulfillment = fulfillment;
-            return this;
-        }
-
-
-        public Builder geographicReach(GeographicReach geographicReach) {
-            Utils.checkNotNull(geographicReach, "geographicReach");
-            this.geographicReach = Optional.ofNullable(geographicReach);
-            return this;
-        }
-
-        public Builder geographicReach(Optional<? extends GeographicReach> geographicReach) {
-            Utils.checkNotNull(geographicReach, "geographicReach");
-            this.geographicReach = geographicReach;
-            return this;
-        }
-
-
-        public Builder businessPresence(BusinessPresence businessPresence) {
-            Utils.checkNotNull(businessPresence, "businessPresence");
-            this.businessPresence = Optional.ofNullable(businessPresence);
-            return this;
-        }
-
-        public Builder businessPresence(Optional<? extends BusinessPresence> businessPresence) {
-            Utils.checkNotNull(businessPresence, "businessPresence");
-            this.businessPresence = businessPresence;
-            return this;
-        }
-
-
-        public Builder pendingLitigation(PendingLitigation pendingLitigation) {
-            Utils.checkNotNull(pendingLitigation, "pendingLitigation");
-            this.pendingLitigation = Optional.ofNullable(pendingLitigation);
-            return this;
-        }
-
-        public Builder pendingLitigation(Optional<? extends PendingLitigation> pendingLitigation) {
-            Utils.checkNotNull(pendingLitigation, "pendingLitigation");
-            this.pendingLitigation = pendingLitigation;
-            return this;
-        }
-
-
-        public Builder volumeShareByCustomerType(VolumeShareByCustomerType volumeShareByCustomerType) {
-            Utils.checkNotNull(volumeShareByCustomerType, "volumeShareByCustomerType");
-            this.volumeShareByCustomerType = Optional.ofNullable(volumeShareByCustomerType);
-            return this;
-        }
-
-        public Builder volumeShareByCustomerType(Optional<? extends VolumeShareByCustomerType> volumeShareByCustomerType) {
-            Utils.checkNotNull(volumeShareByCustomerType, "volumeShareByCustomerType");
-            this.volumeShareByCustomerType = volumeShareByCustomerType;
-            return this;
-        }
-
-
-        public Builder collectFunds(CollectFunds collectFunds) {
-            Utils.checkNotNull(collectFunds, "collectFunds");
-            this.collectFunds = Optional.ofNullable(collectFunds);
-            return this;
-        }
-
-        public Builder collectFunds(Optional<? extends CollectFunds> collectFunds) {
-            Utils.checkNotNull(collectFunds, "collectFunds");
-            this.collectFunds = collectFunds;
-            return this;
-        }
-
-
-        public Builder moneyTransfer(MoneyTransfer moneyTransfer) {
-            Utils.checkNotNull(moneyTransfer, "moneyTransfer");
-            this.moneyTransfer = Optional.ofNullable(moneyTransfer);
-            return this;
-        }
-
-        public Builder moneyTransfer(Optional<? extends MoneyTransfer> moneyTransfer) {
-            Utils.checkNotNull(moneyTransfer, "moneyTransfer");
-            this.moneyTransfer = moneyTransfer;
-            return this;
-        }
-
-
-        public Builder sendFunds(SendFunds sendFunds) {
-            Utils.checkNotNull(sendFunds, "sendFunds");
-            this.sendFunds = Optional.ofNullable(sendFunds);
-            return this;
-        }
-
-        public Builder sendFunds(Optional<? extends SendFunds> sendFunds) {
-            Utils.checkNotNull(sendFunds, "sendFunds");
-            this.sendFunds = sendFunds;
             return this;
         }
 
@@ -721,9 +287,7 @@ public class Underwriting {
             return new Underwriting(
                 averageTransactionSize, maxTransactionSize, averageMonthlyTransactionVolume,
                 status, volumeByCustomerType, cardVolumeDistribution,
-                fulfillment, geographicReach, businessPresence,
-                pendingLitigation, volumeShareByCustomerType, collectFunds,
-                moneyTransfer, sendFunds);
+                fulfillment);
         }
 
     }

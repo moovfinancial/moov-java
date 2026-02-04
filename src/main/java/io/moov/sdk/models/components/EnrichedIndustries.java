@@ -15,17 +15,17 @@ import java.util.List;
 public class EnrichedIndustries {
 
     @JsonProperty("industries")
-    private List<IndustryTaxonomy> industries;
+    private List<EnrichedIndustry> industries;
 
     @JsonCreator
     public EnrichedIndustries(
-            @JsonProperty("industries") List<IndustryTaxonomy> industries) {
+            @JsonProperty("industries") List<EnrichedIndustry> industries) {
         Utils.checkNotNull(industries, "industries");
         this.industries = industries;
     }
 
     @JsonIgnore
-    public List<IndustryTaxonomy> industries() {
+    public List<EnrichedIndustry> industries() {
         return industries;
     }
 
@@ -34,7 +34,7 @@ public class EnrichedIndustries {
     }
 
 
-    public EnrichedIndustries withIndustries(List<IndustryTaxonomy> industries) {
+    public EnrichedIndustries withIndustries(List<EnrichedIndustry> industries) {
         Utils.checkNotNull(industries, "industries");
         this.industries = industries;
         return this;
@@ -68,14 +68,14 @@ public class EnrichedIndustries {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private List<IndustryTaxonomy> industries;
+        private List<EnrichedIndustry> industries;
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder industries(List<IndustryTaxonomy> industries) {
+        public Builder industries(List<EnrichedIndustry> industries) {
             Utils.checkNotNull(industries, "industries");
             this.industries = industries;
             return this;

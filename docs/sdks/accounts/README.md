@@ -123,7 +123,7 @@ public class Application {
             .build();
 
         CreateAccount req = CreateAccount.builder()
-                .accountType(CreateAccountType.BUSINESS)
+                .accountType(AccountType.BUSINESS)
                 .profile(CreateProfile.builder()
                     .business(CreateBusinessProfile.builder()
                         .legalBusinessName("Whole Body Fitness LLC")
@@ -178,7 +178,7 @@ to specify the `/accounts.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.CreateAccountType;
+import io.moov.sdk.models.components.AccountType;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.operations.ListAccountsRequest;
 import io.moov.sdk.models.operations.ListAccountsResponse;
@@ -197,7 +197,7 @@ public class Application {
             .build();
 
         ListAccountsRequest req = ListAccountsRequest.builder()
-                .type(CreateAccountType.BUSINESS)
+                .type(AccountType.BUSINESS)
                 .skip(60L)
                 .count(20L)
                 .build();
@@ -514,6 +514,7 @@ to specify the `/accounts.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.AccountType;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.operations.ListConnectedAccountsForAccountRequest;
 import io.moov.sdk.models.operations.ListConnectedAccountsForAccountResponse;
@@ -533,6 +534,7 @@ public class Application {
 
         ListConnectedAccountsForAccountRequest req = ListConnectedAccountsForAccountRequest.builder()
                 .accountID("7e09ffc8-e508-4fd4-a54e-21cff90a1824")
+                .type(AccountType.BUSINESS)
                 .skip(60L)
                 .count(20L)
                 .build();

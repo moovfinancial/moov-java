@@ -73,9 +73,6 @@ public class Moov {
     private final Images images;
 
 
-    private final Invoices invoices;
-
-
     private final PaymentLinks paymentLinks;
 
 
@@ -98,9 +95,6 @@ public class Moov {
 
 
     private final AccountTerminalApplications accountTerminalApplications;
-
-
-    private final Support support;
 
 
     private final Transfers transfers;
@@ -212,11 +206,6 @@ public class Moov {
     }
 
 
-    public Invoices invoices() {
-        return invoices;
-    }
-
-
     public PaymentLinks paymentLinks() {
         return paymentLinks;
     }
@@ -254,11 +243,6 @@ public class Moov {
 
     public AccountTerminalApplications accountTerminalApplications() {
         return accountTerminalApplications;
-    }
-
-
-    public Support support() {
-        return support;
     }
 
 
@@ -520,7 +504,6 @@ public class Moov {
         this.feePlans = new FeePlans(sdkConfiguration);
         this.files = new Files(sdkConfiguration);
         this.images = new Images(sdkConfiguration);
-        this.invoices = new Invoices(sdkConfiguration);
         this.paymentLinks = new PaymentLinks(sdkConfiguration);
         this.paymentMethods = new PaymentMethods(sdkConfiguration);
         this.products = new Products(sdkConfiguration);
@@ -529,7 +512,6 @@ public class Moov {
         this.statements = new Statements(sdkConfiguration);
         this.sweeps = new Sweeps(sdkConfiguration);
         this.accountTerminalApplications = new AccountTerminalApplications(sdkConfiguration);
-        this.support = new Support(sdkConfiguration);
         this.transfers = new Transfers(sdkConfiguration);
         this.underwriting = new Underwriting(sdkConfiguration);
         this.wallets = new Wallets(sdkConfiguration);

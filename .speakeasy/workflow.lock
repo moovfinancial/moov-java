@@ -1,29 +1,29 @@
-speakeasyVersion: 1.700.2
+speakeasyVersion: 1.703.0
 sources:
     latest:
-        sourceNamespace: api-latest
-        sourceRevisionDigest: sha256:f113bf1bc2313a27d73754c4dde0433801ccc2b0afe5b88a97d53f4ec0776848
-        sourceBlobDigest: sha256:dd5d30466ad3ca0e8cf1b984cf6539ae6170dfca21fb194935a9c2e688bd31fc
+        sourceNamespace: api-v2024.01.00
+        sourceRevisionDigest: sha256:ef7fadbb0229a3319db710ce52ee6af847d13ade01ac759076de6114d7d703ee
+        sourceBlobDigest: sha256:a150c265249c0f01c9602cf6dea42d288e142b92469a1c0b62e31fbe1552af26
         tags:
             - latest
-            - speakeasy-sdk-regen-1770079354
+            - speakeasy-sdk-regen-versions-2024.01-1770229185
 targets:
     latest:
         source: latest
-        sourceNamespace: api-latest
-        sourceRevisionDigest: sha256:f113bf1bc2313a27d73754c4dde0433801ccc2b0afe5b88a97d53f4ec0776848
-        sourceBlobDigest: sha256:dd5d30466ad3ca0e8cf1b984cf6539ae6170dfca21fb194935a9c2e688bd31fc
-        codeSamplesNamespace: latest-java-code-samples
-        codeSamplesRevisionDigest: sha256:dd3905d7dd3b5cee0f413eddad5c357c499c1387a520e888a3436ab0bd1bbb84
+        sourceNamespace: api-v2024.01.00
+        sourceRevisionDigest: sha256:ef7fadbb0229a3319db710ce52ee6af847d13ade01ac759076de6114d7d703ee
+        sourceBlobDigest: sha256:a150c265249c0f01c9602cf6dea42d288e142b92469a1c0b62e31fbe1552af26
+        codeSamplesNamespace: v2024.01.00-java-code-samples
+        codeSamplesRevisionDigest: sha256:feb4828355dea116adbd408ebb68b45e3e951756df43d9516996adc083cc60de
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         latest:
             inputs:
-                - location: registry.speakeasyapi.dev/moov/moov/api-latest
+                - location: registry.speakeasyapi.dev/moov/moov/api-v2024.01.00
             registry:
-                location: registry.speakeasyapi.dev/moov/moov/latest
+                location: registry.speakeasyapi.dev/moov/moov/java-v2024.01.00
     targets:
         latest:
             target: java
@@ -36,7 +36,7 @@ workflow:
                     gpgPassPhrase: $java_gpg_passphrase
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/moov/moov/latest-java-code-samples
+                    location: registry.speakeasyapi.dev/moov/moov/v2024.01.00-java-code-samples
                 labelOverride:
                     fixedValue: Java (SDK)
                 blocking: false

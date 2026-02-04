@@ -18,9 +18,11 @@ import java.util.Optional;
 
 
 public class CreateAccount {
-
+    /**
+     * The type of entity represented by this account.
+     */
     @JsonProperty("accountType")
-    private CreateAccountType accountType;
+    private AccountType accountType;
 
 
     @JsonProperty("profile")
@@ -75,7 +77,7 @@ public class CreateAccount {
 
     @JsonCreator
     public CreateAccount(
-            @JsonProperty("accountType") CreateAccountType accountType,
+            @JsonProperty("accountType") AccountType accountType,
             @JsonProperty("profile") CreateProfile profile,
             @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata,
             @JsonProperty("termsOfService") Optional<? extends TermsOfServicePayload> termsOfService,
@@ -105,15 +107,18 @@ public class CreateAccount {
     }
     
     public CreateAccount(
-            CreateAccountType accountType,
+            AccountType accountType,
             CreateProfile profile) {
         this(accountType, profile, Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty());
     }
 
+    /**
+     * The type of entity represented by this account.
+     */
     @JsonIgnore
-    public CreateAccountType accountType() {
+    public AccountType accountType() {
         return accountType;
     }
 
@@ -185,7 +190,10 @@ public class CreateAccount {
     }
 
 
-    public CreateAccount withAccountType(CreateAccountType accountType) {
+    /**
+     * The type of entity represented by this account.
+     */
+    public CreateAccount withAccountType(AccountType accountType) {
         Utils.checkNotNull(accountType, "accountType");
         this.accountType = accountType;
         return this;
@@ -368,7 +376,7 @@ public class CreateAccount {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private CreateAccountType accountType;
+        private AccountType accountType;
 
         private CreateProfile profile;
 
@@ -391,7 +399,10 @@ public class CreateAccount {
         }
 
 
-        public Builder accountType(CreateAccountType accountType) {
+        /**
+         * The type of entity represented by this account.
+         */
+        public Builder accountType(AccountType accountType) {
             Utils.checkNotNull(accountType, "accountType");
             this.accountType = accountType;
             return this;

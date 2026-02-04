@@ -73,9 +73,6 @@ public class Moov {
     private final Images images;
 
 
-    private final Invoices invoices;
-
-
     private final PaymentLinks paymentLinks;
 
 
@@ -209,11 +206,6 @@ public class Moov {
 
     public Images images() {
         return images;
-    }
-
-
-    public Invoices invoices() {
-        return invoices;
     }
 
 
@@ -520,7 +512,6 @@ public class Moov {
         this.feePlans = new FeePlans(sdkConfiguration);
         this.files = new Files(sdkConfiguration);
         this.images = new Images(sdkConfiguration);
-        this.invoices = new Invoices(sdkConfiguration);
         this.paymentLinks = new PaymentLinks(sdkConfiguration);
         this.paymentMethods = new PaymentMethods(sdkConfiguration);
         this.products = new Products(sdkConfiguration);

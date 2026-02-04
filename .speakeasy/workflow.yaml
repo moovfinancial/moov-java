@@ -3,9 +3,10 @@ speakeasyVersion: latest
 sources:
     latest:
         inputs:
-            - location: registry.speakeasyapi.dev/moov/moov/api-latest
+            - location: registry.speakeasyapi.dev/moov/moov/api-v2026.01.00
+              type: openapi
         registry:
-            location: registry.speakeasyapi.dev/moov/moov/latest
+            location: registry.speakeasyapi.dev/moov/moov/java-v2026.01.00
 targets:
     latest:
         target: java
@@ -18,7 +19,7 @@ targets:
                 gpgPassPhrase: $java_gpg_passphrase
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/moov/moov/latest-java-code-samples
+                location: registry.speakeasyapi.dev/moov/moov/v2026.01.00-java-code-samples
             labelOverride:
                 fixedValue: Java (SDK)
             blocking: false

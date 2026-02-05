@@ -29,10 +29,6 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-* [listPartnerPricing](#listpartnerpricing) - List all partner pricing plans available for use by an account.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 * [listPartnerPricingAgreements](#listpartnerpricingagreements) - List all partner pricing agreements associated with an account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
@@ -418,64 +414,6 @@ public class Application {
 ### Response
 
 **[ListFeesFetchResponse](../../models/operations/ListFeesFetchResponse.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
-
-## listPartnerPricing
-
-List all partner pricing plans available for use by an account.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="listPartnerPricing" method="get" path="/accounts/{accountID}/partner-pricing" -->
-```java
-package hello.world;
-
-import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.operations.ListPartnerPricingResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws Exception {
-
-        Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
-                .security(Security.builder()
-                    .username("")
-                    .password("")
-                    .build())
-            .build();
-
-        ListPartnerPricingResponse res = sdk.feePlans().listPartnerPricing()
-                .accountID("600637f9-c38a-473f-b909-0d5ac537b8a5")
-                .call();
-
-        if (res.partnerPricings().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `accountID`                                                  | *String*                                                     | :heavy_check_mark:                                           | N/A                                                          |
-| `planIDs`                                                    | List\<*String*>                                              | :heavy_minus_sign:                                           | A comma-separated list of plan IDs to filter the results by. |
-
-### Response
-
-**[ListPartnerPricingResponse](../../models/operations/ListPartnerPricingResponse.md)**
 
 ### Errors
 

@@ -22,13 +22,14 @@ generation:
   schemas:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: ""
+  versioningStrategy: automatic
   persistentEdits: {}
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 java:
-  version: 0.34.23
+  version: 0.34.24
   additionalDependencies: []
   additionalPlugins: []
   artifactID: sdk
@@ -69,5 +70,6 @@ java:
   operationScopedParams: true
   outputModelSuffix: output
   projectName: sdk
+  respectTitlesForPrimitiveUnionMembers: false
   templateVersion: v2
   unionStrategy: populated-fields

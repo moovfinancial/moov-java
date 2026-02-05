@@ -27,9 +27,6 @@ import io.moov.sdk.models.operations.ListFeesFetchResponse;
 import io.moov.sdk.models.operations.ListPartnerPricingAgreementsRequest;
 import io.moov.sdk.models.operations.ListPartnerPricingAgreementsRequestBuilder;
 import io.moov.sdk.models.operations.ListPartnerPricingAgreementsResponse;
-import io.moov.sdk.models.operations.ListPartnerPricingRequest;
-import io.moov.sdk.models.operations.ListPartnerPricingRequestBuilder;
-import io.moov.sdk.models.operations.ListPartnerPricingResponse;
 import io.moov.sdk.models.operations.ListResidualFeesRequest;
 import io.moov.sdk.models.operations.ListResidualFeesRequestBuilder;
 import io.moov.sdk.models.operations.ListResidualFeesResponse;
@@ -45,7 +42,6 @@ import io.moov.sdk.operations.ListFeePlanAgreements;
 import io.moov.sdk.operations.ListFeePlans;
 import io.moov.sdk.operations.ListFeeRevenue;
 import io.moov.sdk.operations.ListFeesFetch;
-import io.moov.sdk.operations.ListPartnerPricing;
 import io.moov.sdk.operations.ListPartnerPricingAgreements;
 import io.moov.sdk.operations.ListResidualFees;
 import io.moov.sdk.operations.ListResiduals;
@@ -297,58 +293,6 @@ public class FeePlans {
                 .build();
         RequestOperation<io.moov.sdk.models.operations.ListFeesFetchRequest, ListFeesFetchResponse> operation
               = new ListFeesFetch.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * List all partner pricing plans available for use by an account.
-     * 
-     * <p>To access this endpoint using an [access
-     * token](https://docs.moov.io/api/authentication/access-tokens/)
-     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * 
-     * @return The call builder
-     */
-    public ListPartnerPricingRequestBuilder listPartnerPricing() {
-        return new ListPartnerPricingRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * List all partner pricing plans available for use by an account.
-     * 
-     * <p>To access this endpoint using an [access
-     * token](https://docs.moov.io/api/authentication/access-tokens/)
-     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * 
-     * @param accountID 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public ListPartnerPricingResponse listPartnerPricing(String accountID) {
-        return listPartnerPricing(accountID, Optional.empty());
-    }
-
-    /**
-     * List all partner pricing plans available for use by an account.
-     * 
-     * <p>To access this endpoint using an [access
-     * token](https://docs.moov.io/api/authentication/access-tokens/)
-     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * 
-     * @param accountID 
-     * @param planIDs A comma-separated list of plan IDs to filter the results by.
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public ListPartnerPricingResponse listPartnerPricing(String accountID, Optional<? extends List<String>> planIDs) {
-        ListPartnerPricingRequest request =
-            ListPartnerPricingRequest
-                .builder()
-                .accountID(accountID)
-                .planIDs(planIDs)
-                .build();
-        RequestOperation<ListPartnerPricingRequest, ListPartnerPricingResponse> operation
-              = new ListPartnerPricing.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -29,7 +29,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 java:
-  version: 26.4.0-dev.0
+  version: 26.4.0-dev.1
   additionalDependencies: []
   additionalPlugins: []
   artifactID: sdk
@@ -70,5 +70,6 @@ java:
   operationScopedParams: true
   outputModelSuffix: output
   projectName: sdk
+  respectTitlesForPrimitiveUnionMembers: false
   templateVersion: v2
   unionStrategy: populated-fields

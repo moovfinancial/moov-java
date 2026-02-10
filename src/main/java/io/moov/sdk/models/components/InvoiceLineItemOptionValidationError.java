@@ -12,6 +12,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -36,25 +37,33 @@ public class InvoiceLineItemOptionValidationError {
     @JsonProperty("quantity")
     private Optional<String> quantity;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("images")
+    private Optional<? extends Map<String, InvoiceLineItemImageValidationError>> images;
+
     @JsonCreator
     public InvoiceLineItemOptionValidationError(
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("group") Optional<String> group,
             @JsonProperty("priceModifier") Optional<? extends AmountDecimalValidationError> priceModifier,
-            @JsonProperty("quantity") Optional<String> quantity) {
+            @JsonProperty("quantity") Optional<String> quantity,
+            @JsonProperty("images") Optional<? extends Map<String, InvoiceLineItemImageValidationError>> images) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(group, "group");
         Utils.checkNotNull(priceModifier, "priceModifier");
         Utils.checkNotNull(quantity, "quantity");
+        Utils.checkNotNull(images, "images");
         this.name = name;
         this.group = group;
         this.priceModifier = priceModifier;
         this.quantity = quantity;
+        this.images = images;
     }
     
     public InvoiceLineItemOptionValidationError() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -76,6 +85,12 @@ public class InvoiceLineItemOptionValidationError {
     @JsonIgnore
     public Optional<String> quantity() {
         return quantity;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Map<String, InvoiceLineItemImageValidationError>> images() {
+        return (Optional<Map<String, InvoiceLineItemImageValidationError>>) images;
     }
 
     public static Builder builder() {
@@ -135,6 +150,19 @@ public class InvoiceLineItemOptionValidationError {
         return this;
     }
 
+    public InvoiceLineItemOptionValidationError withImages(Map<String, InvoiceLineItemImageValidationError> images) {
+        Utils.checkNotNull(images, "images");
+        this.images = Optional.ofNullable(images);
+        return this;
+    }
+
+
+    public InvoiceLineItemOptionValidationError withImages(Optional<? extends Map<String, InvoiceLineItemImageValidationError>> images) {
+        Utils.checkNotNull(images, "images");
+        this.images = images;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -148,14 +176,15 @@ public class InvoiceLineItemOptionValidationError {
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.group, other.group) &&
             Utils.enhancedDeepEquals(this.priceModifier, other.priceModifier) &&
-            Utils.enhancedDeepEquals(this.quantity, other.quantity);
+            Utils.enhancedDeepEquals(this.quantity, other.quantity) &&
+            Utils.enhancedDeepEquals(this.images, other.images);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             name, group, priceModifier,
-            quantity);
+            quantity, images);
     }
     
     @Override
@@ -164,7 +193,8 @@ public class InvoiceLineItemOptionValidationError {
                 "name", name,
                 "group", group,
                 "priceModifier", priceModifier,
-                "quantity", quantity);
+                "quantity", quantity,
+                "images", images);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -177,6 +207,8 @@ public class InvoiceLineItemOptionValidationError {
         private Optional<? extends AmountDecimalValidationError> priceModifier = Optional.empty();
 
         private Optional<String> quantity = Optional.empty();
+
+        private Optional<? extends Map<String, InvoiceLineItemImageValidationError>> images = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -234,11 +266,24 @@ public class InvoiceLineItemOptionValidationError {
             return this;
         }
 
+
+        public Builder images(Map<String, InvoiceLineItemImageValidationError> images) {
+            Utils.checkNotNull(images, "images");
+            this.images = Optional.ofNullable(images);
+            return this;
+        }
+
+        public Builder images(Optional<? extends Map<String, InvoiceLineItemImageValidationError>> images) {
+            Utils.checkNotNull(images, "images");
+            this.images = images;
+            return this;
+        }
+
         public InvoiceLineItemOptionValidationError build() {
 
             return new InvoiceLineItemOptionValidationError(
                 name, group, priceModifier,
-                quantity);
+                quantity, images);
         }
 
     }

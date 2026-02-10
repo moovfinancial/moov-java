@@ -59,8 +59,8 @@ public class CreateInvoiceLineItem {
      * Optional list of images associated with this line item.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("imageIDs")
-    private Optional<? extends List<String>> imageIDs;
+    @JsonProperty("images")
+    private Optional<? extends List<CreateInvoiceLineItemImage>> images;
 
     @JsonCreator
     public CreateInvoiceLineItem(
@@ -69,19 +69,19 @@ public class CreateInvoiceLineItem {
             @JsonProperty("quantity") int quantity,
             @JsonProperty("productID") Optional<String> productID,
             @JsonProperty("options") Optional<? extends List<CreateInvoiceLineItemOption>> options,
-            @JsonProperty("imageIDs") Optional<? extends List<String>> imageIDs) {
+            @JsonProperty("images") Optional<? extends List<CreateInvoiceLineItemImage>> images) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(basePrice, "basePrice");
         Utils.checkNotNull(quantity, "quantity");
         Utils.checkNotNull(productID, "productID");
         Utils.checkNotNull(options, "options");
-        Utils.checkNotNull(imageIDs, "imageIDs");
+        Utils.checkNotNull(images, "images");
         this.name = name;
         this.basePrice = basePrice;
         this.quantity = quantity;
         this.productID = productID;
         this.options = options;
-        this.imageIDs = imageIDs;
+        this.images = images;
     }
     
     public CreateInvoiceLineItem(
@@ -139,8 +139,8 @@ public class CreateInvoiceLineItem {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<String>> imageIDs() {
-        return (Optional<List<String>>) imageIDs;
+    public Optional<List<CreateInvoiceLineItemImage>> images() {
+        return (Optional<List<CreateInvoiceLineItemImage>>) images;
     }
 
     public static Builder builder() {
@@ -218,9 +218,9 @@ public class CreateInvoiceLineItem {
     /**
      * Optional list of images associated with this line item.
      */
-    public CreateInvoiceLineItem withImageIDs(List<String> imageIDs) {
-        Utils.checkNotNull(imageIDs, "imageIDs");
-        this.imageIDs = Optional.ofNullable(imageIDs);
+    public CreateInvoiceLineItem withImages(List<CreateInvoiceLineItemImage> images) {
+        Utils.checkNotNull(images, "images");
+        this.images = Optional.ofNullable(images);
         return this;
     }
 
@@ -228,9 +228,9 @@ public class CreateInvoiceLineItem {
     /**
      * Optional list of images associated with this line item.
      */
-    public CreateInvoiceLineItem withImageIDs(Optional<? extends List<String>> imageIDs) {
-        Utils.checkNotNull(imageIDs, "imageIDs");
-        this.imageIDs = imageIDs;
+    public CreateInvoiceLineItem withImages(Optional<? extends List<CreateInvoiceLineItemImage>> images) {
+        Utils.checkNotNull(images, "images");
+        this.images = images;
         return this;
     }
 
@@ -249,14 +249,14 @@ public class CreateInvoiceLineItem {
             Utils.enhancedDeepEquals(this.quantity, other.quantity) &&
             Utils.enhancedDeepEquals(this.productID, other.productID) &&
             Utils.enhancedDeepEquals(this.options, other.options) &&
-            Utils.enhancedDeepEquals(this.imageIDs, other.imageIDs);
+            Utils.enhancedDeepEquals(this.images, other.images);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             name, basePrice, quantity,
-            productID, options, imageIDs);
+            productID, options, images);
     }
     
     @Override
@@ -267,7 +267,7 @@ public class CreateInvoiceLineItem {
                 "quantity", quantity,
                 "productID", productID,
                 "options", options,
-                "imageIDs", imageIDs);
+                "images", images);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -283,7 +283,7 @@ public class CreateInvoiceLineItem {
 
         private Optional<? extends List<CreateInvoiceLineItemOption>> options = Optional.empty();
 
-        private Optional<? extends List<String>> imageIDs = Optional.empty();
+        private Optional<? extends List<CreateInvoiceLineItemImage>> images = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -363,18 +363,18 @@ public class CreateInvoiceLineItem {
         /**
          * Optional list of images associated with this line item.
          */
-        public Builder imageIDs(List<String> imageIDs) {
-            Utils.checkNotNull(imageIDs, "imageIDs");
-            this.imageIDs = Optional.ofNullable(imageIDs);
+        public Builder images(List<CreateInvoiceLineItemImage> images) {
+            Utils.checkNotNull(images, "images");
+            this.images = Optional.ofNullable(images);
             return this;
         }
 
         /**
          * Optional list of images associated with this line item.
          */
-        public Builder imageIDs(Optional<? extends List<String>> imageIDs) {
-            Utils.checkNotNull(imageIDs, "imageIDs");
-            this.imageIDs = imageIDs;
+        public Builder images(Optional<? extends List<CreateInvoiceLineItemImage>> images) {
+            Utils.checkNotNull(images, "images");
+            this.images = images;
             return this;
         }
 
@@ -382,7 +382,7 @@ public class CreateInvoiceLineItem {
 
             return new CreateInvoiceLineItem(
                 name, basePrice, quantity,
-                productID, options, imageIDs);
+                productID, options, images);
         }
 
     }

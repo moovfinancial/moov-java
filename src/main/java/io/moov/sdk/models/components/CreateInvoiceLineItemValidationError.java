@@ -42,28 +42,36 @@ public class CreateInvoiceLineItemValidationError {
     @JsonProperty("quantity")
     private Optional<String> quantity;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("images")
+    private Optional<? extends Map<String, CreateInvoiceLineItemImageValidationError>> images;
+
     @JsonCreator
     public CreateInvoiceLineItemValidationError(
             @JsonProperty("productID") Optional<String> productID,
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("basePrice") Optional<? extends AmountDecimalValidationError> basePrice,
             @JsonProperty("options") Optional<? extends Map<String, CreateInvoiceLineItemOptionValidationError>> options,
-            @JsonProperty("quantity") Optional<String> quantity) {
+            @JsonProperty("quantity") Optional<String> quantity,
+            @JsonProperty("images") Optional<? extends Map<String, CreateInvoiceLineItemImageValidationError>> images) {
         Utils.checkNotNull(productID, "productID");
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(basePrice, "basePrice");
         Utils.checkNotNull(options, "options");
         Utils.checkNotNull(quantity, "quantity");
+        Utils.checkNotNull(images, "images");
         this.productID = productID;
         this.name = name;
         this.basePrice = basePrice;
         this.options = options;
         this.quantity = quantity;
+        this.images = images;
     }
     
     public CreateInvoiceLineItemValidationError() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -91,6 +99,12 @@ public class CreateInvoiceLineItemValidationError {
     @JsonIgnore
     public Optional<String> quantity() {
         return quantity;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Map<String, CreateInvoiceLineItemImageValidationError>> images() {
+        return (Optional<Map<String, CreateInvoiceLineItemImageValidationError>>) images;
     }
 
     public static Builder builder() {
@@ -163,6 +177,19 @@ public class CreateInvoiceLineItemValidationError {
         return this;
     }
 
+    public CreateInvoiceLineItemValidationError withImages(Map<String, CreateInvoiceLineItemImageValidationError> images) {
+        Utils.checkNotNull(images, "images");
+        this.images = Optional.ofNullable(images);
+        return this;
+    }
+
+
+    public CreateInvoiceLineItemValidationError withImages(Optional<? extends Map<String, CreateInvoiceLineItemImageValidationError>> images) {
+        Utils.checkNotNull(images, "images");
+        this.images = images;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -177,14 +204,15 @@ public class CreateInvoiceLineItemValidationError {
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.basePrice, other.basePrice) &&
             Utils.enhancedDeepEquals(this.options, other.options) &&
-            Utils.enhancedDeepEquals(this.quantity, other.quantity);
+            Utils.enhancedDeepEquals(this.quantity, other.quantity) &&
+            Utils.enhancedDeepEquals(this.images, other.images);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             productID, name, basePrice,
-            options, quantity);
+            options, quantity, images);
     }
     
     @Override
@@ -194,7 +222,8 @@ public class CreateInvoiceLineItemValidationError {
                 "name", name,
                 "basePrice", basePrice,
                 "options", options,
-                "quantity", quantity);
+                "quantity", quantity,
+                "images", images);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -209,6 +238,8 @@ public class CreateInvoiceLineItemValidationError {
         private Optional<? extends Map<String, CreateInvoiceLineItemOptionValidationError>> options = Optional.empty();
 
         private Optional<String> quantity = Optional.empty();
+
+        private Optional<? extends Map<String, CreateInvoiceLineItemImageValidationError>> images = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -279,11 +310,24 @@ public class CreateInvoiceLineItemValidationError {
             return this;
         }
 
+
+        public Builder images(Map<String, CreateInvoiceLineItemImageValidationError> images) {
+            Utils.checkNotNull(images, "images");
+            this.images = Optional.ofNullable(images);
+            return this;
+        }
+
+        public Builder images(Optional<? extends Map<String, CreateInvoiceLineItemImageValidationError>> images) {
+            Utils.checkNotNull(images, "images");
+            this.images = images;
+            return this;
+        }
+
         public CreateInvoiceLineItemValidationError build() {
 
             return new CreateInvoiceLineItemValidationError(
                 productID, name, basePrice,
-                options, quantity);
+                options, quantity, images);
         }
 
     }

@@ -283,11 +283,11 @@ public class Scheduling {
      * 
      * @param accountID 
      * @param scheduleID 
-     * @param occurrenceFilter Allows the specification of additional filters beyond the UUID.
+     * @param occurrenceFilter   Allows the specification of additional filters beyond the UUID.
      *         
-     *         Specifying a UUID string returns the exact occurrence.
-     *         Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
-     *         Specifying `latest` returns the latest occurrence at or before now.
+     *           Specifying a UUID string returns the exact occurrence.
+     *           Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
+     *           Specifying `latest` returns the latest occurrence at or before now.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */

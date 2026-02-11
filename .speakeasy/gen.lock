@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 32e19427d8409a5e6dc83a1e42b5eab2
+  docChecksum: 8605c83a8968c52c984da6462883148f
   docVersion: latest
-  speakeasyVersion: 1.709.2
-  generationVersion: 2.814.0
-  releaseVersion: 0.34.26
-  configChecksum: 5bd1ece536833911ee8fb2f8efb6a498
+  speakeasyVersion: 1.709.4
+  generationVersion: 2.816.0
+  releaseVersion: 0.34.27
+  configChecksum: c437f318b8489dab9511e5f63b24af98
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 persistentEdits:
-  generation_id: 39e48aff-fe7d-450d-a2ed-21074a1f9728
-  pristine_commit_hash: fece93f111b95ee4ed651da277d818f4673294da
-  pristine_tree_hash: 28a87d74de060e7952c1a3a8a5c287a51c43f1fd
+  generation_id: 6568fb23-77c4-47fe-9e90-79ea2e7b32e0
+  pristine_commit_hash: 1e15d0fd194e2a4132f2d13e7562bce2d66e923f
+  pristine_tree_hash: c960ac544e6ae6698a87e36f2363295f1be83f31
 features:
   java:
     acceptHeaders: 2.81.2
@@ -2905,8 +2905,8 @@ trackedFiles:
     pristine_git_object: c08f9049720455a33f60307623954ce4970be42d
   docs/models/operations/CreateTransferRequest.md:
     id: 52159bf0573a
-    last_write_checksum: sha1:93ab1119ec99f2b1120bd9122dc543cb95a2baa6
-    pristine_git_object: f027a4e3854b7a36387206eb4ad4aa9866f0ecc7
+    last_write_checksum: sha1:8c17acc85059aa0976bad144e2c645a978da07a8
+    pristine_git_object: c123c30573c8b8f7ca7f181f840593c19d45ed85
   docs/models/operations/CreateTransferResponse.md:
     id: 33ed50986ce8
     last_write_checksum: sha1:e655fa17946e7a0e8b2f976ea037dae595dc362b
@@ -3293,8 +3293,8 @@ trackedFiles:
     pristine_git_object: 2b8264a64f034821988d2586bcce5520c9924635
   docs/models/operations/GetScheduledOccurrenceRequest.md:
     id: 6e289829070d
-    last_write_checksum: sha1:df7d2f7e1ceb6237367a2fc1da74ff26ca28109e
-    pristine_git_object: 46245c08976bdd42b72e87c23892918cadc51209
+    last_write_checksum: sha1:cebaf10b6c9197525bc78154be212abc6ff5ba59
+    pristine_git_object: 73c9bbc937cd182faad31f6696fd166f7f70e3cb
   docs/models/operations/GetScheduledOccurrenceResponse.md:
     id: 2aab794671e0
     last_write_checksum: sha1:6e5c8852c794481a9768099673d2f74a67a21d0f
@@ -4225,8 +4225,8 @@ trackedFiles:
     pristine_git_object: 91dc3ac018f69fd74f0d70d9a3e9e58da015b227
   docs/sdks/scheduling/README.md:
     id: 0508024015b4
-    last_write_checksum: sha1:5239821099b61816b64d4cece192080c402b5ffc
-    pristine_git_object: a8babadc03cfe87a96fe004442374056c83491cd
+    last_write_checksum: sha1:aeeca929948b219f68e743441a23d77c262fe913
+    pristine_git_object: 6ca5844f02e57476e67fd9db9c5ccb2f7ade38ab
   docs/sdks/statements/README.md:
     id: 077d45e19c3c
     last_write_checksum: sha1:b0135e0f9a67822e3816eec48f2019faee99a284
@@ -4245,8 +4245,8 @@ trackedFiles:
     pristine_git_object: d3f4f0ee3d67d0f693d0c38cb54f5f6ead652cab
   docs/sdks/transfers/README.md:
     id: f56918861798
-    last_write_checksum: sha1:9c9b1eb70c074fa6d604351c5bb1252589bdab26
-    pristine_git_object: b61511881bdba5b9906da57942b8fbce088b662d
+    last_write_checksum: sha1:84c51bc213b7ed6b470d585affb157f8648e8db8
+    pristine_git_object: f1c3691e835d1d2e61ba8fbf7dddcf326c7dd774
   docs/sdks/underwriting/README.md:
     id: ef972250826e
     last_write_checksum: sha1:be628445e5fc308d617460d85163b4f9664e71a6
@@ -4265,8 +4265,8 @@ trackedFiles:
     pristine_git_object: 5a1311f65cc22d82e0ed6eafb4b10f581d3ed7c5
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:ef3aaf2fd0bc7df646dd00f5bd229bf0714fd2aa
-    pristine_git_object: f7251502b81781ae95b63b1c34fff06af3733914
+    last_write_checksum: sha1:fff81aa407c9067048aa122b79ba266779acf318
+    pristine_git_object: e00adb3b3937691da9c3ca1859b9a124fa37e41b
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4441,12 +4441,12 @@ trackedFiles:
     pristine_git_object: 64047d75ebffa5dbfe6b7461ed4d624f01890a51
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:a7544889ea59994af544f07c4c0958f50206890e
-    pristine_git_object: f416dbfb1a4e2a7a77a1f8b4e16fc1aaafc3513e
+    last_write_checksum: sha1:fd6da4392062c3e7a233699d86d9547586f2ec16
+    pristine_git_object: 45c63ee3ee8889bb6b260c2d75bf882b673f47e8
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
-    last_write_checksum: sha1:f2634b766e3dc03d4f3043aff0565c655dcf17be
-    pristine_git_object: 5e228bbd579fe851499ab74d4cf33a76acf0c471
+    last_write_checksum: sha1:3cec454068713abb146030e959cd17babeb227af
+    pristine_git_object: 299d0ace0a443ee97db60241478f2aeef1898073
   src/main/java/io/moov/sdk/SecuritySource.java:
     id: 191f73296bf4
     last_write_checksum: sha1:0e907497e197fc6ba78de8733788c92527e3b052
@@ -4469,8 +4469,8 @@ trackedFiles:
     pristine_git_object: c7c20cdfdd7232e2f2f427399de7fdabc3c8baf8
   src/main/java/io/moov/sdk/Transfers.java:
     id: 24ccbdaf852a
-    last_write_checksum: sha1:8bfe24a403d4d3d312d7ae2199eb49924bbad6ff
-    pristine_git_object: a75c2b995709b911e782a7b138560456186ee683
+    last_write_checksum: sha1:3b607f8ba4a24e31c300fb0eb8d1cde0ea01c76f
+    pristine_git_object: 4a5ca94de4393ae759671c6ff8e8d19c38c57090
   src/main/java/io/moov/sdk/Underwriting.java:
     id: 76924327a1ae
     last_write_checksum: sha1:ba75a5305aa21305dfc939e8eb2407fcf7e93112
@@ -12965,7 +12965,6 @@ examples:
           application/json: {"secret": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes:\n* `moov.invoices.createInvoice()`: \n  *  `request.createInvoice.lineItems.items[]` **Changed** (Breaking ⚠️)\n  *  `error.lineItems.items.Map<CreateInvoiceLineItemValidationError>` **Changed**\n* `moov.invoices.updateInvoice()`: \n  *  `request.updateInvoice.lineItems.items[]` **Changed** (Breaking ⚠️)\n  *  `error.lineItems.items.Map<InvoiceLineItemValidationError>` **Changed**\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

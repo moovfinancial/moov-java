@@ -159,9 +159,60 @@ Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/o
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-### Example Usage
+### Example Usage: Created async transfer
 
-<!-- UsageSnippet language="java" operationID="createTransfer" method="post" path="/accounts/{accountID}/transfers" -->
+<!-- UsageSnippet language="java" operationID="createTransfer" method="post" path="/accounts/{accountID}/transfers" example="Created async transfer" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.*;
+import io.moov.sdk.models.errors.*;
+import io.moov.sdk.models.operations.CreateTransferResponse;
+import java.lang.Exception;
+import java.util.Map;
+
+public class Application {
+
+    public static void main(String[] args) throws GenericError, Transfer, TransferValidationError, Exception {
+
+        Moov sdk = Moov.builder()
+                .xMoovVersion("v2024.01.00")
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        CreateTransferResponse res = sdk.transfers().create()
+                .xIdempotencyKey("6de5561f-5a9f-4bd3-a458-ce0baacae20d")
+                .accountID("d5696c5b-7106-4093-8a7d-faa71dda002c")
+                .createTransfer(CreateTransfer.builder()
+                    .source(CreateTransferSource.builder()
+                        .paymentMethodID("9506dbf6-4208-44c3-ad8a-e4431660e1f2")
+                        .build())
+                    .destination(CreateTransferDestination.builder()
+                        .paymentMethodID("3f9969cf-a1f3-4d83-8ddc-229a506651cf")
+                        .build())
+                    .amount(Amount.builder()
+                        .currency("USD")
+                        .value(32945L)
+                        .build())
+                    .description("Transfer from card to wallet")
+                    .metadata(Map.ofEntries(
+                        Map.entry("optional", "metadata")))
+                    .build())
+                .call();
+
+        if (res.createdTransfer().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+### Example Usage: Created synchronous transfer
+
+<!-- UsageSnippet language="java" operationID="createTransfer" method="post" path="/accounts/{accountID}/transfers" example="Created synchronous transfer" -->
 ```java
 package hello.world;
 
@@ -215,7 +266,7 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                                                                                         | Type                                                                                                                                                                                                                                                                                              | Required                                                                                                                                                                                                                                                                                          | Description                                                                                                                                                                                                                                                                                       | Example                                                                                                                                                                                                                                                                                           |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xIdempotencyKey`                                                                                                                                                                                                                                                                                 | *String*                                                                                                                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                                                                                | Identifies a unique request to create a transfer.<br/>In order to avoid creating duplicate transfers, the same idempotency key should be reused when retrying a request.                                                                                                                          |                                                                                                                                                                                                                                                                                                   |
+| `xIdempotencyKey`                                                                                                                                                                                                                                                                                 | *String*                                                                                                                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                                                                                |   Identifies a unique request to create a transfer.<br/>  In order to avoid creating duplicate transfers, the same idempotency key should be reused when retrying a request.                                                                                                                      |                                                                                                                                                                                                                                                                                                   |
 | `xWaitFor`                                                                                                                                                                                                                                                                                        | [Optional\<TransferWaitFor>](../../models/components/TransferWaitFor.md)                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                | Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an <br/>asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds. |                                                                                                                                                                                                                                                                                                   |
 | `accountID`                                                                                                                                                                                                                                                                                       | *String*                                                                                                                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                                                                                | Your Moov account ID.                                                                                                                                                                                                                                                                             |                                                                                                                                                                                                                                                                                                   |
 | `createTransfer`                                                                                                                                                                                                                                                                                  | [CreateTransfer](../../models/components/CreateTransfer.md)                                                                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                                                                                                | N/A                                                                                                                                                                                                                                                                                               | {<br/>"source": {<br/>"paymentMethodID": "9506dbf6-4208-44c3-ad8a-e4431660e1f2"<br/>},<br/>"destination": {<br/>"paymentMethodID": "3f9969cf-a1f3-4d83-8ddc-229a506651cf"<br/>},<br/>"amount": {<br/>"currency": "USD",<br/>"value": 32945<br/>},<br/>"description": "Transfer from card to wallet",<br/>"metadata": {<br/>"optional": "metadata"<br/>}<br/>} |
@@ -447,7 +498,7 @@ public class Application {
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="createCancellation" method="post" path="/accounts/{accountID}/transfers/{transferID}/cancellations" -->
+<!-- UsageSnippet language="java" operationID="createCancellation" method="post" path="/accounts/{accountID}/transfers/{transferID}/cancellations" example="Created cancellation" -->
 ```java
 package hello.world;
 
@@ -506,9 +557,44 @@ public class Application {
   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
   to specify the `/accounts/{accountID}/transfers.read` scope.
 
-### Example Usage
+### Example Usage: Cancellation
 
-<!-- UsageSnippet language="java" operationID="getCancellation" method="get" path="/accounts/{accountID}/transfers/{transferID}/cancellations/{cancellationID}" -->
+<!-- UsageSnippet language="java" operationID="getCancellation" method="get" path="/accounts/{accountID}/transfers/{transferID}/cancellations/{cancellationID}" example="Cancellation" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.GetCancellationResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .xMoovVersion("v2024.01.00")
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        GetCancellationResponse res = sdk.transfers().getCancellation()
+                .accountID("55cb62c2-22e4-4a36-bd53-3b9adc77ee81")
+                .transferID("bc13b680-bac3-432e-bf44-e9aa6426cbb2")
+                .cancellationID("770cb4b5-d5b0-4e8b-995b-86b790296ba5")
+                .call();
+
+        if (res.cancellation().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+### Example Usage: Got cancellation
+
+<!-- UsageSnippet language="java" operationID="getCancellation" method="get" path="/accounts/{accountID}/transfers/{transferID}/cancellations/{cancellationID}" example="Got cancellation" -->
 ```java
 package hello.world;
 
@@ -570,9 +656,9 @@ See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/c
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-### Example Usage
+### Example Usage: Successful async refund
 
-<!-- UsageSnippet language="java" operationID="initiateRefund" method="post" path="/accounts/{accountID}/transfers/{transferID}/refunds" -->
+<!-- UsageSnippet language="java" operationID="initiateRefund" method="post" path="/accounts/{accountID}/transfers/{transferID}/refunds" example="Successful async refund" -->
 ```java
 package hello.world;
 
@@ -600,6 +686,51 @@ public class Application {
                 .xIdempotencyKey("8d9af6b8-67e1-4efa-8188-68039f34097d")
                 .accountID("cb6ae9f9-afab-4f06-9eb0-8abf54a3ada2")
                 .transferID("04022119-95be-4ef4-9dd4-b3782f6aa7b9")
+                .createRefund(CreateRefund.builder()
+                    .amount(1000L)
+                    .build())
+                .build();
+
+        InitiateRefundResponse res = sdk.transfers().initiateRefund()
+                .request(req)
+                .call();
+
+        if (res.createRefundResponse().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+### Example Usage: Successful sync refund
+
+<!-- UsageSnippet language="java" operationID="initiateRefund" method="post" path="/accounts/{accountID}/transfers/{transferID}/refunds" example="Successful sync refund" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.CreateRefund;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.errors.*;
+import io.moov.sdk.models.operations.InitiateRefundRequest;
+import io.moov.sdk.models.operations.InitiateRefundResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws GenericError, CardAcquiringRefund, RefundValidationError, Exception {
+
+        Moov sdk = Moov.builder()
+                .xMoovVersion("v2024.01.00")
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        InitiateRefundRequest req = InitiateRefundRequest.builder()
+                .xIdempotencyKey("4e7a906a-e6d1-4bca-9cc5-6246295ef93c")
+                .accountID("d12ddb6e-0ed9-44e8-92a7-1716ae7cc759")
+                .transferID("d73be489-9da4-4be7-bc04-147d8552279d")
                 .createRefund(CreateRefund.builder()
                     .amount(1000L)
                     .build())
@@ -764,9 +895,50 @@ to learn more.
 To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
 to specify the `/accounts/{accountID}/transfers.write` scope.
 
-### Example Usage
+### Example Usage: Reversed by cancellation
 
-<!-- UsageSnippet language="java" operationID="createReversal" method="post" path="/accounts/{accountID}/transfers/{transferID}/reversals" -->
+<!-- UsageSnippet language="java" operationID="createReversal" method="post" path="/accounts/{accountID}/transfers/{transferID}/reversals" example="Reversed by cancellation" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.CreateReversal;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.errors.ReversalValidationError;
+import io.moov.sdk.models.operations.CreateReversalResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws GenericError, ReversalValidationError, Exception {
+
+        Moov sdk = Moov.builder()
+                .xMoovVersion("v2024.01.00")
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        CreateReversalResponse res = sdk.transfers().createReversal()
+                .xIdempotencyKey("93d03831-45c4-49ec-a9b2-88cbd41dfca7")
+                .accountID("c5fade57-7e5a-4380-ac7b-4abf8b3c24cf")
+                .transferID("82c6eae7-b7e5-4b20-b24e-5116a4d70bde")
+                .createReversal(CreateReversal.builder()
+                    .amount(1000L)
+                    .build())
+                .call();
+
+        if (res.reversal().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+### Example Usage: Reversed by refund
+
+<!-- UsageSnippet language="java" operationID="createReversal" method="post" path="/accounts/{accountID}/transfers/{transferID}/reversals" example="Reversed by refund" -->
 ```java
 package hello.world;
 

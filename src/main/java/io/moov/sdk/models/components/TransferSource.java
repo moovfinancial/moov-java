@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public class TransferSource {
     /**
-     * UUID present only if the transfer is part of a transfer group.
+     * String present only if the transfer is part of a transfer group.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("transferID")
@@ -132,7 +132,7 @@ public class TransferSource {
     }
 
     /**
-     * UUID present only if the transfer is part of a transfer group.
+     * String present only if the transfer is part of a transfer group.
      */
     @JsonIgnore
     public Optional<String> transferID() {
@@ -223,7 +223,7 @@ public class TransferSource {
 
 
     /**
-     * UUID present only if the transfer is part of a transfer group.
+     * String present only if the transfer is part of a transfer group.
      */
     public TransferSource withTransferID(String transferID) {
         Utils.checkNotNull(transferID, "transferID");
@@ -233,7 +233,7 @@ public class TransferSource {
 
 
     /**
-     * UUID present only if the transfer is part of a transfer group.
+     * String present only if the transfer is part of a transfer group.
      */
     public TransferSource withTransferID(Optional<String> transferID) {
         Utils.checkNotNull(transferID, "transferID");
@@ -468,7 +468,7 @@ public class TransferSource {
 
 
         /**
-         * UUID present only if the transfer is part of a transfer group.
+         * String present only if the transfer is part of a transfer group.
          */
         public Builder transferID(String transferID) {
             Utils.checkNotNull(transferID, "transferID");
@@ -477,7 +477,7 @@ public class TransferSource {
         }
 
         /**
-         * UUID present only if the transfer is part of a transfer group.
+         * String present only if the transfer is part of a transfer group.
          */
         public Builder transferID(Optional<String> transferID) {
             Utils.checkNotNull(transferID, "transferID");

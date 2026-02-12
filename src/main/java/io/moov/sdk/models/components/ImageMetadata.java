@@ -20,7 +20,9 @@ import java.util.Optional;
  * <p>Metadata about an uploaded image.
  */
 public class ImageMetadata {
-
+    /**
+     * Unique identifier for a image resource.
+     */
     @JsonProperty("imageID")
     private String imageID;
 
@@ -93,6 +95,9 @@ public class ImageMetadata {
             Optional.empty());
     }
 
+    /**
+     * Unique identifier for a image resource.
+     */
     @JsonIgnore
     public String imageID() {
         return imageID;
@@ -143,6 +148,9 @@ public class ImageMetadata {
     }
 
 
+    /**
+     * Unique identifier for a image resource.
+     */
     public ImageMetadata withImageID(String imageID) {
         Utils.checkNotNull(imageID, "imageID");
         this.imageID = imageID;
@@ -273,6 +281,9 @@ public class ImageMetadata {
         }
 
 
+        /**
+         * Unique identifier for a image resource.
+         */
         public Builder imageID(String imageID) {
             Utils.checkNotNull(imageID, "imageID");
             this.imageID = imageID;

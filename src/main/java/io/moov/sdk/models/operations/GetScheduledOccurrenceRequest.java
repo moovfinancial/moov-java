@@ -21,9 +21,9 @@ public class GetScheduledOccurrenceRequest {
     private String scheduleID;
 
     /**
-     * Allows the specification of additional filters beyond the UUID.
+     * Allows the specification of additional filters beyond the string.
      * 
-     * <p>Specifying a UUID string returns the exact occurrence.
+     * <p>Specifying a string returns the exact occurrence.
      * Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
      * Specifying `latest` returns the latest occurrence at or before now.
      */
@@ -54,9 +54,9 @@ public class GetScheduledOccurrenceRequest {
     }
 
     /**
-     * Allows the specification of additional filters beyond the UUID.
+     * Allows the specification of additional filters beyond the string.
      * 
-     * <p>Specifying a UUID string returns the exact occurrence.
+     * <p>Specifying a string returns the exact occurrence.
      * Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
      * Specifying `latest` returns the latest occurrence at or before now.
      */
@@ -83,9 +83,9 @@ public class GetScheduledOccurrenceRequest {
     }
 
     /**
-     * Allows the specification of additional filters beyond the UUID.
+     * Allows the specification of additional filters beyond the string.
      * 
-     * <p>Specifying a UUID string returns the exact occurrence.
+     * <p>Specifying a string returns the exact occurrence.
      * Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
      * Specifying `latest` returns the latest occurrence at or before now.
      */
@@ -153,9 +153,9 @@ public class GetScheduledOccurrenceRequest {
 
 
         /**
-         * Allows the specification of additional filters beyond the UUID.
+         * Allows the specification of additional filters beyond the string.
          * 
-         * <p>Specifying a UUID string returns the exact occurrence.
+         * <p>Specifying a string returns the exact occurrence.
          * Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
          * Specifying `latest` returns the latest occurrence at or before now.
          */

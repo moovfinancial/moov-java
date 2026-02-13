@@ -44,28 +44,36 @@ public class GeneratedBy {
     @JsonProperty("bankAccountID")
     private Optional<String> bankAccountID;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("invoiceID")
+    private Optional<String> invoiceID;
+
     @JsonCreator
     public GeneratedBy(
             @JsonProperty("transferID") Optional<String> transferID,
             @JsonProperty("cardID") Optional<String> cardID,
             @JsonProperty("disputeID") Optional<String> disputeID,
             @JsonProperty("accountID") Optional<String> accountID,
-            @JsonProperty("bankAccountID") Optional<String> bankAccountID) {
+            @JsonProperty("bankAccountID") Optional<String> bankAccountID,
+            @JsonProperty("invoiceID") Optional<String> invoiceID) {
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(cardID, "cardID");
         Utils.checkNotNull(disputeID, "disputeID");
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(bankAccountID, "bankAccountID");
+        Utils.checkNotNull(invoiceID, "invoiceID");
         this.transferID = transferID;
         this.cardID = cardID;
         this.disputeID = disputeID;
         this.accountID = accountID;
         this.bankAccountID = bankAccountID;
+        this.invoiceID = invoiceID;
     }
     
     public GeneratedBy() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -91,6 +99,11 @@ public class GeneratedBy {
     @JsonIgnore
     public Optional<String> bankAccountID() {
         return bankAccountID;
+    }
+
+    @JsonIgnore
+    public Optional<String> invoiceID() {
+        return invoiceID;
     }
 
     public static Builder builder() {
@@ -163,6 +176,19 @@ public class GeneratedBy {
         return this;
     }
 
+    public GeneratedBy withInvoiceID(String invoiceID) {
+        Utils.checkNotNull(invoiceID, "invoiceID");
+        this.invoiceID = Optional.ofNullable(invoiceID);
+        return this;
+    }
+
+
+    public GeneratedBy withInvoiceID(Optional<String> invoiceID) {
+        Utils.checkNotNull(invoiceID, "invoiceID");
+        this.invoiceID = invoiceID;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -177,14 +203,15 @@ public class GeneratedBy {
             Utils.enhancedDeepEquals(this.cardID, other.cardID) &&
             Utils.enhancedDeepEquals(this.disputeID, other.disputeID) &&
             Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
-            Utils.enhancedDeepEquals(this.bankAccountID, other.bankAccountID);
+            Utils.enhancedDeepEquals(this.bankAccountID, other.bankAccountID) &&
+            Utils.enhancedDeepEquals(this.invoiceID, other.invoiceID);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             transferID, cardID, disputeID,
-            accountID, bankAccountID);
+            accountID, bankAccountID, invoiceID);
     }
     
     @Override
@@ -194,7 +221,8 @@ public class GeneratedBy {
                 "cardID", cardID,
                 "disputeID", disputeID,
                 "accountID", accountID,
-                "bankAccountID", bankAccountID);
+                "bankAccountID", bankAccountID,
+                "invoiceID", invoiceID);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -209,6 +237,8 @@ public class GeneratedBy {
         private Optional<String> accountID = Optional.empty();
 
         private Optional<String> bankAccountID = Optional.empty();
+
+        private Optional<String> invoiceID = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -279,11 +309,24 @@ public class GeneratedBy {
             return this;
         }
 
+
+        public Builder invoiceID(String invoiceID) {
+            Utils.checkNotNull(invoiceID, "invoiceID");
+            this.invoiceID = Optional.ofNullable(invoiceID);
+            return this;
+        }
+
+        public Builder invoiceID(Optional<String> invoiceID) {
+            Utils.checkNotNull(invoiceID, "invoiceID");
+            this.invoiceID = invoiceID;
+            return this;
+        }
+
         public GeneratedBy build() {
 
             return new GeneratedBy(
                 transferID, cardID, disputeID,
-                accountID, bankAccountID);
+                accountID, bankAccountID, invoiceID);
         }
 
     }

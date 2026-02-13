@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 50dc42c0cca81c1a4f12ec758b510a18
+  docChecksum: 7f20bb43619ab4908a4534310e71dcbe
   docVersion: v2025.07.00
-  speakeasyVersion: 1.711.0
-  generationVersion: 2.818.4
-  releaseVersion: 25.7.4
-  configChecksum: 083aaee7332d540f6051a3209e4b6764
+  speakeasyVersion: 1.713.3
+  generationVersion: 2.821.8
+  releaseVersion: 25.7.5
+  configChecksum: c560fb33054d4b69d38947184f39e6bd
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 persistentEdits:
-  generation_id: aa8c9481-84cd-4edf-b9e6-e46ab6946208
-  pristine_commit_hash: 7646ba555009818a8c96f4a0677217354e74f1ec
-  pristine_tree_hash: 6cbcf252b94ef0874c1749ce7636fa3855369cfd
+  generation_id: 9d870360-413d-4e13-bcfc-73685d345e3d
+  pristine_commit_hash: 7c428767bdd0dd4fc2383991927fb171fb6c84ed
+  pristine_tree_hash: eec95ab0172cff51045b91efdc9f0f5d4f33cb0e
 features:
   java:
     acceptHeaders: 2.81.2
@@ -1073,8 +1073,8 @@ trackedFiles:
     pristine_git_object: 1bcf1f8ed24dac552c04312aedefaa378b97a225
   docs/models/components/GeneratedBy.md:
     id: 87a53ceb2263
-    last_write_checksum: sha1:9daf32074158d7cb43e09961eaa896c366cf2af0
-    pristine_git_object: 82986b923f1217de637202921f425b4c1b19d3ad
+    last_write_checksum: sha1:ec00bb088affbdfa39fdbfd4901220bb698de868
+    pristine_git_object: 9e134e8bfe2282076fd604bfd4a43729f9bdd15c
   docs/models/components/GeographicReach.md:
     id: 77c350845874
     last_write_checksum: sha1:a99e1000d845df8544357bcc14e7bf5137820c5f
@@ -4085,8 +4085,8 @@ trackedFiles:
     pristine_git_object: 5a1311f65cc22d82e0ed6eafb4b10f581d3ed7c5
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:71983ca99ff40268a1b0078e6c334fa7ccfacb67
-    pristine_git_object: ae9537bb05f11ab882bd9beab5ceea862281b5f4
+    last_write_checksum: sha1:8a973ca302c8abddabe9ad0e4519f2bc2e84e20b
+    pristine_git_object: 3f34682e3e869a3342821efc29b6afead1e4e065
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4257,8 +4257,8 @@ trackedFiles:
     pristine_git_object: 64047d75ebffa5dbfe6b7461ed4d624f01890a51
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:2690d835679b2192c4eb96d5d69be17da48873f5
-    pristine_git_object: d1311a6e947f4db3693efc72ee5d6a1a7413d805
+    last_write_checksum: sha1:922b2e670801e43a6e10f2ee97684d230d0b108b
+    pristine_git_object: c2c0584564f995dc2f21c20a6d3c1e9ba7ae1f7a
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:bf0300e770bb968bfc8b5ee2b8d6f05e37e9bb67
@@ -5329,8 +5329,8 @@ trackedFiles:
     pristine_git_object: 797664ef049f79f199b6bb319f27043f35742995
   src/main/java/io/moov/sdk/models/components/GeneratedBy.java:
     id: e97889ff8353
-    last_write_checksum: sha1:f3f5ab9e0b19427dfa13137be5f76f06a92b9532
-    pristine_git_object: b7151da386c88af4eee070b647e3cec98b76dc4e
+    last_write_checksum: sha1:34d4750143db352e88d35b3757e1f7995c91b9f3
+    pristine_git_object: 66cc451ea994c076625a95aa87ec96c6b128d488
   src/main/java/io/moov/sdk/models/components/GeographicReach.java:
     id: c20520809e7a
     last_write_checksum: sha1:852e429fe06f862e5a65c7edd70c636bf210adcc
@@ -5757,16 +5757,12 @@ trackedFiles:
     pristine_git_object: c0dcc00e7d6103563ea9821e519ffda307d0ef0b
   src/main/java/io/moov/sdk/models/components/PaymentMethod.java:
     id: e9faf1a7984f
-    last_write_checksum: sha1:a04ca1e358a34bcb2d6fb09ce5656ccec412f604
-    pristine_git_object: 85291f73c6fbc9dd469a407e2d2bf831c063dff2
+    last_write_checksum: sha1:3e347f34ae10d039d6c44f57a42f680b9f99c412
+    pristine_git_object: 014df7e14333de1dc2e88979026ca93396da0931
   src/main/java/io/moov/sdk/models/components/PaymentMethodType.java:
     id: 62e35817ba62
     last_write_checksum: sha1:892ff46046e427fc7bfdb5706c2bab8d43f8a823
     pristine_git_object: 91d41da79011be497af8c1e10c9dbbfce48048bd
-  src/main/java/io/moov/sdk/models/components/PaymentMethodTypeIdResolver.java:
-    id: bd44c77595a7
-    last_write_checksum: sha1:28c3ebe39b63f84c6256e8e74af78775d75c9baf
-    pristine_git_object: 74ead957af01aae64f2b9a48f215baa6f7bd1ff4
   src/main/java/io/moov/sdk/models/components/PaymentMethodsBankAccount.java:
     id: 0f625c69aa3e
     last_write_checksum: sha1:3201eb7deb776dbed73ea472b9131eac61c5bebf
@@ -6299,10 +6295,6 @@ trackedFiles:
     id: 23ea4c39b656
     last_write_checksum: sha1:7d8f021620abdea2c68667198b87c970051130c9
     pristine_git_object: 670a0beaea6bcd1efc7530c66c13f3d9302aa251
-  src/main/java/io/moov/sdk/models/components/UnknownPaymentMethod.java:
-    id: 8c1a202f9db5
-    last_write_checksum: sha1:47df2134584a36f8dbb47d8a4a43d03910dc8439
-    pristine_git_object: bfde7caf2a0f626aaa41f04c5a9613ae2eb576eb
   src/main/java/io/moov/sdk/models/components/UpdateApplePayMerchantDomains.java:
     id: f434969d6466
     last_write_checksum: sha1:b9b6c4728023703f8e138f889be8ef9f89105c68
@@ -9631,10 +9623,6 @@ trackedFiles:
     id: ff8c6fa9d17f
     last_write_checksum: sha1:3f824a4b76922978147d0d17007bada21f07c356
     pristine_git_object: f042985c37aaff468d551f4a161f4f4d3c7395c7
-  src/main/java/io/moov/sdk/utils/GenericTypeIdResolver.java:
-    id: 79076c3554ea
-    last_write_checksum: sha1:001d3704c14476b997a250cf2471592db9ad7e30
-    pristine_git_object: 870f278bcae5a164f079fbf531e7d786f3cc2f76
   src/main/java/io/moov/sdk/utils/Globals.java:
     id: a15b889e01f7
     last_write_checksum: sha1:84287108249501d81b6ebd26ebc963818165a51e
@@ -9795,10 +9783,6 @@ trackedFiles:
     id: 2d1ac8f58f58
     last_write_checksum: sha1:57d7b066a542b188505c991c14314de1bf86be59
     pristine_git_object: 45db6d6a349f7523f5751b762320dcaf702094a6
-  src/main/java/io/moov/sdk/utils/UnknownType.java:
-    id: d630ebd4aec7
-    last_write_checksum: sha1:902e227a333c34b2050890ba7865ecb17d872605
-    pristine_git_object: 0b20f7921c4f45fab033a6171be94f1402831d5d
   src/main/java/io/moov/sdk/utils/Utf8UrlEncoder.java:
     id: 33c7d0904116
     last_write_checksum: sha1:0ed1cb18de74ec91b385261e548b750956ccaf2c
@@ -12557,6 +12541,12 @@ examples:
           application/json: {"secret": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Java SDK Changes:
+  * `moov.feePlans.listFeeRevenue()`:  `response.[].generatedBy.invoiceId` **Added**
+  * `moov.feePlans.retrieveFees()`:  `response.[].generatedBy.invoiceId` **Added**
+  * `moov.feePlans.listFeesFetch()`:  `response.[].generatedBy.invoiceId` **Added**
+  * `moov.feePlans.listResidualFees()`:  `response.[].generatedBy.invoiceId` **Added**
 generatedFiles:
   - .gitattributes
   - USAGE.md

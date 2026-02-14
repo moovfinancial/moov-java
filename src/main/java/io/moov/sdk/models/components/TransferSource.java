@@ -31,7 +31,7 @@ public class TransferSource {
      * The payment method type that represents a payment rail and directionality
      */
     @JsonProperty("paymentMethodType")
-    private PaymentMethodType paymentMethodType;
+    private TransferPaymentMethodType paymentMethodType;
 
 
     @JsonProperty("account")
@@ -42,19 +42,19 @@ public class TransferSource {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bankAccount")
-    private Optional<? extends PaymentMethodsBankAccount> bankAccount;
+    private Optional<? extends TransferPaymentMethodsBankAccount> bankAccount;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("wallet")
-    private Optional<? extends PaymentMethodsWallet> wallet;
+    private Optional<? extends TransferPaymentMethodsWallet> wallet;
 
     /**
      * A card as contained within a payment method.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("card")
-    private Optional<? extends PaymentMethodsCard> card;
+    private Optional<? extends TransferPaymentMethodsCard> card;
 
     /**
      * Describes an Apple Pay token on a Moov account.
@@ -68,7 +68,7 @@ public class TransferSource {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("terminalCard")
-    private Optional<? extends TerminalCard> terminalCard;
+    private Optional<? extends TransferTerminalCard> terminalCard;
 
     /**
      * Card-specific details about the transaction.
@@ -88,13 +88,13 @@ public class TransferSource {
     public TransferSource(
             @JsonProperty("transferID") Optional<String> transferID,
             @JsonProperty("paymentMethodID") String paymentMethodID,
-            @JsonProperty("paymentMethodType") PaymentMethodType paymentMethodType,
+            @JsonProperty("paymentMethodType") TransferPaymentMethodType paymentMethodType,
             @JsonProperty("account") TransferAccount account,
-            @JsonProperty("bankAccount") Optional<? extends PaymentMethodsBankAccount> bankAccount,
-            @JsonProperty("wallet") Optional<? extends PaymentMethodsWallet> wallet,
-            @JsonProperty("card") Optional<? extends PaymentMethodsCard> card,
+            @JsonProperty("bankAccount") Optional<? extends TransferPaymentMethodsBankAccount> bankAccount,
+            @JsonProperty("wallet") Optional<? extends TransferPaymentMethodsWallet> wallet,
+            @JsonProperty("card") Optional<? extends TransferPaymentMethodsCard> card,
             @JsonProperty("applePay") Optional<? extends ApplePayResponse> applePay,
-            @JsonProperty("terminalCard") Optional<? extends TerminalCard> terminalCard,
+            @JsonProperty("terminalCard") Optional<? extends TransferTerminalCard> terminalCard,
             @JsonProperty("cardDetails") Optional<? extends CardTransactionDetails> cardDetails,
             @JsonProperty("achDetails") Optional<? extends ACHTransactionDetails> achDetails) {
         Utils.checkNotNull(transferID, "transferID");
@@ -123,7 +123,7 @@ public class TransferSource {
     
     public TransferSource(
             String paymentMethodID,
-            PaymentMethodType paymentMethodType,
+            TransferPaymentMethodType paymentMethodType,
             TransferAccount account) {
         this(Optional.empty(), paymentMethodID, paymentMethodType,
             account, Optional.empty(), Optional.empty(),
@@ -148,7 +148,7 @@ public class TransferSource {
      * The payment method type that represents a payment rail and directionality
      */
     @JsonIgnore
-    public PaymentMethodType paymentMethodType() {
+    public TransferPaymentMethodType paymentMethodType() {
         return paymentMethodType;
     }
 
@@ -162,14 +162,14 @@ public class TransferSource {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PaymentMethodsBankAccount> bankAccount() {
-        return (Optional<PaymentMethodsBankAccount>) bankAccount;
+    public Optional<TransferPaymentMethodsBankAccount> bankAccount() {
+        return (Optional<TransferPaymentMethodsBankAccount>) bankAccount;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PaymentMethodsWallet> wallet() {
-        return (Optional<PaymentMethodsWallet>) wallet;
+    public Optional<TransferPaymentMethodsWallet> wallet() {
+        return (Optional<TransferPaymentMethodsWallet>) wallet;
     }
 
     /**
@@ -177,8 +177,8 @@ public class TransferSource {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PaymentMethodsCard> card() {
-        return (Optional<PaymentMethodsCard>) card;
+    public Optional<TransferPaymentMethodsCard> card() {
+        return (Optional<TransferPaymentMethodsCard>) card;
     }
 
     /**
@@ -195,8 +195,8 @@ public class TransferSource {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<TerminalCard> terminalCard() {
-        return (Optional<TerminalCard>) terminalCard;
+    public Optional<TransferTerminalCard> terminalCard() {
+        return (Optional<TransferTerminalCard>) terminalCard;
     }
 
     /**
@@ -250,7 +250,7 @@ public class TransferSource {
     /**
      * The payment method type that represents a payment rail and directionality
      */
-    public TransferSource withPaymentMethodType(PaymentMethodType paymentMethodType) {
+    public TransferSource withPaymentMethodType(TransferPaymentMethodType paymentMethodType) {
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
         this.paymentMethodType = paymentMethodType;
         return this;
@@ -265,7 +265,7 @@ public class TransferSource {
     /**
      * A bank account as contained within a payment method.
      */
-    public TransferSource withBankAccount(PaymentMethodsBankAccount bankAccount) {
+    public TransferSource withBankAccount(TransferPaymentMethodsBankAccount bankAccount) {
         Utils.checkNotNull(bankAccount, "bankAccount");
         this.bankAccount = Optional.ofNullable(bankAccount);
         return this;
@@ -275,20 +275,20 @@ public class TransferSource {
     /**
      * A bank account as contained within a payment method.
      */
-    public TransferSource withBankAccount(Optional<? extends PaymentMethodsBankAccount> bankAccount) {
+    public TransferSource withBankAccount(Optional<? extends TransferPaymentMethodsBankAccount> bankAccount) {
         Utils.checkNotNull(bankAccount, "bankAccount");
         this.bankAccount = bankAccount;
         return this;
     }
 
-    public TransferSource withWallet(PaymentMethodsWallet wallet) {
+    public TransferSource withWallet(TransferPaymentMethodsWallet wallet) {
         Utils.checkNotNull(wallet, "wallet");
         this.wallet = Optional.ofNullable(wallet);
         return this;
     }
 
 
-    public TransferSource withWallet(Optional<? extends PaymentMethodsWallet> wallet) {
+    public TransferSource withWallet(Optional<? extends TransferPaymentMethodsWallet> wallet) {
         Utils.checkNotNull(wallet, "wallet");
         this.wallet = wallet;
         return this;
@@ -297,7 +297,7 @@ public class TransferSource {
     /**
      * A card as contained within a payment method.
      */
-    public TransferSource withCard(PaymentMethodsCard card) {
+    public TransferSource withCard(TransferPaymentMethodsCard card) {
         Utils.checkNotNull(card, "card");
         this.card = Optional.ofNullable(card);
         return this;
@@ -307,7 +307,7 @@ public class TransferSource {
     /**
      * A card as contained within a payment method.
      */
-    public TransferSource withCard(Optional<? extends PaymentMethodsCard> card) {
+    public TransferSource withCard(Optional<? extends TransferPaymentMethodsCard> card) {
         Utils.checkNotNull(card, "card");
         this.card = card;
         return this;
@@ -335,7 +335,7 @@ public class TransferSource {
     /**
      * Describes payment card details captured with tap or in-person payment.
      */
-    public TransferSource withTerminalCard(TerminalCard terminalCard) {
+    public TransferSource withTerminalCard(TransferTerminalCard terminalCard) {
         Utils.checkNotNull(terminalCard, "terminalCard");
         this.terminalCard = Optional.ofNullable(terminalCard);
         return this;
@@ -345,7 +345,7 @@ public class TransferSource {
     /**
      * Describes payment card details captured with tap or in-person payment.
      */
-    public TransferSource withTerminalCard(Optional<? extends TerminalCard> terminalCard) {
+    public TransferSource withTerminalCard(Optional<? extends TransferTerminalCard> terminalCard) {
         Utils.checkNotNull(terminalCard, "terminalCard");
         this.terminalCard = terminalCard;
         return this;
@@ -444,19 +444,19 @@ public class TransferSource {
 
         private String paymentMethodID;
 
-        private PaymentMethodType paymentMethodType;
+        private TransferPaymentMethodType paymentMethodType;
 
         private TransferAccount account;
 
-        private Optional<? extends PaymentMethodsBankAccount> bankAccount = Optional.empty();
+        private Optional<? extends TransferPaymentMethodsBankAccount> bankAccount = Optional.empty();
 
-        private Optional<? extends PaymentMethodsWallet> wallet = Optional.empty();
+        private Optional<? extends TransferPaymentMethodsWallet> wallet = Optional.empty();
 
-        private Optional<? extends PaymentMethodsCard> card = Optional.empty();
+        private Optional<? extends TransferPaymentMethodsCard> card = Optional.empty();
 
         private Optional<? extends ApplePayResponse> applePay = Optional.empty();
 
-        private Optional<? extends TerminalCard> terminalCard = Optional.empty();
+        private Optional<? extends TransferTerminalCard> terminalCard = Optional.empty();
 
         private Optional<? extends CardTransactionDetails> cardDetails = Optional.empty();
 
@@ -496,7 +496,7 @@ public class TransferSource {
         /**
          * The payment method type that represents a payment rail and directionality
          */
-        public Builder paymentMethodType(PaymentMethodType paymentMethodType) {
+        public Builder paymentMethodType(TransferPaymentMethodType paymentMethodType) {
             Utils.checkNotNull(paymentMethodType, "paymentMethodType");
             this.paymentMethodType = paymentMethodType;
             return this;
@@ -513,7 +513,7 @@ public class TransferSource {
         /**
          * A bank account as contained within a payment method.
          */
-        public Builder bankAccount(PaymentMethodsBankAccount bankAccount) {
+        public Builder bankAccount(TransferPaymentMethodsBankAccount bankAccount) {
             Utils.checkNotNull(bankAccount, "bankAccount");
             this.bankAccount = Optional.ofNullable(bankAccount);
             return this;
@@ -522,20 +522,20 @@ public class TransferSource {
         /**
          * A bank account as contained within a payment method.
          */
-        public Builder bankAccount(Optional<? extends PaymentMethodsBankAccount> bankAccount) {
+        public Builder bankAccount(Optional<? extends TransferPaymentMethodsBankAccount> bankAccount) {
             Utils.checkNotNull(bankAccount, "bankAccount");
             this.bankAccount = bankAccount;
             return this;
         }
 
 
-        public Builder wallet(PaymentMethodsWallet wallet) {
+        public Builder wallet(TransferPaymentMethodsWallet wallet) {
             Utils.checkNotNull(wallet, "wallet");
             this.wallet = Optional.ofNullable(wallet);
             return this;
         }
 
-        public Builder wallet(Optional<? extends PaymentMethodsWallet> wallet) {
+        public Builder wallet(Optional<? extends TransferPaymentMethodsWallet> wallet) {
             Utils.checkNotNull(wallet, "wallet");
             this.wallet = wallet;
             return this;
@@ -545,7 +545,7 @@ public class TransferSource {
         /**
          * A card as contained within a payment method.
          */
-        public Builder card(PaymentMethodsCard card) {
+        public Builder card(TransferPaymentMethodsCard card) {
             Utils.checkNotNull(card, "card");
             this.card = Optional.ofNullable(card);
             return this;
@@ -554,7 +554,7 @@ public class TransferSource {
         /**
          * A card as contained within a payment method.
          */
-        public Builder card(Optional<? extends PaymentMethodsCard> card) {
+        public Builder card(Optional<? extends TransferPaymentMethodsCard> card) {
             Utils.checkNotNull(card, "card");
             this.card = card;
             return this;
@@ -583,7 +583,7 @@ public class TransferSource {
         /**
          * Describes payment card details captured with tap or in-person payment.
          */
-        public Builder terminalCard(TerminalCard terminalCard) {
+        public Builder terminalCard(TransferTerminalCard terminalCard) {
             Utils.checkNotNull(terminalCard, "terminalCard");
             this.terminalCard = Optional.ofNullable(terminalCard);
             return this;
@@ -592,7 +592,7 @@ public class TransferSource {
         /**
          * Describes payment card details captured with tap or in-person payment.
          */
-        public Builder terminalCard(Optional<? extends TerminalCard> terminalCard) {
+        public Builder terminalCard(Optional<? extends TransferTerminalCard> terminalCard) {
             Utils.checkNotNull(terminalCard, "terminalCard");
             this.terminalCard = terminalCard;
             return this;

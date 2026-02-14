@@ -20,17 +20,17 @@ public class TransferOptions {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sourceOptions")
-    private Optional<? extends List<PaymentMethod>> sourceOptions;
+    private Optional<? extends List<TransferPaymentMethod>> sourceOptions;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("destinationOptions")
-    private Optional<? extends List<PaymentMethod>> destinationOptions;
+    private Optional<? extends List<TransferPaymentMethod>> destinationOptions;
 
     @JsonCreator
     public TransferOptions(
-            @JsonProperty("sourceOptions") Optional<? extends List<PaymentMethod>> sourceOptions,
-            @JsonProperty("destinationOptions") Optional<? extends List<PaymentMethod>> destinationOptions) {
+            @JsonProperty("sourceOptions") Optional<? extends List<TransferPaymentMethod>> sourceOptions,
+            @JsonProperty("destinationOptions") Optional<? extends List<TransferPaymentMethod>> destinationOptions) {
         Utils.checkNotNull(sourceOptions, "sourceOptions");
         Utils.checkNotNull(destinationOptions, "destinationOptions");
         this.sourceOptions = sourceOptions;
@@ -43,14 +43,14 @@ public class TransferOptions {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<PaymentMethod>> sourceOptions() {
-        return (Optional<List<PaymentMethod>>) sourceOptions;
+    public Optional<List<TransferPaymentMethod>> sourceOptions() {
+        return (Optional<List<TransferPaymentMethod>>) sourceOptions;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<PaymentMethod>> destinationOptions() {
-        return (Optional<List<PaymentMethod>>) destinationOptions;
+    public Optional<List<TransferPaymentMethod>> destinationOptions() {
+        return (Optional<List<TransferPaymentMethod>>) destinationOptions;
     }
 
     public static Builder builder() {
@@ -58,27 +58,27 @@ public class TransferOptions {
     }
 
 
-    public TransferOptions withSourceOptions(List<PaymentMethod> sourceOptions) {
+    public TransferOptions withSourceOptions(List<TransferPaymentMethod> sourceOptions) {
         Utils.checkNotNull(sourceOptions, "sourceOptions");
         this.sourceOptions = Optional.ofNullable(sourceOptions);
         return this;
     }
 
 
-    public TransferOptions withSourceOptions(Optional<? extends List<PaymentMethod>> sourceOptions) {
+    public TransferOptions withSourceOptions(Optional<? extends List<TransferPaymentMethod>> sourceOptions) {
         Utils.checkNotNull(sourceOptions, "sourceOptions");
         this.sourceOptions = sourceOptions;
         return this;
     }
 
-    public TransferOptions withDestinationOptions(List<PaymentMethod> destinationOptions) {
+    public TransferOptions withDestinationOptions(List<TransferPaymentMethod> destinationOptions) {
         Utils.checkNotNull(destinationOptions, "destinationOptions");
         this.destinationOptions = Optional.ofNullable(destinationOptions);
         return this;
     }
 
 
-    public TransferOptions withDestinationOptions(Optional<? extends List<PaymentMethod>> destinationOptions) {
+    public TransferOptions withDestinationOptions(Optional<? extends List<TransferPaymentMethod>> destinationOptions) {
         Utils.checkNotNull(destinationOptions, "destinationOptions");
         this.destinationOptions = destinationOptions;
         return this;
@@ -114,35 +114,35 @@ public class TransferOptions {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends List<PaymentMethod>> sourceOptions = Optional.empty();
+        private Optional<? extends List<TransferPaymentMethod>> sourceOptions = Optional.empty();
 
-        private Optional<? extends List<PaymentMethod>> destinationOptions = Optional.empty();
+        private Optional<? extends List<TransferPaymentMethod>> destinationOptions = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder sourceOptions(List<PaymentMethod> sourceOptions) {
+        public Builder sourceOptions(List<TransferPaymentMethod> sourceOptions) {
             Utils.checkNotNull(sourceOptions, "sourceOptions");
             this.sourceOptions = Optional.ofNullable(sourceOptions);
             return this;
         }
 
-        public Builder sourceOptions(Optional<? extends List<PaymentMethod>> sourceOptions) {
+        public Builder sourceOptions(Optional<? extends List<TransferPaymentMethod>> sourceOptions) {
             Utils.checkNotNull(sourceOptions, "sourceOptions");
             this.sourceOptions = sourceOptions;
             return this;
         }
 
 
-        public Builder destinationOptions(List<PaymentMethod> destinationOptions) {
+        public Builder destinationOptions(List<TransferPaymentMethod> destinationOptions) {
             Utils.checkNotNull(destinationOptions, "destinationOptions");
             this.destinationOptions = Optional.ofNullable(destinationOptions);
             return this;
         }
 
-        public Builder destinationOptions(Optional<? extends List<PaymentMethod>> destinationOptions) {
+        public Builder destinationOptions(Optional<? extends List<TransferPaymentMethod>> destinationOptions) {
             Utils.checkNotNull(destinationOptions, "destinationOptions");
             this.destinationOptions = destinationOptions;
             return this;

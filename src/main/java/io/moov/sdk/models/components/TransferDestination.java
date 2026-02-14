@@ -24,7 +24,7 @@ public class TransferDestination {
      * The payment method type that represents a payment rail and directionality
      */
     @JsonProperty("paymentMethodType")
-    private PaymentMethodType paymentMethodType;
+    private TransferPaymentMethodType paymentMethodType;
 
 
     @JsonProperty("account")
@@ -35,19 +35,19 @@ public class TransferDestination {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bankAccount")
-    private Optional<? extends PaymentMethodsBankAccount> bankAccount;
+    private Optional<? extends TransferPaymentMethodsBankAccount> bankAccount;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("wallet")
-    private Optional<? extends PaymentMethodsWallet> wallet;
+    private Optional<? extends TransferPaymentMethodsWallet> wallet;
 
     /**
      * A card as contained within a payment method.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("card")
-    private Optional<? extends PaymentMethodsCard> card;
+    private Optional<? extends TransferPaymentMethodsCard> card;
 
     /**
      * ACH specific details about the transaction.
@@ -80,11 +80,11 @@ public class TransferDestination {
     @JsonCreator
     public TransferDestination(
             @JsonProperty("paymentMethodID") String paymentMethodID,
-            @JsonProperty("paymentMethodType") PaymentMethodType paymentMethodType,
+            @JsonProperty("paymentMethodType") TransferPaymentMethodType paymentMethodType,
             @JsonProperty("account") TransferAccount account,
-            @JsonProperty("bankAccount") Optional<? extends PaymentMethodsBankAccount> bankAccount,
-            @JsonProperty("wallet") Optional<? extends PaymentMethodsWallet> wallet,
-            @JsonProperty("card") Optional<? extends PaymentMethodsCard> card,
+            @JsonProperty("bankAccount") Optional<? extends TransferPaymentMethodsBankAccount> bankAccount,
+            @JsonProperty("wallet") Optional<? extends TransferPaymentMethodsWallet> wallet,
+            @JsonProperty("card") Optional<? extends TransferPaymentMethodsCard> card,
             @JsonProperty("achDetails") Optional<? extends ACHTransactionDetails> achDetails,
             @JsonProperty("applePay") Optional<? extends ApplePayResponse> applePay,
             @JsonProperty("cardDetails") Optional<? extends CardTransactionDetails> cardDetails,
@@ -113,7 +113,7 @@ public class TransferDestination {
     
     public TransferDestination(
             String paymentMethodID,
-            PaymentMethodType paymentMethodType,
+            TransferPaymentMethodType paymentMethodType,
             TransferAccount account) {
         this(paymentMethodID, paymentMethodType, account,
             Optional.empty(), Optional.empty(), Optional.empty(),
@@ -130,7 +130,7 @@ public class TransferDestination {
      * The payment method type that represents a payment rail and directionality
      */
     @JsonIgnore
-    public PaymentMethodType paymentMethodType() {
+    public TransferPaymentMethodType paymentMethodType() {
         return paymentMethodType;
     }
 
@@ -144,14 +144,14 @@ public class TransferDestination {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PaymentMethodsBankAccount> bankAccount() {
-        return (Optional<PaymentMethodsBankAccount>) bankAccount;
+    public Optional<TransferPaymentMethodsBankAccount> bankAccount() {
+        return (Optional<TransferPaymentMethodsBankAccount>) bankAccount;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PaymentMethodsWallet> wallet() {
-        return (Optional<PaymentMethodsWallet>) wallet;
+    public Optional<TransferPaymentMethodsWallet> wallet() {
+        return (Optional<TransferPaymentMethodsWallet>) wallet;
     }
 
     /**
@@ -159,8 +159,8 @@ public class TransferDestination {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PaymentMethodsCard> card() {
-        return (Optional<PaymentMethodsCard>) card;
+    public Optional<TransferPaymentMethodsCard> card() {
+        return (Optional<TransferPaymentMethodsCard>) card;
     }
 
     /**
@@ -213,7 +213,7 @@ public class TransferDestination {
     /**
      * The payment method type that represents a payment rail and directionality
      */
-    public TransferDestination withPaymentMethodType(PaymentMethodType paymentMethodType) {
+    public TransferDestination withPaymentMethodType(TransferPaymentMethodType paymentMethodType) {
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
         this.paymentMethodType = paymentMethodType;
         return this;
@@ -228,7 +228,7 @@ public class TransferDestination {
     /**
      * A bank account as contained within a payment method.
      */
-    public TransferDestination withBankAccount(PaymentMethodsBankAccount bankAccount) {
+    public TransferDestination withBankAccount(TransferPaymentMethodsBankAccount bankAccount) {
         Utils.checkNotNull(bankAccount, "bankAccount");
         this.bankAccount = Optional.ofNullable(bankAccount);
         return this;
@@ -238,20 +238,20 @@ public class TransferDestination {
     /**
      * A bank account as contained within a payment method.
      */
-    public TransferDestination withBankAccount(Optional<? extends PaymentMethodsBankAccount> bankAccount) {
+    public TransferDestination withBankAccount(Optional<? extends TransferPaymentMethodsBankAccount> bankAccount) {
         Utils.checkNotNull(bankAccount, "bankAccount");
         this.bankAccount = bankAccount;
         return this;
     }
 
-    public TransferDestination withWallet(PaymentMethodsWallet wallet) {
+    public TransferDestination withWallet(TransferPaymentMethodsWallet wallet) {
         Utils.checkNotNull(wallet, "wallet");
         this.wallet = Optional.ofNullable(wallet);
         return this;
     }
 
 
-    public TransferDestination withWallet(Optional<? extends PaymentMethodsWallet> wallet) {
+    public TransferDestination withWallet(Optional<? extends TransferPaymentMethodsWallet> wallet) {
         Utils.checkNotNull(wallet, "wallet");
         this.wallet = wallet;
         return this;
@@ -260,7 +260,7 @@ public class TransferDestination {
     /**
      * A card as contained within a payment method.
      */
-    public TransferDestination withCard(PaymentMethodsCard card) {
+    public TransferDestination withCard(TransferPaymentMethodsCard card) {
         Utils.checkNotNull(card, "card");
         this.card = Optional.ofNullable(card);
         return this;
@@ -270,7 +270,7 @@ public class TransferDestination {
     /**
      * A card as contained within a payment method.
      */
-    public TransferDestination withCard(Optional<? extends PaymentMethodsCard> card) {
+    public TransferDestination withCard(Optional<? extends TransferPaymentMethodsCard> card) {
         Utils.checkNotNull(card, "card");
         this.card = card;
         return this;
@@ -403,15 +403,15 @@ public class TransferDestination {
 
         private String paymentMethodID;
 
-        private PaymentMethodType paymentMethodType;
+        private TransferPaymentMethodType paymentMethodType;
 
         private TransferAccount account;
 
-        private Optional<? extends PaymentMethodsBankAccount> bankAccount = Optional.empty();
+        private Optional<? extends TransferPaymentMethodsBankAccount> bankAccount = Optional.empty();
 
-        private Optional<? extends PaymentMethodsWallet> wallet = Optional.empty();
+        private Optional<? extends TransferPaymentMethodsWallet> wallet = Optional.empty();
 
-        private Optional<? extends PaymentMethodsCard> card = Optional.empty();
+        private Optional<? extends TransferPaymentMethodsCard> card = Optional.empty();
 
         private Optional<? extends ACHTransactionDetails> achDetails = Optional.empty();
 
@@ -436,7 +436,7 @@ public class TransferDestination {
         /**
          * The payment method type that represents a payment rail and directionality
          */
-        public Builder paymentMethodType(PaymentMethodType paymentMethodType) {
+        public Builder paymentMethodType(TransferPaymentMethodType paymentMethodType) {
             Utils.checkNotNull(paymentMethodType, "paymentMethodType");
             this.paymentMethodType = paymentMethodType;
             return this;
@@ -453,7 +453,7 @@ public class TransferDestination {
         /**
          * A bank account as contained within a payment method.
          */
-        public Builder bankAccount(PaymentMethodsBankAccount bankAccount) {
+        public Builder bankAccount(TransferPaymentMethodsBankAccount bankAccount) {
             Utils.checkNotNull(bankAccount, "bankAccount");
             this.bankAccount = Optional.ofNullable(bankAccount);
             return this;
@@ -462,20 +462,20 @@ public class TransferDestination {
         /**
          * A bank account as contained within a payment method.
          */
-        public Builder bankAccount(Optional<? extends PaymentMethodsBankAccount> bankAccount) {
+        public Builder bankAccount(Optional<? extends TransferPaymentMethodsBankAccount> bankAccount) {
             Utils.checkNotNull(bankAccount, "bankAccount");
             this.bankAccount = bankAccount;
             return this;
         }
 
 
-        public Builder wallet(PaymentMethodsWallet wallet) {
+        public Builder wallet(TransferPaymentMethodsWallet wallet) {
             Utils.checkNotNull(wallet, "wallet");
             this.wallet = Optional.ofNullable(wallet);
             return this;
         }
 
-        public Builder wallet(Optional<? extends PaymentMethodsWallet> wallet) {
+        public Builder wallet(Optional<? extends TransferPaymentMethodsWallet> wallet) {
             Utils.checkNotNull(wallet, "wallet");
             this.wallet = wallet;
             return this;
@@ -485,7 +485,7 @@ public class TransferDestination {
         /**
          * A card as contained within a payment method.
          */
-        public Builder card(PaymentMethodsCard card) {
+        public Builder card(TransferPaymentMethodsCard card) {
             Utils.checkNotNull(card, "card");
             this.card = Optional.ofNullable(card);
             return this;
@@ -494,7 +494,7 @@ public class TransferDestination {
         /**
          * A card as contained within a payment method.
          */
-        public Builder card(Optional<? extends PaymentMethodsCard> card) {
+        public Builder card(Optional<? extends TransferPaymentMethodsCard> card) {
             Utils.checkNotNull(card, "card");
             this.card = card;
             return this;

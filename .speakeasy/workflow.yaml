@@ -1,7 +1,7 @@
 workflowVersion: 1.0.0
 speakeasyVersion: latest
 sources:
-    latest:
+    dev:
         inputs:
             - location: registry.speakeasyapi.dev/moov/moov/api-dev
               type: openapi
@@ -10,7 +10,7 @@ sources:
 targets:
     latest:
         target: java
-        source: latest
+        source: dev
         publish:
             java:
                 ossrhUsername: $ossrh_username

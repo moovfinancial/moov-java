@@ -4,7 +4,6 @@ sources:
     dev:
         inputs:
             - location: registry.speakeasyapi.dev/moov/moov/api-dev
-              type: openapi
         registry:
             location: registry.speakeasyapi.dev/moov/moov/java-dev
 targets:

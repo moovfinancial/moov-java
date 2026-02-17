@@ -3,11 +3,10 @@
  */
 package io.moov.sdk.models.components;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 import java.lang.String;
 
 /**
@@ -15,20 +14,14 @@ import java.lang.String;
  * 
  * <p>A method of moving money
  */
-@JsonTypeInfo(use = Id.NAME, property = "paymentMethodType", include = As.EXISTING_PROPERTY, visible = true)
-@JsonSubTypes({
-    @Type(value = MoovWalletTransferPaymentMethod.class, name="moov-wallet"),
-    @Type(value = AchDebitFundTransferPaymentMethod.class, name="ach-debit-fund"),
-    @Type(value = AchDebitCollectTransferPaymentMethod.class, name="ach-debit-collect"),
-    @Type(value = AchCreditStandardTransferPaymentMethod.class, name="ach-credit-standard"),
-    @Type(value = AchCreditSameDayTransferPaymentMethod.class, name="ach-credit-same-day"),
-    @Type(value = RtpCreditTransferPaymentMethod.class, name="rtp-credit"),
-    @Type(value = CardPaymentTransferPaymentMethod.class, name="card-payment"),
-    @Type(value = PushToCardTransferPaymentMethod.class, name="push-to-card"),
-    @Type(value = PullFromCardTransferPaymentMethod.class, name="pull-from-card"),
-    @Type(value = ApplePayTransferPaymentMethod.class, name="apple-pay"),
-    @Type(value = CardPresentPaymentTransferPaymentMethod.class, name="card-present-payment"),
-    @Type(value = InstantBankCreditTransferPaymentMethod.class, name="instant-bank-credit")})
+@JsonTypeInfo(
+        use = Id.CUSTOM,
+        property = "paymentMethodType",
+        include = As.EXISTING_PROPERTY,
+        visible = true,
+        defaultImpl = UnknownTransferPaymentMethod.class
+)
+@JsonTypeIdResolver(TransferPaymentMethodTypeIdResolver.class)
 public interface TransferPaymentMethod {
 
     String paymentMethodType();

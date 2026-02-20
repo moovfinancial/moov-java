@@ -11,6 +11,7 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.SecuritySource;
 import io.moov.sdk.models.components.Card;
 import io.moov.sdk.models.errors.APIException;
+import io.moov.sdk.models.errors.DuplicateCardError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.LinkCardError;
 import io.moov.sdk.models.operations.LinkCardRequest;
@@ -188,6 +189,14 @@ public class LinkCard {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
+            if (Utils.statusCodeMatches(response.statusCode(), "409")) {
+                res.withHeaders(response.headers().map());
+                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                    throw DuplicateCardError.from(response);
+                } else {
+                    throw APIException.from("Unexpected content-type received: " + contentType, response);
+                }
+            }
             if (Utils.statusCodeMatches(response.statusCode(), "422")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
@@ -196,7 +205,7 @@ public class LinkCard {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "401", "403", "404", "409", "429")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "401", "403", "404", "429")) {
                 res.withHeaders(response.headers().map());
                 // no content
                 throw APIException.from("API error occurred", response);

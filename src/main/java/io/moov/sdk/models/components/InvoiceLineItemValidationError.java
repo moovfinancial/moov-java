@@ -42,36 +42,28 @@ public class InvoiceLineItemValidationError {
     @JsonProperty("quantity")
     private Optional<String> quantity;
 
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("images")
-    private Optional<? extends Map<String, InvoiceLineItemImageValidationError>> images;
-
     @JsonCreator
     public InvoiceLineItemValidationError(
             @JsonProperty("productID") Optional<String> productID,
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("basePrice") Optional<? extends AmountDecimalValidationError> basePrice,
             @JsonProperty("options") Optional<? extends Map<String, InvoiceLineItemOptionValidationError>> options,
-            @JsonProperty("quantity") Optional<String> quantity,
-            @JsonProperty("images") Optional<? extends Map<String, InvoiceLineItemImageValidationError>> images) {
+            @JsonProperty("quantity") Optional<String> quantity) {
         Utils.checkNotNull(productID, "productID");
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(basePrice, "basePrice");
         Utils.checkNotNull(options, "options");
         Utils.checkNotNull(quantity, "quantity");
-        Utils.checkNotNull(images, "images");
         this.productID = productID;
         this.name = name;
         this.basePrice = basePrice;
         this.options = options;
         this.quantity = quantity;
-        this.images = images;
     }
     
     public InvoiceLineItemValidationError() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -99,12 +91,6 @@ public class InvoiceLineItemValidationError {
     @JsonIgnore
     public Optional<String> quantity() {
         return quantity;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Map<String, InvoiceLineItemImageValidationError>> images() {
-        return (Optional<Map<String, InvoiceLineItemImageValidationError>>) images;
     }
 
     public static Builder builder() {
@@ -177,19 +163,6 @@ public class InvoiceLineItemValidationError {
         return this;
     }
 
-    public InvoiceLineItemValidationError withImages(Map<String, InvoiceLineItemImageValidationError> images) {
-        Utils.checkNotNull(images, "images");
-        this.images = Optional.ofNullable(images);
-        return this;
-    }
-
-
-    public InvoiceLineItemValidationError withImages(Optional<? extends Map<String, InvoiceLineItemImageValidationError>> images) {
-        Utils.checkNotNull(images, "images");
-        this.images = images;
-        return this;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -204,15 +177,14 @@ public class InvoiceLineItemValidationError {
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.basePrice, other.basePrice) &&
             Utils.enhancedDeepEquals(this.options, other.options) &&
-            Utils.enhancedDeepEquals(this.quantity, other.quantity) &&
-            Utils.enhancedDeepEquals(this.images, other.images);
+            Utils.enhancedDeepEquals(this.quantity, other.quantity);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             productID, name, basePrice,
-            options, quantity, images);
+            options, quantity);
     }
     
     @Override
@@ -222,8 +194,7 @@ public class InvoiceLineItemValidationError {
                 "name", name,
                 "basePrice", basePrice,
                 "options", options,
-                "quantity", quantity,
-                "images", images);
+                "quantity", quantity);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -238,8 +209,6 @@ public class InvoiceLineItemValidationError {
         private Optional<? extends Map<String, InvoiceLineItemOptionValidationError>> options = Optional.empty();
 
         private Optional<String> quantity = Optional.empty();
-
-        private Optional<? extends Map<String, InvoiceLineItemImageValidationError>> images = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -310,24 +279,11 @@ public class InvoiceLineItemValidationError {
             return this;
         }
 
-
-        public Builder images(Map<String, InvoiceLineItemImageValidationError> images) {
-            Utils.checkNotNull(images, "images");
-            this.images = Optional.ofNullable(images);
-            return this;
-        }
-
-        public Builder images(Optional<? extends Map<String, InvoiceLineItemImageValidationError>> images) {
-            Utils.checkNotNull(images, "images");
-            this.images = images;
-            return this;
-        }
-
         public InvoiceLineItemValidationError build() {
 
             return new InvoiceLineItemValidationError(
                 productID, name, basePrice,
-                options, quantity, images);
+                options, quantity);
         }
 
     }

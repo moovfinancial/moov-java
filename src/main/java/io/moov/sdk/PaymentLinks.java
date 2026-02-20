@@ -6,6 +6,7 @@ package io.moov.sdk;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.models.components.CreatePaymentLink;
+import io.moov.sdk.models.components.PaymentLinkType;
 import io.moov.sdk.models.components.UpdatePaymentLink;
 import io.moov.sdk.models.operations.CreatePaymentLinkRequest;
 import io.moov.sdk.models.operations.CreatePaymentLinkRequestBuilder;
@@ -30,7 +31,10 @@ import io.moov.sdk.operations.GetPaymentLink;
 import io.moov.sdk.operations.GetPaymentLinkQRCode;
 import io.moov.sdk.operations.ListPaymentLinks;
 import io.moov.sdk.utils.Headers;
+import java.lang.Long;
 import java.lang.String;
+import java.util.List;
+import java.util.Optional;
 
 
 public class PaymentLinks {
@@ -103,11 +107,40 @@ public class PaymentLinks {
      * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
-     * @param request The request object containing all the parameters for the API call.
+     * @param accountID The merchant account ID.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public ListPaymentLinksResponse list(ListPaymentLinksRequest request) {
+    public ListPaymentLinksResponse list(String accountID) {
+        return list(Optional.empty(), Optional.empty(), Optional.empty(),
+            accountID);
+    }
+
+    /**
+     * List all the payment links created under a Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param skip 
+     * @param count 
+     * @param types A comma-separated list of payment link types to filter results.
+     * @param accountID The merchant account ID.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListPaymentLinksResponse list(
+            Optional<Long> skip, Optional<Long> count,
+            Optional<? extends List<PaymentLinkType>> types, String accountID) {
+        ListPaymentLinksRequest request =
+            ListPaymentLinksRequest
+                .builder()
+                .skip(skip)
+                .count(count)
+                .types(types)
+                .accountID(accountID)
+                .build();
         RequestOperation<ListPaymentLinksRequest, ListPaymentLinksResponse> operation
               = new ListPaymentLinks.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));

@@ -8,15 +8,21 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum PaymentLinkType {
-    PAYMENT("payment"),
-    PAYOUT("payout"),
-    INVOICE_PAYMENT("invoice-payment");
+/**
+ * InstantBankTransactionStatus
+ * 
+ * <p>Status of a transaction within the instant-bank lifecycle.
+ */
+public enum InstantBankTransactionStatus {
+    INITIATED("initiated"),
+    COMPLETED("completed"),
+    FAILED("failed"),
+    ACCEPTED_WITHOUT_POSTING("accepted-without-posting");
 
     @JsonValue
     private final String value;
 
-    PaymentLinkType(String value) {
+    InstantBankTransactionStatus(String value) {
         this.value = value;
     }
     
@@ -24,8 +30,8 @@ public enum PaymentLinkType {
         return value;
     }
     
-    public static Optional<PaymentLinkType> fromValue(String value) {
-        for (PaymentLinkType o: PaymentLinkType.values()) {
+    public static Optional<InstantBankTransactionStatus> fromValue(String value) {
+        for (InstantBankTransactionStatus o: InstantBankTransactionStatus.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);
             }

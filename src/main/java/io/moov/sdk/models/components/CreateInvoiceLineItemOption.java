@@ -13,7 +13,6 @@ import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -48,37 +47,27 @@ public class CreateInvoiceLineItemOption {
     @JsonProperty("group")
     private Optional<String> group;
 
-    /**
-     * Optional list of images associated with this line item option.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("images")
-    private Optional<? extends List<CreateInvoiceLineItemImage>> images;
-
     @JsonCreator
     public CreateInvoiceLineItemOption(
             @JsonProperty("name") String name,
             @JsonProperty("quantity") int quantity,
             @JsonProperty("priceModifier") Optional<? extends AmountDecimal> priceModifier,
-            @JsonProperty("group") Optional<String> group,
-            @JsonProperty("images") Optional<? extends List<CreateInvoiceLineItemImage>> images) {
+            @JsonProperty("group") Optional<String> group) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(quantity, "quantity");
         Utils.checkNotNull(priceModifier, "priceModifier");
         Utils.checkNotNull(group, "group");
-        Utils.checkNotNull(images, "images");
         this.name = name;
         this.quantity = quantity;
         this.priceModifier = priceModifier;
         this.group = group;
-        this.images = images;
     }
     
     public CreateInvoiceLineItemOption(
             String name,
             int quantity) {
         this(name, quantity, Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty());
     }
 
     /**
@@ -112,15 +101,6 @@ public class CreateInvoiceLineItemOption {
     @JsonIgnore
     public Optional<String> group() {
         return group;
-    }
-
-    /**
-     * Optional list of images associated with this line item option.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<CreateInvoiceLineItemImage>> images() {
-        return (Optional<List<CreateInvoiceLineItemImage>>) images;
     }
 
     public static Builder builder() {
@@ -184,25 +164,6 @@ public class CreateInvoiceLineItemOption {
         return this;
     }
 
-    /**
-     * Optional list of images associated with this line item option.
-     */
-    public CreateInvoiceLineItemOption withImages(List<CreateInvoiceLineItemImage> images) {
-        Utils.checkNotNull(images, "images");
-        this.images = Optional.ofNullable(images);
-        return this;
-    }
-
-
-    /**
-     * Optional list of images associated with this line item option.
-     */
-    public CreateInvoiceLineItemOption withImages(Optional<? extends List<CreateInvoiceLineItemImage>> images) {
-        Utils.checkNotNull(images, "images");
-        this.images = images;
-        return this;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -216,15 +177,14 @@ public class CreateInvoiceLineItemOption {
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.quantity, other.quantity) &&
             Utils.enhancedDeepEquals(this.priceModifier, other.priceModifier) &&
-            Utils.enhancedDeepEquals(this.group, other.group) &&
-            Utils.enhancedDeepEquals(this.images, other.images);
+            Utils.enhancedDeepEquals(this.group, other.group);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             name, quantity, priceModifier,
-            group, images);
+            group);
     }
     
     @Override
@@ -233,8 +193,7 @@ public class CreateInvoiceLineItemOption {
                 "name", name,
                 "quantity", quantity,
                 "priceModifier", priceModifier,
-                "group", group,
-                "images", images);
+                "group", group);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -247,8 +206,6 @@ public class CreateInvoiceLineItemOption {
         private Optional<? extends AmountDecimal> priceModifier = Optional.empty();
 
         private Optional<String> group = Optional.empty();
-
-        private Optional<? extends List<CreateInvoiceLineItemImage>> images = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -312,30 +269,11 @@ public class CreateInvoiceLineItemOption {
             return this;
         }
 
-
-        /**
-         * Optional list of images associated with this line item option.
-         */
-        public Builder images(List<CreateInvoiceLineItemImage> images) {
-            Utils.checkNotNull(images, "images");
-            this.images = Optional.ofNullable(images);
-            return this;
-        }
-
-        /**
-         * Optional list of images associated with this line item option.
-         */
-        public Builder images(Optional<? extends List<CreateInvoiceLineItemImage>> images) {
-            Utils.checkNotNull(images, "images");
-            this.images = images;
-            return this;
-        }
-
         public CreateInvoiceLineItemOption build() {
 
             return new CreateInvoiceLineItemOption(
                 name, quantity, priceModifier,
-                group, images);
+                group);
         }
 
     }

@@ -5,7 +5,6 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.PaymentLinkStatus;
 import io.moov.sdk.models.components.PaymentLinkType;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
@@ -13,6 +12,7 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -25,13 +25,11 @@ public class ListPaymentLinksRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
 
-
-    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=type")
-    private Optional<? extends PaymentLinkType> type;
-
-
-    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=status")
-    private Optional<? extends PaymentLinkStatus> status;
+    /**
+     * A comma-separated list of payment link types to filter results.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=types")
+    private Optional<? extends List<PaymentLinkType>> types;
 
     /**
      * The merchant account ID.
@@ -43,25 +41,22 @@ public class ListPaymentLinksRequest {
     public ListPaymentLinksRequest(
             Optional<Long> skip,
             Optional<Long> count,
-            Optional<? extends PaymentLinkType> type,
-            Optional<? extends PaymentLinkStatus> status,
+            Optional<? extends List<PaymentLinkType>> types,
             String accountID) {
         Utils.checkNotNull(skip, "skip");
         Utils.checkNotNull(count, "count");
-        Utils.checkNotNull(type, "type");
-        Utils.checkNotNull(status, "status");
+        Utils.checkNotNull(types, "types");
         Utils.checkNotNull(accountID, "accountID");
         this.skip = skip;
         this.count = count;
-        this.type = type;
-        this.status = status;
+        this.types = types;
         this.accountID = accountID;
     }
     
     public ListPaymentLinksRequest(
             String accountID) {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), accountID);
+            accountID);
     }
 
     @JsonIgnore
@@ -74,16 +69,13 @@ public class ListPaymentLinksRequest {
         return count;
     }
 
+    /**
+     * A comma-separated list of payment link types to filter results.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PaymentLinkType> type() {
-        return (Optional<PaymentLinkType>) type;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<PaymentLinkStatus> status() {
-        return (Optional<PaymentLinkStatus>) status;
+    public Optional<List<PaymentLinkType>> types() {
+        return (Optional<List<PaymentLinkType>>) types;
     }
 
     /**
@@ -125,29 +117,22 @@ public class ListPaymentLinksRequest {
         return this;
     }
 
-    public ListPaymentLinksRequest withType(PaymentLinkType type) {
-        Utils.checkNotNull(type, "type");
-        this.type = Optional.ofNullable(type);
+    /**
+     * A comma-separated list of payment link types to filter results.
+     */
+    public ListPaymentLinksRequest withTypes(List<PaymentLinkType> types) {
+        Utils.checkNotNull(types, "types");
+        this.types = Optional.ofNullable(types);
         return this;
     }
 
 
-    public ListPaymentLinksRequest withType(Optional<? extends PaymentLinkType> type) {
-        Utils.checkNotNull(type, "type");
-        this.type = type;
-        return this;
-    }
-
-    public ListPaymentLinksRequest withStatus(PaymentLinkStatus status) {
-        Utils.checkNotNull(status, "status");
-        this.status = Optional.ofNullable(status);
-        return this;
-    }
-
-
-    public ListPaymentLinksRequest withStatus(Optional<? extends PaymentLinkStatus> status) {
-        Utils.checkNotNull(status, "status");
-        this.status = status;
+    /**
+     * A comma-separated list of payment link types to filter results.
+     */
+    public ListPaymentLinksRequest withTypes(Optional<? extends List<PaymentLinkType>> types) {
+        Utils.checkNotNull(types, "types");
+        this.types = types;
         return this;
     }
 
@@ -172,16 +157,15 @@ public class ListPaymentLinksRequest {
         return 
             Utils.enhancedDeepEquals(this.skip, other.skip) &&
             Utils.enhancedDeepEquals(this.count, other.count) &&
-            Utils.enhancedDeepEquals(this.type, other.type) &&
-            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.types, other.types) &&
             Utils.enhancedDeepEquals(this.accountID, other.accountID);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            skip, count, type,
-            status, accountID);
+            skip, count, types,
+            accountID);
     }
     
     @Override
@@ -189,8 +173,7 @@ public class ListPaymentLinksRequest {
         return Utils.toString(ListPaymentLinksRequest.class,
                 "skip", skip,
                 "count", count,
-                "type", type,
-                "status", status,
+                "types", types,
                 "accountID", accountID);
     }
 
@@ -201,9 +184,7 @@ public class ListPaymentLinksRequest {
 
         private Optional<Long> count = Optional.empty();
 
-        private Optional<? extends PaymentLinkType> type = Optional.empty();
-
-        private Optional<? extends PaymentLinkStatus> status = Optional.empty();
+        private Optional<? extends List<PaymentLinkType>> types = Optional.empty();
 
         private String accountID;
 
@@ -238,28 +219,21 @@ public class ListPaymentLinksRequest {
         }
 
 
-        public Builder type(PaymentLinkType type) {
-            Utils.checkNotNull(type, "type");
-            this.type = Optional.ofNullable(type);
+        /**
+         * A comma-separated list of payment link types to filter results.
+         */
+        public Builder types(List<PaymentLinkType> types) {
+            Utils.checkNotNull(types, "types");
+            this.types = Optional.ofNullable(types);
             return this;
         }
 
-        public Builder type(Optional<? extends PaymentLinkType> type) {
-            Utils.checkNotNull(type, "type");
-            this.type = type;
-            return this;
-        }
-
-
-        public Builder status(PaymentLinkStatus status) {
-            Utils.checkNotNull(status, "status");
-            this.status = Optional.ofNullable(status);
-            return this;
-        }
-
-        public Builder status(Optional<? extends PaymentLinkStatus> status) {
-            Utils.checkNotNull(status, "status");
-            this.status = status;
+        /**
+         * A comma-separated list of payment link types to filter results.
+         */
+        public Builder types(Optional<? extends List<PaymentLinkType>> types) {
+            Utils.checkNotNull(types, "types");
+            this.types = types;
             return this;
         }
 
@@ -276,8 +250,8 @@ public class ListPaymentLinksRequest {
         public ListPaymentLinksRequest build() {
 
             return new ListPaymentLinksRequest(
-                skip, count, type,
-                status, accountID);
+                skip, count, types,
+                accountID);
         }
 
     }

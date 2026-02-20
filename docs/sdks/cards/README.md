@@ -81,14 +81,13 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.*;
-import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.LinkCardError;
+import io.moov.sdk.models.errors.*;
 import io.moov.sdk.models.operations.LinkCardResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws GenericError, LinkCardError, Exception {
+    public static void main(String[] args) throws GenericError, DuplicateCardError, LinkCardError, Exception {
 
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
@@ -136,11 +135,12 @@ public class Application {
 
 ### Errors
 
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| models/errors/GenericError  | 400                         | application/json            |
-| models/errors/LinkCardError | 422                         | application/json            |
-| models/errors/APIException  | 4XX, 5XX                    | \*/\*                       |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models/errors/GenericError       | 400                              | application/json                 |
+| models/errors/DuplicateCardError | 409                              | application/json                 |
+| models/errors/LinkCardError      | 422                              | application/json                 |
+| models/errors/APIException       | 4XX, 5XX                         | \*/\*                            |
 
 ## list
 

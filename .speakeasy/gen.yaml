@@ -29,7 +29,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 java:
-  version: 26.1.7
+  version: 26.1.8
   additionalDependencies: []
   additionalPlugins: []
   artifactID: sdk
@@ -40,6 +40,7 @@ java:
   companyURL: https://moov.io/
   defaultErrorName: APIException
   enableCustomCodeRegions: false
+  enableFormatting: false
   enableSlf4jLogging: false
   enableStreamingUploads: false
   flattenGlobalSecurity: true

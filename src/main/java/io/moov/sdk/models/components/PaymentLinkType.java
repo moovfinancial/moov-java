@@ -10,7 +10,8 @@ import java.util.Optional;
 
 public enum PaymentLinkType {
     PAYMENT("payment"),
-    PAYOUT("payout");
+    PAYOUT("payout"),
+    INVOICE_PAYMENT("invoice-payment");
 
     @JsonValue
     private final String value;

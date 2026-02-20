@@ -6,30 +6,86 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.models.components.PaymentLinkType;
 import io.moov.sdk.operations.ListPaymentLinks;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
+import java.lang.Long;
+import java.lang.String;
+import java.util.List;
+import java.util.Optional;
 
 public class ListPaymentLinksRequestBuilder {
 
-    private ListPaymentLinksRequest request;
+    private Optional<Long> skip = Optional.empty();
+    private Optional<Long> count = Optional.empty();
+    private Optional<? extends List<PaymentLinkType>> types = Optional.empty();
+    private String accountID;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public ListPaymentLinksRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
-    public ListPaymentLinksRequestBuilder request(ListPaymentLinksRequest request) {
-        Utils.checkNotNull(request, "request");
-        this.request = request;
+                
+    public ListPaymentLinksRequestBuilder skip(long skip) {
+        Utils.checkNotNull(skip, "skip");
+        this.skip = Optional.of(skip);
         return this;
+    }
+
+    public ListPaymentLinksRequestBuilder skip(Optional<Long> skip) {
+        Utils.checkNotNull(skip, "skip");
+        this.skip = skip;
+        return this;
+    }
+                
+    public ListPaymentLinksRequestBuilder count(long count) {
+        Utils.checkNotNull(count, "count");
+        this.count = Optional.of(count);
+        return this;
+    }
+
+    public ListPaymentLinksRequestBuilder count(Optional<Long> count) {
+        Utils.checkNotNull(count, "count");
+        this.count = count;
+        return this;
+    }
+                
+    public ListPaymentLinksRequestBuilder types(List<PaymentLinkType> types) {
+        Utils.checkNotNull(types, "types");
+        this.types = Optional.of(types);
+        return this;
+    }
+
+    public ListPaymentLinksRequestBuilder types(Optional<? extends List<PaymentLinkType>> types) {
+        Utils.checkNotNull(types, "types");
+        this.types = types;
+        return this;
+    }
+
+    public ListPaymentLinksRequestBuilder accountID(String accountID) {
+        Utils.checkNotNull(accountID, "accountID");
+        this.accountID = accountID;
+        return this;
+    }
+
+
+    private ListPaymentLinksRequest buildRequest() {
+
+        ListPaymentLinksRequest request = new ListPaymentLinksRequest(skip,
+            count,
+            types,
+            accountID);
+
+        return request;
     }
 
     public ListPaymentLinksResponse call() {
         
         RequestOperation<ListPaymentLinksRequest, ListPaymentLinksResponse> operation
               = new ListPaymentLinks.Sync(sdkConfiguration, _headers);
+        ListPaymentLinksRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));
     }

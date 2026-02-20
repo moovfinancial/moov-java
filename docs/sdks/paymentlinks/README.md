@@ -130,7 +130,6 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.operations.ListPaymentLinksRequest;
 import io.moov.sdk.models.operations.ListPaymentLinksResponse;
 import java.lang.Exception;
 
@@ -146,14 +145,10 @@ public class Application {
                     .build())
             .build();
 
-        ListPaymentLinksRequest req = ListPaymentLinksRequest.builder()
-                .accountID("d1039e6d-21ee-4a29-8adf-1dd2a6625a0d")
+        ListPaymentLinksResponse res = sdk.paymentLinks().list()
                 .skip(60L)
                 .count(20L)
-                .build();
-
-        ListPaymentLinksResponse res = sdk.paymentLinks().list()
-                .request(req)
+                .accountID("d1039e6d-21ee-4a29-8adf-1dd2a6625a0d")
                 .call();
 
         if (res.paymentLinks().isPresent()) {
@@ -165,9 +160,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `request`                                                                     | [ListPaymentLinksRequest](../../models/operations/ListPaymentLinksRequest.md) | :heavy_check_mark:                                                            | The request object to use for the request.                                    |
+| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          | Example                                                              |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `skip`                                                               | *Optional\<Long>*                                                    | :heavy_minus_sign:                                                   | N/A                                                                  | 60                                                                   |
+| `count`                                                              | *Optional\<Long>*                                                    | :heavy_minus_sign:                                                   | N/A                                                                  | 20                                                                   |
+| `types`                                                              | List\<[PaymentLinkType](../../models/components/PaymentLinkType.md)> | :heavy_minus_sign:                                                   | A comma-separated list of payment link types to filter results.      |                                                                      |
+| `accountID`                                                          | *String*                                                             | :heavy_check_mark:                                                   | The merchant account ID.                                             |                                                                      |
 
 ### Response
 

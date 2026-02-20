@@ -49,7 +49,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:24.1.7'
+implementation 'io.moov:sdk:24.1.8'
 ```
 
 Maven:
@@ -57,7 +57,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>24.1.7</version>
+    <version>24.1.8</version>
 </dependency>
 ```
 
@@ -1223,7 +1223,7 @@ public class Application {
 **Primary error:**
 * [`MoovError`](./src/main/java/models/errors/MoovError.java): The base class for HTTP error responses.
 
-<details><summary>Less common errors (52)</summary>
+<details><summary>Less common errors (53)</summary>
 
 <br />
 
@@ -1239,6 +1239,7 @@ many more subclasses in the JDK platform).
 * [`io.moov.sdk.models.errors.ProductRequestValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ProductRequestValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 165 methods.*
 * [`io.moov.sdk.models.errors.ScheduleValidationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.ScheduleValidationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 165 methods.*
 * [`io.moov.sdk.models.errors.TerminalApplicationError`](./src/main/java/models/errors/io.moov.sdk.models.errors.TerminalApplicationError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 165 methods.*
+* [`io.moov.sdk.models.errors.DuplicateCardError`](./src/main/java/models/errors/io.moov.sdk.models.errors.DuplicateCardError.java): Attempted to link card that already exists on the account. Status code `409`. Applicable to 1 of 165 methods.*
 * [`io.moov.sdk.models.errors.Transfer`](./src/main/java/models/errors/io.moov.sdk.models.errors.Transfer.java): Details of a Transfer. Status code `409`. Applicable to 1 of 165 methods.*
 * [`io.moov.sdk.models.errors.CardAcquiringRefund`](./src/main/java/models/errors/io.moov.sdk.models.errors.CardAcquiringRefund.java): Details of a card refund. Status code `409`. Applicable to 1 of 165 methods.*
 * [`io.moov.sdk.models.errors.CreateAccountError`](./src/main/java/models/errors/io.moov.sdk.models.errors.CreateAccountError.java): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 165 methods.*

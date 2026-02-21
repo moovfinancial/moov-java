@@ -33,6 +33,12 @@ public class AccountFees {
     private AmountDecimal merchantPCIFee;
 
     /**
+     * Fees for invoice payments.
+     */
+    @JsonProperty("invoicePaymentFee")
+    private AmountDecimal invoicePaymentFee;
+
+    /**
      * Fees for business verification.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -63,18 +69,21 @@ public class AccountFees {
     public AccountFees(
             @JsonProperty("walletFee") AmountDecimal walletFee,
             @JsonProperty("merchantPCIFee") AmountDecimal merchantPCIFee,
+            @JsonProperty("invoicePaymentFee") AmountDecimal invoicePaymentFee,
             @JsonProperty("kybFee") Optional<? extends AmountDecimal> kybFee,
             @JsonProperty("kycFee") Optional<? extends AmountDecimal> kycFee,
             @JsonProperty("transactionMonitoringFee") Optional<? extends AmountDecimal> transactionMonitoringFee,
             @JsonProperty("total") AmountDecimal total) {
         Utils.checkNotNull(walletFee, "walletFee");
         Utils.checkNotNull(merchantPCIFee, "merchantPCIFee");
+        Utils.checkNotNull(invoicePaymentFee, "invoicePaymentFee");
         Utils.checkNotNull(kybFee, "kybFee");
         Utils.checkNotNull(kycFee, "kycFee");
         Utils.checkNotNull(transactionMonitoringFee, "transactionMonitoringFee");
         Utils.checkNotNull(total, "total");
         this.walletFee = walletFee;
         this.merchantPCIFee = merchantPCIFee;
+        this.invoicePaymentFee = invoicePaymentFee;
         this.kybFee = kybFee;
         this.kycFee = kycFee;
         this.transactionMonitoringFee = transactionMonitoringFee;
@@ -84,9 +93,11 @@ public class AccountFees {
     public AccountFees(
             AmountDecimal walletFee,
             AmountDecimal merchantPCIFee,
+            AmountDecimal invoicePaymentFee,
             AmountDecimal total) {
-        this(walletFee, merchantPCIFee, Optional.empty(),
-            Optional.empty(), Optional.empty(), total);
+        this(walletFee, merchantPCIFee, invoicePaymentFee,
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            total);
     }
 
     /**
@@ -103,6 +114,14 @@ public class AccountFees {
     @JsonIgnore
     public AmountDecimal merchantPCIFee() {
         return merchantPCIFee;
+    }
+
+    /**
+     * Fees for invoice payments.
+     */
+    @JsonIgnore
+    public AmountDecimal invoicePaymentFee() {
+        return invoicePaymentFee;
     }
 
     /**
@@ -160,6 +179,15 @@ public class AccountFees {
     public AccountFees withMerchantPCIFee(AmountDecimal merchantPCIFee) {
         Utils.checkNotNull(merchantPCIFee, "merchantPCIFee");
         this.merchantPCIFee = merchantPCIFee;
+        return this;
+    }
+
+    /**
+     * Fees for invoice payments.
+     */
+    public AccountFees withInvoicePaymentFee(AmountDecimal invoicePaymentFee) {
+        Utils.checkNotNull(invoicePaymentFee, "invoicePaymentFee");
+        this.invoicePaymentFee = invoicePaymentFee;
         return this;
     }
 
@@ -241,6 +269,7 @@ public class AccountFees {
         return 
             Utils.enhancedDeepEquals(this.walletFee, other.walletFee) &&
             Utils.enhancedDeepEquals(this.merchantPCIFee, other.merchantPCIFee) &&
+            Utils.enhancedDeepEquals(this.invoicePaymentFee, other.invoicePaymentFee) &&
             Utils.enhancedDeepEquals(this.kybFee, other.kybFee) &&
             Utils.enhancedDeepEquals(this.kycFee, other.kycFee) &&
             Utils.enhancedDeepEquals(this.transactionMonitoringFee, other.transactionMonitoringFee) &&
@@ -250,8 +279,9 @@ public class AccountFees {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            walletFee, merchantPCIFee, kybFee,
-            kycFee, transactionMonitoringFee, total);
+            walletFee, merchantPCIFee, invoicePaymentFee,
+            kybFee, kycFee, transactionMonitoringFee,
+            total);
     }
     
     @Override
@@ -259,6 +289,7 @@ public class AccountFees {
         return Utils.toString(AccountFees.class,
                 "walletFee", walletFee,
                 "merchantPCIFee", merchantPCIFee,
+                "invoicePaymentFee", invoicePaymentFee,
                 "kybFee", kybFee,
                 "kycFee", kycFee,
                 "transactionMonitoringFee", transactionMonitoringFee,
@@ -271,6 +302,8 @@ public class AccountFees {
         private AmountDecimal walletFee;
 
         private AmountDecimal merchantPCIFee;
+
+        private AmountDecimal invoicePaymentFee;
 
         private Optional<? extends AmountDecimal> kybFee = Optional.empty();
 
@@ -301,6 +334,16 @@ public class AccountFees {
         public Builder merchantPCIFee(AmountDecimal merchantPCIFee) {
             Utils.checkNotNull(merchantPCIFee, "merchantPCIFee");
             this.merchantPCIFee = merchantPCIFee;
+            return this;
+        }
+
+
+        /**
+         * Fees for invoice payments.
+         */
+        public Builder invoicePaymentFee(AmountDecimal invoicePaymentFee) {
+            Utils.checkNotNull(invoicePaymentFee, "invoicePaymentFee");
+            this.invoicePaymentFee = invoicePaymentFee;
             return this;
         }
 
@@ -374,8 +417,9 @@ public class AccountFees {
         public AccountFees build() {
 
             return new AccountFees(
-                walletFee, merchantPCIFee, kybFee,
-                kycFee, transactionMonitoringFee, total);
+                walletFee, merchantPCIFee, invoicePaymentFee,
+                kybFee, kycFee, transactionMonitoringFee,
+                total);
         }
 
     }

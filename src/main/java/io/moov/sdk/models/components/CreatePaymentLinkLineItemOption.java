@@ -44,8 +44,8 @@ public class CreatePaymentLinkLineItemOption {
 
     /**
      * Optional list of images associated with this line item option.
-     * This field is deprecated and will be ignored. A future release will populate images associated with
-     * the given productID.
+     * This field is being deprecated in favor using the images associated with a productID and will soon
+     * be unsupported.
      * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
@@ -114,8 +114,8 @@ public class CreatePaymentLinkLineItemOption {
 
     /**
      * Optional list of images associated with this line item option.
-     * This field is deprecated and will be ignored. A future release will populate images associated with
-     * the given productID.
+     * This field is being deprecated in favor using the images associated with a productID and will soon
+     * be unsupported.
      * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
@@ -178,8 +178,8 @@ public class CreatePaymentLinkLineItemOption {
 
     /**
      * Optional list of images associated with this line item option.
-     * This field is deprecated and will be ignored. A future release will populate images associated with
-     * the given productID.
+     * This field is being deprecated in favor using the images associated with a productID and will soon
+     * be unsupported.
      * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
@@ -193,8 +193,8 @@ public class CreatePaymentLinkLineItemOption {
 
     /**
      * Optional list of images associated with this line item option.
-     * This field is deprecated and will be ignored. A future release will populate images associated with
-     * the given productID.
+     * This field is being deprecated in favor using the images associated with a productID and will soon
+     * be unsupported.
      * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
@@ -318,8 +318,8 @@ public class CreatePaymentLinkLineItemOption {
 
         /**
          * Optional list of images associated with this line item option.
-         * This field is deprecated and will be ignored. A future release will populate images associated with
-         * the given productID.
+         * This field is being deprecated in favor using the images associated with a productID and will soon
+         * be unsupported.
          * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
@@ -332,8 +332,8 @@ public class CreatePaymentLinkLineItemOption {
 
         /**
          * Optional list of images associated with this line item option.
-         * This field is deprecated and will be ignored. A future release will populate images associated with
-         * the given productID.
+         * This field is being deprecated in favor using the images associated with a productID and will soon
+         * be unsupported.
          * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */

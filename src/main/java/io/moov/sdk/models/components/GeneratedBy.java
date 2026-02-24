@@ -19,32 +19,50 @@ import java.util.Optional;
  * <p>The entity that generated the fee.
  */
 public class GeneratedBy {
-
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("transferID")
     private Optional<String> transferID;
 
-
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardID")
     private Optional<String> cardID;
 
-
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("disputeID")
     private Optional<String> disputeID;
 
-
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("accountID")
     private Optional<String> accountID;
 
-
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bankAccountID")
     private Optional<String> bankAccountID;
 
-
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("invoiceID")
     private Optional<String> invoiceID;
@@ -76,31 +94,55 @@ public class GeneratedBy {
             Optional.empty(), Optional.empty(), Optional.empty());
     }
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonIgnore
     public Optional<String> transferID() {
         return transferID;
     }
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonIgnore
     public Optional<String> cardID() {
         return cardID;
     }
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonIgnore
     public Optional<String> disputeID() {
         return disputeID;
     }
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonIgnore
     public Optional<String> accountID() {
         return accountID;
     }
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonIgnore
     public Optional<String> bankAccountID() {
         return bankAccountID;
     }
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonIgnore
     public Optional<String> invoiceID() {
         return invoiceID;
@@ -111,6 +153,10 @@ public class GeneratedBy {
     }
 
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public GeneratedBy withTransferID(String transferID) {
         Utils.checkNotNull(transferID, "transferID");
         this.transferID = Optional.ofNullable(transferID);
@@ -118,12 +164,20 @@ public class GeneratedBy {
     }
 
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public GeneratedBy withTransferID(Optional<String> transferID) {
         Utils.checkNotNull(transferID, "transferID");
         this.transferID = transferID;
         return this;
     }
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public GeneratedBy withCardID(String cardID) {
         Utils.checkNotNull(cardID, "cardID");
         this.cardID = Optional.ofNullable(cardID);
@@ -131,12 +185,20 @@ public class GeneratedBy {
     }
 
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public GeneratedBy withCardID(Optional<String> cardID) {
         Utils.checkNotNull(cardID, "cardID");
         this.cardID = cardID;
         return this;
     }
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public GeneratedBy withDisputeID(String disputeID) {
         Utils.checkNotNull(disputeID, "disputeID");
         this.disputeID = Optional.ofNullable(disputeID);
@@ -144,12 +206,20 @@ public class GeneratedBy {
     }
 
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public GeneratedBy withDisputeID(Optional<String> disputeID) {
         Utils.checkNotNull(disputeID, "disputeID");
         this.disputeID = disputeID;
         return this;
     }
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public GeneratedBy withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = Optional.ofNullable(accountID);
@@ -157,12 +227,20 @@ public class GeneratedBy {
     }
 
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public GeneratedBy withAccountID(Optional<String> accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
         return this;
     }
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public GeneratedBy withBankAccountID(String bankAccountID) {
         Utils.checkNotNull(bankAccountID, "bankAccountID");
         this.bankAccountID = Optional.ofNullable(bankAccountID);
@@ -170,12 +248,20 @@ public class GeneratedBy {
     }
 
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public GeneratedBy withBankAccountID(Optional<String> bankAccountID) {
         Utils.checkNotNull(bankAccountID, "bankAccountID");
         this.bankAccountID = bankAccountID;
         return this;
     }
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public GeneratedBy withInvoiceID(String invoiceID) {
         Utils.checkNotNull(invoiceID, "invoiceID");
         this.invoiceID = Optional.ofNullable(invoiceID);
@@ -183,6 +269,10 @@ public class GeneratedBy {
     }
 
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public GeneratedBy withInvoiceID(Optional<String> invoiceID) {
         Utils.checkNotNull(invoiceID, "invoiceID");
         this.invoiceID = invoiceID;
@@ -245,12 +335,20 @@ public class GeneratedBy {
         }
 
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder transferID(String transferID) {
             Utils.checkNotNull(transferID, "transferID");
             this.transferID = Optional.ofNullable(transferID);
             return this;
         }
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder transferID(Optional<String> transferID) {
             Utils.checkNotNull(transferID, "transferID");
             this.transferID = transferID;
@@ -258,12 +356,20 @@ public class GeneratedBy {
         }
 
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder cardID(String cardID) {
             Utils.checkNotNull(cardID, "cardID");
             this.cardID = Optional.ofNullable(cardID);
             return this;
         }
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder cardID(Optional<String> cardID) {
             Utils.checkNotNull(cardID, "cardID");
             this.cardID = cardID;
@@ -271,12 +377,20 @@ public class GeneratedBy {
         }
 
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder disputeID(String disputeID) {
             Utils.checkNotNull(disputeID, "disputeID");
             this.disputeID = Optional.ofNullable(disputeID);
             return this;
         }
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder disputeID(Optional<String> disputeID) {
             Utils.checkNotNull(disputeID, "disputeID");
             this.disputeID = disputeID;
@@ -284,12 +398,20 @@ public class GeneratedBy {
         }
 
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = Optional.ofNullable(accountID);
             return this;
         }
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder accountID(Optional<String> accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
@@ -297,12 +419,20 @@ public class GeneratedBy {
         }
 
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder bankAccountID(String bankAccountID) {
             Utils.checkNotNull(bankAccountID, "bankAccountID");
             this.bankAccountID = Optional.ofNullable(bankAccountID);
             return this;
         }
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder bankAccountID(Optional<String> bankAccountID) {
             Utils.checkNotNull(bankAccountID, "bankAccountID");
             this.bankAccountID = bankAccountID;
@@ -310,12 +440,20 @@ public class GeneratedBy {
         }
 
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder invoiceID(String invoiceID) {
             Utils.checkNotNull(invoiceID, "invoiceID");
             this.invoiceID = Optional.ofNullable(invoiceID);
             return this;
         }
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder invoiceID(Optional<String> invoiceID) {
             Utils.checkNotNull(invoiceID, "invoiceID");
             this.invoiceID = invoiceID;

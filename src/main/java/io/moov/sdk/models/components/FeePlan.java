@@ -17,7 +17,10 @@ import java.util.Optional;
 
 
 public class FeePlan {
-
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonProperty("planID")
     private String planID;
 
@@ -104,6 +107,10 @@ public class FeePlan {
             monthlyPlatformFee, createdAt);
     }
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonIgnore
     public String planID() {
         return planID;
@@ -168,6 +175,10 @@ public class FeePlan {
     }
 
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public FeePlan withPlanID(String planID) {
         Utils.checkNotNull(planID, "planID");
         this.planID = planID;
@@ -310,6 +321,10 @@ public class FeePlan {
         }
 
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder planID(String planID) {
             Utils.checkNotNull(planID, "planID");
             this.planID = planID;

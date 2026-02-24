@@ -21,7 +21,10 @@ import java.util.Optional;
  * <p>A fee incurred by a user.
  */
 public class IncurredFee {
-
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("feeID")
     private Optional<String> feeID;
@@ -121,6 +124,10 @@ public class IncurredFee {
             Optional.empty(), Optional.empty(), Optional.empty());
     }
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonIgnore
     public Optional<String> feeID() {
         return feeID;
@@ -199,6 +206,10 @@ public class IncurredFee {
     }
 
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public IncurredFee withFeeID(String feeID) {
         Utils.checkNotNull(feeID, "feeID");
         this.feeID = Optional.ofNullable(feeID);
@@ -206,6 +217,10 @@ public class IncurredFee {
     }
 
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public IncurredFee withFeeID(Optional<String> feeID) {
         Utils.checkNotNull(feeID, "feeID");
         this.feeID = feeID;
@@ -437,12 +452,20 @@ public class IncurredFee {
         }
 
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder feeID(String feeID) {
             Utils.checkNotNull(feeID, "feeID");
             this.feeID = Optional.ofNullable(feeID);
             return this;
         }
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder feeID(Optional<String> feeID) {
             Utils.checkNotNull(feeID, "feeID");
             this.feeID = feeID;

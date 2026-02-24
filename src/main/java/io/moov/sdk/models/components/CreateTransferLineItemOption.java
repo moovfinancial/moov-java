@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import java.lang.Deprecated;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
@@ -43,9 +44,14 @@ public class CreateTransferLineItemOption {
 
     /**
      * Optional list of images associated with this line item option.
+     * This field is being deprecated in favor using the images associated with a productID and will soon
+     * be unsupported.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("imageIDs")
+    @Deprecated
     private Optional<? extends List<String>> imageIDs;
 
     /**
@@ -108,7 +114,12 @@ public class CreateTransferLineItemOption {
 
     /**
      * Optional list of images associated with this line item option.
+     * This field is being deprecated in favor using the images associated with a productID and will soon
+     * be unsupported.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<String>> imageIDs() {
@@ -167,7 +178,12 @@ public class CreateTransferLineItemOption {
 
     /**
      * Optional list of images associated with this line item option.
+     * This field is being deprecated in favor using the images associated with a productID and will soon
+     * be unsupported.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     public CreateTransferLineItemOption withImageIDs(List<String> imageIDs) {
         Utils.checkNotNull(imageIDs, "imageIDs");
         this.imageIDs = Optional.ofNullable(imageIDs);
@@ -177,7 +193,12 @@ public class CreateTransferLineItemOption {
 
     /**
      * Optional list of images associated with this line item option.
+     * This field is being deprecated in favor using the images associated with a productID and will soon
+     * be unsupported.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     public CreateTransferLineItemOption withImageIDs(Optional<? extends List<String>> imageIDs) {
         Utils.checkNotNull(imageIDs, "imageIDs");
         this.imageIDs = imageIDs;
@@ -246,6 +267,7 @@ public class CreateTransferLineItemOption {
 
         private Optional<? extends AmountDecimal> priceModifier = Optional.empty();
 
+        @Deprecated
         private Optional<? extends List<String>> imageIDs = Optional.empty();
 
         private Optional<String> group = Optional.empty();
@@ -296,7 +318,12 @@ public class CreateTransferLineItemOption {
 
         /**
          * Optional list of images associated with this line item option.
+         * This field is being deprecated in favor using the images associated with a productID and will soon
+         * be unsupported.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
+        @Deprecated
         public Builder imageIDs(List<String> imageIDs) {
             Utils.checkNotNull(imageIDs, "imageIDs");
             this.imageIDs = Optional.ofNullable(imageIDs);
@@ -305,7 +332,12 @@ public class CreateTransferLineItemOption {
 
         /**
          * Optional list of images associated with this line item option.
+         * This field is being deprecated in favor using the images associated with a productID and will soon
+         * be unsupported.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
+        @Deprecated
         public Builder imageIDs(Optional<? extends List<String>> imageIDs) {
             Utils.checkNotNull(imageIDs, "imageIDs");
             this.imageIDs = imageIDs;

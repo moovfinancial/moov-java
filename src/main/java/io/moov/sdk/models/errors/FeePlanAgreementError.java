@@ -53,6 +53,10 @@ public class FeePlanAgreementError extends MoovError {
         }
     }
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @Deprecated
     public Optional<String> planID() {
         return data().flatMap(Data::planID);
@@ -70,7 +74,10 @@ public class FeePlanAgreementError extends MoovError {
     }
 
     public static class Data {
-
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("planID")
         private Optional<String> planID;
@@ -86,6 +93,10 @@ public class FeePlanAgreementError extends MoovError {
             this(Optional.empty());
         }
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         @JsonIgnore
         public Optional<String> planID() {
             return planID;
@@ -96,6 +107,10 @@ public class FeePlanAgreementError extends MoovError {
         }
 
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Data withPlanID(String planID) {
             Utils.checkNotNull(planID, "planID");
             this.planID = Optional.ofNullable(planID);
@@ -103,6 +118,10 @@ public class FeePlanAgreementError extends MoovError {
         }
 
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Data withPlanID(Optional<String> planID) {
             Utils.checkNotNull(planID, "planID");
             this.planID = planID;
@@ -144,12 +163,20 @@ public class FeePlanAgreementError extends MoovError {
             }
 
 
+            /**
+             * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+             * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+             */
             public Builder planID(String planID) {
                 Utils.checkNotNull(planID, "planID");
                 this.planID = Optional.ofNullable(planID);
                 return this;
             }
 
+            /**
+             * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+             * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+             */
             public Builder planID(Optional<String> planID) {
                 Utils.checkNotNull(planID, "planID");
                 this.planID = planID;

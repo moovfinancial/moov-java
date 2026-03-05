@@ -3,6 +3,17 @@ info:
   title: Moov Java SDK Overlay
   version: 0.0.1
 actions:
-  - target: $.components.parameters.VersionHeader.schema
-    update:
-      example: "v2026.01.00"
+  # Remove VersionHeader $ref from all operation parameters
+  - target: $.paths.*.*.parameters[?@['$ref'] == '#/components/parameters/VersionHeader']
+    description: Remove VersionHeader parameter reference from all operations
+    remove: true
+
+  # Remove the VersionHeader component definition
+  - target: $.components.parameters.VersionHeader
+    description: Remove VersionHeader parameter definition
+    remove: true
+
+  # Remove VersionHeader from x-speakeasy-globals
+  - target: $.x-speakeasy-globals.parameters[?@['$ref'] == '#/components/parameters/VersionHeader']
+    description: Remove VersionHeader from global parameters
+    remove: true

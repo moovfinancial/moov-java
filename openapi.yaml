@@ -17999,7 +17999,7 @@ components:
         When no version is specified, the API defaults to `v2024.01.00`.
       schema:
         type: string
-        x-speakeasy-globals-hidden: true
+        # x-speakeasy-globals-hidden: true
       x-speakeasy-globals-hidden: true
     WalletListFilters.status:
       name: status

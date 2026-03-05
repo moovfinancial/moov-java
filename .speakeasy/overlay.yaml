@@ -6,4 +6,4 @@ actions:
   # Set VersionHeader default so examples use the correct version
   - target: $.components.parameters.VersionHeader.schema
     update:
-      default: "v2026.01.00"
+      default: "v2025.07.00"

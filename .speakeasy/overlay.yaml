@@ -1,0 +1,8 @@
+overlay: 1.0.0
+info:
+  title: Moov Java SDK Overlay
+  version: 0.0.1
+actions:
+  - target: $.components.parameters.VersionHeader.schema
+    update:
+      example: "v2026.01.00"

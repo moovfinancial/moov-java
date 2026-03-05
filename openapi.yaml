@@ -17984,6 +17984,7 @@ components:
       explode: false
     VersionHeader:
       name: X-Moov-Version
+      x-speakeasy-ignore: true
       in: header
       required: false
       description: |-
@@ -17999,8 +18000,6 @@ components:
         When no version is specified, the API defaults to `v2024.01.00`.
       schema:
         type: string
-        # x-speakeasy-globals-hidden: true
-      x-speakeasy-globals-hidden: true
     WalletListFilters.status:
       name: status
       in: query
@@ -29509,6 +29508,3 @@ servers:
   - url: https://api.moov.io
     description: Production API host
     variables: {}
-x-speakeasy-globals:
-  parameters:
-    - $ref: '#/components/parameters/VersionHeader'

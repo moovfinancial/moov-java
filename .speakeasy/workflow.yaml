@@ -4,6 +4,8 @@ sources:
     latest:
         inputs:
             - location: /Users/alovak/dev/moov/mf/moov-java/openapi.yaml
+        overlays:
+            - location: .speakeasy/overlay.yaml
         registry:
             location: registry.speakeasyapi.dev/moov/moov/java-v2026.01.00-test
 targets:

@@ -140,7 +140,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -427,7 +428,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -489,7 +491,8 @@ paths:
             type: string
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -864,7 +867,8 @@ paths:
             type: string
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -1118,7 +1122,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -1243,7 +1248,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -1379,7 +1385,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -1604,7 +1611,8 @@ paths:
             type: string
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -1719,7 +1727,8 @@ paths:
             type: string
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -1881,7 +1890,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -2236,7 +2246,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -2357,7 +2368,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -2477,7 +2489,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -2780,7 +2793,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -2938,7 +2952,8 @@ paths:
             $ref: '#/components/schemas/CapabilityID'
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -3169,7 +3184,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/DuplicateCardError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -3472,7 +3488,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -3537,7 +3554,8 @@ paths:
             $ref: '#/components/schemas/CardID'
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -3776,7 +3794,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -3977,7 +3996,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -4531,7 +4551,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -5036,7 +5057,8 @@ paths:
             type: string
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -5374,7 +5396,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -5541,7 +5564,8 @@ paths:
         - name: startDateTime
           in: query
           required: false
-          description: Optional date-time to inclusively filter all fees created after this date-time.
+          description: Optional date-time to inclusively filter all fees created after
+            this date-time.
           schema:
             type: string
             format: RFC-3339
@@ -5549,7 +5573,8 @@ paths:
         - name: endDateTime
           in: query
           required: false
-          description: Optional date-time to exclusively filter all fees created before this date-time.
+          description: Optional date-time to exclusively filter all fees created before
+            this date-time.
           schema:
             type: string
             format: RFC-3339
@@ -5650,7 +5675,8 @@ paths:
         - name: startDateTime
           in: query
           required: false
-          description: Optional date-time to inclusively filter all fees created after this date-time.
+          description: Optional date-time to inclusively filter all fees created after
+            this date-time.
           schema:
             type: string
             format: RFC-3339
@@ -5658,7 +5684,8 @@ paths:
         - name: endDateTime
           in: query
           required: false
-          description: Optional date-time to exclusively filter all fees created before this date-time.
+          description: Optional date-time to exclusively filter all fees created before
+            this date-time.
           schema:
             type: string
             format: RFC-3339
@@ -5880,7 +5907,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -6242,7 +6270,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -6452,7 +6481,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -6522,7 +6552,8 @@ paths:
             type: string
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -6682,7 +6713,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -6975,7 +7007,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -7262,7 +7295,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -7328,7 +7362,8 @@ paths:
             $ref: '#/components/schemas/PaymentLinkCode'
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -7507,7 +7542,8 @@ paths:
         - name: paymentMethodType
           in: query
           required: false
-          description: Optional parameter to filter the account's payment methods by payment method type.
+          description: Optional parameter to filter the account's payment methods by
+            payment method type.
           schema:
             $ref: '#/components/schemas/PaymentMethodType'
           explode: false
@@ -7693,7 +7729,8 @@ paths:
         - name: title
           in: query
           required: false
-          description: Allows filtering products by title. This supports partial matches and is case-insensitive
+          description: Allows filtering products by title. This supports partial matches
+            and is case-insensitive
           schema:
             type: string
           explode: false
@@ -7882,7 +7919,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -8125,7 +8163,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -8189,7 +8228,8 @@ paths:
             $ref: '#/components/schemas/ProductID'
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -8351,7 +8391,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -8495,7 +8536,8 @@ paths:
             type: string
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -8810,7 +8852,8 @@ paths:
         - name: startDateTime
           in: query
           required: false
-          description: Optional date-time to inclusively filter all residuals with a period start after this date-time.
+          description: Optional date-time to inclusively filter all residuals with a
+            period start after this date-time.
           schema:
             type: string
             format: RFC-3339
@@ -8818,7 +8861,8 @@ paths:
         - name: endDateTime
           in: query
           required: false
-          description: Optional date-time to exclusively filter all residuals with a period end before this date-time.
+          description: Optional date-time to exclusively filter all residuals with a
+            period end before this date-time.
           schema:
             type: string
             format: RFC-3339
@@ -8990,7 +9034,8 @@ paths:
         - name: startDateTime
           in: query
           required: false
-          description: Optional date-time to inclusively filter all fees created after this date-time.
+          description: Optional date-time to inclusively filter all fees created after
+            this date-time.
           schema:
             type: string
             format: RFC-3339
@@ -8998,7 +9043,8 @@ paths:
         - name: endDateTime
           in: query
           required: false
-          description: Optional date-time to exclusively filter all fees created before this date-time.
+          description: Optional date-time to exclusively filter all fees created before
+            this date-time.
           schema:
             type: string
             format: RFC-3339
@@ -9138,7 +9184,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -9347,7 +9394,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -9496,7 +9544,8 @@ paths:
             type: string
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -9941,7 +9990,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -10274,7 +10324,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -10397,7 +10448,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -10761,7 +10813,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -10847,7 +10900,8 @@ paths:
                       $ref: '#/components/schemas/Ticket'
                   nextPage:
                     $ref: '#/components/schemas/ItemListNextPage'
-                description: A paginated list of items. The `nextPage` field is omitted if there are no more pages available.
+                description: A paginated list of items. The `nextPage` field is omitted if there
+                  are no more pages available.
         '401':
           description: The request contained missing or expired authentication.
           headers:
@@ -11060,7 +11114,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -11246,7 +11301,8 @@ paths:
               schema:
                 type: string
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -11403,7 +11459,9 @@ paths:
                     transferID: d835gf30-4b19-4850-a9b2-c0624c41ecb3
                     createdOn: '2025-01-21T21:32:16Z'
         '201':
-          description: A transfer was successfully created but an error occurred while generating the synchronous response. The asynchronous response object will be returned.
+          description: A transfer was successfully created but an error occurred while
+            generating the synchronous response. The asynchronous response
+            object will be returned.
           headers:
             x-request-id:
               required: true
@@ -11415,7 +11473,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/AsyncTransfer'
         '202':
-          description: The transfer was created, but rail-specific details may not be available within the 15 second timeout window.
+          description: The transfer was created, but rail-specific details may not be
+            available within the 15 second timeout window.
           headers:
             x-request-id:
               required: true
@@ -11447,7 +11506,8 @@ paths:
               schema:
                 type: string
         '409':
-          description: Attempted to create a transfer using a duplicate X-Idempotency-Key header.
+          description: Attempted to create a transfer using a duplicate X-Idempotency-Key
+            header.
           headers:
             x-request-id:
               required: true
@@ -11459,7 +11519,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Transfer'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -11568,7 +11629,8 @@ paths:
               schema:
                 type: string
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -11754,7 +11816,8 @@ paths:
               schema:
                 type: string
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -11841,7 +11904,8 @@ paths:
                     status: completed
                     createdOn: '2025-01-19T03:02:43.255309588Z'
         '202':
-          description: Successfully initiated a cancellation but an error occurred while waiting for a synchronous response.
+          description: Successfully initiated a cancellation but an error occurred while
+            waiting for a synchronous response.
           headers:
             x-request-id:
               required: true
@@ -12088,7 +12152,8 @@ paths:
                       initiatedOn: '2023-09-09T14:16:22Z'
                       confirmedOn: '2023-09-09T14:17:41Z'
         '202':
-          description: A refund was successfully created but an error occurred while waiting for a synchronous response.
+          description: A refund was successfully created but an error occurred while
+            waiting for a synchronous response.
           headers:
             x-request-id:
               required: true
@@ -12120,7 +12185,8 @@ paths:
               schema:
                 type: string
         '409':
-          description: Attempted to create a refund using a duplicate X-Idempotency-Key header.
+          description: Attempted to create a refund using a duplicate X-Idempotency-Key
+            header.
           headers:
             x-request-id:
               required: true
@@ -12132,7 +12198,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CardAcquiringRefund'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -12436,7 +12503,8 @@ paths:
                       status: completed
                       createdOn: '2025-01-19T03:02:43.255309588Z'
         '202':
-          description: Successfully initiated a reversal but an error occurred while waiting for a synchronous response.
+          description: Successfully initiated a reversal but an error occurred while
+            waiting for a synchronous response.
           headers:
             x-request-id:
               required: true
@@ -12496,7 +12564,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -12698,7 +12767,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -12820,7 +12890,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -12944,7 +13015,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -13052,7 +13124,8 @@ paths:
               schema:
                 type: string
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -13273,7 +13346,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -13658,7 +13732,8 @@ paths:
               schema:
                 type: string
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -13819,7 +13894,8 @@ paths:
         - name: uniqueID
           in: path
           required: true
-          description: Any unique ID associated with an account such as accountID, representativeID, routing number, or userID.
+          description: Any unique ID associated with an account such as accountID,
+            representativeID, routing number, or userID.
           schema:
             type: string
       responses:
@@ -13899,7 +13975,8 @@ paths:
         - $ref: '#/components/parameters/VersionHeader'
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -13954,7 +14031,8 @@ paths:
   /end-to-end-keys:
     post:
       operationId: generateEndToEndKey
-      description: Generates a public key used to create a JWE token for passing secure authentication data through non-PCI compliant intermediaries.
+      description: Generates a public key used to create a JWE token for passing
+        secure authentication data through non-PCI compliant intermediaries.
       parameters:
         - $ref: '#/components/parameters/VersionHeader'
       responses:
@@ -14266,7 +14344,8 @@ paths:
                 type: string
                 format: binary
         '304':
-          description: The resource has not changed; client may use its cached representation.
+          description: The resource has not changed; client may use its cached
+            representation.
           headers:
             x-request-id:
               required: true
@@ -14306,7 +14385,8 @@ paths:
               schema:
                 type: string
         '502':
-          description: The request failed because a downstream service returned an invalid response.
+          description: The request failed because a downstream service returned an invalid
+            response.
           headers:
             x-request-id:
               required: true
@@ -15041,7 +15121,8 @@ paths:
               schema:
                 type: string
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -15105,7 +15186,8 @@ paths:
         - name: states
           in: query
           required: false
-          description: Optional, comma-separated states to filter the Moov list issued cards response. For example `active,pending-verification`
+          description: Optional, comma-separated states to filter the Moov list issued
+            cards response. For example `active,pending-verification`
           schema:
             type: array
             items:
@@ -15276,7 +15358,8 @@ paths:
             type: string
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -15332,7 +15415,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -15474,7 +15558,8 @@ paths:
         - $ref: '#/components/parameters/VersionHeader'
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -15494,7 +15579,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -15572,7 +15658,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -15690,7 +15777,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -15896,7 +15984,8 @@ paths:
             $ref: '#/components/schemas/OnboardingInviteCode'
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -16041,7 +16130,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -16099,7 +16189,8 @@ paths:
         - name: id
           in: query
           required: true
-          description: The transfer, schedule, or transfer occurrence ID to filter receipts by.
+          description: The transfer, schedule, or transfer occurrence ID to filter
+            receipts by.
           schema:
             type: string
           explode: false
@@ -16233,7 +16324,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -16439,7 +16531,8 @@ paths:
             $ref: '#/components/schemas/TerminalApplicationID'
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -16598,7 +16691,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -16656,13 +16750,15 @@ paths:
         - name: origin
           in: header
           required: false
-          description: Indicates the domain from which the request originated. Required if referer header is not present.
+          description: Indicates the domain from which the request originated. Required if
+            referer header is not present.
           schema:
             type: string
         - name: referer
           in: header
           required: false
-          description: Specifies the URL of the resource from which the request originated. Required if origin header is not present.
+          description: Specifies the URL of the resource from which the request
+            originated. Required if origin header is not present.
           schema:
             type: string
       responses:
@@ -16859,7 +16955,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -17050,7 +17147,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
         '422':
-          description: The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+          description: The request was well-formed, but the contents failed validation.
+            Check the request for missing or invalid fields.
           headers:
             x-request-id:
               required: true
@@ -17106,7 +17204,8 @@ paths:
             type: string
       responses:
         '204':
-          description: The request completed successfully, but there is no content to return.
+          description: The request completed successfully, but there is no content to
+            return.
           headers:
             x-request-id:
               required: true
@@ -17373,7 +17472,8 @@ components:
       name: foreignID
       in: query
       required: false
-      description: '  Serves as an optional alias from a foreign/external system which can be used to reference this resource.'
+      description: '  Serves as an optional alias from a foreign/external system which
+        can be used to reference this resource.'
       schema:
         type: string
         pattern: '[a-zA-Z0-9,.\/?:''"|~!@#$%^&*()+_= -]+'
@@ -17459,7 +17559,8 @@ components:
       name: endDateTime
       in: query
       required: false
-      description: Optional date-time parameter to filter all disputes created on and before the provided date and time.
+      description: Optional date-time parameter to filter all disputes created on and
+        before the provided date and time.
       schema:
         type: string
         format: date-time
@@ -17483,7 +17584,8 @@ components:
       name: respondEndDateTime
       in: query
       required: false
-      description: Optional date-time which exclusively filters all disputes with respond by before this date-time.
+      description: Optional date-time which exclusively filters all disputes with
+        respond by before this date-time.
       schema:
         type: string
         format: date-time
@@ -17492,7 +17594,8 @@ components:
       name: respondStartDateTime
       in: query
       required: false
-      description: Optional date-time which exclusively filters all disputes with respond by before this date-time.
+      description: Optional date-time which exclusively filters all disputes with
+        respond by before this date-time.
       schema:
         type: string
         format: date-time
@@ -17501,7 +17604,8 @@ components:
       name: startDateTime
       in: query
       required: false
-      description: Optional date-time parameter to filter all disputes created on and after the provided date and time.
+      description: Optional date-time parameter to filter all disputes created on and
+        after the provided date and time.
       schema:
         type: string
         format: date-time
@@ -17528,7 +17632,8 @@ components:
       name: excludeStates
       in: query
       required: false
-      description: Exclude list of states from results. No `include` pararmeters may be used with this parameter.
+      description: Exclude list of states from results. No `include` pararmeters may
+        be used with this parameter.
       schema:
         type: string
       explode: false
@@ -17587,7 +17692,8 @@ components:
       name: preferRatio
       in: query
       required: false
-      description: Specifies the percentage of address suggestions that should be preferred and will appear at the top of the results.
+      description: Specifies the percentage of address suggestions that should be
+        preferred and will appear at the top of the results.
       schema:
         type: integer
       explode: false
@@ -17619,7 +17725,8 @@ components:
       name: selected
       in: query
       required: false
-      description: Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment building with multiple residences).
+      description: Useful for narrowing results with `addressLine2` suggestions such
+        as `Apt` (denotes an apartment building with multiple residences).
       schema:
         type: string
       explode: false
@@ -17627,7 +17734,8 @@ components:
       name: source
       in: query
       required: false
-      description: Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or `postal` (postal addresses only).
+      description: Include results from alternate data sources. Allowed values are
+        `all` (non-postal addresses), or `postal` (postal addresses only).
       schema:
         type: string
       explode: false
@@ -17643,7 +17751,8 @@ components:
       name: name
       in: query
       required: false
-      description: Name of the financial institution. Either `name` or `routingNumber` is required.
+      description: Name of the financial institution. Either `name` or `routingNumber`
+        is required.
       schema:
         type: string
       explode: false
@@ -17651,7 +17760,8 @@ components:
       name: routingNumber
       in: query
       required: false
-      description: Routing number for a financial institution. Either `routingNumber` or `name` is required.
+      description: Routing number for a financial institution. Either `routingNumber`
+        or `name` is required.
       schema:
         type: string
       explode: false
@@ -17667,7 +17777,8 @@ components:
       name: name
       in: query
       required: false
-      description: Name of the financial institution. Either `name` or `routingNumber` is required.
+      description: Name of the financial institution. Either `name` or `routingNumber`
+        is required.
       schema:
         type: string
       explode: false
@@ -17675,7 +17786,8 @@ components:
       name: routingNumber
       in: query
       required: false
-      description: Routing number for a financial institution. Either `routingNumber` or `name` is required.
+      description: Routing number for a financial institution. Either `routingNumber`
+        or `name` is required.
       schema:
         type: string
       explode: false
@@ -17691,7 +17803,8 @@ components:
       name: endDateTime
       in: query
       required: false
-      description: Optional date-time which exclusively filters all authorizations created before this date-time.
+      description: Optional date-time which exclusively filters all authorizations
+        created before this date-time.
       schema:
         type: string
         format: date-time
@@ -17708,7 +17821,8 @@ components:
       name: startDateTime
       in: query
       required: false
-      description: Optional date-time which inclusively filters all authorizations created after this date-time.
+      description: Optional date-time which inclusively filters all authorizations
+        created after this date-time.
       schema:
         type: string
         format: date-time
@@ -17717,7 +17831,8 @@ components:
       name: statuses
       in: query
       required: false
-      description: Optional, comma-separated statuses of the authorization to filter results.
+      description: Optional, comma-separated statuses of the authorization to filter
+        results.
       schema:
         type: array
         items:
@@ -17727,7 +17842,8 @@ components:
       name: endDateTime
       in: query
       required: false
-      description: Optional date-time which exclusively filters all card transactions created before this date-time.
+      description: Optional date-time which exclusively filters all card transactions
+        created before this date-time.
       schema:
         type: string
         format: date-time
@@ -17744,7 +17860,8 @@ components:
       name: startDateTime
       in: query
       required: false
-      description: Optional date-time which inclusively filters all card transactions created after this date-time.
+      description: Optional date-time which inclusively filters all card transactions
+        created after this date-time.
       schema:
         type: string
         format: date-time
@@ -17753,7 +17870,8 @@ components:
       name: completedEndDateTime
       in: query
       required: false
-      description: Optional date-time which exclusively filters all transactions completed before this date-time.
+      description: Optional date-time which exclusively filters all transactions
+        completed before this date-time.
       schema:
         type: string
         format: date-time
@@ -17762,7 +17880,8 @@ components:
       name: completedStartDateTime
       in: query
       required: false
-      description: Optional date-time which inclusively filters all transactions completed after this date-time.
+      description: Optional date-time which inclusively filters all transactions
+        completed after this date-time.
       schema:
         type: string
         format: date-time
@@ -17771,7 +17890,8 @@ components:
       name: createdEndDateTime
       in: query
       required: false
-      description: Optional date-time which exclusively filters all transactions created before this date-time.
+      description: Optional date-time which exclusively filters all transactions
+        created before this date-time.
       schema:
         type: string
         format: date-time
@@ -17780,7 +17900,8 @@ components:
       name: createdStartDateTime
       in: query
       required: false
-      description: Optional date-time which inclusively filters all transactions created after this date-time.
+      description: Optional date-time which inclusively filters all transactions
+        created after this date-time.
       schema:
         type: string
         format: date-time
@@ -17797,7 +17918,8 @@ components:
       name: sourceType
       in: query
       required: false
-      description: Optional parameter to filter by source type (i.e. transfer, dispute, issuing-transaction).
+      description: Optional parameter to filter by source type (i.e. transfer,
+        dispute, issuing-transaction).
       schema:
         $ref: '#/components/schemas/WalletTransactionSourceType'
       explode: false
@@ -17870,7 +17992,8 @@ components:
       name: billingPeriodEndDateTime
       in: query
       required: false
-      description: Optional date-time which exclusively filters all statements where billing period is before this date-time.
+      description: Optional date-time which exclusively filters all statements where
+        billing period is before this date-time.
       schema:
         type: string
         format: date-time
@@ -17879,7 +18002,8 @@ components:
       name: billingPeriodStartDateTime
       in: query
       required: false
-      description: Optional date-time which inclusively filters all statements where billing period is on or after this date-time.
+      description: Optional date-time which inclusively filters all statements where
+        billing period is on or after this date-time.
       schema:
         type: string
         format: date-time
@@ -17902,7 +18026,8 @@ components:
       name: accountIDs
       in: query
       required: false
-      description: Optional, comma-separated account IDs by which the response is filtered based on whether the account ID is the source or destination.
+      description: Optional, comma-separated account IDs by which the response is
+        filtered based on whether the account ID is the source or destination.
       schema:
         type: array
         items:
@@ -17920,7 +18045,8 @@ components:
       name: endDateTime
       in: query
       required: false
-      description: Optional date-time which exclusively filters all transfers created before this date-time.
+      description: Optional date-time which exclusively filters all transfers created
+        before this date-time.
       schema:
         type: string
         format: date-time
@@ -17929,7 +18055,8 @@ components:
       name: foreignID
       in: query
       required: false
-      description: Optional alias from a foreign/external system which can be used to reference this resource.
+      description: Optional alias from a foreign/external system which can be used to
+        reference this resource.
       schema:
         type: string
       explode: false
@@ -17961,7 +18088,8 @@ components:
       name: scheduleID
       in: query
       required: false
-      description: Optional ID to filter for transfer occurrences belonging to the same schedule.
+      description: Optional ID to filter for transfer occurrences belonging to the
+        same schedule.
       schema:
         type: string
       explode: false
@@ -17969,7 +18097,8 @@ components:
       name: startDateTime
       in: query
       required: false
-      description: Optional date-time which inclusively filters all transfers created after this date-time.
+      description: Optional date-time which inclusively filters all transfers created
+        after this date-time.
       schema:
         type: string
         format: date-time
@@ -17984,7 +18113,6 @@ components:
       explode: false
     VersionHeader:
       name: X-Moov-Version
-      x-speakeasy-ignore: true
       in: header
       required: false
       description: |-
@@ -18000,6 +18128,9 @@ components:
         When no version is specified, the API defaults to `v2024.01.00`.
       schema:
         type: string
+        x-speakeasy-ignore: true
+        default: v2026.01.00
+      x-speakeasy-ignore: true
     WalletListFilters.status:
       name: status
       in: query
@@ -18021,7 +18152,8 @@ components:
       type: string
       minLength: 4
       maxLength: 10
-      description: An optional override of the default NACHA company entry description for a transfer.
+      description: An optional override of the default NACHA company entry description
+        for a transfer.
       example: Gym dues
     ACHException:
       type: object
@@ -18126,7 +18258,8 @@ components:
           minLength: 1
           maxLength: 16
           pattern: '[a-zA-Z0-9- ]+'
-          description: The description that shows up on ACH transactions. This will default to the account's display name on account creation.
+          description: The description that shows up on ACH transactions. This will
+            default to the account's display name on account creation.
           example: WholeBodyFitness
     ACHReturnCode:
       type: string
@@ -18281,7 +18414,8 @@ components:
           type: string
           maxLength: 64
           pattern: '[a-zA-Z0-9,.\/?:''"|~!@#$%^&*()+_= -]+'
-          description: Optional alias from a foreign/external system which can be used to reference this resource.
+          description: Optional alias from a foreign/external system which can be used to
+            reference this resource.
         customerSupport:
           $ref: '#/components/schemas/CustomerSupport'
         settings:
@@ -18327,7 +18461,8 @@ components:
           type: string
         status:
           type: string
-      description: Describes an action or set of actions that an account is permitted to perform.
+      description: Describes an action or set of actions that an account is permitted
+        to perform.
     AccountCountries:
       type: object
       required:
@@ -18386,7 +18521,8 @@ components:
           $ref: '#/components/schemas/CardVerificationResult'
         fullName:
           $ref: '#/components/schemas/CardVerificationResult'
-      description: The results of submitting cardholder name to a card network for verification.
+      description: The results of submitting cardholder name to a card network for
+        verification.
       example:
         firstName: match
         lastName: match
@@ -18734,7 +18870,8 @@ components:
           type: string
         entries:
           type: integer
-          description: The number of units at an address. For example the number of apartments or businesses in a building.
+          description: The number of units at an address. For example the number of
+            apartments or businesses in a building.
         postalCode:
           type: string
         stateOrProvince:
@@ -18885,7 +19022,8 @@ components:
       properties:
         ephemeralPublicKey:
           type: string
-          description: Base64-encoded ephemeral public key, used for ECC-encrypted payment data.
+          description: Base64-encoded ephemeral public key, used for ECC-encrypted payment
+            data.
           example: MFkwEK...Md==
         publicKeyHash:
           type: string
@@ -18917,7 +19055,8 @@ components:
           type: array
           items:
             type: string
-          description: A unique list of fully-qualified, top-level or sub-domain names where you will accept Apple Pay.
+          description: A unique list of fully-qualified, top-level or sub-domain names
+            where you will accept Apple Pay.
           example:
             - checkout.classbooker.dev
         createdOn:
@@ -18970,7 +19109,8 @@ components:
           $ref: '#/components/schemas/CardExpiration'
         dynamicLastFour:
           type: string
-          description: The last four digits of the Apple Pay token, which may differ from the tokenized card's last four digits.
+          description: The last four digits of the Apple Pay token, which may differ from
+            the tokenized card's last four digits.
         issuerCountry:
           type: string
           description: Country where the underlying card was issued.
@@ -19122,7 +19262,9 @@ components:
           example: 1736964352
         scope:
           type: string
-          description: A space-delimited list of [scopes](https://docs.moov.io/api/authentication/scopes/) that are allowed.
+          description: A space-delimited list of
+            [scopes](https://docs.moov.io/api/authentication/scopes/) that are
+            allowed.
           example: /accounts.read /accounts.write
     AuthTokenRequest:
       type: object
@@ -19133,19 +19275,23 @@ components:
           $ref: '#/components/schemas/GrantType'
         client_id:
           type: string
-          description: Client ID can be provided here in the body, or as the Username in HTTP Basic Auth.
+          description: Client ID can be provided here in the body, or as the Username in
+            HTTP Basic Auth.
           example: 5clTR_MdVrrkgxw2
         client_secret:
           type: string
-          description: Client secret can be provided here in the body, or as the Password in HTTP Basic Auth.
+          description: Client secret can be provided here in the body, or as the Password
+            in HTTP Basic Auth.
           example: dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-
         scope:
           type: string
-          description: A space delimited list of scopes. Required when `grant_type` is `client_credentials`.
+          description: A space delimited list of scopes. Required when `grant_type` is
+            `client_credentials`.
           example: /accounts.read /accounts.write
         refresh_token:
           type: string
-          description: The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is `refresh_token`.
+          description: The refresh_token returned alongside the access token being
+            refreshed. Required when `grant_type` is `refresh_token`.
           example: eyJhbGc0eSI6TQSIsImN0kpXVCIsImtp6IkpXVsImtpZC0a...
     AuthTokenRequestError:
       type: object
@@ -19265,8 +19411,10 @@ components:
             - RC04: Creditor FI identifier is invalid or missing
         description:
           type: string
-          description: Details related to an `errored` or `verificationFailed` bank account status.
-      description: Reason for, and details related to, an `errored` or `verificationFailed` bank account status.
+          description: Details related to an `errored` or `verificationFailed` bank
+            account status.
+      description: Reason for, and details related to, an `errored` or
+        `verificationFailed` bank account status.
     BankAccountHolderType:
       type: string
       enum:
@@ -19435,7 +19583,8 @@ components:
         priceModifier:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: The adjustment applied to a product's base price by this option. Can be negative, positive, or zero.
+          description: The adjustment applied to a product's base price by this option.
+            Can be negative, positive, or zero.
     BaseProductOptionGroup:
       type: object
       required:
@@ -19595,12 +19744,14 @@ components:
             volumeAmount:
               allOf:
                 - $ref: '#/components/schemas/AmountDecimal'
-              description: The total transaction volume amount. This field is deprecated and will be removed in a future release.
+              description: The total transaction volume amount. This field is deprecated and
+                will be removed in a future release.
               deprecated: true
             volumeCount:
               type: integer
               format: int64
-              description: The total number of transactions. This field is deprecated and will be removed in a future release.
+              description: The total number of transactions. This field is deprecated and will
+                be removed in a future release.
               deprecated: true
             feeAmount:
               allOf:
@@ -19632,7 +19783,8 @@ components:
         platformFees:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: The total amount of platform fees. This field is deprecated and will be removed in a future release. Use summary.accountFees.
+          description: The total amount of platform fees. This field is deprecated and
+            will be removed in a future release. Use summary.accountFees.
           deprecated: true
         accountFees:
           allOf:
@@ -19641,12 +19793,14 @@ components:
         adjustmentFees:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: The total amount of adjustment fees. This field is deprecated and will be removed in a future release.
+          description: The total amount of adjustment fees. This field is deprecated and
+            will be removed in a future release.
           deprecated: true
         otherFees:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: The total amount of other card fees. This field is deprecated and will be removed in a future release. Use summary.otherCardFees.
+          description: The total amount of other card fees. This field is deprecated and
+            will be removed in a future release. Use summary.otherCardFees.
           deprecated: true
         otherCardFees:
           allOf:
@@ -19666,7 +19820,8 @@ components:
         residualSubtotal:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: The portion of net income allocated to the partner before monthly partner costs.
+          description: The portion of net income allocated to the partner before monthly
+            partner costs.
         monthlyPartnerCosts:
           $ref: '#/components/schemas/PartnerFees'
         netPartnerPayment:
@@ -19680,12 +19835,14 @@ components:
         volumeAmount:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: The total transaction volume amount. This field is deprecated and will be removed in a future release.
+          description: The total transaction volume amount. This field is deprecated and
+            will be removed in a future release.
           deprecated: true
         volumeCount:
           type: integer
           format: int64
-          description: The total number of transactions. This field is deprecated and will be removed in a future release.
+          description: The total number of transactions. This field is deprecated and will
+            be removed in a future release.
           deprecated: true
         feeAmount:
           allOf:
@@ -19834,7 +19991,8 @@ components:
           type: string
           maxLength: 64
           pattern: '[À-ÖØ-öø-ÿ"''(),.0-9A-Za-z~ &!+-]*'
-          description: A registered trade name under which the business operates, if different from its legal name.
+          description: A registered trade name under which the business operates, if
+            different from its legal name.
         businessType:
           $ref: '#/components/schemas/BusinessType'
         address:
@@ -19866,7 +20024,10 @@ components:
           $ref: '#/components/schemas/IndustryCodes'
         industry:
           type: string
-          description: Classification identifier for the industry. Use the [GET industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to retrieve an array of valid industry details for a merchant, inducing all industry field values.
+          description: Classification identifier for the industry. Use the [GET
+            industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/)
+            endpoint to retrieve an array of valid industry details for a
+            merchant, inducing all industry field values.
           example: electronics-appliances
         primaryRegulator:
           $ref: '#/components/schemas/PrimaryRegulator'
@@ -19992,7 +20153,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RequirementError'
-      description: Represents individual and business data necessary to facilitate the enabling of a capability for an account.
+      description: Represents individual and business data necessary to facilitate the
+        enabling of a capability for an account.
     CapabilityStatus:
       type: string
       enum:
@@ -20036,7 +20198,8 @@ components:
           type: string
           minLength: 6
           maxLength: 8
-          description: The first six to eight digits of the card number, which identifies the financial institution that issued the card.
+          description: The first six to eight digits of the card number, which identifies
+            the financial institution that issued the card.
         expiration:
           $ref: '#/components/schemas/CardExpiration'
         holderName:
@@ -20071,7 +20234,8 @@ components:
             If false, the card issuing bank is not regulated, and the scheme fees will not be limited.
         cardOnFile:
           type: boolean
-          description: Indicates cardholder has authorized card to be stored for future payments.
+          description: Indicates cardholder has authorized card to be stored for future
+            payments.
         merchantAccountID:
           type: string
         cardAccountUpdater:
@@ -20136,15 +20300,18 @@ components:
         inPersonPercentage:
           type: integer
           format: int32
-          description: Percentage of card transactions that are in-person payments. Minimum value is 0, maximum is 100.
+          description: Percentage of card transactions that are in-person payments.
+            Minimum value is 0, maximum is 100.
         mailOrPhonePercentage:
           type: integer
           format: int32
-          description: Percentage of card transactions that are mail or phone payments. Minimum value is 0, maximum is 100.
+          description: Percentage of card transactions that are mail or phone payments.
+            Minimum value is 0, maximum is 100.
         onlinePercentage:
           type: integer
           format: int32
-          description: Percentage of card transactions that are online payments. Minimum value is 0, maximum is 100.
+          description: Percentage of card transactions that are online payments. Minimum
+            value is 0, maximum is 100.
       description: Describes the distribution of card transactions by payment method.
     CardAcceptanceMethodsError:
       type: object
@@ -20329,7 +20496,8 @@ components:
       type: string
       minLength: 4
       maxLength: 22
-      description: An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
+      description: An optional override of the default card statement descriptor for a
+        transfer. Accounts must be enabled by Moov to set this field.
       example: WhlBdy *Yoga 11-12
     CardExpiration:
       type: object
@@ -20410,9 +20578,11 @@ components:
           minLength: 4
           maxLength: 22
           pattern: '[a-zA-Z0-9.!*-+_ ]+'
-          description: The description that shows up on credit card transactions. This will default to the accounts display name on account creation.
+          description: The description that shows up on credit card transactions. This
+            will default to the accounts display name on account creation.
           example: Whole Body Fitness
-      description: User provided settings to manage card payments. This data is only allowed on a business account.
+      description: User provided settings to manage card payments. This data is only
+        allowed on a business account.
     CardPaymentTransferPaymentMethod:
       type: object
       required:
@@ -20443,7 +20613,8 @@ components:
             - card-present-payment
         terminalCard:
           $ref: '#/components/schemas/TerminalCard'
-      description: A card used at point of sale terminal for a card present transaction as contained within a payment method.
+      description: A card used at point of sale terminal for a card present
+        transaction as contained within a payment method.
     CardPresentPaymentTransferPaymentMethod:
       type: object
       required:
@@ -20458,7 +20629,8 @@ components:
             - card-present-payment
         terminalCard:
           $ref: '#/components/schemas/TransferTerminalCard'
-      description: A card used at point of sale terminal for a card present transaction as contained within a payment method.
+      description: A card used at point of sale terminal for a card present
+        transaction as contained within a payment method.
     CardTransactionDetails:
       type: object
       properties:
@@ -20490,16 +20662,19 @@ components:
           format: date-time
         interchangeQualification:
           type: string
-          description: The program assigned by the card network that determines the interchange rate for the transfer.
+          description: The program assigned by the card network that determines the
+            interchange rate for the transfer.
           deprecated: true
           example: Visa Signature and Visa Infinite (Spend not-qualified) Product 1
         feeProgram:
           type: string
-          description: The program assigned by the card network that determines the interchange rate for the transfer.
+          description: The program assigned by the card network that determines the
+            interchange rate for the transfer.
           example: Visa Signature and Visa Infinite (Spend not-qualified) Product 1
         authorizationCode:
           type: string
-          description: An alphanumeric code generated by the card network to demonstrate approval for the transaction.
+          description: An alphanumeric code generated by the card network to demonstrate
+            approval for the transaction.
       description: Card-specific details about the transaction.
     CardTransactionFailureCode:
       type: string
@@ -20575,7 +20750,8 @@ components:
           $ref: '#/components/schemas/CardVerificationResult'
         accountName:
           $ref: '#/components/schemas/AccountNameVerification'
-      description: The results of submitting cardholder data to a card network for verification.
+      description: The results of submitting cardholder data to a card network for
+        verification.
       example:
         cvv: match
         addressLine1: match
@@ -20711,7 +20887,8 @@ components:
           type: array
           items:
             type: integer
-          description: Two positive integers, in cents, equal to the values of the micro-deposits sent to the bank account.
+          description: Two positive integers, in cents, equal to the values of the
+            micro-deposits sent to the bank account.
           example:
             - 18
             - 21
@@ -20738,7 +20915,8 @@ components:
     Count:
       type: integer
       format: int64
-      description: Limits the maximum number of results returned, or determines the page size when used with `skip` or `cursor` for pagination.
+      description: Limits the maximum number of results returned, or determines the
+        page size when used with `skip` or `cursor` for pagination.
       example: 20
     CountriesErrors:
       type: object
@@ -20767,7 +20945,8 @@ components:
           type: string
           maxLength: 64
           pattern: '[a-zA-Z0-9,.\/?:''"|~!@#$%^&*()+_= -]+'
-          description: Optional alias from a foreign/external system which can be used to reference this resource.
+          description: Optional alias from a foreign/external system which can be used to
+            reference this resource.
         customerSupport:
           $ref: '#/components/schemas/CustomerSupport'
         settings:
@@ -20828,7 +21007,8 @@ components:
       properties:
         domain:
           type: string
-          description: A fully qualified top-level or sub-domain name where you will accept Apple Pay. Should not include "https".
+          description: A fully qualified top-level or sub-domain name where you will
+            accept Apple Pay. Should not include "https".
           example: checkout.classbooker.dev
         displayName:
           $ref: '#/components/schemas/DomainDisplayName'
@@ -20902,7 +21082,10 @@ components:
               type: string
         industry:
           type: string
-          description: Classification identifier for the industry. Use the [GET industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to retrieve an array of valid industry details for a merchant, inducing all industry field values.
+          description: Classification identifier for the industry. Use the [GET
+            industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/)
+            endpoint to retrieve an array of valid industry details for a
+            merchant, inducing all industry field values.
           example: electronics-appliances
         primaryRegulator:
           type: string
@@ -20921,7 +21104,8 @@ components:
           type: string
           maxLength: 64
           pattern: '[À-ÖØ-öø-ÿ"''(),.0-9A-Za-z~ &!+-]*'
-          description: A registered trade name under which the business operates, if different from its legal name.
+          description: A registered trade name under which the business operates, if
+            different from its legal name.
         businessType:
           $ref: '#/components/schemas/BusinessType'
         address:
@@ -20946,7 +21130,10 @@ components:
           $ref: '#/components/schemas/IndustryCodes'
         industry:
           type: string
-          description: Classification identifier for the industry. Use the [GET industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to retrieve an array of valid industry details for a merchant, inducing all industry field values.
+          description: Classification identifier for the industry. Use the [GET
+            industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/)
+            endpoint to retrieve an array of valid industry details for a
+            merchant, inducing all industry field values.
           example: electronics-appliances
         primaryRegulator:
           $ref: '#/components/schemas/PrimaryRegulator'
@@ -21047,7 +21234,8 @@ components:
           description: The partner's Moov account ID.
         merchantPaymentMethodID:
           type: string
-          description: The merchant's preferred payment method ID. Must be a wallet payment method.
+          description: The merchant's preferred payment method ID. Must be a wallet
+            payment method.
         amount:
           $ref: '#/components/schemas/Amount'
         salesTaxAmount:
@@ -21143,7 +21331,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CreatePaymentLinkLineItemOption'
-          description: Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations).
+          description: Optional list of modifiers applied to this item (e.g., toppings,
+            upgrades, customizations).
         imageIDs:
           type: array
           items:
@@ -21156,8 +21345,10 @@ components:
           type: string
           description: |2-
               Optional unique identifier associating the line item with a product.
-              This is for reporting or tracking purposes, and does not populate other details of the line item.
-      description: Represents a single line item in a payment link, including optional modifiers and quantity.
+              When provided, images associated with the product will be included on the line item.
+              This does not populate other details of the line item.
+      description: Represents a single line item in a payment link, including optional
+        modifiers and quantity.
     CreatePaymentLinkLineItemOption:
       type: object
       required:
@@ -21177,7 +21368,8 @@ components:
         priceModifier:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: Optional price modification applied by this option. Can be positive, negative, or zero.
+          description: Optional price modification applied by this option. Can be
+            positive, negative, or zero.
         imageIDs:
           type: array
           items:
@@ -21189,7 +21381,8 @@ components:
         group:
           type: string
           maxLength: 100
-          description: Optional group identifier to categorize related options (e.g., 'toppings').
+          description: Optional group identifier to categorize related options (e.g.,
+            'toppings').
       description: Represents a modifier or option applied to a line item.
     CreatePaymentLinkLineItemOptionValidationError:
       type: object
@@ -21272,7 +21465,8 @@ components:
         priceModifier:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: The adjustment applied to a product's base price by this option. Can be negative, positive, or zero.
+          description: The adjustment applied to a product's base price by this option.
+            Can be negative, positive, or zero.
         images:
           $ref: '#/components/schemas/AssignProductImagesItem'
     CreateProductOptionGroup:
@@ -21332,7 +21526,8 @@ components:
         amount:
           type: integer
           format: int64
-          description: Amount to refund in cents. If null, the original transfer's full amount will be refunded.
+          description: Amount to refund in cents. If null, the original transfer's full
+            amount will be refunded.
           example: 1000
       description: |-
         Specifies a partial amount to refund. 
@@ -21374,7 +21569,8 @@ components:
         amount:
           type: integer
           format: int64
-          description: Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation.
+          description: Amount to reverse in cents. Partial amounts will automatically
+            trigger a refund instead of a cancellation.
           example: 1000
     CreateRunTransfer:
       type: object
@@ -21390,7 +21586,8 @@ components:
         salesTaxAmount:
           allOf:
             - $ref: '#/components/schemas/Amount'
-          description: Optional sales tax amount. This amount is included in the total transfer amount.
+          description: Optional sales tax amount. This amount is included in the total
+            transfer amount.
         destination:
           $ref: '#/components/schemas/SchedulePaymentMethod'
         partnerAccountID:
@@ -21429,7 +21626,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CreateScheduledTransferLineItemOption'
-          description: Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations).
+          description: Optional list of modifiers applied to this item (e.g., toppings,
+            upgrades, customizations).
         productID:
           type: string
           description: |2-
@@ -21443,7 +21641,8 @@ components:
               Optional list of images associated with this line item.
               This field is being deprecated in favor using the images associated with a productID and will soon be unsupported.
           deprecated: true
-      description: Represents a single item in a scheduled transfer, including optional modifiers and quantity.
+      description: Represents a single item in a scheduled transfer, including
+        optional modifiers and quantity.
     CreateScheduledTransferLineItemOption:
       type: object
       required:
@@ -21463,11 +21662,13 @@ components:
         priceModifier:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: Optional price modification applied by this option. Can be positive, negative, or zero.
+          description: Optional price modification applied by this option. Can be
+            positive, negative, or zero.
         group:
           type: string
           maxLength: 100
-          description: Optional group identifier to categorize related options (e.g., 'toppings').
+          description: Optional group identifier to categorize related options (e.g.,
+            'toppings').
         imageIDs:
           type: array
           items:
@@ -21476,7 +21677,8 @@ components:
               Optional list of images associated with this line item option.
               This field is being deprecated in favor using the images associated with a productID and will soon be unsupported.
           deprecated: true
-      description: Represents a modifier or option applied to a scheduled transfer line item.
+      description: Represents a modifier or option applied to a scheduled transfer
+        line item.
     CreateScheduledTransferLineItems:
       type: object
       required:
@@ -21536,16 +21738,20 @@ components:
           $ref: '#/components/schemas/TerminalApplicationPlatform'
         appBundleID:
           type: string
-          description: The app bundle identifier of the terminal application. Required if platform is `ios`.
+          description: The app bundle identifier of the terminal application. Required if
+            platform is `ios`.
         packageName:
           type: string
-          description: The app package name of the terminal application. Required if platform is `android`.
+          description: The app package name of the terminal application. Required if
+            platform is `android`.
         sha256Digest:
           type: string
-          description: The SHA-256 digest of the signing key for the application. Required if platform is `android`.
+          description: The SHA-256 digest of the signing key for the application. Required
+            if platform is `android`.
         versionCode:
           type: string
-          description: The version code of the Android application. Required if platform is `android`.
+          description: The version code of the Android application. Required if platform
+            is `android`.
       description: Describes a create terminal application request.
       example:
         platform: android
@@ -21609,17 +21815,20 @@ components:
         description:
           type: string
           maxLength: 256
-          description: An optional description of the transfer that is used on receipts and for your own internal use.
+          description: An optional description of the transfer that is used on receipts
+            and for your own internal use.
           example: Pay Instructor for May 15 Class
         metadata:
           $ref: '#/components/schemas/Metadata'
         salesTaxAmount:
           allOf:
             - $ref: '#/components/schemas/Amount'
-          description: Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+          description: Optional sales tax amount. `transfer.amount.value` should be
+            inclusive of any sales tax and represents the total amount charged.
         foreignID:
           type: string
-          description: Optional alias from a foreign/external system which can be used to reference this resource.
+          description: Optional alias from a foreign/external system which can be used to
+            reference this resource.
         lineItems:
           $ref: '#/components/schemas/CreateTransferLineItems'
       example:
@@ -21696,7 +21905,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CreateTransferLineItemOption'
-          description: Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations).
+          description: Optional list of modifiers applied to this item (e.g., toppings,
+            upgrades, customizations).
         imageIDs:
           type: array
           items:
@@ -21710,7 +21920,8 @@ components:
           description: |2-
               Optional unique identifier associating the line item with a product.
               This is for reporting or tracking purposes, and does not populate other details of the line item.
-      description: Represents a single item in a transfer, including optional modifiers and quantity.
+      description: Represents a single item in a transfer, including optional
+        modifiers and quantity.
     CreateTransferLineItemOption:
       type: object
       required:
@@ -21730,7 +21941,8 @@ components:
         priceModifier:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: Optional price modification applied by this option. Can be positive, negative, or zero.
+          description: Optional price modification applied by this option. Can be
+            positive, negative, or zero.
         imageIDs:
           type: array
           items:
@@ -21742,7 +21954,8 @@ components:
         group:
           type: string
           maxLength: 100
-          description: Optional group identifier to categorize related options (e.g., 'toppings').
+          description: Optional group identifier to categorize related options (e.g.,
+            'toppings').
       description: Represents a modifier or option applied to a line item.
     CreateTransferLineItemOptionValidationError:
       type: object
@@ -21824,7 +22037,8 @@ components:
           $ref: '#/components/schemas/CreateTransferSourceCard'
         achDetails:
           $ref: '#/components/schemas/CreateTransferSourceACH'
-      description: Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
+      description: Where funds for a transfer originate. For the source, you must
+        include either a `paymentMethodID` or a `transferID`.
     CreateTransferSourceACH:
       type: object
       properties:
@@ -21941,7 +22155,8 @@ components:
         description:
           type: string
           maxLength: 128
-          description: An optional description of the transfer that is used on receipts and for your own internal use.
+          description: An optional description of the transfer that is used on receipts
+            and for your own internal use.
           example: Pay Instructor for May 15 Class
         metadata:
           $ref: '#/components/schemas/Metadata'
@@ -21953,7 +22168,8 @@ components:
           description: Fees charged to your platform account for transfers.
         moovFeeDecimal:
           type: string
-          description: Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+          description: Same as `moovFee`, but a decimal-formatted numerical string that
+            represents up to 9 decimal place precision.
         moovFeeDetails:
           $ref: '#/components/schemas/MoovFeeDetails'
         groupID:
@@ -21985,10 +22201,12 @@ components:
         salesTaxAmount:
           allOf:
             - $ref: '#/components/schemas/Amount'
-          description: Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+          description: Optional sales tax amount. `transfer.amount.value` should be
+            inclusive of any sales tax and represents the total amount charged.
         foreignID:
           type: string
-          description: Optional alias from a foreign/external system which can be used to reference this resource.
+          description: Optional alias from a foreign/external system which can be used to
+            reference this resource.
         lineItems:
           $ref: '#/components/schemas/TransferLineItems'
     Currency:
@@ -22046,7 +22264,9 @@ components:
         - no-hold
         - 1-day
         - 2-days
-      description: An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting.
+      description: An optional override of your default ACH hold period in banking
+        days. The hold period must be longer than or equal to your default
+        setting.
       example: 2-days
     DisbursementPaymentMethodType:
       type: string
@@ -22245,7 +22465,8 @@ components:
         - standard
         - fast-funds
         - unknown
-      description: Indicates which level of domestic push-to-card transfer is supported by the card, if any.
+      description: Indicates which level of domestic push-to-card transfer is
+        supported by the card, if any.
       example: standard
     DuplicateCardError:
       type: object
@@ -22493,7 +22714,8 @@ components:
         total:
           type: integer
           format: int64
-          description: Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set.
+          description: Total facilitator fee in cents. Only either `total` or
+            `totalDecimal` can be set.
         totalDecimal:
           type: string
           pattern: ^\d+\.\d{1,9}$
@@ -22505,7 +22727,8 @@ components:
         markup:
           type: integer
           format: int64
-          description: Markup facilitator fee in cents. Only either `markup` or `markupDecimal` can be set.
+          description: Markup facilitator fee in cents. Only either `markup` or
+            `markupDecimal` can be set.
         markupDecimal:
           type: string
           pattern: ^\d+\.\d{1,9}$
@@ -22548,7 +22771,8 @@ components:
           example: true
         requestForPayment:
           type: boolean
-          description: Indicates if the institution can process request for payment messages.
+          description: Indicates if the institution can process request for payment
+            messages.
           example: true
     FeeCategory:
       type: string
@@ -22565,7 +22789,8 @@ components:
     FeeConditions:
       type: object
       additionalProperties: {}
-      description: Defines the specific conditions that must be met for the fee to be applied.
+      description: Defines the specific conditions that must be met for the fee to be
+        applied.
       example:
         cardBrand:
           - visa
@@ -22668,7 +22893,8 @@ components:
         fixedAmount:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models.
+          description: A fixed fee that is applied to the amount of each transaction in
+            the `fixed` and `blended` fee models.
         variableRate:
           type: string
           pattern: ^[0-9]+.?[0-9]*$
@@ -22680,11 +22906,13 @@ components:
         minPerTransaction:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: Specifies the minimum allowable spending for a single transaction, working as a transaction floor.
+          description: Specifies the minimum allowable spending for a single transaction,
+            working as a transaction floor.
         maxPerTransaction:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: Specifies the maximum allowable spending for a single transaction, working as a transaction ceiling.
+          description: Specifies the maximum allowable spending for a single transaction,
+            working as a transaction ceiling.
         volumeRanges:
           type: array
           items:
@@ -22739,7 +22967,10 @@ components:
         metadata:
           type: string
           format: json
-          example: '{"error_code": "document-name-mismatch", "requirement_id": "document.individual.verification", "representative_id": "c63ab175-251d-497e-a267-7346d087e180", "comment": "testing comment"'
+          example: '{"error_code": "document-name-mismatch", "requirement_id":
+            "document.individual.verification", "representative_id":
+            "c63ab175-251d-497e-a267-7346d087e180", "comment": "testing
+            comment"'
         decisionReason:
           type: string
           example: not correct file
@@ -23040,7 +23271,10 @@ components:
     ID:
       type: string
       maxLength: 36
-      description: A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+      description: A unique identifier for a Moov resource. Supports UUID format
+        (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with
+        base32-encoded UUID and type suffix (e.g.,
+        kuoaydiojf7uszaokc2ggnaaaa_xfer).
     ImageID:
       type: string
       description: Unique identifier for a image resource.
@@ -23144,10 +23378,12 @@ components:
         generatedBy:
           allOf:
             - $ref: '#/components/schemas/GeneratedBy'
-          description: Object indicating what generated the fee (TransferID, CardID, DisputeID, AccountID, or BankAccountID).
+          description: Object indicating what generated the fee (TransferID, CardID,
+            DisputeID, AccountID, or BankAccountID).
         feeGroup:
           type: string
-          description: Describes the source of the fee, such as a Moov-set processing fee, a network pass-through fee, or an interchange or discount fee.
+          description: Describes the source of the fee, such as a Moov-set processing fee,
+            a network pass-through fee, or an interchange or discount fee.
         residualID:
           allOf:
             - $ref: '#/components/schemas/ID'
@@ -23239,7 +23475,8 @@ components:
           description: Indicates whether this individual's birth date has been provided.
         governmentIDProvided:
           type: boolean
-          description: Indicates whether a government ID (SSN, ITIN, etc.) has been provided for this individual.
+          description: Indicates whether a government ID (SSN, ITIN, etc.) has been
+            provided for this individual.
       description: Describes an individual.
     IndustryCodes:
       type: object
@@ -23299,7 +23536,8 @@ components:
           maxLength: 4
           description: Default Merchant Category Code
           example: '5651'
-      description: A structured industry taxonomy entry with category and mapped to a default MCC code.
+      description: A structured industry taxonomy entry with category and mapped to a
+        default MCC code.
     InstantBankCreditPaymentMethod:
       type: object
       required:
@@ -23528,7 +23766,9 @@ components:
       properties:
         eventID:
           type: string
-          description: The identifier for this event. Use the `eventType` field to determine what resource is identified by this ID (`authorization`, `reversal`, etc.).
+          description: The identifier for this event. Use the `eventType` field to
+            determine what resource is identified by this ID (`authorization`,
+            `reversal`, etc.).
         eventType:
           $ref: '#/components/schemas/IssuedCardEventType'
         amount:
@@ -23559,7 +23799,8 @@ components:
       type: string
       enum:
         - virtual
-      description: Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card.
+      description: Specifies the type of spend card to be issued. Presently supports
+        virtual only, providing a digital number without a physical card.
     IssuedCardState:
       type: string
       enum:
@@ -23617,12 +23858,14 @@ components:
       properties:
         singleUse:
           type: boolean
-          description: Indicates if the card is single-use. If true, the card closes after the first authorization.
+          description: Indicates if the card is single-use. If true, the card closes after
+            the first authorization.
         velocityLimits:
           type: array
           items:
             $ref: '#/components/schemas/IssuingVelocityLimit'
-          description: Sets the spending limit per time interval. Only one limit per interval is supported.
+          description: Sets the spending limit per time interval. Only one limit per
+            interval is supported.
     IssuingControlsError:
       type: object
       properties:
@@ -23639,7 +23882,8 @@ components:
       type: string
       enum:
         - per-transaction
-      description: Specifies the time frame for the velocity limit. Currently supports only per-transaction limits.
+      description: Specifies the time frame for the velocity limit. Currently supports
+        only per-transaction limits.
     IssuingMerchantData:
       type: object
       required:
@@ -23649,7 +23893,8 @@ components:
       properties:
         networkID:
           type: string
-          description: External identifier used to identify the merchant with the card brand.
+          description: External identifier used to identify the merchant with the card
+            brand.
         name:
           type: string
           description: Name of the merchant.
@@ -23705,7 +23950,8 @@ components:
     JSONWebEncryptionToken:
       type: string
       format: jwe
-      description: An [RFC](https://datatracker.ietf.org/doc/html/rfc7516) compact-serialized JSON Web Encryption (JWE) token.
+      description: An [RFC](https://datatracker.ietf.org/doc/html/rfc7516)
+        compact-serialized JSON Web Encryption (JWE) token.
     JSONWebKey:
       type: object
       required:
@@ -23713,21 +23959,25 @@ components:
       properties:
         kty:
           type: string
-          description: The cryptographic algorithm family used with the key (e.g., 'RSA', 'EC', 'oct').
+          description: The cryptographic algorithm family used with the key (e.g., 'RSA',
+            'EC', 'oct').
         use:
           type: string
           enum:
             - sig
             - enc
-          description: The intended use of the key. 'sig' for signature, 'enc' for encryption.
+          description: The intended use of the key. 'sig' for signature, 'enc' for
+            encryption.
         key_ops:
           type: array
           items:
             type: string
-          description: The permitted operations for the key, e.g., 'sign', 'verify', 'encrypt', 'decrypt'.
+          description: The permitted operations for the key, e.g., 'sign', 'verify',
+            'encrypt', 'decrypt'.
         alg:
           type: string
-          description: The algorithm intended for use with the key, e.g., 'RS256' or 'ES256'.
+          description: The algorithm intended for use with the key, e.g., 'RS256' or
+            'ES256'.
         kid:
           type: string
           description: A unique identifier for the key.
@@ -23761,7 +24011,8 @@ components:
             The exponent value for RSA keys.
 
             This field is required when `kty` is 'RSA'.
-      description: Describes an [RFC7517](https://datatracker.ietf.org/doc/html/rfc7517) web key.
+      description: Describes an
+        [RFC7517](https://datatracker.ietf.org/doc/html/rfc7517) web key.
       example:
         use: enc
         kty: EC
@@ -23797,7 +24048,8 @@ components:
       properties:
         error:
           type: string
-          description: Describes an error that wasn't attributable to a single request field.
+          description: Describes an error that wasn't attributable to a single request
+            field.
         paymentData:
           type: string
           description: Describes an error within the `token.paymentData` request field.
@@ -23806,7 +24058,8 @@ components:
           description: Describes an error within the `token.paymentMethod` request field.
         transactionIdentifier:
           type: string
-          description: Describes an error within the `token.transactionIdentifier` request field.
+          description: Describes an error within the `token.transactionIdentifier` request
+            field.
     LinkApplePayToken:
       type: object
       required:
@@ -23837,7 +24090,8 @@ components:
       properties:
         version:
           type: string
-          description: Specifies the encryption used for the payment token ("EC_v1" or "RSA_v1").
+          description: Specifies the encryption used for the payment token ("EC_v1" or
+            "RSA_v1").
           example: EC_v1
         data:
           type: string
@@ -24069,11 +24323,13 @@ components:
           type: string
           maxLength: 255
           description: The user-agent of the user making the request.
-          example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36
+          example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36
+            (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36
         acceptedDomain:
           type: string
           format: uri
-      description: Describes the acceptance of the Terms of Service. All data is required, and must be from the user.
+      description: Describes the acceptance of the Terms of Service. All data is
+        required, and must be from the user.
       title: Manual
     ManualTermsOfServiceUpdate:
       type: object
@@ -24091,11 +24347,13 @@ components:
           type: string
           maxLength: 255
           description: The user-agent of the user making the request.
-          example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36
+          example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36
+            (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36
         acceptedDomain:
           type: string
           format: uri
-      description: Describes the acceptance of the Terms of Service. All data is required, and must be from the user.
+      description: Describes the acceptance of the Terms of Service. All data is
+        required, and must be from the user.
       title: Manual
     ManualToSError:
       type: object
@@ -24116,7 +24374,8 @@ components:
       type: object
       additionalProperties:
         type: string
-      description: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+      description: Free-form key-value pair list. Useful for storing information that
+        is not captured elsewhere.
       example:
         optional: metadata
     MicroDepositStatus:
@@ -24132,7 +24391,9 @@ components:
       type: object
       allOf:
         - $ref: '#/components/schemas/AmountDecimal'
-      description: The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+      description: The minimum spending amount that must be met in the billing period.
+        If actual usage is below the minimum amount, account is charged the
+        difference.
     Mode:
       type: string
       enum:
@@ -24190,7 +24451,8 @@ components:
         - 500k-1m
         - 1m-5m
         - over-5m
-      description: The low value in each range is included. The high value in each range is excluded.
+      description: The low value in each range is included. The high value in each
+        range is excluded.
     MoovFee:
       type: object
       required:
@@ -24205,7 +24467,8 @@ components:
         transferParty:
           allOf:
             - $ref: '#/components/schemas/TransferParty'
-          description: Indicates whether the account charged was the partner, source, or destination of the transfer.
+          description: Indicates whether the account charged was the partner, source, or
+            destination of the transfer.
         totalAmount:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
@@ -24223,16 +24486,20 @@ components:
       properties:
         cardScheme:
           type: string
-          description: Card scheme fees accrued during authorization and settlement. String type represents dollars with up to 9 decimal place precision.
+          description: Card scheme fees accrued during authorization and settlement.
+            String type represents dollars with up to 9 decimal place precision.
         interchange:
           type: string
-          description: Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to 9 decimal place precision.
+          description: Network interchange fee for Visa, Mastercard, or Discover. String
+            type represents dollars with up to 9 decimal place precision.
         discount:
           type: string
-          description: Network discount fee for American Express. String type represents dollars with up to 9 decimal place precision.
+          description: Network discount fee for American Express. String type represents
+            dollars with up to 9 decimal place precision.
         moovProcessing:
           type: string
-          description: Moov processing fee. String type represents dollars with up to 9 decimal place precision.
+          description: Moov processing fee. String type represents dollars with up to 9
+            decimal place precision.
       description: Processing and pass-through costs that add up to the moovFee.
     MoovWalletPaymentMethod:
       type: object
@@ -24289,7 +24556,8 @@ components:
       properties:
         canceled:
           type: boolean
-          description: If set to true, will cancel the occurrence. If set false will resume the occurrence. If unset leaves the value unchanged.
+          description: If set to true, will cancel the occurrence. If set false will
+            resume the occurrence. If unset leaves the value unchanged.
         occurrenceID:
           type: string
           description: |2-
@@ -24367,7 +24635,8 @@ components:
         link:
           type: string
           format: uri
-          description: A unique URL, including the invite code, that the recipient can follow to redeem the invitation.
+          description: A unique URL, including the invite code, that the recipient can
+            follow to redeem the invitation.
         returnURL:
           type: string
           description: The scopes requested by the inviter.
@@ -24455,7 +24724,8 @@ components:
         returnURL:
           type: string
           format: uri
-          description: Optional URL to redirect the user to after they complete the onboarding process.
+          description: Optional URL to redirect the user to after they complete the
+            onboarding process.
         termsOfServiceURL:
           type: string
           format: uri
@@ -24578,7 +24848,9 @@ components:
         minimumCommitment:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+          description: The minimum spending amount that must be met in the billing period.
+            If actual usage is below the minimum amount, account is charged the
+            difference.
         monthlyPlatform:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
@@ -24587,7 +24859,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
           description: Total partner fees.
-      description: Monthly partner costs that are charged separately and not included in residual subtotal (e.g. platform fees, minimums).
+      description: Monthly partner costs that are charged separately and not included
+        in residual subtotal (e.g. platform fees, minimums).
     PartnerPricingAgreement:
       type: object
       required:
@@ -24676,7 +24949,10 @@ components:
           $ref: '#/components/schemas/IndustryCodes'
         industry:
           type: string
-          description: Classification identifier for the industry. Use the [GET industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to retrieve an array of valid industry details for a merchant, inducing all industry field values.
+          description: Classification identifier for the industry. Use the [GET
+            industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/)
+            endpoint to retrieve an array of valid industry details for a
+            merchant, inducing all industry field values.
           example: electronics-appliances
         primaryRegulator:
           $ref: '#/components/schemas/PrimaryRegulator'
@@ -24755,7 +25031,8 @@ components:
           nullable: true
         foreignID:
           type: string
-          description: Optional alias from a foreign/external system which can be used to reference this resource.
+          description: Optional alias from a foreign/external system which can be used to
+            reference this resource.
     PatchTransferValidationError:
       type: object
       properties:
@@ -24839,7 +25116,8 @@ components:
           description: The payment link's owner's Moov account ID.
         merchantPaymentMethodID:
           type: string
-          description: The merchant's preferred payment method ID. Must be a wallet payment method.
+          description: The merchant's preferred payment method ID. Must be a wallet
+            payment method.
         link:
           type: string
           format: uri
@@ -24923,7 +25201,8 @@ components:
       properties:
         requireAddress:
           type: boolean
-          description: If true, a billing address is required when completing the payment form.
+          description: If true, a billing address is required when completing the payment
+            form.
         requirePhone:
           type: boolean
           description: If true, a phone number is required when completing the payment form.
@@ -24931,7 +25210,8 @@ components:
           type: object
           additionalProperties:
             type: string
-          description: Optional free-form metadata for the Moov account that will represent this customer.
+          description: Optional free-form metadata for the Moov account that will
+            represent this customer.
     PaymentLinkDisplayOptions:
       type: object
       required:
@@ -24985,7 +25265,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PaymentLinkLineItemOption'
-          description: Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations).
+          description: Optional list of modifiers applied to this item (e.g., toppings,
+            upgrades, customizations).
         images:
           type: array
           items:
@@ -24994,7 +25275,8 @@ components:
         productID:
           type: string
           description: Optional unique identifier associating the line item with a product.
-      description: Represents a single line item in a payment link, including optional modifiers and quantity.
+      description: Represents a single line item in a payment link, including optional
+        modifiers and quantity.
     PaymentLinkLineItemImageMetadata:
       type: object
       required:
@@ -25034,7 +25316,8 @@ components:
         priceModifier:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: Optional price modification applied by this option. Can be positive, negative, or zero.
+          description: Optional price modification applied by this option. Can be
+            positive, negative, or zero.
         images:
           type: array
           items:
@@ -25043,7 +25326,8 @@ components:
         group:
           type: string
           maxLength: 100
-          description: Optional group identifier to categorize related options (e.g., 'toppings').
+          description: Optional group identifier to categorize related options (e.g.,
+            'toppings').
       description: Represents a modifier or option applied to a line item.
     PaymentLinkLineItems:
       type: object
@@ -25069,7 +25353,8 @@ components:
           items:
             $ref: '#/components/schemas/CollectionPaymentMethodType'
           minItems: 1
-          description: A list of payment methods that should be supported for this payment link.
+          description: A list of payment methods that should be supported for this payment
+            link.
         cardDetails:
           $ref: '#/components/schemas/CardPaymentDetails'
         achDetails:
@@ -25088,7 +25373,8 @@ components:
           items:
             $ref: '#/components/schemas/CollectionPaymentMethodType'
           minItems: 1
-          description: A list of payment methods that should be supported for this payment link.
+          description: A list of payment methods that should be supported for this payment
+            link.
         cardDetails:
           $ref: '#/components/schemas/CardPaymentDetails'
         achDetails:
@@ -25110,7 +25396,8 @@ components:
           items:
             $ref: '#/components/schemas/DisbursementPaymentMethodType'
           minItems: 1
-          description: A list of payment methods that should be supported for this payment link.
+          description: A list of payment methods that should be supported for this payment
+            link.
         recipient:
           $ref: '#/components/schemas/PayoutRecipient'
         metadata:
@@ -25126,7 +25413,8 @@ components:
           items:
             $ref: '#/components/schemas/DisbursementPaymentMethodType'
           minItems: 1
-          description: A list of payment methods that should be supported for this payment link.
+          description: A list of payment methods that should be supported for this payment
+            link.
         recipient:
           $ref: '#/components/schemas/PayoutRecipient'
         metadata:
@@ -25268,7 +25556,8 @@ components:
           type: string
           minLength: 6
           maxLength: 8
-          description: The first six to eight digits of the card number, which identifies the financial institution that issued the card.
+          description: The first six to eight digits of the card number, which identifies
+            the financial institution that issued the card.
         expiration:
           $ref: '#/components/schemas/CardExpiration'
         holderName:
@@ -25286,7 +25575,8 @@ components:
           description: Country where the card was issued.
         cardOnFile:
           type: boolean
-          description: Indicates cardholder has authorized card to be stored for future payments.
+          description: Indicates cardholder has authorized card to be stored for future
+            payments.
         merchantAccountID:
           type: string
         cardAccountUpdater:
@@ -25382,7 +25672,8 @@ components:
         requestBodySent:
           type: object
           additionalProperties: {}
-          description: The request body sent to the target URL. It will contain an event type of `event.test` and an empty (null) data payload.
+          description: The request body sent to the target URL. It will contain an event
+            type of `event.test` and an empty (null) data payload.
         responseStatusCode:
           type: integer
           format: int32
@@ -25443,7 +25734,8 @@ components:
       properties:
         plaid:
           $ref: '#/components/schemas/PlaidIntegration'
-      description: Describes the account to link to the Moov account using a Plaid processor token.
+      description: Describes the account to link to the Moov account using a Plaid
+        processor token.
       title: Plaid
     PlatformFees:
       type: object
@@ -25464,7 +25756,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
           description: Total platform fees.
-      description: A detailed breakdown of platform fees. This field is deprecated and will be removed in a future release. Use accountFees.
+      description: A detailed breakdown of platform fees. This field is deprecated and
+        will be removed in a future release. Use accountFees.
       deprecated: true
     PrimaryRegulator:
       type: string
@@ -25474,7 +25767,8 @@ components:
         - NCUA
         - FRB
         - state-cu-regulator
-      description: If the business is a financial institution, this field describes its primary regulator.
+      description: If the business is a financial institution, this field describes
+        its primary regulator.
     Product:
       type: object
       required:
@@ -25576,7 +25870,8 @@ components:
         priceModifier:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: The adjustment applied to a product's base price by this option. Can be negative, positive, or zero.
+          description: The adjustment applied to a product's base price by this option.
+            Can be negative, positive, or zero.
         images:
           type: array
           items:
@@ -25621,7 +25916,8 @@ components:
           items:
             $ref: '#/components/schemas/ProductOption'
           description: The options available within this group.
-      description: Represents a group of product configuration options, such as size or color.
+      description: Represents a group of product configuration options, such as size
+        or color.
     ProductOptionGroupValidationError:
       type: object
       properties:
@@ -25706,7 +26002,8 @@ components:
           $ref: '#/components/schemas/BusinessProfile'
         guest:
           $ref: '#/components/schemas/GuestProfile'
-      description: Describes a Moov account profile. A profile will have a business, individual, or guest depending on the account's type.
+      description: Describes a Moov account profile. A profile will have a business,
+        individual, or guest depending on the account's type.
     PullFromCardPaymentMethod:
       type: object
       required:
@@ -25867,7 +26164,9 @@ components:
         acceptedWithoutPostingOn:
           type: string
           format: date-time
-      description: RTP specific details about the transaction.
+      description: 'DEPRECATED: use `InstantBankTransactionDetails` instead
+        (v2026.04.00 or later). RTP specific details about the transaction.'
+      deprecated: true
     RTPTransactionStatus:
       type: string
       enum:
@@ -25916,7 +26215,8 @@ components:
           description: |-
             The ID of the schedule occurrence associated with this receipt.
             Exactly one of forTransferID, forScheduleID, or forOccurrenceID must be provided.
-      description: A receipt request for a specific transfer, schedule, or schedule occurrence.
+      description: A receipt request for a specific transfer, schedule, or schedule
+        occurrence.
     ReceiptResponse:
       type: object
       required:
@@ -26106,7 +26406,8 @@ components:
           type: string
         error:
           type: string
-          description: Used for generic errors when invalid request data isn't attributed to a single request field.
+          description: Used for generic errors when invalid request data isn't attributed
+            to a single request field.
     RegisterApplePayMerchantDomains:
       type: object
       properties:
@@ -26116,7 +26417,8 @@ components:
           type: array
           items:
             type: string
-          description: A unique list of fully-qualified, top-level or sub-domain names where you will accept Apple Pay.
+          description: A unique list of fully-qualified, top-level or sub-domain names
+            where you will accept Apple Pay.
           example:
             - checkout.classbooker.dev
     Representative:
@@ -26143,7 +26445,8 @@ components:
           description: Indicates whether this representative's birth date has been provided.
         governmentIDProvided:
           type: boolean
-          description: Indicates whether a government ID (SSN, ITIN, etc.) has been provided for this representative.
+          description: Indicates whether a government ID (SSN, ITIN, etc.) has been
+            provided for this representative.
         responsibilities:
           $ref: '#/components/schemas/RepresentativeResponsibilities'
         createdOn:
@@ -26161,7 +26464,8 @@ components:
       properties:
         isController:
           type: boolean
-          description: Indicates whether this individual has significant management responsibilities within the business.
+          description: Indicates whether this individual has significant management
+            responsibilities within the business.
         isOwner:
           type: boolean
           description: |-
@@ -26169,7 +26473,8 @@ components:
             business. If the representative does not own at least 25% of the business, this field should be `false`.
         ownershipPercentage:
           type: integer
-          description: The percentage of ownership this individual has in the business (required if `isOwner` is `true`).
+          description: The percentage of ownership this individual has in the business
+            (required if `isOwner` is `true`).
           example: 38
         jobTitle:
           type: string
@@ -26424,7 +26729,8 @@ components:
         merchantFees:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: Total amount of merchant fees collected during the period. This represents the partner's revenue from merchant fees.
+          description: Total amount of merchant fees collected during the period. This
+            represents the partner's revenue from merchant fees.
         partnerCost:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
@@ -26435,12 +26741,14 @@ components:
           description: Net income calculated as merchant fee revenue minus partner costs.
         revenueShare:
           type: string
-          description: The revenue share percentage the partner receives, expressed as a decimal string (e.g., "25.00" for 25%).
+          description: The revenue share percentage the partner receives, expressed as a
+            decimal string (e.g., "25.00" for 25%).
           example: '2.25'
         residualAmount:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: The amount the partner receives as their share of the net income (netIncome × revenueShare).
+          description: The amount the partner receives as their share of the net income
+            (netIncome × revenueShare).
         createdOn:
           type: string
           format: date-time
@@ -26460,7 +26768,8 @@ components:
       oneOf:
         - $ref: '#/components/schemas/ReversedWithCancellation'
         - $ref: '#/components/schemas/ReversedWithRefund'
-      description: Contains either a cancellation or refund, depending on the method used to reverse the transfer.
+      description: Contains either a cancellation or refund, depending on the method
+        used to reverse the transfer.
     ReversalValidationError:
       type: object
       properties:
@@ -26498,11 +26807,13 @@ components:
           description: The type of token being revoked.
         client_id:
           type: string
-          description: Client ID can be provided here in the body, or as the Username in HTTP Basic Auth.
+          description: Client ID can be provided here in the body, or as the Username in
+            HTTP Basic Auth.
           example: 5clTR_MdVrrkgxw2
         client_secret:
           type: string
-          description: Client secret can be provided here in the body, or as the Password in HTTP Basic Auth.
+          description: Client secret can be provided here in the body, or as the Password
+            in HTTP Basic Auth.
           example: dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-
     RevokeTokenRequestError:
       type: object
@@ -26557,7 +26868,8 @@ components:
         salesTaxAmount:
           allOf:
             - $ref: '#/components/schemas/Amount'
-          description: Optional sales tax amount. This amount is included in the total transfer amount.
+          description: Optional sales tax amount. This amount is included in the total
+            transfer amount.
         destination:
           $ref: '#/components/schemas/SchedulePaymentMethod'
         partnerAccountID:
@@ -26712,7 +27024,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ScheduledTransferLineItemOption'
-          description: Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations).
+          description: Optional list of modifiers applied to this item (e.g., toppings,
+            upgrades, customizations).
         productID:
           type: string
           description: Optional unique identifier associating the line item with a product.
@@ -26721,7 +27034,8 @@ components:
           items:
             $ref: '#/components/schemas/ScheduledTransferImageMetadata'
           description: Optional list of images associated with this line item.
-      description: Represents a single item in a scheduled transfer, including optional modifiers and quantity.
+      description: Represents a single item in a scheduled transfer, including
+        optional modifiers and quantity.
     ScheduledTransferLineItemOption:
       type: object
       required:
@@ -26741,17 +27055,20 @@ components:
         priceModifier:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: Optional price modification applied by this option. Can be positive, negative, or zero.
+          description: Optional price modification applied by this option. Can be
+            positive, negative, or zero.
         group:
           type: string
           maxLength: 100
-          description: Optional group identifier to categorize related options (e.g., 'toppings').
+          description: Optional group identifier to categorize related options (e.g.,
+            'toppings').
         images:
           type: array
           items:
             $ref: '#/components/schemas/ScheduledTransferImageMetadata'
           description: Optional list of images associated with this line item.
-      description: Represents a modifier or option applied to a scheduled transfer line item.
+      description: Represents a modifier or option applied to a scheduled transfer
+        line item.
     ScheduledTransferLineItems:
       type: object
       required:
@@ -26865,15 +27182,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ApplicationScope'
-          description: The list of scopes to share with the principal account. If none are provided, all intersecting scopes are added.
+          description: The list of scopes to share with the principal account. If none are
+            provided, all intersecting scopes are added.
           example:
             - transfers.write
             - payment-methods.read
-      description: Describes the scopes being shared from a subject account to a principal account.
+      description: Describes the scopes being shared from a subject account to a
+        principal account.
     SignedDecimalString:
       type: string
       format: ^\d+\.\d{1,2}$
-      description: A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99.
+      description: A decimal-formatted numerical string that represents up to 2
+        decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is
+        $0.99.
       example: '-14.89'
     Skip:
       type: integer
@@ -27005,7 +27326,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SweepSubtotal'
-          description: The subtotal of each transaction type contributing to the sweep's accrued amount.
+          description: The subtotal of each transaction type contributing to the sweep's
+            accrued amount.
     SweepConfig:
       type: object
       required:
@@ -27030,14 +27352,18 @@ components:
         minimumBalance:
           type: string
           pattern: ^\d+\.\d{1,2}$
-          description: An optional field to specify an amount to maintain in the wallet. This is a decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99. If not supplied, the default is 0.00.
+          description: An optional field to specify an amount to maintain in the wallet.
+            This is a decimal-formatted numerical string that represents up to 2
+            decimal place precision. In USD for example, 12.34 is $12.34 and
+            0.99 is $0.99. If not supplied, the default is 0.00.
         statementDescriptor:
           $ref: '#/components/schemas/SweepStatementDescriptor'
         lockedFields:
           type: array
           items:
             type: string
-          description: An array of fields that are locked. To request updates, please contact Moov support.
+          description: An array of fields that are locked. To request updates, please
+            contact Moov support.
         createdOn:
           type: string
           format: date-time
@@ -27070,7 +27396,9 @@ components:
       type: string
       minLength: 4
       maxLength: 10
-      description: The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
+      description: The text that appears on the banking statement. The default
+        descriptor is a 10 character ID if an override is not set in the sweep
+        configs statementDescriptor.
     SweepStatus:
       type: string
       enum:
@@ -27112,7 +27440,8 @@ components:
               example: 12-3456789
           required:
             - number
-      description: An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+      description: An EIN (employer identification number) for the business. For sole
+        proprietors, an SSN can be used as the EIN.
     TaxIDUpdate:
       type: object
       properties:
@@ -27122,7 +27451,8 @@ components:
             number:
               type: string
               example: 12-3456789
-      description: An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+      description: An EIN (employer identification number) for the business. For sole
+        proprietors, an SSN can be used as the EIN.
     TerminalApplication:
       type: object
       required:
@@ -27138,17 +27468,21 @@ components:
           $ref: '#/components/schemas/TerminalApplicationPlatform'
         appBundleID:
           type: string
-          description: The app bundle identifier of the terminal application. Will be returned if platform is `ios`.
+          description: The app bundle identifier of the terminal application. Will be
+            returned if platform is `ios`.
         packageName:
           type: string
           pattern: ^[a-z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)+$
-          description: The app package name of the terminal application. Will be returned if platform is `android`.
+          description: The app package name of the terminal application. Will be returned
+            if platform is `android`.
         sha256Digest:
           type: string
-          description: A cryptographic hash of the signing key for the application. Will be returned if platform is `android`.
+          description: A cryptographic hash of the signing key for the application. Will
+            be returned if platform is `android`.
         versionCode:
           type: string
-          description: The app version code of the terminal application. Will be returned if platform is `android`.
+          description: The app version code of the terminal application. Will be returned
+            if platform is `android`.
       description: Describes a terminal application.
       example:
         terminalApplicationID: 12345678-1234-1234-1234-123456789012
@@ -27198,7 +27532,8 @@ components:
       properties:
         version:
           type: string
-          description: The app version of the terminal application (version code for Android terminal application).
+          description: The app version of the terminal application (version code for
+            Android terminal application).
       description: Describes a terminal application version.
       example:
         version: '20440059'
@@ -27389,7 +27724,8 @@ components:
       type: string
       enum:
         - Bearer
-      description: An [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750#section-6.1) token type.
+      description: An [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750#section-6.1)
+        token type.
       example: Bearer
     TransactionSource:
       type: string
@@ -27433,7 +27769,8 @@ components:
         description:
           type: string
           maxLength: 128
-          description: An optional description of the transfer that is used on receipts and for your own internal use.
+          description: An optional description of the transfer that is used on receipts
+            and for your own internal use.
           example: Pay Instructor for May 15 Class
         metadata:
           $ref: '#/components/schemas/Metadata'
@@ -27445,7 +27782,8 @@ components:
           description: Fees charged to your platform account for transfers.
         moovFeeDecimal:
           type: string
-          description: Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+          description: Same as `moovFee`, but a decimal-formatted numerical string that
+            represents up to 9 decimal place precision.
         moovFeeDetails:
           $ref: '#/components/schemas/MoovFeeDetails'
         moovFees:
@@ -27483,10 +27821,12 @@ components:
         salesTaxAmount:
           allOf:
             - $ref: '#/components/schemas/Amount'
-          description: Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+          description: Optional sales tax amount. `transfer.amount.value` should be
+            inclusive of any sales tax and represents the total amount charged.
         foreignID:
           type: string
-          description: Optional alias from a foreign/external system which can be used to reference this resource.
+          description: Optional alias from a foreign/external system which can be used to
+            reference this resource.
         lineItems:
           $ref: '#/components/schemas/TransferLineItems'
       description: Details of a Transfer.
@@ -27609,7 +27949,9 @@ components:
         cardDetails:
           $ref: '#/components/schemas/CardTransactionDetails'
         rtpDetails:
-          $ref: '#/components/schemas/RTPTransactionDetails'
+          allOf:
+            - $ref: '#/components/schemas/RTPTransactionDetails'
+          deprecated: true
     TransferEntryMode:
       type: string
       enum:
@@ -27650,7 +27992,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TransferLineItemOption'
-          description: Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations).
+          description: Optional list of modifiers applied to this item (e.g., toppings,
+            upgrades, customizations).
         images:
           type: array
           items:
@@ -27659,7 +28002,8 @@ components:
         productID:
           type: string
           description: Optional unique identifier associating the line item with a product.
-      description: Represents a single item in a transfer, including optional modifiers and quantity.
+      description: Represents a single item in a transfer, including optional
+        modifiers and quantity.
     TransferLineItemImageMetadata:
       type: object
       required:
@@ -27699,7 +28043,8 @@ components:
         priceModifier:
           allOf:
             - $ref: '#/components/schemas/AmountDecimal'
-          description: Optional price modification applied by this option. Can be positive, negative, or zero.
+          description: Optional price modification applied by this option. Can be
+            positive, negative, or zero.
         images:
           type: array
           items:
@@ -27708,7 +28053,8 @@ components:
         group:
           type: string
           maxLength: 100
-          description: Optional group identifier to categorize related options (e.g., 'toppings').
+          description: Optional group identifier to categorize related options (e.g.,
+            'toppings').
       description: Represents a modifier or option applied to a line item.
     TransferLineItems:
       type: object
@@ -27872,7 +28218,8 @@ components:
           type: string
           minLength: 6
           maxLength: 8
-          description: The first six to eight digits of the card number, which identifies the financial institution that issued the card.
+          description: The first six to eight digits of the card number, which identifies
+            the financial institution that issued the card.
         expiration:
           $ref: '#/components/schemas/CardExpiration'
         holderName:
@@ -27890,7 +28237,8 @@ components:
           description: Country where the card was issued.
         cardOnFile:
           type: boolean
-          description: Indicates cardholder has authorized card to be stored for future payments.
+          description: Indicates cardholder has authorized card to be stored for future
+            payments.
         merchantAccountID:
           type: string
         cardAccountUpdater:
@@ -28086,14 +28434,16 @@ components:
           type: array
           items:
             type: string
-          description: A unique list of fully-qualified, top-level or sub-domain names to add.
+          description: A unique list of fully-qualified, top-level or sub-domain names to
+            add.
           example:
             - pay.classbooker.dev
         removeDomains:
           type: array
           items:
             type: string
-          description: A unique list of fully-qualified, top-level or sub-domain names to remove.
+          description: A unique list of fully-qualified, top-level or sub-domain names to
+            remove.
           example:
             - checkout.classbooker.dev
     UpdateCard:
@@ -28181,7 +28531,8 @@ components:
           $ref: '#/components/schemas/EvidenceType'
         text:
           type: string
-          description: If updating text evidence, the new text to associate with the dispute.
+          description: If updating text evidence, the new text to associate with the
+            dispute.
     UpdateIssuedCard:
       type: object
       properties:
@@ -28464,7 +28815,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Document'
-      description: Describes identity verification status and relevant identity verification documents.
+      description: Describes identity verification status and relevant identity
+        verification documents.
     VerificationStatus:
       type: string
       enum:
@@ -28687,15 +29039,22 @@ components:
         grossAmount:
           type: integer
           format: int64
-          description: The total transaction amount. The amount is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+          description: The total transaction amount. The amount is in the smallest unit of
+            the specified currency. In USD this is cents, for example, $12.04 is
+            1204 and $0.99 is 99.
         grossAmountDecimal:
           type: string
           pattern: ^\d+\.\d{1,9}$
-          description: The total transaction amount. Same as `grossAmount`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+          description: The total transaction amount. Same as `grossAmount`, but a
+            decimal-formatted numerical string that represents up to 9 decimal
+            place precision. In USD for example, 12.987654321 is $12.987654321
+            and 0.9987634521 is $0.9987634521.
         fee:
           type: integer
           format: int64
-          description: Total fees paid for the transaction. The value is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+          description: Total fees paid for the transaction. The value is in the smallest
+            unit of the specified currency. In USD this is cents, for example,
+            $12.04 is 1204 and $0.99 is 99.
         feeIDs:
           type: array
           items:
@@ -28704,23 +29063,40 @@ components:
         feeDecimal:
           type: string
           pattern: ^\d+\.\d{1,9}$
-          description: Total fees paid for the transaction. Same as `fee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+          description: Total fees paid for the transaction. Same as `fee`, but a
+            decimal-formatted numerical string that represents up to 9 decimal
+            place precision. In USD for example, 12.987654321 is $12.987654321
+            and 0.9987634521 is $0.9987634521.
         netAmount:
           type: integer
           format: int64
-          description: Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance. The amount is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+          description: Net amount is the gross amount less fees paid, and the amount that
+            affects the wallet's balance. The amount is in the smallest unit of
+            the specified currency. In USD this is cents, for example, $12.04 is
+            1204 and $0.99 is 99.
         netAmountDecimal:
           type: string
           pattern: ^\d+\.\d{1,9}$
-          description: Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance. Same as `netAmount`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+          description: Net amount is the gross amount less fees paid, and the amount that
+            affects the wallet's balance. Same as `netAmount`, but a
+            decimal-formatted numerical string that represents up to 9 decimal
+            place precision. In USD for example, 12.987654321 is $12.987654321
+            and 0.9987634521 is $0.9987634521.
         availableBalance:
           type: integer
           format: int64
-          description: The wallet's total available balance after recording a completed transaction. The value is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+          description: The wallet's total available balance after recording a completed
+            transaction. The value is in the smallest unit of the specified
+            currency. In USD this is cents, for example, $12.04 is 1204 and
+            $0.99 is 99.
         availableBalanceDecimal:
           type: string
           pattern: ^\d+\.\d{1,9}$
-          description: The wallet's total available balance after recording a completed transaction. Same as `availableBalance`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+          description: The wallet's total available balance after recording a completed
+            transaction. Same as `availableBalance`, but a decimal-formatted
+            numerical string that represents up to 9 decimal place precision. In
+            USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is
+            $0.9987634521.
         sweepID:
           allOf:
             - $ref: '#/components/schemas/SweepID'
@@ -29392,7 +29768,9 @@ components:
         createdOn:
           type: string
           format: date-time
-      description: Webhook events are sent to your webhook URL when certain actions occur in the Moov API. You can subscribe to these events to receive real-time notifications.
+      description: Webhook events are sent to your webhook URL when certain actions
+        occur in the Moov API. You can subscribe to these events to receive
+        real-time notifications.
       x-speakeasy-include: true
     WebhookEventType:
       type: string
@@ -29443,7 +29821,8 @@ components:
       properties:
         secret:
           type: string
-          description: The secret key used to sign webhook payloads. Use this to verify the authenticity of incoming webhooks.
+          description: The secret key used to sign webhook payloads. Use this to verify
+            the authenticity of incoming webhooks.
       description: The secret used to verify webhook payloads.
     WebhookStatus:
       type: string
@@ -29490,7 +29869,8 @@ components:
       properties:
         fundsTransferStatus:
           type: boolean
-          description: The institution's capability to process standard Fedwire funds transfers.
+          description: The institution's capability to process standard Fedwire funds
+            transfers.
           example: true
         fundsSettlementOnlyStatus:
           type: boolean

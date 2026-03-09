@@ -126,7 +126,7 @@ public class Application {
                 .call();
 
         if (res.fileDetails().isPresent()) {
-            // handle response
+            System.out.println(res.fileDetails().get());
         }
     }
 }
@@ -184,7 +184,7 @@ public class Application {
                 .call();
 
         if (res.fileDetails().isPresent()) {
-            // handle response
+            System.out.println(res.fileDetails().get());
         }
     }
 }

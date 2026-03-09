@@ -2,6 +2,14 @@
 
 The type of event that occurred.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.WebhookEventType;
+
+WebhookEventType value = WebhookEventType.WILDCARD;
+```
+
 
 ## Values
 

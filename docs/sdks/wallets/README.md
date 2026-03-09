@@ -76,7 +76,7 @@ public class Application {
                 .call();
 
         if (res.wallet().isPresent()) {
-            // handle response
+            System.out.println(res.wallet().get());
         }
     }
 }
@@ -146,7 +146,7 @@ public class Application {
                 .call();
 
         if (res.wallets().isPresent()) {
-            // handle response
+            System.out.println(res.wallets().get());
         }
     }
 }
@@ -207,7 +207,7 @@ public class Application {
                 .call();
 
         if (res.wallet().isPresent()) {
-            // handle response
+            System.out.println(res.wallet().get());
         }
     }
 }
@@ -278,7 +278,7 @@ public class Application {
                 .call();
 
         if (res.wallet().isPresent()) {
-            // handle response
+            System.out.println(res.wallet().get());
         }
     }
 }

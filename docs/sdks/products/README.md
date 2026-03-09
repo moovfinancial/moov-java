@@ -46,7 +46,7 @@ public class Application {
                 .call();
 
         if (res.products().isPresent()) {
-            // handle response
+            System.out.println(res.products().get());
         }
     }
 }
@@ -176,7 +176,7 @@ public class Application {
                 .call();
 
         if (res.product().isPresent()) {
-            // handle response
+            System.out.println(res.product().get());
         }
     }
 }
@@ -234,7 +234,7 @@ public class Application {
                 .call();
 
         if (res.product().isPresent()) {
-            // handle response
+            System.out.println(res.product().get());
         }
     }
 }
@@ -307,7 +307,7 @@ public class Application {
                 .call();
 
         if (res.product().isPresent()) {
-            // handle response
+            System.out.println(res.product().get());
         }
     }
 }

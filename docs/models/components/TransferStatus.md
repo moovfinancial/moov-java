@@ -2,6 +2,14 @@
 
 Status of a transfer.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.TransferStatus;
+
+TransferStatus value = TransferStatus.CREATED;
+```
+
 
 ## Values
 

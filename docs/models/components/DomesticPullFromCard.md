@@ -2,6 +2,14 @@
 
 Indicates if the card supports domestic pull-from-card transfer.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.DomesticPullFromCard;
+
+DomesticPullFromCard value = DomesticPullFromCard.NOT_SUPPORTED;
+```
+
 
 ## Values
 

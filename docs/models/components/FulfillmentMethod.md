@@ -1,5 +1,13 @@
 # FulfillmentMethod
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.FulfillmentMethod;
+
+FulfillmentMethod value = FulfillmentMethod.BILL_OR_DEBT_PAYMENT;
+```
+
 
 ## Values
 

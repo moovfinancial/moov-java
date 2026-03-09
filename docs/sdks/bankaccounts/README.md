@@ -139,7 +139,7 @@ public class Application {
                 .call();
 
         if (res.bankAccount().isPresent()) {
-            // handle response
+            System.out.println(res.bankAccount().get());
         }
     }
 }
@@ -202,7 +202,7 @@ public class Application {
                 .call();
 
         if (res.bankAccounts().isPresent()) {
-            // handle response
+            System.out.println(res.bankAccounts().get());
         }
     }
 }
@@ -262,7 +262,7 @@ public class Application {
                 .call();
 
         if (res.bankAccount().isPresent()) {
-            // handle response
+            System.out.println(res.bankAccount().get());
         }
     }
 }
@@ -459,7 +459,7 @@ public class Application {
                 .call();
 
         if (res.completedMicroDeposits().isPresent()) {
-            // handle response
+            System.out.println(res.completedMicroDeposits().get());
         }
     }
 }
@@ -530,7 +530,7 @@ public class Application {
                 .call();
 
         if (res.bankAccountVerification().isPresent()) {
-            // handle response
+            System.out.println(res.bankAccountVerification().get());
         }
     }
 }
@@ -605,7 +605,7 @@ public class Application {
                 .call();
 
         if (res.bankAccountVerificationCreated().isPresent()) {
-            // handle response
+            System.out.println(res.bankAccountVerificationCreated().get());
         }
     }
 }
@@ -678,7 +678,7 @@ public class Application {
                 .call();
 
         if (res.bankAccountVerification().isPresent()) {
-            // handle response
+            System.out.println(res.bankAccountVerification().get());
         }
     }
 }

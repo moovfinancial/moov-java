@@ -2,6 +2,14 @@
 
 The low value in each range is included. The high value in each range is excluded.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.MonthlyVolumeRange;
+
+MonthlyVolumeRange value = MonthlyVolumeRange.UNDER10K;
+```
+
 
 ## Values
 

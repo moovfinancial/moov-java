@@ -1,5 +1,13 @@
 # SweepStatus
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.SweepStatus;
+
+SweepStatus value = SweepStatus.ACCRUING;
+```
+
 
 ## Values
 

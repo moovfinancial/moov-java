@@ -60,7 +60,7 @@ public class Application {
                 .call();
 
         if (res.underwriting().isPresent()) {
-            // handle response
+            System.out.println(res.underwriting().get());
         }
     }
 }
@@ -124,7 +124,7 @@ public class Application {
                 .call();
 
         if (res.underwriting().isPresent()) {
-            // handle response
+            System.out.println(res.underwriting().get());
         }
     }
 }
@@ -209,7 +209,7 @@ public class Application {
                 .call();
 
         if (res.underwriting().isPresent()) {
-            // handle response
+            System.out.println(res.underwriting().get());
         }
     }
 }

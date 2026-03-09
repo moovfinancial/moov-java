@@ -1,5 +1,13 @@
 # GeographicReach
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.GeographicReach;
+
+GeographicReach value = GeographicReach.INTERNATIONAL_ONLY;
+```
+
 
 ## Values
 

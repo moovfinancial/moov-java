@@ -90,7 +90,7 @@ public class Application {
                 .call();
 
         if (res.paymentLink().isPresent()) {
-            // handle response
+            System.out.println(res.paymentLink().get());
         }
     }
 }
@@ -152,7 +152,7 @@ public class Application {
                 .call();
 
         if (res.paymentLinks().isPresent()) {
-            // handle response
+            System.out.println(res.paymentLinks().get());
         }
     }
 }
@@ -213,7 +213,7 @@ public class Application {
                 .call();
 
         if (res.paymentLink().isPresent()) {
-            // handle response
+            System.out.println(res.paymentLink().get());
         }
     }
 }
@@ -284,7 +284,7 @@ public class Application {
                 .call();
 
         if (res.paymentLink().isPresent()) {
-            // handle response
+            System.out.println(res.paymentLink().get());
         }
     }
 }

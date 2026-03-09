@@ -1,5 +1,13 @@
 # CardTransactionFailureCode
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.CardTransactionFailureCode;
+
+CardTransactionFailureCode value = CardTransactionFailureCode.CALL_ISSUER;
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # RefundCardStatus
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.RefundCardStatus;
+
+RefundCardStatus value = RefundCardStatus.INITIATED;
+```
+
 
 ## Values
 

@@ -2,6 +2,14 @@
 
 The type of entity represented by this business.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.BusinessType;
+
+BusinessType value = BusinessType.SOLE_PROPRIETORSHIP;
+```
+
 
 ## Values
 

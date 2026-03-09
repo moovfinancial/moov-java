@@ -1,5 +1,13 @@
 # WalletTransactionStatus
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.WalletTransactionStatus;
+
+WalletTransactionStatus value = WalletTransactionStatus.PENDING;
+```
+
 
 ## Values
 

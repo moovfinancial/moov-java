@@ -71,11 +71,11 @@ public class TransferDestination {
     private Optional<? extends CardTransactionDetails> cardDetails;
 
     /**
-     * RTP specific details about the transaction.
+     * Instant-bank specific details about the transaction.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("rtpDetails")
-    private Optional<? extends RTPTransactionDetails> rtpDetails;
+    @JsonProperty("instantBankDetails")
+    private Optional<? extends InstantBankTransactionDetails> instantBankDetails;
 
     @JsonCreator
     public TransferDestination(
@@ -88,7 +88,7 @@ public class TransferDestination {
             @JsonProperty("achDetails") Optional<? extends ACHTransactionDetails> achDetails,
             @JsonProperty("applePay") Optional<? extends ApplePayResponse> applePay,
             @JsonProperty("cardDetails") Optional<? extends CardTransactionDetails> cardDetails,
-            @JsonProperty("rtpDetails") Optional<? extends RTPTransactionDetails> rtpDetails) {
+            @JsonProperty("instantBankDetails") Optional<? extends InstantBankTransactionDetails> instantBankDetails) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
         Utils.checkNotNull(account, "account");
@@ -98,7 +98,7 @@ public class TransferDestination {
         Utils.checkNotNull(achDetails, "achDetails");
         Utils.checkNotNull(applePay, "applePay");
         Utils.checkNotNull(cardDetails, "cardDetails");
-        Utils.checkNotNull(rtpDetails, "rtpDetails");
+        Utils.checkNotNull(instantBankDetails, "instantBankDetails");
         this.paymentMethodID = paymentMethodID;
         this.paymentMethodType = paymentMethodType;
         this.account = account;
@@ -108,7 +108,7 @@ public class TransferDestination {
         this.achDetails = achDetails;
         this.applePay = applePay;
         this.cardDetails = cardDetails;
-        this.rtpDetails = rtpDetails;
+        this.instantBankDetails = instantBankDetails;
     }
     
     public TransferDestination(
@@ -191,12 +191,12 @@ public class TransferDestination {
     }
 
     /**
-     * RTP specific details about the transaction.
+     * Instant-bank specific details about the transaction.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<RTPTransactionDetails> rtpDetails() {
-        return (Optional<RTPTransactionDetails>) rtpDetails;
+    public Optional<InstantBankTransactionDetails> instantBankDetails() {
+        return (Optional<InstantBankTransactionDetails>) instantBankDetails;
     }
 
     public static Builder builder() {
@@ -334,21 +334,21 @@ public class TransferDestination {
     }
 
     /**
-     * RTP specific details about the transaction.
+     * Instant-bank specific details about the transaction.
      */
-    public TransferDestination withRtpDetails(RTPTransactionDetails rtpDetails) {
-        Utils.checkNotNull(rtpDetails, "rtpDetails");
-        this.rtpDetails = Optional.ofNullable(rtpDetails);
+    public TransferDestination withInstantBankDetails(InstantBankTransactionDetails instantBankDetails) {
+        Utils.checkNotNull(instantBankDetails, "instantBankDetails");
+        this.instantBankDetails = Optional.ofNullable(instantBankDetails);
         return this;
     }
 
 
     /**
-     * RTP specific details about the transaction.
+     * Instant-bank specific details about the transaction.
      */
-    public TransferDestination withRtpDetails(Optional<? extends RTPTransactionDetails> rtpDetails) {
-        Utils.checkNotNull(rtpDetails, "rtpDetails");
-        this.rtpDetails = rtpDetails;
+    public TransferDestination withInstantBankDetails(Optional<? extends InstantBankTransactionDetails> instantBankDetails) {
+        Utils.checkNotNull(instantBankDetails, "instantBankDetails");
+        this.instantBankDetails = instantBankDetails;
         return this;
     }
 
@@ -371,7 +371,7 @@ public class TransferDestination {
             Utils.enhancedDeepEquals(this.achDetails, other.achDetails) &&
             Utils.enhancedDeepEquals(this.applePay, other.applePay) &&
             Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails) &&
-            Utils.enhancedDeepEquals(this.rtpDetails, other.rtpDetails);
+            Utils.enhancedDeepEquals(this.instantBankDetails, other.instantBankDetails);
     }
     
     @Override
@@ -380,7 +380,7 @@ public class TransferDestination {
             paymentMethodID, paymentMethodType, account,
             bankAccount, wallet, card,
             achDetails, applePay, cardDetails,
-            rtpDetails);
+            instantBankDetails);
     }
     
     @Override
@@ -395,7 +395,7 @@ public class TransferDestination {
                 "achDetails", achDetails,
                 "applePay", applePay,
                 "cardDetails", cardDetails,
-                "rtpDetails", rtpDetails);
+                "instantBankDetails", instantBankDetails);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -419,7 +419,7 @@ public class TransferDestination {
 
         private Optional<? extends CardTransactionDetails> cardDetails = Optional.empty();
 
-        private Optional<? extends RTPTransactionDetails> rtpDetails = Optional.empty();
+        private Optional<? extends InstantBankTransactionDetails> instantBankDetails = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -559,20 +559,20 @@ public class TransferDestination {
 
 
         /**
-         * RTP specific details about the transaction.
+         * Instant-bank specific details about the transaction.
          */
-        public Builder rtpDetails(RTPTransactionDetails rtpDetails) {
-            Utils.checkNotNull(rtpDetails, "rtpDetails");
-            this.rtpDetails = Optional.ofNullable(rtpDetails);
+        public Builder instantBankDetails(InstantBankTransactionDetails instantBankDetails) {
+            Utils.checkNotNull(instantBankDetails, "instantBankDetails");
+            this.instantBankDetails = Optional.ofNullable(instantBankDetails);
             return this;
         }
 
         /**
-         * RTP specific details about the transaction.
+         * Instant-bank specific details about the transaction.
          */
-        public Builder rtpDetails(Optional<? extends RTPTransactionDetails> rtpDetails) {
-            Utils.checkNotNull(rtpDetails, "rtpDetails");
-            this.rtpDetails = rtpDetails;
+        public Builder instantBankDetails(Optional<? extends InstantBankTransactionDetails> instantBankDetails) {
+            Utils.checkNotNull(instantBankDetails, "instantBankDetails");
+            this.instantBankDetails = instantBankDetails;
             return this;
         }
 
@@ -582,7 +582,7 @@ public class TransferDestination {
                 paymentMethodID, paymentMethodType, account,
                 bankAccount, wallet, card,
                 achDetails, applePay, cardDetails,
-                rtpDetails);
+                instantBankDetails);
         }
 
     }

@@ -44,7 +44,7 @@ public class Application {
                 .call();
 
         if (res.eventTypes().isPresent()) {
-            // handle response
+            System.out.println(res.eventTypes().get());
         }
     }
 }
@@ -91,7 +91,7 @@ public class Application {
                 .call();
 
         if (res.webhooks().isPresent()) {
-            // handle response
+            System.out.println(res.webhooks().get());
         }
     }
 }
@@ -146,7 +146,7 @@ public class Application {
                 .call();
 
         if (res.webhook().isPresent()) {
-            // handle response
+            System.out.println(res.webhook().get());
         }
     }
 }
@@ -205,7 +205,7 @@ public class Application {
                 .call();
 
         if (res.webhook().isPresent()) {
-            // handle response
+            System.out.println(res.webhook().get());
         }
     }
 }
@@ -268,7 +268,7 @@ public class Application {
                 .call();
 
         if (res.webhook().isPresent()) {
-            // handle response
+            System.out.println(res.webhook().get());
         }
     }
 }
@@ -379,7 +379,7 @@ public class Application {
                 .call();
 
         if (res.pingResponse().isPresent()) {
-            // handle response
+            System.out.println(res.pingResponse().get());
         }
     }
 }
@@ -433,7 +433,7 @@ public class Application {
                 .call();
 
         if (res.webhookSecret().isPresent()) {
-            // handle response
+            System.out.println(res.webhookSecret().get());
         }
     }
 }

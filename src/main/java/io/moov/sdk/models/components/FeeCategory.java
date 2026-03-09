@@ -14,6 +14,7 @@ public enum FeeCategory {
     CARD_OTHER("card-other"),
     CARD_PULL("card-pull"),
     CARD_PUSH("card-push"),
+    INSTANT_BANK("instant-bank"),
     MONTHLY_PLATFORM("monthly-platform"),
     NETWORK_PASSTHROUGH("network-passthrough"),
     OTHER("other"),

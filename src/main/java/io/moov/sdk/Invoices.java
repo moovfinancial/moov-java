@@ -14,6 +14,9 @@ import io.moov.sdk.models.operations.CreateInvoicePaymentResponse;
 import io.moov.sdk.models.operations.CreateInvoiceRequest;
 import io.moov.sdk.models.operations.CreateInvoiceRequestBuilder;
 import io.moov.sdk.models.operations.CreateInvoiceResponse;
+import io.moov.sdk.models.operations.DeleteInvoiceRequest;
+import io.moov.sdk.models.operations.DeleteInvoiceRequestBuilder;
+import io.moov.sdk.models.operations.DeleteInvoiceResponse;
 import io.moov.sdk.models.operations.GetInvoiceRequest;
 import io.moov.sdk.models.operations.GetInvoiceRequestBuilder;
 import io.moov.sdk.models.operations.GetInvoiceResponse;
@@ -26,6 +29,7 @@ import io.moov.sdk.models.operations.ListInvoicesResponse;
 import io.moov.sdk.models.operations.UpdateInvoiceRequest;
 import io.moov.sdk.models.operations.UpdateInvoiceRequestBuilder;
 import io.moov.sdk.models.operations.UpdateInvoiceResponse;
+import io.moov.sdk.operations.DeleteInvoice;
 import io.moov.sdk.operations.GetInvoice;
 import io.moov.sdk.operations.ListInvoicePayments;
 import io.moov.sdk.operations.ListInvoices;
@@ -183,6 +187,55 @@ public class Invoices {
                 .build();
         RequestOperation<UpdateInvoiceRequest, UpdateInvoiceResponse> operation
               = new io.moov.sdk.operations.UpdateInvoice.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Delete an invoice. Only invoices in `draft` status can be deleted.
+     * 
+     * <p>Deleting an invoice indicates it was created by mistake and should be completely disregarded.
+     * Deleted invoices are hidden from list results by default, but can still be retrieved
+     * individually through the get invoice endpoint. If you need to void an invoice that was
+     * already sent or is otherwise part of the invoice history, cancel it instead by updating
+     * its status to `canceled`.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+     * 
+     * @return The call builder
+     */
+    public DeleteInvoiceRequestBuilder delete() {
+        return new DeleteInvoiceRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete an invoice. Only invoices in `draft` status can be deleted.
+     * 
+     * <p>Deleting an invoice indicates it was created by mistake and should be completely disregarded.
+     * Deleted invoices are hidden from list results by default, but can still be retrieved
+     * individually through the get invoice endpoint. If you need to void an invoice that was
+     * already sent or is otherwise part of the invoice history, cancel it instead by updating
+     * its status to `canceled`.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+     * 
+     * @param accountID 
+     * @param invoiceID 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DeleteInvoiceResponse delete(String accountID, String invoiceID) {
+        DeleteInvoiceRequest request =
+            DeleteInvoiceRequest
+                .builder()
+                .accountID(accountID)
+                .invoiceID(invoiceID)
+                .build();
+        RequestOperation<DeleteInvoiceRequest, DeleteInvoiceResponse> operation
+              = new DeleteInvoice.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

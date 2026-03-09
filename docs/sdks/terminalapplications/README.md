@@ -69,7 +69,7 @@ public class Application {
                 .call();
 
         if (res.terminalApplication().isPresent()) {
-            // handle response
+            System.out.println(res.terminalApplication().get());
         }
     }
 }
@@ -127,7 +127,7 @@ public class Application {
                 .call();
 
         if (res.terminalApplications().isPresent()) {
-            // handle response
+            System.out.println(res.terminalApplications().get());
         }
     }
 }
@@ -178,7 +178,7 @@ public class Application {
                 .call();
 
         if (res.terminalApplication().isPresent()) {
-            // handle response
+            System.out.println(res.terminalApplication().get());
         }
     }
 }
@@ -298,7 +298,7 @@ public class Application {
                 .call();
 
         if (res.terminalApplicationVersion().isPresent()) {
-            // handle response
+            System.out.println(res.terminalApplicationVersion().get());
         }
     }
 }

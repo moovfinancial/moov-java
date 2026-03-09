@@ -1,5 +1,13 @@
 # EvidenceType
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.EvidenceType;
+
+EvidenceType value = EvidenceType.RECEIPT;
+```
+
 
 ## Values
 

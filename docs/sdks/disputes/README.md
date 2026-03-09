@@ -119,7 +119,7 @@ public class Application {
                 .call();
 
         if (res.disputes().isPresent()) {
-            // handle response
+            System.out.println(res.disputes().get());
         }
     }
 }
@@ -180,7 +180,7 @@ public class Application {
                 .call();
 
         if (res.dispute().isPresent()) {
-            // handle response
+            System.out.println(res.dispute().get());
         }
     }
 }
@@ -242,7 +242,7 @@ public class Application {
                 .call();
 
         if (res.dispute().isPresent()) {
-            // handle response
+            System.out.println(res.dispute().get());
         }
     }
 }
@@ -304,7 +304,7 @@ public class Application {
                 .call();
 
         if (res.disputeEvidenceResponses().isPresent()) {
-            // handle response
+            System.out.println(res.disputeEvidenceResponses().get());
         }
     }
 }
@@ -442,7 +442,7 @@ public class Application {
                 .call();
 
         if (res.evidenceTextResponse().isPresent()) {
-            // handle response
+            System.out.println(res.evidenceTextResponse().get());
         }
     }
 }
@@ -509,7 +509,7 @@ public class Application {
                 .call();
 
         if (res.dispute().isPresent()) {
-            // handle response
+            System.out.println(res.dispute().get());
         }
     }
 }
@@ -572,7 +572,7 @@ public class Application {
                 .call();
 
         if (res.disputeEvidenceResponse().isPresent()) {
-            // handle response
+            System.out.println(res.disputeEvidenceResponse().get());
         }
     }
 }
@@ -639,7 +639,7 @@ public class Application {
                 .call();
 
         if (res.disputeEvidenceResponse().isPresent()) {
-            // handle response
+            System.out.println(res.disputeEvidenceResponse().get());
         }
     }
 }

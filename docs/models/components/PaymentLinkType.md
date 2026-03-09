@@ -1,5 +1,13 @@
 # PaymentLinkType
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.PaymentLinkType;
+
+PaymentLinkType value = PaymentLinkType.PAYMENT;
+```
+
 
 ## Values
 

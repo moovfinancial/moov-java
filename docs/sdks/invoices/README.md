@@ -20,6 +20,16 @@ you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+* [delete](#delete) - Delete an invoice. Only invoices in `draft` status can be deleted.
+
+Deleting an invoice indicates it was created by mistake and should be completely disregarded.
+Deleted invoices are hidden from list results by default, but can still be retrieved
+individually through the get invoice endpoint. If you need to void an invoice that was
+already sent or is otherwise part of the invoice history, cancel it instead by updating
+its status to `canceled`.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 * [createInvoicePayment](#createinvoicepayment) - Creates a payment resource to represent that an invoice was paid outside of the Moov platform.
 If a payment link was created for the invoice, the corresponding payment link is canceled, but a receipt is still sent.
 
@@ -90,7 +100,7 @@ public class Application {
                 .call();
 
         if (res.invoice().isPresent()) {
-            // handle response
+            System.out.println(res.invoice().get());
         }
     }
 }
@@ -158,7 +168,7 @@ public class Application {
                 .call();
 
         if (res.invoices().isPresent()) {
-            // handle response
+            System.out.println(res.invoices().get());
         }
     }
 }
@@ -217,7 +227,7 @@ public class Application {
                 .call();
 
         if (res.invoice().isPresent()) {
-            // handle response
+            System.out.println(res.invoice().get());
         }
     }
 }
@@ -296,7 +306,7 @@ public class Application {
                 .call();
 
         if (res.invoice().isPresent()) {
-            // handle response
+            System.out.println(res.invoice().get());
         }
     }
 }
@@ -321,6 +331,71 @@ public class Application {
 | models/errors/GenericError       | 400, 409                         | application/json                 |
 | models/errors/UpdateInvoiceError | 422                              | application/json                 |
 | models/errors/APIException       | 4XX, 5XX                         | \*/\*                            |
+
+## delete
+
+Delete an invoice. Only invoices in `draft` status can be deleted.
+
+Deleting an invoice indicates it was created by mistake and should be completely disregarded.
+Deleted invoices are hidden from list results by default, but can still be retrieved
+individually through the get invoice endpoint. If you need to void an invoice that was
+already sent or is otherwise part of the invoice history, cancel it instead by updating
+its status to `canceled`.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="deleteInvoice" method="delete" path="/accounts/{accountID}/invoices/{invoiceID}" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.DeleteInvoiceResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws GenericError, Exception {
+
+        Moov sdk = Moov.builder()
+                .xMoovVersion("<value>")
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        DeleteInvoiceResponse res = sdk.invoices().delete()
+                .accountID("<id>")
+                .invoiceID("<id>")
+                .call();
+
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter          | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `accountID`        | *String*           | :heavy_check_mark: | N/A                |
+| `invoiceID`        | *String*           | :heavy_check_mark: | N/A                |
+
+### Response
+
+**[DeleteInvoiceResponse](../../models/operations/DeleteInvoiceResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/GenericError | 400, 409                   | application/json           |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
 ## createInvoicePayment
 
@@ -371,7 +446,7 @@ public class Application {
                 .call();
 
         if (res.invoicePayment().isPresent()) {
-            // handle response
+            System.out.println(res.invoicePayment().get());
         }
     }
 }
@@ -433,7 +508,7 @@ public class Application {
                 .call();
 
         if (res.invoicePayments().isPresent()) {
-            // handle response
+            System.out.println(res.invoicePayments().get());
         }
     }
 }

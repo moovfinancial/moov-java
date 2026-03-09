@@ -2,6 +2,14 @@
 
 Reason for a transfer's failure.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.TransferFailureReason;
+
+TransferFailureReason value = TransferFailureReason.SOURCE_PAYMENT_ERROR;
+```
+
 
 ## Values
 

@@ -9,11 +9,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * RTPTransactionStatus
+ * InstantBankTransactionStatus
  * 
- * <p>Status of a transaction within the RTP lifecycle.
+ * <p>Status of a transaction within the instant-bank lifecycle.
  */
-public enum RTPTransactionStatus {
+public enum InstantBankTransactionStatus {
     INITIATED("initiated"),
     COMPLETED("completed"),
     FAILED("failed"),
@@ -22,7 +22,7 @@ public enum RTPTransactionStatus {
     @JsonValue
     private final String value;
 
-    RTPTransactionStatus(String value) {
+    InstantBankTransactionStatus(String value) {
         this.value = value;
     }
     
@@ -30,8 +30,8 @@ public enum RTPTransactionStatus {
         return value;
     }
     
-    public static Optional<RTPTransactionStatus> fromValue(String value) {
-        for (RTPTransactionStatus o: RTPTransactionStatus.values()) {
+    public static Optional<InstantBankTransactionStatus> fromValue(String value) {
+        for (InstantBankTransactionStatus o: InstantBankTransactionStatus.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);
             }

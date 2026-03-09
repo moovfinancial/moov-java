@@ -9,11 +9,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * RTPFailureCode
+ * InstantBankFailureCode
  * 
- * <p>Status codes for RTP failures.
+ * <p>Status codes for instant-bank failures.
  */
-public enum RTPFailureCode {
+public enum InstantBankFailureCode {
     PROCESSING_ERROR("processing-error"),
     INVALID_ACCOUNT("invalid-account"),
     ACCOUNT_CLOSED("account-closed"),
@@ -23,12 +23,13 @@ public enum RTPFailureCode {
     LIMIT_EXCEEDED("limit-exceeded"),
     INVALID_AMOUNT("invalid-amount"),
     CUSTOMER_DECEASED("customer-deceased"),
+    PARTICIPANT_NOT_AVAILABLE("participant-not-available"),
     OTHER("other");
 
     @JsonValue
     private final String value;
 
-    RTPFailureCode(String value) {
+    InstantBankFailureCode(String value) {
         this.value = value;
     }
     
@@ -36,8 +37,8 @@ public enum RTPFailureCode {
         return value;
     }
     
-    public static Optional<RTPFailureCode> fromValue(String value) {
-        for (RTPFailureCode o: RTPFailureCode.values()) {
+    public static Optional<InstantBankFailureCode> fromValue(String value) {
+        for (InstantBankFailureCode o: InstantBankFailureCode.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);
             }

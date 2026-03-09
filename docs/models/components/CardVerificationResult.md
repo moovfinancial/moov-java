@@ -1,5 +1,13 @@
 # CardVerificationResult
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.CardVerificationResult;
+
+CardVerificationResult value = CardVerificationResult.NO_MATCH;
+```
+
 
 ## Values
 

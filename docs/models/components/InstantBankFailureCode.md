@@ -1,6 +1,14 @@
-# RTPFailureCode
+# InstantBankFailureCode
 
-Status codes for RTP failures.
+Status codes for instant-bank failures.
+
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.InstantBankFailureCode;
+
+InstantBankFailureCode value = InstantBankFailureCode.PROCESSING_ERROR;
+```
 
 
 ## Values
@@ -16,4 +24,5 @@ Status codes for RTP failures.
 | `LIMIT_EXCEEDED`            | limit-exceeded              |
 | `INVALID_AMOUNT`            | invalid-amount              |
 | `CUSTOMER_DECEASED`         | customer-deceased           |
+| `PARTICIPANT_NOT_AVAILABLE` | participant-not-available   |
 | `OTHER`                     | other                       |

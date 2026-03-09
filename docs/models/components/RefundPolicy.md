@@ -1,5 +1,13 @@
 # RefundPolicy
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.RefundPolicy;
+
+RefundPolicy value = RefundPolicy.CONDITIONAL_REFUND;
+```
+
 
 ## Values
 

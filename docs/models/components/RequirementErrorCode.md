@@ -1,5 +1,13 @@
 # RequirementErrorCode
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.RequirementErrorCode;
+
+RequirementErrorCode value = RequirementErrorCode.INVALID_VALUE;
+```
+
 
 ## Values
 

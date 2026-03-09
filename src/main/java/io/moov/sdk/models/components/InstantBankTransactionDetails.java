@@ -16,17 +16,22 @@ import java.time.OffsetDateTime;
 import java.util.Optional;
 
 /**
- * RTPTransactionDetails
+ * InstantBankTransactionDetails
  * 
- * <p>RTP specific details about the transaction.
+ * <p>Instant-bank specific details about the transaction.
  */
-public class RTPTransactionDetails {
+public class InstantBankTransactionDetails {
     /**
-     * Status of a transaction within the RTP lifecycle.
+     * The network that the transaction was processed on.
      */
-    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("network")
+    private InstantBankNetwork network;
+
+    /**
+     * Status of a transaction within the instant-bank lifecycle.
+     */
     @JsonProperty("status")
-    private Optional<? extends RTPTransactionStatus> status;
+    private InstantBankTransactionStatus status;
 
     /**
      * Response code returned by network on failure.
@@ -36,11 +41,16 @@ public class RTPTransactionDetails {
     private Optional<String> networkResponseCode;
 
     /**
-     * Status codes for RTP failures.
+     * Status codes for instant-bank failures.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("failureCode")
-    private Optional<? extends RTPFailureCode> failureCode;
+    private Optional<? extends InstantBankFailureCode> failureCode;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("endToEndID")
+    private Optional<String> endToEndID;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -63,43 +73,58 @@ public class RTPTransactionDetails {
     private Optional<OffsetDateTime> acceptedWithoutPostingOn;
 
     @JsonCreator
-    public RTPTransactionDetails(
-            @JsonProperty("status") Optional<? extends RTPTransactionStatus> status,
+    public InstantBankTransactionDetails(
+            @JsonProperty("network") InstantBankNetwork network,
+            @JsonProperty("status") InstantBankTransactionStatus status,
             @JsonProperty("networkResponseCode") Optional<String> networkResponseCode,
-            @JsonProperty("failureCode") Optional<? extends RTPFailureCode> failureCode,
+            @JsonProperty("failureCode") Optional<? extends InstantBankFailureCode> failureCode,
+            @JsonProperty("endToEndID") Optional<String> endToEndID,
             @JsonProperty("initiatedOn") Optional<OffsetDateTime> initiatedOn,
             @JsonProperty("completedOn") Optional<OffsetDateTime> completedOn,
             @JsonProperty("failedOn") Optional<OffsetDateTime> failedOn,
             @JsonProperty("acceptedWithoutPostingOn") Optional<OffsetDateTime> acceptedWithoutPostingOn) {
+        Utils.checkNotNull(network, "network");
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(networkResponseCode, "networkResponseCode");
         Utils.checkNotNull(failureCode, "failureCode");
+        Utils.checkNotNull(endToEndID, "endToEndID");
         Utils.checkNotNull(initiatedOn, "initiatedOn");
         Utils.checkNotNull(completedOn, "completedOn");
         Utils.checkNotNull(failedOn, "failedOn");
         Utils.checkNotNull(acceptedWithoutPostingOn, "acceptedWithoutPostingOn");
+        this.network = network;
         this.status = status;
         this.networkResponseCode = networkResponseCode;
         this.failureCode = failureCode;
+        this.endToEndID = endToEndID;
         this.initiatedOn = initiatedOn;
         this.completedOn = completedOn;
         this.failedOn = failedOn;
         this.acceptedWithoutPostingOn = acceptedWithoutPostingOn;
     }
     
-    public RTPTransactionDetails() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
+    public InstantBankTransactionDetails(
+            InstantBankNetwork network,
+            InstantBankTransactionStatus status) {
+        this(network, status, Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
-     * Status of a transaction within the RTP lifecycle.
+     * The network that the transaction was processed on.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<RTPTransactionStatus> status() {
-        return (Optional<RTPTransactionStatus>) status;
+    public InstantBankNetwork network() {
+        return network;
+    }
+
+    /**
+     * Status of a transaction within the instant-bank lifecycle.
+     */
+    @JsonIgnore
+    public InstantBankTransactionStatus status() {
+        return status;
     }
 
     /**
@@ -111,12 +136,17 @@ public class RTPTransactionDetails {
     }
 
     /**
-     * Status codes for RTP failures.
+     * Status codes for instant-bank failures.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<RTPFailureCode> failureCode() {
-        return (Optional<RTPFailureCode>) failureCode;
+    public Optional<InstantBankFailureCode> failureCode() {
+        return (Optional<InstantBankFailureCode>) failureCode;
+    }
+
+    @JsonIgnore
+    public Optional<String> endToEndID() {
+        return endToEndID;
     }
 
     @JsonIgnore
@@ -145,19 +175,18 @@ public class RTPTransactionDetails {
 
 
     /**
-     * Status of a transaction within the RTP lifecycle.
+     * The network that the transaction was processed on.
      */
-    public RTPTransactionDetails withStatus(RTPTransactionStatus status) {
-        Utils.checkNotNull(status, "status");
-        this.status = Optional.ofNullable(status);
+    public InstantBankTransactionDetails withNetwork(InstantBankNetwork network) {
+        Utils.checkNotNull(network, "network");
+        this.network = network;
         return this;
     }
 
-
     /**
-     * Status of a transaction within the RTP lifecycle.
+     * Status of a transaction within the instant-bank lifecycle.
      */
-    public RTPTransactionDetails withStatus(Optional<? extends RTPTransactionStatus> status) {
+    public InstantBankTransactionDetails withStatus(InstantBankTransactionStatus status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
@@ -166,7 +195,7 @@ public class RTPTransactionDetails {
     /**
      * Response code returned by network on failure.
      */
-    public RTPTransactionDetails withNetworkResponseCode(String networkResponseCode) {
+    public InstantBankTransactionDetails withNetworkResponseCode(String networkResponseCode) {
         Utils.checkNotNull(networkResponseCode, "networkResponseCode");
         this.networkResponseCode = Optional.ofNullable(networkResponseCode);
         return this;
@@ -176,16 +205,16 @@ public class RTPTransactionDetails {
     /**
      * Response code returned by network on failure.
      */
-    public RTPTransactionDetails withNetworkResponseCode(Optional<String> networkResponseCode) {
+    public InstantBankTransactionDetails withNetworkResponseCode(Optional<String> networkResponseCode) {
         Utils.checkNotNull(networkResponseCode, "networkResponseCode");
         this.networkResponseCode = networkResponseCode;
         return this;
     }
 
     /**
-     * Status codes for RTP failures.
+     * Status codes for instant-bank failures.
      */
-    public RTPTransactionDetails withFailureCode(RTPFailureCode failureCode) {
+    public InstantBankTransactionDetails withFailureCode(InstantBankFailureCode failureCode) {
         Utils.checkNotNull(failureCode, "failureCode");
         this.failureCode = Optional.ofNullable(failureCode);
         return this;
@@ -193,61 +222,74 @@ public class RTPTransactionDetails {
 
 
     /**
-     * Status codes for RTP failures.
+     * Status codes for instant-bank failures.
      */
-    public RTPTransactionDetails withFailureCode(Optional<? extends RTPFailureCode> failureCode) {
+    public InstantBankTransactionDetails withFailureCode(Optional<? extends InstantBankFailureCode> failureCode) {
         Utils.checkNotNull(failureCode, "failureCode");
         this.failureCode = failureCode;
         return this;
     }
 
-    public RTPTransactionDetails withInitiatedOn(OffsetDateTime initiatedOn) {
+    public InstantBankTransactionDetails withEndToEndID(String endToEndID) {
+        Utils.checkNotNull(endToEndID, "endToEndID");
+        this.endToEndID = Optional.ofNullable(endToEndID);
+        return this;
+    }
+
+
+    public InstantBankTransactionDetails withEndToEndID(Optional<String> endToEndID) {
+        Utils.checkNotNull(endToEndID, "endToEndID");
+        this.endToEndID = endToEndID;
+        return this;
+    }
+
+    public InstantBankTransactionDetails withInitiatedOn(OffsetDateTime initiatedOn) {
         Utils.checkNotNull(initiatedOn, "initiatedOn");
         this.initiatedOn = Optional.ofNullable(initiatedOn);
         return this;
     }
 
 
-    public RTPTransactionDetails withInitiatedOn(Optional<OffsetDateTime> initiatedOn) {
+    public InstantBankTransactionDetails withInitiatedOn(Optional<OffsetDateTime> initiatedOn) {
         Utils.checkNotNull(initiatedOn, "initiatedOn");
         this.initiatedOn = initiatedOn;
         return this;
     }
 
-    public RTPTransactionDetails withCompletedOn(OffsetDateTime completedOn) {
+    public InstantBankTransactionDetails withCompletedOn(OffsetDateTime completedOn) {
         Utils.checkNotNull(completedOn, "completedOn");
         this.completedOn = Optional.ofNullable(completedOn);
         return this;
     }
 
 
-    public RTPTransactionDetails withCompletedOn(Optional<OffsetDateTime> completedOn) {
+    public InstantBankTransactionDetails withCompletedOn(Optional<OffsetDateTime> completedOn) {
         Utils.checkNotNull(completedOn, "completedOn");
         this.completedOn = completedOn;
         return this;
     }
 
-    public RTPTransactionDetails withFailedOn(OffsetDateTime failedOn) {
+    public InstantBankTransactionDetails withFailedOn(OffsetDateTime failedOn) {
         Utils.checkNotNull(failedOn, "failedOn");
         this.failedOn = Optional.ofNullable(failedOn);
         return this;
     }
 
 
-    public RTPTransactionDetails withFailedOn(Optional<OffsetDateTime> failedOn) {
+    public InstantBankTransactionDetails withFailedOn(Optional<OffsetDateTime> failedOn) {
         Utils.checkNotNull(failedOn, "failedOn");
         this.failedOn = failedOn;
         return this;
     }
 
-    public RTPTransactionDetails withAcceptedWithoutPostingOn(OffsetDateTime acceptedWithoutPostingOn) {
+    public InstantBankTransactionDetails withAcceptedWithoutPostingOn(OffsetDateTime acceptedWithoutPostingOn) {
         Utils.checkNotNull(acceptedWithoutPostingOn, "acceptedWithoutPostingOn");
         this.acceptedWithoutPostingOn = Optional.ofNullable(acceptedWithoutPostingOn);
         return this;
     }
 
 
-    public RTPTransactionDetails withAcceptedWithoutPostingOn(Optional<OffsetDateTime> acceptedWithoutPostingOn) {
+    public InstantBankTransactionDetails withAcceptedWithoutPostingOn(Optional<OffsetDateTime> acceptedWithoutPostingOn) {
         Utils.checkNotNull(acceptedWithoutPostingOn, "acceptedWithoutPostingOn");
         this.acceptedWithoutPostingOn = acceptedWithoutPostingOn;
         return this;
@@ -261,11 +303,13 @@ public class RTPTransactionDetails {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        RTPTransactionDetails other = (RTPTransactionDetails) o;
+        InstantBankTransactionDetails other = (InstantBankTransactionDetails) o;
         return 
+            Utils.enhancedDeepEquals(this.network, other.network) &&
             Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.networkResponseCode, other.networkResponseCode) &&
             Utils.enhancedDeepEquals(this.failureCode, other.failureCode) &&
+            Utils.enhancedDeepEquals(this.endToEndID, other.endToEndID) &&
             Utils.enhancedDeepEquals(this.initiatedOn, other.initiatedOn) &&
             Utils.enhancedDeepEquals(this.completedOn, other.completedOn) &&
             Utils.enhancedDeepEquals(this.failedOn, other.failedOn) &&
@@ -275,17 +319,19 @@ public class RTPTransactionDetails {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            status, networkResponseCode, failureCode,
-            initiatedOn, completedOn, failedOn,
-            acceptedWithoutPostingOn);
+            network, status, networkResponseCode,
+            failureCode, endToEndID, initiatedOn,
+            completedOn, failedOn, acceptedWithoutPostingOn);
     }
     
     @Override
     public String toString() {
-        return Utils.toString(RTPTransactionDetails.class,
+        return Utils.toString(InstantBankTransactionDetails.class,
+                "network", network,
                 "status", status,
                 "networkResponseCode", networkResponseCode,
                 "failureCode", failureCode,
+                "endToEndID", endToEndID,
                 "initiatedOn", initiatedOn,
                 "completedOn", completedOn,
                 "failedOn", failedOn,
@@ -295,11 +341,15 @@ public class RTPTransactionDetails {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends RTPTransactionStatus> status = Optional.empty();
+        private InstantBankNetwork network;
+
+        private InstantBankTransactionStatus status;
 
         private Optional<String> networkResponseCode = Optional.empty();
 
-        private Optional<? extends RTPFailureCode> failureCode = Optional.empty();
+        private Optional<? extends InstantBankFailureCode> failureCode = Optional.empty();
+
+        private Optional<String> endToEndID = Optional.empty();
 
         private Optional<OffsetDateTime> initiatedOn = Optional.empty();
 
@@ -315,18 +365,19 @@ public class RTPTransactionDetails {
 
 
         /**
-         * Status of a transaction within the RTP lifecycle.
+         * The network that the transaction was processed on.
          */
-        public Builder status(RTPTransactionStatus status) {
-            Utils.checkNotNull(status, "status");
-            this.status = Optional.ofNullable(status);
+        public Builder network(InstantBankNetwork network) {
+            Utils.checkNotNull(network, "network");
+            this.network = network;
             return this;
         }
 
+
         /**
-         * Status of a transaction within the RTP lifecycle.
+         * Status of a transaction within the instant-bank lifecycle.
          */
-        public Builder status(Optional<? extends RTPTransactionStatus> status) {
+        public Builder status(InstantBankTransactionStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
@@ -353,20 +404,33 @@ public class RTPTransactionDetails {
 
 
         /**
-         * Status codes for RTP failures.
+         * Status codes for instant-bank failures.
          */
-        public Builder failureCode(RTPFailureCode failureCode) {
+        public Builder failureCode(InstantBankFailureCode failureCode) {
             Utils.checkNotNull(failureCode, "failureCode");
             this.failureCode = Optional.ofNullable(failureCode);
             return this;
         }
 
         /**
-         * Status codes for RTP failures.
+         * Status codes for instant-bank failures.
          */
-        public Builder failureCode(Optional<? extends RTPFailureCode> failureCode) {
+        public Builder failureCode(Optional<? extends InstantBankFailureCode> failureCode) {
             Utils.checkNotNull(failureCode, "failureCode");
             this.failureCode = failureCode;
+            return this;
+        }
+
+
+        public Builder endToEndID(String endToEndID) {
+            Utils.checkNotNull(endToEndID, "endToEndID");
+            this.endToEndID = Optional.ofNullable(endToEndID);
+            return this;
+        }
+
+        public Builder endToEndID(Optional<String> endToEndID) {
+            Utils.checkNotNull(endToEndID, "endToEndID");
+            this.endToEndID = endToEndID;
             return this;
         }
 
@@ -422,12 +486,12 @@ public class RTPTransactionDetails {
             return this;
         }
 
-        public RTPTransactionDetails build() {
+        public InstantBankTransactionDetails build() {
 
-            return new RTPTransactionDetails(
-                status, networkResponseCode, failureCode,
-                initiatedOn, completedOn, failedOn,
-                acceptedWithoutPostingOn);
+            return new InstantBankTransactionDetails(
+                network, status, networkResponseCode,
+                failureCode, endToEndID, initiatedOn,
+                completedOn, failedOn, acceptedWithoutPostingOn);
         }
 
     }

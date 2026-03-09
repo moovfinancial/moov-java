@@ -114,7 +114,7 @@ public class Application {
                 .call();
 
         if (res.authToken().isPresent()) {
-            // handle response
+            System.out.println(res.authToken().get());
         }
     }
 }

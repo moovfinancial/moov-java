@@ -30,7 +30,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 java:
-  version: 26.4.0-dev.10
+  version: 26.4.0-dev.11
   additionalDependencies: []
   additionalPlugins: []
   artifactID: sdk
@@ -44,11 +44,13 @@ java:
   enableFormatting: false
   enableSlf4jLogging: false
   enableStreamingUploads: false
+  explicitDocImports: false
   flattenGlobalSecurity: true
   forwardCompatibleEnumsByDefault: false
   forwardCompatibleUnionsByDefault: "false"
   generateOptionalUnionAccessors: false
   generateSpringBootStarter: true
+  generateUnionDocs: false
   githubURL: github.com/moovfinancial/moov-java
   groupID: io.moov
   imports:
@@ -71,7 +73,9 @@ java:
   nullFriendlyParameters: false
   operationScopedParams: true
   outputModelSuffix: output
+  prefixModeMethodNames: false
   projectName: sdk
   respectTitlesForPrimitiveUnionMembers: false
+  showSetterGetterTypesInDocs: false
   templateVersion: v2
   unionStrategy: populated-fields

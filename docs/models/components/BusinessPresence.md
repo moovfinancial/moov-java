@@ -1,5 +1,13 @@
 # BusinessPresence
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.BusinessPresence;
+
+BusinessPresence value = BusinessPresence.COMMERCIAL_OFFICE;
+```
+
 
 ## Values
 

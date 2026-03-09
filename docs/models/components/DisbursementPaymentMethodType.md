@@ -2,6 +2,14 @@
 
 Payment methods allowed for disbursing funds.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.DisbursementPaymentMethodType;
+
+DisbursementPaymentMethodType value = DisbursementPaymentMethodType.PUSH_TO_CARD;
+```
+
 
 ## Values
 

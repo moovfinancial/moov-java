@@ -1,6 +1,14 @@
-# RTPTransactionStatus
+# InstantBankTransactionStatus
 
-Status of a transaction within the RTP lifecycle.
+Status of a transaction within the instant-bank lifecycle.
+
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.InstantBankTransactionStatus;
+
+InstantBankTransactionStatus value = InstantBankTransactionStatus.INITIATED;
+```
 
 
 ## Values

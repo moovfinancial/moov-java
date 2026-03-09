@@ -2,6 +2,14 @@
 
 The results of the card update request.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.CardUpdateReason;
+
+CardUpdateReason value = CardUpdateReason.UNSPECIFIED;
+```
+
 
 ## Values
 

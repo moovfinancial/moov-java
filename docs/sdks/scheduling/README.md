@@ -174,7 +174,7 @@ public class Application {
                 .call();
 
         if (res.scheduleResponse().isPresent()) {
-            // handle response
+            System.out.println(res.scheduleResponse().get());
         }
     }
 }
@@ -236,7 +236,7 @@ public class Application {
                 .call();
 
         if (res.scheduleListResponses().isPresent()) {
-            // handle response
+            System.out.println(res.scheduleListResponses().get());
         }
     }
 }
@@ -456,7 +456,7 @@ public class Application {
                 .call();
 
         if (res.scheduleResponse().isPresent()) {
-            // handle response
+            System.out.println(res.scheduleResponse().get());
         }
     }
 }
@@ -518,7 +518,7 @@ public class Application {
                 .call();
 
         if (res.scheduleResponse().isPresent()) {
-            // handle response
+            System.out.println(res.scheduleResponse().get());
         }
     }
 }
@@ -637,7 +637,7 @@ public class Application {
                 .call();
 
         if (res.occurrencesResponse().isPresent()) {
-            // handle response
+            System.out.println(res.occurrencesResponse().get());
         }
     }
 }

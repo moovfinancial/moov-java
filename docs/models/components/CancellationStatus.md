@@ -1,5 +1,13 @@
 # CancellationStatus
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.CancellationStatus;
+
+CancellationStatus value = CancellationStatus.PENDING;
+```
+
 
 ## Values
 

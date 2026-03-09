@@ -2,6 +2,14 @@
 
 The type of token being revoked.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.TokenTypeHint;
+
+TokenTypeHint value = TokenTypeHint.ACCESS_TOKEN;
+```
+
 
 ## Values
 

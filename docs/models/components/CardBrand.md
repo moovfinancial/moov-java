@@ -2,6 +2,14 @@
 
 The card brand.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.CardBrand;
+
+CardBrand value = CardBrand.AMERICAN_EXPRESS;
+```
+
 
 ## Values
 

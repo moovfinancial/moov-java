@@ -1,5 +1,13 @@
 # RefundStatus
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.RefundStatus;
+
+RefundStatus value = RefundStatus.CREATED;
+```
+
 
 ## Values
 

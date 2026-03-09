@@ -58,7 +58,7 @@ public class Application {
                 .call();
 
         if (res.statements().isPresent()) {
-            // handle response
+            System.out.println(res.statements().get());
         }
     }
 }

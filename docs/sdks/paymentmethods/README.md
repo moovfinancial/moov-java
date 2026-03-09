@@ -50,7 +50,7 @@ public class Application {
                 .call();
 
         if (res.paymentMethods().isPresent()) {
-            // handle response
+            System.out.println(res.paymentMethods().get());
         }
     }
 }
@@ -88,6 +88,7 @@ you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.PaymentMethod;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.operations.GetPaymentMethodResponse;
 import java.lang.Exception;
@@ -110,7 +111,44 @@ public class Application {
                 .call();
 
         if (res.paymentMethod().isPresent()) {
-            // handle response
+            PaymentMethod unionValue = res.paymentMethod().get();
+            switch (unionValue.paymentMethodType()) {
+                case "moov-wallet":
+                    // Handle moov-wallet discriminator variant
+                    break;
+                case "ach-debit-fund":
+                    // Handle ach-debit-fund discriminator variant
+                    break;
+                case "ach-debit-collect":
+                    // Handle ach-debit-collect discriminator variant
+                    break;
+                case "ach-credit-standard":
+                    // Handle ach-credit-standard discriminator variant
+                    break;
+                case "ach-credit-same-day":
+                    // Handle ach-credit-same-day discriminator variant
+                    break;
+                case "rtp-credit":
+                    // Handle rtp-credit discriminator variant
+                    break;
+                case "card-payment":
+                    // Handle card-payment discriminator variant
+                    break;
+                case "push-to-card":
+                    // Handle push-to-card discriminator variant
+                    break;
+                case "pull-from-card":
+                    // Handle pull-from-card discriminator variant
+                    break;
+                case "apple-pay":
+                    // Handle apple-pay discriminator variant
+                    break;
+                case "card-present-payment":
+                    // Handle card-present-payment discriminator variant
+                    break;
+                default:
+                    // Handle unknown discriminator variant
+            }
         }
     }
 }

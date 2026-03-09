@@ -1,5 +1,13 @@
 # RtpCreditTransferPaymentMethodPaymentMethodType
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.RtpCreditTransferPaymentMethodPaymentMethodType;
+
+RtpCreditTransferPaymentMethodPaymentMethodType value = RtpCreditTransferPaymentMethodPaymentMethodType.RTP_CREDIT;
+```
+
 
 ## Values
 

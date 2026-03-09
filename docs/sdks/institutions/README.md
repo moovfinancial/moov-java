@@ -57,7 +57,7 @@ public class Application {
                 .call();
 
         if (res.institutionsSearchResponse().isPresent()) {
-            // handle response
+            System.out.println(res.institutionsSearchResponse().get());
         }
     }
 }
@@ -120,7 +120,7 @@ public class Application {
                 .call();
 
         if (res.financialInstitutions().isPresent()) {
-            // handle response
+            System.out.println(res.financialInstitutions().get());
         }
     }
 }

@@ -1,5 +1,13 @@
 # FulfillmentTimeframe
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.FulfillmentTimeframe;
+
+FulfillmentTimeframe value = FulfillmentTimeframe.IMMEDIATE;
+```
+
 
 ## Values
 

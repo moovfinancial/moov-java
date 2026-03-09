@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import java.lang.Deprecated;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -71,11 +72,13 @@ public class TransferDestination {
     private Optional<? extends CardTransactionDetails> cardDetails;
 
     /**
-     * RTP specific details about the transaction.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("rtpDetails")
-    private Optional<? extends RTPTransactionDetails> rtpDetails;
+    @Deprecated
+    private Optional<? extends RtpDetails> rtpDetails;
 
     @JsonCreator
     public TransferDestination(
@@ -88,7 +91,7 @@ public class TransferDestination {
             @JsonProperty("achDetails") Optional<? extends ACHTransactionDetails> achDetails,
             @JsonProperty("applePay") Optional<? extends ApplePayResponse> applePay,
             @JsonProperty("cardDetails") Optional<? extends CardTransactionDetails> cardDetails,
-            @JsonProperty("rtpDetails") Optional<? extends RTPTransactionDetails> rtpDetails) {
+            @JsonProperty("rtpDetails") Optional<? extends RtpDetails> rtpDetails) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
         Utils.checkNotNull(account, "account");
@@ -191,12 +194,14 @@ public class TransferDestination {
     }
 
     /**
-     * RTP specific details about the transaction.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<RTPTransactionDetails> rtpDetails() {
-        return (Optional<RTPTransactionDetails>) rtpDetails;
+    public Optional<RtpDetails> rtpDetails() {
+        return (Optional<RtpDetails>) rtpDetails;
     }
 
     public static Builder builder() {
@@ -334,9 +339,11 @@ public class TransferDestination {
     }
 
     /**
-     * RTP specific details about the transaction.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
-    public TransferDestination withRtpDetails(RTPTransactionDetails rtpDetails) {
+    @Deprecated
+    public TransferDestination withRtpDetails(RtpDetails rtpDetails) {
         Utils.checkNotNull(rtpDetails, "rtpDetails");
         this.rtpDetails = Optional.ofNullable(rtpDetails);
         return this;
@@ -344,9 +351,11 @@ public class TransferDestination {
 
 
     /**
-     * RTP specific details about the transaction.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
-    public TransferDestination withRtpDetails(Optional<? extends RTPTransactionDetails> rtpDetails) {
+    @Deprecated
+    public TransferDestination withRtpDetails(Optional<? extends RtpDetails> rtpDetails) {
         Utils.checkNotNull(rtpDetails, "rtpDetails");
         this.rtpDetails = rtpDetails;
         return this;
@@ -419,7 +428,8 @@ public class TransferDestination {
 
         private Optional<? extends CardTransactionDetails> cardDetails = Optional.empty();
 
-        private Optional<? extends RTPTransactionDetails> rtpDetails = Optional.empty();
+        @Deprecated
+        private Optional<? extends RtpDetails> rtpDetails = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -559,18 +569,22 @@ public class TransferDestination {
 
 
         /**
-         * RTP specific details about the transaction.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
-        public Builder rtpDetails(RTPTransactionDetails rtpDetails) {
+        @Deprecated
+        public Builder rtpDetails(RtpDetails rtpDetails) {
             Utils.checkNotNull(rtpDetails, "rtpDetails");
             this.rtpDetails = Optional.ofNullable(rtpDetails);
             return this;
         }
 
         /**
-         * RTP specific details about the transaction.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
-        public Builder rtpDetails(Optional<? extends RTPTransactionDetails> rtpDetails) {
+        @Deprecated
+        public Builder rtpDetails(Optional<? extends RtpDetails> rtpDetails) {
             Utils.checkNotNull(rtpDetails, "rtpDetails");
             this.rtpDetails = rtpDetails;
             return this;

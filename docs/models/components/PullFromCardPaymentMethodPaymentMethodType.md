@@ -1,5 +1,13 @@
 # PullFromCardPaymentMethodPaymentMethodType
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.PullFromCardPaymentMethodPaymentMethodType;
+
+PullFromCardPaymentMethodPaymentMethodType value = PullFromCardPaymentMethodPaymentMethodType.PULL_FROM_CARD;
+```
+
 
 ## Values
 

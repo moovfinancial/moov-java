@@ -125,7 +125,7 @@ public class Application {
                 .call();
 
         if (res.transferOptions().isPresent()) {
-            // handle response
+            System.out.println(res.transferOptions().get());
         }
     }
 }
@@ -205,7 +205,7 @@ public class Application {
                 .call();
 
         if (res.createdTransfer().isPresent()) {
-            // handle response
+            System.out.println(res.createdTransfer().get());
         }
     }
 }
@@ -256,7 +256,7 @@ public class Application {
                 .call();
 
         if (res.createdTransfer().isPresent()) {
-            // handle response
+            System.out.println(res.createdTransfer().get());
         }
     }
 }
@@ -334,7 +334,7 @@ public class Application {
                 .call();
 
         if (res.transfers().isPresent()) {
-            // handle response
+            System.out.println(res.transfers().get());
         }
     }
 }
@@ -396,7 +396,7 @@ public class Application {
                 .call();
 
         if (res.transfer().isPresent()) {
-            // handle response
+            System.out.println(res.transfer().get());
         }
     }
 }
@@ -464,7 +464,7 @@ public class Application {
                 .call();
 
         if (res.transfer().isPresent()) {
-            // handle response
+            System.out.println(res.transfer().get());
         }
     }
 }
@@ -526,7 +526,7 @@ public class Application {
                 .call();
 
         if (res.cancellation().isPresent()) {
-            // handle response
+            System.out.println(res.cancellation().get());
         }
     }
 }
@@ -587,7 +587,7 @@ public class Application {
                 .call();
 
         if (res.cancellation().isPresent()) {
-            // handle response
+            System.out.println(res.cancellation().get());
         }
     }
 }
@@ -622,7 +622,7 @@ public class Application {
                 .call();
 
         if (res.cancellation().isPresent()) {
-            // handle response
+            System.out.println(res.cancellation().get());
         }
     }
 }
@@ -663,12 +663,12 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.CreateRefund;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.*;
 import io.moov.sdk.models.operations.InitiateRefundRequest;
 import io.moov.sdk.models.operations.InitiateRefundResponse;
 import java.lang.Exception;
+import java.lang.Object;
 
 public class Application {
 
@@ -696,7 +696,17 @@ public class Application {
                 .call();
 
         if (res.createRefundResponse().isPresent()) {
-            // handle response
+            CreateRefundResponse unionValue = res.createRefundResponse().get();
+            Object raw = unionValue.value();
+            if (raw instanceof io.moov.sdk.models.components.CardAcquiringRefund) {
+                io.moov.sdk.models.components.CardAcquiringRefund cardAcquiringRefundValue = (io.moov.sdk.models.components.CardAcquiringRefund) raw;
+                // Handle cardAcquiringRefund variant
+            } else if (raw instanceof AsyncCreatedRefund) {
+                AsyncCreatedRefund yncCreatedRefundValue = (AsyncCreatedRefund) raw;
+                // Handle asyncCreatedRefund variant
+            } else {
+                // Unknown or unsupported variant
+            }
         }
     }
 }
@@ -708,12 +718,12 @@ public class Application {
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.CreateRefund;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.*;
 import io.moov.sdk.models.operations.InitiateRefundRequest;
 import io.moov.sdk.models.operations.InitiateRefundResponse;
 import java.lang.Exception;
+import java.lang.Object;
 
 public class Application {
 
@@ -741,7 +751,17 @@ public class Application {
                 .call();
 
         if (res.createRefundResponse().isPresent()) {
-            // handle response
+            CreateRefundResponse unionValue = res.createRefundResponse().get();
+            Object raw = unionValue.value();
+            if (raw instanceof io.moov.sdk.models.components.CardAcquiringRefund) {
+                io.moov.sdk.models.components.CardAcquiringRefund cardAcquiringRefundValue = (io.moov.sdk.models.components.CardAcquiringRefund) raw;
+                // Handle cardAcquiringRefund variant
+            } else if (raw instanceof AsyncCreatedRefund) {
+                AsyncCreatedRefund yncCreatedRefundValue = (AsyncCreatedRefund) raw;
+                // Handle asyncCreatedRefund variant
+            } else {
+                // Unknown or unsupported variant
+            }
         }
     }
 }
@@ -802,7 +822,7 @@ public class Application {
                 .call();
 
         if (res.cardAcquiringRefunds().isPresent()) {
-            // handle response
+            System.out.println(res.cardAcquiringRefunds().get());
         }
     }
 }
@@ -862,7 +882,7 @@ public class Application {
                 .call();
 
         if (res.cardAcquiringRefund().isPresent()) {
-            // handle response
+            System.out.println(res.cardAcquiringRefund().get());
         }
     }
 }
@@ -902,12 +922,12 @@ to specify the `/accounts/{accountID}/transfers.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.CreateReversal;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.ReversalValidationError;
 import io.moov.sdk.models.operations.CreateReversalResponse;
 import java.lang.Exception;
+import java.lang.Object;
 
 public class Application {
 
@@ -931,7 +951,17 @@ public class Application {
                 .call();
 
         if (res.reversal().isPresent()) {
-            // handle response
+            Reversal unionValue = res.reversal().get();
+            Object raw = unionValue.value();
+            if (raw instanceof ReversedWithCancellation) {
+                ReversedWithCancellation reversedWithCancellationValue = (ReversedWithCancellation) raw;
+                // Handle reversedWithCancellation variant
+            } else if (raw instanceof ReversedWithRefund) {
+                ReversedWithRefund reversedWithRefundValue = (ReversedWithRefund) raw;
+                // Handle reversedWithRefund variant
+            } else {
+                // Unknown or unsupported variant
+            }
         }
     }
 }
@@ -943,12 +973,12 @@ public class Application {
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.CreateReversal;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.ReversalValidationError;
 import io.moov.sdk.models.operations.CreateReversalResponse;
 import java.lang.Exception;
+import java.lang.Object;
 
 public class Application {
 
@@ -972,7 +1002,17 @@ public class Application {
                 .call();
 
         if (res.reversal().isPresent()) {
-            // handle response
+            Reversal unionValue = res.reversal().get();
+            Object raw = unionValue.value();
+            if (raw instanceof ReversedWithCancellation) {
+                ReversedWithCancellation reversedWithCancellationValue = (ReversedWithCancellation) raw;
+                // Handle reversedWithCancellation variant
+            } else if (raw instanceof ReversedWithRefund) {
+                ReversedWithRefund reversedWithRefundValue = (ReversedWithRefund) raw;
+                // Handle reversedWithRefund variant
+            } else {
+                // Unknown or unsupported variant
+            }
         }
     }
 }

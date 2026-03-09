@@ -78,7 +78,7 @@ public class Application {
                 .call();
 
         if (res.onboardingInvite().isPresent()) {
-            // handle response
+            System.out.println(res.onboardingInvite().get());
         }
     }
 }
@@ -136,7 +136,7 @@ public class Application {
                 .call();
 
         if (res.onboardingInvites().isPresent()) {
-            // handle response
+            System.out.println(res.onboardingInvites().get());
         }
     }
 }
@@ -187,7 +187,7 @@ public class Application {
                 .call();
 
         if (res.onboardingInvite().isPresent()) {
-            // handle response
+            System.out.println(res.onboardingInvite().get());
         }
     }
 }

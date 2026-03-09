@@ -84,7 +84,7 @@ public class Application {
                 .call();
 
         if (res.applePayMerchantDomains().isPresent()) {
-            // handle response
+            System.out.println(res.applePayMerchantDomains().get());
         }
     }
 }
@@ -214,7 +214,7 @@ public class Application {
                 .call();
 
         if (res.applePayMerchantDomains().isPresent()) {
-            // handle response
+            System.out.println(res.applePayMerchantDomains().get());
         }
     }
 }
@@ -280,7 +280,7 @@ public class Application {
                 .call();
 
         if (res.applePaySession().isPresent()) {
-            // handle response
+            System.out.println(res.applePaySession().get());
         }
     }
 }
@@ -373,7 +373,7 @@ public class Application {
                 .call();
 
         if (res.linkedApplePayPaymentMethod().isPresent()) {
-            // handle response
+            System.out.println(res.linkedApplePayPaymentMethod().get());
         }
     }
 }

@@ -2,6 +2,14 @@
 
 Status codes for RTP failures.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.RTPFailureCode;
+
+RTPFailureCode value = RTPFailureCode.PROCESSING_ERROR;
+```
+
 
 ## Values
 

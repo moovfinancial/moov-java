@@ -87,7 +87,7 @@ public class Application {
                 .call();
 
         if (res.ticket().isPresent()) {
-            // handle response
+            System.out.println(res.ticket().get());
         }
     }
 }
@@ -156,7 +156,7 @@ public class Application {
                 .call();
 
         if (res.object().isPresent()) {
-            // handle response
+            System.out.println(res.object().get());
         }
     }
 }
@@ -217,7 +217,7 @@ public class Application {
                 .call();
 
         if (res.ticket().isPresent()) {
-            // handle response
+            System.out.println(res.ticket().get());
         }
     }
 }
@@ -284,7 +284,7 @@ public class Application {
                 .call();
 
         if (res.ticket().isPresent()) {
-            // handle response
+            System.out.println(res.ticket().get());
         }
     }
 }
@@ -349,7 +349,7 @@ public class Application {
                 .call();
 
         if (res.ticketMessages().isPresent()) {
-            // handle response
+            System.out.println(res.ticketMessages().get());
         }
     }
 }

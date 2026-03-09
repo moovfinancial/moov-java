@@ -60,7 +60,7 @@ public class Application {
                 .call();
 
         if (res.capabilities().isPresent()) {
-            // handle response
+            System.out.println(res.capabilities().get());
         }
     }
 }
@@ -124,7 +124,7 @@ public class Application {
                 .call();
 
         if (res.capabilities().isPresent()) {
-            // handle response
+            System.out.println(res.capabilities().get());
         }
     }
 }
@@ -186,7 +186,7 @@ public class Application {
                 .call();
 
         if (res.capability().isPresent()) {
-            // handle response
+            System.out.println(res.capability().get());
         }
     }
 }

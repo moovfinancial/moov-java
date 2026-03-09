@@ -53,7 +53,7 @@ public class Application {
                 .call();
 
         if (res.receiptResponses().isPresent()) {
-            // handle response
+            System.out.println(res.receiptResponses().get());
         }
     }
 }
@@ -111,7 +111,7 @@ public class Application {
                 .call();
 
         if (res.receiptResponses().isPresent()) {
-            // handle response
+            System.out.println(res.receiptResponses().get());
         }
     }
 }

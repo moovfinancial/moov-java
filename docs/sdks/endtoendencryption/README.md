@@ -98,7 +98,7 @@ public class Application {
                 .call();
 
         if (res.jsonWebKey().isPresent()) {
-            // handle response
+            System.out.println(res.jsonWebKey().get());
         }
     }
 }

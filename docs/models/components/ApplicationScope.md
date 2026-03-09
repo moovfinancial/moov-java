@@ -2,6 +2,14 @@
 
 A permission that the application requests on another account.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.ApplicationScope;
+
+ApplicationScope value = ApplicationScope.ACCOUNTS_READ;
+```
+
 
 ## Values
 

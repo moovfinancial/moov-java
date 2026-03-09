@@ -2,6 +2,14 @@
 
 The payment method type that represents a payment rail and directionality
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.TransferPaymentMethodType;
+
+TransferPaymentMethodType value = TransferPaymentMethodType.MOOV_WALLET;
+```
+
 
 ## Values
 

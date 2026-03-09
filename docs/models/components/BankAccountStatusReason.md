@@ -2,6 +2,14 @@
 
 The reason the bank account status changed to the current value.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.BankAccountStatusReason;
+
+BankAccountStatusReason value = BankAccountStatusReason.BANK_ACCOUNT_CREATED;
+```
+
 
 ## Values
 

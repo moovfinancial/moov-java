@@ -88,7 +88,7 @@ public class Application {
                 .call();
 
         if (res.feePlanAgreements().isPresent()) {
-            // handle response
+            System.out.println(res.feePlanAgreements().get());
         }
     }
 }
@@ -151,7 +151,7 @@ public class Application {
                 .call();
 
         if (res.feePlanAgreement().isPresent()) {
-            // handle response
+            System.out.println(res.feePlanAgreement().get());
         }
     }
 }
@@ -212,7 +212,7 @@ public class Application {
                 .call();
 
         if (res.feePlans().isPresent()) {
-            // handle response
+            System.out.println(res.feePlans().get());
         }
     }
 }
@@ -277,7 +277,7 @@ public class Application {
                 .call();
 
         if (res.incurredFees().isPresent()) {
-            // handle response
+            System.out.println(res.incurredFees().get());
         }
     }
 }
@@ -341,7 +341,7 @@ public class Application {
                 .call();
 
         if (res.incurredFees().isPresent()) {
-            // handle response
+            System.out.println(res.incurredFees().get());
         }
     }
 }
@@ -398,7 +398,7 @@ public class Application {
                 .call();
 
         if (res.incurredFees().isPresent()) {
-            // handle response
+            System.out.println(res.incurredFees().get());
         }
     }
 }
@@ -463,7 +463,7 @@ public class Application {
                 .call();
 
         if (res.partnerPricingAgreements().isPresent()) {
-            // handle response
+            System.out.println(res.partnerPricingAgreements().get());
         }
     }
 }
@@ -527,7 +527,7 @@ public class Application {
                 .call();
 
         if (res.residuals().isPresent()) {
-            // handle response
+            System.out.println(res.residuals().get());
         }
     }
 }
@@ -585,7 +585,7 @@ public class Application {
                 .call();
 
         if (res.residual().isPresent()) {
-            // handle response
+            System.out.println(res.residual().get());
         }
     }
 }
@@ -651,7 +651,7 @@ public class Application {
                 .call();
 
         if (res.incurredFees().isPresent()) {
-            // handle response
+            System.out.println(res.incurredFees().get());
         }
     }
 }

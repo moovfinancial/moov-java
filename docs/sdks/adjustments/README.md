@@ -48,7 +48,7 @@ public class Application {
                 .call();
 
         if (res.adjustments().isPresent()) {
-            // handle response
+            System.out.println(res.adjustments().get());
         }
     }
 }
@@ -107,7 +107,7 @@ public class Application {
                 .call();
 
         if (res.adjustment().isPresent()) {
-            // handle response
+            System.out.println(res.adjustment().get());
         }
     }
 }

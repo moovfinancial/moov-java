@@ -1,5 +1,13 @@
 # TransferParty
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.TransferParty;
+
+TransferParty value = TransferParty.SOURCE;
+```
+
 
 ## Values
 

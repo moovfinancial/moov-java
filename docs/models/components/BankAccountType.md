@@ -2,6 +2,14 @@
 
 The bank account type.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.BankAccountType;
+
+BankAccountType value = BankAccountType.CHECKING;
+```
+
 
 ## Values
 

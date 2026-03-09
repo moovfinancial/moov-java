@@ -1,5 +1,13 @@
 # TicketStatus
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.TicketStatus;
+
+TicketStatus value = TicketStatus.NEW;
+```
+
 
 ## Values
 

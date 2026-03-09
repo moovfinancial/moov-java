@@ -2,6 +2,14 @@
 
 The type of receipt being requested.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.ReceiptKind;
+
+ReceiptKind value = ReceiptKind.SALE_CUSTOMER_V1;
+```
+
 
 ## Values
 

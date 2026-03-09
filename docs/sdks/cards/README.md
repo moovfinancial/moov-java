@@ -115,7 +115,7 @@ public class Application {
                 .call();
 
         if (res.card().isPresent()) {
-            // handle response
+            System.out.println(res.card().get());
         }
     }
 }
@@ -179,7 +179,7 @@ public class Application {
                 .call();
 
         if (res.cards().isPresent()) {
-            // handle response
+            System.out.println(res.cards().get());
         }
     }
 }
@@ -239,7 +239,7 @@ public class Application {
                 .call();
 
         if (res.card().isPresent()) {
-            // handle response
+            System.out.println(res.card().get());
         }
     }
 }
@@ -313,7 +313,7 @@ public class Application {
                 .call();
 
         if (res.card().isPresent()) {
-            // handle response
+            System.out.println(res.card().get());
         }
     }
 }

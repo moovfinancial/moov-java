@@ -136,7 +136,7 @@ public class Application {
                 .call();
 
         if (res.account().isPresent()) {
-            // handle response
+            System.out.println(res.account().get());
         }
     }
 }
@@ -207,7 +207,7 @@ public class Application {
                 .call();
 
         if (res.accounts().isPresent()) {
-            // handle response
+            System.out.println(res.accounts().get());
         }
     }
 }
@@ -264,7 +264,7 @@ public class Application {
                 .call();
 
         if (res.account().isPresent()) {
-            // handle response
+            System.out.println(res.account().get());
         }
     }
 }
@@ -412,7 +412,7 @@ public class Application {
                 .call();
 
         if (res.account().isPresent()) {
-            // handle response
+            System.out.println(res.account().get());
         }
     }
 }
@@ -544,7 +544,7 @@ public class Application {
                 .call();
 
         if (res.accounts().isPresent()) {
-            // handle response
+            System.out.println(res.accounts().get());
         }
     }
 }
@@ -666,7 +666,7 @@ public class Application {
                 .call();
 
         if (res.accountCountries().isPresent()) {
-            // handle response
+            System.out.println(res.accountCountries().get());
         }
     }
 }
@@ -733,7 +733,7 @@ public class Application {
                 .call();
 
         if (res.accountCountries().isPresent()) {
-            // handle response
+            System.out.println(res.accountCountries().get());
         }
     }
 }
@@ -850,7 +850,7 @@ public class Application {
                 .call();
 
         if (res.termsOfServiceToken().isPresent()) {
-            // handle response
+            System.out.println(res.termsOfServiceToken().get());
         }
     }
 }

@@ -2,6 +2,14 @@
 
 The file's purpose.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.FilePurpose;
+
+FilePurpose value = FilePurpose.BUSINESS_VERIFICATION;
+```
+
 
 ## Values
 

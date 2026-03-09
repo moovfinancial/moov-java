@@ -23,6 +23,14 @@ The return code of an ACH transaction that caused the bank account status to cha
 - R38: Stop Payment on Source Document (Adjustment Entry)
 - R39: Improper Source Document
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.ACHReturnCode;
+
+ACHReturnCode value = ACHReturnCode.R02;
+```
+
 
 ## Values
 

@@ -63,7 +63,7 @@ public class Application {
                 .call();
 
         if (res.walletTransactions().isPresent()) {
-            // handle response
+            System.out.println(res.walletTransactions().get());
         }
     }
 }
@@ -125,7 +125,7 @@ public class Application {
                 .call();
 
         if (res.walletTransaction().isPresent()) {
-            // handle response
+            System.out.println(res.walletTransaction().get());
         }
     }
 }

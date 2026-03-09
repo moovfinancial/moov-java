@@ -1,5 +1,13 @@
 # WalletTransactionSourceType
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.WalletTransactionSourceType;
+
+WalletTransactionSourceType value = WalletTransactionSourceType.TRANSFER;
+```
+
 
 ## Values
 

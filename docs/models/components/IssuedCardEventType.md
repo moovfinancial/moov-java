@@ -2,6 +2,14 @@
 
 The type of event that occurred on the card.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.IssuedCardEventType;
+
+IssuedCardEventType value = IssuedCardEventType.AUTHORIZATION;
+```
+
 
 ## Values
 

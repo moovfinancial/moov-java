@@ -64,7 +64,7 @@ public class Application {
                 .call();
 
         if (res.brandProperties().isPresent()) {
-            // handle response
+            System.out.println(res.brandProperties().get());
         }
     }
 }
@@ -136,7 +136,7 @@ public class Application {
                 .call();
 
         if (res.brandProperties().isPresent()) {
-            // handle response
+            System.out.println(res.brandProperties().get());
         }
     }
 }
@@ -196,7 +196,7 @@ public class Application {
                 .call();
 
         if (res.brandProperties().isPresent()) {
-            // handle response
+            System.out.println(res.brandProperties().get());
         }
     }
 }

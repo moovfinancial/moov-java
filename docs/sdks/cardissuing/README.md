@@ -89,7 +89,7 @@ public class Application {
                 .call();
 
         if (res.issuedCard().isPresent()) {
-            // handle response
+            System.out.println(res.issuedCard().get());
         }
     }
 }
@@ -151,7 +151,7 @@ public class Application {
                 .call();
 
         if (res.issuedCards().isPresent()) {
-            // handle response
+            System.out.println(res.issuedCards().get());
         }
     }
 }
@@ -212,7 +212,7 @@ public class Application {
                 .call();
 
         if (res.issuedCard().isPresent()) {
-            // handle response
+            System.out.println(res.issuedCard().get());
         }
     }
 }
@@ -344,7 +344,7 @@ public class Application {
                 .call();
 
         if (res.fullIssuedCard().isPresent()) {
-            // handle response
+            System.out.println(res.fullIssuedCard().get());
         }
     }
 }

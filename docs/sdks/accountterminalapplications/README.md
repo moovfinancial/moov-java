@@ -62,7 +62,7 @@ public class Application {
                 .call();
 
         if (res.accountTerminalApplication().isPresent()) {
-            // handle response
+            System.out.println(res.accountTerminalApplication().get());
         }
     }
 }
@@ -122,7 +122,7 @@ public class Application {
                 .call();
 
         if (res.accountTerminalApplications().isPresent()) {
-            // handle response
+            System.out.println(res.accountTerminalApplications().get());
         }
     }
 }
@@ -180,7 +180,7 @@ public class Application {
                 .call();
 
         if (res.accountTerminalApplication().isPresent()) {
-            // handle response
+            System.out.println(res.accountTerminalApplication().get());
         }
     }
 }
@@ -239,7 +239,7 @@ public class Application {
                 .call();
 
         if (res.terminalConfiguration().isPresent()) {
-            // handle response
+            System.out.println(res.terminalConfiguration().get());
         }
     }
 }

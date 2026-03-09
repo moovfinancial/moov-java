@@ -2,6 +2,14 @@
 
 Status of the terminal application.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.TerminalApplicationStatus;
+
+TerminalApplicationStatus value = TerminalApplicationStatus.UNDEFINED;
+```
+
 
 ## Values
 

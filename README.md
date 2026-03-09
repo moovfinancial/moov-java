@@ -32,6 +32,7 @@ For more information about the API: [Moov Guides and API Documentation](https://
   * [Server Selection](#server-selection)
   * [Custom HTTP Client](#custom-http-client)
   * [Debugging](#debugging)
+  * [Jackson Configuration](#jackson-configuration)
 * [Development](#development)
   * [Maturity](#maturity)
   * [Contributions](#contributions)
@@ -49,7 +50,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:24.1.10'
+implementation 'io.moov:sdk:24.1.11'
 ```
 
 Maven:
@@ -57,7 +58,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>24.1.10</version>
+    <version>24.1.11</version>
 </dependency>
 ```
 
@@ -117,11 +118,20 @@ public class Application {
                 .call();
 
         if (res.account().isPresent()) {
-            // handle response
+            System.out.println(res.account().get());
         }
     }
 }
 ```
+
+#### Union Consumption Patterns
+
+When a response field is a union model:
+
+- Discriminated unions: branch on the discriminator (`switch`) and then narrow to the concrete type.
+- Non-discriminated unions: use generated accessors (for example `string()`, `asLong()`, `simpleObject()`) to determine the active variant.
+
+For full model-specific examples (including Java 11/16/21 variants), see each union model's **Supported Types** section in the generated model docs.
 <!-- End SDK Example Usage [usage] -->
 
 <!-- Start Authentication [security] -->
@@ -172,7 +182,7 @@ public class Application {
                 .call();
 
         if (res.account().isPresent()) {
-            // handle response
+            System.out.println(res.account().get());
         }
     }
 }
@@ -1182,7 +1192,7 @@ public class Application {
                     .call();
 
             if (res.account().isPresent()) {
-                // handle response
+                System.out.println(res.account().get());
             }
         } catch (MoovError ex) { // all SDK exceptions inherit from MoovError
 
@@ -1330,7 +1340,7 @@ public class Application {
                 .call();
 
         if (res.account().isPresent()) {
-            // handle response
+            System.out.println(res.account().get());
         }
     }
 }
@@ -1495,6 +1505,36 @@ __NOTE__: This is a convenience method that calls `HTTPClient.enableDebugLogging
 
 Another option is to set the System property `-Djdk.httpclient.HttpClient.log=all`. However, this second option does not log bodies.
 <!-- End Debugging [debug] -->
+
+<!-- Start Jackson Configuration [jackson] -->
+## Jackson Configuration
+
+The SDK ships with a pre-configured Jackson [`ObjectMapper`][jackson-databind] accessible via
+`JSON.getMapper()`. It is set up with type modules, strict deserializers, and the feature flags
+needed for full SDK compatibility (including ISO-8601 `OffsetDateTime` serialization):
+
+```java
+import io.moov.sdk.utils.JSON;
+
+String json = JSON.getMapper().writeValueAsString(response);
+```
+
+To compose with your own `ObjectMapper`, register the provided `SDKJacksonModule`, which
+bundles all the same modules and feature flags as a single plug-and-play module:
+
+```java
+import io.moov.sdk.utils.SDKJacksonModule;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+ObjectMapper myMapper = new ObjectMapper()
+    .registerModule(new SDKJacksonModule());
+
+String json = myMapper.writeValueAsString(response);
+```
+
+[jackson-databind]: https://github.com/FasterXML/jackson-databind
+[jackson-jsr310]: https://github.com/FasterXML/jackson-modules-java8/tree/master/datetime
+<!-- End Jackson Configuration [jackson] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

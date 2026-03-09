@@ -1,5 +1,13 @@
 # AchDebitCollectTransferPaymentMethodPaymentMethodType
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.AchDebitCollectTransferPaymentMethodPaymentMethodType;
+
+AchDebitCollectTransferPaymentMethodPaymentMethodType value = AchDebitCollectTransferPaymentMethodPaymentMethodType.ACH_DEBIT_COLLECT;
+```
+
 
 ## Values
 

@@ -67,7 +67,7 @@ public class Application {
                 .call();
 
         if (res.issuedCardAuthorizations().isPresent()) {
-            // handle response
+            System.out.println(res.issuedCardAuthorizations().get());
         }
     }
 }
@@ -125,7 +125,7 @@ public class Application {
                 .call();
 
         if (res.issuedCardAuthorization().isPresent()) {
-            // handle response
+            System.out.println(res.issuedCardAuthorization().get());
         }
     }
 }
@@ -186,7 +186,7 @@ public class Application {
                 .call();
 
         if (res.issuedCardAuthorizationEvents().isPresent()) {
-            // handle response
+            System.out.println(res.issuedCardAuthorizationEvents().get());
         }
     }
 }
@@ -253,7 +253,7 @@ public class Application {
                 .call();
 
         if (res.issuedCardTransactions().isPresent()) {
-            // handle response
+            System.out.println(res.issuedCardTransactions().get());
         }
     }
 }
@@ -311,7 +311,7 @@ public class Application {
                 .call();
 
         if (res.issuedCardTransaction().isPresent()) {
-            // handle response
+            System.out.println(res.issuedCardTransaction().get());
         }
     }
 }

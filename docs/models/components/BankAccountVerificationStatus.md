@@ -1,5 +1,13 @@
 # BankAccountVerificationStatus
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.BankAccountVerificationStatus;
+
+BankAccountVerificationStatus value = BankAccountVerificationStatus.NEW;
+```
+
 
 ## Values
 

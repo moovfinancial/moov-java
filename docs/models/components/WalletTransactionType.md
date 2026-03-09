@@ -1,5 +1,13 @@
 # WalletTransactionType
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.WalletTransactionType;
+
+WalletTransactionType value = WalletTransactionType.ACCOUNT_FUNDING;
+```
+
 
 ## Values
 

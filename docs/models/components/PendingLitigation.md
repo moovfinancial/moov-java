@@ -1,5 +1,13 @@
 # PendingLitigation
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.PendingLitigation;
+
+PendingLitigation value = PendingLitigation.BANKRUPTCY_OR_INSOLVENCY;
+```
+
 
 ## Values
 

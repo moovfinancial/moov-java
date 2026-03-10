@@ -43,7 +43,7 @@ public class Application {
                 .call();
 
         if (res.enrichedIndustries().isPresent()) {
-            // handle response
+            System.out.println(res.enrichedIndustries().get());
         }
     }
 }

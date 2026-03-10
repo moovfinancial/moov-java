@@ -1,5 +1,13 @@
 # InstantBankCreditPaymentMethodPaymentMethodType
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.InstantBankCreditPaymentMethodPaymentMethodType;
+
+InstantBankCreditPaymentMethodPaymentMethodType value = InstantBankCreditPaymentMethodPaymentMethodType.INSTANT_BANK_CREDIT;
+```
+
 
 ## Values
 

@@ -42,7 +42,8 @@ public class InvoiceLineItem {
 
     /**
      * Optional unique identifier associating the line item with a product.
-     * This is for reporting or tracking purposes, and does not populate other details of the line item.
+     * When provided, images associated with the product will be included on the line item.
+     * This does not populate other details of the line item.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("productID")
@@ -118,7 +119,8 @@ public class InvoiceLineItem {
 
     /**
      * Optional unique identifier associating the line item with a product.
-     * This is for reporting or tracking purposes, and does not populate other details of the line item.
+     * When provided, images associated with the product will be included on the line item.
+     * This does not populate other details of the line item.
      */
     @JsonIgnore
     public Optional<String> productID() {
@@ -177,7 +179,8 @@ public class InvoiceLineItem {
 
     /**
      * Optional unique identifier associating the line item with a product.
-     * This is for reporting or tracking purposes, and does not populate other details of the line item.
+     * When provided, images associated with the product will be included on the line item.
+     * This does not populate other details of the line item.
      */
     public InvoiceLineItem withProductID(String productID) {
         Utils.checkNotNull(productID, "productID");
@@ -188,7 +191,8 @@ public class InvoiceLineItem {
 
     /**
      * Optional unique identifier associating the line item with a product.
-     * This is for reporting or tracking purposes, and does not populate other details of the line item.
+     * When provided, images associated with the product will be included on the line item.
+     * This does not populate other details of the line item.
      */
     public InvoiceLineItem withProductID(Optional<String> productID) {
         Utils.checkNotNull(productID, "productID");
@@ -322,7 +326,8 @@ public class InvoiceLineItem {
 
         /**
          * Optional unique identifier associating the line item with a product.
-         * This is for reporting or tracking purposes, and does not populate other details of the line item.
+         * When provided, images associated with the product will be included on the line item.
+         * This does not populate other details of the line item.
          */
         public Builder productID(String productID) {
             Utils.checkNotNull(productID, "productID");
@@ -332,7 +337,8 @@ public class InvoiceLineItem {
 
         /**
          * Optional unique identifier associating the line item with a product.
-         * This is for reporting or tracking purposes, and does not populate other details of the line item.
+         * When provided, images associated with the product will be included on the line item.
+         * This does not populate other details of the line item.
          */
         public Builder productID(Optional<String> productID) {
             Utils.checkNotNull(productID, "productID");

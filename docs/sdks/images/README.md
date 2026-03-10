@@ -53,7 +53,7 @@ public class Application {
                 .call();
 
         if (res.imageMetadata().isPresent()) {
-            // handle response
+            System.out.println(res.imageMetadata().get());
         }
     }
 }
@@ -175,7 +175,7 @@ public class Application {
                 .call();
 
         if (res.imageMetadata().isPresent()) {
-            // handle response
+            System.out.println(res.imageMetadata().get());
         }
     }
 }
@@ -364,7 +364,7 @@ public class Application {
                 .call();
 
         if (res.imageMetadata().isPresent()) {
-            // handle response
+            System.out.println(res.imageMetadata().get());
         }
     }
 }

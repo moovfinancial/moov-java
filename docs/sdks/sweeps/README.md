@@ -72,7 +72,7 @@ public class Application {
                 .call();
 
         if (res.sweepConfig().isPresent()) {
-            // handle response
+            System.out.println(res.sweepConfig().get());
         }
     }
 }
@@ -132,7 +132,7 @@ public class Application {
                 .call();
 
         if (res.sweepConfigs().isPresent()) {
-            // handle response
+            System.out.println(res.sweepConfigs().get());
         }
     }
 }
@@ -190,7 +190,7 @@ public class Application {
                 .call();
 
         if (res.sweepConfig().isPresent()) {
-            // handle response
+            System.out.println(res.sweepConfig().get());
         }
     }
 }
@@ -254,7 +254,7 @@ public class Application {
                 .call();
 
         if (res.sweepConfig().isPresent()) {
-            // handle response
+            System.out.println(res.sweepConfig().get());
         }
     }
 }
@@ -323,7 +323,7 @@ public class Application {
                 .call();
 
         if (res.sweeps().isPresent()) {
-            // handle response
+            System.out.println(res.sweeps().get());
         }
     }
 }
@@ -382,7 +382,7 @@ public class Application {
                 .call();
 
         if (res.sweep().isPresent()) {
-            // handle response
+            System.out.println(res.sweep().get());
         }
     }
 }
@@ -417,7 +417,7 @@ public class Application {
                 .call();
 
         if (res.sweep().isPresent()) {
-            // handle response
+            System.out.println(res.sweep().get());
         }
     }
 }

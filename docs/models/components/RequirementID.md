@@ -2,6 +2,14 @@
 
 The unique ID of what the requirement is asking to be filled out.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.RequirementID;
+
+RequirementID value = RequirementID.ACCOUNT_TOS_ACCEPTANCE;
+```
+
 
 ## Values
 

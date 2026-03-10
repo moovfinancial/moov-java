@@ -1,5 +1,13 @@
 # InvoiceStatus
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.InvoiceStatus;
+
+InvoiceStatus value = InvoiceStatus.DRAFT;
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # CardPaymentTransferPaymentMethodPaymentMethodType
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.CardPaymentTransferPaymentMethodPaymentMethodType;
+
+CardPaymentTransferPaymentMethodPaymentMethodType value = CardPaymentTransferPaymentMethodPaymentMethodType.CARD_PAYMENT;
+```
+
 
 ## Values
 

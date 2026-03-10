@@ -42,6 +42,18 @@ public class Invoice {
     private String customerAccountID;
 
     /**
+     * Display name of the customer account.
+     */
+    @JsonProperty("customerDisplayName")
+    private String customerDisplayName;
+
+    /**
+     * Email address of the customer account.
+     */
+    @JsonProperty("customerEmail")
+    private String customerEmail;
+
+    /**
      * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
      * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
      */
@@ -137,12 +149,19 @@ public class Invoice {
     @JsonProperty("canceledOn")
     private Optional<OffsetDateTime> canceledOn;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("disabledOn")
+    private Optional<OffsetDateTime> disabledOn;
+
     @JsonCreator
     public Invoice(
             @JsonProperty("invoiceID") String invoiceID,
             @JsonProperty("invoiceNumber") String invoiceNumber,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("customerAccountID") String customerAccountID,
+            @JsonProperty("customerDisplayName") String customerDisplayName,
+            @JsonProperty("customerEmail") String customerEmail,
             @JsonProperty("partnerAccountID") String partnerAccountID,
             @JsonProperty("status") InvoiceStatus status,
             @JsonProperty("lineItems") InvoiceLineItems lineItems,
@@ -160,11 +179,14 @@ public class Invoice {
             @JsonProperty("dueDate") Optional<OffsetDateTime> dueDate,
             @JsonProperty("sentOn") Optional<OffsetDateTime> sentOn,
             @JsonProperty("paidOn") Optional<OffsetDateTime> paidOn,
-            @JsonProperty("canceledOn") Optional<OffsetDateTime> canceledOn) {
+            @JsonProperty("canceledOn") Optional<OffsetDateTime> canceledOn,
+            @JsonProperty("disabledOn") Optional<OffsetDateTime> disabledOn) {
         Utils.checkNotNull(invoiceID, "invoiceID");
         Utils.checkNotNull(invoiceNumber, "invoiceNumber");
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(customerAccountID, "customerAccountID");
+        Utils.checkNotNull(customerDisplayName, "customerDisplayName");
+        Utils.checkNotNull(customerEmail, "customerEmail");
         Utils.checkNotNull(partnerAccountID, "partnerAccountID");
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(lineItems, "lineItems");
@@ -183,10 +205,13 @@ public class Invoice {
         Utils.checkNotNull(sentOn, "sentOn");
         Utils.checkNotNull(paidOn, "paidOn");
         Utils.checkNotNull(canceledOn, "canceledOn");
+        Utils.checkNotNull(disabledOn, "disabledOn");
         this.invoiceID = invoiceID;
         this.invoiceNumber = invoiceNumber;
         this.description = description;
         this.customerAccountID = customerAccountID;
+        this.customerDisplayName = customerDisplayName;
+        this.customerEmail = customerEmail;
         this.partnerAccountID = partnerAccountID;
         this.status = status;
         this.lineItems = lineItems;
@@ -205,12 +230,15 @@ public class Invoice {
         this.sentOn = sentOn;
         this.paidOn = paidOn;
         this.canceledOn = canceledOn;
+        this.disabledOn = disabledOn;
     }
     
     public Invoice(
             String invoiceID,
             String invoiceNumber,
             String customerAccountID,
+            String customerDisplayName,
+            String customerEmail,
             String partnerAccountID,
             InvoiceStatus status,
             InvoiceLineItems lineItems,
@@ -223,11 +251,12 @@ public class Invoice {
             AmountDecimal disputedAmount,
             OffsetDateTime createdOn) {
         this(invoiceID, invoiceNumber, Optional.empty(),
-            customerAccountID, partnerAccountID, status,
-            lineItems, subtotalAmount, taxAmount,
-            totalAmount, pendingAmount, paidAmount,
-            refundedAmount, disputedAmount, Optional.empty(),
-            Optional.empty(), createdOn, Optional.empty(),
+            customerAccountID, customerDisplayName, customerEmail,
+            partnerAccountID, status, lineItems,
+            subtotalAmount, taxAmount, totalAmount,
+            pendingAmount, paidAmount, refundedAmount,
+            disputedAmount, Optional.empty(), Optional.empty(),
+            createdOn, Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty());
     }
@@ -258,6 +287,22 @@ public class Invoice {
     @JsonIgnore
     public String customerAccountID() {
         return customerAccountID;
+    }
+
+    /**
+     * Display name of the customer account.
+     */
+    @JsonIgnore
+    public String customerDisplayName() {
+        return customerDisplayName;
+    }
+
+    /**
+     * Email address of the customer account.
+     */
+    @JsonIgnore
+    public String customerEmail() {
+        return customerEmail;
     }
 
     /**
@@ -376,6 +421,11 @@ public class Invoice {
         return canceledOn;
     }
 
+    @JsonIgnore
+    public Optional<OffsetDateTime> disabledOn() {
+        return disabledOn;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -417,6 +467,24 @@ public class Invoice {
     public Invoice withCustomerAccountID(String customerAccountID) {
         Utils.checkNotNull(customerAccountID, "customerAccountID");
         this.customerAccountID = customerAccountID;
+        return this;
+    }
+
+    /**
+     * Display name of the customer account.
+     */
+    public Invoice withCustomerDisplayName(String customerDisplayName) {
+        Utils.checkNotNull(customerDisplayName, "customerDisplayName");
+        this.customerDisplayName = customerDisplayName;
+        return this;
+    }
+
+    /**
+     * Email address of the customer account.
+     */
+    public Invoice withCustomerEmail(String customerEmail) {
+        Utils.checkNotNull(customerEmail, "customerEmail");
+        this.customerEmail = customerEmail;
         return this;
     }
 
@@ -605,6 +673,19 @@ public class Invoice {
         return this;
     }
 
+    public Invoice withDisabledOn(OffsetDateTime disabledOn) {
+        Utils.checkNotNull(disabledOn, "disabledOn");
+        this.disabledOn = Optional.ofNullable(disabledOn);
+        return this;
+    }
+
+
+    public Invoice withDisabledOn(Optional<OffsetDateTime> disabledOn) {
+        Utils.checkNotNull(disabledOn, "disabledOn");
+        this.disabledOn = disabledOn;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -619,6 +700,8 @@ public class Invoice {
             Utils.enhancedDeepEquals(this.invoiceNumber, other.invoiceNumber) &&
             Utils.enhancedDeepEquals(this.description, other.description) &&
             Utils.enhancedDeepEquals(this.customerAccountID, other.customerAccountID) &&
+            Utils.enhancedDeepEquals(this.customerDisplayName, other.customerDisplayName) &&
+            Utils.enhancedDeepEquals(this.customerEmail, other.customerEmail) &&
             Utils.enhancedDeepEquals(this.partnerAccountID, other.partnerAccountID) &&
             Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
@@ -636,20 +719,22 @@ public class Invoice {
             Utils.enhancedDeepEquals(this.dueDate, other.dueDate) &&
             Utils.enhancedDeepEquals(this.sentOn, other.sentOn) &&
             Utils.enhancedDeepEquals(this.paidOn, other.paidOn) &&
-            Utils.enhancedDeepEquals(this.canceledOn, other.canceledOn);
+            Utils.enhancedDeepEquals(this.canceledOn, other.canceledOn) &&
+            Utils.enhancedDeepEquals(this.disabledOn, other.disabledOn);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             invoiceID, invoiceNumber, description,
-            customerAccountID, partnerAccountID, status,
-            lineItems, subtotalAmount, taxAmount,
-            totalAmount, pendingAmount, paidAmount,
-            refundedAmount, disputedAmount, paymentLinkCode,
-            invoicePayments, createdOn, invoiceDate,
-            dueDate, sentOn, paidOn,
-            canceledOn);
+            customerAccountID, customerDisplayName, customerEmail,
+            partnerAccountID, status, lineItems,
+            subtotalAmount, taxAmount, totalAmount,
+            pendingAmount, paidAmount, refundedAmount,
+            disputedAmount, paymentLinkCode, invoicePayments,
+            createdOn, invoiceDate, dueDate,
+            sentOn, paidOn, canceledOn,
+            disabledOn);
     }
     
     @Override
@@ -659,6 +744,8 @@ public class Invoice {
                 "invoiceNumber", invoiceNumber,
                 "description", description,
                 "customerAccountID", customerAccountID,
+                "customerDisplayName", customerDisplayName,
+                "customerEmail", customerEmail,
                 "partnerAccountID", partnerAccountID,
                 "status", status,
                 "lineItems", lineItems,
@@ -676,7 +763,8 @@ public class Invoice {
                 "dueDate", dueDate,
                 "sentOn", sentOn,
                 "paidOn", paidOn,
-                "canceledOn", canceledOn);
+                "canceledOn", canceledOn,
+                "disabledOn", disabledOn);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -689,6 +777,10 @@ public class Invoice {
         private Optional<String> description = Optional.empty();
 
         private String customerAccountID;
+
+        private String customerDisplayName;
+
+        private String customerEmail;
 
         private String partnerAccountID;
 
@@ -725,6 +817,8 @@ public class Invoice {
         private Optional<OffsetDateTime> paidOn = Optional.empty();
 
         private Optional<OffsetDateTime> canceledOn = Optional.empty();
+
+        private Optional<OffsetDateTime> disabledOn = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -769,6 +863,26 @@ public class Invoice {
         public Builder customerAccountID(String customerAccountID) {
             Utils.checkNotNull(customerAccountID, "customerAccountID");
             this.customerAccountID = customerAccountID;
+            return this;
+        }
+
+
+        /**
+         * Display name of the customer account.
+         */
+        public Builder customerDisplayName(String customerDisplayName) {
+            Utils.checkNotNull(customerDisplayName, "customerDisplayName");
+            this.customerDisplayName = customerDisplayName;
+            return this;
+        }
+
+
+        /**
+         * Email address of the customer account.
+         */
+        public Builder customerEmail(String customerEmail) {
+            Utils.checkNotNull(customerEmail, "customerEmail");
+            this.customerEmail = customerEmail;
             return this;
         }
 
@@ -968,17 +1082,31 @@ public class Invoice {
             return this;
         }
 
+
+        public Builder disabledOn(OffsetDateTime disabledOn) {
+            Utils.checkNotNull(disabledOn, "disabledOn");
+            this.disabledOn = Optional.ofNullable(disabledOn);
+            return this;
+        }
+
+        public Builder disabledOn(Optional<OffsetDateTime> disabledOn) {
+            Utils.checkNotNull(disabledOn, "disabledOn");
+            this.disabledOn = disabledOn;
+            return this;
+        }
+
         public Invoice build() {
 
             return new Invoice(
                 invoiceID, invoiceNumber, description,
-                customerAccountID, partnerAccountID, status,
-                lineItems, subtotalAmount, taxAmount,
-                totalAmount, pendingAmount, paidAmount,
-                refundedAmount, disputedAmount, paymentLinkCode,
-                invoicePayments, createdOn, invoiceDate,
-                dueDate, sentOn, paidOn,
-                canceledOn);
+                customerAccountID, customerDisplayName, customerEmail,
+                partnerAccountID, status, lineItems,
+                subtotalAmount, taxAmount, totalAmount,
+                pendingAmount, paidAmount, refundedAmount,
+                disputedAmount, paymentLinkCode, invoicePayments,
+                createdOn, invoiceDate, dueDate,
+                sentOn, paidOn, canceledOn,
+                disabledOn);
         }
 
     }

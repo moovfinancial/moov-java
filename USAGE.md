@@ -35,7 +35,7 @@ public class Application {
                 .call();
 
         if (res.account().isPresent()) {
-            // handle response
+            System.out.println(res.account().get());
         }
     }
 }

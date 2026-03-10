@@ -2,6 +2,14 @@
 
 Status of a transaction within the ACH lifecycle.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.ACHTransactionStatus;
+
+ACHTransactionStatus value = ACHTransactionStatus.UNKNOWN;
+```
+
 
 ## Values
 

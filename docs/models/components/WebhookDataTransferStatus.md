@@ -1,5 +1,13 @@
 # WebhookDataTransferStatus
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.WebhookDataTransferStatus;
+
+WebhookDataTransferStatus value = WebhookDataTransferStatus.CREATED;
+```
+
 
 ## Values
 

@@ -2,6 +2,14 @@
 
 Types of documents that can be uploaded.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.DocumentType;
+
+DocumentType value = DocumentType.DRIVERS_LICENSE;
+```
+
 
 ## Values
 

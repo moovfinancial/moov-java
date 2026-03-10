@@ -1,5 +1,13 @@
 # FeeCategory
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.FeeCategory;
+
+FeeCategory value = FeeCategory.ACH;
+```
+
 
 ## Values
 

@@ -2,6 +2,14 @@
 
 Status codes for instant-bank failures.
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.InstantBankFailureCode;
+
+InstantBankFailureCode value = InstantBankFailureCode.PROCESSING_ERROR;
+```
+
 
 ## Values
 

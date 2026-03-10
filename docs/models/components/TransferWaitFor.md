@@ -1,5 +1,13 @@
 # TransferWaitFor
 
+## Example Usage
+
+```java
+import io.moov.sdk.models.components.TransferWaitFor;
+
+TransferWaitFor value = TransferWaitFor.RAIL_RESPONSE;
+```
+
 
 ## Values
 

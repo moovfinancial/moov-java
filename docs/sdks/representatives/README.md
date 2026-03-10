@@ -112,7 +112,7 @@ public class Application {
                 .call();
 
         if (res.representative().isPresent()) {
-            // handle response
+            System.out.println(res.representative().get());
         }
     }
 }
@@ -175,7 +175,7 @@ public class Application {
                 .call();
 
         if (res.representatives().isPresent()) {
-            // handle response
+            System.out.println(res.representatives().get());
         }
     }
 }
@@ -292,7 +292,7 @@ public class Application {
                 .call();
 
         if (res.representative().isPresent()) {
-            // handle response
+            System.out.println(res.representative().get());
         }
     }
 }
@@ -392,7 +392,7 @@ public class Application {
                 .call();
 
         if (res.representative().isPresent()) {
-            // handle response
+            System.out.println(res.representative().get());
         }
     }
 }

@@ -15,7 +15,7 @@ public final class SDKHooks {
     public static final void initialize(io.moov.sdk.utils.Hooks hooks) {
         // register hooks here
         MoovVersionHeaderHook moovVersionHook = new MoovVersionHeaderHook();
-        hooks.registerSdkInit(moovVersionHook);
+        hooks.registerBeforeRequest(moovVersionHook);
 
         FixDoubleAuthHeader authHeaderHook = new FixDoubleAuthHeader();
         hooks.registerBeforeRequest(authHeaderHook);

@@ -88,6 +88,9 @@ public class Moov {
     private final Representatives representatives;
 
 
+    private final ResolutionLinks resolutionLinks;
+
+
     private final Scheduling scheduling;
 
 
@@ -234,6 +237,11 @@ public class Moov {
 
     public Representatives representatives() {
         return representatives;
+    }
+
+
+    public ResolutionLinks resolutionLinks() {
+        return resolutionLinks;
     }
 
 
@@ -525,6 +533,7 @@ public class Moov {
         this.paymentMethods = new PaymentMethods(sdkConfiguration);
         this.products = new Products(sdkConfiguration);
         this.representatives = new Representatives(sdkConfiguration);
+        this.resolutionLinks = new ResolutionLinks(sdkConfiguration);
         this.scheduling = new Scheduling(sdkConfiguration);
         this.statements = new Statements(sdkConfiguration);
         this.sweeps = new Sweeps(sdkConfiguration);

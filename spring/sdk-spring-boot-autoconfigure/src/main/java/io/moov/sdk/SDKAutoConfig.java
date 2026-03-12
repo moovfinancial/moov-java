@@ -398,6 +398,17 @@ public class SDKAutoConfig {
         return moov.representatives();
     }
     /**
+     * Creates a ResolutionLinks sub-SDK bean if none exists.
+     *
+     * @param moov the main SDK instance
+     * @return A configured ResolutionLinks instance
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public ResolutionLinks resolutionLinks(Moov moov) {
+        return moov.resolutionLinks();
+    }
+    /**
      * Creates a Scheduling sub-SDK bean if none exists.
      *
      * @param moov the main SDK instance

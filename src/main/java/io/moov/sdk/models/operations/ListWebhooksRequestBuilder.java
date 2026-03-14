@@ -3,7 +3,7 @@
  */
 package io.moov.sdk.models.operations;
 
-import static io.moov.sdk.operations.Operations.RequestOperation;
+import static io.moov.sdk.operations.Operations.RequestlessOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListWebhooks;
@@ -18,20 +18,11 @@ public class ListWebhooksRequestBuilder {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
-    private ListWebhooksRequest buildRequest() {
-
-        ListWebhooksRequest request = new ListWebhooksRequest();
-
-        return request;
-    }
-
     public ListWebhooksResponse call() {
         
-        RequestOperation<ListWebhooksRequest, ListWebhooksResponse> operation
-              = new ListWebhooks.Sync(sdkConfiguration, _headers);
-        ListWebhooksRequest request = buildRequest();
+        RequestlessOperation<ListWebhooksResponse> operation
+            = new ListWebhooks.Sync(sdkConfiguration, _headers);
 
-        return operation.handleResponse(operation.doRequest(request));
+        return operation.handleResponse(operation.doRequest());
     }
 }

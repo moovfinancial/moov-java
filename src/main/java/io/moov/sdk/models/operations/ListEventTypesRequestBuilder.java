@@ -3,7 +3,7 @@
  */
 package io.moov.sdk.models.operations;
 
-import static io.moov.sdk.operations.Operations.RequestOperation;
+import static io.moov.sdk.operations.Operations.RequestlessOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListEventTypes;
@@ -18,20 +18,11 @@ public class ListEventTypesRequestBuilder {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
-    private ListEventTypesRequest buildRequest() {
-
-        ListEventTypesRequest request = new ListEventTypesRequest();
-
-        return request;
-    }
-
     public ListEventTypesResponse call() {
         
-        RequestOperation<ListEventTypesRequest, ListEventTypesResponse> operation
-              = new ListEventTypes.Sync(sdkConfiguration, _headers);
-        ListEventTypesRequest request = buildRequest();
+        RequestlessOperation<ListEventTypesResponse> operation
+            = new ListEventTypes.Sync(sdkConfiguration, _headers);
 
-        return operation.handleResponse(operation.doRequest(request));
+        return operation.handleResponse(operation.doRequest());
     }
 }

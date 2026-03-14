@@ -3,9 +3,8 @@
  */
 package io.moov.sdk;
 
-import static io.moov.sdk.operations.Operations.RequestOperation;
+import static io.moov.sdk.operations.Operations.RequestlessOperation;
 
-import io.moov.sdk.models.operations.ListIndustriesRequest;
 import io.moov.sdk.models.operations.ListIndustriesRequestBuilder;
 import io.moov.sdk.models.operations.ListIndustriesResponse;
 import io.moov.sdk.operations.ListIndustries;
@@ -46,13 +45,9 @@ public class Industries {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListIndustriesResponse listDirect() {
-        ListIndustriesRequest request =
-            ListIndustriesRequest
-                .builder()
-                .build();
-        RequestOperation<ListIndustriesRequest, ListIndustriesResponse> operation
-              = new ListIndustries.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
+        RequestlessOperation<ListIndustriesResponse> operation
+            = new ListIndustries.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest());
     }
 
 }

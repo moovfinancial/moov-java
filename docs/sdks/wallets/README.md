@@ -58,7 +58,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, CreateWalletValidationError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -128,7 +127,6 @@ public class Application {
     public static void main(String[] args) throws ListWalletsValidationError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -194,7 +192,6 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -259,7 +256,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, PatchWalletValidationError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")

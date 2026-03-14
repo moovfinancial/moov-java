@@ -42,10 +42,6 @@ public class SDKAutoConfigProperties {
      */
     private int serverIdx = 0;
     /**
-     * Global parameter configuration for all SDK operations.
-     */
-    private Globals globals = new Globals();
-    /**
      * Security configuration for API authentication.
      */
     private Security security = new Security();
@@ -119,23 +115,6 @@ public class SDKAutoConfigProperties {
      */
     public void setServerIdx(int serverIdx) {
         this.serverIdx = serverIdx;
-    }
-    /**
-     * Gets the global parameter configuration for all SDK operations.
-     *
-     * @return the global parameters configuration
-     */
-    public Globals getGlobals() {
-        return globals;
-    }
-
-    /**
-     * Sets the global parameter configuration for all SDK operations.
-     *
-     * @param globals the global parameters configuration to use
-     */
-    public void setGlobals(Globals globals) {
-        this.globals = globals;
     }
     /**
      * Gets the security configuration for API authentication.
@@ -442,51 +421,6 @@ public class SDKAutoConfigProperties {
          */
         public void setRedactedHeaders(Collection<String> redactedHeaders) {
             this.redactedHeaders = redactedHeaders;
-        }
-    }
-
-    /**
-     * Global parameters configuration properties
-     */
-    public static class Globals {
-        
-        /**
-         * Constructor.
-         */
-        public Globals() {
-        }
-        
-        /**
-         * Specify an API version.
-         * 
-         * <p>API versioning follows the format `vYYYY.QQ.BB`, where
-         * - `YYYY` is the year
-         * - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-         * - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter.
-         * - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-         * 
-         * <p>The `dev` version represents the most recent development state. It may include breaking changes and
-         * should be treated as a beta release.
-         * When no version is specified, the API defaults to `v2024.01.00`.
-         */
-        private String xMoovVersion;
-
-        /**
-         * Gets the global X-Moov-Version parameter.
-         *
-         * @return the X-Moov-Version value
-         */
-        public String getXMoovVersion() {
-            return xMoovVersion;
-        }
-
-        /**
-         * Sets the global X-Moov-Version parameter.
-         *
-         * @param xMoovVersion the X-Moov-Version value to use
-         */
-        public void setXMoovVersion(String xMoovVersion) {
-            this.xMoovVersion = xMoovVersion;
         }
     }
 

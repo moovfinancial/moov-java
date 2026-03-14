@@ -50,7 +50,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, CreateResolutionLinkError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -118,7 +117,6 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -175,7 +173,6 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -235,7 +232,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")

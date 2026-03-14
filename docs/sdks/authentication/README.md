@@ -22,6 +22,7 @@ Allows clients to notify the authorization server that a previously obtained ref
 package hello.world;
 
 import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.RevokeTokenRequest;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.RevokeTokenRequestError;
@@ -33,17 +34,20 @@ public class Application {
     public static void main(String[] args) throws GenericError, RevokeTokenRequestError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")
                     .build())
             .build();
 
-        RevokeAccessTokenResponse res = sdk.authentication().revokeAccessToken()
+        RevokeTokenRequest req = RevokeTokenRequest.builder()
                 .token("<value>")
                 .clientId("5clTR_MdVrrkgxw2")
                 .clientSecret("dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-")
+                .build();
+
+        RevokeAccessTokenResponse res = sdk.authentication().revokeAccessToken()
+                .request(req)
                 .call();
 
         // handle response
@@ -53,12 +57,9 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            | Example                                                                                |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `token`                                                                                | *String*                                                                               | :heavy_check_mark:                                                                     | The access or refresh token to revoke.                                                 |                                                                                        |
-| `tokenTypeHint`                                                                        | [Optional\<TokenTypeHint>](../../models/components/TokenTypeHint.md)                   | :heavy_minus_sign:                                                                     | The type of token being revoked.                                                       |                                                                                        |
-| `clientId`                                                                             | *Optional\<String>*                                                                    | :heavy_minus_sign:                                                                     | Client ID can be provided here in the body, or as the Username in HTTP Basic Auth.     | 5clTR_MdVrrkgxw2                                                                       |
-| `clientSecret`                                                                         | *Optional\<String>*                                                                    | :heavy_minus_sign:                                                                     | Client secret can be provided here in the body, or as the Password in HTTP Basic Auth. | dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-                                                       |
+| Parameter                                                       | Type                                                            | Required                                                        | Description                                                     |
+| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| `request`                                                       | [RevokeTokenRequest](../../models/shared/RevokeTokenRequest.md) | :heavy_check_mark:                                              | The request object to use for the request.                      |
 
 ### Response
 
@@ -94,7 +95,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, AuthTokenRequestError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")

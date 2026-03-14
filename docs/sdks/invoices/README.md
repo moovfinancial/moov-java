@@ -67,7 +67,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, CreateInvoiceError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -150,7 +149,6 @@ public class Application {
     public static void main(String[] args) throws ListInvoicesValidationError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -214,7 +212,6 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -277,7 +274,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, UpdateInvoiceError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -362,7 +358,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -424,7 +419,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, CreateInvoicePaymentError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -495,7 +489,6 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")

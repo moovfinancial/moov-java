@@ -4,6 +4,7 @@
 package io.moov.sdk;
 
 import static io.moov.sdk.operations.Operations.RequestOperation;
+import static io.moov.sdk.operations.Operations.RequestlessOperation;
 
 import io.moov.sdk.models.components.CreateTerminalApplication;
 import io.moov.sdk.models.components.TerminalApplicationVersion;
@@ -18,7 +19,6 @@ import io.moov.sdk.models.operations.DeleteTerminalApplicationResponse;
 import io.moov.sdk.models.operations.GetTerminalApplicationRequest;
 import io.moov.sdk.models.operations.GetTerminalApplicationRequestBuilder;
 import io.moov.sdk.models.operations.GetTerminalApplicationResponse;
-import io.moov.sdk.models.operations.ListTerminalApplicationsRequest;
 import io.moov.sdk.models.operations.ListTerminalApplicationsRequestBuilder;
 import io.moov.sdk.models.operations.ListTerminalApplicationsResponse;
 import io.moov.sdk.operations.CreateTerminalApplicationVersion;
@@ -91,13 +91,9 @@ public class TerminalApplications {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListTerminalApplicationsResponse listDirect() {
-        ListTerminalApplicationsRequest request =
-            ListTerminalApplicationsRequest
-                .builder()
-                .build();
-        RequestOperation<ListTerminalApplicationsRequest, ListTerminalApplicationsResponse> operation
-              = new ListTerminalApplications.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
+        RequestlessOperation<ListTerminalApplicationsResponse> operation
+            = new ListTerminalApplications.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest());
     }
 
     /**

@@ -3,12 +3,11 @@
  */
 package io.moov.sdk;
 
+import static io.moov.sdk.operations.Operations.RequestlessOperation;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.models.components.CreateWebhook;
 import io.moov.sdk.models.components.UpdateWebhook;
-import io.moov.sdk.models.components.WebhookEventType;
-import io.moov.sdk.models.components.WebhookStatus;
 import io.moov.sdk.models.operations.CreateWebhookRequestBuilder;
 import io.moov.sdk.models.operations.CreateWebhookResponse;
 import io.moov.sdk.models.operations.DisableWebhookRequest;
@@ -20,10 +19,8 @@ import io.moov.sdk.models.operations.GetWebhookResponse;
 import io.moov.sdk.models.operations.GetWebhookSecretRequest;
 import io.moov.sdk.models.operations.GetWebhookSecretRequestBuilder;
 import io.moov.sdk.models.operations.GetWebhookSecretResponse;
-import io.moov.sdk.models.operations.ListEventTypesRequest;
 import io.moov.sdk.models.operations.ListEventTypesRequestBuilder;
 import io.moov.sdk.models.operations.ListEventTypesResponse;
-import io.moov.sdk.models.operations.ListWebhooksRequest;
 import io.moov.sdk.models.operations.ListWebhooksRequestBuilder;
 import io.moov.sdk.models.operations.ListWebhooksResponse;
 import io.moov.sdk.models.operations.PingWebhookRequest;
@@ -40,7 +37,6 @@ import io.moov.sdk.operations.ListWebhooks;
 import io.moov.sdk.operations.PingWebhook;
 import io.moov.sdk.utils.Headers;
 import java.lang.String;
-import java.util.List;
 
 
 public class Webhooks {
@@ -67,13 +63,9 @@ public class Webhooks {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListEventTypesResponse listEventTypesDirect() {
-        ListEventTypesRequest request =
-            ListEventTypesRequest
-                .builder()
-                .build();
-        RequestOperation<ListEventTypesRequest, ListEventTypesResponse> operation
-              = new ListEventTypes.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
+        RequestlessOperation<ListEventTypesResponse> operation
+            = new ListEventTypes.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest());
     }
 
     /**
@@ -92,13 +84,9 @@ public class Webhooks {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListWebhooksResponse listDirect() {
-        ListWebhooksRequest request =
-            ListWebhooksRequest
-                .builder()
-                .build();
-        RequestOperation<ListWebhooksRequest, ListWebhooksResponse> operation
-              = new ListWebhooks.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
+        RequestlessOperation<ListWebhooksResponse> operation
+            = new ListWebhooks.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest());
     }
 
     /**
@@ -113,24 +101,11 @@ public class Webhooks {
     /**
      * Create a new webhook for the account.
      * 
-     * @param url 
-     * @param status The status of a webhook.
-     * @param eventTypes 
-     * @param description 
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public CreateWebhookResponse create(
-            String url, WebhookStatus status,
-            List<WebhookEventType> eventTypes, String description) {
-        CreateWebhook request =
-            CreateWebhook
-                .builder()
-                .url(url)
-                .status(status)
-                .eventTypes(eventTypes)
-                .description(description)
-                .build();
+    public CreateWebhookResponse create(CreateWebhook request) {
         RequestOperation<CreateWebhook, CreateWebhookResponse> operation
               = new io.moov.sdk.operations.CreateWebhook.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));

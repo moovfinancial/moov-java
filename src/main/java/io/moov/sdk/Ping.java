@@ -3,9 +3,8 @@
  */
 package io.moov.sdk;
 
-import static io.moov.sdk.operations.Operations.RequestOperation;
+import static io.moov.sdk.operations.Operations.RequestlessOperation;
 
-import io.moov.sdk.models.operations.PingRequest;
 import io.moov.sdk.models.operations.PingRequestBuilder;
 import io.moov.sdk.models.operations.PingResponse;
 import io.moov.sdk.utils.Headers;
@@ -43,13 +42,9 @@ public class Ping {
      * @throws RuntimeException subclass if the API call fails
      */
     public PingResponse pingDirect() {
-        PingRequest request =
-            PingRequest
-                .builder()
-                .build();
-        RequestOperation<PingRequest, PingResponse> operation
-              = new io.moov.sdk.operations.Ping.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
+        RequestlessOperation<PingResponse> operation
+            = new io.moov.sdk.operations.Ping.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest());
     }
 
 }

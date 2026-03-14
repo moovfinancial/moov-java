@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 7ede35287ac0cf4b08e9a94104403f4f
+  docChecksum: 6094500425cc8ec72b9ef7cb84bf3bb7
   docVersion: dev
   speakeasyVersion: 1.755.0
   generationVersion: 2.865.2
-  releaseVersion: 0.0.0-dev.7
-  configChecksum: 0b95fca8466849e5904a285f0861874c
+  releaseVersion: 0.0.0-dev.8
+  configChecksum: 139d8d2a4856a63a80594c25efdf89f9
   repoURL: https://github.com/moovfinancial/moov-java.git
   installationURL: https://github.com/moovfinancial/moov-java
   published: true
 persistentEdits:
-  generation_id: 3e505d65-b87e-4be9-bbb3-24f38f55f415
-  pristine_commit_hash: d1e6d057ec58de6a1a9c8244d7f9fef73692779f
-  pristine_tree_hash: f9d746360c7946a0e7a555865229944f6e28b83b
+  generation_id: 6de0f3e5-e922-4f50-a876-5043157cdf50
+  pristine_commit_hash: 0099ceae9d0ef16045dce2fb245cfbb079bfd826
+  pristine_tree_hash: 970081be6adb74cb062ff1e513dbcc67ddddc944
 features:
   java:
     acceptHeaders: 2.81.2
@@ -4417,8 +4417,8 @@ trackedFiles:
     pristine_git_object: 9b40f611aaace5afe9cf7cadc73ff2301fe51e80
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:4de3f376c70326b6f397d7866efc0af3a787270c
-    pristine_git_object: 5db69ab7c2060f698041a396d3d581eef56c6e9e
+    last_write_checksum: sha1:fcb4e5e7be0bfd7f75f18f0bab27fb5e28756c29
+    pristine_git_object: c55113e76363b0a70fde649f4279be61ac39bfa0
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4597,8 +4597,8 @@ trackedFiles:
     pristine_git_object: 72495cf1b905a82c978c8ca472b53f9c9cecccbd
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:bd1e308f3104589354081fac3bc18fa0b22430dd
-    pristine_git_object: 7d7ee0b7b2fdabca837616779f892992087f068c
+    last_write_checksum: sha1:9c7cd24609c3bde51ebb24c7753f37e5d9546ddb
+    pristine_git_object: c4b4521a603964f3dddba3eb4ce002f91231a1d4
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:bf0300e770bb968bfc8b5ee2b8d6f05e37e9bb67
@@ -13372,15 +13372,6 @@ examples:
           application/json: {"error": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Java SDK Changes:
-  * `moov.endToEndEncryption.generateKey()`:  `request` **Removed** (Breaking ⚠️)
-  * `moov.webhooks.listEventTypes()`:  `request` **Removed** (Breaking ⚠️)
-  * `moov.webhooks.list()`:  `request` **Removed** (Breaking ⚠️)
-  * `moov.industries.list()`:  `request` **Removed** (Breaking ⚠️)
-  * `moov.onboarding.listInvites()`:  `request` **Removed** (Breaking ⚠️)
-  * `moov.ping.ping()`:  `request` **Removed** (Breaking ⚠️)
-  * `moov.terminalApplications.list()`:  `request` **Removed** (Breaking ⚠️)
 generatedFiles:
   - .gitattributes
   - USAGE.md

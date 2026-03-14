@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: dcb9870e0b3fa716e45e8246f99b9803
+  docChecksum: 7991fc6b765c9768628214abdee94b9e
   docVersion: dev
   speakeasyVersion: 1.755.0
   generationVersion: 2.865.2
-  releaseVersion: 0.0.0-dev.9
-  configChecksum: 1bd71afbe304e5ee944d1793ca3b97ab
+  releaseVersion: 0.0.0-dev.10
+  configChecksum: 2a5b13d4f98f62feb6cdbfecc7ee8dc0
   repoURL: https://github.com/moovfinancial/moov-java.git
   installationURL: https://github.com/moovfinancial/moov-java
   published: true
 persistentEdits:
-  generation_id: 6e6a227d-b9ad-4fc8-a0ee-5c0efe82bf68
-  pristine_commit_hash: 138dfb6b65033a156d99b14154e96bd4601a543b
-  pristine_tree_hash: 07e821177d5219156b207b2880f86ccafff0817f
+  generation_id: 1b798725-7f4d-4cd6-91fd-690f60934430
+  pristine_commit_hash: ced1ba30fd2aa52774f80d63706bdda3929c559e
+  pristine_tree_hash: ac025cc79ed3158c20c697939408c4ae438dde1f
 features:
   java:
     acceptHeaders: 2.81.2
@@ -4417,8 +4417,8 @@ trackedFiles:
     pristine_git_object: 9b40f611aaace5afe9cf7cadc73ff2301fe51e80
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:8f30e911f63710bf34530edf845f33c58e5e56f6
-    pristine_git_object: 3e51145e976b8f478ec1cfdde5f6cce3c70548c7
+    last_write_checksum: sha1:8389e1778ddaa55b72e1dbd40d576eac21ee0c92
+    pristine_git_object: e36c226822498b9c36919f3f7af445bca4e2569b
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4597,8 +4597,8 @@ trackedFiles:
     pristine_git_object: 72495cf1b905a82c978c8ca472b53f9c9cecccbd
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:70efa060648fad3516894eb0dd4e6d23a23027bc
-    pristine_git_object: ed07b0131f9d176b9029cc1304a84b8560be99a5
+    last_write_checksum: sha1:c8bf3952f57ba8beb289e39f4f4aca8bed8f9f84
+    pristine_git_object: 660ad080e5d96a9746f56c5dde40f97d2550fd22
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:bf0300e770bb968bfc8b5ee2b8d6f05e37e9bb67

@@ -20,22 +20,30 @@ import java.util.Optional;
  * <p>The results of submitting cardholder name to a card network for verification.
  */
 public class AccountNameVerification {
-
+    /**
+     * Verification result of the cardholder's first name.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("firstName")
     private Optional<? extends CardVerificationResult> firstName;
 
-
+    /**
+     * Verification result of the cardholder's last name.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lastName")
     private Optional<? extends CardVerificationResult> lastName;
 
-
+    /**
+     * Verification result of the cardholder's middle name.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("middleName")
     private Optional<? extends CardVerificationResult> middleName;
 
-
+    /**
+     * Verification result of the cardholder's full name.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fullName")
     private Optional<? extends CardVerificationResult> fullName;
@@ -61,24 +69,36 @@ public class AccountNameVerification {
             Optional.empty());
     }
 
+    /**
+     * Verification result of the cardholder's first name.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<CardVerificationResult> firstName() {
         return (Optional<CardVerificationResult>) firstName;
     }
 
+    /**
+     * Verification result of the cardholder's last name.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<CardVerificationResult> lastName() {
         return (Optional<CardVerificationResult>) lastName;
     }
 
+    /**
+     * Verification result of the cardholder's middle name.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<CardVerificationResult> middleName() {
         return (Optional<CardVerificationResult>) middleName;
     }
 
+    /**
+     * Verification result of the cardholder's full name.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<CardVerificationResult> fullName() {
@@ -90,6 +110,9 @@ public class AccountNameVerification {
     }
 
 
+    /**
+     * Verification result of the cardholder's first name.
+     */
     public AccountNameVerification withFirstName(CardVerificationResult firstName) {
         Utils.checkNotNull(firstName, "firstName");
         this.firstName = Optional.ofNullable(firstName);
@@ -97,12 +120,18 @@ public class AccountNameVerification {
     }
 
 
+    /**
+     * Verification result of the cardholder's first name.
+     */
     public AccountNameVerification withFirstName(Optional<? extends CardVerificationResult> firstName) {
         Utils.checkNotNull(firstName, "firstName");
         this.firstName = firstName;
         return this;
     }
 
+    /**
+     * Verification result of the cardholder's last name.
+     */
     public AccountNameVerification withLastName(CardVerificationResult lastName) {
         Utils.checkNotNull(lastName, "lastName");
         this.lastName = Optional.ofNullable(lastName);
@@ -110,12 +139,18 @@ public class AccountNameVerification {
     }
 
 
+    /**
+     * Verification result of the cardholder's last name.
+     */
     public AccountNameVerification withLastName(Optional<? extends CardVerificationResult> lastName) {
         Utils.checkNotNull(lastName, "lastName");
         this.lastName = lastName;
         return this;
     }
 
+    /**
+     * Verification result of the cardholder's middle name.
+     */
     public AccountNameVerification withMiddleName(CardVerificationResult middleName) {
         Utils.checkNotNull(middleName, "middleName");
         this.middleName = Optional.ofNullable(middleName);
@@ -123,12 +158,18 @@ public class AccountNameVerification {
     }
 
 
+    /**
+     * Verification result of the cardholder's middle name.
+     */
     public AccountNameVerification withMiddleName(Optional<? extends CardVerificationResult> middleName) {
         Utils.checkNotNull(middleName, "middleName");
         this.middleName = middleName;
         return this;
     }
 
+    /**
+     * Verification result of the cardholder's full name.
+     */
     public AccountNameVerification withFullName(CardVerificationResult fullName) {
         Utils.checkNotNull(fullName, "fullName");
         this.fullName = Optional.ofNullable(fullName);
@@ -136,6 +177,9 @@ public class AccountNameVerification {
     }
 
 
+    /**
+     * Verification result of the cardholder's full name.
+     */
     public AccountNameVerification withFullName(Optional<? extends CardVerificationResult> fullName) {
         Utils.checkNotNull(fullName, "fullName");
         this.fullName = fullName;
@@ -190,12 +234,18 @@ public class AccountNameVerification {
         }
 
 
+        /**
+         * Verification result of the cardholder's first name.
+         */
         public Builder firstName(CardVerificationResult firstName) {
             Utils.checkNotNull(firstName, "firstName");
             this.firstName = Optional.ofNullable(firstName);
             return this;
         }
 
+        /**
+         * Verification result of the cardholder's first name.
+         */
         public Builder firstName(Optional<? extends CardVerificationResult> firstName) {
             Utils.checkNotNull(firstName, "firstName");
             this.firstName = firstName;
@@ -203,12 +253,18 @@ public class AccountNameVerification {
         }
 
 
+        /**
+         * Verification result of the cardholder's last name.
+         */
         public Builder lastName(CardVerificationResult lastName) {
             Utils.checkNotNull(lastName, "lastName");
             this.lastName = Optional.ofNullable(lastName);
             return this;
         }
 
+        /**
+         * Verification result of the cardholder's last name.
+         */
         public Builder lastName(Optional<? extends CardVerificationResult> lastName) {
             Utils.checkNotNull(lastName, "lastName");
             this.lastName = lastName;
@@ -216,12 +272,18 @@ public class AccountNameVerification {
         }
 
 
+        /**
+         * Verification result of the cardholder's middle name.
+         */
         public Builder middleName(CardVerificationResult middleName) {
             Utils.checkNotNull(middleName, "middleName");
             this.middleName = Optional.ofNullable(middleName);
             return this;
         }
 
+        /**
+         * Verification result of the cardholder's middle name.
+         */
         public Builder middleName(Optional<? extends CardVerificationResult> middleName) {
             Utils.checkNotNull(middleName, "middleName");
             this.middleName = middleName;
@@ -229,12 +291,18 @@ public class AccountNameVerification {
         }
 
 
+        /**
+         * Verification result of the cardholder's full name.
+         */
         public Builder fullName(CardVerificationResult fullName) {
             Utils.checkNotNull(fullName, "fullName");
             this.fullName = Optional.ofNullable(fullName);
             return this;
         }
 
+        /**
+         * Verification result of the cardholder's full name.
+         */
         public Builder fullName(Optional<? extends CardVerificationResult> fullName) {
             Utils.checkNotNull(fullName, "fullName");
             this.fullName = fullName;

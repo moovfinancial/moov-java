@@ -7,19 +7,13 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.RevokeTokenRequest;
-import io.moov.sdk.models.components.TokenTypeHint;
 import io.moov.sdk.operations.RevokeAccessToken;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.String;
-import java.util.Optional;
 
 public class RevokeAccessTokenRequestBuilder {
 
-    private String token;
-    private Optional<? extends TokenTypeHint> tokenTypeHint = Optional.empty();
-    private Optional<String> clientId = Optional.empty();
-    private Optional<String> clientSecret = Optional.empty();
+    private RevokeTokenRequest request;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -27,64 +21,16 @@ public class RevokeAccessTokenRequestBuilder {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public RevokeAccessTokenRequestBuilder token(String token) {
-        Utils.checkNotNull(token, "token");
-        this.token = token;
+    public RevokeAccessTokenRequestBuilder request(RevokeTokenRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-                
-    public RevokeAccessTokenRequestBuilder tokenTypeHint(TokenTypeHint tokenTypeHint) {
-        Utils.checkNotNull(tokenTypeHint, "tokenTypeHint");
-        this.tokenTypeHint = Optional.of(tokenTypeHint);
-        return this;
-    }
-
-    public RevokeAccessTokenRequestBuilder tokenTypeHint(Optional<? extends TokenTypeHint> tokenTypeHint) {
-        Utils.checkNotNull(tokenTypeHint, "tokenTypeHint");
-        this.tokenTypeHint = tokenTypeHint;
-        return this;
-    }
-                
-    public RevokeAccessTokenRequestBuilder clientId(String clientId) {
-        Utils.checkNotNull(clientId, "clientId");
-        this.clientId = Optional.of(clientId);
-        return this;
-    }
-
-    public RevokeAccessTokenRequestBuilder clientId(Optional<String> clientId) {
-        Utils.checkNotNull(clientId, "clientId");
-        this.clientId = clientId;
-        return this;
-    }
-                
-    public RevokeAccessTokenRequestBuilder clientSecret(String clientSecret) {
-        Utils.checkNotNull(clientSecret, "clientSecret");
-        this.clientSecret = Optional.of(clientSecret);
-        return this;
-    }
-
-    public RevokeAccessTokenRequestBuilder clientSecret(Optional<String> clientSecret) {
-        Utils.checkNotNull(clientSecret, "clientSecret");
-        this.clientSecret = clientSecret;
-        return this;
-    }
-
-
-    private RevokeTokenRequest buildRequest() {
-
-        RevokeTokenRequest request = new RevokeTokenRequest(token,
-            tokenTypeHint,
-            clientId,
-            clientSecret);
-
-        return request;
     }
 
     public RevokeAccessTokenResponse call() {
         
         RequestOperation<RevokeTokenRequest, RevokeAccessTokenResponse> operation
               = new RevokeAccessToken.Sync(sdkConfiguration, _headers);
-        RevokeTokenRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));
     }

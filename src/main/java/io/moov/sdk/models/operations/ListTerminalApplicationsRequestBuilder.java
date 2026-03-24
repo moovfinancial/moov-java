@@ -3,7 +3,7 @@
  */
 package io.moov.sdk.models.operations;
 
-import static io.moov.sdk.operations.Operations.RequestOperation;
+import static io.moov.sdk.operations.Operations.RequestlessOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListTerminalApplications;
@@ -18,20 +18,11 @@ public class ListTerminalApplicationsRequestBuilder {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
-    private ListTerminalApplicationsRequest buildRequest() {
-
-        ListTerminalApplicationsRequest request = new ListTerminalApplicationsRequest();
-
-        return request;
-    }
-
     public ListTerminalApplicationsResponse call() {
         
-        RequestOperation<ListTerminalApplicationsRequest, ListTerminalApplicationsResponse> operation
-              = new ListTerminalApplications.Sync(sdkConfiguration, _headers);
-        ListTerminalApplicationsRequest request = buildRequest();
+        RequestlessOperation<ListTerminalApplicationsResponse> operation
+            = new ListTerminalApplications.Sync(sdkConfiguration, _headers);
 
-        return operation.handleResponse(operation.doRequest(request));
+        return operation.handleResponse(operation.doRequest());
     }
 }

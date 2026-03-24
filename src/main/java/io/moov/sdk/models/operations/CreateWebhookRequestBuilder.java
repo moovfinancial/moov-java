@@ -7,19 +7,12 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateWebhook;
-import io.moov.sdk.models.components.WebhookEventType;
-import io.moov.sdk.models.components.WebhookStatus;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.String;
-import java.util.List;
 
 public class CreateWebhookRequestBuilder {
 
-    private String url;
-    private WebhookStatus status;
-    private List<WebhookEventType> eventTypes;
-    private String description;
+    private CreateWebhook request;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -27,46 +20,16 @@ public class CreateWebhookRequestBuilder {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public CreateWebhookRequestBuilder url(String url) {
-        Utils.checkNotNull(url, "url");
-        this.url = url;
+    public CreateWebhookRequestBuilder request(CreateWebhook request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-
-    public CreateWebhookRequestBuilder status(WebhookStatus status) {
-        Utils.checkNotNull(status, "status");
-        this.status = status;
-        return this;
-    }
-
-    public CreateWebhookRequestBuilder eventTypes(List<WebhookEventType> eventTypes) {
-        Utils.checkNotNull(eventTypes, "eventTypes");
-        this.eventTypes = eventTypes;
-        return this;
-    }
-
-    public CreateWebhookRequestBuilder description(String description) {
-        Utils.checkNotNull(description, "description");
-        this.description = description;
-        return this;
-    }
-
-
-    private CreateWebhook buildRequest() {
-
-        CreateWebhook request = new CreateWebhook(url,
-            status,
-            eventTypes,
-            description);
-
-        return request;
     }
 
     public CreateWebhookResponse call() {
         
         RequestOperation<CreateWebhook, CreateWebhookResponse> operation
               = new io.moov.sdk.operations.CreateWebhook.Sync(sdkConfiguration, _headers);
-        CreateWebhook request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));
     }

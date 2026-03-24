@@ -50,7 +50,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:25.4.11'
+implementation 'io.moov:sdk:25.5.0'
 ```
 
 Maven:
@@ -58,7 +58,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>25.4.11</version>
+    <version>25.5.0</version>
 </dependency>
 ```
 
@@ -97,7 +97,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, CreateAccountError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -165,7 +164,6 @@ public class Application {
                     .username("")
                     .password("")
                     .build())
-                .xMoovVersion("v2024.01.00")
             .build();
 
         CreateAccount req = CreateAccount.builder()
@@ -1170,7 +1168,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, CreateAccountError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -1319,7 +1316,6 @@ public class Application {
 
         Moov sdk = Moov.builder()
                 .serverURL("https://api.moov.io")
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")

@@ -11,7 +11,6 @@ import io.moov.sdk.SecuritySource;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.GetMerchantProcessingAgreementRequest;
 import io.moov.sdk.models.operations.GetMerchantProcessingAgreementResponse;
-import io.moov.sdk.utils.Globals;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Headers;
@@ -35,7 +34,6 @@ public class GetMerchantProcessingAgreement {
         final SecuritySource securitySource;
         final HTTPClient client;
         final Headers _headers;
-        final Globals operationGlobals;
 
         public Base(SDKConfiguration sdkConfiguration, Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
@@ -43,9 +41,6 @@ public class GetMerchantProcessingAgreement {
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.securitySource = this.sdkConfiguration.securitySource();
             this.client = this.sdkConfiguration.client();
-            this.operationGlobals = new Globals();
-            this.sdkConfiguration.globals.getParam("header", "X-Moov-Version")
-                .ifPresent(param -> operationGlobals.putParam("header", "X-Moov-Version", param));
         }
 
         Optional<SecuritySource> securitySource() {
@@ -83,12 +78,11 @@ public class GetMerchantProcessingAgreement {
                     klass,
                     this.baseUrl,
                     "/accounts/{accountID}/merchant-agreement",
-                    request, this.operationGlobals);
+                    request, null);
             HTTPRequest req = new HTTPRequest(url, "GET");
             req.addHeader("Accept", "application/pdf")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
             _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
-            req.addHeaders(Utils.getHeadersFromMetadata(request, this.operationGlobals));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
             return req.build();

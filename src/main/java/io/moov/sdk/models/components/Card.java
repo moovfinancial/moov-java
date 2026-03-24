@@ -85,7 +85,9 @@ public class Card {
     @JsonProperty("holderName")
     private Optional<String> holderName;
 
-
+    /**
+     * The billing address associated with the card.
+     */
     @JsonProperty("billingAddress")
     private CardAddress billingAddress;
 
@@ -147,7 +149,11 @@ public class Card {
     @JsonProperty("cardOnFile")
     private Optional<Boolean> cardOnFile;
 
-
+    /**
+     * Merchant account whose details (statement descriptor, address, etc.) are used for the card
+     * verification authorization.
+     * If omitted, the partner account's details are used instead.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("merchantAccountID")
     private Optional<String> merchantAccountID;
@@ -355,6 +361,9 @@ public class Card {
         return holderName;
     }
 
+    /**
+     * The billing address associated with the card.
+     */
     @JsonIgnore
     public CardAddress billingAddress() {
         return billingAddress;
@@ -427,6 +436,11 @@ public class Card {
         return cardOnFile;
     }
 
+    /**
+     * Merchant account whose details (statement descriptor, address, etc.) are used for the card
+     * verification authorization.
+     * If omitted, the partner account's details are used instead.
+     */
     @JsonIgnore
     public Optional<String> merchantAccountID() {
         return merchantAccountID;
@@ -586,6 +600,9 @@ public class Card {
         return this;
     }
 
+    /**
+     * The billing address associated with the card.
+     */
     public Card withBillingAddress(CardAddress billingAddress) {
         Utils.checkNotNull(billingAddress, "billingAddress");
         this.billingAddress = billingAddress;
@@ -740,6 +757,11 @@ public class Card {
         return this;
     }
 
+    /**
+     * Merchant account whose details (statement descriptor, address, etc.) are used for the card
+     * verification authorization.
+     * If omitted, the partner account's details are used instead.
+     */
     public Card withMerchantAccountID(String merchantAccountID) {
         Utils.checkNotNull(merchantAccountID, "merchantAccountID");
         this.merchantAccountID = Optional.ofNullable(merchantAccountID);
@@ -747,6 +769,11 @@ public class Card {
     }
 
 
+    /**
+     * Merchant account whose details (statement descriptor, address, etc.) are used for the card
+     * verification authorization.
+     * If omitted, the partner account's details are used instead.
+     */
     public Card withMerchantAccountID(Optional<String> merchantAccountID) {
         Utils.checkNotNull(merchantAccountID, "merchantAccountID");
         this.merchantAccountID = merchantAccountID;
@@ -1082,6 +1109,9 @@ public class Card {
         }
 
 
+        /**
+         * The billing address associated with the card.
+         */
         public Builder billingAddress(CardAddress billingAddress) {
             Utils.checkNotNull(billingAddress, "billingAddress");
             this.billingAddress = billingAddress;
@@ -1238,12 +1268,22 @@ public class Card {
         }
 
 
+        /**
+         * Merchant account whose details (statement descriptor, address, etc.) are used for the card
+         * verification authorization.
+         * If omitted, the partner account's details are used instead.
+         */
         public Builder merchantAccountID(String merchantAccountID) {
             Utils.checkNotNull(merchantAccountID, "merchantAccountID");
             this.merchantAccountID = Optional.ofNullable(merchantAccountID);
             return this;
         }
 
+        /**
+         * Merchant account whose details (statement descriptor, address, etc.) are used for the card
+         * verification authorization.
+         * If omitted, the partner account's details are used instead.
+         */
         public Builder merchantAccountID(Optional<String> merchantAccountID) {
             Utils.checkNotNull(merchantAccountID, "merchantAccountID");
             this.merchantAccountID = merchantAccountID;

@@ -21,7 +21,9 @@ import java.util.Optional;
  * <p>The results of the most recent card update request.
  */
 public class CardAccountUpdater {
-
+    /**
+     * Timestamp from the card network indicating when the card update was processed.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedOn")
     private Optional<OffsetDateTime> updatedOn;
@@ -47,6 +49,9 @@ public class CardAccountUpdater {
         this(Optional.empty(), Optional.empty());
     }
 
+    /**
+     * Timestamp from the card network indicating when the card update was processed.
+     */
     @JsonIgnore
     public Optional<OffsetDateTime> updatedOn() {
         return updatedOn;
@@ -66,6 +71,9 @@ public class CardAccountUpdater {
     }
 
 
+    /**
+     * Timestamp from the card network indicating when the card update was processed.
+     */
     public CardAccountUpdater withUpdatedOn(OffsetDateTime updatedOn) {
         Utils.checkNotNull(updatedOn, "updatedOn");
         this.updatedOn = Optional.ofNullable(updatedOn);
@@ -73,6 +81,9 @@ public class CardAccountUpdater {
     }
 
 
+    /**
+     * Timestamp from the card network indicating when the card update was processed.
+     */
     public CardAccountUpdater withUpdatedOn(Optional<OffsetDateTime> updatedOn) {
         Utils.checkNotNull(updatedOn, "updatedOn");
         this.updatedOn = updatedOn;
@@ -137,12 +148,18 @@ public class CardAccountUpdater {
         }
 
 
+        /**
+         * Timestamp from the card network indicating when the card update was processed.
+         */
         public Builder updatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
             this.updatedOn = Optional.ofNullable(updatedOn);
             return this;
         }
 
+        /**
+         * Timestamp from the card network indicating when the card update was processed.
+         */
         public Builder updatedOn(Optional<OffsetDateTime> updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
             this.updatedOn = updatedOn;

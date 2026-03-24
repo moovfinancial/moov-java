@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: f70c0c3c72916caeb30864bce46a3cde
+  docChecksum: aaf87e988ac47c8be2d6f450a07e9539
   docVersion: v2026.04.00
-  speakeasyVersion: 1.757.0
-  generationVersion: 2.866.0
-  releaseVersion: 26.4.0-dev.16
-  configChecksum: 9816c0efbe614490a547d4ecea57ba2e
+  speakeasyVersion: 1.759.1
+  generationVersion: 2.869.10
+  releaseVersion: 26.4.0-dev.17
+  configChecksum: 62109d31ab259f97ec3a0a7552910d38
   repoURL: https://github.com/moovfinancial/moov-java.git
   installationURL: https://github.com/moovfinancial/moov-java
   published: true
 persistentEdits:
-  generation_id: 845e67a6-a39b-4704-9862-62df73528468
-  pristine_commit_hash: 9f3f0ce073843f5cb8ae0e182bae2b74d0081f53
-  pristine_tree_hash: 45184660b773b72cfe6601244d2dbdfbe5d93386
+  generation_id: b01da63e-6339-4183-ac9c-9fd070a3cfc8
+  pristine_commit_hash: b6bdf2bbff23a85f1d52c67f992367d6734db7d2
+  pristine_tree_hash: d3045e70d06875f561110e9710618d0aa675db66
 features:
   java:
     acceptHeaders: 2.81.2
@@ -2425,8 +2425,8 @@ trackedFiles:
     pristine_git_object: 26c5176a11807a32fb3c3cde58e774229c0e9917
   docs/models/components/WalletTransactionType.md:
     id: 12b6a23ebb38
-    last_write_checksum: sha1:35908cbb5c1eb764308db6ee7aa144b506a4d050
-    pristine_git_object: 643d6ad6054a6434ac94dacad96a77f7cc232e41
+    last_write_checksum: sha1:8f7049b2b38678f40102dae029c5ed564036afe3
+    pristine_git_object: 0882b60c0e3b57f0395360578206f93c30d08ea8
   docs/models/components/WalletType.md:
     id: abbd0bc77e34
     last_write_checksum: sha1:2aa99e16390b9153de96a4ae1c631ef98eb32bb8
@@ -4417,8 +4417,8 @@ trackedFiles:
     pristine_git_object: 9b40f611aaace5afe9cf7cadc73ff2301fe51e80
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:ec5bdb234c3301d4a3e3314064158cbbd802bf3b
-    pristine_git_object: 557bbdaee2a9314c92cf377ac1cf74fbc24a3a55
+    last_write_checksum: sha1:ea8e5ed198a0faf37b490263a6b95af33c577510
+    pristine_git_object: aa89556f42b718d9e44a69a65ba29941e0962861
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4597,8 +4597,8 @@ trackedFiles:
     pristine_git_object: 72495cf1b905a82c978c8ca472b53f9c9cecccbd
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:bf4f781f8bc9c103d2f13517e31474cc21a62620
-    pristine_git_object: 2cb772622202449ae22bc4412570abd2ff79258e
+    last_write_checksum: sha1:dbd45b60d6cb739146c2e81d8e88a3ad16c7c5a1
+    pristine_git_object: 12de7f562cfd0e98f7a206674875d68d8699b1a3
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:bf0300e770bb968bfc8b5ee2b8d6f05e37e9bb67
@@ -7037,8 +7037,8 @@ trackedFiles:
     pristine_git_object: ed02cdf3836e63166e368b5e8791466ef52f65e0
   src/main/java/io/moov/sdk/models/components/WalletTransactionType.java:
     id: 692e8acba2b7
-    last_write_checksum: sha1:5501b42ce1e0df3f4df1909c8202e6b319f68993
-    pristine_git_object: 1eb566d687bc21e9a010fdb15708c9805ce9f952
+    last_write_checksum: sha1:68e4ce4976de7cc061dcd2907c46b41bfc2c3294
+    pristine_git_object: 01fe5f146e1265dbd8cb2d61645916e74f033c6c
   src/main/java/io/moov/sdk/models/components/WalletType.java:
     id: b72c72fdfbef
     last_write_checksum: sha1:ab3bca23ac04654d9572e6437910bc632760d86a
@@ -13372,6 +13372,7 @@ examples:
           application/json: {"error": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Java SDK Changes:\n* `moov.sweeps.list()`:  `response.[].subtotals[].type.enum(instantBankFailure)` **Added** (Breaking ⚠️)\n* `moov.sweeps.get()`:  `response.subtotals[].type.enum(instantBankFailure)` **Added** (Breaking ⚠️)\n* `moov.walletTransactions.list()`: \n  *  `request` **Changed**\n  *  `response.[].transactionType.enum(instantBankFailure)` **Added** (Breaking ⚠️)\n* `moov.walletTransactions.get()`:  `response.transactionType.enum(instantBankFailure)` **Added** (Breaking ⚠️)\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

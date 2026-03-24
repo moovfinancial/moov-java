@@ -35,7 +35,8 @@ public enum WalletTransactionType {
     WALLET_TRANSFER("wallet-transfer"),
     ADJUSTMENT("adjustment"),
     FEE_REVENUE("fee-revenue"),
-    RESIDUAL("residual");
+    RESIDUAL("residual"),
+    INSTANT_BANK_FAILURE("instant-bank-failure");
 
     @JsonValue
     private final String value;

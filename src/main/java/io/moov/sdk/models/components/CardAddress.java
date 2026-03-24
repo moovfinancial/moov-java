@@ -15,31 +15,43 @@ import java.util.Optional;
 
 
 public class CardAddress {
-
+    /**
+     * Street address line 1.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addressLine1")
     private Optional<String> addressLine1;
 
-
+    /**
+     * Street address line 2 (e.g., apartment or suite number).
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addressLine2")
     private Optional<String> addressLine2;
 
-
+    /**
+     * City name.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("city")
     private Optional<String> city;
 
-
+    /**
+     * Two-letter state or province code.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("stateOrProvince")
     private Optional<String> stateOrProvince;
 
-
+    /**
+     * Postal or ZIP code.
+     */
     @JsonProperty("postalCode")
     private String postalCode;
 
-
+    /**
+     * Two-letter ISO 3166-1 country code.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("country")
     private Optional<String> country;
@@ -72,31 +84,49 @@ public class CardAddress {
             Optional.empty(), postalCode, Optional.empty());
     }
 
+    /**
+     * Street address line 1.
+     */
     @JsonIgnore
     public Optional<String> addressLine1() {
         return addressLine1;
     }
 
+    /**
+     * Street address line 2 (e.g., apartment or suite number).
+     */
     @JsonIgnore
     public Optional<String> addressLine2() {
         return addressLine2;
     }
 
+    /**
+     * City name.
+     */
     @JsonIgnore
     public Optional<String> city() {
         return city;
     }
 
+    /**
+     * Two-letter state or province code.
+     */
     @JsonIgnore
     public Optional<String> stateOrProvince() {
         return stateOrProvince;
     }
 
+    /**
+     * Postal or ZIP code.
+     */
     @JsonIgnore
     public String postalCode() {
         return postalCode;
     }
 
+    /**
+     * Two-letter ISO 3166-1 country code.
+     */
     @JsonIgnore
     public Optional<String> country() {
         return country;
@@ -107,6 +137,9 @@ public class CardAddress {
     }
 
 
+    /**
+     * Street address line 1.
+     */
     public CardAddress withAddressLine1(String addressLine1) {
         Utils.checkNotNull(addressLine1, "addressLine1");
         this.addressLine1 = Optional.ofNullable(addressLine1);
@@ -114,12 +147,18 @@ public class CardAddress {
     }
 
 
+    /**
+     * Street address line 1.
+     */
     public CardAddress withAddressLine1(Optional<String> addressLine1) {
         Utils.checkNotNull(addressLine1, "addressLine1");
         this.addressLine1 = addressLine1;
         return this;
     }
 
+    /**
+     * Street address line 2 (e.g., apartment or suite number).
+     */
     public CardAddress withAddressLine2(String addressLine2) {
         Utils.checkNotNull(addressLine2, "addressLine2");
         this.addressLine2 = Optional.ofNullable(addressLine2);
@@ -127,12 +166,18 @@ public class CardAddress {
     }
 
 
+    /**
+     * Street address line 2 (e.g., apartment or suite number).
+     */
     public CardAddress withAddressLine2(Optional<String> addressLine2) {
         Utils.checkNotNull(addressLine2, "addressLine2");
         this.addressLine2 = addressLine2;
         return this;
     }
 
+    /**
+     * City name.
+     */
     public CardAddress withCity(String city) {
         Utils.checkNotNull(city, "city");
         this.city = Optional.ofNullable(city);
@@ -140,12 +185,18 @@ public class CardAddress {
     }
 
 
+    /**
+     * City name.
+     */
     public CardAddress withCity(Optional<String> city) {
         Utils.checkNotNull(city, "city");
         this.city = city;
         return this;
     }
 
+    /**
+     * Two-letter state or province code.
+     */
     public CardAddress withStateOrProvince(String stateOrProvince) {
         Utils.checkNotNull(stateOrProvince, "stateOrProvince");
         this.stateOrProvince = Optional.ofNullable(stateOrProvince);
@@ -153,18 +204,27 @@ public class CardAddress {
     }
 
 
+    /**
+     * Two-letter state or province code.
+     */
     public CardAddress withStateOrProvince(Optional<String> stateOrProvince) {
         Utils.checkNotNull(stateOrProvince, "stateOrProvince");
         this.stateOrProvince = stateOrProvince;
         return this;
     }
 
+    /**
+     * Postal or ZIP code.
+     */
     public CardAddress withPostalCode(String postalCode) {
         Utils.checkNotNull(postalCode, "postalCode");
         this.postalCode = postalCode;
         return this;
     }
 
+    /**
+     * Two-letter ISO 3166-1 country code.
+     */
     public CardAddress withCountry(String country) {
         Utils.checkNotNull(country, "country");
         this.country = Optional.ofNullable(country);
@@ -172,6 +232,9 @@ public class CardAddress {
     }
 
 
+    /**
+     * Two-letter ISO 3166-1 country code.
+     */
     public CardAddress withCountry(Optional<String> country) {
         Utils.checkNotNull(country, "country");
         this.country = country;
@@ -234,12 +297,18 @@ public class CardAddress {
         }
 
 
+        /**
+         * Street address line 1.
+         */
         public Builder addressLine1(String addressLine1) {
             Utils.checkNotNull(addressLine1, "addressLine1");
             this.addressLine1 = Optional.ofNullable(addressLine1);
             return this;
         }
 
+        /**
+         * Street address line 1.
+         */
         public Builder addressLine1(Optional<String> addressLine1) {
             Utils.checkNotNull(addressLine1, "addressLine1");
             this.addressLine1 = addressLine1;
@@ -247,12 +316,18 @@ public class CardAddress {
         }
 
 
+        /**
+         * Street address line 2 (e.g., apartment or suite number).
+         */
         public Builder addressLine2(String addressLine2) {
             Utils.checkNotNull(addressLine2, "addressLine2");
             this.addressLine2 = Optional.ofNullable(addressLine2);
             return this;
         }
 
+        /**
+         * Street address line 2 (e.g., apartment or suite number).
+         */
         public Builder addressLine2(Optional<String> addressLine2) {
             Utils.checkNotNull(addressLine2, "addressLine2");
             this.addressLine2 = addressLine2;
@@ -260,12 +335,18 @@ public class CardAddress {
         }
 
 
+        /**
+         * City name.
+         */
         public Builder city(String city) {
             Utils.checkNotNull(city, "city");
             this.city = Optional.ofNullable(city);
             return this;
         }
 
+        /**
+         * City name.
+         */
         public Builder city(Optional<String> city) {
             Utils.checkNotNull(city, "city");
             this.city = city;
@@ -273,12 +354,18 @@ public class CardAddress {
         }
 
 
+        /**
+         * Two-letter state or province code.
+         */
         public Builder stateOrProvince(String stateOrProvince) {
             Utils.checkNotNull(stateOrProvince, "stateOrProvince");
             this.stateOrProvince = Optional.ofNullable(stateOrProvince);
             return this;
         }
 
+        /**
+         * Two-letter state or province code.
+         */
         public Builder stateOrProvince(Optional<String> stateOrProvince) {
             Utils.checkNotNull(stateOrProvince, "stateOrProvince");
             this.stateOrProvince = stateOrProvince;
@@ -286,6 +373,9 @@ public class CardAddress {
         }
 
 
+        /**
+         * Postal or ZIP code.
+         */
         public Builder postalCode(String postalCode) {
             Utils.checkNotNull(postalCode, "postalCode");
             this.postalCode = postalCode;
@@ -293,12 +383,18 @@ public class CardAddress {
         }
 
 
+        /**
+         * Two-letter ISO 3166-1 country code.
+         */
         public Builder country(String country) {
             Utils.checkNotNull(country, "country");
             this.country = Optional.ofNullable(country);
             return this;
         }
 
+        /**
+         * Two-letter ISO 3166-1 country code.
+         */
         public Builder country(Optional<String> country) {
             Utils.checkNotNull(country, "country");
             this.country = country;

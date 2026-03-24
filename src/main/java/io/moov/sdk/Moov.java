@@ -452,17 +452,6 @@ public class Moov {
             return this;
         }
 
-
-        /**
-         * Allows setting the xMoovVersion parameter for all supported operations.
-         *
-         * @param xMoovVersion The value to set.
-         * @return The builder instance.
-         */
-        public Builder xMoovVersion(String xMoovVersion) {
-            this.sdkConfiguration.globals.putParam("header", "X-Moov-Version", xMoovVersion);
-            return this;
-        }
         // Visible for testing, may be accessed via reflection in tests
         Builder _hooks(io.moov.sdk.utils.Hooks hooks) {
             sdkConfiguration.setHooks(hooks);  

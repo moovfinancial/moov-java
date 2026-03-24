@@ -20,20 +20,30 @@ import java.util.Optional;
  * <p>The results of submitting cardholder data to a card network for verification.
  */
 public class CardVerification {
-
+    /**
+     * Verification result of the card's CVV.
+     */
     @JsonProperty("cvv")
     private CardVerificationResult cvv;
 
-
+    /**
+     * Verification result of the billing address line 1.
+     * Derived from the same AVS code as `postalCode`; the card network returns a single code covering both
+     * address fields.
+     */
     @JsonProperty("addressLine1")
     private CardVerificationResult addressLine1;
 
-
+    /**
+     * Verification result of the billing address postal code.
+     * Derived from the same AVS code as `addressLine1`; the card network returns a single code covering
+     * both address fields.
+     */
     @JsonProperty("postalCode")
     private CardVerificationResult postalCode;
 
     /**
-     * The results of submitting cardholder name to a card network for verification.
+     * Verification results of the cardholder's name, broken down by name component.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("accountName")
@@ -63,23 +73,36 @@ public class CardVerification {
             Optional.empty());
     }
 
+    /**
+     * Verification result of the card's CVV.
+     */
     @JsonIgnore
     public CardVerificationResult cvv() {
         return cvv;
     }
 
+    /**
+     * Verification result of the billing address line 1.
+     * Derived from the same AVS code as `postalCode`; the card network returns a single code covering both
+     * address fields.
+     */
     @JsonIgnore
     public CardVerificationResult addressLine1() {
         return addressLine1;
     }
 
+    /**
+     * Verification result of the billing address postal code.
+     * Derived from the same AVS code as `addressLine1`; the card network returns a single code covering
+     * both address fields.
+     */
     @JsonIgnore
     public CardVerificationResult postalCode() {
         return postalCode;
     }
 
     /**
-     * The results of submitting cardholder name to a card network for verification.
+     * Verification results of the cardholder's name, broken down by name component.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -92,18 +115,31 @@ public class CardVerification {
     }
 
 
+    /**
+     * Verification result of the card's CVV.
+     */
     public CardVerification withCvv(CardVerificationResult cvv) {
         Utils.checkNotNull(cvv, "cvv");
         this.cvv = cvv;
         return this;
     }
 
+    /**
+     * Verification result of the billing address line 1.
+     * Derived from the same AVS code as `postalCode`; the card network returns a single code covering both
+     * address fields.
+     */
     public CardVerification withAddressLine1(CardVerificationResult addressLine1) {
         Utils.checkNotNull(addressLine1, "addressLine1");
         this.addressLine1 = addressLine1;
         return this;
     }
 
+    /**
+     * Verification result of the billing address postal code.
+     * Derived from the same AVS code as `addressLine1`; the card network returns a single code covering
+     * both address fields.
+     */
     public CardVerification withPostalCode(CardVerificationResult postalCode) {
         Utils.checkNotNull(postalCode, "postalCode");
         this.postalCode = postalCode;
@@ -111,7 +147,7 @@ public class CardVerification {
     }
 
     /**
-     * The results of submitting cardholder name to a card network for verification.
+     * Verification results of the cardholder's name, broken down by name component.
      */
     public CardVerification withAccountName(AccountNameVerification accountName) {
         Utils.checkNotNull(accountName, "accountName");
@@ -121,7 +157,7 @@ public class CardVerification {
 
 
     /**
-     * The results of submitting cardholder name to a card network for verification.
+     * Verification results of the cardholder's name, broken down by name component.
      */
     public CardVerification withAccountName(Optional<? extends AccountNameVerification> accountName) {
         Utils.checkNotNull(accountName, "accountName");
@@ -177,6 +213,9 @@ public class CardVerification {
         }
 
 
+        /**
+         * Verification result of the card's CVV.
+         */
         public Builder cvv(CardVerificationResult cvv) {
             Utils.checkNotNull(cvv, "cvv");
             this.cvv = cvv;
@@ -184,6 +223,11 @@ public class CardVerification {
         }
 
 
+        /**
+         * Verification result of the billing address line 1.
+         * Derived from the same AVS code as `postalCode`; the card network returns a single code covering both
+         * address fields.
+         */
         public Builder addressLine1(CardVerificationResult addressLine1) {
             Utils.checkNotNull(addressLine1, "addressLine1");
             this.addressLine1 = addressLine1;
@@ -191,6 +235,11 @@ public class CardVerification {
         }
 
 
+        /**
+         * Verification result of the billing address postal code.
+         * Derived from the same AVS code as `addressLine1`; the card network returns a single code covering
+         * both address fields.
+         */
         public Builder postalCode(CardVerificationResult postalCode) {
             Utils.checkNotNull(postalCode, "postalCode");
             this.postalCode = postalCode;
@@ -199,7 +248,7 @@ public class CardVerification {
 
 
         /**
-         * The results of submitting cardholder name to a card network for verification.
+         * Verification results of the cardholder's name, broken down by name component.
          */
         public Builder accountName(AccountNameVerification accountName) {
             Utils.checkNotNull(accountName, "accountName");
@@ -208,7 +257,7 @@ public class CardVerification {
         }
 
         /**
-         * The results of submitting cardholder name to a card network for verification.
+         * Verification results of the cardholder's name, broken down by name component.
          */
         public Builder accountName(Optional<? extends AccountNameVerification> accountName) {
             Utils.checkNotNull(accountName, "accountName");

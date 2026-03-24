@@ -15,12 +15,16 @@ import java.util.Optional;
 
 
 public class UpdateCardExpiration {
-
+    /**
+     * Two-digit month the card expires.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("month")
     private Optional<String> month;
 
-
+    /**
+     * Two-digit year the card expires.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("year")
     private Optional<String> year;
@@ -39,11 +43,17 @@ public class UpdateCardExpiration {
         this(Optional.empty(), Optional.empty());
     }
 
+    /**
+     * Two-digit month the card expires.
+     */
     @JsonIgnore
     public Optional<String> month() {
         return month;
     }
 
+    /**
+     * Two-digit year the card expires.
+     */
     @JsonIgnore
     public Optional<String> year() {
         return year;
@@ -54,6 +64,9 @@ public class UpdateCardExpiration {
     }
 
 
+    /**
+     * Two-digit month the card expires.
+     */
     public UpdateCardExpiration withMonth(String month) {
         Utils.checkNotNull(month, "month");
         this.month = Optional.ofNullable(month);
@@ -61,12 +74,18 @@ public class UpdateCardExpiration {
     }
 
 
+    /**
+     * Two-digit month the card expires.
+     */
     public UpdateCardExpiration withMonth(Optional<String> month) {
         Utils.checkNotNull(month, "month");
         this.month = month;
         return this;
     }
 
+    /**
+     * Two-digit year the card expires.
+     */
     public UpdateCardExpiration withYear(String year) {
         Utils.checkNotNull(year, "year");
         this.year = Optional.ofNullable(year);
@@ -74,6 +93,9 @@ public class UpdateCardExpiration {
     }
 
 
+    /**
+     * Two-digit year the card expires.
+     */
     public UpdateCardExpiration withYear(Optional<String> year) {
         Utils.checkNotNull(year, "year");
         this.year = year;
@@ -119,12 +141,18 @@ public class UpdateCardExpiration {
         }
 
 
+        /**
+         * Two-digit month the card expires.
+         */
         public Builder month(String month) {
             Utils.checkNotNull(month, "month");
             this.month = Optional.ofNullable(month);
             return this;
         }
 
+        /**
+         * Two-digit month the card expires.
+         */
         public Builder month(Optional<String> month) {
             Utils.checkNotNull(month, "month");
             this.month = month;
@@ -132,12 +160,18 @@ public class UpdateCardExpiration {
         }
 
 
+        /**
+         * Two-digit year the card expires.
+         */
         public Builder year(String year) {
             Utils.checkNotNull(year, "year");
             this.year = Optional.ofNullable(year);
             return this;
         }
 
+        /**
+         * Two-digit year the card expires.
+         */
         public Builder year(Optional<String> year) {
             Utils.checkNotNull(year, "year");
             this.year = year;

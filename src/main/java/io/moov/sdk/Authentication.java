@@ -7,7 +7,6 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.models.components.AuthTokenRequest;
 import io.moov.sdk.models.components.RevokeTokenRequest;
-import io.moov.sdk.models.components.TokenTypeHint;
 import io.moov.sdk.models.operations.CreateAccessTokenRequestBuilder;
 import io.moov.sdk.models.operations.CreateAccessTokenResponse;
 import io.moov.sdk.models.operations.RevokeAccessTokenRequestBuilder;
@@ -15,8 +14,6 @@ import io.moov.sdk.models.operations.RevokeAccessTokenResponse;
 import io.moov.sdk.operations.CreateAccessToken;
 import io.moov.sdk.operations.RevokeAccessToken;
 import io.moov.sdk.utils.Headers;
-import java.lang.String;
-import java.util.Optional;
 
 
 public class Authentication {
@@ -45,39 +42,11 @@ public class Authentication {
      * <p>Allows clients to notify the authorization server that a previously obtained refresh or access token
      * is no longer needed.
      * 
-     * @param token 
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public RevokeAccessTokenResponse revokeAccessToken(String token) {
-        return revokeAccessToken(token, Optional.empty(), Optional.empty(),
-            Optional.empty());
-    }
-
-    /**
-     * Revoke an auth token.
-     * 
-     * <p>Allows clients to notify the authorization server that a previously obtained refresh or access token
-     * is no longer needed.
-     * 
-     * @param token 
-     * @param tokenTypeHint The type of token being revoked.
-     * @param clientId 
-     * @param clientSecret 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public RevokeAccessTokenResponse revokeAccessToken(
-            String token, Optional<? extends TokenTypeHint> tokenTypeHint,
-            Optional<String> clientId, Optional<String> clientSecret) {
-        RevokeTokenRequest request =
-            RevokeTokenRequest
-                .builder()
-                .token(token)
-                .tokenTypeHint(tokenTypeHint)
-                .clientId(clientId)
-                .clientSecret(clientSecret)
-                .build();
+    public RevokeAccessTokenResponse revokeAccessToken(RevokeTokenRequest request) {
         RequestOperation<RevokeTokenRequest, RevokeAccessTokenResponse> operation
               = new RevokeAccessToken.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));

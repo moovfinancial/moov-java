@@ -8,6 +8,11 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * CardVerificationResult
+ * 
+ * <p>The result of a card verification check.
+ */
 public enum CardVerificationResult {
     NO_MATCH("noMatch"),
     MATCH("match"),

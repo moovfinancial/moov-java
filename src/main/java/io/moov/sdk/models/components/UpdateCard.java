@@ -28,7 +28,9 @@ public class UpdateCard {
     @JsonProperty("e2ee")
     private Optional<? extends E2EETokenUpdate> e2ee;
 
-
+    /**
+     * Updated billing address to store on file for the card.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("billingAddress")
     private Optional<? extends UpdateCardAddress> billingAddress;
@@ -38,27 +40,46 @@ public class UpdateCard {
     @JsonProperty("expiration")
     private Optional<? extends UpdateCardExpiration> expiration;
 
-
+    /**
+     * The card's 3- or 4-digit card verification value. Providing this triggers a new $0 verification
+     * authorization, which performs both CVV and address verification.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardCvv")
     private Optional<String> cardCvv;
 
-
+    /**
+     * Indicates cardholder has authorized card to be stored for future payments (e.g., recurring
+     * payments).
+     * If true and no `merchantAccountID` is provided, the partner account's ID is automatically used as
+     * the merchant account for verification.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardOnFile")
     private Optional<Boolean> cardOnFile;
 
-
+    /**
+     * Merchant account whose details (statement descriptor, address, etc.) are used for the card
+     * verification authorization.
+     * If omitted, the partner account's details are used instead.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("merchantAccountID")
     private Optional<String> merchantAccountID;
 
-
+    /**
+     * If true, submits the cardholder's name to the card network for verification as part of the $0
+     * authorization.
+     * Only supported for Visa and Mastercard; requesting name verification for American Express or
+     * Discover will return an error.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("verifyName")
     private Optional<Boolean> verifyName;
 
-
+    /**
+     * Updated name of the cardholder as it appears on the card.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("holderName")
     private Optional<String> holderName;
@@ -110,6 +131,9 @@ public class UpdateCard {
         return (Optional<E2EETokenUpdate>) e2ee;
     }
 
+    /**
+     * Updated billing address to store on file for the card.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<UpdateCardAddress> billingAddress() {
@@ -122,26 +146,50 @@ public class UpdateCard {
         return (Optional<UpdateCardExpiration>) expiration;
     }
 
+    /**
+     * The card's 3- or 4-digit card verification value. Providing this triggers a new $0 verification
+     * authorization, which performs both CVV and address verification.
+     */
     @JsonIgnore
     public Optional<String> cardCvv() {
         return cardCvv;
     }
 
+    /**
+     * Indicates cardholder has authorized card to be stored for future payments (e.g., recurring
+     * payments).
+     * If true and no `merchantAccountID` is provided, the partner account's ID is automatically used as
+     * the merchant account for verification.
+     */
     @JsonIgnore
     public Optional<Boolean> cardOnFile() {
         return cardOnFile;
     }
 
+    /**
+     * Merchant account whose details (statement descriptor, address, etc.) are used for the card
+     * verification authorization.
+     * If omitted, the partner account's details are used instead.
+     */
     @JsonIgnore
     public Optional<String> merchantAccountID() {
         return merchantAccountID;
     }
 
+    /**
+     * If true, submits the cardholder's name to the card network for verification as part of the $0
+     * authorization.
+     * Only supported for Visa and Mastercard; requesting name verification for American Express or
+     * Discover will return an error.
+     */
     @JsonIgnore
     public Optional<Boolean> verifyName() {
         return verifyName;
     }
 
+    /**
+     * Updated name of the cardholder as it appears on the card.
+     */
     @JsonIgnore
     public Optional<String> holderName() {
         return holderName;
@@ -179,6 +227,9 @@ public class UpdateCard {
         return this;
     }
 
+    /**
+     * Updated billing address to store on file for the card.
+     */
     public UpdateCard withBillingAddress(UpdateCardAddress billingAddress) {
         Utils.checkNotNull(billingAddress, "billingAddress");
         this.billingAddress = Optional.ofNullable(billingAddress);
@@ -186,6 +237,9 @@ public class UpdateCard {
     }
 
 
+    /**
+     * Updated billing address to store on file for the card.
+     */
     public UpdateCard withBillingAddress(Optional<? extends UpdateCardAddress> billingAddress) {
         Utils.checkNotNull(billingAddress, "billingAddress");
         this.billingAddress = billingAddress;
@@ -205,6 +259,10 @@ public class UpdateCard {
         return this;
     }
 
+    /**
+     * The card's 3- or 4-digit card verification value. Providing this triggers a new $0 verification
+     * authorization, which performs both CVV and address verification.
+     */
     public UpdateCard withCardCvv(String cardCvv) {
         Utils.checkNotNull(cardCvv, "cardCvv");
         this.cardCvv = Optional.ofNullable(cardCvv);
@@ -212,12 +270,22 @@ public class UpdateCard {
     }
 
 
+    /**
+     * The card's 3- or 4-digit card verification value. Providing this triggers a new $0 verification
+     * authorization, which performs both CVV and address verification.
+     */
     public UpdateCard withCardCvv(Optional<String> cardCvv) {
         Utils.checkNotNull(cardCvv, "cardCvv");
         this.cardCvv = cardCvv;
         return this;
     }
 
+    /**
+     * Indicates cardholder has authorized card to be stored for future payments (e.g., recurring
+     * payments).
+     * If true and no `merchantAccountID` is provided, the partner account's ID is automatically used as
+     * the merchant account for verification.
+     */
     public UpdateCard withCardOnFile(boolean cardOnFile) {
         Utils.checkNotNull(cardOnFile, "cardOnFile");
         this.cardOnFile = Optional.ofNullable(cardOnFile);
@@ -225,12 +293,23 @@ public class UpdateCard {
     }
 
 
+    /**
+     * Indicates cardholder has authorized card to be stored for future payments (e.g., recurring
+     * payments).
+     * If true and no `merchantAccountID` is provided, the partner account's ID is automatically used as
+     * the merchant account for verification.
+     */
     public UpdateCard withCardOnFile(Optional<Boolean> cardOnFile) {
         Utils.checkNotNull(cardOnFile, "cardOnFile");
         this.cardOnFile = cardOnFile;
         return this;
     }
 
+    /**
+     * Merchant account whose details (statement descriptor, address, etc.) are used for the card
+     * verification authorization.
+     * If omitted, the partner account's details are used instead.
+     */
     public UpdateCard withMerchantAccountID(String merchantAccountID) {
         Utils.checkNotNull(merchantAccountID, "merchantAccountID");
         this.merchantAccountID = Optional.ofNullable(merchantAccountID);
@@ -238,12 +317,23 @@ public class UpdateCard {
     }
 
 
+    /**
+     * Merchant account whose details (statement descriptor, address, etc.) are used for the card
+     * verification authorization.
+     * If omitted, the partner account's details are used instead.
+     */
     public UpdateCard withMerchantAccountID(Optional<String> merchantAccountID) {
         Utils.checkNotNull(merchantAccountID, "merchantAccountID");
         this.merchantAccountID = merchantAccountID;
         return this;
     }
 
+    /**
+     * If true, submits the cardholder's name to the card network for verification as part of the $0
+     * authorization.
+     * Only supported for Visa and Mastercard; requesting name verification for American Express or
+     * Discover will return an error.
+     */
     public UpdateCard withVerifyName(boolean verifyName) {
         Utils.checkNotNull(verifyName, "verifyName");
         this.verifyName = Optional.ofNullable(verifyName);
@@ -251,12 +341,21 @@ public class UpdateCard {
     }
 
 
+    /**
+     * If true, submits the cardholder's name to the card network for verification as part of the $0
+     * authorization.
+     * Only supported for Visa and Mastercard; requesting name verification for American Express or
+     * Discover will return an error.
+     */
     public UpdateCard withVerifyName(Optional<Boolean> verifyName) {
         Utils.checkNotNull(verifyName, "verifyName");
         this.verifyName = verifyName;
         return this;
     }
 
+    /**
+     * Updated name of the cardholder as it appears on the card.
+     */
     public UpdateCard withHolderName(String holderName) {
         Utils.checkNotNull(holderName, "holderName");
         this.holderName = Optional.ofNullable(holderName);
@@ -264,6 +363,9 @@ public class UpdateCard {
     }
 
 
+    /**
+     * Updated name of the cardholder as it appears on the card.
+     */
     public UpdateCard withHolderName(Optional<String> holderName) {
         Utils.checkNotNull(holderName, "holderName");
         this.holderName = holderName;
@@ -362,12 +464,18 @@ public class UpdateCard {
         }
 
 
+        /**
+         * Updated billing address to store on file for the card.
+         */
         public Builder billingAddress(UpdateCardAddress billingAddress) {
             Utils.checkNotNull(billingAddress, "billingAddress");
             this.billingAddress = Optional.ofNullable(billingAddress);
             return this;
         }
 
+        /**
+         * Updated billing address to store on file for the card.
+         */
         public Builder billingAddress(Optional<? extends UpdateCardAddress> billingAddress) {
             Utils.checkNotNull(billingAddress, "billingAddress");
             this.billingAddress = billingAddress;
@@ -388,12 +496,20 @@ public class UpdateCard {
         }
 
 
+        /**
+         * The card's 3- or 4-digit card verification value. Providing this triggers a new $0 verification
+         * authorization, which performs both CVV and address verification.
+         */
         public Builder cardCvv(String cardCvv) {
             Utils.checkNotNull(cardCvv, "cardCvv");
             this.cardCvv = Optional.ofNullable(cardCvv);
             return this;
         }
 
+        /**
+         * The card's 3- or 4-digit card verification value. Providing this triggers a new $0 verification
+         * authorization, which performs both CVV and address verification.
+         */
         public Builder cardCvv(Optional<String> cardCvv) {
             Utils.checkNotNull(cardCvv, "cardCvv");
             this.cardCvv = cardCvv;
@@ -401,12 +517,24 @@ public class UpdateCard {
         }
 
 
+        /**
+         * Indicates cardholder has authorized card to be stored for future payments (e.g., recurring
+         * payments).
+         * If true and no `merchantAccountID` is provided, the partner account's ID is automatically used as
+         * the merchant account for verification.
+         */
         public Builder cardOnFile(boolean cardOnFile) {
             Utils.checkNotNull(cardOnFile, "cardOnFile");
             this.cardOnFile = Optional.ofNullable(cardOnFile);
             return this;
         }
 
+        /**
+         * Indicates cardholder has authorized card to be stored for future payments (e.g., recurring
+         * payments).
+         * If true and no `merchantAccountID` is provided, the partner account's ID is automatically used as
+         * the merchant account for verification.
+         */
         public Builder cardOnFile(Optional<Boolean> cardOnFile) {
             Utils.checkNotNull(cardOnFile, "cardOnFile");
             this.cardOnFile = cardOnFile;
@@ -414,12 +542,22 @@ public class UpdateCard {
         }
 
 
+        /**
+         * Merchant account whose details (statement descriptor, address, etc.) are used for the card
+         * verification authorization.
+         * If omitted, the partner account's details are used instead.
+         */
         public Builder merchantAccountID(String merchantAccountID) {
             Utils.checkNotNull(merchantAccountID, "merchantAccountID");
             this.merchantAccountID = Optional.ofNullable(merchantAccountID);
             return this;
         }
 
+        /**
+         * Merchant account whose details (statement descriptor, address, etc.) are used for the card
+         * verification authorization.
+         * If omitted, the partner account's details are used instead.
+         */
         public Builder merchantAccountID(Optional<String> merchantAccountID) {
             Utils.checkNotNull(merchantAccountID, "merchantAccountID");
             this.merchantAccountID = merchantAccountID;
@@ -427,12 +565,24 @@ public class UpdateCard {
         }
 
 
+        /**
+         * If true, submits the cardholder's name to the card network for verification as part of the $0
+         * authorization.
+         * Only supported for Visa and Mastercard; requesting name verification for American Express or
+         * Discover will return an error.
+         */
         public Builder verifyName(boolean verifyName) {
             Utils.checkNotNull(verifyName, "verifyName");
             this.verifyName = Optional.ofNullable(verifyName);
             return this;
         }
 
+        /**
+         * If true, submits the cardholder's name to the card network for verification as part of the $0
+         * authorization.
+         * Only supported for Visa and Mastercard; requesting name verification for American Express or
+         * Discover will return an error.
+         */
         public Builder verifyName(Optional<Boolean> verifyName) {
             Utils.checkNotNull(verifyName, "verifyName");
             this.verifyName = verifyName;
@@ -440,12 +590,18 @@ public class UpdateCard {
         }
 
 
+        /**
+         * Updated name of the cardholder as it appears on the card.
+         */
         public Builder holderName(String holderName) {
             Utils.checkNotNull(holderName, "holderName");
             this.holderName = Optional.ofNullable(holderName);
             return this;
         }
 
+        /**
+         * Updated name of the cardholder as it appears on the card.
+         */
         public Builder holderName(Optional<String> holderName) {
             Utils.checkNotNull(holderName, "holderName");
             this.holderName = holderName;

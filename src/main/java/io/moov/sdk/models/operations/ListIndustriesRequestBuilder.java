@@ -3,7 +3,7 @@
  */
 package io.moov.sdk.models.operations;
 
-import static io.moov.sdk.operations.Operations.RequestOperation;
+import static io.moov.sdk.operations.Operations.RequestlessOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListIndustries;
@@ -18,20 +18,11 @@ public class ListIndustriesRequestBuilder {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
-    private ListIndustriesRequest buildRequest() {
-
-        ListIndustriesRequest request = new ListIndustriesRequest();
-
-        return request;
-    }
-
     public ListIndustriesResponse call() {
         
-        RequestOperation<ListIndustriesRequest, ListIndustriesResponse> operation
-              = new ListIndustries.Sync(sdkConfiguration, _headers);
-        ListIndustriesRequest request = buildRequest();
+        RequestlessOperation<ListIndustriesResponse> operation
+            = new ListIndustries.Sync(sdkConfiguration, _headers);
 
-        return operation.handleResponse(operation.doRequest(request));
+        return operation.handleResponse(operation.doRequest());
     }
 }

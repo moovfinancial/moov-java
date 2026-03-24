@@ -4,6 +4,7 @@
 package io.moov.sdk;
 
 import static io.moov.sdk.operations.Operations.RequestOperation;
+import static io.moov.sdk.operations.Operations.RequestlessOperation;
 
 import io.moov.sdk.models.components.OnboardingInviteRequest;
 import io.moov.sdk.models.operations.CreateOnboardingInviteRequestBuilder;
@@ -11,7 +12,6 @@ import io.moov.sdk.models.operations.CreateOnboardingInviteResponse;
 import io.moov.sdk.models.operations.GetOnboardingInviteRequest;
 import io.moov.sdk.models.operations.GetOnboardingInviteRequestBuilder;
 import io.moov.sdk.models.operations.GetOnboardingInviteResponse;
-import io.moov.sdk.models.operations.ListOnboardingInvitesRequest;
 import io.moov.sdk.models.operations.ListOnboardingInvitesRequestBuilder;
 import io.moov.sdk.models.operations.ListOnboardingInvitesResponse;
 import io.moov.sdk.models.operations.RevokeOnboardingInviteRequest;
@@ -89,13 +89,9 @@ public class Onboarding {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListOnboardingInvitesResponse listInvitesDirect() {
-        ListOnboardingInvitesRequest request =
-            ListOnboardingInvitesRequest
-                .builder()
-                .build();
-        RequestOperation<ListOnboardingInvitesRequest, ListOnboardingInvitesResponse> operation
-              = new ListOnboardingInvites.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
+        RequestlessOperation<ListOnboardingInvitesResponse> operation
+            = new ListOnboardingInvites.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest());
     }
 
     /**

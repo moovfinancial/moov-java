@@ -15,7 +15,6 @@ import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.UpdateWebhookValidationError;
 import io.moov.sdk.models.operations.UpdateWebhookRequest;
 import io.moov.sdk.models.operations.UpdateWebhookResponse;
-import io.moov.sdk.utils.Globals;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Headers;
@@ -43,7 +42,6 @@ public class UpdateWebhook {
         final SecuritySource securitySource;
         final HTTPClient client;
         final Headers _headers;
-        final Globals operationGlobals;
 
         public Base(SDKConfiguration sdkConfiguration, Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
@@ -51,9 +49,6 @@ public class UpdateWebhook {
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.securitySource = this.sdkConfiguration.securitySource();
             this.client = this.sdkConfiguration.client();
-            this.operationGlobals = new Globals();
-            this.sdkConfiguration.globals.getParam("header", "X-Moov-Version")
-                .ifPresent(param -> operationGlobals.putParam("header", "X-Moov-Version", param));
         }
 
         Optional<SecuritySource> securitySource() {
@@ -91,7 +86,7 @@ public class UpdateWebhook {
                     klass,
                     this.baseUrl,
                     "/webhooks/{webhookID}",
-                    request, this.operationGlobals);
+                    request, null);
             HTTPRequest req = new HTTPRequest(url, "PUT");
             Object convertedRequest = Utils.convertToShape(
                     request,
@@ -109,7 +104,6 @@ public class UpdateWebhook {
             req.addHeader("Accept", "application/json")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
             _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
-            req.addHeaders(Utils.getHeadersFromMetadata(request, this.operationGlobals));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
             return req.build();

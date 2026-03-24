@@ -147,7 +147,6 @@ public class SDKAutoConfig {
      * @param httpClient the HTTP client bean
      * @param hooks the hooks bean
      * @param securitySource the security source bean (optional)
-     * @param globals the globals configuration bean
      * @param retryConfig the retry config bean (optional)
      * @return A configured SDKConfiguration instance
      */
@@ -158,7 +157,6 @@ public class SDKAutoConfig {
             HTTPClient httpClient,
             io.moov.sdk.utils.Hooks hooks,
             SecuritySource securitySource,
-            io.moov.sdk.utils.Globals globals,
             Optional<RetryConfig> retryConfig) {
         
         SDKConfiguration sdkConfiguration = new SDKConfiguration();
@@ -172,7 +170,6 @@ public class SDKAutoConfig {
             sdkConfiguration.setServerUrl(properties.getServerUrl());
         }
         sdkConfiguration.setServerIdx(properties.getServerIdx());
-        sdkConfiguration.setGlobals(globals);
         
         sdkConfiguration.setRetryConfig(retryConfig);
         
@@ -189,26 +186,6 @@ public class SDKAutoConfig {
     @ConditionalOnMissingBean
     public Moov moov(SDKConfiguration sdkConfiguration) {
         return new Moov(sdkConfiguration);
-    }
-
-    /**
-     * Creates a Globals configuration bean if none exists, populated from properties.
-     *
-     * @param properties the configuration properties
-     * @return A configured Globals instance
-     */
-    @Bean
-    @ConditionalOnMissingBean
-    public io.moov.sdk.utils.Globals globals(SDKAutoConfigProperties properties) {
-        io.moov.sdk.utils.Globals globals = new io.moov.sdk.utils.Globals();
-        
-        // Populate globals from properties
-        SDKAutoConfigProperties.Globals globalProps = properties.getGlobals();
-        if (globalProps.getXMoovVersion() != null) {
-            globals.putParam("header", "X-Moov-Version", globalProps.getXMoovVersion());
-        }
-        
-        return globals;
     }
 
     /**

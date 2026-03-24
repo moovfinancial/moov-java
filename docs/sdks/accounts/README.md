@@ -115,7 +115,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, CreateAccountError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -189,7 +188,6 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -252,7 +250,6 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -320,7 +317,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, PatchAccountError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -463,7 +459,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -525,7 +520,6 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -590,7 +584,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, ConnectAccountRequestValidationError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -654,7 +647,6 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -717,7 +709,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, AssignCountriesError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -781,7 +772,6 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -839,7 +829,6 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")

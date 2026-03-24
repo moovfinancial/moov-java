@@ -16,11 +16,15 @@ import java.lang.String;
  * <p>The expiration date of the card or token.
  */
 public class CardExpiration {
-
+    /**
+     * Two-digit month the card expires.
+     */
     @JsonProperty("month")
     private String month;
 
-
+    /**
+     * Two-digit year the card expires.
+     */
     @JsonProperty("year")
     private String year;
 
@@ -34,11 +38,17 @@ public class CardExpiration {
         this.year = year;
     }
 
+    /**
+     * Two-digit month the card expires.
+     */
     @JsonIgnore
     public String month() {
         return month;
     }
 
+    /**
+     * Two-digit year the card expires.
+     */
     @JsonIgnore
     public String year() {
         return year;
@@ -49,12 +59,18 @@ public class CardExpiration {
     }
 
 
+    /**
+     * Two-digit month the card expires.
+     */
     public CardExpiration withMonth(String month) {
         Utils.checkNotNull(month, "month");
         this.month = month;
         return this;
     }
 
+    /**
+     * Two-digit year the card expires.
+     */
     public CardExpiration withYear(String year) {
         Utils.checkNotNull(year, "year");
         this.year = year;
@@ -100,6 +116,9 @@ public class CardExpiration {
         }
 
 
+        /**
+         * Two-digit month the card expires.
+         */
         public Builder month(String month) {
             Utils.checkNotNull(month, "month");
             this.month = month;
@@ -107,6 +126,9 @@ public class CardExpiration {
         }
 
 
+        /**
+         * Two-digit year the card expires.
+         */
         public Builder year(String year) {
             Utils.checkNotNull(year, "year");
             this.year = year;

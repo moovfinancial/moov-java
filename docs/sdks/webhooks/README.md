@@ -33,7 +33,6 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -80,7 +79,6 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -118,8 +116,7 @@ Create a new webhook for the account.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.components.WebhookStatus;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.CreateWebhookValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateWebhookResponse;
@@ -131,18 +128,21 @@ public class Application {
     public static void main(String[] args) throws GenericError, CreateWebhookValidationError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
                     .build())
             .build();
 
-        CreateWebhookResponse res = sdk.webhooks().create()
+        CreateWebhook req = CreateWebhook.builder()
                 .url("https://experienced-sailor.biz/")
                 .status(WebhookStatus.DISABLED)
                 .eventTypes(List.of())
                 .description("overdue bonnet failing")
+                .build();
+
+        CreateWebhookResponse res = sdk.webhooks().create()
+                .request(req)
                 .call();
 
         if (res.webhook().isPresent()) {
@@ -154,12 +154,9 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `url`                                                                  | *String*                                                               | :heavy_check_mark:                                                     | The URL where webhook events will be sent.                             |
-| `status`                                                               | [WebhookStatus](../../models/components/WebhookStatus.md)              | :heavy_check_mark:                                                     | The status of the webhook.                                             |
-| `eventTypes`                                                           | List\<[WebhookEventType](../../models/components/WebhookEventType.md)> | :heavy_check_mark:                                                     | The list of event types this webhook should subscribe to.              |
-| `description`                                                          | *String*                                                               | :heavy_check_mark:                                                     | A description of the webhook for reference. Can be an empty string.    |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `request`                                             | [CreateWebhook](../../models/shared/CreateWebhook.md) | :heavy_check_mark:                                    | The request object to use for the request.            |
 
 ### Response
 
@@ -193,7 +190,6 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -250,7 +246,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, UpdateWebhookValidationError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -314,7 +309,6 @@ public class Application {
     public static void main(String[] args) throws GenericError, Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -367,7 +361,6 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -421,7 +414,6 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
                 .security(Security.builder()
                     .username("")
                     .password("")

@@ -4,22 +4,20 @@
 package io.moov.sdk;
 
 import io.moov.sdk.hooks.SDKHooks;
-import io.moov.sdk.utils.Globals;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.Hooks;
 import io.moov.sdk.utils.RetryConfig;
 import io.moov.sdk.utils.SpeakeasyHTTPClient;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 public class SDKConfiguration {
 
     private static final String LANGUAGE = "java";
     public static final String OPENAPI_DOC_VERSION = "v2024.01.00";
-    public static final String SDK_VERSION = "24.1.11";
-    public static final String GEN_VERSION = "2.856.1";
+    public static final String SDK_VERSION = "24.2.0";
+    public static final String GEN_VERSION = "2.869.10";
     private static final String BASE_PACKAGE = "io.moov.sdk";
     public static final String USER_AGENT = 
             String.format("speakeasy-sdk/%s %s %s %s %s",
@@ -105,17 +103,7 @@ public class SDKConfiguration {
         SDKHooks.initialize(_hooks);
     }
 
-    @SuppressWarnings("serial")
-    public Globals globals = new Globals();
-    /**
-     * Sets the globals configuration. Used by Spring Boot auto-configuration.
-     *
-     * @param globals The globals configuration to set.
-     */
-    public void setGlobals(Globals globals) {
-        Utils.checkNotNull(globals, "globals");
-        this.globals = globals;
-    }
+    
     
     private Optional<RetryConfig> retryConfig = Optional.empty();
     

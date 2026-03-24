@@ -3,7 +3,7 @@
  */
 package io.moov.sdk.models.operations;
 
-import static io.moov.sdk.operations.Operations.RequestOperation;
+import static io.moov.sdk.operations.Operations.RequestlessOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListOnboardingInvites;
@@ -18,20 +18,11 @@ public class ListOnboardingInvitesRequestBuilder {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
-    private ListOnboardingInvitesRequest buildRequest() {
-
-        ListOnboardingInvitesRequest request = new ListOnboardingInvitesRequest();
-
-        return request;
-    }
-
     public ListOnboardingInvitesResponse call() {
         
-        RequestOperation<ListOnboardingInvitesRequest, ListOnboardingInvitesResponse> operation
-              = new ListOnboardingInvites.Sync(sdkConfiguration, _headers);
-        ListOnboardingInvitesRequest request = buildRequest();
+        RequestlessOperation<ListOnboardingInvitesResponse> operation
+            = new ListOnboardingInvites.Sync(sdkConfiguration, _headers);
 
-        return operation.handleResponse(operation.doRequest(request));
+        return operation.handleResponse(operation.doRequest());
     }
 }

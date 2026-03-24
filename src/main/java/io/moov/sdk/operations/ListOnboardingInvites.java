@@ -3,7 +3,7 @@
  */
 package io.moov.sdk.operations;
 
-import static io.moov.sdk.operations.Operations.RequestOperation;
+import static io.moov.sdk.operations.Operations.RequestlessOperation;
 import static io.moov.sdk.utils.Exceptions.unchecked;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -11,9 +11,7 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.SecuritySource;
 import io.moov.sdk.models.components.OnboardingInvite;
 import io.moov.sdk.models.errors.APIException;
-import io.moov.sdk.models.operations.ListOnboardingInvitesRequest;
 import io.moov.sdk.models.operations.ListOnboardingInvitesResponse;
-import io.moov.sdk.utils.Globals;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Headers;
@@ -38,7 +36,6 @@ public class ListOnboardingInvites {
         final SecuritySource securitySource;
         final HTTPClient client;
         final Headers _headers;
-        final Globals operationGlobals;
 
         public Base(SDKConfiguration sdkConfiguration, Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
@@ -46,9 +43,6 @@ public class ListOnboardingInvites {
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.securitySource = this.sdkConfiguration.securitySource();
             this.client = this.sdkConfiguration.client();
-            this.operationGlobals = new Globals();
-            this.sdkConfiguration.globals.getParam("header", "X-Moov-Version")
-                .ifPresent(param -> operationGlobals.putParam("header", "X-Moov-Version", param));
         }
 
         Optional<SecuritySource> securitySource() {
@@ -81,7 +75,7 @@ public class ListOnboardingInvites {
                     java.util.Optional.empty(),
                     securitySource());
         }
-        <T>HttpRequest buildRequest(T request) throws Exception {
+        HttpRequest buildRequest() throws Exception {
             String url = Utils.generateURL(
                     this.baseUrl,
                     "/onboarding-invites");
@@ -89,7 +83,6 @@ public class ListOnboardingInvites {
             req.addHeader("Accept", "application/json")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
             _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
-            req.addHeaders(Utils.getHeadersFromMetadata(request, this.operationGlobals));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
             return req.build();
@@ -97,13 +90,13 @@ public class ListOnboardingInvites {
     }
 
     public static class Sync extends Base
-            implements RequestOperation<ListOnboardingInvitesRequest, ListOnboardingInvitesResponse> {
+            implements RequestlessOperation<ListOnboardingInvitesResponse> {
         public Sync(SDKConfiguration sdkConfiguration, Headers _headers) {
             super(sdkConfiguration, _headers);
         }
 
-        private HttpRequest onBuildRequest(ListOnboardingInvitesRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+        private HttpRequest onBuildRequest() throws Exception {
+            HttpRequest req = buildRequest();
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 
@@ -119,8 +112,8 @@ public class ListOnboardingInvites {
         }
 
         @Override
-        public HttpResponse<InputStream> doRequest(ListOnboardingInvitesRequest request) {
-            HttpRequest r = unchecked(() -> onBuildRequest(request)).get();
+        public HttpResponse<InputStream> doRequest() {
+            HttpRequest r = unchecked(() -> onBuildRequest()).get();
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);

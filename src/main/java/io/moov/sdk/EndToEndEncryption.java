@@ -4,9 +4,9 @@
 package io.moov.sdk;
 
 import static io.moov.sdk.operations.Operations.RequestOperation;
+import static io.moov.sdk.operations.Operations.RequestlessOperation;
 
 import io.moov.sdk.models.components.E2EEToken;
-import io.moov.sdk.models.operations.GenerateEndToEndKeyRequest;
 import io.moov.sdk.models.operations.GenerateEndToEndKeyRequestBuilder;
 import io.moov.sdk.models.operations.GenerateEndToEndKeyResponse;
 import io.moov.sdk.models.operations.TestEndToEndTokenRequestBuilder;
@@ -14,7 +14,6 @@ import io.moov.sdk.models.operations.TestEndToEndTokenResponse;
 import io.moov.sdk.operations.GenerateEndToEndKey;
 import io.moov.sdk.operations.TestEndToEndToken;
 import io.moov.sdk.utils.Headers;
-import java.lang.String;
 
 
 public class EndToEndEncryption {
@@ -45,16 +44,11 @@ public class EndToEndEncryption {
      * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/ping.read` scope.
      * 
-     * @param token 
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public TestEndToEndTokenResponse testEncryptedToken(String token) {
-        E2EEToken request =
-            E2EEToken
-                .builder()
-                .token(token)
-                .build();
+    public TestEndToEndTokenResponse testEncryptedToken(E2EEToken request) {
         RequestOperation<E2EEToken, TestEndToEndTokenResponse> operation
               = new TestEndToEndToken.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -78,13 +72,9 @@ public class EndToEndEncryption {
      * @throws RuntimeException subclass if the API call fails
      */
     public GenerateEndToEndKeyResponse generateKeyDirect() {
-        GenerateEndToEndKeyRequest request =
-            GenerateEndToEndKeyRequest
-                .builder()
-                .build();
-        RequestOperation<GenerateEndToEndKeyRequest, GenerateEndToEndKeyResponse> operation
-              = new GenerateEndToEndKey.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
+        RequestlessOperation<GenerateEndToEndKeyResponse> operation
+            = new GenerateEndToEndKey.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest());
     }
 
 }

@@ -3,7 +3,7 @@
  */
 package io.moov.sdk.models.operations;
 
-import static io.moov.sdk.operations.Operations.RequestOperation;
+import static io.moov.sdk.operations.Operations.RequestlessOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GenerateEndToEndKey;
@@ -18,20 +18,11 @@ public class GenerateEndToEndKeyRequestBuilder {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
-    private GenerateEndToEndKeyRequest buildRequest() {
-
-        GenerateEndToEndKeyRequest request = new GenerateEndToEndKeyRequest();
-
-        return request;
-    }
-
     public GenerateEndToEndKeyResponse call() {
         
-        RequestOperation<GenerateEndToEndKeyRequest, GenerateEndToEndKeyResponse> operation
-              = new GenerateEndToEndKey.Sync(sdkConfiguration, _headers);
-        GenerateEndToEndKeyRequest request = buildRequest();
+        RequestlessOperation<GenerateEndToEndKeyResponse> operation
+            = new GenerateEndToEndKey.Sync(sdkConfiguration, _headers);
 
-        return operation.handleResponse(operation.doRequest(request));
+        return operation.handleResponse(operation.doRequest());
     }
 }

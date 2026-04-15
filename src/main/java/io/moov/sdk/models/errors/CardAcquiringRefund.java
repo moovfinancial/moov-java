@@ -12,7 +12,6 @@ import io.moov.sdk.models.components.Amount;
 import io.moov.sdk.models.components.RefundCardDetails;
 import io.moov.sdk.models.components.RefundStatus;
 import io.moov.sdk.utils.Utils;
-import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
 import java.lang.Deprecated;

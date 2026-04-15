@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 
@@ -23,15 +24,26 @@ public class CreateTransferDestinationCard {
     @JsonProperty("dynamicDescriptor")
     private Optional<String> dynamicDescriptor;
 
+    /**
+     * An optional field to specify the type of card payout, used to route the transfer with the
+     * appropriate business application identifier (BAI).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("payoutType")
+    private Optional<? extends CardPayoutType> payoutType;
+
     @JsonCreator
     public CreateTransferDestinationCard(
-            @JsonProperty("dynamicDescriptor") Optional<String> dynamicDescriptor) {
+            @JsonProperty("dynamicDescriptor") Optional<String> dynamicDescriptor,
+            @JsonProperty("payoutType") Optional<? extends CardPayoutType> payoutType) {
         Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");
+        Utils.checkNotNull(payoutType, "payoutType");
         this.dynamicDescriptor = dynamicDescriptor;
+        this.payoutType = payoutType;
     }
     
     public CreateTransferDestinationCard() {
-        this(Optional.empty());
+        this(Optional.empty(), Optional.empty());
     }
 
     /**
@@ -41,6 +53,16 @@ public class CreateTransferDestinationCard {
     @JsonIgnore
     public Optional<String> dynamicDescriptor() {
         return dynamicDescriptor;
+    }
+
+    /**
+     * An optional field to specify the type of card payout, used to route the transfer with the
+     * appropriate business application identifier (BAI).
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<CardPayoutType> payoutType() {
+        return (Optional<CardPayoutType>) payoutType;
     }
 
     public static Builder builder() {
@@ -69,6 +91,27 @@ public class CreateTransferDestinationCard {
         return this;
     }
 
+    /**
+     * An optional field to specify the type of card payout, used to route the transfer with the
+     * appropriate business application identifier (BAI).
+     */
+    public CreateTransferDestinationCard withPayoutType(CardPayoutType payoutType) {
+        Utils.checkNotNull(payoutType, "payoutType");
+        this.payoutType = Optional.ofNullable(payoutType);
+        return this;
+    }
+
+
+    /**
+     * An optional field to specify the type of card payout, used to route the transfer with the
+     * appropriate business application identifier (BAI).
+     */
+    public CreateTransferDestinationCard withPayoutType(Optional<? extends CardPayoutType> payoutType) {
+        Utils.checkNotNull(payoutType, "payoutType");
+        this.payoutType = payoutType;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -79,25 +122,29 @@ public class CreateTransferDestinationCard {
         }
         CreateTransferDestinationCard other = (CreateTransferDestinationCard) o;
         return 
-            Utils.enhancedDeepEquals(this.dynamicDescriptor, other.dynamicDescriptor);
+            Utils.enhancedDeepEquals(this.dynamicDescriptor, other.dynamicDescriptor) &&
+            Utils.enhancedDeepEquals(this.payoutType, other.payoutType);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            dynamicDescriptor);
+            dynamicDescriptor, payoutType);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CreateTransferDestinationCard.class,
-                "dynamicDescriptor", dynamicDescriptor);
+                "dynamicDescriptor", dynamicDescriptor,
+                "payoutType", payoutType);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
         private Optional<String> dynamicDescriptor = Optional.empty();
+
+        private Optional<? extends CardPayoutType> payoutType = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -124,10 +171,31 @@ public class CreateTransferDestinationCard {
             return this;
         }
 
+
+        /**
+         * An optional field to specify the type of card payout, used to route the transfer with the
+         * appropriate business application identifier (BAI).
+         */
+        public Builder payoutType(CardPayoutType payoutType) {
+            Utils.checkNotNull(payoutType, "payoutType");
+            this.payoutType = Optional.ofNullable(payoutType);
+            return this;
+        }
+
+        /**
+         * An optional field to specify the type of card payout, used to route the transfer with the
+         * appropriate business application identifier (BAI).
+         */
+        public Builder payoutType(Optional<? extends CardPayoutType> payoutType) {
+            Utils.checkNotNull(payoutType, "payoutType");
+            this.payoutType = payoutType;
+            return this;
+        }
+
         public CreateTransferDestinationCard build() {
 
             return new CreateTransferDestinationCard(
-                dynamicDescriptor);
+                dynamicDescriptor, payoutType);
         }
 
     }

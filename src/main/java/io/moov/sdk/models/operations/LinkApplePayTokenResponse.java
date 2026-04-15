@@ -38,7 +38,7 @@ public class LinkApplePayTokenResponse implements Response {
     /**
      * The request completed successfully.
      */
-    private Optional<? extends LinkedApplePayPaymentMethod> linkedApplePayPaymentMethod;
+    private Optional<? extends List<LinkedApplePayPaymentMethod>> linkedApplePayPaymentMethods;
 
 
     private Map<String, List<String>> headers;
@@ -48,18 +48,18 @@ public class LinkApplePayTokenResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends LinkedApplePayPaymentMethod> linkedApplePayPaymentMethod,
+            Optional<? extends List<LinkedApplePayPaymentMethod>> linkedApplePayPaymentMethods,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(linkedApplePayPaymentMethod, "linkedApplePayPaymentMethod");
+        Utils.checkNotNull(linkedApplePayPaymentMethods, "linkedApplePayPaymentMethods");
         headers = Utils.emptyMapIfNull(headers);
         Utils.checkNotNull(headers, "headers");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.linkedApplePayPaymentMethod = linkedApplePayPaymentMethod;
+        this.linkedApplePayPaymentMethods = linkedApplePayPaymentMethods;
         this.headers = headers;
     }
     
@@ -101,8 +101,8 @@ public class LinkApplePayTokenResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<LinkedApplePayPaymentMethod> linkedApplePayPaymentMethod() {
-        return (Optional<LinkedApplePayPaymentMethod>) linkedApplePayPaymentMethod;
+    public Optional<List<LinkedApplePayPaymentMethod>> linkedApplePayPaymentMethods() {
+        return (Optional<List<LinkedApplePayPaymentMethod>>) linkedApplePayPaymentMethods;
     }
 
     @JsonIgnore
@@ -145,9 +145,9 @@ public class LinkApplePayTokenResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public LinkApplePayTokenResponse withLinkedApplePayPaymentMethod(LinkedApplePayPaymentMethod linkedApplePayPaymentMethod) {
-        Utils.checkNotNull(linkedApplePayPaymentMethod, "linkedApplePayPaymentMethod");
-        this.linkedApplePayPaymentMethod = Optional.ofNullable(linkedApplePayPaymentMethod);
+    public LinkApplePayTokenResponse withLinkedApplePayPaymentMethods(List<LinkedApplePayPaymentMethod> linkedApplePayPaymentMethods) {
+        Utils.checkNotNull(linkedApplePayPaymentMethods, "linkedApplePayPaymentMethods");
+        this.linkedApplePayPaymentMethods = Optional.ofNullable(linkedApplePayPaymentMethods);
         return this;
     }
 
@@ -155,9 +155,9 @@ public class LinkApplePayTokenResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public LinkApplePayTokenResponse withLinkedApplePayPaymentMethod(Optional<? extends LinkedApplePayPaymentMethod> linkedApplePayPaymentMethod) {
-        Utils.checkNotNull(linkedApplePayPaymentMethod, "linkedApplePayPaymentMethod");
-        this.linkedApplePayPaymentMethod = linkedApplePayPaymentMethod;
+    public LinkApplePayTokenResponse withLinkedApplePayPaymentMethods(Optional<? extends List<LinkedApplePayPaymentMethod>> linkedApplePayPaymentMethods) {
+        Utils.checkNotNull(linkedApplePayPaymentMethods, "linkedApplePayPaymentMethods");
+        this.linkedApplePayPaymentMethods = linkedApplePayPaymentMethods;
         return this;
     }
 
@@ -180,7 +180,7 @@ public class LinkApplePayTokenResponse implements Response {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.linkedApplePayPaymentMethod, other.linkedApplePayPaymentMethod) &&
+            Utils.enhancedDeepEquals(this.linkedApplePayPaymentMethods, other.linkedApplePayPaymentMethods) &&
             Utils.enhancedDeepEquals(this.headers, other.headers);
     }
     
@@ -188,7 +188,7 @@ public class LinkApplePayTokenResponse implements Response {
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            linkedApplePayPaymentMethod, headers);
+            linkedApplePayPaymentMethods, headers);
     }
     
     @Override
@@ -197,7 +197,7 @@ public class LinkApplePayTokenResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "linkedApplePayPaymentMethod", linkedApplePayPaymentMethod,
+                "linkedApplePayPaymentMethods", linkedApplePayPaymentMethods,
                 "headers", headers);
     }
 
@@ -210,7 +210,7 @@ public class LinkApplePayTokenResponse implements Response {
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends LinkedApplePayPaymentMethod> linkedApplePayPaymentMethod = Optional.empty();
+        private Optional<? extends List<LinkedApplePayPaymentMethod>> linkedApplePayPaymentMethods = Optional.empty();
 
         private Map<String, List<String>> headers;
 
@@ -252,18 +252,18 @@ public class LinkApplePayTokenResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder linkedApplePayPaymentMethod(LinkedApplePayPaymentMethod linkedApplePayPaymentMethod) {
-            Utils.checkNotNull(linkedApplePayPaymentMethod, "linkedApplePayPaymentMethod");
-            this.linkedApplePayPaymentMethod = Optional.ofNullable(linkedApplePayPaymentMethod);
+        public Builder linkedApplePayPaymentMethods(List<LinkedApplePayPaymentMethod> linkedApplePayPaymentMethods) {
+            Utils.checkNotNull(linkedApplePayPaymentMethods, "linkedApplePayPaymentMethods");
+            this.linkedApplePayPaymentMethods = Optional.ofNullable(linkedApplePayPaymentMethods);
             return this;
         }
 
         /**
          * The request completed successfully.
          */
-        public Builder linkedApplePayPaymentMethod(Optional<? extends LinkedApplePayPaymentMethod> linkedApplePayPaymentMethod) {
-            Utils.checkNotNull(linkedApplePayPaymentMethod, "linkedApplePayPaymentMethod");
-            this.linkedApplePayPaymentMethod = linkedApplePayPaymentMethod;
+        public Builder linkedApplePayPaymentMethods(Optional<? extends List<LinkedApplePayPaymentMethod>> linkedApplePayPaymentMethods) {
+            Utils.checkNotNull(linkedApplePayPaymentMethods, "linkedApplePayPaymentMethods");
+            this.linkedApplePayPaymentMethods = linkedApplePayPaymentMethods;
             return this;
         }
 
@@ -278,7 +278,7 @@ public class LinkApplePayTokenResponse implements Response {
 
             return new LinkApplePayTokenResponse(
                 contentType, statusCode, rawResponse,
-                linkedApplePayPaymentMethod, headers);
+                linkedApplePayPaymentMethods, headers);
         }
 
     }

@@ -5,15 +5,18 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.moov.sdk.models.components.IssuedCard;
 import io.moov.sdk.utils.Response;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 
 public class UpdateIssuedCardResponse implements Response {
@@ -32,6 +35,11 @@ public class UpdateIssuedCardResponse implements Response {
      */
     private HttpResponse<InputStream> rawResponse;
 
+    /**
+     * The request completed successfully.
+     */
+    private Optional<? extends IssuedCard> issuedCard;
+
 
     private Map<String, List<String>> headers;
 
@@ -40,16 +48,28 @@ public class UpdateIssuedCardResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
+            Optional<? extends IssuedCard> issuedCard,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
+        Utils.checkNotNull(issuedCard, "issuedCard");
         headers = Utils.emptyMapIfNull(headers);
         Utils.checkNotNull(headers, "headers");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
+        this.issuedCard = issuedCard;
         this.headers = headers;
+    }
+    
+    public UpdateIssuedCardResponse(
+            String contentType,
+            int statusCode,
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
+        this(contentType, statusCode, rawResponse,
+            Optional.empty(), headers);
     }
 
     /**
@@ -74,6 +94,15 @@ public class UpdateIssuedCardResponse implements Response {
     @JsonIgnore
     public HttpResponse<InputStream> rawResponse() {
         return rawResponse;
+    }
+
+    /**
+     * The request completed successfully.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<IssuedCard> issuedCard() {
+        return (Optional<IssuedCard>) issuedCard;
     }
 
     @JsonIgnore
@@ -113,6 +142,25 @@ public class UpdateIssuedCardResponse implements Response {
         return this;
     }
 
+    /**
+     * The request completed successfully.
+     */
+    public UpdateIssuedCardResponse withIssuedCard(IssuedCard issuedCard) {
+        Utils.checkNotNull(issuedCard, "issuedCard");
+        this.issuedCard = Optional.ofNullable(issuedCard);
+        return this;
+    }
+
+
+    /**
+     * The request completed successfully.
+     */
+    public UpdateIssuedCardResponse withIssuedCard(Optional<? extends IssuedCard> issuedCard) {
+        Utils.checkNotNull(issuedCard, "issuedCard");
+        this.issuedCard = issuedCard;
+        return this;
+    }
+
     public UpdateIssuedCardResponse withHeaders(Map<String, List<String>> headers) {
         Utils.checkNotNull(headers, "headers");
         this.headers = headers;
@@ -132,6 +180,7 @@ public class UpdateIssuedCardResponse implements Response {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
+            Utils.enhancedDeepEquals(this.issuedCard, other.issuedCard) &&
             Utils.enhancedDeepEquals(this.headers, other.headers);
     }
     
@@ -139,7 +188,7 @@ public class UpdateIssuedCardResponse implements Response {
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            headers);
+            issuedCard, headers);
     }
     
     @Override
@@ -148,6 +197,7 @@ public class UpdateIssuedCardResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
+                "issuedCard", issuedCard,
                 "headers", headers);
     }
 
@@ -159,6 +209,8 @@ public class UpdateIssuedCardResponse implements Response {
         private Integer statusCode;
 
         private HttpResponse<InputStream> rawResponse;
+
+        private Optional<? extends IssuedCard> issuedCard = Optional.empty();
 
         private Map<String, List<String>> headers;
 
@@ -197,6 +249,25 @@ public class UpdateIssuedCardResponse implements Response {
         }
 
 
+        /**
+         * The request completed successfully.
+         */
+        public Builder issuedCard(IssuedCard issuedCard) {
+            Utils.checkNotNull(issuedCard, "issuedCard");
+            this.issuedCard = Optional.ofNullable(issuedCard);
+            return this;
+        }
+
+        /**
+         * The request completed successfully.
+         */
+        public Builder issuedCard(Optional<? extends IssuedCard> issuedCard) {
+            Utils.checkNotNull(issuedCard, "issuedCard");
+            this.issuedCard = issuedCard;
+            return this;
+        }
+
+
         public Builder headers(Map<String, List<String>> headers) {
             Utils.checkNotNull(headers, "headers");
             this.headers = headers;
@@ -207,7 +278,7 @@ public class UpdateIssuedCardResponse implements Response {
 
             return new UpdateIssuedCardResponse(
                 contentType, statusCode, rawResponse,
-                headers);
+                issuedCard, headers);
         }
 
     }

@@ -277,7 +277,9 @@ public class Application {
                     .build())
                 .call();
 
-        // handle response
+        if (res.issuedCard().isPresent()) {
+            System.out.println(res.issuedCard().get());
+        }
     }
 }
 ```

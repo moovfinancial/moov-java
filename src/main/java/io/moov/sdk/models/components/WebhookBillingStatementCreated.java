@@ -13,14 +13,26 @@ import java.lang.String;
 
 public class WebhookBillingStatementCreated {
 
+    @JsonProperty("accountID")
+    private String accountID;
+
+
     @JsonProperty("statementID")
     private String statementID;
 
     @JsonCreator
     public WebhookBillingStatementCreated(
+            @JsonProperty("accountID") String accountID,
             @JsonProperty("statementID") String statementID) {
+        Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(statementID, "statementID");
+        this.accountID = accountID;
         this.statementID = statementID;
+    }
+
+    @JsonIgnore
+    public String accountID() {
+        return accountID;
     }
 
     @JsonIgnore
@@ -32,6 +44,12 @@ public class WebhookBillingStatementCreated {
         return new Builder();
     }
 
+
+    public WebhookBillingStatementCreated withAccountID(String accountID) {
+        Utils.checkNotNull(accountID, "accountID");
+        this.accountID = accountID;
+        return this;
+    }
 
     public WebhookBillingStatementCreated withStatementID(String statementID) {
         Utils.checkNotNull(statementID, "statementID");
@@ -49,28 +67,39 @@ public class WebhookBillingStatementCreated {
         }
         WebhookBillingStatementCreated other = (WebhookBillingStatementCreated) o;
         return 
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
             Utils.enhancedDeepEquals(this.statementID, other.statementID);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            statementID);
+            accountID, statementID);
     }
     
     @Override
     public String toString() {
         return Utils.toString(WebhookBillingStatementCreated.class,
+                "accountID", accountID,
                 "statementID", statementID);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private String accountID;
+
         private String statementID;
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        public Builder accountID(String accountID) {
+            Utils.checkNotNull(accountID, "accountID");
+            this.accountID = accountID;
+            return this;
         }
 
 
@@ -83,7 +112,7 @@ public class WebhookBillingStatementCreated {
         public WebhookBillingStatementCreated build() {
 
             return new WebhookBillingStatementCreated(
-                statementID);
+                accountID, statementID);
         }
 
     }

@@ -5,7 +5,7 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.IssuedCard;
+import io.moov.sdk.models.components.Transfer;
 import io.moov.sdk.utils.Response;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 
 
-public class UpdateIssuedCardResponse implements Response {
+public class BatchGetTransfersResponse implements Response {
     /**
      * HTTP response content type for this operation
      */
@@ -38,32 +38,32 @@ public class UpdateIssuedCardResponse implements Response {
     /**
      * The request completed successfully.
      */
-    private Optional<? extends IssuedCard> issuedCard;
+    private Optional<? extends Map<String, Transfer>> object;
 
 
     private Map<String, List<String>> headers;
 
     @JsonCreator
-    public UpdateIssuedCardResponse(
+    public BatchGetTransfersResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends IssuedCard> issuedCard,
+            Optional<? extends Map<String, Transfer>> object,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(issuedCard, "issuedCard");
+        Utils.checkNotNull(object, "object");
         headers = Utils.emptyMapIfNull(headers);
         Utils.checkNotNull(headers, "headers");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.issuedCard = issuedCard;
+        this.object = object;
         this.headers = headers;
     }
     
-    public UpdateIssuedCardResponse(
+    public BatchGetTransfersResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
@@ -101,8 +101,8 @@ public class UpdateIssuedCardResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<IssuedCard> issuedCard() {
-        return (Optional<IssuedCard>) issuedCard;
+    public Optional<Map<String, Transfer>> object() {
+        return (Optional<Map<String, Transfer>>) object;
     }
 
     @JsonIgnore
@@ -118,7 +118,7 @@ public class UpdateIssuedCardResponse implements Response {
     /**
      * HTTP response content type for this operation
      */
-    public UpdateIssuedCardResponse withContentType(String contentType) {
+    public BatchGetTransfersResponse withContentType(String contentType) {
         Utils.checkNotNull(contentType, "contentType");
         this.contentType = contentType;
         return this;
@@ -127,7 +127,7 @@ public class UpdateIssuedCardResponse implements Response {
     /**
      * HTTP response status code for this operation
      */
-    public UpdateIssuedCardResponse withStatusCode(int statusCode) {
+    public BatchGetTransfersResponse withStatusCode(int statusCode) {
         Utils.checkNotNull(statusCode, "statusCode");
         this.statusCode = statusCode;
         return this;
@@ -136,7 +136,7 @@ public class UpdateIssuedCardResponse implements Response {
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
-    public UpdateIssuedCardResponse withRawResponse(HttpResponse<InputStream> rawResponse) {
+    public BatchGetTransfersResponse withRawResponse(HttpResponse<InputStream> rawResponse) {
         Utils.checkNotNull(rawResponse, "rawResponse");
         this.rawResponse = rawResponse;
         return this;
@@ -145,9 +145,9 @@ public class UpdateIssuedCardResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public UpdateIssuedCardResponse withIssuedCard(IssuedCard issuedCard) {
-        Utils.checkNotNull(issuedCard, "issuedCard");
-        this.issuedCard = Optional.ofNullable(issuedCard);
+    public BatchGetTransfersResponse withObject(Map<String, Transfer> object) {
+        Utils.checkNotNull(object, "object");
+        this.object = Optional.ofNullable(object);
         return this;
     }
 
@@ -155,13 +155,13 @@ public class UpdateIssuedCardResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public UpdateIssuedCardResponse withIssuedCard(Optional<? extends IssuedCard> issuedCard) {
-        Utils.checkNotNull(issuedCard, "issuedCard");
-        this.issuedCard = issuedCard;
+    public BatchGetTransfersResponse withObject(Optional<? extends Map<String, Transfer>> object) {
+        Utils.checkNotNull(object, "object");
+        this.object = object;
         return this;
     }
 
-    public UpdateIssuedCardResponse withHeaders(Map<String, List<String>> headers) {
+    public BatchGetTransfersResponse withHeaders(Map<String, List<String>> headers) {
         Utils.checkNotNull(headers, "headers");
         this.headers = headers;
         return this;
@@ -175,12 +175,12 @@ public class UpdateIssuedCardResponse implements Response {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        UpdateIssuedCardResponse other = (UpdateIssuedCardResponse) o;
+        BatchGetTransfersResponse other = (BatchGetTransfersResponse) o;
         return 
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.issuedCard, other.issuedCard) &&
+            Utils.enhancedDeepEquals(this.object, other.object) &&
             Utils.enhancedDeepEquals(this.headers, other.headers);
     }
     
@@ -188,16 +188,16 @@ public class UpdateIssuedCardResponse implements Response {
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            issuedCard, headers);
+            object, headers);
     }
     
     @Override
     public String toString() {
-        return Utils.toString(UpdateIssuedCardResponse.class,
+        return Utils.toString(BatchGetTransfersResponse.class,
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "issuedCard", issuedCard,
+                "object", object,
                 "headers", headers);
     }
 
@@ -210,7 +210,7 @@ public class UpdateIssuedCardResponse implements Response {
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends IssuedCard> issuedCard = Optional.empty();
+        private Optional<? extends Map<String, Transfer>> object = Optional.empty();
 
         private Map<String, List<String>> headers;
 
@@ -252,18 +252,18 @@ public class UpdateIssuedCardResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder issuedCard(IssuedCard issuedCard) {
-            Utils.checkNotNull(issuedCard, "issuedCard");
-            this.issuedCard = Optional.ofNullable(issuedCard);
+        public Builder object(Map<String, Transfer> object) {
+            Utils.checkNotNull(object, "object");
+            this.object = Optional.ofNullable(object);
             return this;
         }
 
         /**
          * The request completed successfully.
          */
-        public Builder issuedCard(Optional<? extends IssuedCard> issuedCard) {
-            Utils.checkNotNull(issuedCard, "issuedCard");
-            this.issuedCard = issuedCard;
+        public Builder object(Optional<? extends Map<String, Transfer>> object) {
+            Utils.checkNotNull(object, "object");
+            this.object = object;
             return this;
         }
 
@@ -274,11 +274,11 @@ public class UpdateIssuedCardResponse implements Response {
             return this;
         }
 
-        public UpdateIssuedCardResponse build() {
+        public BatchGetTransfersResponse build() {
 
-            return new UpdateIssuedCardResponse(
+            return new BatchGetTransfersResponse(
                 contentType, statusCode, rawResponse,
-                issuedCard, headers);
+                object, headers);
         }
 
     }

@@ -5,11 +5,14 @@ package io.moov.sdk;
 
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
+import io.moov.sdk.models.components.BatchGetTransfersRequest;
 import io.moov.sdk.models.components.CreateReversal;
 import io.moov.sdk.models.components.CreateTransfer;
 import io.moov.sdk.models.components.CreateTransferOptions;
 import io.moov.sdk.models.components.PatchTransfer;
 import io.moov.sdk.models.components.TransferWaitFor;
+import io.moov.sdk.models.operations.BatchGetTransfersRequestBuilder;
+import io.moov.sdk.models.operations.BatchGetTransfersResponse;
 import io.moov.sdk.models.operations.CreateCancellationRequest;
 import io.moov.sdk.models.operations.CreateCancellationRequestBuilder;
 import io.moov.sdk.models.operations.CreateCancellationResponse;
@@ -43,6 +46,7 @@ import io.moov.sdk.models.operations.ListTransfersResponse;
 import io.moov.sdk.models.operations.UpdateTransferRequest;
 import io.moov.sdk.models.operations.UpdateTransferRequestBuilder;
 import io.moov.sdk.models.operations.UpdateTransferResponse;
+import io.moov.sdk.operations.BatchGetTransfers;
 import io.moov.sdk.operations.CreateCancellation;
 import io.moov.sdk.operations.GetCancellation;
 import io.moov.sdk.operations.GetRefund;
@@ -240,6 +244,53 @@ public class Transfers {
     public ListTransfersResponse list(ListTransfersRequest request) {
         RequestOperation<ListTransfersRequest, ListTransfersResponse> operation
               = new ListTransfers.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Retrieve transfer details for multiple transfers in one request. The response is a map from each
+     * requested transfer ID to its full transfer details when available; IDs that are not found or not
+     * accessible under this account are omitted from the map.
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn
+     * more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @return The call builder
+     */
+    public BatchGetTransfersRequestBuilder batchGetTransfers() {
+        return new BatchGetTransfersRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Retrieve transfer details for multiple transfers in one request. The response is a map from each
+     * requested transfer ID to its full transfer details when available; IDs that are not found or not
+     * accessible under this account are omitted from the map.
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn
+     * more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID 
+     * @param batchGetTransfersRequest Array of transfer IDs to fetch.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public BatchGetTransfersResponse batchGetTransfers(String accountID, BatchGetTransfersRequest batchGetTransfersRequest) {
+        io.moov.sdk.models.operations.BatchGetTransfersRequest request =
+            io.moov.sdk.models.operations.BatchGetTransfersRequest
+                .builder()
+                .accountID(accountID)
+                .batchGetTransfersRequest(batchGetTransfersRequest)
+                .build();
+        RequestOperation<io.moov.sdk.models.operations.BatchGetTransfersRequest, BatchGetTransfersResponse> operation
+              = new BatchGetTransfers.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -9,12 +9,10 @@ import static io.moov.sdk.utils.Exceptions.unchecked;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.SecuritySource;
-import io.moov.sdk.models.components.IssuedCard;
+import io.moov.sdk.models.components.Transfer;
 import io.moov.sdk.models.errors.APIException;
-import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.UpdateIssuedCardError;
-import io.moov.sdk.models.operations.UpdateIssuedCardRequest;
-import io.moov.sdk.models.operations.UpdateIssuedCardResponse;
+import io.moov.sdk.models.operations.BatchGetTransfersRequest;
+import io.moov.sdk.models.operations.BatchGetTransfersResponse;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Headers;
@@ -31,10 +29,11 @@ import java.lang.Object;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Map;
 import java.util.Optional;
 
 
-public class UpdateIssuedCard {
+public class BatchGetTransfers {
 
     static abstract class Base {
         final SDKConfiguration sdkConfiguration;
@@ -59,7 +58,7 @@ public class UpdateIssuedCard {
             return new BeforeRequestContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "updateIssuedCard",
+                    "batchGetTransfers",
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -68,7 +67,7 @@ public class UpdateIssuedCard {
             return new AfterSuccessContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "updateIssuedCard",
+                    "batchGetTransfers",
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -77,7 +76,7 @@ public class UpdateIssuedCard {
             return new AfterErrorContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "updateIssuedCard",
+                    "batchGetTransfers",
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -85,16 +84,16 @@ public class UpdateIssuedCard {
             String url = Utils.generateURL(
                     klass,
                     this.baseUrl,
-                    "/issuing/{accountID}/issued-cards/{issuedCardID}",
+                    "/accounts/{accountID}/transfers/.fetch",
                     request, null);
-            HTTPRequest req = new HTTPRequest(url, "PATCH");
+            HTTPRequest req = new HTTPRequest(url, "POST");
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
                     typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
-                    "updateIssuedCard",
+                    "batchGetTransfersRequest",
                     "json",
                     false);
             if (serializedRequestBody == null) {
@@ -111,13 +110,13 @@ public class UpdateIssuedCard {
     }
 
     public static class Sync extends Base
-            implements RequestOperation<UpdateIssuedCardRequest, UpdateIssuedCardResponse> {
+            implements RequestOperation<BatchGetTransfersRequest, BatchGetTransfersResponse> {
         public Sync(SDKConfiguration sdkConfiguration, Headers _headers) {
             super(sdkConfiguration, _headers);
         }
 
-        private HttpRequest onBuildRequest(UpdateIssuedCardRequest request) throws Exception {
-            HttpRequest req = buildRequest(request, UpdateIssuedCardRequest.class, new TypeReference<UpdateIssuedCardRequest>() {});
+        private HttpRequest onBuildRequest(BatchGetTransfersRequest request) throws Exception {
+            HttpRequest req = buildRequest(request, BatchGetTransfersRequest.class, new TypeReference<BatchGetTransfersRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 
@@ -133,12 +132,12 @@ public class UpdateIssuedCard {
         }
 
         @Override
-        public HttpResponse<InputStream> doRequest(UpdateIssuedCardRequest request) {
+        public HttpResponse<InputStream> doRequest(BatchGetTransfersRequest request) {
             HttpRequest r = unchecked(() -> onBuildRequest(request)).get();
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
-                if (Utils.statusCodeMatches(httpRes.statusCode(), "400", "401", "403", "404", "409", "422", "429", "4XX", "500", "504", "5XX")) {
+                if (Utils.statusCodeMatches(httpRes.statusCode(), "401", "403", "429", "4XX", "500", "504", "5XX")) {
                     httpRes = onError(httpRes, null);
                 } else {
                     httpRes = onSuccess(httpRes);
@@ -152,45 +151,29 @@ public class UpdateIssuedCard {
 
 
         @Override
-        public UpdateIssuedCardResponse handleResponse(HttpResponse<InputStream> response) {
+        public BatchGetTransfersResponse handleResponse(HttpResponse<InputStream> response) {
             String contentType = response
                     .headers()
                     .firstValue("Content-Type")
                     .orElse("application/octet-stream");
-            UpdateIssuedCardResponse.Builder resBuilder =
-                    UpdateIssuedCardResponse
+            BatchGetTransfersResponse.Builder resBuilder =
+                    BatchGetTransfersResponse
                             .builder()
                             .contentType(contentType)
                             .statusCode(response.statusCode())
                             .rawResponse(response);
 
-            UpdateIssuedCardResponse res = resBuilder.build();
+            BatchGetTransfersResponse res = resBuilder.build();
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return res.withIssuedCard(Utils.unmarshal(response, new TypeReference<IssuedCard>() {}));
+                    return res.withObject(Utils.unmarshal(response, new TypeReference<Map<String, Transfer>>() {}));
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "400", "409")) {
-                res.withHeaders(response.headers().map());
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    throw GenericError.from(response);
-                } else {
-                    throw APIException.from("Unexpected content-type received: " + contentType, response);
-                }
-            }
-            if (Utils.statusCodeMatches(response.statusCode(), "422")) {
-                res.withHeaders(response.headers().map());
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    throw UpdateIssuedCardError.from(response);
-                } else {
-                    throw APIException.from("Unexpected content-type received: " + contentType, response);
-                }
-            }
-            if (Utils.statusCodeMatches(response.statusCode(), "401", "403", "404", "429")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "401", "403", "429")) {
                 res.withHeaders(response.headers().map());
                 // no content
                 throw APIException.from("API error occurred", response);

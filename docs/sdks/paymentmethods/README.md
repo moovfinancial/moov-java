@@ -147,6 +147,12 @@ public class Application {
                 case "instant-bank-credit":
                     // Handle instant-bank-credit discriminator variant
                     break;
+                case "push-to-apple-pay":
+                    // Handle push-to-apple-pay discriminator variant
+                    break;
+                case "pull-from-apple-pay":
+                    // Handle pull-from-apple-pay discriminator variant
+                    break;
                 default:
                     // Handle unknown discriminator variant
             }

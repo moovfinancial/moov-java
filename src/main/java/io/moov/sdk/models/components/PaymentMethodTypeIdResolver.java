@@ -36,6 +36,8 @@ public class PaymentMethodTypeIdResolver extends GenericTypeIdResolver<PaymentMe
         registerType("apple-pay", ApplePayPaymentMethod.class);
         registerType("card-present-payment", CardPresentPaymentPaymentMethod.class);
         registerType("instant-bank-credit", InstantBankCreditPaymentMethod.class);
+        registerType("push-to-apple-pay", PushToApplePayPaymentMethod.class);
+        registerType("pull-from-apple-pay", PullFromApplePayPaymentMethod.class);
     }
 
     @Override

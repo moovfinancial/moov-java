@@ -25,7 +25,9 @@ public enum TransferPaymentMethodType {
     PULL_FROM_CARD("pull-from-card"),
     APPLE_PAY("apple-pay"),
     CARD_PRESENT_PAYMENT("card-present-payment"),
-    INSTANT_BANK_CREDIT("instant-bank-credit");
+    INSTANT_BANK_CREDIT("instant-bank-credit"),
+    PUSH_TO_APPLE_PAY("push-to-apple-pay"),
+    PULL_FROM_APPLE_PAY("pull-from-apple-pay");
 
     @JsonValue
     private final String value;

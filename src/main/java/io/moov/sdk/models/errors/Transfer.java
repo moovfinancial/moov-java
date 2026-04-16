@@ -21,7 +21,6 @@ import io.moov.sdk.models.components.TransferLineItems;
 import io.moov.sdk.models.components.TransferSource;
 import io.moov.sdk.models.components.TransferStatus;
 import io.moov.sdk.utils.Utils;
-import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
 import java.lang.Deprecated;

@@ -31,6 +31,7 @@ import java.lang.Object;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -169,7 +170,7 @@ public class LinkApplePayToken {
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return res.withLinkedApplePayPaymentMethod(Utils.unmarshal(response, new TypeReference<LinkedApplePayPaymentMethod>() {}));
+                    return res.withLinkedApplePayPaymentMethods(Utils.unmarshal(response, new TypeReference<List<LinkedApplePayPaymentMethod>>() {}));
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }

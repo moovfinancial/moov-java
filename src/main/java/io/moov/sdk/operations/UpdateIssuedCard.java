@@ -9,6 +9,7 @@ import static io.moov.sdk.utils.Exceptions.unchecked;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.SecuritySource;
+import io.moov.sdk.models.components.IssuedCard;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.UpdateIssuedCardError;
@@ -165,10 +166,13 @@ public class UpdateIssuedCard {
 
             UpdateIssuedCardResponse res = resBuilder.build();
             
-            if (Utils.statusCodeMatches(response.statusCode(), "204")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 res.withHeaders(response.headers().map());
-                // no content
-                return res;
+                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                    return res.withIssuedCard(Utils.unmarshal(response, new TypeReference<IssuedCard>() {}));
+                } else {
+                    throw APIException.from("Unexpected content-type received: " + contentType, response);
+                }
             }
             if (Utils.statusCodeMatches(response.statusCode(), "400", "409")) {
                 res.withHeaders(response.headers().map());

@@ -20,6 +20,8 @@ on:
   schedule:
     - cron: '0 0 * * *'
 
+env:
+  SPEAKEASY_BUMP_OVERRIDE: patch
 jobs:
   generate:
     name: Generate SDKs

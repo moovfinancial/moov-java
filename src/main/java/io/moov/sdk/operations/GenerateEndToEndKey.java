@@ -116,7 +116,7 @@ public class GenerateEndToEndKey {
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
-                if (Utils.statusCodeMatches(httpRes.statusCode(), "429", "4XX", "5XX")) {
+                if (Utils.statusCodeMatches(httpRes.statusCode(), "4XX", "5XX")) {
                     httpRes = onError(httpRes, null);
                 } else {
                     httpRes = onSuccess(httpRes);

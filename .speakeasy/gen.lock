@@ -5,15 +5,15 @@ management:
   docVersion: v2026.04.00
   speakeasyVersion: 1.761.8
   generationVersion: 2.881.2
-  releaseVersion: 26.4.0-dev.19
-  configChecksum: 92289e15d356f58ff922ad3d165e7d3b
+  releaseVersion: 26.4.0
+  configChecksum: 91a827f7df47c7c11ceed6177324a125
   repoURL: https://github.com/moovfinancial/moov-java.git
   installationURL: https://github.com/moovfinancial/moov-java
   published: true
 persistentEdits:
-  generation_id: ce9c623e-29cc-4bc2-993d-609f5d9afcd0
-  pristine_commit_hash: 51c8d893bc43c71c8e2b0ed9ddc7a3716cc63f12
-  pristine_tree_hash: 26af351786d6e32f93c04fc7ffb442a881cbc459
+  generation_id: 13b9234d-12e0-4bed-8b93-b17bbf7ad701
+  pristine_commit_hash: bbb4480a0a47b6042e46a33825662d98381e7699
+  pristine_tree_hash: 5bd9dee1278fedd3a757a52d03f70a0bfdefb39d
 features:
   java:
     acceptHeaders: 2.81.2
@@ -4569,8 +4569,8 @@ trackedFiles:
     pristine_git_object: 9b40f611aaace5afe9cf7cadc73ff2301fe51e80
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:d8da62c9c2b00ba53c54dead7eeb708abe6dfea5
-    pristine_git_object: 9a7f9f3073d59b08001c0fda59a30c8fa8288215
+    last_write_checksum: sha1:ea2333723904bc0a9f7f8106be8abd75f1df71d1
+    pristine_git_object: 61b0de8dccfaaeb95ecdefb15ae5ad77d4185835
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4753,8 +4753,8 @@ trackedFiles:
     pristine_git_object: 72495cf1b905a82c978c8ca472b53f9c9cecccbd
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:ad25afc950dfd79cafe2f7e760b053fdb542772b
-    pristine_git_object: 47670a19df4aa561c600e20ed8b8750288da1721
+    last_write_checksum: sha1:090bcd07b5b5ee954bfb74677448dbcadd6e7ae6
+    pristine_git_object: d734daa68bcc3e516f94fa5398312dc8455e6485
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:bf0300e770bb968bfc8b5ee2b8d6f05e37e9bb67
@@ -13718,7 +13718,6 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes:\n* `moov.paymentLinks.update()`: \n  *  `request.updatePaymentLink.payout.allowedMethods[]` **Changed**\n  *  `response.payout.allowedMethods[]` **Changed** (Breaking ⚠️)\n* `moov.cards.list()`:  `response.[].paymentMethods[].paymentMethodType` **Changed** (Breaking ⚠️)\n* `moov.bankAccounts.link()`:  `response.paymentMethods[].paymentMethodType` **Changed** (Breaking ⚠️)\n* `moov.bankAccounts.list()`:  `response.[].paymentMethods[].paymentMethodType` **Changed** (Breaking ⚠️)\n* `moov.bankAccounts.get()`:  `response.paymentMethods[].paymentMethodType` **Changed** (Breaking ⚠️)\n* `moov.cards.link()`:  `response.paymentMethods[].paymentMethodType` **Changed** (Breaking ⚠️)\n* `moov.paymentLinks.get()`:  `response.payout.allowedMethods[]` **Changed** (Breaking ⚠️)\n* `moov.cards.get()`:  `response.paymentMethods[].paymentMethodType` **Changed** (Breaking ⚠️)\n* `moov.cards.update()`:  `response.paymentMethods[].paymentMethodType` **Changed** (Breaking ⚠️)\n* `moov.paymentLinks.create()`: \n  *  `request.createPaymentLink.payout.allowedMethods[]` **Changed**\n  *  `response.payout.allowedMethods[]` **Changed** (Breaking ⚠️)\n* `moov.applePay.linkToken()`:  `response.[].paymentMethodType` **Changed** (Breaking ⚠️)\n* `moov.paymentLinks.list()`:  `response.[].payout.allowedMethods[]` **Changed** (Breaking ⚠️)\n* `moov.transfers.update()`:  `response.source.paymentMethodType` **Changed** (Breaking ⚠️)\n* `moov.paymentMethods.list()`: \n  *  `request.paymentMethodType` **Changed**\n  *  `response.[]` **Changed** (Breaking ⚠️)\n* `moov.paymentMethods.get()`:  `response` **Changed** (Breaking ⚠️)\n* `moov.transfers.get()`:  `response.source.paymentMethodType` **Changed** (Breaking ⚠️)\n* `moov.transfers.batchGetTransfers()`:  `response.Map<Transfer>.source.paymentMethodType` **Changed** (Breaking ⚠️)\n* `moov.transfers.list()`:  `response.[].source.paymentMethodType` **Changed** (Breaking ⚠️)\n* `moov.transfers.generateOptions()`:  `response.sourceOptions[]` **Changed** (Breaking ⚠️)\n* `moov.transfers.create()`: \n  *  `response.source.paymentMethodType` **Changed** (Breaking ⚠️)\n  *  `error.source.paymentMethodType` **Changed** (Breaking ⚠️)\n* `moov.resolutionLinks.get()`:  `response.status` **Added**\n* `moov.googlePay.linkToken()`: **Added**\n* `moov.resolutionLinks.create()`:  `response.status` **Added**\n* `moov.resolutionLinks.list()`:  `response.[].status` **Added**\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

@@ -52,6 +52,12 @@ public class ResolutionLink {
     private String url;
 
     /**
+     * The current status of the resolution link.
+     */
+    @JsonProperty("status")
+    private ResolutionLinkStatus status;
+
+    /**
      * The date and time the resolution link was created.
      */
     @JsonProperty("createdOn")
@@ -83,6 +89,7 @@ public class ResolutionLink {
             @JsonProperty("partnerAccountID") String partnerAccountID,
             @JsonProperty("recipient") String recipient,
             @JsonProperty("url") String url,
+            @JsonProperty("status") ResolutionLinkStatus status,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
             @JsonProperty("updatedOn") OffsetDateTime updatedOn,
             @JsonProperty("disabledOn") Optional<OffsetDateTime> disabledOn,
@@ -92,6 +99,7 @@ public class ResolutionLink {
         Utils.checkNotNull(partnerAccountID, "partnerAccountID");
         Utils.checkNotNull(recipient, "recipient");
         Utils.checkNotNull(url, "url");
+        Utils.checkNotNull(status, "status");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(updatedOn, "updatedOn");
         Utils.checkNotNull(disabledOn, "disabledOn");
@@ -101,6 +109,7 @@ public class ResolutionLink {
         this.partnerAccountID = partnerAccountID;
         this.recipient = recipient;
         this.url = url;
+        this.status = status;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
         this.disabledOn = disabledOn;
@@ -113,12 +122,14 @@ public class ResolutionLink {
             String partnerAccountID,
             String recipient,
             String url,
+            ResolutionLinkStatus status,
             OffsetDateTime createdOn,
             OffsetDateTime updatedOn,
             OffsetDateTime expiresOn) {
         this(code, accountID, partnerAccountID,
-            recipient, url, createdOn,
-            updatedOn, Optional.empty(), expiresOn);
+            recipient, url, status,
+            createdOn, updatedOn, Optional.empty(),
+            expiresOn);
     }
 
     /**
@@ -159,6 +170,14 @@ public class ResolutionLink {
     @JsonIgnore
     public String url() {
         return url;
+    }
+
+    /**
+     * The current status of the resolution link.
+     */
+    @JsonIgnore
+    public ResolutionLinkStatus status() {
+        return status;
     }
 
     /**
@@ -244,6 +263,15 @@ public class ResolutionLink {
     }
 
     /**
+     * The current status of the resolution link.
+     */
+    public ResolutionLink withStatus(ResolutionLinkStatus status) {
+        Utils.checkNotNull(status, "status");
+        this.status = status;
+        return this;
+    }
+
+    /**
      * The date and time the resolution link was created.
      */
     public ResolutionLink withCreatedOn(OffsetDateTime createdOn) {
@@ -304,6 +332,7 @@ public class ResolutionLink {
             Utils.enhancedDeepEquals(this.partnerAccountID, other.partnerAccountID) &&
             Utils.enhancedDeepEquals(this.recipient, other.recipient) &&
             Utils.enhancedDeepEquals(this.url, other.url) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
             Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
             Utils.enhancedDeepEquals(this.disabledOn, other.disabledOn) &&
@@ -314,8 +343,9 @@ public class ResolutionLink {
     public int hashCode() {
         return Utils.enhancedHash(
             code, accountID, partnerAccountID,
-            recipient, url, createdOn,
-            updatedOn, disabledOn, expiresOn);
+            recipient, url, status,
+            createdOn, updatedOn, disabledOn,
+            expiresOn);
     }
     
     @Override
@@ -326,6 +356,7 @@ public class ResolutionLink {
                 "partnerAccountID", partnerAccountID,
                 "recipient", recipient,
                 "url", url,
+                "status", status,
                 "createdOn", createdOn,
                 "updatedOn", updatedOn,
                 "disabledOn", disabledOn,
@@ -344,6 +375,8 @@ public class ResolutionLink {
         private String recipient;
 
         private String url;
+
+        private ResolutionLinkStatus status;
 
         private OffsetDateTime createdOn;
 
@@ -409,6 +442,16 @@ public class ResolutionLink {
 
 
         /**
+         * The current status of the resolution link.
+         */
+        public Builder status(ResolutionLinkStatus status) {
+            Utils.checkNotNull(status, "status");
+            this.status = status;
+            return this;
+        }
+
+
+        /**
          * The date and time the resolution link was created.
          */
         public Builder createdOn(OffsetDateTime createdOn) {
@@ -460,8 +503,9 @@ public class ResolutionLink {
 
             return new ResolutionLink(
                 code, accountID, partnerAccountID,
-                recipient, url, createdOn,
-                updatedOn, disabledOn, expiresOn);
+                recipient, url, status,
+                createdOn, updatedOn, disabledOn,
+                expiresOn);
         }
 
     }

@@ -38,6 +38,9 @@ public class TransferPaymentMethodTypeIdResolver extends GenericTypeIdResolver<T
         registerType("instant-bank-credit", InstantBankCreditTransferPaymentMethod.class);
         registerType("push-to-apple-pay", PushToApplePayTransferPaymentMethod.class);
         registerType("pull-from-apple-pay", PullFromApplePayTransferPaymentMethod.class);
+        registerType("google-pay", GooglePayTransferPaymentMethod.class);
+        registerType("push-to-google-pay", PushToGooglePayTransferPaymentMethod.class);
+        registerType("pull-from-google-pay", PullFromGooglePayTransferPaymentMethod.class);
     }
 
     @Override

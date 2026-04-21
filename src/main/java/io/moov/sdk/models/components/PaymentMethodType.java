@@ -27,7 +27,10 @@ public enum PaymentMethodType {
     CARD_PRESENT_PAYMENT("card-present-payment"),
     INSTANT_BANK_CREDIT("instant-bank-credit"),
     PUSH_TO_APPLE_PAY("push-to-apple-pay"),
-    PULL_FROM_APPLE_PAY("pull-from-apple-pay");
+    PULL_FROM_APPLE_PAY("pull-from-apple-pay"),
+    GOOGLE_PAY("google-pay"),
+    PUSH_TO_GOOGLE_PAY("push-to-google-pay"),
+    PULL_FROM_GOOGLE_PAY("pull-from-google-pay");
 
     @JsonValue
     private final String value;

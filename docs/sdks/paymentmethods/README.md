@@ -153,6 +153,15 @@ public class Application {
                 case "pull-from-apple-pay":
                     // Handle pull-from-apple-pay discriminator variant
                     break;
+                case "google-pay":
+                    // Handle google-pay discriminator variant
+                    break;
+                case "push-to-google-pay":
+                    // Handle push-to-google-pay discriminator variant
+                    break;
+                case "pull-from-google-pay":
+                    // Handle pull-from-google-pay discriminator variant
+                    break;
                 default:
                     // Handle unknown discriminator variant
             }

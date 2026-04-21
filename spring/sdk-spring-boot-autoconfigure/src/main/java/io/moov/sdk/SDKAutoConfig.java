@@ -309,6 +309,17 @@ public class SDKAutoConfig {
         return moov.files();
     }
     /**
+     * Creates a GooglePay sub-SDK bean if none exists.
+     *
+     * @param moov the main SDK instance
+     * @return A configured GooglePay instance
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public GooglePay googlePay(Moov moov) {
+        return moov.googlePay();
+    }
+    /**
      * Creates a Images sub-SDK bean if none exists.
      *
      * @param moov the main SDK instance

@@ -39,11 +39,21 @@ public class CreatePaymentLink {
     @JsonProperty("merchantPaymentMethodID")
     private String merchantPaymentMethodID;
 
-
+    /**
+     * The fixed amount of the payment link.
+     * 
+     * <p>In API versions before `2026.07.00`, this was a required field.
+     * 
+     * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
+     * omitted
+     * for `open` payment amount types.
+     */
     @JsonProperty("amount")
     private Amount amount;
 
-
+    /**
+     * Optional sales tax amount.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("salesTaxAmount")
     private Optional<? extends Amount> salesTaxAmount;
@@ -159,11 +169,23 @@ public class CreatePaymentLink {
         return merchantPaymentMethodID;
     }
 
+    /**
+     * The fixed amount of the payment link.
+     * 
+     * <p>In API versions before `2026.07.00`, this was a required field.
+     * 
+     * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
+     * omitted
+     * for `open` payment amount types.
+     */
     @JsonIgnore
     public Amount amount() {
         return amount;
     }
 
+    /**
+     * Optional sales tax amount.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<Amount> salesTaxAmount() {
@@ -250,12 +272,24 @@ public class CreatePaymentLink {
         return this;
     }
 
+    /**
+     * The fixed amount of the payment link.
+     * 
+     * <p>In API versions before `2026.07.00`, this was a required field.
+     * 
+     * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
+     * omitted
+     * for `open` payment amount types.
+     */
     public CreatePaymentLink withAmount(Amount amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
         return this;
     }
 
+    /**
+     * Optional sales tax amount.
+     */
     public CreatePaymentLink withSalesTaxAmount(Amount salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
@@ -263,6 +297,9 @@ public class CreatePaymentLink {
     }
 
 
+    /**
+     * Optional sales tax amount.
+     */
     public CreatePaymentLink withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         this.salesTaxAmount = salesTaxAmount;
@@ -484,6 +521,15 @@ public class CreatePaymentLink {
         }
 
 
+        /**
+         * The fixed amount of the payment link.
+         * 
+         * <p>In API versions before `2026.07.00`, this was a required field.
+         * 
+         * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
+         * omitted
+         * for `open` payment amount types.
+         */
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
@@ -491,12 +537,18 @@ public class CreatePaymentLink {
         }
 
 
+        /**
+         * Optional sales tax amount.
+         */
         public Builder salesTaxAmount(Amount salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
             return this;
         }
 
+        /**
+         * Optional sales tax amount.
+         */
         public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             this.salesTaxAmount = salesTaxAmount;

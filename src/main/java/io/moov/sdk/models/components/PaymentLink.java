@@ -68,7 +68,15 @@ public class PaymentLink {
     @JsonProperty("link")
     private String link;
 
-
+    /**
+     * The fixed amount of the payment link.
+     * 
+     * <p>In API versions before `2026.07.00`, this was a required field.
+     * 
+     * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
+     * omitted
+     * for `open` payment amount types.
+     */
     @JsonProperty("amount")
     private Amount amount;
 
@@ -316,6 +324,15 @@ public class PaymentLink {
         return link;
     }
 
+    /**
+     * The fixed amount of the payment link.
+     * 
+     * <p>In API versions before `2026.07.00`, this was a required field.
+     * 
+     * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
+     * omitted
+     * for `open` payment amount types.
+     */
     @JsonIgnore
     public Amount amount() {
         return amount;
@@ -497,6 +514,15 @@ public class PaymentLink {
         return this;
     }
 
+    /**
+     * The fixed amount of the payment link.
+     * 
+     * <p>In API versions before `2026.07.00`, this was a required field.
+     * 
+     * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
+     * omitted
+     * for `open` payment amount types.
+     */
     public PaymentLink withAmount(Amount amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
@@ -899,6 +925,15 @@ public class PaymentLink {
         }
 
 
+        /**
+         * The fixed amount of the payment link.
+         * 
+         * <p>In API versions before `2026.07.00`, this was a required field.
+         * 
+         * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
+         * omitted
+         * for `open` payment amount types.
+         */
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;

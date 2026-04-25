@@ -225,10 +225,6 @@ public class Transfer extends MoovError {
         return data().flatMap(Data::paymentLinkCode);
     }
 
-    /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
-     */
     @Deprecated
     public Optional<Amount> salesTaxAmount() {
         return data().flatMap(Data::salesTaxAmount);
@@ -407,10 +403,7 @@ public class Transfer extends MoovError {
         @JsonProperty("paymentLinkCode")
         private Optional<String> paymentLinkCode;
 
-        /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
-         */
+
         @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("salesTaxAmount")
         private Optional<? extends Amount> salesTaxAmount;
@@ -703,10 +696,6 @@ public class Transfer extends MoovError {
             return paymentLinkCode;
         }
 
-        /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
-         */
         @SuppressWarnings("unchecked")
         @JsonIgnore
         public Optional<Amount> salesTaxAmount() {
@@ -1078,10 +1067,6 @@ public class Transfer extends MoovError {
             return this;
         }
 
-        /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
-         */
         public Data withSalesTaxAmount(Amount salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
@@ -1089,10 +1074,6 @@ public class Transfer extends MoovError {
         }
 
 
-        /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
-         */
         public Data withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             this.salesTaxAmount = salesTaxAmount;
@@ -1639,20 +1620,12 @@ public class Transfer extends MoovError {
             }
 
 
-            /**
-             * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-             * represents the total amount charged.
-             */
             public Builder salesTaxAmount(Amount salesTaxAmount) {
                 Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
                 this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
                 return this;
             }
 
-            /**
-             * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-             * represents the total amount charged.
-             */
             public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
                 Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
                 this.salesTaxAmount = salesTaxAmount;

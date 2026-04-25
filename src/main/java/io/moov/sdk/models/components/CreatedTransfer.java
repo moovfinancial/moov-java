@@ -156,8 +156,7 @@ public class CreatedTransfer {
     private Optional<String> paymentLinkCode;
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
+     * Optional sales tax amount.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("salesTaxAmount")
@@ -436,8 +435,7 @@ public class CreatedTransfer {
     }
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
+     * Optional sales tax amount.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -817,8 +815,7 @@ public class CreatedTransfer {
     }
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
+     * Optional sales tax amount.
      */
     public CreatedTransfer withSalesTaxAmount(Amount salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
@@ -828,8 +825,7 @@ public class CreatedTransfer {
 
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
+     * Optional sales tax amount.
      */
     public CreatedTransfer withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
@@ -1375,8 +1371,7 @@ public class CreatedTransfer {
 
 
         /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
+         * Optional sales tax amount.
          */
         public Builder salesTaxAmount(Amount salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
@@ -1385,8 +1380,7 @@ public class CreatedTransfer {
         }
 
         /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
+         * Optional sales tax amount.
          */
         public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");

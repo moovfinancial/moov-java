@@ -55,10 +55,7 @@ public class CreateTransfer {
     @JsonProperty("metadata")
     private Optional<? extends Map<String, String>> metadata;
 
-    /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
-     */
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("salesTaxAmount")
     private Optional<? extends Amount> salesTaxAmount;
@@ -166,10 +163,6 @@ public class CreateTransfer {
         return (Optional<Map<String, String>>) metadata;
     }
 
-    /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<Amount> salesTaxAmount() {
@@ -281,10 +274,6 @@ public class CreateTransfer {
         return this;
     }
 
-    /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
-     */
     public CreateTransfer withSalesTaxAmount(Amount salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
@@ -292,10 +281,6 @@ public class CreateTransfer {
     }
 
 
-    /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
-     */
     public CreateTransfer withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         this.salesTaxAmount = salesTaxAmount;
@@ -496,20 +481,12 @@ public class CreateTransfer {
         }
 
 
-        /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
-         */
         public Builder salesTaxAmount(Amount salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
             return this;
         }
 
-        /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
-         */
         public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             this.salesTaxAmount = salesTaxAmount;

@@ -8,13 +8,18 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum LinkedGooglePayPaymentMethodPaymentMethodType {
-    GOOGLE_PAY("google-pay");
+/**
+ * Type
+ * 
+ * <p>The type of payment method. Always `CARD`.
+ */
+public enum Type {
+    CARD("CARD");
 
     @JsonValue
     private final String value;
 
-    LinkedGooglePayPaymentMethodPaymentMethodType(String value) {
+    Type(String value) {
         this.value = value;
     }
     
@@ -22,8 +27,8 @@ public enum LinkedGooglePayPaymentMethodPaymentMethodType {
         return value;
     }
     
-    public static Optional<LinkedGooglePayPaymentMethodPaymentMethodType> fromValue(String value) {
-        for (LinkedGooglePayPaymentMethodPaymentMethodType o: LinkedGooglePayPaymentMethodPaymentMethodType.values()) {
+    public static Optional<Type> fromValue(String value) {
+        for (Type o: Type.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);
             }

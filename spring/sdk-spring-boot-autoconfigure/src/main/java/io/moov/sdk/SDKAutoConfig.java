@@ -452,6 +452,17 @@ public class SDKAutoConfig {
         return moov.support();
     }
     /**
+     * Creates a TransferConfig sub-SDK bean if none exists.
+     *
+     * @param moov the main SDK instance
+     * @return A configured TransferConfig instance
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public TransferConfig transferConfig(Moov moov) {
+        return moov.transferConfig();
+    }
+    /**
      * Creates a Transfers sub-SDK bean if none exists.
      *
      * @param moov the main SDK instance

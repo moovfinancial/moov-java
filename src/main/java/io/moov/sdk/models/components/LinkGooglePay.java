@@ -13,40 +13,58 @@ import java.lang.String;
 /**
  * LinkGooglePay
  * 
- * <p>The encrypted Google Pay payment token (ECv2 format).
+ * <p>Links a Google Pay token to a Moov account.
  * 
- * <p>Refer to [Google's
- * documentation](https://developers.google.com/pay/api/web/guides/resources/payment-data-cryptography#payment-method-token-structure)
- * for more information.
+ * <p>The `paymentMethodData` field should contain the `paymentMethodData` property from the
+ * [PaymentData](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData)
+ * response
+ * returned by Google Pay's client SDK. Pass it through unmodified.
  */
 public class LinkGooglePay {
     /**
-     * Contains the encrypted payment token as returned from Google Pay.
-     * 
-     * <p>Refer to [Google's
-     * documentation](https://developers.google.com/pay/api/web/guides/resources/payment-data-cryptography#payment-method-token-structure)
-     * for more information.
+     * The merchant accountID this token was minted for. Must match the `gatewayMerchantId`
+     * value passed to Google Pay when constructing the PaymentDataRequest. card-gateway validates
+     * that the decrypted `gatewayMerchantId` matches this value.
      */
-    @JsonProperty("token")
-    private GooglePayToken token;
+    @JsonProperty("merchantAccountID")
+    private String merchantAccountID;
+
+    /**
+     * The `paymentMethodData` object from Google Pay's
+     * [PaymentData](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData)
+     * response.
+     */
+    @JsonProperty("paymentMethodData")
+    private GooglePayPaymentMethodData paymentMethodData;
 
     @JsonCreator
     public LinkGooglePay(
-            @JsonProperty("token") GooglePayToken token) {
-        Utils.checkNotNull(token, "token");
-        this.token = token;
+            @JsonProperty("merchantAccountID") String merchantAccountID,
+            @JsonProperty("paymentMethodData") GooglePayPaymentMethodData paymentMethodData) {
+        Utils.checkNotNull(merchantAccountID, "merchantAccountID");
+        Utils.checkNotNull(paymentMethodData, "paymentMethodData");
+        this.merchantAccountID = merchantAccountID;
+        this.paymentMethodData = paymentMethodData;
     }
 
     /**
-     * Contains the encrypted payment token as returned from Google Pay.
-     * 
-     * <p>Refer to [Google's
-     * documentation](https://developers.google.com/pay/api/web/guides/resources/payment-data-cryptography#payment-method-token-structure)
-     * for more information.
+     * The merchant accountID this token was minted for. Must match the `gatewayMerchantId`
+     * value passed to Google Pay when constructing the PaymentDataRequest. card-gateway validates
+     * that the decrypted `gatewayMerchantId` matches this value.
      */
     @JsonIgnore
-    public GooglePayToken token() {
-        return token;
+    public String merchantAccountID() {
+        return merchantAccountID;
+    }
+
+    /**
+     * The `paymentMethodData` object from Google Pay's
+     * [PaymentData](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData)
+     * response.
+     */
+    @JsonIgnore
+    public GooglePayPaymentMethodData paymentMethodData() {
+        return paymentMethodData;
     }
 
     public static Builder builder() {
@@ -55,15 +73,24 @@ public class LinkGooglePay {
 
 
     /**
-     * Contains the encrypted payment token as returned from Google Pay.
-     * 
-     * <p>Refer to [Google's
-     * documentation](https://developers.google.com/pay/api/web/guides/resources/payment-data-cryptography#payment-method-token-structure)
-     * for more information.
+     * The merchant accountID this token was minted for. Must match the `gatewayMerchantId`
+     * value passed to Google Pay when constructing the PaymentDataRequest. card-gateway validates
+     * that the decrypted `gatewayMerchantId` matches this value.
      */
-    public LinkGooglePay withToken(GooglePayToken token) {
-        Utils.checkNotNull(token, "token");
-        this.token = token;
+    public LinkGooglePay withMerchantAccountID(String merchantAccountID) {
+        Utils.checkNotNull(merchantAccountID, "merchantAccountID");
+        this.merchantAccountID = merchantAccountID;
+        return this;
+    }
+
+    /**
+     * The `paymentMethodData` object from Google Pay's
+     * [PaymentData](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData)
+     * response.
+     */
+    public LinkGooglePay withPaymentMethodData(GooglePayPaymentMethodData paymentMethodData) {
+        Utils.checkNotNull(paymentMethodData, "paymentMethodData");
+        this.paymentMethodData = paymentMethodData;
         return this;
     }
 
@@ -77,25 +104,29 @@ public class LinkGooglePay {
         }
         LinkGooglePay other = (LinkGooglePay) o;
         return 
-            Utils.enhancedDeepEquals(this.token, other.token);
+            Utils.enhancedDeepEquals(this.merchantAccountID, other.merchantAccountID) &&
+            Utils.enhancedDeepEquals(this.paymentMethodData, other.paymentMethodData);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            token);
+            merchantAccountID, paymentMethodData);
     }
     
     @Override
     public String toString() {
         return Utils.toString(LinkGooglePay.class,
-                "token", token);
+                "merchantAccountID", merchantAccountID,
+                "paymentMethodData", paymentMethodData);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private GooglePayToken token;
+        private String merchantAccountID;
+
+        private GooglePayPaymentMethodData paymentMethodData;
 
         private Builder() {
           // force use of static builder() method
@@ -103,22 +134,32 @@ public class LinkGooglePay {
 
 
         /**
-         * Contains the encrypted payment token as returned from Google Pay.
-         * 
-         * <p>Refer to [Google's
-         * documentation](https://developers.google.com/pay/api/web/guides/resources/payment-data-cryptography#payment-method-token-structure)
-         * for more information.
+         * The merchant accountID this token was minted for. Must match the `gatewayMerchantId`
+         * value passed to Google Pay when constructing the PaymentDataRequest. card-gateway validates
+         * that the decrypted `gatewayMerchantId` matches this value.
          */
-        public Builder token(GooglePayToken token) {
-            Utils.checkNotNull(token, "token");
-            this.token = token;
+        public Builder merchantAccountID(String merchantAccountID) {
+            Utils.checkNotNull(merchantAccountID, "merchantAccountID");
+            this.merchantAccountID = merchantAccountID;
+            return this;
+        }
+
+
+        /**
+         * The `paymentMethodData` object from Google Pay's
+         * [PaymentData](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData)
+         * response.
+         */
+        public Builder paymentMethodData(GooglePayPaymentMethodData paymentMethodData) {
+            Utils.checkNotNull(paymentMethodData, "paymentMethodData");
+            this.paymentMethodData = paymentMethodData;
             return this;
         }
 
         public LinkGooglePay build() {
 
             return new LinkGooglePay(
-                token);
+                merchantAccountID, paymentMethodData);
         }
 
     }

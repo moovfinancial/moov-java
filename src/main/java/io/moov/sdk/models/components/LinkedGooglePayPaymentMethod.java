@@ -18,9 +18,11 @@ public class LinkedGooglePayPaymentMethod {
     @JsonProperty("paymentMethodID")
     private String paymentMethodID;
 
-
+    /**
+     * The payment method type that represents a payment rail and directionality
+     */
     @JsonProperty("paymentMethodType")
-    private LinkedGooglePayPaymentMethodPaymentMethodType paymentMethodType;
+    private PaymentMethodType paymentMethodType;
 
     /**
      * Describes a Google Pay token on a Moov account.
@@ -31,7 +33,7 @@ public class LinkedGooglePayPaymentMethod {
     @JsonCreator
     public LinkedGooglePayPaymentMethod(
             @JsonProperty("paymentMethodID") String paymentMethodID,
-            @JsonProperty("paymentMethodType") LinkedGooglePayPaymentMethodPaymentMethodType paymentMethodType,
+            @JsonProperty("paymentMethodType") PaymentMethodType paymentMethodType,
             @JsonProperty("googlePay") GooglePayResponse googlePay) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
@@ -49,8 +51,11 @@ public class LinkedGooglePayPaymentMethod {
         return paymentMethodID;
     }
 
+    /**
+     * The payment method type that represents a payment rail and directionality
+     */
     @JsonIgnore
-    public LinkedGooglePayPaymentMethodPaymentMethodType paymentMethodType() {
+    public PaymentMethodType paymentMethodType() {
         return paymentMethodType;
     }
 
@@ -76,7 +81,10 @@ public class LinkedGooglePayPaymentMethod {
         return this;
     }
 
-    public LinkedGooglePayPaymentMethod withPaymentMethodType(LinkedGooglePayPaymentMethodPaymentMethodType paymentMethodType) {
+    /**
+     * The payment method type that represents a payment rail and directionality
+     */
+    public LinkedGooglePayPaymentMethod withPaymentMethodType(PaymentMethodType paymentMethodType) {
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
         this.paymentMethodType = paymentMethodType;
         return this;
@@ -125,7 +133,7 @@ public class LinkedGooglePayPaymentMethod {
 
         private String paymentMethodID;
 
-        private LinkedGooglePayPaymentMethodPaymentMethodType paymentMethodType;
+        private PaymentMethodType paymentMethodType;
 
         private GooglePayResponse googlePay;
 
@@ -144,7 +152,10 @@ public class LinkedGooglePayPaymentMethod {
         }
 
 
-        public Builder paymentMethodType(LinkedGooglePayPaymentMethodPaymentMethodType paymentMethodType) {
+        /**
+         * The payment method type that represents a payment rail and directionality
+         */
+        public Builder paymentMethodType(PaymentMethodType paymentMethodType) {
             Utils.checkNotNull(paymentMethodType, "paymentMethodType");
             this.paymentMethodType = paymentMethodType;
             return this;

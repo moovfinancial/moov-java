@@ -64,6 +64,13 @@ public class TransferSource {
     private Optional<? extends ApplePayResponse> applePay;
 
     /**
+     * Describes a Google Pay token on a Moov account.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("googlePay")
+    private Optional<? extends GooglePayResponse> googlePay;
+
+    /**
      * Describes payment card details captured with tap or in-person payment.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -94,6 +101,7 @@ public class TransferSource {
             @JsonProperty("wallet") Optional<? extends TransferPaymentMethodsWallet> wallet,
             @JsonProperty("card") Optional<? extends TransferPaymentMethodsCard> card,
             @JsonProperty("applePay") Optional<? extends ApplePayResponse> applePay,
+            @JsonProperty("googlePay") Optional<? extends GooglePayResponse> googlePay,
             @JsonProperty("terminalCard") Optional<? extends TransferTerminalCard> terminalCard,
             @JsonProperty("cardDetails") Optional<? extends CardTransactionDetails> cardDetails,
             @JsonProperty("achDetails") Optional<? extends ACHTransactionDetails> achDetails) {
@@ -105,6 +113,7 @@ public class TransferSource {
         Utils.checkNotNull(wallet, "wallet");
         Utils.checkNotNull(card, "card");
         Utils.checkNotNull(applePay, "applePay");
+        Utils.checkNotNull(googlePay, "googlePay");
         Utils.checkNotNull(terminalCard, "terminalCard");
         Utils.checkNotNull(cardDetails, "cardDetails");
         Utils.checkNotNull(achDetails, "achDetails");
@@ -116,6 +125,7 @@ public class TransferSource {
         this.wallet = wallet;
         this.card = card;
         this.applePay = applePay;
+        this.googlePay = googlePay;
         this.terminalCard = terminalCard;
         this.cardDetails = cardDetails;
         this.achDetails = achDetails;
@@ -128,7 +138,7 @@ public class TransferSource {
         this(Optional.empty(), paymentMethodID, paymentMethodType,
             account, Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -188,6 +198,15 @@ public class TransferSource {
     @JsonIgnore
     public Optional<ApplePayResponse> applePay() {
         return (Optional<ApplePayResponse>) applePay;
+    }
+
+    /**
+     * Describes a Google Pay token on a Moov account.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GooglePayResponse> googlePay() {
+        return (Optional<GooglePayResponse>) googlePay;
     }
 
     /**
@@ -333,6 +352,25 @@ public class TransferSource {
     }
 
     /**
+     * Describes a Google Pay token on a Moov account.
+     */
+    public TransferSource withGooglePay(GooglePayResponse googlePay) {
+        Utils.checkNotNull(googlePay, "googlePay");
+        this.googlePay = Optional.ofNullable(googlePay);
+        return this;
+    }
+
+
+    /**
+     * Describes a Google Pay token on a Moov account.
+     */
+    public TransferSource withGooglePay(Optional<? extends GooglePayResponse> googlePay) {
+        Utils.checkNotNull(googlePay, "googlePay");
+        this.googlePay = googlePay;
+        return this;
+    }
+
+    /**
      * Describes payment card details captured with tap or in-person payment.
      */
     public TransferSource withTerminalCard(TransferTerminalCard terminalCard) {
@@ -407,6 +445,7 @@ public class TransferSource {
             Utils.enhancedDeepEquals(this.wallet, other.wallet) &&
             Utils.enhancedDeepEquals(this.card, other.card) &&
             Utils.enhancedDeepEquals(this.applePay, other.applePay) &&
+            Utils.enhancedDeepEquals(this.googlePay, other.googlePay) &&
             Utils.enhancedDeepEquals(this.terminalCard, other.terminalCard) &&
             Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails) &&
             Utils.enhancedDeepEquals(this.achDetails, other.achDetails);
@@ -417,8 +456,8 @@ public class TransferSource {
         return Utils.enhancedHash(
             transferID, paymentMethodID, paymentMethodType,
             account, bankAccount, wallet,
-            card, applePay, terminalCard,
-            cardDetails, achDetails);
+            card, applePay, googlePay,
+            terminalCard, cardDetails, achDetails);
     }
     
     @Override
@@ -432,6 +471,7 @@ public class TransferSource {
                 "wallet", wallet,
                 "card", card,
                 "applePay", applePay,
+                "googlePay", googlePay,
                 "terminalCard", terminalCard,
                 "cardDetails", cardDetails,
                 "achDetails", achDetails);
@@ -455,6 +495,8 @@ public class TransferSource {
         private Optional<? extends TransferPaymentMethodsCard> card = Optional.empty();
 
         private Optional<? extends ApplePayResponse> applePay = Optional.empty();
+
+        private Optional<? extends GooglePayResponse> googlePay = Optional.empty();
 
         private Optional<? extends TransferTerminalCard> terminalCard = Optional.empty();
 
@@ -581,6 +623,25 @@ public class TransferSource {
 
 
         /**
+         * Describes a Google Pay token on a Moov account.
+         */
+        public Builder googlePay(GooglePayResponse googlePay) {
+            Utils.checkNotNull(googlePay, "googlePay");
+            this.googlePay = Optional.ofNullable(googlePay);
+            return this;
+        }
+
+        /**
+         * Describes a Google Pay token on a Moov account.
+         */
+        public Builder googlePay(Optional<? extends GooglePayResponse> googlePay) {
+            Utils.checkNotNull(googlePay, "googlePay");
+            this.googlePay = googlePay;
+            return this;
+        }
+
+
+        /**
          * Describes payment card details captured with tap or in-person payment.
          */
         public Builder terminalCard(TransferTerminalCard terminalCard) {
@@ -641,8 +702,8 @@ public class TransferSource {
             return new TransferSource(
                 transferID, paymentMethodID, paymentMethodType,
                 account, bankAccount, wallet,
-                card, applePay, terminalCard,
-                cardDetails, achDetails);
+                card, applePay, googlePay,
+                terminalCard, cardDetails, achDetails);
         }
 
     }

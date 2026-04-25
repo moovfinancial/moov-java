@@ -15,6 +15,7 @@ import io.moov.sdk.models.components.CardAcquiringRefund;
 import io.moov.sdk.models.components.FacilitatorFee;
 import io.moov.sdk.models.components.MoovFee;
 import io.moov.sdk.models.components.MoovFeeDetails;
+import io.moov.sdk.models.components.TransferAmountDetails;
 import io.moov.sdk.models.components.TransferDestination;
 import io.moov.sdk.models.components.TransferFailureReason;
 import io.moov.sdk.models.components.TransferLineItems;
@@ -225,10 +226,6 @@ public class Transfer extends MoovError {
         return data().flatMap(Data::paymentLinkCode);
     }
 
-    /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
-     */
     @Deprecated
     public Optional<Amount> salesTaxAmount() {
         return data().flatMap(Data::salesTaxAmount);
@@ -257,6 +254,11 @@ public class Transfer extends MoovError {
     @Deprecated
     public Optional<String> invoiceID() {
         return data().flatMap(Data::invoiceID);
+    }
+
+    @Deprecated
+    public Optional<TransferAmountDetails> amountDetails() {
+        return data().flatMap(Data::amountDetails);
     }
 
     public Optional<Data> data() {
@@ -415,10 +417,7 @@ public class Transfer extends MoovError {
         @JsonProperty("paymentLinkCode")
         private Optional<String> paymentLinkCode;
 
-        /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
-         */
+
         @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("salesTaxAmount")
         private Optional<? extends Amount> salesTaxAmount;
@@ -444,6 +443,11 @@ public class Transfer extends MoovError {
         @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("invoiceID")
         private Optional<String> invoiceID;
+
+
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("amountDetails")
+        private Optional<? extends TransferAmountDetails> amountDetails;
 
         @JsonCreator
         public Data(
@@ -475,7 +479,8 @@ public class Transfer extends MoovError {
                 @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
                 @JsonProperty("foreignID") Optional<String> foreignID,
                 @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems,
-                @JsonProperty("invoiceID") Optional<String> invoiceID) {
+                @JsonProperty("invoiceID") Optional<String> invoiceID,
+                @JsonProperty("amountDetails") Optional<? extends TransferAmountDetails> amountDetails) {
             Utils.checkNotNull(transferID, "transferID");
             Utils.checkNotNull(createdOn, "createdOn");
             Utils.checkNotNull(source, "source");
@@ -505,6 +510,7 @@ public class Transfer extends MoovError {
             Utils.checkNotNull(foreignID, "foreignID");
             Utils.checkNotNull(lineItems, "lineItems");
             Utils.checkNotNull(invoiceID, "invoiceID");
+            Utils.checkNotNull(amountDetails, "amountDetails");
             this.transferID = transferID;
             this.createdOn = createdOn;
             this.source = source;
@@ -534,6 +540,7 @@ public class Transfer extends MoovError {
             this.foreignID = foreignID;
             this.lineItems = lineItems;
             this.invoiceID = invoiceID;
+            this.amountDetails = amountDetails;
         }
         
         public Data(
@@ -552,7 +559,7 @@ public class Transfer extends MoovError {
                 Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty(), Optional.empty());
+                Optional.empty(), Optional.empty(), Optional.empty());
         }
 
         @JsonIgnore
@@ -721,10 +728,6 @@ public class Transfer extends MoovError {
             return paymentLinkCode;
         }
 
-        /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
-         */
         @SuppressWarnings("unchecked")
         @JsonIgnore
         public Optional<Amount> salesTaxAmount() {
@@ -755,6 +758,12 @@ public class Transfer extends MoovError {
         @JsonIgnore
         public Optional<String> invoiceID() {
             return invoiceID;
+        }
+
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<TransferAmountDetails> amountDetails() {
+            return (Optional<TransferAmountDetails>) amountDetails;
         }
 
         public static Builder builder() {
@@ -1104,10 +1113,6 @@ public class Transfer extends MoovError {
             return this;
         }
 
-        /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
-         */
         public Data withSalesTaxAmount(Amount salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
@@ -1115,10 +1120,6 @@ public class Transfer extends MoovError {
         }
 
 
-        /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
-         */
         public Data withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             this.salesTaxAmount = salesTaxAmount;
@@ -1184,6 +1185,19 @@ public class Transfer extends MoovError {
             return this;
         }
 
+        public Data withAmountDetails(TransferAmountDetails amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = Optional.ofNullable(amountDetails);
+            return this;
+        }
+
+
+        public Data withAmountDetails(Optional<? extends TransferAmountDetails> amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = amountDetails;
+            return this;
+        }
+
         @Override
         public boolean equals(java.lang.Object o) {
             if (this == o) {
@@ -1222,7 +1236,8 @@ public class Transfer extends MoovError {
                 Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
                 Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
                 Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
-                Utils.enhancedDeepEquals(this.invoiceID, other.invoiceID);
+                Utils.enhancedDeepEquals(this.invoiceID, other.invoiceID) &&
+                Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
         }
         
         @Override
@@ -1237,7 +1252,7 @@ public class Transfer extends MoovError {
                 refunds, disputedAmount, disputes,
                 sweepID, scheduleID, occurrenceID,
                 paymentLinkCode, salesTaxAmount, foreignID,
-                lineItems, invoiceID);
+                lineItems, invoiceID, amountDetails);
         }
         
         @Override
@@ -1271,7 +1286,8 @@ public class Transfer extends MoovError {
                     "salesTaxAmount", salesTaxAmount,
                     "foreignID", foreignID,
                     "lineItems", lineItems,
-                    "invoiceID", invoiceID);
+                    "invoiceID", invoiceID,
+                    "amountDetails", amountDetails);
         }
 
         @SuppressWarnings("UnusedReturnValue")
@@ -1334,6 +1350,8 @@ public class Transfer extends MoovError {
             private Optional<? extends TransferLineItems> lineItems = Optional.empty();
 
             private Optional<String> invoiceID = Optional.empty();
+
+            private Optional<? extends TransferAmountDetails> amountDetails = Optional.empty();
 
             private Builder() {
               // force use of static builder() method
@@ -1688,20 +1706,12 @@ public class Transfer extends MoovError {
             }
 
 
-            /**
-             * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-             * represents the total amount charged.
-             */
             public Builder salesTaxAmount(Amount salesTaxAmount) {
                 Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
                 this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
                 return this;
             }
 
-            /**
-             * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-             * represents the total amount charged.
-             */
             public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
                 Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
                 this.salesTaxAmount = salesTaxAmount;
@@ -1767,6 +1777,19 @@ public class Transfer extends MoovError {
                 return this;
             }
 
+
+            public Builder amountDetails(TransferAmountDetails amountDetails) {
+                Utils.checkNotNull(amountDetails, "amountDetails");
+                this.amountDetails = Optional.ofNullable(amountDetails);
+                return this;
+            }
+
+            public Builder amountDetails(Optional<? extends TransferAmountDetails> amountDetails) {
+                Utils.checkNotNull(amountDetails, "amountDetails");
+                this.amountDetails = amountDetails;
+                return this;
+            }
+
             public Data build() {
 
                 return new Data(
@@ -1779,7 +1802,7 @@ public class Transfer extends MoovError {
                     refunds, disputedAmount, disputes,
                     sweepID, scheduleID, occurrenceID,
                     paymentLinkCode, salesTaxAmount, foreignID,
-                    lineItems, invoiceID);
+                    lineItems, invoiceID, amountDetails);
             }
 
         }

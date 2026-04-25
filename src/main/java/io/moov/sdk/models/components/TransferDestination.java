@@ -65,6 +65,13 @@ public class TransferDestination {
     private Optional<? extends ApplePayResponse> applePay;
 
     /**
+     * Describes a Google Pay token on a Moov account.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("googlePay")
+    private Optional<? extends GooglePayResponse> googlePay;
+
+    /**
      * Card-specific details about the transaction.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -97,6 +104,7 @@ public class TransferDestination {
             @JsonProperty("card") Optional<? extends TransferPaymentMethodsCard> card,
             @JsonProperty("achDetails") Optional<? extends ACHTransactionDetails> achDetails,
             @JsonProperty("applePay") Optional<? extends ApplePayResponse> applePay,
+            @JsonProperty("googlePay") Optional<? extends GooglePayResponse> googlePay,
             @JsonProperty("cardDetails") Optional<? extends CardTransactionDetails> cardDetails,
             @JsonProperty("rtpDetails") Optional<? extends RtpDetails> rtpDetails,
             @JsonProperty("instantBankDetails") Optional<? extends InstantBankTransactionDetails> instantBankDetails) {
@@ -108,6 +116,7 @@ public class TransferDestination {
         Utils.checkNotNull(card, "card");
         Utils.checkNotNull(achDetails, "achDetails");
         Utils.checkNotNull(applePay, "applePay");
+        Utils.checkNotNull(googlePay, "googlePay");
         Utils.checkNotNull(cardDetails, "cardDetails");
         Utils.checkNotNull(rtpDetails, "rtpDetails");
         Utils.checkNotNull(instantBankDetails, "instantBankDetails");
@@ -119,6 +128,7 @@ public class TransferDestination {
         this.card = card;
         this.achDetails = achDetails;
         this.applePay = applePay;
+        this.googlePay = googlePay;
         this.cardDetails = cardDetails;
         this.rtpDetails = rtpDetails;
         this.instantBankDetails = instantBankDetails;
@@ -131,7 +141,7 @@ public class TransferDestination {
         this(paymentMethodID, paymentMethodType, account,
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -192,6 +202,15 @@ public class TransferDestination {
     @JsonIgnore
     public Optional<ApplePayResponse> applePay() {
         return (Optional<ApplePayResponse>) applePay;
+    }
+
+    /**
+     * Describes a Google Pay token on a Moov account.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GooglePayResponse> googlePay() {
+        return (Optional<GooglePayResponse>) googlePay;
     }
 
     /**
@@ -339,6 +358,25 @@ public class TransferDestination {
     }
 
     /**
+     * Describes a Google Pay token on a Moov account.
+     */
+    public TransferDestination withGooglePay(GooglePayResponse googlePay) {
+        Utils.checkNotNull(googlePay, "googlePay");
+        this.googlePay = Optional.ofNullable(googlePay);
+        return this;
+    }
+
+
+    /**
+     * Describes a Google Pay token on a Moov account.
+     */
+    public TransferDestination withGooglePay(Optional<? extends GooglePayResponse> googlePay) {
+        Utils.checkNotNull(googlePay, "googlePay");
+        this.googlePay = googlePay;
+        return this;
+    }
+
+    /**
      * Card-specific details about the transaction.
      */
     public TransferDestination withCardDetails(CardTransactionDetails cardDetails) {
@@ -417,6 +455,7 @@ public class TransferDestination {
             Utils.enhancedDeepEquals(this.card, other.card) &&
             Utils.enhancedDeepEquals(this.achDetails, other.achDetails) &&
             Utils.enhancedDeepEquals(this.applePay, other.applePay) &&
+            Utils.enhancedDeepEquals(this.googlePay, other.googlePay) &&
             Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails) &&
             Utils.enhancedDeepEquals(this.rtpDetails, other.rtpDetails) &&
             Utils.enhancedDeepEquals(this.instantBankDetails, other.instantBankDetails);
@@ -427,8 +466,8 @@ public class TransferDestination {
         return Utils.enhancedHash(
             paymentMethodID, paymentMethodType, account,
             bankAccount, wallet, card,
-            achDetails, applePay, cardDetails,
-            rtpDetails, instantBankDetails);
+            achDetails, applePay, googlePay,
+            cardDetails, rtpDetails, instantBankDetails);
     }
     
     @Override
@@ -442,6 +481,7 @@ public class TransferDestination {
                 "card", card,
                 "achDetails", achDetails,
                 "applePay", applePay,
+                "googlePay", googlePay,
                 "cardDetails", cardDetails,
                 "rtpDetails", rtpDetails,
                 "instantBankDetails", instantBankDetails);
@@ -465,6 +505,8 @@ public class TransferDestination {
         private Optional<? extends ACHTransactionDetails> achDetails = Optional.empty();
 
         private Optional<? extends ApplePayResponse> applePay = Optional.empty();
+
+        private Optional<? extends GooglePayResponse> googlePay = Optional.empty();
 
         private Optional<? extends CardTransactionDetails> cardDetails = Optional.empty();
 
@@ -592,6 +634,25 @@ public class TransferDestination {
 
 
         /**
+         * Describes a Google Pay token on a Moov account.
+         */
+        public Builder googlePay(GooglePayResponse googlePay) {
+            Utils.checkNotNull(googlePay, "googlePay");
+            this.googlePay = Optional.ofNullable(googlePay);
+            return this;
+        }
+
+        /**
+         * Describes a Google Pay token on a Moov account.
+         */
+        public Builder googlePay(Optional<? extends GooglePayResponse> googlePay) {
+            Utils.checkNotNull(googlePay, "googlePay");
+            this.googlePay = googlePay;
+            return this;
+        }
+
+
+        /**
          * Card-specific details about the transaction.
          */
         public Builder cardDetails(CardTransactionDetails cardDetails) {
@@ -656,8 +717,8 @@ public class TransferDestination {
             return new TransferDestination(
                 paymentMethodID, paymentMethodType, account,
                 bankAccount, wallet, card,
-                achDetails, applePay, cardDetails,
-                rtpDetails, instantBankDetails);
+                achDetails, applePay, googlePay,
+                cardDetails, rtpDetails, instantBankDetails);
         }
 
     }

@@ -164,10 +164,7 @@ public class Transfer {
     @JsonProperty("paymentLinkCode")
     private Optional<String> paymentLinkCode;
 
-    /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
-     */
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("salesTaxAmount")
     private Optional<? extends Amount> salesTaxAmount;
@@ -193,6 +190,11 @@ public class Transfer {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("invoiceID")
     private Optional<String> invoiceID;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("amountDetails")
+    private Optional<? extends TransferAmountDetails> amountDetails;
 
     @JsonCreator
     public Transfer(
@@ -224,7 +226,8 @@ public class Transfer {
             @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
             @JsonProperty("foreignID") Optional<String> foreignID,
             @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems,
-            @JsonProperty("invoiceID") Optional<String> invoiceID) {
+            @JsonProperty("invoiceID") Optional<String> invoiceID,
+            @JsonProperty("amountDetails") Optional<? extends TransferAmountDetails> amountDetails) {
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(source, "source");
@@ -254,6 +257,7 @@ public class Transfer {
         Utils.checkNotNull(foreignID, "foreignID");
         Utils.checkNotNull(lineItems, "lineItems");
         Utils.checkNotNull(invoiceID, "invoiceID");
+        Utils.checkNotNull(amountDetails, "amountDetails");
         this.transferID = transferID;
         this.createdOn = createdOn;
         this.source = source;
@@ -283,6 +287,7 @@ public class Transfer {
         this.foreignID = foreignID;
         this.lineItems = lineItems;
         this.invoiceID = invoiceID;
+        this.amountDetails = amountDetails;
     }
     
     public Transfer(
@@ -301,7 +306,7 @@ public class Transfer {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -470,10 +475,6 @@ public class Transfer {
         return paymentLinkCode;
     }
 
-    /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<Amount> salesTaxAmount() {
@@ -504,6 +505,12 @@ public class Transfer {
     @JsonIgnore
     public Optional<String> invoiceID() {
         return invoiceID;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<TransferAmountDetails> amountDetails() {
+        return (Optional<TransferAmountDetails>) amountDetails;
     }
 
     public static Builder builder() {
@@ -853,10 +860,6 @@ public class Transfer {
         return this;
     }
 
-    /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
-     */
     public Transfer withSalesTaxAmount(Amount salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
@@ -864,10 +867,6 @@ public class Transfer {
     }
 
 
-    /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
-     */
     public Transfer withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         this.salesTaxAmount = salesTaxAmount;
@@ -933,6 +932,19 @@ public class Transfer {
         return this;
     }
 
+    public Transfer withAmountDetails(TransferAmountDetails amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = Optional.ofNullable(amountDetails);
+        return this;
+    }
+
+
+    public Transfer withAmountDetails(Optional<? extends TransferAmountDetails> amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = amountDetails;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -971,7 +983,8 @@ public class Transfer {
             Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
             Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
-            Utils.enhancedDeepEquals(this.invoiceID, other.invoiceID);
+            Utils.enhancedDeepEquals(this.invoiceID, other.invoiceID) &&
+            Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
     }
     
     @Override
@@ -986,7 +999,7 @@ public class Transfer {
             refunds, disputedAmount, disputes,
             sweepID, scheduleID, occurrenceID,
             paymentLinkCode, salesTaxAmount, foreignID,
-            lineItems, invoiceID);
+            lineItems, invoiceID, amountDetails);
     }
     
     @Override
@@ -1020,7 +1033,8 @@ public class Transfer {
                 "salesTaxAmount", salesTaxAmount,
                 "foreignID", foreignID,
                 "lineItems", lineItems,
-                "invoiceID", invoiceID);
+                "invoiceID", invoiceID,
+                "amountDetails", amountDetails);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -1083,6 +1097,8 @@ public class Transfer {
         private Optional<? extends TransferLineItems> lineItems = Optional.empty();
 
         private Optional<String> invoiceID = Optional.empty();
+
+        private Optional<? extends TransferAmountDetails> amountDetails = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -1437,20 +1453,12 @@ public class Transfer {
         }
 
 
-        /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
-         */
         public Builder salesTaxAmount(Amount salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
             return this;
         }
 
-        /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
-         */
         public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             this.salesTaxAmount = salesTaxAmount;
@@ -1516,6 +1524,19 @@ public class Transfer {
             return this;
         }
 
+
+        public Builder amountDetails(TransferAmountDetails amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = Optional.ofNullable(amountDetails);
+            return this;
+        }
+
+        public Builder amountDetails(Optional<? extends TransferAmountDetails> amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = amountDetails;
+            return this;
+        }
+
         public Transfer build() {
 
             return new Transfer(
@@ -1528,7 +1549,7 @@ public class Transfer {
                 refunds, disputedAmount, disputes,
                 sweepID, scheduleID, occurrenceID,
                 paymentLinkCode, salesTaxAmount, foreignID,
-                lineItems, invoiceID);
+                lineItems, invoiceID, amountDetails);
         }
 
     }

@@ -15,6 +15,7 @@ import io.moov.sdk.models.components.CardAcquiringRefund;
 import io.moov.sdk.models.components.FacilitatorFee;
 import io.moov.sdk.models.components.MoovFee;
 import io.moov.sdk.models.components.MoovFeeDetails;
+import io.moov.sdk.models.components.TransferAmountDetails;
 import io.moov.sdk.models.components.TransferCapture;
 import io.moov.sdk.models.components.TransferDestination;
 import io.moov.sdk.models.components.TransferFailureReason;
@@ -226,10 +227,6 @@ public class Transfer extends MoovError {
         return data().flatMap(Data::paymentLinkCode);
     }
 
-    /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
-     */
     @Deprecated
     public Optional<Amount> salesTaxAmount() {
         return data().flatMap(Data::salesTaxAmount);
@@ -258,6 +255,11 @@ public class Transfer extends MoovError {
     @Deprecated
     public Optional<String> invoiceID() {
         return data().flatMap(Data::invoiceID);
+    }
+
+    @Deprecated
+    public Optional<TransferAmountDetails> amountDetails() {
+        return data().flatMap(Data::amountDetails);
     }
 
     /**
@@ -424,10 +426,7 @@ public class Transfer extends MoovError {
         @JsonProperty("paymentLinkCode")
         private Optional<String> paymentLinkCode;
 
-        /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
-         */
+
         @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("salesTaxAmount")
         private Optional<? extends Amount> salesTaxAmount;
@@ -453,6 +452,11 @@ public class Transfer extends MoovError {
         @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("invoiceID")
         private Optional<String> invoiceID;
+
+
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("amountDetails")
+        private Optional<? extends TransferAmountDetails> amountDetails;
 
         /**
          * The card authorization and capture IDs associated with a transfer.
@@ -492,6 +496,7 @@ public class Transfer extends MoovError {
                 @JsonProperty("foreignID") Optional<String> foreignID,
                 @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems,
                 @JsonProperty("invoiceID") Optional<String> invoiceID,
+                @JsonProperty("amountDetails") Optional<? extends TransferAmountDetails> amountDetails,
                 @JsonProperty("capture") Optional<? extends TransferCapture> capture) {
             Utils.checkNotNull(transferID, "transferID");
             Utils.checkNotNull(createdOn, "createdOn");
@@ -522,6 +527,7 @@ public class Transfer extends MoovError {
             Utils.checkNotNull(foreignID, "foreignID");
             Utils.checkNotNull(lineItems, "lineItems");
             Utils.checkNotNull(invoiceID, "invoiceID");
+            Utils.checkNotNull(amountDetails, "amountDetails");
             Utils.checkNotNull(capture, "capture");
             this.transferID = transferID;
             this.createdOn = createdOn;
@@ -552,6 +558,7 @@ public class Transfer extends MoovError {
             this.foreignID = foreignID;
             this.lineItems = lineItems;
             this.invoiceID = invoiceID;
+            this.amountDetails = amountDetails;
             this.capture = capture;
         }
         
@@ -571,7 +578,8 @@ public class Transfer extends MoovError {
                 Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty(), Optional.empty(), Optional.empty());
+                Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty());
         }
 
         @JsonIgnore
@@ -740,10 +748,6 @@ public class Transfer extends MoovError {
             return paymentLinkCode;
         }
 
-        /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
-         */
         @SuppressWarnings("unchecked")
         @JsonIgnore
         public Optional<Amount> salesTaxAmount() {
@@ -774,6 +778,12 @@ public class Transfer extends MoovError {
         @JsonIgnore
         public Optional<String> invoiceID() {
             return invoiceID;
+        }
+
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<TransferAmountDetails> amountDetails() {
+            return (Optional<TransferAmountDetails>) amountDetails;
         }
 
         /**
@@ -1132,10 +1142,6 @@ public class Transfer extends MoovError {
             return this;
         }
 
-        /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
-         */
         public Data withSalesTaxAmount(Amount salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
@@ -1143,10 +1149,6 @@ public class Transfer extends MoovError {
         }
 
 
-        /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
-         */
         public Data withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             this.salesTaxAmount = salesTaxAmount;
@@ -1212,6 +1214,19 @@ public class Transfer extends MoovError {
             return this;
         }
 
+        public Data withAmountDetails(TransferAmountDetails amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = Optional.ofNullable(amountDetails);
+            return this;
+        }
+
+
+        public Data withAmountDetails(Optional<? extends TransferAmountDetails> amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = amountDetails;
+            return this;
+        }
+
         /**
          * The card authorization and capture IDs associated with a transfer.
          */
@@ -1270,6 +1285,7 @@ public class Transfer extends MoovError {
                 Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
                 Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
                 Utils.enhancedDeepEquals(this.invoiceID, other.invoiceID) &&
+                Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails) &&
                 Utils.enhancedDeepEquals(this.capture, other.capture);
         }
         
@@ -1285,7 +1301,8 @@ public class Transfer extends MoovError {
                 refunds, disputedAmount, disputes,
                 sweepID, scheduleID, occurrenceID,
                 paymentLinkCode, salesTaxAmount, foreignID,
-                lineItems, invoiceID, capture);
+                lineItems, invoiceID, amountDetails,
+                capture);
         }
         
         @Override
@@ -1320,6 +1337,7 @@ public class Transfer extends MoovError {
                     "foreignID", foreignID,
                     "lineItems", lineItems,
                     "invoiceID", invoiceID,
+                    "amountDetails", amountDetails,
                     "capture", capture);
         }
 
@@ -1383,6 +1401,8 @@ public class Transfer extends MoovError {
             private Optional<? extends TransferLineItems> lineItems = Optional.empty();
 
             private Optional<String> invoiceID = Optional.empty();
+
+            private Optional<? extends TransferAmountDetails> amountDetails = Optional.empty();
 
             private Optional<? extends TransferCapture> capture = Optional.empty();
 
@@ -1739,20 +1759,12 @@ public class Transfer extends MoovError {
             }
 
 
-            /**
-             * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-             * represents the total amount charged.
-             */
             public Builder salesTaxAmount(Amount salesTaxAmount) {
                 Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
                 this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
                 return this;
             }
 
-            /**
-             * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-             * represents the total amount charged.
-             */
             public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
                 Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
                 this.salesTaxAmount = salesTaxAmount;
@@ -1819,6 +1831,19 @@ public class Transfer extends MoovError {
             }
 
 
+            public Builder amountDetails(TransferAmountDetails amountDetails) {
+                Utils.checkNotNull(amountDetails, "amountDetails");
+                this.amountDetails = Optional.ofNullable(amountDetails);
+                return this;
+            }
+
+            public Builder amountDetails(Optional<? extends TransferAmountDetails> amountDetails) {
+                Utils.checkNotNull(amountDetails, "amountDetails");
+                this.amountDetails = amountDetails;
+                return this;
+            }
+
+
             /**
              * The card authorization and capture IDs associated with a transfer.
              */
@@ -1849,7 +1874,8 @@ public class Transfer extends MoovError {
                     refunds, disputedAmount, disputes,
                     sweepID, scheduleID, occurrenceID,
                     paymentLinkCode, salesTaxAmount, foreignID,
-                    lineItems, invoiceID, capture);
+                    lineItems, invoiceID, amountDetails,
+                    capture);
             }
 
         }

@@ -8,13 +8,19 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum LinkedGooglePayPaymentMethodPaymentMethodType {
-    GOOGLE_PAY("google-pay");
+/**
+ * AmountType
+ * 
+ * <p>Indicates whether the payment amount is fixed by the merchant or open for the buyer to choose.
+ */
+public enum AmountType {
+    FIXED("fixed"),
+    OPEN("open");
 
     @JsonValue
     private final String value;
 
-    LinkedGooglePayPaymentMethodPaymentMethodType(String value) {
+    AmountType(String value) {
         this.value = value;
     }
     
@@ -22,8 +28,8 @@ public enum LinkedGooglePayPaymentMethodPaymentMethodType {
         return value;
     }
     
-    public static Optional<LinkedGooglePayPaymentMethodPaymentMethodType> fromValue(String value) {
-        for (LinkedGooglePayPaymentMethodPaymentMethodType o: LinkedGooglePayPaymentMethodPaymentMethodType.values()) {
+    public static Optional<AmountType> fromValue(String value) {
+        for (AmountType o: AmountType.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);
             }

@@ -25,8 +25,10 @@ public class GooglePay {
     /**
      * Connect a Google Pay token to the specified account.
      * 
-     * <p>The `token` data is defined by Google Pay and should be passed through from Google Pay's response
-     * unmodified.
+     * <p>The `paymentMethodData` field should contain the `paymentMethodData` property from Google Pay's
+     * [PaymentData](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData)
+     * response,
+     * passed through unmodified.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
@@ -41,18 +43,21 @@ public class GooglePay {
     /**
      * Connect a Google Pay token to the specified account.
      * 
-     * <p>The `token` data is defined by Google Pay and should be passed through from Google Pay's response
-     * unmodified.
+     * <p>The `paymentMethodData` field should contain the `paymentMethodData` property from Google Pay's
+     * [PaymentData](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData)
+     * response,
+     * passed through unmodified.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
      * 
      * @param accountID ID of the Moov account representing the cardholder.
-     * @param linkGooglePay   The encrypted Google Pay payment token (ECv2 format).
+     * @param linkGooglePay   Links a Google Pay token to a Moov account.
      *         
-     *           Refer to [Google's documentation](https://developers.google.com/pay/api/web/guides/resources/payment-data-cryptography#payment-method-token-structure)
-     *           for more information.
+     *           The `paymentMethodData` field should contain the `paymentMethodData` property from the
+     *           [PaymentData](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData) response
+     *           returned by Google Pay's client SDK. Pass it through unmodified.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */

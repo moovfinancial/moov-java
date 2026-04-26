@@ -33,6 +33,13 @@ public class PaymentLinkCustomerOptions {
     private Optional<Boolean> requirePhone;
 
     /**
+     * If true, tipping is enabled on the payment form. Defaults to false.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("tippingEnabled")
+    private Optional<Boolean> tippingEnabled;
+
+    /**
      * Optional free-form metadata for the Moov account that will represent this customer.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -43,17 +50,21 @@ public class PaymentLinkCustomerOptions {
     public PaymentLinkCustomerOptions(
             @JsonProperty("requireAddress") Optional<Boolean> requireAddress,
             @JsonProperty("requirePhone") Optional<Boolean> requirePhone,
+            @JsonProperty("tippingEnabled") Optional<Boolean> tippingEnabled,
             @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata) {
         Utils.checkNotNull(requireAddress, "requireAddress");
         Utils.checkNotNull(requirePhone, "requirePhone");
+        Utils.checkNotNull(tippingEnabled, "tippingEnabled");
         Utils.checkNotNull(metadata, "metadata");
         this.requireAddress = requireAddress;
         this.requirePhone = requirePhone;
+        this.tippingEnabled = tippingEnabled;
         this.metadata = metadata;
     }
     
     public PaymentLinkCustomerOptions() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -70,6 +81,14 @@ public class PaymentLinkCustomerOptions {
     @JsonIgnore
     public Optional<Boolean> requirePhone() {
         return requirePhone;
+    }
+
+    /**
+     * If true, tipping is enabled on the payment form. Defaults to false.
+     */
+    @JsonIgnore
+    public Optional<Boolean> tippingEnabled() {
+        return tippingEnabled;
     }
 
     /**
@@ -125,6 +144,25 @@ public class PaymentLinkCustomerOptions {
     }
 
     /**
+     * If true, tipping is enabled on the payment form. Defaults to false.
+     */
+    public PaymentLinkCustomerOptions withTippingEnabled(boolean tippingEnabled) {
+        Utils.checkNotNull(tippingEnabled, "tippingEnabled");
+        this.tippingEnabled = Optional.ofNullable(tippingEnabled);
+        return this;
+    }
+
+
+    /**
+     * If true, tipping is enabled on the payment form. Defaults to false.
+     */
+    public PaymentLinkCustomerOptions withTippingEnabled(Optional<Boolean> tippingEnabled) {
+        Utils.checkNotNull(tippingEnabled, "tippingEnabled");
+        this.tippingEnabled = tippingEnabled;
+        return this;
+    }
+
+    /**
      * Optional free-form metadata for the Moov account that will represent this customer.
      */
     public PaymentLinkCustomerOptions withMetadata(Map<String, String> metadata) {
@@ -155,13 +193,15 @@ public class PaymentLinkCustomerOptions {
         return 
             Utils.enhancedDeepEquals(this.requireAddress, other.requireAddress) &&
             Utils.enhancedDeepEquals(this.requirePhone, other.requirePhone) &&
+            Utils.enhancedDeepEquals(this.tippingEnabled, other.tippingEnabled) &&
             Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            requireAddress, requirePhone, metadata);
+            requireAddress, requirePhone, tippingEnabled,
+            metadata);
     }
     
     @Override
@@ -169,6 +209,7 @@ public class PaymentLinkCustomerOptions {
         return Utils.toString(PaymentLinkCustomerOptions.class,
                 "requireAddress", requireAddress,
                 "requirePhone", requirePhone,
+                "tippingEnabled", tippingEnabled,
                 "metadata", metadata);
     }
 
@@ -178,6 +219,8 @@ public class PaymentLinkCustomerOptions {
         private Optional<Boolean> requireAddress = Optional.empty();
 
         private Optional<Boolean> requirePhone = Optional.empty();
+
+        private Optional<Boolean> tippingEnabled = Optional.empty();
 
         private Optional<? extends Map<String, String>> metadata = Optional.empty();
 
@@ -225,6 +268,25 @@ public class PaymentLinkCustomerOptions {
 
 
         /**
+         * If true, tipping is enabled on the payment form. Defaults to false.
+         */
+        public Builder tippingEnabled(boolean tippingEnabled) {
+            Utils.checkNotNull(tippingEnabled, "tippingEnabled");
+            this.tippingEnabled = Optional.ofNullable(tippingEnabled);
+            return this;
+        }
+
+        /**
+         * If true, tipping is enabled on the payment form. Defaults to false.
+         */
+        public Builder tippingEnabled(Optional<Boolean> tippingEnabled) {
+            Utils.checkNotNull(tippingEnabled, "tippingEnabled");
+            this.tippingEnabled = tippingEnabled;
+            return this;
+        }
+
+
+        /**
          * Optional free-form metadata for the Moov account that will represent this customer.
          */
         public Builder metadata(Map<String, String> metadata) {
@@ -245,7 +307,8 @@ public class PaymentLinkCustomerOptions {
         public PaymentLinkCustomerOptions build() {
 
             return new PaymentLinkCustomerOptions(
-                requireAddress, requirePhone, metadata);
+                requireAddress, requirePhone, tippingEnabled,
+                metadata);
         }
 
     }

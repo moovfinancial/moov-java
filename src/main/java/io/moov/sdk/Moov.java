@@ -109,6 +109,9 @@ public class Moov {
     private final Support support;
 
 
+    private final TransferConfig transferConfig;
+
+
     private final Transfers transfers;
 
 
@@ -275,6 +278,11 @@ public class Moov {
 
     public Support support() {
         return support;
+    }
+
+
+    public TransferConfig transferConfig() {
+        return transferConfig;
     }
 
 
@@ -537,6 +545,7 @@ public class Moov {
         this.sweeps = new Sweeps(sdkConfiguration);
         this.accountTerminalApplications = new AccountTerminalApplications(sdkConfiguration);
         this.support = new Support(sdkConfiguration);
+        this.transferConfig = new TransferConfig(sdkConfiguration);
         this.transfers = new Transfers(sdkConfiguration);
         this.underwriting = new Underwriting(sdkConfiguration);
         this.wallets = new Wallets(sdkConfiguration);

@@ -13,6 +13,7 @@ import io.moov.sdk.models.components.CreatePaymentLinkLineItemsValidationError;
 import io.moov.sdk.models.components.DisplayOptionsError;
 import io.moov.sdk.models.components.PaymentDetailsError;
 import io.moov.sdk.models.components.PayoutDetailsError;
+import io.moov.sdk.models.components.UpdatePaymentLinkAmountDetailsValidationError;
 import io.moov.sdk.utils.Utils;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
@@ -93,6 +94,11 @@ public class UpdatePaymentLinkError extends MoovError {
         return data().flatMap(Data::lineItems);
     }
 
+    @Deprecated
+    public Optional<UpdatePaymentLinkAmountDetailsValidationError> amountDetails() {
+        return data().flatMap(Data::amountDetails);
+    }
+
     public Optional<Data> data() {
         return Optional.ofNullable(data);
     }
@@ -140,6 +146,11 @@ public class UpdatePaymentLinkError extends MoovError {
         @JsonProperty("lineItems")
         private Optional<? extends CreatePaymentLinkLineItemsValidationError> lineItems;
 
+
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("amountDetails")
+        private Optional<? extends UpdatePaymentLinkAmountDetailsValidationError> amountDetails;
+
         @JsonCreator
         public Data(
                 @JsonProperty("amount") Optional<? extends AmountValidationError> amount,
@@ -148,7 +159,8 @@ public class UpdatePaymentLinkError extends MoovError {
                 @JsonProperty("display") Optional<? extends DisplayOptionsError> display,
                 @JsonProperty("payment") Optional<? extends PaymentDetailsError> payment,
                 @JsonProperty("payout") Optional<? extends PayoutDetailsError> payout,
-                @JsonProperty("lineItems") Optional<? extends CreatePaymentLinkLineItemsValidationError> lineItems) {
+                @JsonProperty("lineItems") Optional<? extends CreatePaymentLinkLineItemsValidationError> lineItems,
+                @JsonProperty("amountDetails") Optional<? extends UpdatePaymentLinkAmountDetailsValidationError> amountDetails) {
             Utils.checkNotNull(amount, "amount");
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             Utils.checkNotNull(expiresOn, "expiresOn");
@@ -156,6 +168,7 @@ public class UpdatePaymentLinkError extends MoovError {
             Utils.checkNotNull(payment, "payment");
             Utils.checkNotNull(payout, "payout");
             Utils.checkNotNull(lineItems, "lineItems");
+            Utils.checkNotNull(amountDetails, "amountDetails");
             this.amount = amount;
             this.salesTaxAmount = salesTaxAmount;
             this.expiresOn = expiresOn;
@@ -163,12 +176,13 @@ public class UpdatePaymentLinkError extends MoovError {
             this.payment = payment;
             this.payout = payout;
             this.lineItems = lineItems;
+            this.amountDetails = amountDetails;
         }
         
         public Data() {
             this(Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty());
+                Optional.empty(), Optional.empty());
         }
 
         @SuppressWarnings("unchecked")
@@ -210,6 +224,12 @@ public class UpdatePaymentLinkError extends MoovError {
         @JsonIgnore
         public Optional<CreatePaymentLinkLineItemsValidationError> lineItems() {
             return (Optional<CreatePaymentLinkLineItemsValidationError>) lineItems;
+        }
+
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<UpdatePaymentLinkAmountDetailsValidationError> amountDetails() {
+            return (Optional<UpdatePaymentLinkAmountDetailsValidationError>) amountDetails;
         }
 
         public static Builder builder() {
@@ -308,6 +328,19 @@ public class UpdatePaymentLinkError extends MoovError {
             return this;
         }
 
+        public Data withAmountDetails(UpdatePaymentLinkAmountDetailsValidationError amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = Optional.ofNullable(amountDetails);
+            return this;
+        }
+
+
+        public Data withAmountDetails(Optional<? extends UpdatePaymentLinkAmountDetailsValidationError> amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = amountDetails;
+            return this;
+        }
+
         @Override
         public boolean equals(java.lang.Object o) {
             if (this == o) {
@@ -324,7 +357,8 @@ public class UpdatePaymentLinkError extends MoovError {
                 Utils.enhancedDeepEquals(this.display, other.display) &&
                 Utils.enhancedDeepEquals(this.payment, other.payment) &&
                 Utils.enhancedDeepEquals(this.payout, other.payout) &&
-                Utils.enhancedDeepEquals(this.lineItems, other.lineItems);
+                Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
+                Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
         }
         
         @Override
@@ -332,7 +366,7 @@ public class UpdatePaymentLinkError extends MoovError {
             return Utils.enhancedHash(
                 amount, salesTaxAmount, expiresOn,
                 display, payment, payout,
-                lineItems);
+                lineItems, amountDetails);
         }
         
         @Override
@@ -344,7 +378,8 @@ public class UpdatePaymentLinkError extends MoovError {
                     "display", display,
                     "payment", payment,
                     "payout", payout,
-                    "lineItems", lineItems);
+                    "lineItems", lineItems,
+                    "amountDetails", amountDetails);
         }
 
         @SuppressWarnings("UnusedReturnValue")
@@ -363,6 +398,8 @@ public class UpdatePaymentLinkError extends MoovError {
             private Optional<? extends PayoutDetailsError> payout = Optional.empty();
 
             private Optional<? extends CreatePaymentLinkLineItemsValidationError> lineItems = Optional.empty();
+
+            private Optional<? extends UpdatePaymentLinkAmountDetailsValidationError> amountDetails = Optional.empty();
 
             private Builder() {
               // force use of static builder() method
@@ -459,12 +496,25 @@ public class UpdatePaymentLinkError extends MoovError {
                 return this;
             }
 
+
+            public Builder amountDetails(UpdatePaymentLinkAmountDetailsValidationError amountDetails) {
+                Utils.checkNotNull(amountDetails, "amountDetails");
+                this.amountDetails = Optional.ofNullable(amountDetails);
+                return this;
+            }
+
+            public Builder amountDetails(Optional<? extends UpdatePaymentLinkAmountDetailsValidationError> amountDetails) {
+                Utils.checkNotNull(amountDetails, "amountDetails");
+                this.amountDetails = amountDetails;
+                return this;
+            }
+
             public Data build() {
 
                 return new Data(
                     amount, salesTaxAmount, expiresOn,
                     display, payment, payout,
-                    lineItems);
+                    lineItems, amountDetails);
             }
 
         }

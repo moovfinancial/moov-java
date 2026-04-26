@@ -156,8 +156,7 @@ public class CreatedTransfer {
     private Optional<String> paymentLinkCode;
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
+     * Optional sales tax amount.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("salesTaxAmount")
@@ -177,6 +176,11 @@ public class CreatedTransfer {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lineItems")
     private Optional<? extends TransferLineItems> lineItems;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("amountDetails")
+    private Optional<? extends TransferAmountDetails> amountDetails;
 
     /**
      * The card authorization and capture IDs associated with a transfer.
@@ -214,6 +218,7 @@ public class CreatedTransfer {
             @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
             @JsonProperty("foreignID") Optional<String> foreignID,
             @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems,
+            @JsonProperty("amountDetails") Optional<? extends TransferAmountDetails> amountDetails,
             @JsonProperty("capture") Optional<? extends TransferCapture> capture) {
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(createdOn, "createdOn");
@@ -242,6 +247,7 @@ public class CreatedTransfer {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         Utils.checkNotNull(foreignID, "foreignID");
         Utils.checkNotNull(lineItems, "lineItems");
+        Utils.checkNotNull(amountDetails, "amountDetails");
         Utils.checkNotNull(capture, "capture");
         this.transferID = transferID;
         this.createdOn = createdOn;
@@ -270,6 +276,7 @@ public class CreatedTransfer {
         this.salesTaxAmount = salesTaxAmount;
         this.foreignID = foreignID;
         this.lineItems = lineItems;
+        this.amountDetails = amountDetails;
         this.capture = capture;
     }
     
@@ -285,7 +292,7 @@ public class CreatedTransfer {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -447,8 +454,7 @@ public class CreatedTransfer {
     }
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
+     * Optional sales tax amount.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -472,6 +478,12 @@ public class CreatedTransfer {
     @JsonIgnore
     public Optional<TransferLineItems> lineItems() {
         return (Optional<TransferLineItems>) lineItems;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<TransferAmountDetails> amountDetails() {
+        return (Optional<TransferAmountDetails>) amountDetails;
     }
 
     /**
@@ -837,8 +849,7 @@ public class CreatedTransfer {
     }
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
+     * Optional sales tax amount.
      */
     public CreatedTransfer withSalesTaxAmount(Amount salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
@@ -848,8 +859,7 @@ public class CreatedTransfer {
 
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-     * represents the total amount charged.
+     * Optional sales tax amount.
      */
     public CreatedTransfer withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
@@ -894,6 +904,19 @@ public class CreatedTransfer {
     public CreatedTransfer withLineItems(Optional<? extends TransferLineItems> lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
         this.lineItems = lineItems;
+        return this;
+    }
+
+    public CreatedTransfer withAmountDetails(TransferAmountDetails amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = Optional.ofNullable(amountDetails);
+        return this;
+    }
+
+
+    public CreatedTransfer withAmountDetails(Optional<? extends TransferAmountDetails> amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = amountDetails;
         return this;
     }
 
@@ -953,6 +976,7 @@ public class CreatedTransfer {
             Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
             Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
+            Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails) &&
             Utils.enhancedDeepEquals(this.capture, other.capture);
     }
     
@@ -968,7 +992,7 @@ public class CreatedTransfer {
             disputedAmount, disputes, sweepID,
             scheduleID, occurrenceID, paymentLinkCode,
             salesTaxAmount, foreignID, lineItems,
-            capture);
+            amountDetails, capture);
     }
     
     @Override
@@ -1001,6 +1025,7 @@ public class CreatedTransfer {
                 "salesTaxAmount", salesTaxAmount,
                 "foreignID", foreignID,
                 "lineItems", lineItems,
+                "amountDetails", amountDetails,
                 "capture", capture);
     }
 
@@ -1060,6 +1085,8 @@ public class CreatedTransfer {
         private Optional<String> foreignID = Optional.empty();
 
         private Optional<? extends TransferLineItems> lineItems = Optional.empty();
+
+        private Optional<? extends TransferAmountDetails> amountDetails = Optional.empty();
 
         private Optional<? extends TransferCapture> capture = Optional.empty();
 
@@ -1419,8 +1446,7 @@ public class CreatedTransfer {
 
 
         /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
+         * Optional sales tax amount.
          */
         public Builder salesTaxAmount(Amount salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
@@ -1429,8 +1455,7 @@ public class CreatedTransfer {
         }
 
         /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
-         * represents the total amount charged.
+         * Optional sales tax amount.
          */
         public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
@@ -1479,6 +1504,19 @@ public class CreatedTransfer {
         }
 
 
+        public Builder amountDetails(TransferAmountDetails amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = Optional.ofNullable(amountDetails);
+            return this;
+        }
+
+        public Builder amountDetails(Optional<? extends TransferAmountDetails> amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = amountDetails;
+            return this;
+        }
+
+
         /**
          * The card authorization and capture IDs associated with a transfer.
          */
@@ -1509,7 +1547,7 @@ public class CreatedTransfer {
                 disputedAmount, disputes, sweepID,
                 scheduleID, occurrenceID, paymentLinkCode,
                 salesTaxAmount, foreignID, lineItems,
-                capture);
+                amountDetails, capture);
         }
 
     }

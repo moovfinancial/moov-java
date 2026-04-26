@@ -65,6 +65,11 @@ public class UpdatePaymentLink {
     @JsonProperty("lineItems")
     private Optional<? extends CreatePaymentLinkLineItemsUpdate> lineItems;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("amountDetails")
+    private Optional<? extends UpdatePaymentLinkAmountDetails> amountDetails;
+
     @JsonCreator
     public UpdatePaymentLink(
             @JsonProperty("amount") Optional<? extends AmountUpdate> amount,
@@ -74,7 +79,8 @@ public class UpdatePaymentLink {
             @JsonProperty("customer") Optional<? extends PaymentLinkCustomerOptions> customer,
             @JsonProperty("payment") Optional<? extends PaymentLinkPaymentDetailsUpdate> payment,
             @JsonProperty("payout") Optional<? extends PaymentLinkPayoutDetailsUpdate> payout,
-            @JsonProperty("lineItems") Optional<? extends CreatePaymentLinkLineItemsUpdate> lineItems) {
+            @JsonProperty("lineItems") Optional<? extends CreatePaymentLinkLineItemsUpdate> lineItems,
+            @JsonProperty("amountDetails") Optional<? extends UpdatePaymentLinkAmountDetails> amountDetails) {
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         Utils.checkNotNull(expiresOn, "expiresOn");
@@ -83,6 +89,7 @@ public class UpdatePaymentLink {
         Utils.checkNotNull(payment, "payment");
         Utils.checkNotNull(payout, "payout");
         Utils.checkNotNull(lineItems, "lineItems");
+        Utils.checkNotNull(amountDetails, "amountDetails");
         this.amount = amount;
         this.salesTaxAmount = salesTaxAmount;
         this.expiresOn = expiresOn;
@@ -91,12 +98,13 @@ public class UpdatePaymentLink {
         this.payment = payment;
         this.payout = payout;
         this.lineItems = lineItems;
+        this.amountDetails = amountDetails;
     }
     
     public UpdatePaymentLink() {
         this(Optional.empty(), Optional.empty(), JsonNullable.undefined(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -154,6 +162,12 @@ public class UpdatePaymentLink {
     @JsonIgnore
     public Optional<CreatePaymentLinkLineItemsUpdate> lineItems() {
         return (Optional<CreatePaymentLinkLineItemsUpdate>) lineItems;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<UpdatePaymentLinkAmountDetails> amountDetails() {
+        return (Optional<UpdatePaymentLinkAmountDetails>) amountDetails;
     }
 
     public static Builder builder() {
@@ -284,6 +298,19 @@ public class UpdatePaymentLink {
         return this;
     }
 
+    public UpdatePaymentLink withAmountDetails(UpdatePaymentLinkAmountDetails amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = Optional.ofNullable(amountDetails);
+        return this;
+    }
+
+
+    public UpdatePaymentLink withAmountDetails(Optional<? extends UpdatePaymentLinkAmountDetails> amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = amountDetails;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -301,7 +328,8 @@ public class UpdatePaymentLink {
             Utils.enhancedDeepEquals(this.customer, other.customer) &&
             Utils.enhancedDeepEquals(this.payment, other.payment) &&
             Utils.enhancedDeepEquals(this.payout, other.payout) &&
-            Utils.enhancedDeepEquals(this.lineItems, other.lineItems);
+            Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
+            Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
     }
     
     @Override
@@ -309,7 +337,7 @@ public class UpdatePaymentLink {
         return Utils.enhancedHash(
             amount, salesTaxAmount, expiresOn,
             display, customer, payment,
-            payout, lineItems);
+            payout, lineItems, amountDetails);
     }
     
     @Override
@@ -322,7 +350,8 @@ public class UpdatePaymentLink {
                 "customer", customer,
                 "payment", payment,
                 "payout", payout,
-                "lineItems", lineItems);
+                "lineItems", lineItems,
+                "amountDetails", amountDetails);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -343,6 +372,8 @@ public class UpdatePaymentLink {
         private Optional<? extends PaymentLinkPayoutDetailsUpdate> payout = Optional.empty();
 
         private Optional<? extends CreatePaymentLinkLineItemsUpdate> lineItems = Optional.empty();
+
+        private Optional<? extends UpdatePaymentLinkAmountDetails> amountDetails = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -472,12 +503,25 @@ public class UpdatePaymentLink {
             return this;
         }
 
+
+        public Builder amountDetails(UpdatePaymentLinkAmountDetails amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = Optional.ofNullable(amountDetails);
+            return this;
+        }
+
+        public Builder amountDetails(Optional<? extends UpdatePaymentLinkAmountDetails> amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = amountDetails;
+            return this;
+        }
+
         public UpdatePaymentLink build() {
 
             return new UpdatePaymentLink(
                 amount, salesTaxAmount, expiresOn,
                 display, customer, payment,
-                payout, lineItems);
+                payout, lineItems, amountDetails);
         }
 
     }

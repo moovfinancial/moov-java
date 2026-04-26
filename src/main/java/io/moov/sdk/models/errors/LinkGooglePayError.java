@@ -62,11 +62,19 @@ public class LinkGooglePayError extends MoovError {
     }
 
     /**
-     * Describes an error within the `token` request field.
+     * Describes an error within the `merchantAccountID` request field.
      */
     @Deprecated
-    public Optional<String> token() {
-        return data().flatMap(Data::token);
+    public Optional<String> merchantAccountID() {
+        return data().flatMap(Data::merchantAccountID);
+    }
+
+    /**
+     * Describes an error within the `paymentMethodData` request field.
+     */
+    @Deprecated
+    public Optional<String> paymentMethodData() {
+        return data().flatMap(Data::paymentMethodData);
     }
 
     public Optional<Data> data() {
@@ -89,24 +97,34 @@ public class LinkGooglePayError extends MoovError {
         private Optional<String> error;
 
         /**
-         * Describes an error within the `token` request field.
+         * Describes an error within the `merchantAccountID` request field.
          */
         @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("token")
-        private Optional<String> token;
+        @JsonProperty("merchantAccountID")
+        private Optional<String> merchantAccountID;
+
+        /**
+         * Describes an error within the `paymentMethodData` request field.
+         */
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("paymentMethodData")
+        private Optional<String> paymentMethodData;
 
         @JsonCreator
         public Data(
                 @JsonProperty("error") Optional<String> error,
-                @JsonProperty("token") Optional<String> token) {
+                @JsonProperty("merchantAccountID") Optional<String> merchantAccountID,
+                @JsonProperty("paymentMethodData") Optional<String> paymentMethodData) {
             Utils.checkNotNull(error, "error");
-            Utils.checkNotNull(token, "token");
+            Utils.checkNotNull(merchantAccountID, "merchantAccountID");
+            Utils.checkNotNull(paymentMethodData, "paymentMethodData");
             this.error = error;
-            this.token = token;
+            this.merchantAccountID = merchantAccountID;
+            this.paymentMethodData = paymentMethodData;
         }
         
         public Data() {
-            this(Optional.empty(), Optional.empty());
+            this(Optional.empty(), Optional.empty(), Optional.empty());
         }
 
         /**
@@ -118,11 +136,19 @@ public class LinkGooglePayError extends MoovError {
         }
 
         /**
-         * Describes an error within the `token` request field.
+         * Describes an error within the `merchantAccountID` request field.
          */
         @JsonIgnore
-        public Optional<String> token() {
-            return token;
+        public Optional<String> merchantAccountID() {
+            return merchantAccountID;
+        }
+
+        /**
+         * Describes an error within the `paymentMethodData` request field.
+         */
+        @JsonIgnore
+        public Optional<String> paymentMethodData() {
+            return paymentMethodData;
         }
 
         public static Builder builder() {
@@ -150,21 +176,40 @@ public class LinkGooglePayError extends MoovError {
         }
 
         /**
-         * Describes an error within the `token` request field.
+         * Describes an error within the `merchantAccountID` request field.
          */
-        public Data withToken(String token) {
-            Utils.checkNotNull(token, "token");
-            this.token = Optional.ofNullable(token);
+        public Data withMerchantAccountID(String merchantAccountID) {
+            Utils.checkNotNull(merchantAccountID, "merchantAccountID");
+            this.merchantAccountID = Optional.ofNullable(merchantAccountID);
             return this;
         }
 
 
         /**
-         * Describes an error within the `token` request field.
+         * Describes an error within the `merchantAccountID` request field.
          */
-        public Data withToken(Optional<String> token) {
-            Utils.checkNotNull(token, "token");
-            this.token = token;
+        public Data withMerchantAccountID(Optional<String> merchantAccountID) {
+            Utils.checkNotNull(merchantAccountID, "merchantAccountID");
+            this.merchantAccountID = merchantAccountID;
+            return this;
+        }
+
+        /**
+         * Describes an error within the `paymentMethodData` request field.
+         */
+        public Data withPaymentMethodData(String paymentMethodData) {
+            Utils.checkNotNull(paymentMethodData, "paymentMethodData");
+            this.paymentMethodData = Optional.ofNullable(paymentMethodData);
+            return this;
+        }
+
+
+        /**
+         * Describes an error within the `paymentMethodData` request field.
+         */
+        public Data withPaymentMethodData(Optional<String> paymentMethodData) {
+            Utils.checkNotNull(paymentMethodData, "paymentMethodData");
+            this.paymentMethodData = paymentMethodData;
             return this;
         }
 
@@ -179,20 +224,22 @@ public class LinkGooglePayError extends MoovError {
             Data other = (Data) o;
             return 
                 Utils.enhancedDeepEquals(this.error, other.error) &&
-                Utils.enhancedDeepEquals(this.token, other.token);
+                Utils.enhancedDeepEquals(this.merchantAccountID, other.merchantAccountID) &&
+                Utils.enhancedDeepEquals(this.paymentMethodData, other.paymentMethodData);
         }
         
         @Override
         public int hashCode() {
             return Utils.enhancedHash(
-                error, token);
+                error, merchantAccountID, paymentMethodData);
         }
         
         @Override
         public String toString() {
             return Utils.toString(Data.class,
                     "error", error,
-                    "token", token);
+                    "merchantAccountID", merchantAccountID,
+                    "paymentMethodData", paymentMethodData);
         }
 
         @SuppressWarnings("UnusedReturnValue")
@@ -200,7 +247,9 @@ public class LinkGooglePayError extends MoovError {
 
             private Optional<String> error = Optional.empty();
 
-            private Optional<String> token = Optional.empty();
+            private Optional<String> merchantAccountID = Optional.empty();
+
+            private Optional<String> paymentMethodData = Optional.empty();
 
             private Builder() {
               // force use of static builder() method
@@ -227,27 +276,46 @@ public class LinkGooglePayError extends MoovError {
 
 
             /**
-             * Describes an error within the `token` request field.
+             * Describes an error within the `merchantAccountID` request field.
              */
-            public Builder token(String token) {
-                Utils.checkNotNull(token, "token");
-                this.token = Optional.ofNullable(token);
+            public Builder merchantAccountID(String merchantAccountID) {
+                Utils.checkNotNull(merchantAccountID, "merchantAccountID");
+                this.merchantAccountID = Optional.ofNullable(merchantAccountID);
                 return this;
             }
 
             /**
-             * Describes an error within the `token` request field.
+             * Describes an error within the `merchantAccountID` request field.
              */
-            public Builder token(Optional<String> token) {
-                Utils.checkNotNull(token, "token");
-                this.token = token;
+            public Builder merchantAccountID(Optional<String> merchantAccountID) {
+                Utils.checkNotNull(merchantAccountID, "merchantAccountID");
+                this.merchantAccountID = merchantAccountID;
+                return this;
+            }
+
+
+            /**
+             * Describes an error within the `paymentMethodData` request field.
+             */
+            public Builder paymentMethodData(String paymentMethodData) {
+                Utils.checkNotNull(paymentMethodData, "paymentMethodData");
+                this.paymentMethodData = Optional.ofNullable(paymentMethodData);
+                return this;
+            }
+
+            /**
+             * Describes an error within the `paymentMethodData` request field.
+             */
+            public Builder paymentMethodData(Optional<String> paymentMethodData) {
+                Utils.checkNotNull(paymentMethodData, "paymentMethodData");
+                this.paymentMethodData = paymentMethodData;
                 return this;
             }
 
             public Data build() {
 
                 return new Data(
-                    error, token);
+                    error, merchantAccountID, paymentMethodData);
             }
 
         }

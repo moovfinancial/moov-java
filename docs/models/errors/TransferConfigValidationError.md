@@ -1,0 +1,10 @@
+# TransferConfigValidationError
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `tipPresetsCalculationBasis`                                                                          | *Optional\<String>*                                                                                   | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |
+| `tipPresetsPercentageOptions`                                                                         | Map\<String, *String*>                                                                                | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |
+| `tipPresetsFixedAmountOptions`                                                                        | Map\<String, [AmountDecimalValidationError](../../models/components/AmountDecimalValidationError.md)> | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |

@@ -39,11 +39,22 @@ public class CreatePaymentLink {
     @JsonProperty("merchantPaymentMethodID")
     private String merchantPaymentMethodID;
 
-
+    /**
+     * The fixed amount of the payment link.
+     * 
+     * <p>In API versions before `2026.07.00`, this was a required field.
+     * 
+     * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
+     * omitted
+     * for `open` payment amount types.
+     */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
-    private Amount amount;
+    private Optional<? extends Amount> amount;
 
-
+    /**
+     * Optional sales tax amount.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("salesTaxAmount")
     private Optional<? extends Amount> salesTaxAmount;
@@ -95,11 +106,16 @@ public class CreatePaymentLink {
     @JsonProperty("lineItems")
     private Optional<? extends CreatePaymentLinkLineItems> lineItems;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("amountDetails")
+    private Optional<? extends CreatePaymentLinkAmountDetails> amountDetails;
+
     @JsonCreator
     public CreatePaymentLink(
             @JsonProperty("partnerAccountID") String partnerAccountID,
             @JsonProperty("merchantPaymentMethodID") String merchantPaymentMethodID,
-            @JsonProperty("amount") Amount amount,
+            @JsonProperty("amount") Optional<? extends Amount> amount,
             @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
             @JsonProperty("maxUses") Optional<Long> maxUses,
             @JsonProperty("expiresOn") Optional<OffsetDateTime> expiresOn,
@@ -107,7 +123,8 @@ public class CreatePaymentLink {
             @JsonProperty("customer") Optional<? extends PaymentLinkCustomerOptions> customer,
             @JsonProperty("payment") Optional<? extends PaymentLinkPaymentDetails> payment,
             @JsonProperty("payout") Optional<? extends PaymentLinkPayoutDetails> payout,
-            @JsonProperty("lineItems") Optional<? extends CreatePaymentLinkLineItems> lineItems) {
+            @JsonProperty("lineItems") Optional<? extends CreatePaymentLinkLineItems> lineItems,
+            @JsonProperty("amountDetails") Optional<? extends CreatePaymentLinkAmountDetails> amountDetails) {
         Utils.checkNotNull(partnerAccountID, "partnerAccountID");
         Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
         Utils.checkNotNull(amount, "amount");
@@ -119,6 +136,7 @@ public class CreatePaymentLink {
         Utils.checkNotNull(payment, "payment");
         Utils.checkNotNull(payout, "payout");
         Utils.checkNotNull(lineItems, "lineItems");
+        Utils.checkNotNull(amountDetails, "amountDetails");
         this.partnerAccountID = partnerAccountID;
         this.merchantPaymentMethodID = merchantPaymentMethodID;
         this.amount = amount;
@@ -130,17 +148,17 @@ public class CreatePaymentLink {
         this.payment = payment;
         this.payout = payout;
         this.lineItems = lineItems;
+        this.amountDetails = amountDetails;
     }
     
     public CreatePaymentLink(
             String partnerAccountID,
             String merchantPaymentMethodID,
-            Amount amount,
             PaymentLinkDisplayOptions display) {
-        this(partnerAccountID, merchantPaymentMethodID, amount,
+        this(partnerAccountID, merchantPaymentMethodID, Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             display, Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -159,11 +177,24 @@ public class CreatePaymentLink {
         return merchantPaymentMethodID;
     }
 
+    /**
+     * The fixed amount of the payment link.
+     * 
+     * <p>In API versions before `2026.07.00`, this was a required field.
+     * 
+     * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
+     * omitted
+     * for `open` payment amount types.
+     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Amount amount() {
-        return amount;
+    public Optional<Amount> amount() {
+        return (Optional<Amount>) amount;
     }
 
+    /**
+     * Optional sales tax amount.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<Amount> salesTaxAmount() {
@@ -227,6 +258,12 @@ public class CreatePaymentLink {
         return (Optional<CreatePaymentLinkLineItems>) lineItems;
     }
 
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<CreatePaymentLinkAmountDetails> amountDetails() {
+        return (Optional<CreatePaymentLinkAmountDetails>) amountDetails;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -250,12 +287,40 @@ public class CreatePaymentLink {
         return this;
     }
 
+    /**
+     * The fixed amount of the payment link.
+     * 
+     * <p>In API versions before `2026.07.00`, this was a required field.
+     * 
+     * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
+     * omitted
+     * for `open` payment amount types.
+     */
     public CreatePaymentLink withAmount(Amount amount) {
+        Utils.checkNotNull(amount, "amount");
+        this.amount = Optional.ofNullable(amount);
+        return this;
+    }
+
+
+    /**
+     * The fixed amount of the payment link.
+     * 
+     * <p>In API versions before `2026.07.00`, this was a required field.
+     * 
+     * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
+     * omitted
+     * for `open` payment amount types.
+     */
+    public CreatePaymentLink withAmount(Optional<? extends Amount> amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
         return this;
     }
 
+    /**
+     * Optional sales tax amount.
+     */
     public CreatePaymentLink withSalesTaxAmount(Amount salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
@@ -263,6 +328,9 @@ public class CreatePaymentLink {
     }
 
 
+    /**
+     * Optional sales tax amount.
+     */
     public CreatePaymentLink withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         this.salesTaxAmount = salesTaxAmount;
@@ -386,6 +454,19 @@ public class CreatePaymentLink {
         return this;
     }
 
+    public CreatePaymentLink withAmountDetails(CreatePaymentLinkAmountDetails amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = Optional.ofNullable(amountDetails);
+        return this;
+    }
+
+
+    public CreatePaymentLink withAmountDetails(Optional<? extends CreatePaymentLinkAmountDetails> amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = amountDetails;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -406,7 +487,8 @@ public class CreatePaymentLink {
             Utils.enhancedDeepEquals(this.customer, other.customer) &&
             Utils.enhancedDeepEquals(this.payment, other.payment) &&
             Utils.enhancedDeepEquals(this.payout, other.payout) &&
-            Utils.enhancedDeepEquals(this.lineItems, other.lineItems);
+            Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
+            Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
     }
     
     @Override
@@ -415,7 +497,7 @@ public class CreatePaymentLink {
             partnerAccountID, merchantPaymentMethodID, amount,
             salesTaxAmount, maxUses, expiresOn,
             display, customer, payment,
-            payout, lineItems);
+            payout, lineItems, amountDetails);
     }
     
     @Override
@@ -431,7 +513,8 @@ public class CreatePaymentLink {
                 "customer", customer,
                 "payment", payment,
                 "payout", payout,
-                "lineItems", lineItems);
+                "lineItems", lineItems,
+                "amountDetails", amountDetails);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -441,7 +524,7 @@ public class CreatePaymentLink {
 
         private String merchantPaymentMethodID;
 
-        private Amount amount;
+        private Optional<? extends Amount> amount = Optional.empty();
 
         private Optional<? extends Amount> salesTaxAmount = Optional.empty();
 
@@ -458,6 +541,8 @@ public class CreatePaymentLink {
         private Optional<? extends PaymentLinkPayoutDetails> payout = Optional.empty();
 
         private Optional<? extends CreatePaymentLinkLineItems> lineItems = Optional.empty();
+
+        private Optional<? extends CreatePaymentLinkAmountDetails> amountDetails = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -484,19 +569,49 @@ public class CreatePaymentLink {
         }
 
 
+        /**
+         * The fixed amount of the payment link.
+         * 
+         * <p>In API versions before `2026.07.00`, this was a required field.
+         * 
+         * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
+         * omitted
+         * for `open` payment amount types.
+         */
         public Builder amount(Amount amount) {
+            Utils.checkNotNull(amount, "amount");
+            this.amount = Optional.ofNullable(amount);
+            return this;
+        }
+
+        /**
+         * The fixed amount of the payment link.
+         * 
+         * <p>In API versions before `2026.07.00`, this was a required field.
+         * 
+         * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
+         * omitted
+         * for `open` payment amount types.
+         */
+        public Builder amount(Optional<? extends Amount> amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
         }
 
 
+        /**
+         * Optional sales tax amount.
+         */
         public Builder salesTaxAmount(Amount salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
             return this;
         }
 
+        /**
+         * Optional sales tax amount.
+         */
         public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             this.salesTaxAmount = salesTaxAmount;
@@ -621,13 +736,26 @@ public class CreatePaymentLink {
             return this;
         }
 
+
+        public Builder amountDetails(CreatePaymentLinkAmountDetails amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = Optional.ofNullable(amountDetails);
+            return this;
+        }
+
+        public Builder amountDetails(Optional<? extends CreatePaymentLinkAmountDetails> amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = amountDetails;
+            return this;
+        }
+
         public CreatePaymentLink build() {
 
             return new CreatePaymentLink(
                 partnerAccountID, merchantPaymentMethodID, amount,
                 salesTaxAmount, maxUses, expiresOn,
                 display, customer, payment,
-                payout, lineItems);
+                payout, lineItems, amountDetails);
         }
 
     }

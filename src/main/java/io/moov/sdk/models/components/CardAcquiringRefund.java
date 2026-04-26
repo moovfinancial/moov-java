@@ -45,6 +45,11 @@ public class CardAcquiringRefund {
 
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("amountDetails")
+    private Optional<? extends RefundAmountDetails> amountDetails;
+
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardDetails")
     private Optional<? extends RefundCardDetails> cardDetails;
 
@@ -55,18 +60,21 @@ public class CardAcquiringRefund {
             @JsonProperty("updatedOn") OffsetDateTime updatedOn,
             @JsonProperty("status") RefundStatus status,
             @JsonProperty("amount") Amount amount,
+            @JsonProperty("amountDetails") Optional<? extends RefundAmountDetails> amountDetails,
             @JsonProperty("cardDetails") Optional<? extends RefundCardDetails> cardDetails) {
         Utils.checkNotNull(refundID, "refundID");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(updatedOn, "updatedOn");
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(amount, "amount");
+        Utils.checkNotNull(amountDetails, "amountDetails");
         Utils.checkNotNull(cardDetails, "cardDetails");
         this.refundID = refundID;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
         this.status = status;
         this.amount = amount;
+        this.amountDetails = amountDetails;
         this.cardDetails = cardDetails;
     }
     
@@ -77,7 +85,8 @@ public class CardAcquiringRefund {
             RefundStatus status,
             Amount amount) {
         this(refundID, createdOn, updatedOn,
-            status, amount, Optional.empty());
+            status, amount, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -106,6 +115,12 @@ public class CardAcquiringRefund {
     @JsonIgnore
     public Amount amount() {
         return amount;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<RefundAmountDetails> amountDetails() {
+        return (Optional<RefundAmountDetails>) amountDetails;
     }
 
     @SuppressWarnings("unchecked")
@@ -152,6 +167,19 @@ public class CardAcquiringRefund {
         return this;
     }
 
+    public CardAcquiringRefund withAmountDetails(RefundAmountDetails amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = Optional.ofNullable(amountDetails);
+        return this;
+    }
+
+
+    public CardAcquiringRefund withAmountDetails(Optional<? extends RefundAmountDetails> amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = amountDetails;
+        return this;
+    }
+
     public CardAcquiringRefund withCardDetails(RefundCardDetails cardDetails) {
         Utils.checkNotNull(cardDetails, "cardDetails");
         this.cardDetails = Optional.ofNullable(cardDetails);
@@ -180,6 +208,7 @@ public class CardAcquiringRefund {
             Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
             Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails) &&
             Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails);
     }
     
@@ -187,7 +216,8 @@ public class CardAcquiringRefund {
     public int hashCode() {
         return Utils.enhancedHash(
             refundID, createdOn, updatedOn,
-            status, amount, cardDetails);
+            status, amount, amountDetails,
+            cardDetails);
     }
     
     @Override
@@ -198,6 +228,7 @@ public class CardAcquiringRefund {
                 "updatedOn", updatedOn,
                 "status", status,
                 "amount", amount,
+                "amountDetails", amountDetails,
                 "cardDetails", cardDetails);
     }
 
@@ -213,6 +244,8 @@ public class CardAcquiringRefund {
         private RefundStatus status;
 
         private Amount amount;
+
+        private Optional<? extends RefundAmountDetails> amountDetails = Optional.empty();
 
         private Optional<? extends RefundCardDetails> cardDetails = Optional.empty();
 
@@ -259,6 +292,19 @@ public class CardAcquiringRefund {
         }
 
 
+        public Builder amountDetails(RefundAmountDetails amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = Optional.ofNullable(amountDetails);
+            return this;
+        }
+
+        public Builder amountDetails(Optional<? extends RefundAmountDetails> amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = amountDetails;
+            return this;
+        }
+
+
         public Builder cardDetails(RefundCardDetails cardDetails) {
             Utils.checkNotNull(cardDetails, "cardDetails");
             this.cardDetails = Optional.ofNullable(cardDetails);
@@ -275,7 +321,8 @@ public class CardAcquiringRefund {
 
             return new CardAcquiringRefund(
                 refundID, createdOn, updatedOn,
-                status, amount, cardDetails);
+                status, amount, amountDetails,
+                cardDetails);
         }
 
     }

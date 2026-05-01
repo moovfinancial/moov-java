@@ -20,14 +20,21 @@ public class WebhookDataBankAccountCreated {
     @JsonProperty("accountID")
     private String accountID;
 
+
+    @JsonProperty("status")
+    private BankAccountStatus status;
+
     @JsonCreator
     public WebhookDataBankAccountCreated(
             @JsonProperty("bankAccountID") String bankAccountID,
-            @JsonProperty("accountID") String accountID) {
+            @JsonProperty("accountID") String accountID,
+            @JsonProperty("status") BankAccountStatus status) {
         Utils.checkNotNull(bankAccountID, "bankAccountID");
         Utils.checkNotNull(accountID, "accountID");
+        Utils.checkNotNull(status, "status");
         this.bankAccountID = bankAccountID;
         this.accountID = accountID;
+        this.status = status;
     }
 
     @JsonIgnore
@@ -38,6 +45,11 @@ public class WebhookDataBankAccountCreated {
     @JsonIgnore
     public String accountID() {
         return accountID;
+    }
+
+    @JsonIgnore
+    public BankAccountStatus status() {
+        return status;
     }
 
     public static Builder builder() {
@@ -57,6 +69,12 @@ public class WebhookDataBankAccountCreated {
         return this;
     }
 
+    public WebhookDataBankAccountCreated withStatus(BankAccountStatus status) {
+        Utils.checkNotNull(status, "status");
+        this.status = status;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -68,20 +86,22 @@ public class WebhookDataBankAccountCreated {
         WebhookDataBankAccountCreated other = (WebhookDataBankAccountCreated) o;
         return 
             Utils.enhancedDeepEquals(this.bankAccountID, other.bankAccountID) &&
-            Utils.enhancedDeepEquals(this.accountID, other.accountID);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.status, other.status);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            bankAccountID, accountID);
+            bankAccountID, accountID, status);
     }
     
     @Override
     public String toString() {
         return Utils.toString(WebhookDataBankAccountCreated.class,
                 "bankAccountID", bankAccountID,
-                "accountID", accountID);
+                "accountID", accountID,
+                "status", status);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -90,6 +110,8 @@ public class WebhookDataBankAccountCreated {
         private String bankAccountID;
 
         private String accountID;
+
+        private BankAccountStatus status;
 
         private Builder() {
           // force use of static builder() method
@@ -109,10 +131,17 @@ public class WebhookDataBankAccountCreated {
             return this;
         }
 
+
+        public Builder status(BankAccountStatus status) {
+            Utils.checkNotNull(status, "status");
+            this.status = status;
+            return this;
+        }
+
         public WebhookDataBankAccountCreated build() {
 
             return new WebhookDataBankAccountCreated(
-                bankAccountID, accountID);
+                bankAccountID, accountID, status);
         }
 
     }

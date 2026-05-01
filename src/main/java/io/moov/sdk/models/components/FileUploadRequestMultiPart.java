@@ -9,12 +9,13 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 
 public class FileUploadRequestMultiPart {
     /**
-     * The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`.
+     * The file to upload. Valid types are `csv`, `png`, `jpeg`, `pdf`.
      */
     @SpeakeasyMetadata("multipartForm:file,name=file")
     private FileUploadRequestMultiPartFile file;
@@ -26,18 +27,16 @@ public class FileUploadRequestMultiPart {
     private FilePurpose filePurpose;
 
     /**
-     * Additional metadata to be stored with the file, formatted as a JSON string.
-     * 
-     * <p>Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
+     * Additional metadata to be stored with the file.
      */
-    @SpeakeasyMetadata("multipartForm:name=metadata")
-    private Optional<String> metadata;
+    @SpeakeasyMetadata("multipartForm:name=metadata,json")
+    private Optional<? extends FileUploadMetadata> metadata;
 
     @JsonCreator
     public FileUploadRequestMultiPart(
             FileUploadRequestMultiPartFile file,
             FilePurpose filePurpose,
-            Optional<String> metadata) {
+            Optional<? extends FileUploadMetadata> metadata) {
         Utils.checkNotNull(file, "file");
         Utils.checkNotNull(filePurpose, "filePurpose");
         Utils.checkNotNull(metadata, "metadata");
@@ -53,7 +52,7 @@ public class FileUploadRequestMultiPart {
     }
 
     /**
-     * The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`.
+     * The file to upload. Valid types are `csv`, `png`, `jpeg`, `pdf`.
      */
     @JsonIgnore
     public FileUploadRequestMultiPartFile file() {
@@ -69,13 +68,12 @@ public class FileUploadRequestMultiPart {
     }
 
     /**
-     * Additional metadata to be stored with the file, formatted as a JSON string.
-     * 
-     * <p>Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
+     * Additional metadata to be stored with the file.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> metadata() {
-        return metadata;
+    public Optional<FileUploadMetadata> metadata() {
+        return (Optional<FileUploadMetadata>) metadata;
     }
 
     public static Builder builder() {
@@ -84,7 +82,7 @@ public class FileUploadRequestMultiPart {
 
 
     /**
-     * The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`.
+     * The file to upload. Valid types are `csv`, `png`, `jpeg`, `pdf`.
      */
     public FileUploadRequestMultiPart withFile(FileUploadRequestMultiPartFile file) {
         Utils.checkNotNull(file, "file");
@@ -102,11 +100,9 @@ public class FileUploadRequestMultiPart {
     }
 
     /**
-     * Additional metadata to be stored with the file, formatted as a JSON string.
-     * 
-     * <p>Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
+     * Additional metadata to be stored with the file.
      */
-    public FileUploadRequestMultiPart withMetadata(String metadata) {
+    public FileUploadRequestMultiPart withMetadata(FileUploadMetadata metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = Optional.ofNullable(metadata);
         return this;
@@ -114,11 +110,9 @@ public class FileUploadRequestMultiPart {
 
 
     /**
-     * Additional metadata to be stored with the file, formatted as a JSON string.
-     * 
-     * <p>Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
+     * Additional metadata to be stored with the file.
      */
-    public FileUploadRequestMultiPart withMetadata(Optional<String> metadata) {
+    public FileUploadRequestMultiPart withMetadata(Optional<? extends FileUploadMetadata> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
@@ -160,7 +154,7 @@ public class FileUploadRequestMultiPart {
 
         private FilePurpose filePurpose;
 
-        private Optional<String> metadata = Optional.empty();
+        private Optional<? extends FileUploadMetadata> metadata = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -168,7 +162,7 @@ public class FileUploadRequestMultiPart {
 
 
         /**
-         * The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`.
+         * The file to upload. Valid types are `csv`, `png`, `jpeg`, `pdf`.
          */
         public Builder file(FileUploadRequestMultiPartFile file) {
             Utils.checkNotNull(file, "file");
@@ -188,22 +182,18 @@ public class FileUploadRequestMultiPart {
 
 
         /**
-         * Additional metadata to be stored with the file, formatted as a JSON string.
-         * 
-         * <p>Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
+         * Additional metadata to be stored with the file.
          */
-        public Builder metadata(String metadata) {
+        public Builder metadata(FileUploadMetadata metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
             return this;
         }
 
         /**
-         * Additional metadata to be stored with the file, formatted as a JSON string.
-         * 
-         * <p>Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
+         * Additional metadata to be stored with the file.
          */
-        public Builder metadata(Optional<String> metadata) {
+        public Builder metadata(Optional<? extends FileUploadMetadata> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = metadata;
             return this;

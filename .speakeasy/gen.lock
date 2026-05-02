@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: b924e2e22f1f6dcf01d08e887223e39b
+  docChecksum: fa10c53b753c735a2142ba86db352b47
   docVersion: dev
-  speakeasyVersion: 1.761.9
-  generationVersion: 2.881.4
-  releaseVersion: 0.0.0-dev.14
-  configChecksum: 92c42e9dd675ee26618cf94b8b923521
+  speakeasyVersion: 1.761.11
+  generationVersion: 2.881.17
+  releaseVersion: 0.0.0-dev.15
+  configChecksum: 30d7f018b8a1a3e11a85b4a524ca7039
   repoURL: https://github.com/moovfinancial/moov-java.git
   installationURL: https://github.com/moovfinancial/moov-java
   published: true
 persistentEdits:
-  generation_id: f976b616-ccef-403f-b8a1-a2418943d781
-  pristine_commit_hash: 7dc5036f1ba056a51583fec87eb585e5889102c7
-  pristine_tree_hash: 5006ec0212a86971145fe5282f7bffafde61c9af
+  generation_id: f9d31b5f-c3fa-4450-877a-1abbef99c2f5
+  pristine_commit_hash: 5ada4de691bc9b3e1b197337c05a5e751ff70cbc
+  pristine_tree_hash: 08d82850feab90057cfd9e0439cc5295cb5af643
 features:
   java:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.3
-    core: 3.55.23
+    core: 3.55.24
     decimal: 0.0.1
     deprecations: 2.81.2
     downloadStreams: 0.1.1
@@ -1183,10 +1183,14 @@ trackedFiles:
     id: 82c0fc8d45a5
     last_write_checksum: sha1:660e5cd2d016fe5836cc01a5af139e86a4a9addd
     pristine_git_object: 9935e94860f414dcc9479fa9c6e1845a9b85549a
+  docs/models/components/FileUploadMetadata.md:
+    id: 06dc0a4c0b29
+    last_write_checksum: sha1:0e683478f1969b3d81cba0ff638a2ff729bae616
+    pristine_git_object: 3de65015ab479f09feb535720b07113380dfa9de
   docs/models/components/FileUploadRequestMultiPart.md:
     id: d095aef0439b
-    last_write_checksum: sha1:decf201571fc904188aa3f0048f6240fc7d3a604
-    pristine_git_object: c4062234d52d02585733c020571b1e9effef581c
+    last_write_checksum: sha1:1d9a2918e40ef5204f830041270109583971dbc3
+    pristine_git_object: 8e346fe0f2e213cbdcf5119abfe3418485ae52b9
   docs/models/components/FileUploadRequestMultiPartFile.md:
     id: f0783ee8ae71
     last_write_checksum: sha1:b5f0c08f2bb2d9e61369f2e15be6ee08c2a5d2be
@@ -2701,8 +2705,8 @@ trackedFiles:
     pristine_git_object: 00392e702394777c4cd13936edbd130c52c098f4
   docs/models/components/WebhookDataBankAccountCreated.md:
     id: 3e75a58e0ec7
-    last_write_checksum: sha1:ada1336e088bd13eb031537d2d447353a1c3a953
-    pristine_git_object: 35f152fb6fb4f7e4c851f908320e61973893a014
+    last_write_checksum: sha1:c892c1fe39a78320441d27a1d2b5ca76c4ed8214
+    pristine_git_object: 1a95c44289817ef6806b370da7800376ff3f6c5c
   docs/models/components/WebhookDataBankAccountDeleted.md:
     id: 84ea10c479b2
     last_write_checksum: sha1:7125258e516edd417d479b140986bf9070cff1be
@@ -4713,8 +4717,8 @@ trackedFiles:
     pristine_git_object: 9b40f611aaace5afe9cf7cadc73ff2301fe51e80
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:5dc4eb95fd728aaaa6d1a17636ba031cefb7cab7
-    pristine_git_object: e1726098f1753718d30cf29a2248311c79a56ede
+    last_write_checksum: sha1:578c177b72cd0f7d8dc2f5f55c43b7596cdf8bff
+    pristine_git_object: c2fbae88e793c2083402697378a8aa080afd8fcb
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4897,8 +4901,8 @@ trackedFiles:
     pristine_git_object: 72495cf1b905a82c978c8ca472b53f9c9cecccbd
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:b8cc6fc7829724ed0b6f90c32a139656df007bc4
-    pristine_git_object: fef60c3457beb27d32682ac6bb9440bc611dbcc9
+    last_write_checksum: sha1:c19454e1dc293ecf7f251e0c4e672806da2d3e94
+    pristine_git_object: 1ddb9aa28521e3f0fdaaa402bd831fe4364eaa67
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:bf0300e770bb968bfc8b5ee2b8d6f05e37e9bb67
@@ -6083,10 +6087,14 @@ trackedFiles:
     id: d2872950ba50
     last_write_checksum: sha1:534916ca5967ebe6b3e6fd808a62f87564efdc0b
     pristine_git_object: 67cfe89cec3d7227b1f4de9828b1f26146bb2d06
+  src/main/java/io/moov/sdk/models/components/FileUploadMetadata.java:
+    id: 62eec26be428
+    last_write_checksum: sha1:9ae8b6431b497a32c2ea4dca2986f29593d89bce
+    pristine_git_object: 27383a31972895d2c30b5943e66b834d8618130c
   src/main/java/io/moov/sdk/models/components/FileUploadRequestMultiPart.java:
     id: f5fa633eba6b
-    last_write_checksum: sha1:5789d22bcc6323f31a761c5853217736e715e334
-    pristine_git_object: 5f5ab8904bd77d3e923838cd351c0b817e27a970
+    last_write_checksum: sha1:a6064605deb7d7cb20d1f21f1a6121f1eca66c91
+    pristine_git_object: 18ecce6f5c379c5c32f413107812b22fe9d4a64b
   src/main/java/io/moov/sdk/models/components/FileUploadRequestMultiPartFile.java:
     id: b2a2f6aa67a8
     last_write_checksum: sha1:8f347189c8af15371fc64ad8d7bfd50f2a6bba19
@@ -7617,8 +7625,8 @@ trackedFiles:
     pristine_git_object: 371179b11c1699fc8294fa6ddb8e5f8d61773596
   src/main/java/io/moov/sdk/models/components/WebhookDataBankAccountCreated.java:
     id: d1fc0c4d0446
-    last_write_checksum: sha1:dcd740c511744fb4cdde9dacc55a348413499b46
-    pristine_git_object: b535f427ae558f051375492c04dcd70f383e611f
+    last_write_checksum: sha1:2bbc9a5f1dae0ebfbf1ca6315925afea45fb33b0
+    pristine_git_object: 8670256f437b86c82969a6850a1e5513ec788c90
   src/main/java/io/moov/sdk/models/components/WebhookDataBankAccountDeleted.java:
     id: 00c1e74ebd31
     last_write_checksum: sha1:10ace185d8bd4a2614f2a45db4fc56836ac9a50c
@@ -14083,7 +14091,7 @@ examples:
           application/json: {"tipPresets": {"calculationBasis": "pre-tax", "percentageOptions": [10, 15, 20]}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes:\n* `moov.googlePay.linkToken()`: \n  *  `request.linkGooglePay` **Changed** (Breaking ⚠️)\n  *  `response.[].paymentMethodType` **Changed** (Breaking ⚠️)\n  *  `error` **Changed** (Breaking ⚠️)\n* `moov.transfers.create()`: \n  *  `request.createTransfer.amountDetails` **Added**\n  *  `response` **Changed**\n  *  `error` **Changed**\n* `moov.transfers.batchGetTransfers()`:  `response.Map<Transfer>` **Changed**\n* `moov.transferConfig.get()`: **Added**\n* `moov.paymentLinks.create()`: \n  *  `request.createPaymentLink` **Changed**\n  *  `response` **Changed**\n  *  `error.amountDetails` **Added**\n* `moov.paymentLinks.list()`:  `response.[]` **Changed**\n* `moov.paymentLinks.get()`:  `response` **Changed**\n* `moov.transferConfig.update()`: **Added**\n* `moov.paymentLinks.update()`: \n  *  `request.updatePaymentLink` **Changed**\n  *  `response` **Changed**\n  *  `error.amountDetails` **Added**\n* `moov.transfers.list()`:  `response.[]` **Changed**\n* `moov.transferConfig.create()`: **Added**\n* `moov.transfers.get()`:  `response` **Changed**\n* `moov.transfers.update()`:  `response` **Changed**\n* `moov.transfers.initiateRefund()`: \n  *  `request.createRefund.amountDetails` **Added**\n  *  `response` **Changed**\n  *  `error.amountDetails` **Added**\n* `moov.transfers.listRefunds()`:  `response.[].amountDetails` **Added**\n* `moov.transfers.getRefund()`:  `response.amountDetails` **Added**\n* `moov.transfers.createReversal()`:  `response.union(ReversedWithRefund).refund.amountDetails` **Added**\n"
+releaseNotes: "## Java SDK Changes:\n* `moov.files.upload()`: \n  *  `request.fileUploadRequestMultiPart.metadata` **Changed** (Breaking ⚠️)\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

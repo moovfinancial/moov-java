@@ -16,7 +16,8 @@ import java.util.Optional;
 public enum CollectionPaymentMethodType {
     APPLE_PAY("apple-pay"),
     CARD_PAYMENT("card-payment"),
-    ACH_DEBIT_COLLECT("ach-debit-collect");
+    ACH_DEBIT_COLLECT("ach-debit-collect"),
+    GOOGLE_PAY("google-pay");
 
     @JsonValue
     private final String value;

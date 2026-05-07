@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: da6a6f38dbded5f83dcc4c7881d71307
+  docChecksum: b52ca137dea3791c0e2d0a889c39b40e
   docVersion: v2026.04.00
-  speakeasyVersion: 1.761.11
-  generationVersion: 2.881.17
-  releaseVersion: 26.4.2
-  configChecksum: 17d74ad60fd3224ca756f3a65dc66aeb
+  speakeasyVersion: 1.762.0
+  generationVersion: 2.882.0
+  releaseVersion: 26.4.3
+  configChecksum: 35484fd6285c26525a9361681b749599
   repoURL: https://github.com/moovfinancial/moov-java.git
   installationURL: https://github.com/moovfinancial/moov-java
   published: true
 persistentEdits:
-  generation_id: 673df5b9-390e-4f38-8c8b-d9f4bccc8285
-  pristine_commit_hash: 26c6bdc73dfe8c9779abd41a134a60992633c472
-  pristine_tree_hash: 1ad423cccef6283030d26ad5a69e953986769da2
+  generation_id: 889d6235-1054-4f90-bccc-bb634df3307c
+  pristine_commit_hash: fd5d8814e1e0ce9b6e7a9c76747e150a2d3444e7
+  pristine_tree_hash: 66d5751f331e0704864e6fe59356430a132ee8f7
 features:
   java:
     acceptHeaders: 2.81.2
@@ -661,8 +661,8 @@ trackedFiles:
     pristine_git_object: 9da815cc70c6da24786d19def6cea36f97ad20b2
   docs/models/components/CollectionPaymentMethodType.md:
     id: 1851fa7ac055
-    last_write_checksum: sha1:156523529248271e70e5bd73d2957d2968f09c5e
-    pristine_git_object: 4f6bfcbf233b17fce89b7e2349b6f7d3db6ba255
+    last_write_checksum: sha1:87fd4797fcb2d4267f9bb9f21bea5a366ea5ac13
+    pristine_git_object: 353510b7ad3e46f7ac5af9fd8f959d3f3dedf710
   docs/models/components/ColorsValidationError.md:
     id: a12c118f46c8
     last_write_checksum: sha1:67cce49790a47bf892b65ab5f379a13543e2ce5c
@@ -4669,8 +4669,8 @@ trackedFiles:
     pristine_git_object: 9b40f611aaace5afe9cf7cadc73ff2301fe51e80
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:c8ff943e2ead93c07958fbf225913be45b055ee5
-    pristine_git_object: 613e05b5f289596eac1ffa1f3389366d5acf72ec
+    last_write_checksum: sha1:c70da54cac36665a0f025b58bad6f560d5218b00
+    pristine_git_object: bdc5518f32305b73ef5613062fca7085fbb5700f
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4853,8 +4853,8 @@ trackedFiles:
     pristine_git_object: 72495cf1b905a82c978c8ca472b53f9c9cecccbd
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:0e14689222db1e271786c7a294445c620d278b75
-    pristine_git_object: 37f177102ff3b970bc922acc9f7178d869112bb1
+    last_write_checksum: sha1:fc3377f01fc41e5f14677504f82af849f3337c1a
+    pristine_git_object: 1cc6d31d40617dc81cad424e769476a94e9c622a
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:bf0300e770bb968bfc8b5ee2b8d6f05e37e9bb67
@@ -5517,8 +5517,8 @@ trackedFiles:
     pristine_git_object: d54ad6da0b8c269067014543977ab141c18678bc
   src/main/java/io/moov/sdk/models/components/CollectionPaymentMethodType.java:
     id: f623e09fa2d4
-    last_write_checksum: sha1:090124cb7d1e463485d1ddbdcf258697bf911a58
-    pristine_git_object: 768a75e168985e55904addc7e94d4571bd4c726b
+    last_write_checksum: sha1:a8fd19951d9467c2b4878ea79623384fc45b4437
+    pristine_git_object: dd9087953b856aefe8e22ed8c023bb82396d1627
   src/main/java/io/moov/sdk/models/components/ColorsValidationError.java:
     id: 3c9328321d48
     last_write_checksum: sha1:77adb6f65568fcdb1bcb42813ea3ef98e83abfd4
@@ -13995,7 +13995,7 @@ examples:
           application/json: {"tipPresets": {"calculationBasis": "pre-tax", "percentageOptions": [10, 15, 20]}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes:\n* `moov.files.upload()`: \n  *  `request.fileUploadRequestMultiPart.metadata` **Changed** (Breaking ⚠️)\n"
+releaseNotes: "## Java SDK Changes:\n* `moov.paymentLinks.create()`: \n  *  `request.createPaymentLink.payment.allowedMethods[].enum(googlePay)` **Added**\n  *  `response.payment.allowedMethods[].enum(googlePay)` **Added** (Breaking ⚠️)\n* `moov.paymentLinks.list()`:  `response.[].payment.allowedMethods[].enum(googlePay)` **Added** (Breaking ⚠️)\n* `moov.paymentLinks.get()`:  `response.payment.allowedMethods[].enum(googlePay)` **Added** (Breaking ⚠️)\n* `moov.paymentLinks.update()`: \n  *  `request.updatePaymentLink.payment.allowedMethods[].enum(googlePay)` **Added**\n  *  `response.payment.allowedMethods[].enum(googlePay)` **Added** (Breaking ⚠️)\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

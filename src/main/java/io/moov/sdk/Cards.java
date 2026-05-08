@@ -5,12 +5,15 @@ package io.moov.sdk;
 
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
+import io.moov.sdk.models.components.CardMetadataRequest;
 import io.moov.sdk.models.components.LinkCard;
 import io.moov.sdk.models.components.LinkCardWaitFor;
 import io.moov.sdk.models.components.UpdateCard;
 import io.moov.sdk.models.operations.DisableCardRequest;
 import io.moov.sdk.models.operations.DisableCardRequestBuilder;
 import io.moov.sdk.models.operations.DisableCardResponse;
+import io.moov.sdk.models.operations.GetCardMetadataRequestBuilder;
+import io.moov.sdk.models.operations.GetCardMetadataResponse;
 import io.moov.sdk.models.operations.GetCardRequest;
 import io.moov.sdk.models.operations.GetCardRequestBuilder;
 import io.moov.sdk.models.operations.GetCardResponse;
@@ -25,6 +28,7 @@ import io.moov.sdk.models.operations.UpdateCardRequestBuilder;
 import io.moov.sdk.models.operations.UpdateCardResponse;
 import io.moov.sdk.operations.DisableCard;
 import io.moov.sdk.operations.GetCard;
+import io.moov.sdk.operations.GetCardMetadata;
 import io.moov.sdk.operations.ListCards;
 import io.moov.sdk.utils.Headers;
 import java.lang.String;
@@ -337,6 +341,40 @@ public class Cards {
                 .build();
         RequestOperation<DisableCardRequest, DisableCardResponse> operation
               = new DisableCard.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Look up metadata for a card without linking it to a Moov account.
+     * 
+     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/card-metadata.read` scope.
+     * 
+     * @return The call builder
+     */
+    public GetCardMetadataRequestBuilder getMetadata() {
+        return new GetCardMetadataRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Look up metadata for a card without linking it to a Moov account.
+     * 
+     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/card-metadata.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetCardMetadataResponse getMetadata(CardMetadataRequest request) {
+        RequestOperation<CardMetadataRequest, GetCardMetadataResponse> operation
+              = new GetCardMetadata.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

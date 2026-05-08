@@ -5,11 +5,15 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.Optional;
 
 
 public class CreateReversal {
@@ -20,11 +24,26 @@ public class CreateReversal {
     @JsonProperty("amount")
     private long amount;
 
+    /**
+     * Breakdown of the reversed amount.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("amountDetails")
+    private Optional<? extends ReversalAmountDetails> amountDetails;
+
     @JsonCreator
     public CreateReversal(
-            @JsonProperty("amount") long amount) {
+            @JsonProperty("amount") long amount,
+            @JsonProperty("amountDetails") Optional<? extends ReversalAmountDetails> amountDetails) {
         Utils.checkNotNull(amount, "amount");
+        Utils.checkNotNull(amountDetails, "amountDetails");
         this.amount = amount;
+        this.amountDetails = amountDetails;
+    }
+    
+    public CreateReversal(
+            long amount) {
+        this(amount, Optional.empty());
     }
 
     /**
@@ -34,6 +53,15 @@ public class CreateReversal {
     @JsonIgnore
     public long amount() {
         return amount;
+    }
+
+    /**
+     * Breakdown of the reversed amount.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<ReversalAmountDetails> amountDetails() {
+        return (Optional<ReversalAmountDetails>) amountDetails;
     }
 
     public static Builder builder() {
@@ -51,6 +79,25 @@ public class CreateReversal {
         return this;
     }
 
+    /**
+     * Breakdown of the reversed amount.
+     */
+    public CreateReversal withAmountDetails(ReversalAmountDetails amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = Optional.ofNullable(amountDetails);
+        return this;
+    }
+
+
+    /**
+     * Breakdown of the reversed amount.
+     */
+    public CreateReversal withAmountDetails(Optional<? extends ReversalAmountDetails> amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = amountDetails;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -61,25 +108,29 @@ public class CreateReversal {
         }
         CreateReversal other = (CreateReversal) o;
         return 
-            Utils.enhancedDeepEquals(this.amount, other.amount);
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            amount);
+            amount, amountDetails);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CreateReversal.class,
-                "amount", amount);
+                "amount", amount,
+                "amountDetails", amountDetails);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
         private Long amount;
+
+        private Optional<? extends ReversalAmountDetails> amountDetails = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -96,10 +147,29 @@ public class CreateReversal {
             return this;
         }
 
+
+        /**
+         * Breakdown of the reversed amount.
+         */
+        public Builder amountDetails(ReversalAmountDetails amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = Optional.ofNullable(amountDetails);
+            return this;
+        }
+
+        /**
+         * Breakdown of the reversed amount.
+         */
+        public Builder amountDetails(Optional<? extends ReversalAmountDetails> amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = amountDetails;
+            return this;
+        }
+
         public CreateReversal build() {
 
             return new CreateReversal(
-                amount);
+                amount, amountDetails);
         }
 
     }

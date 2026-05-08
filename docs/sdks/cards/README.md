@@ -51,6 +51,12 @@ you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+* [getMetadata](#getmetadata) - Look up metadata for a card without linking it to a Moov account.
+  
+Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/card-metadata.read` scope.
 
 ## link
 
@@ -392,3 +398,70 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/GenericError | 400, 409                   | application/json           |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## getMetadata
+
+Look up metadata for a card without linking it to a Moov account.
+  
+Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/card-metadata.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="getCardMetadata" method="post" path="/card-metadata" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.CardMetadataRequest;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.errors.CardMetadataRequestError;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.GetCardMetadataResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws GenericError, CardMetadataRequestError, Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        CardMetadataRequest req = CardMetadataRequest.builder()
+                .cardNumber("4111111111111111")
+                .build();
+
+        GetCardMetadataResponse res = sdk.cards().getMetadata()
+                .request(req)
+                .call();
+
+        if (res.cardMetadata().isPresent()) {
+            System.out.println(res.cardMetadata().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `request`                                                         | [CardMetadataRequest](../../models/shared/CardMetadataRequest.md) | :heavy_check_mark:                                                | The request object to use for the request.                        |
+
+### Response
+
+**[GetCardMetadataResponse](../../models/operations/GetCardMetadataResponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/GenericError             | 400, 409                               | application/json                       |
+| models/errors/CardMetadataRequestError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |

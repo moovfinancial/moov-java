@@ -72,13 +72,15 @@ public class TransferDestination {
     private Optional<? extends CardTransactionDetails> cardDetails;
 
     /**
+     * DEPRECATED: use `InstantBankTransactionDetails` instead (v2026.04.00 or later). RTP specific details
+     * about the transaction.
      * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("rtpDetails")
     @Deprecated
-    private Optional<? extends RtpDetails> rtpDetails;
+    private Optional<? extends RTPTransactionDetails> rtpDetails;
 
     /**
      * Instant-bank specific details about the transaction.
@@ -98,7 +100,7 @@ public class TransferDestination {
             @JsonProperty("achDetails") Optional<? extends ACHTransactionDetails> achDetails,
             @JsonProperty("applePay") Optional<? extends ApplePayResponse> applePay,
             @JsonProperty("cardDetails") Optional<? extends CardTransactionDetails> cardDetails,
-            @JsonProperty("rtpDetails") Optional<? extends RtpDetails> rtpDetails,
+            @JsonProperty("rtpDetails") Optional<? extends RTPTransactionDetails> rtpDetails,
             @JsonProperty("instantBankDetails") Optional<? extends InstantBankTransactionDetails> instantBankDetails) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
@@ -204,14 +206,16 @@ public class TransferDestination {
     }
 
     /**
+     * DEPRECATED: use `InstantBankTransactionDetails` instead (v2026.04.00 or later). RTP specific details
+     * about the transaction.
      * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<RtpDetails> rtpDetails() {
-        return (Optional<RtpDetails>) rtpDetails;
+    public Optional<RTPTransactionDetails> rtpDetails() {
+        return (Optional<RTPTransactionDetails>) rtpDetails;
     }
 
     /**
@@ -358,11 +362,13 @@ public class TransferDestination {
     }
 
     /**
+     * DEPRECATED: use `InstantBankTransactionDetails` instead (v2026.04.00 or later). RTP specific details
+     * about the transaction.
      * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
-    public TransferDestination withRtpDetails(RtpDetails rtpDetails) {
+    public TransferDestination withRtpDetails(RTPTransactionDetails rtpDetails) {
         Utils.checkNotNull(rtpDetails, "rtpDetails");
         this.rtpDetails = Optional.ofNullable(rtpDetails);
         return this;
@@ -370,11 +376,13 @@ public class TransferDestination {
 
 
     /**
+     * DEPRECATED: use `InstantBankTransactionDetails` instead (v2026.04.00 or later). RTP specific details
+     * about the transaction.
      * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
-    public TransferDestination withRtpDetails(Optional<? extends RtpDetails> rtpDetails) {
+    public TransferDestination withRtpDetails(Optional<? extends RTPTransactionDetails> rtpDetails) {
         Utils.checkNotNull(rtpDetails, "rtpDetails");
         this.rtpDetails = rtpDetails;
         return this;
@@ -469,7 +477,7 @@ public class TransferDestination {
         private Optional<? extends CardTransactionDetails> cardDetails = Optional.empty();
 
         @Deprecated
-        private Optional<? extends RtpDetails> rtpDetails = Optional.empty();
+        private Optional<? extends RTPTransactionDetails> rtpDetails = Optional.empty();
 
         private Optional<? extends InstantBankTransactionDetails> instantBankDetails = Optional.empty();
 
@@ -611,22 +619,26 @@ public class TransferDestination {
 
 
         /**
+         * DEPRECATED: use `InstantBankTransactionDetails` instead (v2026.04.00 or later). RTP specific details
+         * about the transaction.
          * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated
-        public Builder rtpDetails(RtpDetails rtpDetails) {
+        public Builder rtpDetails(RTPTransactionDetails rtpDetails) {
             Utils.checkNotNull(rtpDetails, "rtpDetails");
             this.rtpDetails = Optional.ofNullable(rtpDetails);
             return this;
         }
 
         /**
+         * DEPRECATED: use `InstantBankTransactionDetails` instead (v2026.04.00 or later). RTP specific details
+         * about the transaction.
          * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated
-        public Builder rtpDetails(Optional<? extends RtpDetails> rtpDetails) {
+        public Builder rtpDetails(Optional<? extends RTPTransactionDetails> rtpDetails) {
             Utils.checkNotNull(rtpDetails, "rtpDetails");
             this.rtpDetails = rtpDetails;
             return this;

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 /**
@@ -20,16 +21,31 @@ import java.util.Optional;
  */
 public class GooglePayResponse {
     /**
+     * The unique identifier of the Google Pay token.
+     */
+    @JsonProperty("tokenID")
+    private String tokenID;
+
+    /**
      * The card brand.
      */
     @JsonProperty("brand")
     private CardBrand brand;
 
     /**
-     * The last four digits of the underlying card number.
+     * The type of the card.
      */
-    @JsonProperty("cardDetails")
-    private String cardDetails;
+    @JsonProperty("cardType")
+    private CardType cardType;
+
+    /**
+     * User-friendly name of the tokenized card returned by Google Pay.
+     * 
+     * <p>It usually contains the last four digits of the underlying card.
+     * There is no standard format.
+     */
+    @JsonProperty("cardDisplayName")
+    private String cardDisplayName;
 
     /**
      * Uniquely identifies a linked payment card or token.
@@ -48,38 +64,76 @@ public class GooglePayResponse {
     private CardExpiration expiration;
 
     /**
+     * The last four digits of the Google Pay token, which may differ from the tokenized card's last four
+     * digits.
+     */
+    @JsonProperty("dynamicLastFour")
+    private String dynamicLastFour;
+
+    /**
      * Country where the underlying card was issued.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("issuerCountry")
     private Optional<String> issuerCountry;
 
+    /**
+     * The authentication method used for the Google Pay token.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("authMethod")
+    private Optional<? extends AuthMethod> authMethod;
+
     @JsonCreator
     public GooglePayResponse(
+            @JsonProperty("tokenID") String tokenID,
             @JsonProperty("brand") CardBrand brand,
-            @JsonProperty("cardDetails") String cardDetails,
+            @JsonProperty("cardType") CardType cardType,
+            @JsonProperty("cardDisplayName") String cardDisplayName,
             @JsonProperty("fingerprint") String fingerprint,
             @JsonProperty("expiration") CardExpiration expiration,
-            @JsonProperty("issuerCountry") Optional<String> issuerCountry) {
+            @JsonProperty("dynamicLastFour") String dynamicLastFour,
+            @JsonProperty("issuerCountry") Optional<String> issuerCountry,
+            @JsonProperty("authMethod") Optional<? extends AuthMethod> authMethod) {
+        Utils.checkNotNull(tokenID, "tokenID");
         Utils.checkNotNull(brand, "brand");
-        Utils.checkNotNull(cardDetails, "cardDetails");
+        Utils.checkNotNull(cardType, "cardType");
+        Utils.checkNotNull(cardDisplayName, "cardDisplayName");
         Utils.checkNotNull(fingerprint, "fingerprint");
         Utils.checkNotNull(expiration, "expiration");
+        Utils.checkNotNull(dynamicLastFour, "dynamicLastFour");
         Utils.checkNotNull(issuerCountry, "issuerCountry");
+        Utils.checkNotNull(authMethod, "authMethod");
+        this.tokenID = tokenID;
         this.brand = brand;
-        this.cardDetails = cardDetails;
+        this.cardType = cardType;
+        this.cardDisplayName = cardDisplayName;
         this.fingerprint = fingerprint;
         this.expiration = expiration;
+        this.dynamicLastFour = dynamicLastFour;
         this.issuerCountry = issuerCountry;
+        this.authMethod = authMethod;
     }
     
     public GooglePayResponse(
+            String tokenID,
             CardBrand brand,
-            String cardDetails,
+            CardType cardType,
+            String cardDisplayName,
             String fingerprint,
-            CardExpiration expiration) {
-        this(brand, cardDetails, fingerprint,
-            expiration, Optional.empty());
+            CardExpiration expiration,
+            String dynamicLastFour) {
+        this(tokenID, brand, cardType,
+            cardDisplayName, fingerprint, expiration,
+            dynamicLastFour, Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * The unique identifier of the Google Pay token.
+     */
+    @JsonIgnore
+    public String tokenID() {
+        return tokenID;
     }
 
     /**
@@ -91,11 +145,22 @@ public class GooglePayResponse {
     }
 
     /**
-     * The last four digits of the underlying card number.
+     * The type of the card.
      */
     @JsonIgnore
-    public String cardDetails() {
-        return cardDetails;
+    public CardType cardType() {
+        return cardType;
+    }
+
+    /**
+     * User-friendly name of the tokenized card returned by Google Pay.
+     * 
+     * <p>It usually contains the last four digits of the underlying card.
+     * There is no standard format.
+     */
+    @JsonIgnore
+    public String cardDisplayName() {
+        return cardDisplayName;
     }
 
     /**
@@ -119,6 +184,15 @@ public class GooglePayResponse {
     }
 
     /**
+     * The last four digits of the Google Pay token, which may differ from the tokenized card's last four
+     * digits.
+     */
+    @JsonIgnore
+    public String dynamicLastFour() {
+        return dynamicLastFour;
+    }
+
+    /**
      * Country where the underlying card was issued.
      */
     @JsonIgnore
@@ -126,10 +200,28 @@ public class GooglePayResponse {
         return issuerCountry;
     }
 
+    /**
+     * The authentication method used for the Google Pay token.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<AuthMethod> authMethod() {
+        return (Optional<AuthMethod>) authMethod;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
+
+    /**
+     * The unique identifier of the Google Pay token.
+     */
+    public GooglePayResponse withTokenID(String tokenID) {
+        Utils.checkNotNull(tokenID, "tokenID");
+        this.tokenID = tokenID;
+        return this;
+    }
 
     /**
      * The card brand.
@@ -141,11 +233,23 @@ public class GooglePayResponse {
     }
 
     /**
-     * The last four digits of the underlying card number.
+     * The type of the card.
      */
-    public GooglePayResponse withCardDetails(String cardDetails) {
-        Utils.checkNotNull(cardDetails, "cardDetails");
-        this.cardDetails = cardDetails;
+    public GooglePayResponse withCardType(CardType cardType) {
+        Utils.checkNotNull(cardType, "cardType");
+        this.cardType = cardType;
+        return this;
+    }
+
+    /**
+     * User-friendly name of the tokenized card returned by Google Pay.
+     * 
+     * <p>It usually contains the last four digits of the underlying card.
+     * There is no standard format.
+     */
+    public GooglePayResponse withCardDisplayName(String cardDisplayName) {
+        Utils.checkNotNull(cardDisplayName, "cardDisplayName");
+        this.cardDisplayName = cardDisplayName;
         return this;
     }
 
@@ -172,6 +276,16 @@ public class GooglePayResponse {
     }
 
     /**
+     * The last four digits of the Google Pay token, which may differ from the tokenized card's last four
+     * digits.
+     */
+    public GooglePayResponse withDynamicLastFour(String dynamicLastFour) {
+        Utils.checkNotNull(dynamicLastFour, "dynamicLastFour");
+        this.dynamicLastFour = dynamicLastFour;
+        return this;
+    }
+
+    /**
      * Country where the underlying card was issued.
      */
     public GooglePayResponse withIssuerCountry(String issuerCountry) {
@@ -190,6 +304,25 @@ public class GooglePayResponse {
         return this;
     }
 
+    /**
+     * The authentication method used for the Google Pay token.
+     */
+    public GooglePayResponse withAuthMethod(AuthMethod authMethod) {
+        Utils.checkNotNull(authMethod, "authMethod");
+        this.authMethod = Optional.ofNullable(authMethod);
+        return this;
+    }
+
+
+    /**
+     * The authentication method used for the Google Pay token.
+     */
+    public GooglePayResponse withAuthMethod(Optional<? extends AuthMethod> authMethod) {
+        Utils.checkNotNull(authMethod, "authMethod");
+        this.authMethod = authMethod;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -200,45 +333,72 @@ public class GooglePayResponse {
         }
         GooglePayResponse other = (GooglePayResponse) o;
         return 
+            Utils.enhancedDeepEquals(this.tokenID, other.tokenID) &&
             Utils.enhancedDeepEquals(this.brand, other.brand) &&
-            Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails) &&
+            Utils.enhancedDeepEquals(this.cardType, other.cardType) &&
+            Utils.enhancedDeepEquals(this.cardDisplayName, other.cardDisplayName) &&
             Utils.enhancedDeepEquals(this.fingerprint, other.fingerprint) &&
             Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
-            Utils.enhancedDeepEquals(this.issuerCountry, other.issuerCountry);
+            Utils.enhancedDeepEquals(this.dynamicLastFour, other.dynamicLastFour) &&
+            Utils.enhancedDeepEquals(this.issuerCountry, other.issuerCountry) &&
+            Utils.enhancedDeepEquals(this.authMethod, other.authMethod);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            brand, cardDetails, fingerprint,
-            expiration, issuerCountry);
+            tokenID, brand, cardType,
+            cardDisplayName, fingerprint, expiration,
+            dynamicLastFour, issuerCountry, authMethod);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GooglePayResponse.class,
+                "tokenID", tokenID,
                 "brand", brand,
-                "cardDetails", cardDetails,
+                "cardType", cardType,
+                "cardDisplayName", cardDisplayName,
                 "fingerprint", fingerprint,
                 "expiration", expiration,
-                "issuerCountry", issuerCountry);
+                "dynamicLastFour", dynamicLastFour,
+                "issuerCountry", issuerCountry,
+                "authMethod", authMethod);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private String tokenID;
+
         private CardBrand brand;
 
-        private String cardDetails;
+        private CardType cardType;
+
+        private String cardDisplayName;
 
         private String fingerprint;
 
         private CardExpiration expiration;
 
+        private String dynamicLastFour;
+
         private Optional<String> issuerCountry = Optional.empty();
+
+        private Optional<? extends AuthMethod> authMethod = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * The unique identifier of the Google Pay token.
+         */
+        public Builder tokenID(String tokenID) {
+            Utils.checkNotNull(tokenID, "tokenID");
+            this.tokenID = tokenID;
+            return this;
         }
 
 
@@ -253,11 +413,24 @@ public class GooglePayResponse {
 
 
         /**
-         * The last four digits of the underlying card number.
+         * The type of the card.
          */
-        public Builder cardDetails(String cardDetails) {
-            Utils.checkNotNull(cardDetails, "cardDetails");
-            this.cardDetails = cardDetails;
+        public Builder cardType(CardType cardType) {
+            Utils.checkNotNull(cardType, "cardType");
+            this.cardType = cardType;
+            return this;
+        }
+
+
+        /**
+         * User-friendly name of the tokenized card returned by Google Pay.
+         * 
+         * <p>It usually contains the last four digits of the underlying card.
+         * There is no standard format.
+         */
+        public Builder cardDisplayName(String cardDisplayName) {
+            Utils.checkNotNull(cardDisplayName, "cardDisplayName");
+            this.cardDisplayName = cardDisplayName;
             return this;
         }
 
@@ -287,6 +460,17 @@ public class GooglePayResponse {
 
 
         /**
+         * The last four digits of the Google Pay token, which may differ from the tokenized card's last four
+         * digits.
+         */
+        public Builder dynamicLastFour(String dynamicLastFour) {
+            Utils.checkNotNull(dynamicLastFour, "dynamicLastFour");
+            this.dynamicLastFour = dynamicLastFour;
+            return this;
+        }
+
+
+        /**
          * Country where the underlying card was issued.
          */
         public Builder issuerCountry(String issuerCountry) {
@@ -304,11 +488,31 @@ public class GooglePayResponse {
             return this;
         }
 
+
+        /**
+         * The authentication method used for the Google Pay token.
+         */
+        public Builder authMethod(AuthMethod authMethod) {
+            Utils.checkNotNull(authMethod, "authMethod");
+            this.authMethod = Optional.ofNullable(authMethod);
+            return this;
+        }
+
+        /**
+         * The authentication method used for the Google Pay token.
+         */
+        public Builder authMethod(Optional<? extends AuthMethod> authMethod) {
+            Utils.checkNotNull(authMethod, "authMethod");
+            this.authMethod = authMethod;
+            return this;
+        }
+
         public GooglePayResponse build() {
 
             return new GooglePayResponse(
-                brand, cardDetails, fingerprint,
-                expiration, issuerCountry);
+                tokenID, brand, cardType,
+                cardDisplayName, fingerprint, expiration,
+                dynamicLastFour, issuerCountry, authMethod);
         }
 
     }

@@ -140,7 +140,7 @@ public class PaymentLink {
 
     /**
      * An optional collection of line items for a payment link.
-     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     * When line items are provided, their total plus tax must equal the payment link amount.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lineItems")
@@ -411,7 +411,7 @@ public class PaymentLink {
 
     /**
      * An optional collection of line items for a payment link.
-     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     * When line items are provided, their total plus tax must equal the payment link amount.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -667,7 +667,7 @@ public class PaymentLink {
 
     /**
      * An optional collection of line items for a payment link.
-     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     * When line items are provided, their total plus tax must equal the payment link amount.
      */
     public PaymentLink withLineItems(PaymentLinkLineItems lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
@@ -678,7 +678,7 @@ public class PaymentLink {
 
     /**
      * An optional collection of line items for a payment link.
-     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     * When line items are provided, their total plus tax must equal the payment link amount.
      */
     public PaymentLink withLineItems(Optional<? extends PaymentLinkLineItems> lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
@@ -1082,7 +1082,7 @@ public class PaymentLink {
 
         /**
          * An optional collection of line items for a payment link.
-         * When line items are provided, their total plus sales tax must equal the payment link amount.
+         * When line items are provided, their total plus tax must equal the payment link amount.
          */
         public Builder lineItems(PaymentLinkLineItems lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
@@ -1092,7 +1092,7 @@ public class PaymentLink {
 
         /**
          * An optional collection of line items for a payment link.
-         * When line items are provided, their total plus sales tax must equal the payment link amount.
+         * When line items are provided, their total plus tax must equal the payment link amount.
          */
         public Builder lineItems(Optional<? extends PaymentLinkLineItems> lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");

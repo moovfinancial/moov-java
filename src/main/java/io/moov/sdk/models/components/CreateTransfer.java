@@ -69,7 +69,7 @@ public class CreateTransfer {
 
     /**
      * An optional collection of line items for a transfer.
-     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     * When line items are provided, their total plus tax must equal the transfer amount.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lineItems")
@@ -188,7 +188,7 @@ public class CreateTransfer {
 
     /**
      * An optional collection of line items for a transfer.
-     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     * When line items are provided, their total plus tax must equal the transfer amount.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -323,7 +323,7 @@ public class CreateTransfer {
 
     /**
      * An optional collection of line items for a transfer.
-     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     * When line items are provided, their total plus tax must equal the transfer amount.
      */
     public CreateTransfer withLineItems(CreateTransferLineItems lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
@@ -334,7 +334,7 @@ public class CreateTransfer {
 
     /**
      * An optional collection of line items for a transfer.
-     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     * When line items are provided, their total plus tax must equal the transfer amount.
      */
     public CreateTransfer withLineItems(Optional<? extends CreateTransferLineItems> lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
@@ -548,7 +548,7 @@ public class CreateTransfer {
 
         /**
          * An optional collection of line items for a transfer.
-         * When line items are provided, their total plus sales tax must equal the transfer amount.
+         * When line items are provided, their total plus tax must equal the transfer amount.
          */
         public Builder lineItems(CreateTransferLineItems lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
@@ -558,7 +558,7 @@ public class CreateTransfer {
 
         /**
          * An optional collection of line items for a transfer.
-         * When line items are provided, their total plus sales tax must equal the transfer amount.
+         * When line items are provided, their total plus tax must equal the transfer amount.
          */
         public Builder lineItems(Optional<? extends CreateTransferLineItems> lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");

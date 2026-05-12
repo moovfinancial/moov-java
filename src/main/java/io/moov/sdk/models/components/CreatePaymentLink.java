@@ -99,7 +99,7 @@ public class CreatePaymentLink {
 
     /**
      * An optional collection of line items for a payment link.
-     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     * When line items are provided, their total plus tax must equal the payment link amount.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lineItems")
@@ -241,7 +241,7 @@ public class CreatePaymentLink {
 
     /**
      * An optional collection of line items for a payment link.
-     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     * When line items are provided, their total plus tax must equal the payment link amount.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -404,7 +404,7 @@ public class CreatePaymentLink {
 
     /**
      * An optional collection of line items for a payment link.
-     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     * When line items are provided, their total plus tax must equal the payment link amount.
      */
     public CreatePaymentLink withLineItems(CreatePaymentLinkLineItems lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
@@ -415,7 +415,7 @@ public class CreatePaymentLink {
 
     /**
      * An optional collection of line items for a payment link.
-     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     * When line items are provided, their total plus tax must equal the payment link amount.
      */
     public CreatePaymentLink withLineItems(Optional<? extends CreatePaymentLinkLineItems> lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
@@ -655,7 +655,7 @@ public class CreatePaymentLink {
 
         /**
          * An optional collection of line items for a payment link.
-         * When line items are provided, their total plus sales tax must equal the payment link amount.
+         * When line items are provided, their total plus tax must equal the payment link amount.
          */
         public Builder lineItems(CreatePaymentLinkLineItems lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
@@ -665,7 +665,7 @@ public class CreatePaymentLink {
 
         /**
          * An optional collection of line items for a payment link.
-         * When line items are provided, their total plus sales tax must equal the payment link amount.
+         * When line items are provided, their total plus tax must equal the payment link amount.
          */
         public Builder lineItems(Optional<? extends CreatePaymentLinkLineItems> lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");

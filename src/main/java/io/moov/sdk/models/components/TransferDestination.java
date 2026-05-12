@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
-import java.lang.Deprecated;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -79,15 +78,6 @@ public class TransferDestination {
     private Optional<? extends CardTransactionDetails> cardDetails;
 
     /**
-     * 
-     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("rtpDetails")
-    @Deprecated
-    private Optional<? extends RtpDetails> rtpDetails;
-
-    /**
      * Instant-bank specific details about the transaction.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -106,7 +96,6 @@ public class TransferDestination {
             @JsonProperty("applePay") Optional<? extends ApplePayResponse> applePay,
             @JsonProperty("googlePay") Optional<? extends GooglePayResponse> googlePay,
             @JsonProperty("cardDetails") Optional<? extends CardTransactionDetails> cardDetails,
-            @JsonProperty("rtpDetails") Optional<? extends RtpDetails> rtpDetails,
             @JsonProperty("instantBankDetails") Optional<? extends InstantBankTransactionDetails> instantBankDetails) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
@@ -118,7 +107,6 @@ public class TransferDestination {
         Utils.checkNotNull(applePay, "applePay");
         Utils.checkNotNull(googlePay, "googlePay");
         Utils.checkNotNull(cardDetails, "cardDetails");
-        Utils.checkNotNull(rtpDetails, "rtpDetails");
         Utils.checkNotNull(instantBankDetails, "instantBankDetails");
         this.paymentMethodID = paymentMethodID;
         this.paymentMethodType = paymentMethodType;
@@ -130,7 +118,6 @@ public class TransferDestination {
         this.applePay = applePay;
         this.googlePay = googlePay;
         this.cardDetails = cardDetails;
-        this.rtpDetails = rtpDetails;
         this.instantBankDetails = instantBankDetails;
     }
     
@@ -141,7 +128,7 @@ public class TransferDestination {
         this(paymentMethodID, paymentMethodType, account,
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -220,17 +207,6 @@ public class TransferDestination {
     @JsonIgnore
     public Optional<CardTransactionDetails> cardDetails() {
         return (Optional<CardTransactionDetails>) cardDetails;
-    }
-
-    /**
-     * 
-     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
-     */
-    @Deprecated
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<RtpDetails> rtpDetails() {
-        return (Optional<RtpDetails>) rtpDetails;
     }
 
     /**
@@ -396,29 +372,6 @@ public class TransferDestination {
     }
 
     /**
-     * 
-     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
-     */
-    @Deprecated
-    public TransferDestination withRtpDetails(RtpDetails rtpDetails) {
-        Utils.checkNotNull(rtpDetails, "rtpDetails");
-        this.rtpDetails = Optional.ofNullable(rtpDetails);
-        return this;
-    }
-
-
-    /**
-     * 
-     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
-     */
-    @Deprecated
-    public TransferDestination withRtpDetails(Optional<? extends RtpDetails> rtpDetails) {
-        Utils.checkNotNull(rtpDetails, "rtpDetails");
-        this.rtpDetails = rtpDetails;
-        return this;
-    }
-
-    /**
      * Instant-bank specific details about the transaction.
      */
     public TransferDestination withInstantBankDetails(InstantBankTransactionDetails instantBankDetails) {
@@ -457,7 +410,6 @@ public class TransferDestination {
             Utils.enhancedDeepEquals(this.applePay, other.applePay) &&
             Utils.enhancedDeepEquals(this.googlePay, other.googlePay) &&
             Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails) &&
-            Utils.enhancedDeepEquals(this.rtpDetails, other.rtpDetails) &&
             Utils.enhancedDeepEquals(this.instantBankDetails, other.instantBankDetails);
     }
     
@@ -467,7 +419,7 @@ public class TransferDestination {
             paymentMethodID, paymentMethodType, account,
             bankAccount, wallet, card,
             achDetails, applePay, googlePay,
-            cardDetails, rtpDetails, instantBankDetails);
+            cardDetails, instantBankDetails);
     }
     
     @Override
@@ -483,7 +435,6 @@ public class TransferDestination {
                 "applePay", applePay,
                 "googlePay", googlePay,
                 "cardDetails", cardDetails,
-                "rtpDetails", rtpDetails,
                 "instantBankDetails", instantBankDetails);
     }
 
@@ -509,9 +460,6 @@ public class TransferDestination {
         private Optional<? extends GooglePayResponse> googlePay = Optional.empty();
 
         private Optional<? extends CardTransactionDetails> cardDetails = Optional.empty();
-
-        @Deprecated
-        private Optional<? extends RtpDetails> rtpDetails = Optional.empty();
 
         private Optional<? extends InstantBankTransactionDetails> instantBankDetails = Optional.empty();
 
@@ -672,29 +620,6 @@ public class TransferDestination {
 
 
         /**
-         * 
-         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
-         */
-        @Deprecated
-        public Builder rtpDetails(RtpDetails rtpDetails) {
-            Utils.checkNotNull(rtpDetails, "rtpDetails");
-            this.rtpDetails = Optional.ofNullable(rtpDetails);
-            return this;
-        }
-
-        /**
-         * 
-         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
-         */
-        @Deprecated
-        public Builder rtpDetails(Optional<? extends RtpDetails> rtpDetails) {
-            Utils.checkNotNull(rtpDetails, "rtpDetails");
-            this.rtpDetails = rtpDetails;
-            return this;
-        }
-
-
-        /**
          * Instant-bank specific details about the transaction.
          */
         public Builder instantBankDetails(InstantBankTransactionDetails instantBankDetails) {
@@ -718,7 +643,7 @@ public class TransferDestination {
                 paymentMethodID, paymentMethodType, account,
                 bankAccount, wallet, card,
                 achDetails, applePay, googlePay,
-                cardDetails, rtpDetails, instantBankDetails);
+                cardDetails, instantBankDetails);
         }
 
     }

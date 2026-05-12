@@ -9,20 +9,18 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * RTPTransactionStatus
+ * AuthMethod
  * 
- * <p>Status of a transaction within the RTP lifecycle.
+ * <p>The authentication method used for the Google Pay token.
  */
-public enum RTPTransactionStatus {
-    INITIATED("initiated"),
-    COMPLETED("completed"),
-    FAILED("failed"),
-    ACCEPTED_WITHOUT_POSTING("accepted-without-posting");
+public enum AuthMethod {
+    PAN_ONLY("PAN_ONLY"),
+    CRYPTOGRAM3_DS("CRYPTOGRAM_3DS");
 
     @JsonValue
     private final String value;
 
-    RTPTransactionStatus(String value) {
+    AuthMethod(String value) {
         this.value = value;
     }
     
@@ -30,8 +28,8 @@ public enum RTPTransactionStatus {
         return value;
     }
     
-    public static Optional<RTPTransactionStatus> fromValue(String value) {
-        for (RTPTransactionStatus o: RTPTransactionStatus.values()) {
+    public static Optional<AuthMethod> fromValue(String value) {
+        for (AuthMethod o: AuthMethod.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);
             }

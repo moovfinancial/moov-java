@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: e5f5c247fd5f746da4ff91c3dc707316
+  docChecksum: 3df58689dfbdfdd3e3c9672bbd44c64c
   docVersion: v2026.07.00
   speakeasyVersion: 1.763.0
   generationVersion: 2.884.0
-  releaseVersion: 26.7.0-dev.0
-  configChecksum: ea1734a7e16bc5964302d764010a6daf
+  releaseVersion: 26.7.0-dev.1
+  configChecksum: 590addd17ae0f3ad0ba249d3c053e671
   repoURL: https://github.com/moovfinancial/moov-java.git
   installationURL: https://github.com/moovfinancial/moov-java
   published: true
 persistentEdits:
-  generation_id: 5f1dd426-1ced-44dc-a16b-318bd1d59c87
-  pristine_commit_hash: a5d938230f0bc30203d7ab377299e41d3f95e7a0
-  pristine_tree_hash: e0f8d775ac329b523f4eceaa49a6ff54af1daa6f
+  generation_id: ad832e6e-9664-446b-b600-b09a517edd73
+  pristine_commit_hash: 939c2f0a4e7713f05b5fcb70d7ee194fbc0fac2c
+  pristine_tree_hash: e4a63c331efd74a5b828fe14ba6b1b538ddd8bf9
 features:
   java:
     acceptHeaders: 2.81.2
@@ -2697,8 +2697,8 @@ trackedFiles:
     pristine_git_object: 1a95c44289817ef6806b370da7800376ff3f6c5c
   docs/models/components/WebhookDataBankAccountDeleted.md:
     id: 84ea10c479b2
-    last_write_checksum: sha1:7125258e516edd417d479b140986bf9070cff1be
-    pristine_git_object: 4455a6335882bfa6d409727cfe4a84102ce1b0b1
+    last_write_checksum: sha1:a905e842dc1387da6d14c704cdf1058b13ef71fe
+    pristine_git_object: 846f3033adabe82303897a05443f0f85396efb4d
   docs/models/components/WebhookDataBankAccountUpdated.md:
     id: c8de3eaa10dc
     last_write_checksum: sha1:e8c4d8b6ef2eda562f587f010ebfdd9a4af8a921
@@ -4713,8 +4713,8 @@ trackedFiles:
     pristine_git_object: 9b40f611aaace5afe9cf7cadc73ff2301fe51e80
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:0d44bf973b99e808aff9415bf5d0310ed2280b13
-    pristine_git_object: 224b6aa2aa0ea4a9d54d642513d754af3f21390c
+    last_write_checksum: sha1:9e33e849a6fadff9d09aad68dc2fe35a00979f29
+    pristine_git_object: 03acf3df7473500ecf05dcb2f0dd817a25838106
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4897,8 +4897,8 @@ trackedFiles:
     pristine_git_object: 72495cf1b905a82c978c8ca472b53f9c9cecccbd
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:9fed6acebbf1473bc0e8f414958760d1c8e38f86
-    pristine_git_object: be1bac521fe855b7e4491673403f681f737d72d7
+    last_write_checksum: sha1:6f3b7601682c7557cbcf1a1f13dbbd6027b48a3c
+    pristine_git_object: a0bcec72f04409c7756cff5d3dcd8831ef8ad569
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:bf0300e770bb968bfc8b5ee2b8d6f05e37e9bb67
@@ -7613,8 +7613,8 @@ trackedFiles:
     pristine_git_object: 8670256f437b86c82969a6850a1e5513ec788c90
   src/main/java/io/moov/sdk/models/components/WebhookDataBankAccountDeleted.java:
     id: 00c1e74ebd31
-    last_write_checksum: sha1:10ace185d8bd4a2614f2a45db4fc56836ac9a50c
-    pristine_git_object: d53ae72e82464eb1b5cc84f408b955e7d0f7b7d0
+    last_write_checksum: sha1:1256d26565fab2ddbc7f3947a658acc63742fded
+    pristine_git_object: c916bb23a23e83fa3871a7fe57a111341e2765b4
   src/main/java/io/moov/sdk/models/components/WebhookDataBankAccountUpdated.java:
     id: 8ec5a34c12fc
     last_write_checksum: sha1:8ead3337861f66e49d7daa8c4ccf4b07faa5cb8b
@@ -14102,7 +14102,6 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes:\n* `moov.paymentLinks.create()`: \n  *  `request.createPaymentLink.amountDetails.surcharge` **Removed** (Breaking ⚠️)\n  *  `response.amountDetails.surcharge` **Removed** (Breaking ⚠️)\n  *  `error.amountDetails.surcharge` **Removed** (Breaking ⚠️)\n* `moov.paymentLinks.list()`:  `response.[].amountDetails.surcharge` **Removed** (Breaking ⚠️)\n* `moov.paymentLinks.get()`:  `response.amountDetails.surcharge` **Removed** (Breaking ⚠️)\n* `moov.paymentLinks.update()`: \n  *  `request.updatePaymentLink.amountDetails.surcharge` **Removed** (Breaking ⚠️)\n  *  `response.amountDetails.surcharge` **Removed** (Breaking ⚠️)\n  *  `error.amountDetails.surcharge` **Removed** (Breaking ⚠️)\n* `moov.transfers.create()`: \n  *  `request.createTransfer.amountDetails.surcharge` **Removed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error` **Changed** (Breaking ⚠️)\n* `moov.transfers.list()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.[]` **Changed** (Breaking ⚠️)\n* `moov.transfers.batchGetTransfers()`:  `response.Map<Transfer>` **Changed** (Breaking ⚠️)\n* `moov.transfers.get()`:  `response` **Changed** (Breaking ⚠️)\n* `moov.transfers.update()`:  `response` **Changed** (Breaking ⚠️)\n* `moov.transfers.initiateRefund()`: \n  *  `request.createRefund.amountDetails` **Removed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.amountDetails` **Removed** (Breaking ⚠️)\n* `moov.transfers.listRefunds()`:  `response.[].amountDetails` **Removed** (Breaking ⚠️)\n* `moov.transfers.getRefund()`:  `response.amountDetails` **Removed** (Breaking ⚠️)\n* `moov.transfers.createReversal()`: \n  *  `request.createReversal.amountDetails` **Removed** (Breaking ⚠️)\n  *  `response.union(ReversedWithRefund).refund.amountDetails` **Removed** (Breaking ⚠️)\n  *  `error.amountDetails` **Removed** (Breaking ⚠️)\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

@@ -30,28 +30,18 @@ public class CreateTransferAmountDetails {
     @JsonProperty("tax")
     private Optional<? extends AmountDecimal> tax;
 
-    /**
-     * The amount of surcharge applied to the transfer.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("surcharge")
-    private Optional<? extends AmountDecimal> surcharge;
-
     @JsonCreator
     public CreateTransferAmountDetails(
             @JsonProperty("tip") Optional<? extends AmountDecimal> tip,
-            @JsonProperty("tax") Optional<? extends AmountDecimal> tax,
-            @JsonProperty("surcharge") Optional<? extends AmountDecimal> surcharge) {
+            @JsonProperty("tax") Optional<? extends AmountDecimal> tax) {
         Utils.checkNotNull(tip, "tip");
         Utils.checkNotNull(tax, "tax");
-        Utils.checkNotNull(surcharge, "surcharge");
         this.tip = tip;
         this.tax = tax;
-        this.surcharge = surcharge;
     }
     
     public CreateTransferAmountDetails() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty());
     }
 
     /**
@@ -70,15 +60,6 @@ public class CreateTransferAmountDetails {
     @JsonIgnore
     public Optional<AmountDecimal> tax() {
         return (Optional<AmountDecimal>) tax;
-    }
-
-    /**
-     * The amount of surcharge applied to the transfer.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<AmountDecimal> surcharge() {
-        return (Optional<AmountDecimal>) surcharge;
     }
 
     public static Builder builder() {
@@ -124,25 +105,6 @@ public class CreateTransferAmountDetails {
         return this;
     }
 
-    /**
-     * The amount of surcharge applied to the transfer.
-     */
-    public CreateTransferAmountDetails withSurcharge(AmountDecimal surcharge) {
-        Utils.checkNotNull(surcharge, "surcharge");
-        this.surcharge = Optional.ofNullable(surcharge);
-        return this;
-    }
-
-
-    /**
-     * The amount of surcharge applied to the transfer.
-     */
-    public CreateTransferAmountDetails withSurcharge(Optional<? extends AmountDecimal> surcharge) {
-        Utils.checkNotNull(surcharge, "surcharge");
-        this.surcharge = surcharge;
-        return this;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -154,22 +116,20 @@ public class CreateTransferAmountDetails {
         CreateTransferAmountDetails other = (CreateTransferAmountDetails) o;
         return 
             Utils.enhancedDeepEquals(this.tip, other.tip) &&
-            Utils.enhancedDeepEquals(this.tax, other.tax) &&
-            Utils.enhancedDeepEquals(this.surcharge, other.surcharge);
+            Utils.enhancedDeepEquals(this.tax, other.tax);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            tip, tax, surcharge);
+            tip, tax);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CreateTransferAmountDetails.class,
                 "tip", tip,
-                "tax", tax,
-                "surcharge", surcharge);
+                "tax", tax);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -178,8 +138,6 @@ public class CreateTransferAmountDetails {
         private Optional<? extends AmountDecimal> tip = Optional.empty();
 
         private Optional<? extends AmountDecimal> tax = Optional.empty();
-
-        private Optional<? extends AmountDecimal> surcharge = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -223,29 +181,10 @@ public class CreateTransferAmountDetails {
             return this;
         }
 
-
-        /**
-         * The amount of surcharge applied to the transfer.
-         */
-        public Builder surcharge(AmountDecimal surcharge) {
-            Utils.checkNotNull(surcharge, "surcharge");
-            this.surcharge = Optional.ofNullable(surcharge);
-            return this;
-        }
-
-        /**
-         * The amount of surcharge applied to the transfer.
-         */
-        public Builder surcharge(Optional<? extends AmountDecimal> surcharge) {
-            Utils.checkNotNull(surcharge, "surcharge");
-            this.surcharge = surcharge;
-            return this;
-        }
-
         public CreateTransferAmountDetails build() {
 
             return new CreateTransferAmountDetails(
-                tip, tax, surcharge);
+                tip, tax);
         }
 
     }

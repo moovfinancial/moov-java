@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 /**
@@ -31,25 +30,15 @@ public class CreateRefund {
     @JsonProperty("amount")
     private Optional<Long> amount;
 
-    /**
-     * Breakdown of the refunded amount.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("amountDetails")
-    private Optional<? extends RefundAmountDetails> amountDetails;
-
     @JsonCreator
     public CreateRefund(
-            @JsonProperty("amount") Optional<Long> amount,
-            @JsonProperty("amountDetails") Optional<? extends RefundAmountDetails> amountDetails) {
+            @JsonProperty("amount") Optional<Long> amount) {
         Utils.checkNotNull(amount, "amount");
-        Utils.checkNotNull(amountDetails, "amountDetails");
         this.amount = amount;
-        this.amountDetails = amountDetails;
     }
     
     public CreateRefund() {
-        this(Optional.empty(), Optional.empty());
+        this(Optional.empty());
     }
 
     /**
@@ -58,15 +47,6 @@ public class CreateRefund {
     @JsonIgnore
     public Optional<Long> amount() {
         return amount;
-    }
-
-    /**
-     * Breakdown of the refunded amount.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<RefundAmountDetails> amountDetails() {
-        return (Optional<RefundAmountDetails>) amountDetails;
     }
 
     public static Builder builder() {
@@ -93,25 +73,6 @@ public class CreateRefund {
         return this;
     }
 
-    /**
-     * Breakdown of the refunded amount.
-     */
-    public CreateRefund withAmountDetails(RefundAmountDetails amountDetails) {
-        Utils.checkNotNull(amountDetails, "amountDetails");
-        this.amountDetails = Optional.ofNullable(amountDetails);
-        return this;
-    }
-
-
-    /**
-     * Breakdown of the refunded amount.
-     */
-    public CreateRefund withAmountDetails(Optional<? extends RefundAmountDetails> amountDetails) {
-        Utils.checkNotNull(amountDetails, "amountDetails");
-        this.amountDetails = amountDetails;
-        return this;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -122,29 +83,25 @@ public class CreateRefund {
         }
         CreateRefund other = (CreateRefund) o;
         return 
-            Utils.enhancedDeepEquals(this.amount, other.amount) &&
-            Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
+            Utils.enhancedDeepEquals(this.amount, other.amount);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            amount, amountDetails);
+            amount);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CreateRefund.class,
-                "amount", amount,
-                "amountDetails", amountDetails);
+                "amount", amount);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
         private Optional<Long> amount = Optional.empty();
-
-        private Optional<? extends RefundAmountDetails> amountDetails = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -169,29 +126,10 @@ public class CreateRefund {
             return this;
         }
 
-
-        /**
-         * Breakdown of the refunded amount.
-         */
-        public Builder amountDetails(RefundAmountDetails amountDetails) {
-            Utils.checkNotNull(amountDetails, "amountDetails");
-            this.amountDetails = Optional.ofNullable(amountDetails);
-            return this;
-        }
-
-        /**
-         * Breakdown of the refunded amount.
-         */
-        public Builder amountDetails(Optional<? extends RefundAmountDetails> amountDetails) {
-            Utils.checkNotNull(amountDetails, "amountDetails");
-            this.amountDetails = amountDetails;
-            return this;
-        }
-
         public CreateRefund build() {
 
             return new CreateRefund(
-                amount, amountDetails);
+                amount);
         }
 
     }

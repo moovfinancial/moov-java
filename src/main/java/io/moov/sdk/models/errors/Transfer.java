@@ -16,7 +16,6 @@ import io.moov.sdk.models.components.FacilitatorFee;
 import io.moov.sdk.models.components.MoovFee;
 import io.moov.sdk.models.components.MoovFeeDetails;
 import io.moov.sdk.models.components.TransferAmountDetails;
-import io.moov.sdk.models.components.TransferCapture;
 import io.moov.sdk.models.components.TransferDestination;
 import io.moov.sdk.models.components.TransferFailureReason;
 import io.moov.sdk.models.components.TransferLineItems;
@@ -257,14 +256,6 @@ public class Transfer extends MoovError {
         return data().flatMap(Data::amountDetails);
     }
 
-    /**
-     * The card authorization and capture IDs associated with a transfer.
-     */
-    @Deprecated
-    public Optional<TransferCapture> capture() {
-        return data().flatMap(Data::capture);
-    }
-
     public Optional<Data> data() {
         return Optional.ofNullable(data);
     }
@@ -448,13 +439,6 @@ public class Transfer extends MoovError {
         @JsonProperty("amountDetails")
         private Optional<? extends TransferAmountDetails> amountDetails;
 
-        /**
-         * The card authorization and capture IDs associated with a transfer.
-         */
-        @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("capture")
-        private Optional<? extends TransferCapture> capture;
-
         @JsonCreator
         public Data(
                 @JsonProperty("transferID") String transferID,
@@ -485,8 +469,7 @@ public class Transfer extends MoovError {
                 @JsonProperty("foreignID") Optional<String> foreignID,
                 @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems,
                 @JsonProperty("invoiceID") Optional<String> invoiceID,
-                @JsonProperty("amountDetails") Optional<? extends TransferAmountDetails> amountDetails,
-                @JsonProperty("capture") Optional<? extends TransferCapture> capture) {
+                @JsonProperty("amountDetails") Optional<? extends TransferAmountDetails> amountDetails) {
             Utils.checkNotNull(transferID, "transferID");
             Utils.checkNotNull(createdOn, "createdOn");
             Utils.checkNotNull(source, "source");
@@ -516,7 +499,6 @@ public class Transfer extends MoovError {
             Utils.checkNotNull(lineItems, "lineItems");
             Utils.checkNotNull(invoiceID, "invoiceID");
             Utils.checkNotNull(amountDetails, "amountDetails");
-            Utils.checkNotNull(capture, "capture");
             this.transferID = transferID;
             this.createdOn = createdOn;
             this.source = source;
@@ -546,7 +528,6 @@ public class Transfer extends MoovError {
             this.lineItems = lineItems;
             this.invoiceID = invoiceID;
             this.amountDetails = amountDetails;
-            this.capture = capture;
         }
         
         public Data(
@@ -565,7 +546,7 @@ public class Transfer extends MoovError {
                 Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty(), Optional.empty(), Optional.empty());
+                Optional.empty(), Optional.empty());
         }
 
         @JsonIgnore
@@ -764,15 +745,6 @@ public class Transfer extends MoovError {
         @JsonIgnore
         public Optional<TransferAmountDetails> amountDetails() {
             return (Optional<TransferAmountDetails>) amountDetails;
-        }
-
-        /**
-         * The card authorization and capture IDs associated with a transfer.
-         */
-        @SuppressWarnings("unchecked")
-        @JsonIgnore
-        public Optional<TransferCapture> capture() {
-            return (Optional<TransferCapture>) capture;
         }
 
         public static Builder builder() {
@@ -1194,25 +1166,6 @@ public class Transfer extends MoovError {
             return this;
         }
 
-        /**
-         * The card authorization and capture IDs associated with a transfer.
-         */
-        public Data withCapture(TransferCapture capture) {
-            Utils.checkNotNull(capture, "capture");
-            this.capture = Optional.ofNullable(capture);
-            return this;
-        }
-
-
-        /**
-         * The card authorization and capture IDs associated with a transfer.
-         */
-        public Data withCapture(Optional<? extends TransferCapture> capture) {
-            Utils.checkNotNull(capture, "capture");
-            this.capture = capture;
-            return this;
-        }
-
         @Override
         public boolean equals(java.lang.Object o) {
             if (this == o) {
@@ -1251,8 +1204,7 @@ public class Transfer extends MoovError {
                 Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
                 Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
                 Utils.enhancedDeepEquals(this.invoiceID, other.invoiceID) &&
-                Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails) &&
-                Utils.enhancedDeepEquals(this.capture, other.capture);
+                Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
         }
         
         @Override
@@ -1267,7 +1219,7 @@ public class Transfer extends MoovError {
                 refunds, disputedAmount, disputes,
                 sweepID, scheduleID, occurrenceID,
                 paymentLinkCode, foreignID, lineItems,
-                invoiceID, amountDetails, capture);
+                invoiceID, amountDetails);
         }
         
         @Override
@@ -1301,8 +1253,7 @@ public class Transfer extends MoovError {
                     "foreignID", foreignID,
                     "lineItems", lineItems,
                     "invoiceID", invoiceID,
-                    "amountDetails", amountDetails,
-                    "capture", capture);
+                    "amountDetails", amountDetails);
         }
 
         @SuppressWarnings("UnusedReturnValue")
@@ -1365,8 +1316,6 @@ public class Transfer extends MoovError {
             private Optional<String> invoiceID = Optional.empty();
 
             private Optional<? extends TransferAmountDetails> amountDetails = Optional.empty();
-
-            private Optional<? extends TransferCapture> capture = Optional.empty();
 
             private Builder() {
               // force use of static builder() method
@@ -1792,25 +1741,6 @@ public class Transfer extends MoovError {
                 return this;
             }
 
-
-            /**
-             * The card authorization and capture IDs associated with a transfer.
-             */
-            public Builder capture(TransferCapture capture) {
-                Utils.checkNotNull(capture, "capture");
-                this.capture = Optional.ofNullable(capture);
-                return this;
-            }
-
-            /**
-             * The card authorization and capture IDs associated with a transfer.
-             */
-            public Builder capture(Optional<? extends TransferCapture> capture) {
-                Utils.checkNotNull(capture, "capture");
-                this.capture = capture;
-                return this;
-            }
-
             public Data build() {
 
                 return new Data(
@@ -1823,7 +1753,7 @@ public class Transfer extends MoovError {
                     refunds, disputedAmount, disputes,
                     sweepID, scheduleID, occurrenceID,
                     paymentLinkCode, foreignID, lineItems,
-                    invoiceID, amountDetails, capture);
+                    invoiceID, amountDetails);
             }
 
         }

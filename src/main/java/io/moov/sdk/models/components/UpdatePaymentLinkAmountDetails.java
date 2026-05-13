@@ -23,25 +23,15 @@ public class UpdatePaymentLinkAmountDetails {
     @JsonProperty("tax")
     private Optional<? extends AmountDecimalUpdate> tax;
 
-    /**
-     * The amount of surcharge applied to the payment link.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("surcharge")
-    private Optional<? extends AmountDecimalUpdate> surcharge;
-
     @JsonCreator
     public UpdatePaymentLinkAmountDetails(
-            @JsonProperty("tax") Optional<? extends AmountDecimalUpdate> tax,
-            @JsonProperty("surcharge") Optional<? extends AmountDecimalUpdate> surcharge) {
+            @JsonProperty("tax") Optional<? extends AmountDecimalUpdate> tax) {
         Utils.checkNotNull(tax, "tax");
-        Utils.checkNotNull(surcharge, "surcharge");
         this.tax = tax;
-        this.surcharge = surcharge;
     }
     
     public UpdatePaymentLinkAmountDetails() {
-        this(Optional.empty(), Optional.empty());
+        this(Optional.empty());
     }
 
     /**
@@ -51,15 +41,6 @@ public class UpdatePaymentLinkAmountDetails {
     @JsonIgnore
     public Optional<AmountDecimalUpdate> tax() {
         return (Optional<AmountDecimalUpdate>) tax;
-    }
-
-    /**
-     * The amount of surcharge applied to the payment link.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<AmountDecimalUpdate> surcharge() {
-        return (Optional<AmountDecimalUpdate>) surcharge;
     }
 
     public static Builder builder() {
@@ -86,25 +67,6 @@ public class UpdatePaymentLinkAmountDetails {
         return this;
     }
 
-    /**
-     * The amount of surcharge applied to the payment link.
-     */
-    public UpdatePaymentLinkAmountDetails withSurcharge(AmountDecimalUpdate surcharge) {
-        Utils.checkNotNull(surcharge, "surcharge");
-        this.surcharge = Optional.ofNullable(surcharge);
-        return this;
-    }
-
-
-    /**
-     * The amount of surcharge applied to the payment link.
-     */
-    public UpdatePaymentLinkAmountDetails withSurcharge(Optional<? extends AmountDecimalUpdate> surcharge) {
-        Utils.checkNotNull(surcharge, "surcharge");
-        this.surcharge = surcharge;
-        return this;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -115,29 +77,25 @@ public class UpdatePaymentLinkAmountDetails {
         }
         UpdatePaymentLinkAmountDetails other = (UpdatePaymentLinkAmountDetails) o;
         return 
-            Utils.enhancedDeepEquals(this.tax, other.tax) &&
-            Utils.enhancedDeepEquals(this.surcharge, other.surcharge);
+            Utils.enhancedDeepEquals(this.tax, other.tax);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            tax, surcharge);
+            tax);
     }
     
     @Override
     public String toString() {
         return Utils.toString(UpdatePaymentLinkAmountDetails.class,
-                "tax", tax,
-                "surcharge", surcharge);
+                "tax", tax);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
         private Optional<? extends AmountDecimalUpdate> tax = Optional.empty();
-
-        private Optional<? extends AmountDecimalUpdate> surcharge = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -162,29 +120,10 @@ public class UpdatePaymentLinkAmountDetails {
             return this;
         }
 
-
-        /**
-         * The amount of surcharge applied to the payment link.
-         */
-        public Builder surcharge(AmountDecimalUpdate surcharge) {
-            Utils.checkNotNull(surcharge, "surcharge");
-            this.surcharge = Optional.ofNullable(surcharge);
-            return this;
-        }
-
-        /**
-         * The amount of surcharge applied to the payment link.
-         */
-        public Builder surcharge(Optional<? extends AmountDecimalUpdate> surcharge) {
-            Utils.checkNotNull(surcharge, "surcharge");
-            this.surcharge = surcharge;
-            return this;
-        }
-
         public UpdatePaymentLinkAmountDetails build() {
 
             return new UpdatePaymentLinkAmountDetails(
-                tax, surcharge);
+                tax);
         }
 
     }

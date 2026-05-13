@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.models.components.Amount;
-import io.moov.sdk.models.components.RefundAmountDetails;
 import io.moov.sdk.models.components.RefundCardDetails;
 import io.moov.sdk.models.components.RefundStatus;
 import io.moov.sdk.utils.Utils;
@@ -87,11 +86,6 @@ public class CardAcquiringRefund extends MoovError {
     }
 
     @Deprecated
-    public Optional<RefundAmountDetails> amountDetails() {
-        return data().flatMap(Data::amountDetails);
-    }
-
-    @Deprecated
     public Optional<RefundCardDetails> cardDetails() {
         return data().flatMap(Data::cardDetails);
     }
@@ -136,11 +130,6 @@ public class CardAcquiringRefund extends MoovError {
 
 
         @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("amountDetails")
-        private Optional<? extends RefundAmountDetails> amountDetails;
-
-
-        @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("cardDetails")
         private Optional<? extends RefundCardDetails> cardDetails;
 
@@ -151,21 +140,18 @@ public class CardAcquiringRefund extends MoovError {
                 @JsonProperty("updatedOn") OffsetDateTime updatedOn,
                 @JsonProperty("status") RefundStatus status,
                 @JsonProperty("amount") Amount amount,
-                @JsonProperty("amountDetails") Optional<? extends RefundAmountDetails> amountDetails,
                 @JsonProperty("cardDetails") Optional<? extends RefundCardDetails> cardDetails) {
             Utils.checkNotNull(refundID, "refundID");
             Utils.checkNotNull(createdOn, "createdOn");
             Utils.checkNotNull(updatedOn, "updatedOn");
             Utils.checkNotNull(status, "status");
             Utils.checkNotNull(amount, "amount");
-            Utils.checkNotNull(amountDetails, "amountDetails");
             Utils.checkNotNull(cardDetails, "cardDetails");
             this.refundID = refundID;
             this.createdOn = createdOn;
             this.updatedOn = updatedOn;
             this.status = status;
             this.amount = amount;
-            this.amountDetails = amountDetails;
             this.cardDetails = cardDetails;
         }
         
@@ -176,8 +162,7 @@ public class CardAcquiringRefund extends MoovError {
                 RefundStatus status,
                 Amount amount) {
             this(refundID, createdOn, updatedOn,
-                status, amount, Optional.empty(),
-                Optional.empty());
+                status, amount, Optional.empty());
         }
 
         /**
@@ -206,12 +191,6 @@ public class CardAcquiringRefund extends MoovError {
         @JsonIgnore
         public Amount amount() {
             return amount;
-        }
-
-        @SuppressWarnings("unchecked")
-        @JsonIgnore
-        public Optional<RefundAmountDetails> amountDetails() {
-            return (Optional<RefundAmountDetails>) amountDetails;
         }
 
         @SuppressWarnings("unchecked")
@@ -258,19 +237,6 @@ public class CardAcquiringRefund extends MoovError {
             return this;
         }
 
-        public Data withAmountDetails(RefundAmountDetails amountDetails) {
-            Utils.checkNotNull(amountDetails, "amountDetails");
-            this.amountDetails = Optional.ofNullable(amountDetails);
-            return this;
-        }
-
-
-        public Data withAmountDetails(Optional<? extends RefundAmountDetails> amountDetails) {
-            Utils.checkNotNull(amountDetails, "amountDetails");
-            this.amountDetails = amountDetails;
-            return this;
-        }
-
         public Data withCardDetails(RefundCardDetails cardDetails) {
             Utils.checkNotNull(cardDetails, "cardDetails");
             this.cardDetails = Optional.ofNullable(cardDetails);
@@ -299,7 +265,6 @@ public class CardAcquiringRefund extends MoovError {
                 Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
                 Utils.enhancedDeepEquals(this.status, other.status) &&
                 Utils.enhancedDeepEquals(this.amount, other.amount) &&
-                Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails) &&
                 Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails);
         }
         
@@ -307,8 +272,7 @@ public class CardAcquiringRefund extends MoovError {
         public int hashCode() {
             return Utils.enhancedHash(
                 refundID, createdOn, updatedOn,
-                status, amount, amountDetails,
-                cardDetails);
+                status, amount, cardDetails);
         }
         
         @Override
@@ -319,7 +283,6 @@ public class CardAcquiringRefund extends MoovError {
                     "updatedOn", updatedOn,
                     "status", status,
                     "amount", amount,
-                    "amountDetails", amountDetails,
                     "cardDetails", cardDetails);
         }
 
@@ -335,8 +298,6 @@ public class CardAcquiringRefund extends MoovError {
             private RefundStatus status;
 
             private Amount amount;
-
-            private Optional<? extends RefundAmountDetails> amountDetails = Optional.empty();
 
             private Optional<? extends RefundCardDetails> cardDetails = Optional.empty();
 
@@ -383,19 +344,6 @@ public class CardAcquiringRefund extends MoovError {
             }
 
 
-            public Builder amountDetails(RefundAmountDetails amountDetails) {
-                Utils.checkNotNull(amountDetails, "amountDetails");
-                this.amountDetails = Optional.ofNullable(amountDetails);
-                return this;
-            }
-
-            public Builder amountDetails(Optional<? extends RefundAmountDetails> amountDetails) {
-                Utils.checkNotNull(amountDetails, "amountDetails");
-                this.amountDetails = amountDetails;
-                return this;
-            }
-
-
             public Builder cardDetails(RefundCardDetails cardDetails) {
                 Utils.checkNotNull(cardDetails, "cardDetails");
                 this.cardDetails = Optional.ofNullable(cardDetails);
@@ -412,8 +360,7 @@ public class CardAcquiringRefund extends MoovError {
 
                 return new Data(
                     refundID, createdOn, updatedOn,
-                    status, amount, amountDetails,
-                    cardDetails);
+                    status, amount, cardDetails);
             }
 
         }

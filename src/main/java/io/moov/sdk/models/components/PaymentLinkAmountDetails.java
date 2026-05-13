@@ -23,25 +23,15 @@ public class PaymentLinkAmountDetails {
     @JsonProperty("tax")
     private Optional<? extends AmountDecimal> tax;
 
-    /**
-     * The amount of surcharge applied to the payment link.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("surcharge")
-    private Optional<? extends AmountDecimal> surcharge;
-
     @JsonCreator
     public PaymentLinkAmountDetails(
-            @JsonProperty("tax") Optional<? extends AmountDecimal> tax,
-            @JsonProperty("surcharge") Optional<? extends AmountDecimal> surcharge) {
+            @JsonProperty("tax") Optional<? extends AmountDecimal> tax) {
         Utils.checkNotNull(tax, "tax");
-        Utils.checkNotNull(surcharge, "surcharge");
         this.tax = tax;
-        this.surcharge = surcharge;
     }
     
     public PaymentLinkAmountDetails() {
-        this(Optional.empty(), Optional.empty());
+        this(Optional.empty());
     }
 
     /**
@@ -51,15 +41,6 @@ public class PaymentLinkAmountDetails {
     @JsonIgnore
     public Optional<AmountDecimal> tax() {
         return (Optional<AmountDecimal>) tax;
-    }
-
-    /**
-     * The amount of surcharge applied to the payment link.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<AmountDecimal> surcharge() {
-        return (Optional<AmountDecimal>) surcharge;
     }
 
     public static Builder builder() {
@@ -86,25 +67,6 @@ public class PaymentLinkAmountDetails {
         return this;
     }
 
-    /**
-     * The amount of surcharge applied to the payment link.
-     */
-    public PaymentLinkAmountDetails withSurcharge(AmountDecimal surcharge) {
-        Utils.checkNotNull(surcharge, "surcharge");
-        this.surcharge = Optional.ofNullable(surcharge);
-        return this;
-    }
-
-
-    /**
-     * The amount of surcharge applied to the payment link.
-     */
-    public PaymentLinkAmountDetails withSurcharge(Optional<? extends AmountDecimal> surcharge) {
-        Utils.checkNotNull(surcharge, "surcharge");
-        this.surcharge = surcharge;
-        return this;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -115,29 +77,25 @@ public class PaymentLinkAmountDetails {
         }
         PaymentLinkAmountDetails other = (PaymentLinkAmountDetails) o;
         return 
-            Utils.enhancedDeepEquals(this.tax, other.tax) &&
-            Utils.enhancedDeepEquals(this.surcharge, other.surcharge);
+            Utils.enhancedDeepEquals(this.tax, other.tax);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            tax, surcharge);
+            tax);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PaymentLinkAmountDetails.class,
-                "tax", tax,
-                "surcharge", surcharge);
+                "tax", tax);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
         private Optional<? extends AmountDecimal> tax = Optional.empty();
-
-        private Optional<? extends AmountDecimal> surcharge = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -162,29 +120,10 @@ public class PaymentLinkAmountDetails {
             return this;
         }
 
-
-        /**
-         * The amount of surcharge applied to the payment link.
-         */
-        public Builder surcharge(AmountDecimal surcharge) {
-            Utils.checkNotNull(surcharge, "surcharge");
-            this.surcharge = Optional.ofNullable(surcharge);
-            return this;
-        }
-
-        /**
-         * The amount of surcharge applied to the payment link.
-         */
-        public Builder surcharge(Optional<? extends AmountDecimal> surcharge) {
-            Utils.checkNotNull(surcharge, "surcharge");
-            this.surcharge = surcharge;
-            return this;
-        }
-
         public PaymentLinkAmountDetails build() {
 
             return new PaymentLinkAmountDetails(
-                tax, surcharge);
+                tax);
         }
 
     }

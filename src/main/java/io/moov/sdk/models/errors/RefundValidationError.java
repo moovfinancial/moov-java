@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.moov.sdk.models.components.RefundAmountDetailsValidationError;
 import io.moov.sdk.utils.Utils;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
@@ -59,11 +58,6 @@ public class RefundValidationError extends MoovError {
         return data().flatMap(Data::amount);
     }
 
-    @Deprecated
-    public Optional<RefundAmountDetailsValidationError> amountDetails() {
-        return data().flatMap(Data::amountDetails);
-    }
-
     /**
      * Used for generic errors when invalid request data isn't attributed to a single request field.
      */
@@ -89,11 +83,6 @@ public class RefundValidationError extends MoovError {
         @JsonProperty("amount")
         private Optional<String> amount;
 
-
-        @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("amountDetails")
-        private Optional<? extends RefundAmountDetailsValidationError> amountDetails;
-
         /**
          * Used for generic errors when invalid request data isn't attributed to a single request field.
          */
@@ -104,29 +93,20 @@ public class RefundValidationError extends MoovError {
         @JsonCreator
         public Data(
                 @JsonProperty("amount") Optional<String> amount,
-                @JsonProperty("amountDetails") Optional<? extends RefundAmountDetailsValidationError> amountDetails,
                 @JsonProperty("error") Optional<String> error) {
             Utils.checkNotNull(amount, "amount");
-            Utils.checkNotNull(amountDetails, "amountDetails");
             Utils.checkNotNull(error, "error");
             this.amount = amount;
-            this.amountDetails = amountDetails;
             this.error = error;
         }
         
         public Data() {
-            this(Optional.empty(), Optional.empty(), Optional.empty());
+            this(Optional.empty(), Optional.empty());
         }
 
         @JsonIgnore
         public Optional<String> amount() {
             return amount;
-        }
-
-        @SuppressWarnings("unchecked")
-        @JsonIgnore
-        public Optional<RefundAmountDetailsValidationError> amountDetails() {
-            return (Optional<RefundAmountDetailsValidationError>) amountDetails;
         }
 
         /**
@@ -152,19 +132,6 @@ public class RefundValidationError extends MoovError {
         public Data withAmount(Optional<String> amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
-            return this;
-        }
-
-        public Data withAmountDetails(RefundAmountDetailsValidationError amountDetails) {
-            Utils.checkNotNull(amountDetails, "amountDetails");
-            this.amountDetails = Optional.ofNullable(amountDetails);
-            return this;
-        }
-
-
-        public Data withAmountDetails(Optional<? extends RefundAmountDetailsValidationError> amountDetails) {
-            Utils.checkNotNull(amountDetails, "amountDetails");
-            this.amountDetails = amountDetails;
             return this;
         }
 
@@ -198,21 +165,19 @@ public class RefundValidationError extends MoovError {
             Data other = (Data) o;
             return 
                 Utils.enhancedDeepEquals(this.amount, other.amount) &&
-                Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails) &&
                 Utils.enhancedDeepEquals(this.error, other.error);
         }
         
         @Override
         public int hashCode() {
             return Utils.enhancedHash(
-                amount, amountDetails, error);
+                amount, error);
         }
         
         @Override
         public String toString() {
             return Utils.toString(Data.class,
                     "amount", amount,
-                    "amountDetails", amountDetails,
                     "error", error);
         }
 
@@ -220,8 +185,6 @@ public class RefundValidationError extends MoovError {
         public final static class Builder {
 
             private Optional<String> amount = Optional.empty();
-
-            private Optional<? extends RefundAmountDetailsValidationError> amountDetails = Optional.empty();
 
             private Optional<String> error = Optional.empty();
 
@@ -239,19 +202,6 @@ public class RefundValidationError extends MoovError {
             public Builder amount(Optional<String> amount) {
                 Utils.checkNotNull(amount, "amount");
                 this.amount = amount;
-                return this;
-            }
-
-
-            public Builder amountDetails(RefundAmountDetailsValidationError amountDetails) {
-                Utils.checkNotNull(amountDetails, "amountDetails");
-                this.amountDetails = Optional.ofNullable(amountDetails);
-                return this;
-            }
-
-            public Builder amountDetails(Optional<? extends RefundAmountDetailsValidationError> amountDetails) {
-                Utils.checkNotNull(amountDetails, "amountDetails");
-                this.amountDetails = amountDetails;
                 return this;
             }
 
@@ -277,7 +227,7 @@ public class RefundValidationError extends MoovError {
             public Data build() {
 
                 return new Data(
-                    amount, amountDetails, error);
+                    amount, error);
             }
 
         }

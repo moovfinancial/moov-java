@@ -5,15 +5,11 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
-import java.util.Optional;
 
 /**
  * AsyncCreatedRefund
@@ -33,33 +29,17 @@ public class AsyncCreatedRefund {
     @JsonProperty("amount")
     private Amount amount;
 
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("amountDetails")
-    private Optional<? extends RefundAmountDetails> amountDetails;
-
     @JsonCreator
     public AsyncCreatedRefund(
             @JsonProperty("refundID") String refundID,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
-            @JsonProperty("amount") Amount amount,
-            @JsonProperty("amountDetails") Optional<? extends RefundAmountDetails> amountDetails) {
+            @JsonProperty("amount") Amount amount) {
         Utils.checkNotNull(refundID, "refundID");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(amount, "amount");
-        Utils.checkNotNull(amountDetails, "amountDetails");
         this.refundID = refundID;
         this.createdOn = createdOn;
         this.amount = amount;
-        this.amountDetails = amountDetails;
-    }
-    
-    public AsyncCreatedRefund(
-            String refundID,
-            OffsetDateTime createdOn,
-            Amount amount) {
-        this(refundID, createdOn, amount,
-            Optional.empty());
     }
 
     @JsonIgnore
@@ -75,12 +55,6 @@ public class AsyncCreatedRefund {
     @JsonIgnore
     public Amount amount() {
         return amount;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<RefundAmountDetails> amountDetails() {
-        return (Optional<RefundAmountDetails>) amountDetails;
     }
 
     public static Builder builder() {
@@ -106,19 +80,6 @@ public class AsyncCreatedRefund {
         return this;
     }
 
-    public AsyncCreatedRefund withAmountDetails(RefundAmountDetails amountDetails) {
-        Utils.checkNotNull(amountDetails, "amountDetails");
-        this.amountDetails = Optional.ofNullable(amountDetails);
-        return this;
-    }
-
-
-    public AsyncCreatedRefund withAmountDetails(Optional<? extends RefundAmountDetails> amountDetails) {
-        Utils.checkNotNull(amountDetails, "amountDetails");
-        this.amountDetails = amountDetails;
-        return this;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -131,15 +92,13 @@ public class AsyncCreatedRefund {
         return 
             Utils.enhancedDeepEquals(this.refundID, other.refundID) &&
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
-            Utils.enhancedDeepEquals(this.amount, other.amount) &&
-            Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
+            Utils.enhancedDeepEquals(this.amount, other.amount);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            refundID, createdOn, amount,
-            amountDetails);
+            refundID, createdOn, amount);
     }
     
     @Override
@@ -147,8 +106,7 @@ public class AsyncCreatedRefund {
         return Utils.toString(AsyncCreatedRefund.class,
                 "refundID", refundID,
                 "createdOn", createdOn,
-                "amount", amount,
-                "amountDetails", amountDetails);
+                "amount", amount);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -159,8 +117,6 @@ public class AsyncCreatedRefund {
         private OffsetDateTime createdOn;
 
         private Amount amount;
-
-        private Optional<? extends RefundAmountDetails> amountDetails = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -187,24 +143,10 @@ public class AsyncCreatedRefund {
             return this;
         }
 
-
-        public Builder amountDetails(RefundAmountDetails amountDetails) {
-            Utils.checkNotNull(amountDetails, "amountDetails");
-            this.amountDetails = Optional.ofNullable(amountDetails);
-            return this;
-        }
-
-        public Builder amountDetails(Optional<? extends RefundAmountDetails> amountDetails) {
-            Utils.checkNotNull(amountDetails, "amountDetails");
-            this.amountDetails = amountDetails;
-            return this;
-        }
-
         public AsyncCreatedRefund build() {
 
             return new AsyncCreatedRefund(
-                refundID, createdOn, amount,
-                amountDetails);
+                refundID, createdOn, amount);
         }
 
     }

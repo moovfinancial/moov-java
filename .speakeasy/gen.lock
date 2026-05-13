@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 5f3b5c0b7510a416e48c1c89c5305868
+  docChecksum: 13275c08001a47067667c7174af9e05a
   docVersion: v2025.04.00
-  speakeasyVersion: 1.762.0
-  generationVersion: 2.882.0
-  releaseVersion: 25.5.6
-  configChecksum: 28384c968c06c6040ee7f4e07feaa8c1
+  speakeasyVersion: 1.763.0
+  generationVersion: 2.884.0
+  releaseVersion: 25.5.7
+  configChecksum: effbf3610370c033b45a040d9e8c3e0b
   repoURL: https://github.com/moovfinancial/moov-java.git
   installationURL: https://github.com/moovfinancial/moov-java
   published: true
 persistentEdits:
-  generation_id: 7cebf293-1b5a-42ef-ad62-3e4cf6d6633e
-  pristine_commit_hash: 7d95e34cb853d65e603fe077d2b0cc881b5bc1ee
-  pristine_tree_hash: dd39ebece9dfac673486280aac5b825a172d09ee
+  generation_id: 14185b1e-9565-4b71-bc0e-57ffcebece83
+  pristine_commit_hash: 05e921a43c5f98d09008f5316e5578b77d469f98
+  pristine_tree_hash: 1a1aeaf344ee3fd07aad25b19010ec33aeb90a38
 features:
   java:
     acceptHeaders: 2.81.2
@@ -2169,8 +2169,8 @@ trackedFiles:
     pristine_git_object: 1a95c44289817ef6806b370da7800376ff3f6c5c
   docs/models/components/WebhookDataBankAccountDeleted.md:
     id: 84ea10c479b2
-    last_write_checksum: sha1:7125258e516edd417d479b140986bf9070cff1be
-    pristine_git_object: 4455a6335882bfa6d409727cfe4a84102ce1b0b1
+    last_write_checksum: sha1:a905e842dc1387da6d14c704cdf1058b13ef71fe
+    pristine_git_object: 846f3033adabe82303897a05443f0f85396efb4d
   docs/models/components/WebhookDataBankAccountUpdated.md:
     id: c8de3eaa10dc
     last_write_checksum: sha1:e8c4d8b6ef2eda562f587f010ebfdd9a4af8a921
@@ -3945,8 +3945,8 @@ trackedFiles:
     pristine_git_object: 9b40f611aaace5afe9cf7cadc73ff2301fe51e80
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:a0dd1b51ac83af239ec19551970d69718c61d152
-    pristine_git_object: 3e3a6d611c29ce826281509448c317c6ff795f3c
+    last_write_checksum: sha1:3769233d65ec14bf9336e811b88eb6cf92c3c460
+    pristine_git_object: 02d80cc85f1d084602733849572fcc86ab9f6630
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4117,8 +4117,8 @@ trackedFiles:
     pristine_git_object: 64047d75ebffa5dbfe6b7461ed4d624f01890a51
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:cbe0bb1da16880b1984bbd229275ea09532d3b15
-    pristine_git_object: 5f3ed50d8e2cef595d69b0b8d3c8d404e3530d78
+    last_write_checksum: sha1:13920ef33e3fb6877ca5cf1d0911e4825824d9f6
+    pristine_git_object: f0cf14a2bfeb14f1e5e8efb6ea96a06acafe2ee8
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:bf0300e770bb968bfc8b5ee2b8d6f05e37e9bb67
@@ -6297,8 +6297,8 @@ trackedFiles:
     pristine_git_object: 8670256f437b86c82969a6850a1e5513ec788c90
   src/main/java/io/moov/sdk/models/components/WebhookDataBankAccountDeleted.java:
     id: 00c1e74ebd31
-    last_write_checksum: sha1:10ace185d8bd4a2614f2a45db4fc56836ac9a50c
-    pristine_git_object: d53ae72e82464eb1b5cc84f408b955e7d0f7b7d0
+    last_write_checksum: sha1:1256d26565fab2ddbc7f3947a658acc63742fded
+    pristine_git_object: c916bb23a23e83fa3871a7fe57a111341e2765b4
   src/main/java/io/moov/sdk/models/components/WebhookDataBankAccountUpdated.java:
     id: 8ec5a34c12fc
     last_write_checksum: sha1:8ead3337861f66e49d7daa8c4ccf4b07faa5cb8b

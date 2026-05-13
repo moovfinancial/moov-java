@@ -75,11 +75,6 @@ public class CreatePaymentLinkError extends MoovError {
     }
 
     @Deprecated
-    public Optional<AmountValidationError> salesTaxAmount() {
-        return data().flatMap(Data::salesTaxAmount);
-    }
-
-    @Deprecated
     public Optional<String> maxUses() {
         return data().flatMap(Data::maxUses);
     }
@@ -143,11 +138,6 @@ public class CreatePaymentLinkError extends MoovError {
 
 
         @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("salesTaxAmount")
-        private Optional<? extends AmountValidationError> salesTaxAmount;
-
-
-        @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("maxUses")
         private Optional<String> maxUses;
 
@@ -186,7 +176,6 @@ public class CreatePaymentLinkError extends MoovError {
                 @JsonProperty("partnerAccountID") Optional<String> partnerAccountID,
                 @JsonProperty("merchantPaymentMethodID") Optional<String> merchantPaymentMethodID,
                 @JsonProperty("amount") Optional<? extends AmountValidationError> amount,
-                @JsonProperty("salesTaxAmount") Optional<? extends AmountValidationError> salesTaxAmount,
                 @JsonProperty("maxUses") Optional<String> maxUses,
                 @JsonProperty("expiresOn") Optional<String> expiresOn,
                 @JsonProperty("display") Optional<? extends DisplayOptionsError> display,
@@ -197,7 +186,6 @@ public class CreatePaymentLinkError extends MoovError {
             Utils.checkNotNull(partnerAccountID, "partnerAccountID");
             Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
             Utils.checkNotNull(amount, "amount");
-            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             Utils.checkNotNull(maxUses, "maxUses");
             Utils.checkNotNull(expiresOn, "expiresOn");
             Utils.checkNotNull(display, "display");
@@ -208,7 +196,6 @@ public class CreatePaymentLinkError extends MoovError {
             this.partnerAccountID = partnerAccountID;
             this.merchantPaymentMethodID = merchantPaymentMethodID;
             this.amount = amount;
-            this.salesTaxAmount = salesTaxAmount;
             this.maxUses = maxUses;
             this.expiresOn = expiresOn;
             this.display = display;
@@ -222,7 +209,7 @@ public class CreatePaymentLinkError extends MoovError {
             this(Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty(), Optional.empty());
+                Optional.empty());
         }
 
         @JsonIgnore
@@ -239,12 +226,6 @@ public class CreatePaymentLinkError extends MoovError {
         @JsonIgnore
         public Optional<AmountValidationError> amount() {
             return (Optional<AmountValidationError>) amount;
-        }
-
-        @SuppressWarnings("unchecked")
-        @JsonIgnore
-        public Optional<AmountValidationError> salesTaxAmount() {
-            return (Optional<AmountValidationError>) salesTaxAmount;
         }
 
         @JsonIgnore
@@ -328,19 +309,6 @@ public class CreatePaymentLinkError extends MoovError {
         public Data withAmount(Optional<? extends AmountValidationError> amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
-            return this;
-        }
-
-        public Data withSalesTaxAmount(AmountValidationError salesTaxAmount) {
-            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-            this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
-            return this;
-        }
-
-
-        public Data withSalesTaxAmount(Optional<? extends AmountValidationError> salesTaxAmount) {
-            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-            this.salesTaxAmount = salesTaxAmount;
             return this;
         }
 
@@ -448,7 +416,6 @@ public class CreatePaymentLinkError extends MoovError {
                 Utils.enhancedDeepEquals(this.partnerAccountID, other.partnerAccountID) &&
                 Utils.enhancedDeepEquals(this.merchantPaymentMethodID, other.merchantPaymentMethodID) &&
                 Utils.enhancedDeepEquals(this.amount, other.amount) &&
-                Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
                 Utils.enhancedDeepEquals(this.maxUses, other.maxUses) &&
                 Utils.enhancedDeepEquals(this.expiresOn, other.expiresOn) &&
                 Utils.enhancedDeepEquals(this.display, other.display) &&
@@ -462,9 +429,9 @@ public class CreatePaymentLinkError extends MoovError {
         public int hashCode() {
             return Utils.enhancedHash(
                 partnerAccountID, merchantPaymentMethodID, amount,
-                salesTaxAmount, maxUses, expiresOn,
-                display, payment, payout,
-                lineItems, amountDetails);
+                maxUses, expiresOn, display,
+                payment, payout, lineItems,
+                amountDetails);
         }
         
         @Override
@@ -473,7 +440,6 @@ public class CreatePaymentLinkError extends MoovError {
                     "partnerAccountID", partnerAccountID,
                     "merchantPaymentMethodID", merchantPaymentMethodID,
                     "amount", amount,
-                    "salesTaxAmount", salesTaxAmount,
                     "maxUses", maxUses,
                     "expiresOn", expiresOn,
                     "display", display,
@@ -491,8 +457,6 @@ public class CreatePaymentLinkError extends MoovError {
             private Optional<String> merchantPaymentMethodID = Optional.empty();
 
             private Optional<? extends AmountValidationError> amount = Optional.empty();
-
-            private Optional<? extends AmountValidationError> salesTaxAmount = Optional.empty();
 
             private Optional<String> maxUses = Optional.empty();
 
@@ -548,19 +512,6 @@ public class CreatePaymentLinkError extends MoovError {
             public Builder amount(Optional<? extends AmountValidationError> amount) {
                 Utils.checkNotNull(amount, "amount");
                 this.amount = amount;
-                return this;
-            }
-
-
-            public Builder salesTaxAmount(AmountValidationError salesTaxAmount) {
-                Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-                this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
-                return this;
-            }
-
-            public Builder salesTaxAmount(Optional<? extends AmountValidationError> salesTaxAmount) {
-                Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-                this.salesTaxAmount = salesTaxAmount;
                 return this;
             }
 
@@ -659,9 +610,9 @@ public class CreatePaymentLinkError extends MoovError {
 
                 return new Data(
                     partnerAccountID, merchantPaymentMethodID, amount,
-                    salesTaxAmount, maxUses, expiresOn,
-                    display, payment, payout,
-                    lineItems, amountDetails);
+                    maxUses, expiresOn, display,
+                    payment, payout, lineItems,
+                    amountDetails);
             }
 
         }

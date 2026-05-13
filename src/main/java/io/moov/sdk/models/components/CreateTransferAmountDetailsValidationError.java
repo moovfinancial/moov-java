@@ -22,26 +22,39 @@ public class CreateTransferAmountDetailsValidationError {
 
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("tax")
+    private Optional<String> tax;
+
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("surcharge")
     private Optional<String> surcharge;
 
     @JsonCreator
     public CreateTransferAmountDetailsValidationError(
             @JsonProperty("tip") Optional<String> tip,
+            @JsonProperty("tax") Optional<String> tax,
             @JsonProperty("surcharge") Optional<String> surcharge) {
         Utils.checkNotNull(tip, "tip");
+        Utils.checkNotNull(tax, "tax");
         Utils.checkNotNull(surcharge, "surcharge");
         this.tip = tip;
+        this.tax = tax;
         this.surcharge = surcharge;
     }
     
     public CreateTransferAmountDetailsValidationError() {
-        this(Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
     public Optional<String> tip() {
         return tip;
+    }
+
+    @JsonIgnore
+    public Optional<String> tax() {
+        return tax;
     }
 
     @JsonIgnore
@@ -64,6 +77,19 @@ public class CreateTransferAmountDetailsValidationError {
     public CreateTransferAmountDetailsValidationError withTip(Optional<String> tip) {
         Utils.checkNotNull(tip, "tip");
         this.tip = tip;
+        return this;
+    }
+
+    public CreateTransferAmountDetailsValidationError withTax(String tax) {
+        Utils.checkNotNull(tax, "tax");
+        this.tax = Optional.ofNullable(tax);
+        return this;
+    }
+
+
+    public CreateTransferAmountDetailsValidationError withTax(Optional<String> tax) {
+        Utils.checkNotNull(tax, "tax");
+        this.tax = tax;
         return this;
     }
 
@@ -91,19 +117,21 @@ public class CreateTransferAmountDetailsValidationError {
         CreateTransferAmountDetailsValidationError other = (CreateTransferAmountDetailsValidationError) o;
         return 
             Utils.enhancedDeepEquals(this.tip, other.tip) &&
+            Utils.enhancedDeepEquals(this.tax, other.tax) &&
             Utils.enhancedDeepEquals(this.surcharge, other.surcharge);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            tip, surcharge);
+            tip, tax, surcharge);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CreateTransferAmountDetailsValidationError.class,
                 "tip", tip,
+                "tax", tax,
                 "surcharge", surcharge);
     }
 
@@ -111,6 +139,8 @@ public class CreateTransferAmountDetailsValidationError {
     public final static class Builder {
 
         private Optional<String> tip = Optional.empty();
+
+        private Optional<String> tax = Optional.empty();
 
         private Optional<String> surcharge = Optional.empty();
 
@@ -132,6 +162,19 @@ public class CreateTransferAmountDetailsValidationError {
         }
 
 
+        public Builder tax(String tax) {
+            Utils.checkNotNull(tax, "tax");
+            this.tax = Optional.ofNullable(tax);
+            return this;
+        }
+
+        public Builder tax(Optional<String> tax) {
+            Utils.checkNotNull(tax, "tax");
+            this.tax = tax;
+            return this;
+        }
+
+
         public Builder surcharge(String surcharge) {
             Utils.checkNotNull(surcharge, "surcharge");
             this.surcharge = Optional.ofNullable(surcharge);
@@ -147,7 +190,7 @@ public class CreateTransferAmountDetailsValidationError {
         public CreateTransferAmountDetailsValidationError build() {
 
             return new CreateTransferAmountDetailsValidationError(
-                tip, surcharge);
+                tip, tax, surcharge);
         }
 
     }

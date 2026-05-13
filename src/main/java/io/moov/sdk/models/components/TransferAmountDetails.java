@@ -24,6 +24,13 @@ public class TransferAmountDetails {
     private Optional<? extends AmountDecimal> tip;
 
     /**
+     * The amount of tax applied to the transfer.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("tax")
+    private Optional<? extends AmountDecimal> tax;
+
+    /**
      * The amount of surcharge applied to the transfer.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -33,15 +40,18 @@ public class TransferAmountDetails {
     @JsonCreator
     public TransferAmountDetails(
             @JsonProperty("tip") Optional<? extends AmountDecimal> tip,
+            @JsonProperty("tax") Optional<? extends AmountDecimal> tax,
             @JsonProperty("surcharge") Optional<? extends AmountDecimal> surcharge) {
         Utils.checkNotNull(tip, "tip");
+        Utils.checkNotNull(tax, "tax");
         Utils.checkNotNull(surcharge, "surcharge");
         this.tip = tip;
+        this.tax = tax;
         this.surcharge = surcharge;
     }
     
     public TransferAmountDetails() {
-        this(Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -51,6 +61,15 @@ public class TransferAmountDetails {
     @JsonIgnore
     public Optional<AmountDecimal> tip() {
         return (Optional<AmountDecimal>) tip;
+    }
+
+    /**
+     * The amount of tax applied to the transfer.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<AmountDecimal> tax() {
+        return (Optional<AmountDecimal>) tax;
     }
 
     /**
@@ -87,6 +106,25 @@ public class TransferAmountDetails {
     }
 
     /**
+     * The amount of tax applied to the transfer.
+     */
+    public TransferAmountDetails withTax(AmountDecimal tax) {
+        Utils.checkNotNull(tax, "tax");
+        this.tax = Optional.ofNullable(tax);
+        return this;
+    }
+
+
+    /**
+     * The amount of tax applied to the transfer.
+     */
+    public TransferAmountDetails withTax(Optional<? extends AmountDecimal> tax) {
+        Utils.checkNotNull(tax, "tax");
+        this.tax = tax;
+        return this;
+    }
+
+    /**
      * The amount of surcharge applied to the transfer.
      */
     public TransferAmountDetails withSurcharge(AmountDecimal surcharge) {
@@ -116,19 +154,21 @@ public class TransferAmountDetails {
         TransferAmountDetails other = (TransferAmountDetails) o;
         return 
             Utils.enhancedDeepEquals(this.tip, other.tip) &&
+            Utils.enhancedDeepEquals(this.tax, other.tax) &&
             Utils.enhancedDeepEquals(this.surcharge, other.surcharge);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            tip, surcharge);
+            tip, tax, surcharge);
     }
     
     @Override
     public String toString() {
         return Utils.toString(TransferAmountDetails.class,
                 "tip", tip,
+                "tax", tax,
                 "surcharge", surcharge);
     }
 
@@ -136,6 +176,8 @@ public class TransferAmountDetails {
     public final static class Builder {
 
         private Optional<? extends AmountDecimal> tip = Optional.empty();
+
+        private Optional<? extends AmountDecimal> tax = Optional.empty();
 
         private Optional<? extends AmountDecimal> surcharge = Optional.empty();
 
@@ -164,6 +206,25 @@ public class TransferAmountDetails {
 
 
         /**
+         * The amount of tax applied to the transfer.
+         */
+        public Builder tax(AmountDecimal tax) {
+            Utils.checkNotNull(tax, "tax");
+            this.tax = Optional.ofNullable(tax);
+            return this;
+        }
+
+        /**
+         * The amount of tax applied to the transfer.
+         */
+        public Builder tax(Optional<? extends AmountDecimal> tax) {
+            Utils.checkNotNull(tax, "tax");
+            this.tax = tax;
+            return this;
+        }
+
+
+        /**
          * The amount of surcharge applied to the transfer.
          */
         public Builder surcharge(AmountDecimal surcharge) {
@@ -184,7 +245,7 @@ public class TransferAmountDetails {
         public TransferAmountDetails build() {
 
             return new TransferAmountDetails(
-                tip, surcharge);
+                tip, tax, surcharge);
         }
 
     }

@@ -65,11 +65,6 @@ public class UpdatePaymentLinkError extends MoovError {
     }
 
     @Deprecated
-    public Optional<AmountValidationError> salesTaxAmount() {
-        return data().flatMap(Data::salesTaxAmount);
-    }
-
-    @Deprecated
     public Optional<String> expiresOn() {
         return data().flatMap(Data::expiresOn);
     }
@@ -118,11 +113,6 @@ public class UpdatePaymentLinkError extends MoovError {
 
 
         @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("salesTaxAmount")
-        private Optional<? extends AmountValidationError> salesTaxAmount;
-
-
-        @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("expiresOn")
         private Optional<String> expiresOn;
 
@@ -154,7 +144,6 @@ public class UpdatePaymentLinkError extends MoovError {
         @JsonCreator
         public Data(
                 @JsonProperty("amount") Optional<? extends AmountValidationError> amount,
-                @JsonProperty("salesTaxAmount") Optional<? extends AmountValidationError> salesTaxAmount,
                 @JsonProperty("expiresOn") Optional<String> expiresOn,
                 @JsonProperty("display") Optional<? extends DisplayOptionsError> display,
                 @JsonProperty("payment") Optional<? extends PaymentDetailsError> payment,
@@ -162,7 +151,6 @@ public class UpdatePaymentLinkError extends MoovError {
                 @JsonProperty("lineItems") Optional<? extends CreatePaymentLinkLineItemsValidationError> lineItems,
                 @JsonProperty("amountDetails") Optional<? extends UpdatePaymentLinkAmountDetailsValidationError> amountDetails) {
             Utils.checkNotNull(amount, "amount");
-            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             Utils.checkNotNull(expiresOn, "expiresOn");
             Utils.checkNotNull(display, "display");
             Utils.checkNotNull(payment, "payment");
@@ -170,7 +158,6 @@ public class UpdatePaymentLinkError extends MoovError {
             Utils.checkNotNull(lineItems, "lineItems");
             Utils.checkNotNull(amountDetails, "amountDetails");
             this.amount = amount;
-            this.salesTaxAmount = salesTaxAmount;
             this.expiresOn = expiresOn;
             this.display = display;
             this.payment = payment;
@@ -182,19 +169,13 @@ public class UpdatePaymentLinkError extends MoovError {
         public Data() {
             this(Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty(), Optional.empty());
+                Optional.empty());
         }
 
         @SuppressWarnings("unchecked")
         @JsonIgnore
         public Optional<AmountValidationError> amount() {
             return (Optional<AmountValidationError>) amount;
-        }
-
-        @SuppressWarnings("unchecked")
-        @JsonIgnore
-        public Optional<AmountValidationError> salesTaxAmount() {
-            return (Optional<AmountValidationError>) salesTaxAmount;
         }
 
         @JsonIgnore
@@ -247,19 +228,6 @@ public class UpdatePaymentLinkError extends MoovError {
         public Data withAmount(Optional<? extends AmountValidationError> amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
-            return this;
-        }
-
-        public Data withSalesTaxAmount(AmountValidationError salesTaxAmount) {
-            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-            this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
-            return this;
-        }
-
-
-        public Data withSalesTaxAmount(Optional<? extends AmountValidationError> salesTaxAmount) {
-            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-            this.salesTaxAmount = salesTaxAmount;
             return this;
         }
 
@@ -352,7 +320,6 @@ public class UpdatePaymentLinkError extends MoovError {
             Data other = (Data) o;
             return 
                 Utils.enhancedDeepEquals(this.amount, other.amount) &&
-                Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
                 Utils.enhancedDeepEquals(this.expiresOn, other.expiresOn) &&
                 Utils.enhancedDeepEquals(this.display, other.display) &&
                 Utils.enhancedDeepEquals(this.payment, other.payment) &&
@@ -364,16 +331,15 @@ public class UpdatePaymentLinkError extends MoovError {
         @Override
         public int hashCode() {
             return Utils.enhancedHash(
-                amount, salesTaxAmount, expiresOn,
-                display, payment, payout,
-                lineItems, amountDetails);
+                amount, expiresOn, display,
+                payment, payout, lineItems,
+                amountDetails);
         }
         
         @Override
         public String toString() {
             return Utils.toString(Data.class,
                     "amount", amount,
-                    "salesTaxAmount", salesTaxAmount,
                     "expiresOn", expiresOn,
                     "display", display,
                     "payment", payment,
@@ -386,8 +352,6 @@ public class UpdatePaymentLinkError extends MoovError {
         public final static class Builder {
 
             private Optional<? extends AmountValidationError> amount = Optional.empty();
-
-            private Optional<? extends AmountValidationError> salesTaxAmount = Optional.empty();
 
             private Optional<String> expiresOn = Optional.empty();
 
@@ -415,19 +379,6 @@ public class UpdatePaymentLinkError extends MoovError {
             public Builder amount(Optional<? extends AmountValidationError> amount) {
                 Utils.checkNotNull(amount, "amount");
                 this.amount = amount;
-                return this;
-            }
-
-
-            public Builder salesTaxAmount(AmountValidationError salesTaxAmount) {
-                Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-                this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
-                return this;
-            }
-
-            public Builder salesTaxAmount(Optional<? extends AmountValidationError> salesTaxAmount) {
-                Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-                this.salesTaxAmount = salesTaxAmount;
                 return this;
             }
 
@@ -512,9 +463,9 @@ public class UpdatePaymentLinkError extends MoovError {
             public Data build() {
 
                 return new Data(
-                    amount, salesTaxAmount, expiresOn,
-                    display, payment, payout,
-                    lineItems, amountDetails);
+                    amount, expiresOn, display,
+                    payment, payout, lineItems,
+                    amountDetails);
             }
 
         }

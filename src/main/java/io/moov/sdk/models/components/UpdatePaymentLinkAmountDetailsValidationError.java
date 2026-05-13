@@ -17,18 +17,31 @@ import java.util.Optional;
 public class UpdatePaymentLinkAmountDetailsValidationError {
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("tax")
+    private Optional<String> tax;
+
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("surcharge")
     private Optional<String> surcharge;
 
     @JsonCreator
     public UpdatePaymentLinkAmountDetailsValidationError(
+            @JsonProperty("tax") Optional<String> tax,
             @JsonProperty("surcharge") Optional<String> surcharge) {
+        Utils.checkNotNull(tax, "tax");
         Utils.checkNotNull(surcharge, "surcharge");
+        this.tax = tax;
         this.surcharge = surcharge;
     }
     
     public UpdatePaymentLinkAmountDetailsValidationError() {
-        this(Optional.empty());
+        this(Optional.empty(), Optional.empty());
+    }
+
+    @JsonIgnore
+    public Optional<String> tax() {
+        return tax;
     }
 
     @JsonIgnore
@@ -40,6 +53,19 @@ public class UpdatePaymentLinkAmountDetailsValidationError {
         return new Builder();
     }
 
+
+    public UpdatePaymentLinkAmountDetailsValidationError withTax(String tax) {
+        Utils.checkNotNull(tax, "tax");
+        this.tax = Optional.ofNullable(tax);
+        return this;
+    }
+
+
+    public UpdatePaymentLinkAmountDetailsValidationError withTax(Optional<String> tax) {
+        Utils.checkNotNull(tax, "tax");
+        this.tax = tax;
+        return this;
+    }
 
     public UpdatePaymentLinkAmountDetailsValidationError withSurcharge(String surcharge) {
         Utils.checkNotNull(surcharge, "surcharge");
@@ -64,28 +90,45 @@ public class UpdatePaymentLinkAmountDetailsValidationError {
         }
         UpdatePaymentLinkAmountDetailsValidationError other = (UpdatePaymentLinkAmountDetailsValidationError) o;
         return 
+            Utils.enhancedDeepEquals(this.tax, other.tax) &&
             Utils.enhancedDeepEquals(this.surcharge, other.surcharge);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            surcharge);
+            tax, surcharge);
     }
     
     @Override
     public String toString() {
         return Utils.toString(UpdatePaymentLinkAmountDetailsValidationError.class,
+                "tax", tax,
                 "surcharge", surcharge);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<String> tax = Optional.empty();
+
         private Optional<String> surcharge = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        public Builder tax(String tax) {
+            Utils.checkNotNull(tax, "tax");
+            this.tax = Optional.ofNullable(tax);
+            return this;
+        }
+
+        public Builder tax(Optional<String> tax) {
+            Utils.checkNotNull(tax, "tax");
+            this.tax = tax;
+            return this;
         }
 
 
@@ -104,7 +147,7 @@ public class UpdatePaymentLinkAmountDetailsValidationError {
         public UpdatePaymentLinkAmountDetailsValidationError build() {
 
             return new UpdatePaymentLinkAmountDetailsValidationError(
-                surcharge);
+                tax, surcharge);
         }
 
     }

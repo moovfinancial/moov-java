@@ -227,11 +227,6 @@ public class Transfer extends MoovError {
         return data().flatMap(Data::paymentLinkCode);
     }
 
-    @Deprecated
-    public Optional<Amount> salesTaxAmount() {
-        return data().flatMap(Data::salesTaxAmount);
-    }
-
     /**
      * Optional alias from a foreign/external system which can be used to reference this resource.
      */
@@ -242,7 +237,7 @@ public class Transfer extends MoovError {
 
     /**
      * An optional collection of line items for a transfer.
-     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     * When line items are provided, their total plus tax must equal the transfer amount.
      */
     @Deprecated
     public Optional<TransferLineItems> lineItems() {
@@ -426,11 +421,6 @@ public class Transfer extends MoovError {
         @JsonProperty("paymentLinkCode")
         private Optional<String> paymentLinkCode;
 
-
-        @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("salesTaxAmount")
-        private Optional<? extends Amount> salesTaxAmount;
-
         /**
          * Optional alias from a foreign/external system which can be used to reference this resource.
          */
@@ -440,7 +430,7 @@ public class Transfer extends MoovError {
 
         /**
          * An optional collection of line items for a transfer.
-         * When line items are provided, their total plus sales tax must equal the transfer amount.
+         * When line items are provided, their total plus tax must equal the transfer amount.
          */
         @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("lineItems")
@@ -492,7 +482,6 @@ public class Transfer extends MoovError {
                 @JsonProperty("scheduleID") Optional<String> scheduleID,
                 @JsonProperty("occurrenceID") Optional<String> occurrenceID,
                 @JsonProperty("paymentLinkCode") Optional<String> paymentLinkCode,
-                @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
                 @JsonProperty("foreignID") Optional<String> foreignID,
                 @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems,
                 @JsonProperty("invoiceID") Optional<String> invoiceID,
@@ -523,7 +512,6 @@ public class Transfer extends MoovError {
             Utils.checkNotNull(scheduleID, "scheduleID");
             Utils.checkNotNull(occurrenceID, "occurrenceID");
             Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
-            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             Utils.checkNotNull(foreignID, "foreignID");
             Utils.checkNotNull(lineItems, "lineItems");
             Utils.checkNotNull(invoiceID, "invoiceID");
@@ -554,7 +542,6 @@ public class Transfer extends MoovError {
             this.scheduleID = scheduleID;
             this.occurrenceID = occurrenceID;
             this.paymentLinkCode = paymentLinkCode;
-            this.salesTaxAmount = salesTaxAmount;
             this.foreignID = foreignID;
             this.lineItems = lineItems;
             this.invoiceID = invoiceID;
@@ -578,8 +565,7 @@ public class Transfer extends MoovError {
                 Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty());
+                Optional.empty(), Optional.empty(), Optional.empty());
         }
 
         @JsonIgnore
@@ -748,12 +734,6 @@ public class Transfer extends MoovError {
             return paymentLinkCode;
         }
 
-        @SuppressWarnings("unchecked")
-        @JsonIgnore
-        public Optional<Amount> salesTaxAmount() {
-            return (Optional<Amount>) salesTaxAmount;
-        }
-
         /**
          * Optional alias from a foreign/external system which can be used to reference this resource.
          */
@@ -764,7 +744,7 @@ public class Transfer extends MoovError {
 
         /**
          * An optional collection of line items for a transfer.
-         * When line items are provided, their total plus sales tax must equal the transfer amount.
+         * When line items are provided, their total plus tax must equal the transfer amount.
          */
         @SuppressWarnings("unchecked")
         @JsonIgnore
@@ -1142,19 +1122,6 @@ public class Transfer extends MoovError {
             return this;
         }
 
-        public Data withSalesTaxAmount(Amount salesTaxAmount) {
-            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-            this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
-            return this;
-        }
-
-
-        public Data withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
-            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-            this.salesTaxAmount = salesTaxAmount;
-            return this;
-        }
-
         /**
          * Optional alias from a foreign/external system which can be used to reference this resource.
          */
@@ -1176,7 +1143,7 @@ public class Transfer extends MoovError {
 
         /**
          * An optional collection of line items for a transfer.
-         * When line items are provided, their total plus sales tax must equal the transfer amount.
+         * When line items are provided, their total plus tax must equal the transfer amount.
          */
         public Data withLineItems(TransferLineItems lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
@@ -1187,7 +1154,7 @@ public class Transfer extends MoovError {
 
         /**
          * An optional collection of line items for a transfer.
-         * When line items are provided, their total plus sales tax must equal the transfer amount.
+         * When line items are provided, their total plus tax must equal the transfer amount.
          */
         public Data withLineItems(Optional<? extends TransferLineItems> lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
@@ -1281,7 +1248,6 @@ public class Transfer extends MoovError {
                 Utils.enhancedDeepEquals(this.scheduleID, other.scheduleID) &&
                 Utils.enhancedDeepEquals(this.occurrenceID, other.occurrenceID) &&
                 Utils.enhancedDeepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
-                Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
                 Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
                 Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
                 Utils.enhancedDeepEquals(this.invoiceID, other.invoiceID) &&
@@ -1300,9 +1266,8 @@ public class Transfer extends MoovError {
                 groupID, cancellations, refundedAmount,
                 refunds, disputedAmount, disputes,
                 sweepID, scheduleID, occurrenceID,
-                paymentLinkCode, salesTaxAmount, foreignID,
-                lineItems, invoiceID, amountDetails,
-                capture);
+                paymentLinkCode, foreignID, lineItems,
+                invoiceID, amountDetails, capture);
         }
         
         @Override
@@ -1333,7 +1298,6 @@ public class Transfer extends MoovError {
                     "scheduleID", scheduleID,
                     "occurrenceID", occurrenceID,
                     "paymentLinkCode", paymentLinkCode,
-                    "salesTaxAmount", salesTaxAmount,
                     "foreignID", foreignID,
                     "lineItems", lineItems,
                     "invoiceID", invoiceID,
@@ -1393,8 +1357,6 @@ public class Transfer extends MoovError {
             private Optional<String> occurrenceID = Optional.empty();
 
             private Optional<String> paymentLinkCode = Optional.empty();
-
-            private Optional<? extends Amount> salesTaxAmount = Optional.empty();
 
             private Optional<String> foreignID = Optional.empty();
 
@@ -1759,19 +1721,6 @@ public class Transfer extends MoovError {
             }
 
 
-            public Builder salesTaxAmount(Amount salesTaxAmount) {
-                Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-                this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
-                return this;
-            }
-
-            public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
-                Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-                this.salesTaxAmount = salesTaxAmount;
-                return this;
-            }
-
-
             /**
              * Optional alias from a foreign/external system which can be used to reference this resource.
              */
@@ -1793,7 +1742,7 @@ public class Transfer extends MoovError {
 
             /**
              * An optional collection of line items for a transfer.
-             * When line items are provided, their total plus sales tax must equal the transfer amount.
+             * When line items are provided, their total plus tax must equal the transfer amount.
              */
             public Builder lineItems(TransferLineItems lineItems) {
                 Utils.checkNotNull(lineItems, "lineItems");
@@ -1803,7 +1752,7 @@ public class Transfer extends MoovError {
 
             /**
              * An optional collection of line items for a transfer.
-             * When line items are provided, their total plus sales tax must equal the transfer amount.
+             * When line items are provided, their total plus tax must equal the transfer amount.
              */
             public Builder lineItems(Optional<? extends TransferLineItems> lineItems) {
                 Utils.checkNotNull(lineItems, "lineItems");
@@ -1873,9 +1822,8 @@ public class Transfer extends MoovError {
                     groupID, cancellations, refundedAmount,
                     refunds, disputedAmount, disputes,
                     sweepID, scheduleID, occurrenceID,
-                    paymentLinkCode, salesTaxAmount, foreignID,
-                    lineItems, invoiceID, amountDetails,
-                    capture);
+                    paymentLinkCode, foreignID, lineItems,
+                    invoiceID, amountDetails, capture);
             }
 
         }

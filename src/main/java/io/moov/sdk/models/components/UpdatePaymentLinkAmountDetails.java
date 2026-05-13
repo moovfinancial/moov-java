@@ -17,6 +17,13 @@ import java.util.Optional;
 
 public class UpdatePaymentLinkAmountDetails {
     /**
+     * The amount of tax applied to the payment link.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("tax")
+    private Optional<? extends AmountDecimalUpdate> tax;
+
+    /**
      * The amount of surcharge applied to the payment link.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -25,13 +32,25 @@ public class UpdatePaymentLinkAmountDetails {
 
     @JsonCreator
     public UpdatePaymentLinkAmountDetails(
+            @JsonProperty("tax") Optional<? extends AmountDecimalUpdate> tax,
             @JsonProperty("surcharge") Optional<? extends AmountDecimalUpdate> surcharge) {
+        Utils.checkNotNull(tax, "tax");
         Utils.checkNotNull(surcharge, "surcharge");
+        this.tax = tax;
         this.surcharge = surcharge;
     }
     
     public UpdatePaymentLinkAmountDetails() {
-        this(Optional.empty());
+        this(Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * The amount of tax applied to the payment link.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<AmountDecimalUpdate> tax() {
+        return (Optional<AmountDecimalUpdate>) tax;
     }
 
     /**
@@ -47,6 +66,25 @@ public class UpdatePaymentLinkAmountDetails {
         return new Builder();
     }
 
+
+    /**
+     * The amount of tax applied to the payment link.
+     */
+    public UpdatePaymentLinkAmountDetails withTax(AmountDecimalUpdate tax) {
+        Utils.checkNotNull(tax, "tax");
+        this.tax = Optional.ofNullable(tax);
+        return this;
+    }
+
+
+    /**
+     * The amount of tax applied to the payment link.
+     */
+    public UpdatePaymentLinkAmountDetails withTax(Optional<? extends AmountDecimalUpdate> tax) {
+        Utils.checkNotNull(tax, "tax");
+        this.tax = tax;
+        return this;
+    }
 
     /**
      * The amount of surcharge applied to the payment link.
@@ -77,28 +115,51 @@ public class UpdatePaymentLinkAmountDetails {
         }
         UpdatePaymentLinkAmountDetails other = (UpdatePaymentLinkAmountDetails) o;
         return 
+            Utils.enhancedDeepEquals(this.tax, other.tax) &&
             Utils.enhancedDeepEquals(this.surcharge, other.surcharge);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            surcharge);
+            tax, surcharge);
     }
     
     @Override
     public String toString() {
         return Utils.toString(UpdatePaymentLinkAmountDetails.class,
+                "tax", tax,
                 "surcharge", surcharge);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends AmountDecimalUpdate> tax = Optional.empty();
+
         private Optional<? extends AmountDecimalUpdate> surcharge = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * The amount of tax applied to the payment link.
+         */
+        public Builder tax(AmountDecimalUpdate tax) {
+            Utils.checkNotNull(tax, "tax");
+            this.tax = Optional.ofNullable(tax);
+            return this;
+        }
+
+        /**
+         * The amount of tax applied to the payment link.
+         */
+        public Builder tax(Optional<? extends AmountDecimalUpdate> tax) {
+            Utils.checkNotNull(tax, "tax");
+            this.tax = tax;
+            return this;
         }
 
 
@@ -123,7 +184,7 @@ public class UpdatePaymentLinkAmountDetails {
         public UpdatePaymentLinkAmountDetails build() {
 
             return new UpdatePaymentLinkAmountDetails(
-                surcharge);
+                tax, surcharge);
         }
 
     }

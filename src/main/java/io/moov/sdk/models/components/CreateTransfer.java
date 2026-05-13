@@ -55,11 +55,6 @@ public class CreateTransfer {
     @JsonProperty("metadata")
     private Optional<? extends Map<String, String>> metadata;
 
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("salesTaxAmount")
-    private Optional<? extends Amount> salesTaxAmount;
-
     /**
      * Optional alias from a foreign/external system which can be used to reference this resource.
      */
@@ -69,7 +64,7 @@ public class CreateTransfer {
 
     /**
      * An optional collection of line items for a transfer.
-     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     * When line items are provided, their total plus tax must equal the transfer amount.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lineItems")
@@ -88,7 +83,6 @@ public class CreateTransfer {
             @JsonProperty("facilitatorFee") Optional<? extends FacilitatorFee> facilitatorFee,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata,
-            @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
             @JsonProperty("foreignID") Optional<String> foreignID,
             @JsonProperty("lineItems") Optional<? extends CreateTransferLineItems> lineItems,
             @JsonProperty("amountDetails") Optional<? extends CreateTransferAmountDetails> amountDetails) {
@@ -98,7 +92,6 @@ public class CreateTransfer {
         Utils.checkNotNull(facilitatorFee, "facilitatorFee");
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(metadata, "metadata");
-        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         Utils.checkNotNull(foreignID, "foreignID");
         Utils.checkNotNull(lineItems, "lineItems");
         Utils.checkNotNull(amountDetails, "amountDetails");
@@ -108,7 +101,6 @@ public class CreateTransfer {
         this.facilitatorFee = facilitatorFee;
         this.description = description;
         this.metadata = metadata;
-        this.salesTaxAmount = salesTaxAmount;
         this.foreignID = foreignID;
         this.lineItems = lineItems;
         this.amountDetails = amountDetails;
@@ -120,8 +112,7 @@ public class CreateTransfer {
             Amount amount) {
         this(source, destination, amount,
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -172,12 +163,6 @@ public class CreateTransfer {
         return (Optional<Map<String, String>>) metadata;
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Amount> salesTaxAmount() {
-        return (Optional<Amount>) salesTaxAmount;
-    }
-
     /**
      * Optional alias from a foreign/external system which can be used to reference this resource.
      */
@@ -188,7 +173,7 @@ public class CreateTransfer {
 
     /**
      * An optional collection of line items for a transfer.
-     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     * When line items are provided, their total plus tax must equal the transfer amount.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -289,19 +274,6 @@ public class CreateTransfer {
         return this;
     }
 
-    public CreateTransfer withSalesTaxAmount(Amount salesTaxAmount) {
-        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-        this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
-        return this;
-    }
-
-
-    public CreateTransfer withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
-        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-        this.salesTaxAmount = salesTaxAmount;
-        return this;
-    }
-
     /**
      * Optional alias from a foreign/external system which can be used to reference this resource.
      */
@@ -323,7 +295,7 @@ public class CreateTransfer {
 
     /**
      * An optional collection of line items for a transfer.
-     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     * When line items are provided, their total plus tax must equal the transfer amount.
      */
     public CreateTransfer withLineItems(CreateTransferLineItems lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
@@ -334,7 +306,7 @@ public class CreateTransfer {
 
     /**
      * An optional collection of line items for a transfer.
-     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     * When line items are provided, their total plus tax must equal the transfer amount.
      */
     public CreateTransfer withLineItems(Optional<? extends CreateTransferLineItems> lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
@@ -371,7 +343,6 @@ public class CreateTransfer {
             Utils.enhancedDeepEquals(this.facilitatorFee, other.facilitatorFee) &&
             Utils.enhancedDeepEquals(this.description, other.description) &&
             Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
-            Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
             Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
             Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
@@ -382,8 +353,7 @@ public class CreateTransfer {
         return Utils.enhancedHash(
             source, destination, amount,
             facilitatorFee, description, metadata,
-            salesTaxAmount, foreignID, lineItems,
-            amountDetails);
+            foreignID, lineItems, amountDetails);
     }
     
     @Override
@@ -395,7 +365,6 @@ public class CreateTransfer {
                 "facilitatorFee", facilitatorFee,
                 "description", description,
                 "metadata", metadata,
-                "salesTaxAmount", salesTaxAmount,
                 "foreignID", foreignID,
                 "lineItems", lineItems,
                 "amountDetails", amountDetails);
@@ -415,8 +384,6 @@ public class CreateTransfer {
         private Optional<String> description = Optional.empty();
 
         private Optional<? extends Map<String, String>> metadata = Optional.empty();
-
-        private Optional<? extends Amount> salesTaxAmount = Optional.empty();
 
         private Optional<String> foreignID = Optional.empty();
 
@@ -514,19 +481,6 @@ public class CreateTransfer {
         }
 
 
-        public Builder salesTaxAmount(Amount salesTaxAmount) {
-            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-            this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
-            return this;
-        }
-
-        public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
-            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-            this.salesTaxAmount = salesTaxAmount;
-            return this;
-        }
-
-
         /**
          * Optional alias from a foreign/external system which can be used to reference this resource.
          */
@@ -548,7 +502,7 @@ public class CreateTransfer {
 
         /**
          * An optional collection of line items for a transfer.
-         * When line items are provided, their total plus sales tax must equal the transfer amount.
+         * When line items are provided, their total plus tax must equal the transfer amount.
          */
         public Builder lineItems(CreateTransferLineItems lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
@@ -558,7 +512,7 @@ public class CreateTransfer {
 
         /**
          * An optional collection of line items for a transfer.
-         * When line items are provided, their total plus sales tax must equal the transfer amount.
+         * When line items are provided, their total plus tax must equal the transfer amount.
          */
         public Builder lineItems(Optional<? extends CreateTransferLineItems> lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
@@ -584,8 +538,7 @@ public class CreateTransfer {
             return new CreateTransfer(
                 source, destination, amount,
                 facilitatorFee, description, metadata,
-                salesTaxAmount, foreignID, lineItems,
-                amountDetails);
+                foreignID, lineItems, amountDetails);
         }
 
     }

@@ -156,13 +156,6 @@ public class CreatedTransfer {
     private Optional<String> paymentLinkCode;
 
     /**
-     * Optional sales tax amount.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("salesTaxAmount")
-    private Optional<? extends Amount> salesTaxAmount;
-
-    /**
      * Optional alias from a foreign/external system which can be used to reference this resource.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -171,7 +164,7 @@ public class CreatedTransfer {
 
     /**
      * An optional collection of line items for a transfer.
-     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     * When line items are provided, their total plus tax must equal the transfer amount.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lineItems")
@@ -215,7 +208,6 @@ public class CreatedTransfer {
             @JsonProperty("scheduleID") Optional<String> scheduleID,
             @JsonProperty("occurrenceID") Optional<String> occurrenceID,
             @JsonProperty("paymentLinkCode") Optional<String> paymentLinkCode,
-            @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
             @JsonProperty("foreignID") Optional<String> foreignID,
             @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems,
             @JsonProperty("amountDetails") Optional<? extends TransferAmountDetails> amountDetails,
@@ -244,7 +236,6 @@ public class CreatedTransfer {
         Utils.checkNotNull(scheduleID, "scheduleID");
         Utils.checkNotNull(occurrenceID, "occurrenceID");
         Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
-        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         Utils.checkNotNull(foreignID, "foreignID");
         Utils.checkNotNull(lineItems, "lineItems");
         Utils.checkNotNull(amountDetails, "amountDetails");
@@ -273,7 +264,6 @@ public class CreatedTransfer {
         this.scheduleID = scheduleID;
         this.occurrenceID = occurrenceID;
         this.paymentLinkCode = paymentLinkCode;
-        this.salesTaxAmount = salesTaxAmount;
         this.foreignID = foreignID;
         this.lineItems = lineItems;
         this.amountDetails = amountDetails;
@@ -292,7 +282,7 @@ public class CreatedTransfer {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -454,15 +444,6 @@ public class CreatedTransfer {
     }
 
     /**
-     * Optional sales tax amount.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Amount> salesTaxAmount() {
-        return (Optional<Amount>) salesTaxAmount;
-    }
-
-    /**
      * Optional alias from a foreign/external system which can be used to reference this resource.
      */
     @JsonIgnore
@@ -472,7 +453,7 @@ public class CreatedTransfer {
 
     /**
      * An optional collection of line items for a transfer.
-     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     * When line items are provided, their total plus tax must equal the transfer amount.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -849,25 +830,6 @@ public class CreatedTransfer {
     }
 
     /**
-     * Optional sales tax amount.
-     */
-    public CreatedTransfer withSalesTaxAmount(Amount salesTaxAmount) {
-        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-        this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
-        return this;
-    }
-
-
-    /**
-     * Optional sales tax amount.
-     */
-    public CreatedTransfer withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
-        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-        this.salesTaxAmount = salesTaxAmount;
-        return this;
-    }
-
-    /**
      * Optional alias from a foreign/external system which can be used to reference this resource.
      */
     public CreatedTransfer withForeignID(String foreignID) {
@@ -888,7 +850,7 @@ public class CreatedTransfer {
 
     /**
      * An optional collection of line items for a transfer.
-     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     * When line items are provided, their total plus tax must equal the transfer amount.
      */
     public CreatedTransfer withLineItems(TransferLineItems lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
@@ -899,7 +861,7 @@ public class CreatedTransfer {
 
     /**
      * An optional collection of line items for a transfer.
-     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     * When line items are provided, their total plus tax must equal the transfer amount.
      */
     public CreatedTransfer withLineItems(Optional<? extends TransferLineItems> lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
@@ -973,7 +935,6 @@ public class CreatedTransfer {
             Utils.enhancedDeepEquals(this.scheduleID, other.scheduleID) &&
             Utils.enhancedDeepEquals(this.occurrenceID, other.occurrenceID) &&
             Utils.enhancedDeepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
-            Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
             Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
             Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails) &&
@@ -991,8 +952,8 @@ public class CreatedTransfer {
             cancellations, refundedAmount, refunds,
             disputedAmount, disputes, sweepID,
             scheduleID, occurrenceID, paymentLinkCode,
-            salesTaxAmount, foreignID, lineItems,
-            amountDetails, capture);
+            foreignID, lineItems, amountDetails,
+            capture);
     }
     
     @Override
@@ -1022,7 +983,6 @@ public class CreatedTransfer {
                 "scheduleID", scheduleID,
                 "occurrenceID", occurrenceID,
                 "paymentLinkCode", paymentLinkCode,
-                "salesTaxAmount", salesTaxAmount,
                 "foreignID", foreignID,
                 "lineItems", lineItems,
                 "amountDetails", amountDetails,
@@ -1079,8 +1039,6 @@ public class CreatedTransfer {
         private Optional<String> occurrenceID = Optional.empty();
 
         private Optional<String> paymentLinkCode = Optional.empty();
-
-        private Optional<? extends Amount> salesTaxAmount = Optional.empty();
 
         private Optional<String> foreignID = Optional.empty();
 
@@ -1446,25 +1404,6 @@ public class CreatedTransfer {
 
 
         /**
-         * Optional sales tax amount.
-         */
-        public Builder salesTaxAmount(Amount salesTaxAmount) {
-            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-            this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
-            return this;
-        }
-
-        /**
-         * Optional sales tax amount.
-         */
-        public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
-            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-            this.salesTaxAmount = salesTaxAmount;
-            return this;
-        }
-
-
-        /**
          * Optional alias from a foreign/external system which can be used to reference this resource.
          */
         public Builder foreignID(String foreignID) {
@@ -1485,7 +1424,7 @@ public class CreatedTransfer {
 
         /**
          * An optional collection of line items for a transfer.
-         * When line items are provided, their total plus sales tax must equal the transfer amount.
+         * When line items are provided, their total plus tax must equal the transfer amount.
          */
         public Builder lineItems(TransferLineItems lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
@@ -1495,7 +1434,7 @@ public class CreatedTransfer {
 
         /**
          * An optional collection of line items for a transfer.
-         * When line items are provided, their total plus sales tax must equal the transfer amount.
+         * When line items are provided, their total plus tax must equal the transfer amount.
          */
         public Builder lineItems(Optional<? extends TransferLineItems> lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
@@ -1546,8 +1485,8 @@ public class CreatedTransfer {
                 cancellations, refundedAmount, refunds,
                 disputedAmount, disputes, sweepID,
                 scheduleID, occurrenceID, paymentLinkCode,
-                salesTaxAmount, foreignID, lineItems,
-                amountDetails, capture);
+                foreignID, lineItems, amountDetails,
+                capture);
         }
 
     }

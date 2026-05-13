@@ -96,11 +96,6 @@ public class TransferValidationError extends MoovError {
     }
 
     @Deprecated
-    public Optional<String> salesTaxAmount() {
-        return data().flatMap(Data::salesTaxAmount);
-    }
-
-    @Deprecated
     public Optional<String> foreignID() {
         return data().flatMap(Data::foreignID);
     }
@@ -169,11 +164,6 @@ public class TransferValidationError extends MoovError {
 
 
         @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("salesTaxAmount")
-        private Optional<String> salesTaxAmount;
-
-
-        @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("foreignID")
         private Optional<String> foreignID;
 
@@ -197,7 +187,6 @@ public class TransferValidationError extends MoovError {
                 @JsonProperty("FacilitatorFee.TotalDecimal") Optional<String> facilitatorFeeTotalDecimal,
                 @JsonProperty("FacilitatorFee.MarkupDecimal") Optional<String> facilitatorFeeMarkupDecimal,
                 @JsonProperty("metadata") Optional<String> metadata,
-                @JsonProperty("salesTaxAmount") Optional<String> salesTaxAmount,
                 @JsonProperty("foreignID") Optional<String> foreignID,
                 @JsonProperty("lineItems") Optional<? extends CreateTransferLineItemsValidationError> lineItems,
                 @JsonProperty("amountDetails") Optional<? extends CreateTransferAmountDetailsValidationError> amountDetails) {
@@ -209,7 +198,6 @@ public class TransferValidationError extends MoovError {
             Utils.checkNotNull(facilitatorFeeTotalDecimal, "facilitatorFeeTotalDecimal");
             Utils.checkNotNull(facilitatorFeeMarkupDecimal, "facilitatorFeeMarkupDecimal");
             Utils.checkNotNull(metadata, "metadata");
-            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             Utils.checkNotNull(foreignID, "foreignID");
             Utils.checkNotNull(lineItems, "lineItems");
             Utils.checkNotNull(amountDetails, "amountDetails");
@@ -221,7 +209,6 @@ public class TransferValidationError extends MoovError {
             this.facilitatorFeeTotalDecimal = facilitatorFeeTotalDecimal;
             this.facilitatorFeeMarkupDecimal = facilitatorFeeMarkupDecimal;
             this.metadata = metadata;
-            this.salesTaxAmount = salesTaxAmount;
             this.foreignID = foreignID;
             this.lineItems = lineItems;
             this.amountDetails = amountDetails;
@@ -231,7 +218,7 @@ public class TransferValidationError extends MoovError {
             this(Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty(), Optional.empty(), Optional.empty());
+                Optional.empty(), Optional.empty());
         }
 
         @JsonIgnore
@@ -272,11 +259,6 @@ public class TransferValidationError extends MoovError {
         @JsonIgnore
         public Optional<String> metadata() {
             return metadata;
-        }
-
-        @JsonIgnore
-        public Optional<String> salesTaxAmount() {
-            return salesTaxAmount;
         }
 
         @JsonIgnore
@@ -405,19 +387,6 @@ public class TransferValidationError extends MoovError {
             return this;
         }
 
-        public Data withSalesTaxAmount(String salesTaxAmount) {
-            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-            this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
-            return this;
-        }
-
-
-        public Data withSalesTaxAmount(Optional<String> salesTaxAmount) {
-            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-            this.salesTaxAmount = salesTaxAmount;
-            return this;
-        }
-
         public Data withForeignID(String foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
             this.foreignID = Optional.ofNullable(foreignID);
@@ -475,7 +444,6 @@ public class TransferValidationError extends MoovError {
                 Utils.enhancedDeepEquals(this.facilitatorFeeTotalDecimal, other.facilitatorFeeTotalDecimal) &&
                 Utils.enhancedDeepEquals(this.facilitatorFeeMarkupDecimal, other.facilitatorFeeMarkupDecimal) &&
                 Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
-                Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
                 Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
                 Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
                 Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
@@ -486,8 +454,8 @@ public class TransferValidationError extends MoovError {
             return Utils.enhancedHash(
                 amount, source, sourcePaymentMethodID,
                 destinationPaymentMethodID, description, facilitatorFeeTotalDecimal,
-                facilitatorFeeMarkupDecimal, metadata, salesTaxAmount,
-                foreignID, lineItems, amountDetails);
+                facilitatorFeeMarkupDecimal, metadata, foreignID,
+                lineItems, amountDetails);
         }
         
         @Override
@@ -501,7 +469,6 @@ public class TransferValidationError extends MoovError {
                     "facilitatorFeeTotalDecimal", facilitatorFeeTotalDecimal,
                     "facilitatorFeeMarkupDecimal", facilitatorFeeMarkupDecimal,
                     "metadata", metadata,
-                    "salesTaxAmount", salesTaxAmount,
                     "foreignID", foreignID,
                     "lineItems", lineItems,
                     "amountDetails", amountDetails);
@@ -525,8 +492,6 @@ public class TransferValidationError extends MoovError {
             private Optional<String> facilitatorFeeMarkupDecimal = Optional.empty();
 
             private Optional<String> metadata = Optional.empty();
-
-            private Optional<String> salesTaxAmount = Optional.empty();
 
             private Optional<String> foreignID = Optional.empty();
 
@@ -643,19 +608,6 @@ public class TransferValidationError extends MoovError {
             }
 
 
-            public Builder salesTaxAmount(String salesTaxAmount) {
-                Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-                this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
-                return this;
-            }
-
-            public Builder salesTaxAmount(Optional<String> salesTaxAmount) {
-                Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
-                this.salesTaxAmount = salesTaxAmount;
-                return this;
-            }
-
-
             public Builder foreignID(String foreignID) {
                 Utils.checkNotNull(foreignID, "foreignID");
                 this.foreignID = Optional.ofNullable(foreignID);
@@ -699,8 +651,8 @@ public class TransferValidationError extends MoovError {
                 return new Data(
                     amount, source, sourcePaymentMethodID,
                     destinationPaymentMethodID, description, facilitatorFeeTotalDecimal,
-                    facilitatorFeeMarkupDecimal, metadata, salesTaxAmount,
-                    foreignID, lineItems, amountDetails);
+                    facilitatorFeeMarkupDecimal, metadata, foreignID,
+                    lineItems, amountDetails);
             }
 
         }

@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 69762ba63a318e349b4b70061a21cc33
+  docChecksum: 7dd42617994709d55d3457b8c0644696
   docVersion: v2026.04.00
-  speakeasyVersion: 1.763.0
-  generationVersion: 2.884.0
-  releaseVersion: 26.4.6
-  configChecksum: ee2bdac09b5fafb015d9af785bc80c64
+  speakeasyVersion: 1.770.0
+  generationVersion: 2.893.0
+  releaseVersion: 26.4.7
+  configChecksum: e6d1bc116cbd10b208c1b3b4afa1eb3e
   repoURL: https://github.com/moovfinancial/moov-java.git
   installationURL: https://github.com/moovfinancial/moov-java
   published: true
 persistentEdits:
-  generation_id: b92d244f-2d93-4eff-86bd-5949d99a4cfe
-  pristine_commit_hash: 4df515f89b2f18ff697edcb4405adade1d7564d8
-  pristine_tree_hash: a0eda9a9b8a59517994c59d8b1960d6197660155
+  generation_id: fc983166-d97b-4f5e-8682-7ac94a050e2e
+  pristine_commit_hash: 3711a175397538016059cdf04dfa431359df9843
+  pristine_tree_hash: 178af8026064592ac2c547685e73f300bacf1ad3
 features:
   java:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.3
-    core: 3.55.24
+    core: 3.55.26
     decimal: 0.0.1
     deprecations: 2.81.2
     downloadStreams: 0.1.1
@@ -32,7 +32,7 @@ features:
     nameOverrides: 2.81.5
     nullables: 0.1.0
     sdkHooks: 1.2.0
-    unions: 0.3.5
+    unions: 0.3.6
     uploadStreams: 0.1.0
 trackedFiles:
   .gitattributes:
@@ -1377,8 +1377,8 @@ trackedFiles:
     pristine_git_object: 12a5a9f01ff0d191aaac7427b6d0611908fb8225
   docs/models/components/Invoice.md:
     id: 8dbabf0e657f
-    last_write_checksum: sha1:9dd555dec821282cff972eac868ea68530772161
-    pristine_git_object: 6e0d8ce383800e9b868d0efa21e3f235f30c67a2
+    last_write_checksum: sha1:be49ed013f0dbe48c3281f0c13f4beb02ee16183
+    pristine_git_object: f409d81def2aae524a742e595f8707bf6f099c3b
   docs/models/components/InvoiceExternalPayment.md:
     id: "511617486284"
     last_write_checksum: sha1:856a9d8f91e65e6a3993daaa6a830d9a93bdbac1
@@ -2389,8 +2389,12 @@ trackedFiles:
     pristine_git_object: daaac23b8d7bc0ed3dde81e53417e649b4dfce84
   docs/models/components/TransferConfig.md:
     id: dfae6b55fe5e
-    last_write_checksum: sha1:540fcd704bb4f76019ce03535549bf689614888c
-    pristine_git_object: 483367b68ee79ee6fc45d081e64d5686de6ffaec
+    last_write_checksum: sha1:902a763fa1287fb0770ac19d069a3393147c84d0
+    pristine_git_object: bedd961d46a1d4be2c988ea485d0a3437fa46906
+  docs/models/components/TransferControls.md:
+    id: 69a495e4045c
+    last_write_checksum: sha1:7fb09781ac4b679151028834c7a8aaee0af2dae5
+    pristine_git_object: b825b20d86cc6e837cddaff2ff92abd209f2fb2d
   docs/models/components/TransferDestination.md:
     id: 1759bd481353
     last_write_checksum: sha1:ad418dca83047ba9403ab12a6869913ea32cc7fd
@@ -2497,8 +2501,8 @@ trackedFiles:
     pristine_git_object: bbe3c4af031c4b38e8e0c170d88708e256f404a3
   docs/models/components/UpdateInvoice.md:
     id: 29f763bb4508
-    last_write_checksum: sha1:21f4e1b1350569e7fd443f311f64c6996ddc415f
-    pristine_git_object: 1bd5f9b95d80f1f1020416aaccd2dc48efc13695
+    last_write_checksum: sha1:ebaae00bb6ae54ba6e731bf08550f15b8bee589d
+    pristine_git_object: ca2fede6051a19be7f0b6fa2879ce87161298f04
   docs/models/components/UpdateIssuedCard.md:
     id: afa72e93ecef
     last_write_checksum: sha1:de8ef039d3b70ee927cf02d6bbf338547f8938f2
@@ -4673,8 +4677,8 @@ trackedFiles:
     pristine_git_object: 9b40f611aaace5afe9cf7cadc73ff2301fe51e80
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:f446c48d7d3974ef9af85be16e1bda326485561d
-    pristine_git_object: 3667f2f18fd1b43ca2be9fc2dda5497ae6252e35
+    last_write_checksum: sha1:e03f0da379f37bc16961631fd273b7ea074980c8
+    pristine_git_object: 725af4e6a5bce013a2910bb7b120c6da9c9a1091
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4857,8 +4861,8 @@ trackedFiles:
     pristine_git_object: 72495cf1b905a82c978c8ca472b53f9c9cecccbd
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:71854c214515caa1b429aab4c057fcedb2f8f325
-    pristine_git_object: b55fe63d52083a612a3e07f6065d23e75d3003ac
+    last_write_checksum: sha1:f0ca306e9a767873157de0025274eb1e9ec7e9ef
+    pristine_git_object: af2d807718f327568aac012ccaee2452a6220c2c
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:bf0300e770bb968bfc8b5ee2b8d6f05e37e9bb67
@@ -6237,8 +6241,8 @@ trackedFiles:
     pristine_git_object: 2eeab666c1d3f34bf2273ba13889efb3604ee6ac
   src/main/java/io/moov/sdk/models/components/Invoice.java:
     id: 1e9b6bc5d636
-    last_write_checksum: sha1:f351c3476ee2cbfee4c3a03d6301e4ac9cf47941
-    pristine_git_object: 054ef6825180e1a164f46eaffc5cea9a9d915e40
+    last_write_checksum: sha1:a5eb2383a96a90cd8b1dc276d5b45762174147ed
+    pristine_git_object: 0b439e645a26c8a1c414b457ee3b31113958080b
   src/main/java/io/moov/sdk/models/components/InvoiceExternalPayment.java:
     id: 8e6d26b5907b
     last_write_checksum: sha1:bd2909274b07bf80064cd987ab0341904979273b
@@ -7253,8 +7257,12 @@ trackedFiles:
     pristine_git_object: 9cf3fa44634af98c2ed8dbaff0194082905be0c3
   src/main/java/io/moov/sdk/models/components/TransferConfig.java:
     id: 3a6c7c36f0d5
-    last_write_checksum: sha1:9c7f844bd90632951171b881ac87a91853e36688
-    pristine_git_object: b8d3ef1618733e167678df996dc2cb03c0335c2b
+    last_write_checksum: sha1:7d2f8363cd3de98468ffbb043efce13814d73e40
+    pristine_git_object: c223b04a7f77eaece876739e1f2fde17bfb7f269
+  src/main/java/io/moov/sdk/models/components/TransferControls.java:
+    id: a01b2890252d
+    last_write_checksum: sha1:b20e026337fa40fea1c94d916a786abafcd5f444
+    pristine_git_object: 08aa33db3ac620c8f668641beea09084f5497dd9
   src/main/java/io/moov/sdk/models/components/TransferDestination.java:
     id: 20ad34b3a041
     last_write_checksum: sha1:271ef020eb009e9660edde06d3c6606ea0d7d640
@@ -11009,8 +11017,8 @@ trackedFiles:
     pristine_git_object: 2d440864fe0830fd3b25ead687703b68712f0a48
   src/main/java/io/moov/sdk/utils/OneOfDeserializer.java:
     id: b5c0ca257463
-    last_write_checksum: sha1:73539d464834dcaa90f40b167418790dfdae30ec
-    pristine_git_object: ea3f6913b0bd24a47a3340f9aa62aa6cd505e1fc
+    last_write_checksum: sha1:1d0c2bf703bd41c5b49a48ac060221dbf6954a28
+    pristine_git_object: e78616eb3a0227c20c6493659987b589e4e77879
   src/main/java/io/moov/sdk/utils/Options.java:
     id: 9f717306fb5e
     last_write_checksum: sha1:a2a747da26966dd4dbf26a96433be8076392d0e4
@@ -13966,7 +13974,7 @@ examples:
         application/json: {"tipPresets": {"fixedAmountOptions": [{"currency": "USD", "valueDecimal": "12.987654321"}]}}
       responses:
         "201":
-          application/json: {"tipPresets": {"calculationBasis": "pre-tax", "percentageOptions": [10, 15, 20]}}
+          application/json: {"tipPresets": {"calculationBasis": "pre-tax", "percentageOptions": [10, 15, 20]}, "transferControls": [{"accountID": "01234567-89ab-cdef-0123-456789abcdef", "partnerAccountID": "01234567-89ab-cdef-0123-456789abcdef", "debtRepayment": false, "allowDynamicDescriptor": true, "allowSurcharge": true}]}
   getTransferConfig:
     Fixed amount tip config:
       parameters:
@@ -13981,7 +13989,7 @@ examples:
           accountID: "<id>"
       responses:
         "200":
-          application/json: {"tipPresets": {"calculationBasis": "pre-tax", "percentageOptions": [10, 15, 20]}}
+          application/json: {"tipPresets": {"calculationBasis": "pre-tax", "percentageOptions": [10, 15, 20]}, "transferControls": [{"accountID": "01234567-89ab-cdef-0123-456789abcdef", "partnerAccountID": "01234567-89ab-cdef-0123-456789abcdef", "debtRepayment": false, "allowDynamicDescriptor": true, "allowSurcharge": true}]}
   updateTransferConfig:
     Updated fixed amount tip config:
       parameters:
@@ -14000,9 +14008,14 @@ examples:
         application/json: {"tipPresets": {"fixedAmountOptions": [{"currency": "USD", "valueDecimal": "12.987654321"}]}}
       responses:
         "200":
-          application/json: {"tipPresets": {"calculationBasis": "pre-tax", "percentageOptions": [10, 15, 20]}}
+          application/json: {"tipPresets": {"calculationBasis": "pre-tax", "percentageOptions": [10, 15, 20]}, "transferControls": [{"accountID": "01234567-89ab-cdef-0123-456789abcdef", "partnerAccountID": "01234567-89ab-cdef-0123-456789abcdef", "debtRepayment": false, "allowDynamicDescriptor": true, "allowSurcharge": true}]}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Java SDK Changes:
+  * `moov.transferConfig.create()`:  `response.transferControls` **Added**
+  * `moov.transferConfig.get()`:  `response.transferControls` **Added**
+  * `moov.transferConfig.update()`:  `response.transferControls` **Added**
 generatedFiles:
   - .gitattributes
   - USAGE.md

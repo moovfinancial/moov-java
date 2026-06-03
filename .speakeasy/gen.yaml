@@ -30,7 +30,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 java:
-  version: 26.4.6
+  version: 26.4.7
   additionalDependencies: []
   additionalPlugins: []
   artifactID: sdk

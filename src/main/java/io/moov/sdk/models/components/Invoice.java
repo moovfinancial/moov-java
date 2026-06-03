@@ -79,7 +79,7 @@ public class Invoice {
     private AmountDecimal taxAmount;
 
     /**
-     * Total amount of the invoice, sum of subTotalAmount and taxAmount
+     * Total amount of the invoice, including subtotal, tax, and surcharge amounts.
      */
     @JsonProperty("totalAmount")
     private AmountDecimal totalAmount;
@@ -338,7 +338,7 @@ public class Invoice {
     }
 
     /**
-     * Total amount of the invoice, sum of subTotalAmount and taxAmount
+     * Total amount of the invoice, including subtotal, tax, and surcharge amounts.
      */
     @JsonIgnore
     public AmountDecimal totalAmount() {
@@ -526,7 +526,7 @@ public class Invoice {
     }
 
     /**
-     * Total amount of the invoice, sum of subTotalAmount and taxAmount
+     * Total amount of the invoice, including subtotal, tax, and surcharge amounts.
      */
     public Invoice withTotalAmount(AmountDecimal totalAmount) {
         Utils.checkNotNull(totalAmount, "totalAmount");
@@ -930,7 +930,7 @@ public class Invoice {
 
 
         /**
-         * Total amount of the invoice, sum of subTotalAmount and taxAmount
+         * Total amount of the invoice, including subtotal, tax, and surcharge amounts.
          */
         public Builder totalAmount(AmountDecimal totalAmount) {
             Utils.checkNotNull(totalAmount, "totalAmount");

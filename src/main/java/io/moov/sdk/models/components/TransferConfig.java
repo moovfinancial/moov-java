@@ -12,6 +12,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -27,15 +28,23 @@ public class TransferConfig {
     @JsonProperty("tipPresets")
     private Optional<? extends TipPresets> tipPresets;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("transferControls")
+    private Optional<? extends List<TransferControls>> transferControls;
+
     @JsonCreator
     public TransferConfig(
-            @JsonProperty("tipPresets") Optional<? extends TipPresets> tipPresets) {
+            @JsonProperty("tipPresets") Optional<? extends TipPresets> tipPresets,
+            @JsonProperty("transferControls") Optional<? extends List<TransferControls>> transferControls) {
         Utils.checkNotNull(tipPresets, "tipPresets");
+        Utils.checkNotNull(transferControls, "transferControls");
         this.tipPresets = tipPresets;
+        this.transferControls = transferControls;
     }
     
     public TransferConfig() {
-        this(Optional.empty());
+        this(Optional.empty(), Optional.empty());
     }
 
     /**
@@ -45,6 +54,12 @@ public class TransferConfig {
     @JsonIgnore
     public Optional<TipPresets> tipPresets() {
         return (Optional<TipPresets>) tipPresets;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<TransferControls>> transferControls() {
+        return (Optional<List<TransferControls>>) transferControls;
     }
 
     public static Builder builder() {
@@ -71,6 +86,19 @@ public class TransferConfig {
         return this;
     }
 
+    public TransferConfig withTransferControls(List<TransferControls> transferControls) {
+        Utils.checkNotNull(transferControls, "transferControls");
+        this.transferControls = Optional.ofNullable(transferControls);
+        return this;
+    }
+
+
+    public TransferConfig withTransferControls(Optional<? extends List<TransferControls>> transferControls) {
+        Utils.checkNotNull(transferControls, "transferControls");
+        this.transferControls = transferControls;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -81,25 +109,29 @@ public class TransferConfig {
         }
         TransferConfig other = (TransferConfig) o;
         return 
-            Utils.enhancedDeepEquals(this.tipPresets, other.tipPresets);
+            Utils.enhancedDeepEquals(this.tipPresets, other.tipPresets) &&
+            Utils.enhancedDeepEquals(this.transferControls, other.transferControls);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            tipPresets);
+            tipPresets, transferControls);
     }
     
     @Override
     public String toString() {
         return Utils.toString(TransferConfig.class,
-                "tipPresets", tipPresets);
+                "tipPresets", tipPresets,
+                "transferControls", transferControls);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
         private Optional<? extends TipPresets> tipPresets = Optional.empty();
+
+        private Optional<? extends List<TransferControls>> transferControls = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -124,10 +156,23 @@ public class TransferConfig {
             return this;
         }
 
+
+        public Builder transferControls(List<TransferControls> transferControls) {
+            Utils.checkNotNull(transferControls, "transferControls");
+            this.transferControls = Optional.ofNullable(transferControls);
+            return this;
+        }
+
+        public Builder transferControls(Optional<? extends List<TransferControls>> transferControls) {
+            Utils.checkNotNull(transferControls, "transferControls");
+            this.transferControls = transferControls;
+            return this;
+        }
+
         public TransferConfig build() {
 
             return new TransferConfig(
-                tipPresets);
+                tipPresets, transferControls);
         }
 
     }

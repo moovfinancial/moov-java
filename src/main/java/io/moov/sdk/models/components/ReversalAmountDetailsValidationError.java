@@ -14,34 +14,21 @@ import java.lang.String;
 import java.util.Optional;
 
 
-public class UpdatePaymentLinkAmountDetailsValidationError {
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("tax")
-    private Optional<String> tax;
-
+public class ReversalAmountDetailsValidationError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("surcharge")
     private Optional<String> surcharge;
 
     @JsonCreator
-    public UpdatePaymentLinkAmountDetailsValidationError(
-            @JsonProperty("tax") Optional<String> tax,
+    public ReversalAmountDetailsValidationError(
             @JsonProperty("surcharge") Optional<String> surcharge) {
-        Utils.checkNotNull(tax, "tax");
         Utils.checkNotNull(surcharge, "surcharge");
-        this.tax = tax;
         this.surcharge = surcharge;
     }
     
-    public UpdatePaymentLinkAmountDetailsValidationError() {
-        this(Optional.empty(), Optional.empty());
-    }
-
-    @JsonIgnore
-    public Optional<String> tax() {
-        return tax;
+    public ReversalAmountDetailsValidationError() {
+        this(Optional.empty());
     }
 
     @JsonIgnore
@@ -54,27 +41,14 @@ public class UpdatePaymentLinkAmountDetailsValidationError {
     }
 
 
-    public UpdatePaymentLinkAmountDetailsValidationError withTax(String tax) {
-        Utils.checkNotNull(tax, "tax");
-        this.tax = Optional.ofNullable(tax);
-        return this;
-    }
-
-
-    public UpdatePaymentLinkAmountDetailsValidationError withTax(Optional<String> tax) {
-        Utils.checkNotNull(tax, "tax");
-        this.tax = tax;
-        return this;
-    }
-
-    public UpdatePaymentLinkAmountDetailsValidationError withSurcharge(String surcharge) {
+    public ReversalAmountDetailsValidationError withSurcharge(String surcharge) {
         Utils.checkNotNull(surcharge, "surcharge");
         this.surcharge = Optional.ofNullable(surcharge);
         return this;
     }
 
 
-    public UpdatePaymentLinkAmountDetailsValidationError withSurcharge(Optional<String> surcharge) {
+    public ReversalAmountDetailsValidationError withSurcharge(Optional<String> surcharge) {
         Utils.checkNotNull(surcharge, "surcharge");
         this.surcharge = surcharge;
         return this;
@@ -88,47 +62,30 @@ public class UpdatePaymentLinkAmountDetailsValidationError {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        UpdatePaymentLinkAmountDetailsValidationError other = (UpdatePaymentLinkAmountDetailsValidationError) o;
+        ReversalAmountDetailsValidationError other = (ReversalAmountDetailsValidationError) o;
         return 
-            Utils.enhancedDeepEquals(this.tax, other.tax) &&
             Utils.enhancedDeepEquals(this.surcharge, other.surcharge);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            tax, surcharge);
+            surcharge);
     }
     
     @Override
     public String toString() {
-        return Utils.toString(UpdatePaymentLinkAmountDetailsValidationError.class,
-                "tax", tax,
+        return Utils.toString(ReversalAmountDetailsValidationError.class,
                 "surcharge", surcharge);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> tax = Optional.empty();
-
         private Optional<String> surcharge = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        public Builder tax(String tax) {
-            Utils.checkNotNull(tax, "tax");
-            this.tax = Optional.ofNullable(tax);
-            return this;
-        }
-
-        public Builder tax(Optional<String> tax) {
-            Utils.checkNotNull(tax, "tax");
-            this.tax = tax;
-            return this;
         }
 
 
@@ -144,10 +101,10 @@ public class UpdatePaymentLinkAmountDetailsValidationError {
             return this;
         }
 
-        public UpdatePaymentLinkAmountDetailsValidationError build() {
+        public ReversalAmountDetailsValidationError build() {
 
-            return new UpdatePaymentLinkAmountDetailsValidationError(
-                tax, surcharge);
+            return new ReversalAmountDetailsValidationError(
+                surcharge);
         }
 
     }

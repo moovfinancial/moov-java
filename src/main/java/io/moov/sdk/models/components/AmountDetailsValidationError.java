@@ -11,55 +11,42 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 
-public class UpdatePaymentLinkAmountDetails {
-    /**
-     * The amount of tax applied to the payment link.
-     */
+public class AmountDetailsValidationError {
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tax")
-    private Optional<? extends AmountDecimalUpdate> tax;
+    private Optional<String> tax;
 
-    /**
-     * The amount of surcharge applied to the payment link.
-     */
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("surcharge")
-    private Optional<? extends AmountDecimalUpdate> surcharge;
+    private Optional<String> surcharge;
 
     @JsonCreator
-    public UpdatePaymentLinkAmountDetails(
-            @JsonProperty("tax") Optional<? extends AmountDecimalUpdate> tax,
-            @JsonProperty("surcharge") Optional<? extends AmountDecimalUpdate> surcharge) {
+    public AmountDetailsValidationError(
+            @JsonProperty("tax") Optional<String> tax,
+            @JsonProperty("surcharge") Optional<String> surcharge) {
         Utils.checkNotNull(tax, "tax");
         Utils.checkNotNull(surcharge, "surcharge");
         this.tax = tax;
         this.surcharge = surcharge;
     }
     
-    public UpdatePaymentLinkAmountDetails() {
+    public AmountDetailsValidationError() {
         this(Optional.empty(), Optional.empty());
     }
 
-    /**
-     * The amount of tax applied to the payment link.
-     */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<AmountDecimalUpdate> tax() {
-        return (Optional<AmountDecimalUpdate>) tax;
+    public Optional<String> tax() {
+        return tax;
     }
 
-    /**
-     * The amount of surcharge applied to the payment link.
-     */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<AmountDecimalUpdate> surcharge() {
-        return (Optional<AmountDecimalUpdate>) surcharge;
+    public Optional<String> surcharge() {
+        return surcharge;
     }
 
     public static Builder builder() {
@@ -67,39 +54,27 @@ public class UpdatePaymentLinkAmountDetails {
     }
 
 
-    /**
-     * The amount of tax applied to the payment link.
-     */
-    public UpdatePaymentLinkAmountDetails withTax(AmountDecimalUpdate tax) {
+    public AmountDetailsValidationError withTax(String tax) {
         Utils.checkNotNull(tax, "tax");
         this.tax = Optional.ofNullable(tax);
         return this;
     }
 
 
-    /**
-     * The amount of tax applied to the payment link.
-     */
-    public UpdatePaymentLinkAmountDetails withTax(Optional<? extends AmountDecimalUpdate> tax) {
+    public AmountDetailsValidationError withTax(Optional<String> tax) {
         Utils.checkNotNull(tax, "tax");
         this.tax = tax;
         return this;
     }
 
-    /**
-     * The amount of surcharge applied to the payment link.
-     */
-    public UpdatePaymentLinkAmountDetails withSurcharge(AmountDecimalUpdate surcharge) {
+    public AmountDetailsValidationError withSurcharge(String surcharge) {
         Utils.checkNotNull(surcharge, "surcharge");
         this.surcharge = Optional.ofNullable(surcharge);
         return this;
     }
 
 
-    /**
-     * The amount of surcharge applied to the payment link.
-     */
-    public UpdatePaymentLinkAmountDetails withSurcharge(Optional<? extends AmountDecimalUpdate> surcharge) {
+    public AmountDetailsValidationError withSurcharge(Optional<String> surcharge) {
         Utils.checkNotNull(surcharge, "surcharge");
         this.surcharge = surcharge;
         return this;
@@ -113,7 +88,7 @@ public class UpdatePaymentLinkAmountDetails {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        UpdatePaymentLinkAmountDetails other = (UpdatePaymentLinkAmountDetails) o;
+        AmountDetailsValidationError other = (AmountDetailsValidationError) o;
         return 
             Utils.enhancedDeepEquals(this.tax, other.tax) &&
             Utils.enhancedDeepEquals(this.surcharge, other.surcharge);
@@ -127,7 +102,7 @@ public class UpdatePaymentLinkAmountDetails {
     
     @Override
     public String toString() {
-        return Utils.toString(UpdatePaymentLinkAmountDetails.class,
+        return Utils.toString(AmountDetailsValidationError.class,
                 "tax", tax,
                 "surcharge", surcharge);
     }
@@ -135,55 +110,43 @@ public class UpdatePaymentLinkAmountDetails {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends AmountDecimalUpdate> tax = Optional.empty();
+        private Optional<String> tax = Optional.empty();
 
-        private Optional<? extends AmountDecimalUpdate> surcharge = Optional.empty();
+        private Optional<String> surcharge = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        /**
-         * The amount of tax applied to the payment link.
-         */
-        public Builder tax(AmountDecimalUpdate tax) {
+        public Builder tax(String tax) {
             Utils.checkNotNull(tax, "tax");
             this.tax = Optional.ofNullable(tax);
             return this;
         }
 
-        /**
-         * The amount of tax applied to the payment link.
-         */
-        public Builder tax(Optional<? extends AmountDecimalUpdate> tax) {
+        public Builder tax(Optional<String> tax) {
             Utils.checkNotNull(tax, "tax");
             this.tax = tax;
             return this;
         }
 
 
-        /**
-         * The amount of surcharge applied to the payment link.
-         */
-        public Builder surcharge(AmountDecimalUpdate surcharge) {
+        public Builder surcharge(String surcharge) {
             Utils.checkNotNull(surcharge, "surcharge");
             this.surcharge = Optional.ofNullable(surcharge);
             return this;
         }
 
-        /**
-         * The amount of surcharge applied to the payment link.
-         */
-        public Builder surcharge(Optional<? extends AmountDecimalUpdate> surcharge) {
+        public Builder surcharge(Optional<String> surcharge) {
             Utils.checkNotNull(surcharge, "surcharge");
             this.surcharge = surcharge;
             return this;
         }
 
-        public UpdatePaymentLinkAmountDetails build() {
+        public AmountDetailsValidationError build() {
 
-            return new UpdatePaymentLinkAmountDetails(
+            return new AmountDetailsValidationError(
                 tax, surcharge);
         }
 

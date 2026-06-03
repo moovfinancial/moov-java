@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.moov.sdk.models.components.ReversalAmountDetailsValidationError;
 import io.moov.sdk.utils.Utils;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
@@ -58,6 +59,11 @@ public class ReversalValidationError extends MoovError {
         return data().flatMap(Data::amount);
     }
 
+    @Deprecated
+    public Optional<ReversalAmountDetailsValidationError> amountDetails() {
+        return data().flatMap(Data::amountDetails);
+    }
+
     public Optional<Data> data() {
         return Optional.ofNullable(data);
     }
@@ -75,20 +81,34 @@ public class ReversalValidationError extends MoovError {
         @JsonProperty("amount")
         private Optional<String> amount;
 
+
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("amountDetails")
+        private Optional<? extends ReversalAmountDetailsValidationError> amountDetails;
+
         @JsonCreator
         public Data(
-                @JsonProperty("amount") Optional<String> amount) {
+                @JsonProperty("amount") Optional<String> amount,
+                @JsonProperty("amountDetails") Optional<? extends ReversalAmountDetailsValidationError> amountDetails) {
             Utils.checkNotNull(amount, "amount");
+            Utils.checkNotNull(amountDetails, "amountDetails");
             this.amount = amount;
+            this.amountDetails = amountDetails;
         }
         
         public Data() {
-            this(Optional.empty());
+            this(Optional.empty(), Optional.empty());
         }
 
         @JsonIgnore
         public Optional<String> amount() {
             return amount;
+        }
+
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<ReversalAmountDetailsValidationError> amountDetails() {
+            return (Optional<ReversalAmountDetailsValidationError>) amountDetails;
         }
 
         public static Builder builder() {
@@ -109,6 +129,19 @@ public class ReversalValidationError extends MoovError {
             return this;
         }
 
+        public Data withAmountDetails(ReversalAmountDetailsValidationError amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = Optional.ofNullable(amountDetails);
+            return this;
+        }
+
+
+        public Data withAmountDetails(Optional<? extends ReversalAmountDetailsValidationError> amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = amountDetails;
+            return this;
+        }
+
         @Override
         public boolean equals(java.lang.Object o) {
             if (this == o) {
@@ -119,25 +152,29 @@ public class ReversalValidationError extends MoovError {
             }
             Data other = (Data) o;
             return 
-                Utils.enhancedDeepEquals(this.amount, other.amount);
+                Utils.enhancedDeepEquals(this.amount, other.amount) &&
+                Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
         }
         
         @Override
         public int hashCode() {
             return Utils.enhancedHash(
-                amount);
+                amount, amountDetails);
         }
         
         @Override
         public String toString() {
             return Utils.toString(Data.class,
-                    "amount", amount);
+                    "amount", amount,
+                    "amountDetails", amountDetails);
         }
 
         @SuppressWarnings("UnusedReturnValue")
         public final static class Builder {
 
             private Optional<String> amount = Optional.empty();
+
+            private Optional<? extends ReversalAmountDetailsValidationError> amountDetails = Optional.empty();
 
             private Builder() {
               // force use of static builder() method
@@ -156,10 +193,23 @@ public class ReversalValidationError extends MoovError {
                 return this;
             }
 
+
+            public Builder amountDetails(ReversalAmountDetailsValidationError amountDetails) {
+                Utils.checkNotNull(amountDetails, "amountDetails");
+                this.amountDetails = Optional.ofNullable(amountDetails);
+                return this;
+            }
+
+            public Builder amountDetails(Optional<? extends ReversalAmountDetailsValidationError> amountDetails) {
+                Utils.checkNotNull(amountDetails, "amountDetails");
+                this.amountDetails = amountDetails;
+                return this;
+            }
+
             public Data build() {
 
                 return new Data(
-                    amount);
+                    amount, amountDetails);
             }
 
         }

@@ -91,10 +91,6 @@ public class Application {
                     .description("Professional services for Q1 2026")
                     .invoiceDate(OffsetDateTime.parse("2026-01-15T00:00:00Z"))
                     .dueDate(OffsetDateTime.parse("2026-02-15T00:00:00Z"))
-                    .taxAmount(AmountDecimal.builder()
-                        .currency("USD")
-                        .valueDecimal("80.00")
-                        .build())
                     .build())
                 .call();
 

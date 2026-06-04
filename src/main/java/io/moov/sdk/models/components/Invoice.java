@@ -75,11 +75,12 @@ public class Invoice {
     private AmountDecimal subtotalAmount;
 
 
-    @JsonProperty("taxAmount")
-    private AmountDecimal taxAmount;
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("amountDetails")
+    private Optional<? extends AmountDetails> amountDetails;
 
     /**
-     * Total amount of the invoice, sum of subTotalAmount and taxAmount
+     * Total amount of the invoice, including subtotal, tax, and surcharge amounts.
      */
     @JsonProperty("totalAmount")
     private AmountDecimal totalAmount;
@@ -166,7 +167,7 @@ public class Invoice {
             @JsonProperty("status") InvoiceStatus status,
             @JsonProperty("lineItems") InvoiceLineItems lineItems,
             @JsonProperty("subtotalAmount") AmountDecimal subtotalAmount,
-            @JsonProperty("taxAmount") AmountDecimal taxAmount,
+            @JsonProperty("amountDetails") Optional<? extends AmountDetails> amountDetails,
             @JsonProperty("totalAmount") AmountDecimal totalAmount,
             @JsonProperty("pendingAmount") AmountDecimal pendingAmount,
             @JsonProperty("paidAmount") AmountDecimal paidAmount,
@@ -191,7 +192,7 @@ public class Invoice {
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(lineItems, "lineItems");
         Utils.checkNotNull(subtotalAmount, "subtotalAmount");
-        Utils.checkNotNull(taxAmount, "taxAmount");
+        Utils.checkNotNull(amountDetails, "amountDetails");
         Utils.checkNotNull(totalAmount, "totalAmount");
         Utils.checkNotNull(pendingAmount, "pendingAmount");
         Utils.checkNotNull(paidAmount, "paidAmount");
@@ -216,7 +217,7 @@ public class Invoice {
         this.status = status;
         this.lineItems = lineItems;
         this.subtotalAmount = subtotalAmount;
-        this.taxAmount = taxAmount;
+        this.amountDetails = amountDetails;
         this.totalAmount = totalAmount;
         this.pendingAmount = pendingAmount;
         this.paidAmount = paidAmount;
@@ -243,7 +244,6 @@ public class Invoice {
             InvoiceStatus status,
             InvoiceLineItems lineItems,
             AmountDecimal subtotalAmount,
-            AmountDecimal taxAmount,
             AmountDecimal totalAmount,
             AmountDecimal pendingAmount,
             AmountDecimal paidAmount,
@@ -253,7 +253,7 @@ public class Invoice {
         this(invoiceID, invoiceNumber, Optional.empty(),
             customerAccountID, customerDisplayName, customerEmail,
             partnerAccountID, status, lineItems,
-            subtotalAmount, taxAmount, totalAmount,
+            subtotalAmount, Optional.empty(), totalAmount,
             pendingAmount, paidAmount, refundedAmount,
             disputedAmount, Optional.empty(), Optional.empty(),
             createdOn, Optional.empty(), Optional.empty(),
@@ -332,13 +332,14 @@ public class Invoice {
         return subtotalAmount;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public AmountDecimal taxAmount() {
-        return taxAmount;
+    public Optional<AmountDetails> amountDetails() {
+        return (Optional<AmountDetails>) amountDetails;
     }
 
     /**
-     * Total amount of the invoice, sum of subTotalAmount and taxAmount
+     * Total amount of the invoice, including subtotal, tax, and surcharge amounts.
      */
     @JsonIgnore
     public AmountDecimal totalAmount() {
@@ -519,14 +520,21 @@ public class Invoice {
         return this;
     }
 
-    public Invoice withTaxAmount(AmountDecimal taxAmount) {
-        Utils.checkNotNull(taxAmount, "taxAmount");
-        this.taxAmount = taxAmount;
+    public Invoice withAmountDetails(AmountDetails amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = Optional.ofNullable(amountDetails);
+        return this;
+    }
+
+
+    public Invoice withAmountDetails(Optional<? extends AmountDetails> amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = amountDetails;
         return this;
     }
 
     /**
-     * Total amount of the invoice, sum of subTotalAmount and taxAmount
+     * Total amount of the invoice, including subtotal, tax, and surcharge amounts.
      */
     public Invoice withTotalAmount(AmountDecimal totalAmount) {
         Utils.checkNotNull(totalAmount, "totalAmount");
@@ -706,7 +714,7 @@ public class Invoice {
             Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
             Utils.enhancedDeepEquals(this.subtotalAmount, other.subtotalAmount) &&
-            Utils.enhancedDeepEquals(this.taxAmount, other.taxAmount) &&
+            Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails) &&
             Utils.enhancedDeepEquals(this.totalAmount, other.totalAmount) &&
             Utils.enhancedDeepEquals(this.pendingAmount, other.pendingAmount) &&
             Utils.enhancedDeepEquals(this.paidAmount, other.paidAmount) &&
@@ -729,7 +737,7 @@ public class Invoice {
             invoiceID, invoiceNumber, description,
             customerAccountID, customerDisplayName, customerEmail,
             partnerAccountID, status, lineItems,
-            subtotalAmount, taxAmount, totalAmount,
+            subtotalAmount, amountDetails, totalAmount,
             pendingAmount, paidAmount, refundedAmount,
             disputedAmount, paymentLinkCode, invoicePayments,
             createdOn, invoiceDate, dueDate,
@@ -750,7 +758,7 @@ public class Invoice {
                 "status", status,
                 "lineItems", lineItems,
                 "subtotalAmount", subtotalAmount,
-                "taxAmount", taxAmount,
+                "amountDetails", amountDetails,
                 "totalAmount", totalAmount,
                 "pendingAmount", pendingAmount,
                 "paidAmount", paidAmount,
@@ -790,7 +798,7 @@ public class Invoice {
 
         private AmountDecimal subtotalAmount;
 
-        private AmountDecimal taxAmount;
+        private Optional<? extends AmountDetails> amountDetails = Optional.empty();
 
         private AmountDecimal totalAmount;
 
@@ -922,15 +930,21 @@ public class Invoice {
         }
 
 
-        public Builder taxAmount(AmountDecimal taxAmount) {
-            Utils.checkNotNull(taxAmount, "taxAmount");
-            this.taxAmount = taxAmount;
+        public Builder amountDetails(AmountDetails amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = Optional.ofNullable(amountDetails);
+            return this;
+        }
+
+        public Builder amountDetails(Optional<? extends AmountDetails> amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = amountDetails;
             return this;
         }
 
 
         /**
-         * Total amount of the invoice, sum of subTotalAmount and taxAmount
+         * Total amount of the invoice, including subtotal, tax, and surcharge amounts.
          */
         public Builder totalAmount(AmountDecimal totalAmount) {
             Utils.checkNotNull(totalAmount, "totalAmount");
@@ -1101,7 +1115,7 @@ public class Invoice {
                 invoiceID, invoiceNumber, description,
                 customerAccountID, customerDisplayName, customerEmail,
                 partnerAccountID, status, lineItems,
-                subtotalAmount, taxAmount, totalAmount,
+                subtotalAmount, amountDetails, totalAmount,
                 pendingAmount, paidAmount, refundedAmount,
                 disputedAmount, paymentLinkCode, invoicePayments,
                 createdOn, invoiceDate, dueDate,

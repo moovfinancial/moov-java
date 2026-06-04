@@ -47,8 +47,8 @@ public class CreateInvoice {
 
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("taxAmount")
-    private Optional<? extends AmountDecimal> taxAmount;
+    @JsonProperty("amountDetails")
+    private Optional<? extends AmountDetails> amountDetails;
 
     @JsonCreator
     public CreateInvoice(
@@ -57,19 +57,19 @@ public class CreateInvoice {
             @JsonProperty("lineItems") CreateInvoiceLineItems lineItems,
             @JsonProperty("invoiceDate") Optional<OffsetDateTime> invoiceDate,
             @JsonProperty("dueDate") Optional<OffsetDateTime> dueDate,
-            @JsonProperty("taxAmount") Optional<? extends AmountDecimal> taxAmount) {
+            @JsonProperty("amountDetails") Optional<? extends AmountDetails> amountDetails) {
         Utils.checkNotNull(customerAccountID, "customerAccountID");
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(lineItems, "lineItems");
         Utils.checkNotNull(invoiceDate, "invoiceDate");
         Utils.checkNotNull(dueDate, "dueDate");
-        Utils.checkNotNull(taxAmount, "taxAmount");
+        Utils.checkNotNull(amountDetails, "amountDetails");
         this.customerAccountID = customerAccountID;
         this.description = description;
         this.lineItems = lineItems;
         this.invoiceDate = invoiceDate;
         this.dueDate = dueDate;
-        this.taxAmount = taxAmount;
+        this.amountDetails = amountDetails;
     }
     
     public CreateInvoice(
@@ -113,8 +113,8 @@ public class CreateInvoice {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<AmountDecimal> taxAmount() {
-        return (Optional<AmountDecimal>) taxAmount;
+    public Optional<AmountDetails> amountDetails() {
+        return (Optional<AmountDetails>) amountDetails;
     }
 
     public static Builder builder() {
@@ -180,16 +180,16 @@ public class CreateInvoice {
         return this;
     }
 
-    public CreateInvoice withTaxAmount(AmountDecimal taxAmount) {
-        Utils.checkNotNull(taxAmount, "taxAmount");
-        this.taxAmount = Optional.ofNullable(taxAmount);
+    public CreateInvoice withAmountDetails(AmountDetails amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = Optional.ofNullable(amountDetails);
         return this;
     }
 
 
-    public CreateInvoice withTaxAmount(Optional<? extends AmountDecimal> taxAmount) {
-        Utils.checkNotNull(taxAmount, "taxAmount");
-        this.taxAmount = taxAmount;
+    public CreateInvoice withAmountDetails(Optional<? extends AmountDetails> amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = amountDetails;
         return this;
     }
 
@@ -208,14 +208,14 @@ public class CreateInvoice {
             Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
             Utils.enhancedDeepEquals(this.invoiceDate, other.invoiceDate) &&
             Utils.enhancedDeepEquals(this.dueDate, other.dueDate) &&
-            Utils.enhancedDeepEquals(this.taxAmount, other.taxAmount);
+            Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             customerAccountID, description, lineItems,
-            invoiceDate, dueDate, taxAmount);
+            invoiceDate, dueDate, amountDetails);
     }
     
     @Override
@@ -226,7 +226,7 @@ public class CreateInvoice {
                 "lineItems", lineItems,
                 "invoiceDate", invoiceDate,
                 "dueDate", dueDate,
-                "taxAmount", taxAmount);
+                "amountDetails", amountDetails);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -242,7 +242,7 @@ public class CreateInvoice {
 
         private Optional<OffsetDateTime> dueDate = Optional.empty();
 
-        private Optional<? extends AmountDecimal> taxAmount = Optional.empty();
+        private Optional<? extends AmountDetails> amountDetails = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -309,15 +309,15 @@ public class CreateInvoice {
         }
 
 
-        public Builder taxAmount(AmountDecimal taxAmount) {
-            Utils.checkNotNull(taxAmount, "taxAmount");
-            this.taxAmount = Optional.ofNullable(taxAmount);
+        public Builder amountDetails(AmountDetails amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = Optional.ofNullable(amountDetails);
             return this;
         }
 
-        public Builder taxAmount(Optional<? extends AmountDecimal> taxAmount) {
-            Utils.checkNotNull(taxAmount, "taxAmount");
-            this.taxAmount = taxAmount;
+        public Builder amountDetails(Optional<? extends AmountDetails> amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = amountDetails;
             return this;
         }
 
@@ -325,7 +325,7 @@ public class CreateInvoice {
 
             return new CreateInvoice(
                 customerAccountID, description, lineItems,
-                invoiceDate, dueDate, taxAmount);
+                invoiceDate, dueDate, amountDetails);
         }
 
     }

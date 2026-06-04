@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.moov.sdk.models.components.AmountDecimalValidationError;
+import io.moov.sdk.models.components.AmountDetailsValidationError;
 import io.moov.sdk.models.components.CreateInvoiceLineItemsValidationError;
 import io.moov.sdk.utils.Utils;
 import jakarta.annotation.Nullable;
@@ -81,8 +81,8 @@ public class CreateInvoiceError extends MoovError {
     }
 
     @Deprecated
-    public Optional<AmountDecimalValidationError> taxAmount() {
-        return data().flatMap(Data::taxAmount);
+    public Optional<AmountDetailsValidationError> amountDetails() {
+        return data().flatMap(Data::amountDetails);
     }
 
     public Optional<Data> data() {
@@ -124,8 +124,8 @@ public class CreateInvoiceError extends MoovError {
 
 
         @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("taxAmount")
-        private Optional<? extends AmountDecimalValidationError> taxAmount;
+        @JsonProperty("amountDetails")
+        private Optional<? extends AmountDetailsValidationError> amountDetails;
 
         @JsonCreator
         public Data(
@@ -134,19 +134,19 @@ public class CreateInvoiceError extends MoovError {
                 @JsonProperty("lineItems") Optional<? extends CreateInvoiceLineItemsValidationError> lineItems,
                 @JsonProperty("invoiceDate") Optional<String> invoiceDate,
                 @JsonProperty("dueDate") Optional<String> dueDate,
-                @JsonProperty("taxAmount") Optional<? extends AmountDecimalValidationError> taxAmount) {
+                @JsonProperty("amountDetails") Optional<? extends AmountDetailsValidationError> amountDetails) {
             Utils.checkNotNull(customerAccountID, "customerAccountID");
             Utils.checkNotNull(description, "description");
             Utils.checkNotNull(lineItems, "lineItems");
             Utils.checkNotNull(invoiceDate, "invoiceDate");
             Utils.checkNotNull(dueDate, "dueDate");
-            Utils.checkNotNull(taxAmount, "taxAmount");
+            Utils.checkNotNull(amountDetails, "amountDetails");
             this.customerAccountID = customerAccountID;
             this.description = description;
             this.lineItems = lineItems;
             this.invoiceDate = invoiceDate;
             this.dueDate = dueDate;
-            this.taxAmount = taxAmount;
+            this.amountDetails = amountDetails;
         }
         
         public Data() {
@@ -182,8 +182,8 @@ public class CreateInvoiceError extends MoovError {
 
         @SuppressWarnings("unchecked")
         @JsonIgnore
-        public Optional<AmountDecimalValidationError> taxAmount() {
-            return (Optional<AmountDecimalValidationError>) taxAmount;
+        public Optional<AmountDetailsValidationError> amountDetails() {
+            return (Optional<AmountDetailsValidationError>) amountDetails;
         }
 
         public static Builder builder() {
@@ -256,16 +256,16 @@ public class CreateInvoiceError extends MoovError {
             return this;
         }
 
-        public Data withTaxAmount(AmountDecimalValidationError taxAmount) {
-            Utils.checkNotNull(taxAmount, "taxAmount");
-            this.taxAmount = Optional.ofNullable(taxAmount);
+        public Data withAmountDetails(AmountDetailsValidationError amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = Optional.ofNullable(amountDetails);
             return this;
         }
 
 
-        public Data withTaxAmount(Optional<? extends AmountDecimalValidationError> taxAmount) {
-            Utils.checkNotNull(taxAmount, "taxAmount");
-            this.taxAmount = taxAmount;
+        public Data withAmountDetails(Optional<? extends AmountDetailsValidationError> amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = amountDetails;
             return this;
         }
 
@@ -284,14 +284,14 @@ public class CreateInvoiceError extends MoovError {
                 Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
                 Utils.enhancedDeepEquals(this.invoiceDate, other.invoiceDate) &&
                 Utils.enhancedDeepEquals(this.dueDate, other.dueDate) &&
-                Utils.enhancedDeepEquals(this.taxAmount, other.taxAmount);
+                Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
         }
         
         @Override
         public int hashCode() {
             return Utils.enhancedHash(
                 customerAccountID, description, lineItems,
-                invoiceDate, dueDate, taxAmount);
+                invoiceDate, dueDate, amountDetails);
         }
         
         @Override
@@ -302,7 +302,7 @@ public class CreateInvoiceError extends MoovError {
                     "lineItems", lineItems,
                     "invoiceDate", invoiceDate,
                     "dueDate", dueDate,
-                    "taxAmount", taxAmount);
+                    "amountDetails", amountDetails);
         }
 
         @SuppressWarnings("UnusedReturnValue")
@@ -318,7 +318,7 @@ public class CreateInvoiceError extends MoovError {
 
             private Optional<String> dueDate = Optional.empty();
 
-            private Optional<? extends AmountDecimalValidationError> taxAmount = Optional.empty();
+            private Optional<? extends AmountDetailsValidationError> amountDetails = Optional.empty();
 
             private Builder() {
               // force use of static builder() method
@@ -390,15 +390,15 @@ public class CreateInvoiceError extends MoovError {
             }
 
 
-            public Builder taxAmount(AmountDecimalValidationError taxAmount) {
-                Utils.checkNotNull(taxAmount, "taxAmount");
-                this.taxAmount = Optional.ofNullable(taxAmount);
+            public Builder amountDetails(AmountDetailsValidationError amountDetails) {
+                Utils.checkNotNull(amountDetails, "amountDetails");
+                this.amountDetails = Optional.ofNullable(amountDetails);
                 return this;
             }
 
-            public Builder taxAmount(Optional<? extends AmountDecimalValidationError> taxAmount) {
-                Utils.checkNotNull(taxAmount, "taxAmount");
-                this.taxAmount = taxAmount;
+            public Builder amountDetails(Optional<? extends AmountDetailsValidationError> amountDetails) {
+                Utils.checkNotNull(amountDetails, "amountDetails");
+                this.amountDetails = amountDetails;
                 return this;
             }
 
@@ -406,7 +406,7 @@ public class CreateInvoiceError extends MoovError {
 
                 return new Data(
                     customerAccountID, description, lineItems,
-                    invoiceDate, dueDate, taxAmount);
+                    invoiceDate, dueDate, amountDetails);
             }
 
         }

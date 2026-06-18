@@ -13,7 +13,15 @@ import java.util.List;
 
 
 public class AddCapabilities {
-
+    /**
+     * Capabilities to request for the account. Request granular capability IDs that match your use case.
+     * 
+     * <p>Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to
+     * choose the right capabilities for your integration.
+     * 
+     * <p>The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Use granular values
+     * such as `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance` instead.
+     */
     @JsonProperty("capabilities")
     private List<CapabilityID> capabilities;
 
@@ -24,6 +32,15 @@ public class AddCapabilities {
         this.capabilities = capabilities;
     }
 
+    /**
+     * Capabilities to request for the account. Request granular capability IDs that match your use case.
+     * 
+     * <p>Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to
+     * choose the right capabilities for your integration.
+     * 
+     * <p>The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Use granular values
+     * such as `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance` instead.
+     */
     @JsonIgnore
     public List<CapabilityID> capabilities() {
         return capabilities;
@@ -34,6 +51,15 @@ public class AddCapabilities {
     }
 
 
+    /**
+     * Capabilities to request for the account. Request granular capability IDs that match your use case.
+     * 
+     * <p>Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to
+     * choose the right capabilities for your integration.
+     * 
+     * <p>The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Use granular values
+     * such as `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance` instead.
+     */
     public AddCapabilities withCapabilities(List<CapabilityID> capabilities) {
         Utils.checkNotNull(capabilities, "capabilities");
         this.capabilities = capabilities;
@@ -75,6 +101,15 @@ public class AddCapabilities {
         }
 
 
+        /**
+         * Capabilities to request for the account. Request granular capability IDs that match your use case.
+         * 
+         * <p>Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to
+         * choose the right capabilities for your integration.
+         * 
+         * <p>The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Use granular values
+         * such as `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance` instead.
+         */
         public Builder capabilities(List<CapabilityID> capabilities) {
             Utils.checkNotNull(capabilities, "capabilities");
             this.capabilities = capabilities;

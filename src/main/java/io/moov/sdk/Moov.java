@@ -488,7 +488,7 @@ public class Moov {
         return new Builder();
     }
 
-    public Moov(SDKConfiguration sdkConfiguration) {
+    private Moov(SDKConfiguration sdkConfiguration) {
         sdkConfiguration.initialize();
         this.accounts = new Accounts(sdkConfiguration);
         this.adjustments = new Adjustments(sdkConfiguration);

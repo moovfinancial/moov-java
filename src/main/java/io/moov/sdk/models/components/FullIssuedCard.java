@@ -13,6 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -42,23 +43,38 @@ public class FullIssuedCard {
     private CardExpiration expiration;
 
     /**
-     * Fields for identifying an authorized individual.
-     */
-    @JsonProperty("authorizedUser")
-    private AuthorizedUser authorizedUser;
-
-    /**
-     * Optional descriptor for the card.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("memo")
-    private Optional<String> memo;
-
-    /**
      * Unique identifier for the wallet funding the card.
      */
     @JsonProperty("fundingWalletID")
     private String fundingWalletID;
+
+    /**
+     * Identifier for the account of the card's authorized user.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("authorizedUserAccountID")
+    private Optional<String> authorizedUserAccountID;
+
+    /**
+     * An optional descriptive name for the card.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("nickname")
+    private Optional<String> nickname;
+
+    /**
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("metadata")
+    private Optional<? extends Map<String, String>> metadata;
+
+    /**
+     * Billing address associated with the card.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("billingAddress")
+    private Optional<? extends Address> billingAddress;
 
     /**
      * The `state` represents the operational status of an issued card. A card can only approve incoming
@@ -92,6 +108,10 @@ public class FullIssuedCard {
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
 
+
+    @JsonProperty("updatedOn")
+    private OffsetDateTime updatedOn;
+
     /**
      * The issued card's Primary Account Number (PAN)
      */
@@ -110,39 +130,48 @@ public class FullIssuedCard {
             @JsonProperty("brand") CardBrand brand,
             @JsonProperty("lastFourCardNumber") String lastFourCardNumber,
             @JsonProperty("expiration") CardExpiration expiration,
-            @JsonProperty("authorizedUser") AuthorizedUser authorizedUser,
-            @JsonProperty("memo") Optional<String> memo,
             @JsonProperty("fundingWalletID") String fundingWalletID,
+            @JsonProperty("authorizedUserAccountID") Optional<String> authorizedUserAccountID,
+            @JsonProperty("nickname") Optional<String> nickname,
+            @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata,
+            @JsonProperty("billingAddress") Optional<? extends Address> billingAddress,
             @JsonProperty("state") IssuedCardState state,
             @JsonProperty("formFactor") IssuedCardFormFactor formFactor,
             @JsonProperty("controls") Optional<? extends IssuingControls> controls,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
+            @JsonProperty("updatedOn") OffsetDateTime updatedOn,
             @JsonProperty("pan") String pan,
             @JsonProperty("cvv") String cvv) {
         Utils.checkNotNull(issuedCardID, "issuedCardID");
         Utils.checkNotNull(brand, "brand");
         Utils.checkNotNull(lastFourCardNumber, "lastFourCardNumber");
         Utils.checkNotNull(expiration, "expiration");
-        Utils.checkNotNull(authorizedUser, "authorizedUser");
-        Utils.checkNotNull(memo, "memo");
         Utils.checkNotNull(fundingWalletID, "fundingWalletID");
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+        Utils.checkNotNull(nickname, "nickname");
+        Utils.checkNotNull(metadata, "metadata");
+        Utils.checkNotNull(billingAddress, "billingAddress");
         Utils.checkNotNull(state, "state");
         Utils.checkNotNull(formFactor, "formFactor");
         Utils.checkNotNull(controls, "controls");
         Utils.checkNotNull(createdOn, "createdOn");
+        Utils.checkNotNull(updatedOn, "updatedOn");
         Utils.checkNotNull(pan, "pan");
         Utils.checkNotNull(cvv, "cvv");
         this.issuedCardID = issuedCardID;
         this.brand = brand;
         this.lastFourCardNumber = lastFourCardNumber;
         this.expiration = expiration;
-        this.authorizedUser = authorizedUser;
-        this.memo = memo;
         this.fundingWalletID = fundingWalletID;
+        this.authorizedUserAccountID = authorizedUserAccountID;
+        this.nickname = nickname;
+        this.metadata = metadata;
+        this.billingAddress = billingAddress;
         this.state = state;
         this.formFactor = formFactor;
         this.controls = controls;
         this.createdOn = createdOn;
+        this.updatedOn = updatedOn;
         this.pan = pan;
         this.cvv = cvv;
     }
@@ -152,17 +181,18 @@ public class FullIssuedCard {
             CardBrand brand,
             String lastFourCardNumber,
             CardExpiration expiration,
-            AuthorizedUser authorizedUser,
             String fundingWalletID,
             IssuedCardState state,
             IssuedCardFormFactor formFactor,
             OffsetDateTime createdOn,
+            OffsetDateTime updatedOn,
             String pan,
             String cvv) {
         this(issuedCardID, brand, lastFourCardNumber,
-            expiration, authorizedUser, Optional.empty(),
-            fundingWalletID, state, formFactor,
-            Optional.empty(), createdOn, pan,
+            expiration, fundingWalletID, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            state, formFactor, Optional.empty(),
+            createdOn, updatedOn, pan,
             cvv);
     }
 
@@ -193,27 +223,45 @@ public class FullIssuedCard {
     }
 
     /**
-     * Fields for identifying an authorized individual.
-     */
-    @JsonIgnore
-    public AuthorizedUser authorizedUser() {
-        return authorizedUser;
-    }
-
-    /**
-     * Optional descriptor for the card.
-     */
-    @JsonIgnore
-    public Optional<String> memo() {
-        return memo;
-    }
-
-    /**
      * Unique identifier for the wallet funding the card.
      */
     @JsonIgnore
     public String fundingWalletID() {
         return fundingWalletID;
+    }
+
+    /**
+     * Identifier for the account of the card's authorized user.
+     */
+    @JsonIgnore
+    public Optional<String> authorizedUserAccountID() {
+        return authorizedUserAccountID;
+    }
+
+    /**
+     * An optional descriptive name for the card.
+     */
+    @JsonIgnore
+    public Optional<String> nickname() {
+        return nickname;
+    }
+
+    /**
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Map<String, String>> metadata() {
+        return (Optional<Map<String, String>>) metadata;
+    }
+
+    /**
+     * Billing address associated with the card.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Address> billingAddress() {
+        return (Optional<Address>) billingAddress;
     }
 
     /**
@@ -252,6 +300,11 @@ public class FullIssuedCard {
     @JsonIgnore
     public OffsetDateTime createdOn() {
         return createdOn;
+    }
+
+    @JsonIgnore
+    public OffsetDateTime updatedOn() {
+        return updatedOn;
     }
 
     /**
@@ -306,39 +359,87 @@ public class FullIssuedCard {
     }
 
     /**
-     * Fields for identifying an authorized individual.
-     */
-    public FullIssuedCard withAuthorizedUser(AuthorizedUser authorizedUser) {
-        Utils.checkNotNull(authorizedUser, "authorizedUser");
-        this.authorizedUser = authorizedUser;
-        return this;
-    }
-
-    /**
-     * Optional descriptor for the card.
-     */
-    public FullIssuedCard withMemo(String memo) {
-        Utils.checkNotNull(memo, "memo");
-        this.memo = Optional.ofNullable(memo);
-        return this;
-    }
-
-
-    /**
-     * Optional descriptor for the card.
-     */
-    public FullIssuedCard withMemo(Optional<String> memo) {
-        Utils.checkNotNull(memo, "memo");
-        this.memo = memo;
-        return this;
-    }
-
-    /**
      * Unique identifier for the wallet funding the card.
      */
     public FullIssuedCard withFundingWalletID(String fundingWalletID) {
         Utils.checkNotNull(fundingWalletID, "fundingWalletID");
         this.fundingWalletID = fundingWalletID;
+        return this;
+    }
+
+    /**
+     * Identifier for the account of the card's authorized user.
+     */
+    public FullIssuedCard withAuthorizedUserAccountID(String authorizedUserAccountID) {
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+        this.authorizedUserAccountID = Optional.ofNullable(authorizedUserAccountID);
+        return this;
+    }
+
+
+    /**
+     * Identifier for the account of the card's authorized user.
+     */
+    public FullIssuedCard withAuthorizedUserAccountID(Optional<String> authorizedUserAccountID) {
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+        this.authorizedUserAccountID = authorizedUserAccountID;
+        return this;
+    }
+
+    /**
+     * An optional descriptive name for the card.
+     */
+    public FullIssuedCard withNickname(String nickname) {
+        Utils.checkNotNull(nickname, "nickname");
+        this.nickname = Optional.ofNullable(nickname);
+        return this;
+    }
+
+
+    /**
+     * An optional descriptive name for the card.
+     */
+    public FullIssuedCard withNickname(Optional<String> nickname) {
+        Utils.checkNotNull(nickname, "nickname");
+        this.nickname = nickname;
+        return this;
+    }
+
+    /**
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+     */
+    public FullIssuedCard withMetadata(Map<String, String> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = Optional.ofNullable(metadata);
+        return this;
+    }
+
+
+    /**
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+     */
+    public FullIssuedCard withMetadata(Optional<? extends Map<String, String>> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = metadata;
+        return this;
+    }
+
+    /**
+     * Billing address associated with the card.
+     */
+    public FullIssuedCard withBillingAddress(Address billingAddress) {
+        Utils.checkNotNull(billingAddress, "billingAddress");
+        this.billingAddress = Optional.ofNullable(billingAddress);
+        return this;
+    }
+
+
+    /**
+     * Billing address associated with the card.
+     */
+    public FullIssuedCard withBillingAddress(Optional<? extends Address> billingAddress) {
+        Utils.checkNotNull(billingAddress, "billingAddress");
+        this.billingAddress = billingAddress;
         return this;
     }
 
@@ -390,6 +491,12 @@ public class FullIssuedCard {
         return this;
     }
 
+    public FullIssuedCard withUpdatedOn(OffsetDateTime updatedOn) {
+        Utils.checkNotNull(updatedOn, "updatedOn");
+        this.updatedOn = updatedOn;
+        return this;
+    }
+
     /**
      * The issued card's Primary Account Number (PAN)
      */
@@ -422,13 +529,16 @@ public class FullIssuedCard {
             Utils.enhancedDeepEquals(this.brand, other.brand) &&
             Utils.enhancedDeepEquals(this.lastFourCardNumber, other.lastFourCardNumber) &&
             Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
-            Utils.enhancedDeepEquals(this.authorizedUser, other.authorizedUser) &&
-            Utils.enhancedDeepEquals(this.memo, other.memo) &&
             Utils.enhancedDeepEquals(this.fundingWalletID, other.fundingWalletID) &&
+            Utils.enhancedDeepEquals(this.authorizedUserAccountID, other.authorizedUserAccountID) &&
+            Utils.enhancedDeepEquals(this.nickname, other.nickname) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.billingAddress, other.billingAddress) &&
             Utils.enhancedDeepEquals(this.state, other.state) &&
             Utils.enhancedDeepEquals(this.formFactor, other.formFactor) &&
             Utils.enhancedDeepEquals(this.controls, other.controls) &&
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
             Utils.enhancedDeepEquals(this.pan, other.pan) &&
             Utils.enhancedDeepEquals(this.cvv, other.cvv);
     }
@@ -437,9 +547,10 @@ public class FullIssuedCard {
     public int hashCode() {
         return Utils.enhancedHash(
             issuedCardID, brand, lastFourCardNumber,
-            expiration, authorizedUser, memo,
-            fundingWalletID, state, formFactor,
-            controls, createdOn, pan,
+            expiration, fundingWalletID, authorizedUserAccountID,
+            nickname, metadata, billingAddress,
+            state, formFactor, controls,
+            createdOn, updatedOn, pan,
             cvv);
     }
     
@@ -450,13 +561,16 @@ public class FullIssuedCard {
                 "brand", brand,
                 "lastFourCardNumber", lastFourCardNumber,
                 "expiration", expiration,
-                "authorizedUser", authorizedUser,
-                "memo", memo,
                 "fundingWalletID", fundingWalletID,
+                "authorizedUserAccountID", authorizedUserAccountID,
+                "nickname", nickname,
+                "metadata", metadata,
+                "billingAddress", billingAddress,
                 "state", state,
                 "formFactor", formFactor,
                 "controls", controls,
                 "createdOn", createdOn,
+                "updatedOn", updatedOn,
                 "pan", pan,
                 "cvv", cvv);
     }
@@ -472,11 +586,15 @@ public class FullIssuedCard {
 
         private CardExpiration expiration;
 
-        private AuthorizedUser authorizedUser;
-
-        private Optional<String> memo = Optional.empty();
-
         private String fundingWalletID;
+
+        private Optional<String> authorizedUserAccountID = Optional.empty();
+
+        private Optional<String> nickname = Optional.empty();
+
+        private Optional<? extends Map<String, String>> metadata = Optional.empty();
+
+        private Optional<? extends Address> billingAddress = Optional.empty();
 
         private IssuedCardState state;
 
@@ -485,6 +603,8 @@ public class FullIssuedCard {
         private Optional<? extends IssuingControls> controls = Optional.empty();
 
         private OffsetDateTime createdOn;
+
+        private OffsetDateTime updatedOn;
 
         private String pan;
 
@@ -530,40 +650,87 @@ public class FullIssuedCard {
 
 
         /**
-         * Fields for identifying an authorized individual.
-         */
-        public Builder authorizedUser(AuthorizedUser authorizedUser) {
-            Utils.checkNotNull(authorizedUser, "authorizedUser");
-            this.authorizedUser = authorizedUser;
-            return this;
-        }
-
-
-        /**
-         * Optional descriptor for the card.
-         */
-        public Builder memo(String memo) {
-            Utils.checkNotNull(memo, "memo");
-            this.memo = Optional.ofNullable(memo);
-            return this;
-        }
-
-        /**
-         * Optional descriptor for the card.
-         */
-        public Builder memo(Optional<String> memo) {
-            Utils.checkNotNull(memo, "memo");
-            this.memo = memo;
-            return this;
-        }
-
-
-        /**
          * Unique identifier for the wallet funding the card.
          */
         public Builder fundingWalletID(String fundingWalletID) {
             Utils.checkNotNull(fundingWalletID, "fundingWalletID");
             this.fundingWalletID = fundingWalletID;
+            return this;
+        }
+
+
+        /**
+         * Identifier for the account of the card's authorized user.
+         */
+        public Builder authorizedUserAccountID(String authorizedUserAccountID) {
+            Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+            this.authorizedUserAccountID = Optional.ofNullable(authorizedUserAccountID);
+            return this;
+        }
+
+        /**
+         * Identifier for the account of the card's authorized user.
+         */
+        public Builder authorizedUserAccountID(Optional<String> authorizedUserAccountID) {
+            Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+            this.authorizedUserAccountID = authorizedUserAccountID;
+            return this;
+        }
+
+
+        /**
+         * An optional descriptive name for the card.
+         */
+        public Builder nickname(String nickname) {
+            Utils.checkNotNull(nickname, "nickname");
+            this.nickname = Optional.ofNullable(nickname);
+            return this;
+        }
+
+        /**
+         * An optional descriptive name for the card.
+         */
+        public Builder nickname(Optional<String> nickname) {
+            Utils.checkNotNull(nickname, "nickname");
+            this.nickname = nickname;
+            return this;
+        }
+
+
+        /**
+         * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+         */
+        public Builder metadata(Map<String, String> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = Optional.ofNullable(metadata);
+            return this;
+        }
+
+        /**
+         * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+         */
+        public Builder metadata(Optional<? extends Map<String, String>> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = metadata;
+            return this;
+        }
+
+
+        /**
+         * Billing address associated with the card.
+         */
+        public Builder billingAddress(Address billingAddress) {
+            Utils.checkNotNull(billingAddress, "billingAddress");
+            this.billingAddress = Optional.ofNullable(billingAddress);
+            return this;
+        }
+
+        /**
+         * Billing address associated with the card.
+         */
+        public Builder billingAddress(Optional<? extends Address> billingAddress) {
+            Utils.checkNotNull(billingAddress, "billingAddress");
+            this.billingAddress = billingAddress;
             return this;
         }
 
@@ -619,6 +786,13 @@ public class FullIssuedCard {
         }
 
 
+        public Builder updatedOn(OffsetDateTime updatedOn) {
+            Utils.checkNotNull(updatedOn, "updatedOn");
+            this.updatedOn = updatedOn;
+            return this;
+        }
+
+
         /**
          * The issued card's Primary Account Number (PAN)
          */
@@ -642,9 +816,10 @@ public class FullIssuedCard {
 
             return new FullIssuedCard(
                 issuedCardID, brand, lastFourCardNumber,
-                expiration, authorizedUser, memo,
-                fundingWalletID, state, formFactor,
-                controls, createdOn, pan,
+                expiration, fundingWalletID, authorizedUserAccountID,
+                nickname, metadata, billingAddress,
+                state, formFactor, controls,
+                createdOn, updatedOn, pan,
                 cvv);
         }
 

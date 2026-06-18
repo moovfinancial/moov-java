@@ -37,6 +37,9 @@ import io.moov.sdk.models.operations.GetTransferResponse;
 import io.moov.sdk.models.operations.InitiateRefundRequest;
 import io.moov.sdk.models.operations.InitiateRefundRequestBuilder;
 import io.moov.sdk.models.operations.InitiateRefundResponse;
+import io.moov.sdk.models.operations.ListCancellationsRequest;
+import io.moov.sdk.models.operations.ListCancellationsRequestBuilder;
+import io.moov.sdk.models.operations.ListCancellationsResponse;
 import io.moov.sdk.models.operations.ListRefundsRequest;
 import io.moov.sdk.models.operations.ListRefundsRequestBuilder;
 import io.moov.sdk.models.operations.ListRefundsResponse;
@@ -52,6 +55,7 @@ import io.moov.sdk.operations.GetCancellation;
 import io.moov.sdk.operations.GetRefund;
 import io.moov.sdk.operations.GetTransfer;
 import io.moov.sdk.operations.InitiateRefund;
+import io.moov.sdk.operations.ListCancellations;
 import io.moov.sdk.operations.ListRefunds;
 import io.moov.sdk.operations.ListTransfers;
 import io.moov.sdk.operations.UpdateTransfer;
@@ -420,6 +424,43 @@ public class Transfers {
                 .build();
         RequestOperation<CreateCancellationRequest, CreateCancellationResponse> operation
               = new CreateCancellation.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get a list of cancellations for a transfer.
+     * 
+     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need
+     * to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @return The call builder
+     */
+    public ListCancellationsRequestBuilder listCancellations() {
+        return new ListCancellationsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a list of cancellations for a transfer.
+     * 
+     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need
+     * to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID Moov account ID of the partner or transfer's source or destination.
+     * @param transferID Identifier for the transfer.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListCancellationsResponse listCancellations(String accountID, String transferID) {
+        ListCancellationsRequest request =
+            ListCancellationsRequest
+                .builder()
+                .accountID(accountID)
+                .transferID(transferID)
+                .build();
+        RequestOperation<ListCancellationsRequest, ListCancellationsResponse> operation
+              = new ListCancellations.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

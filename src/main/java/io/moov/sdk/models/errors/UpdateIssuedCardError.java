@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.moov.sdk.models.components.CreateAuthorizedUserError;
+import io.moov.sdk.models.components.AddressError;
 import io.moov.sdk.utils.Utils;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
@@ -60,13 +60,18 @@ public class UpdateIssuedCardError extends MoovError {
     }
 
     @Deprecated
-    public Optional<String> memo() {
-        return data().flatMap(Data::memo);
+    public Optional<String> nickname() {
+        return data().flatMap(Data::nickname);
     }
 
     @Deprecated
-    public Optional<CreateAuthorizedUserError> authorizedUser() {
-        return data().flatMap(Data::authorizedUser);
+    public Optional<String> metadata() {
+        return data().flatMap(Data::metadata);
+    }
+
+    @Deprecated
+    public Optional<AddressError> billingAddress() {
+        return data().flatMap(Data::billingAddress);
     }
 
     public Optional<Data> data() {
@@ -88,29 +93,38 @@ public class UpdateIssuedCardError extends MoovError {
 
 
         @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("memo")
-        private Optional<String> memo;
+        @JsonProperty("nickname")
+        private Optional<String> nickname;
 
 
         @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("authorizedUser")
-        private Optional<? extends CreateAuthorizedUserError> authorizedUser;
+        @JsonProperty("metadata")
+        private Optional<String> metadata;
+
+
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("billingAddress")
+        private Optional<? extends AddressError> billingAddress;
 
         @JsonCreator
         public Data(
                 @JsonProperty("state") Optional<String> state,
-                @JsonProperty("memo") Optional<String> memo,
-                @JsonProperty("authorizedUser") Optional<? extends CreateAuthorizedUserError> authorizedUser) {
+                @JsonProperty("nickname") Optional<String> nickname,
+                @JsonProperty("metadata") Optional<String> metadata,
+                @JsonProperty("billingAddress") Optional<? extends AddressError> billingAddress) {
             Utils.checkNotNull(state, "state");
-            Utils.checkNotNull(memo, "memo");
-            Utils.checkNotNull(authorizedUser, "authorizedUser");
+            Utils.checkNotNull(nickname, "nickname");
+            Utils.checkNotNull(metadata, "metadata");
+            Utils.checkNotNull(billingAddress, "billingAddress");
             this.state = state;
-            this.memo = memo;
-            this.authorizedUser = authorizedUser;
+            this.nickname = nickname;
+            this.metadata = metadata;
+            this.billingAddress = billingAddress;
         }
         
         public Data() {
-            this(Optional.empty(), Optional.empty(), Optional.empty());
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty());
         }
 
         @JsonIgnore
@@ -119,14 +133,19 @@ public class UpdateIssuedCardError extends MoovError {
         }
 
         @JsonIgnore
-        public Optional<String> memo() {
-            return memo;
+        public Optional<String> nickname() {
+            return nickname;
+        }
+
+        @JsonIgnore
+        public Optional<String> metadata() {
+            return metadata;
         }
 
         @SuppressWarnings("unchecked")
         @JsonIgnore
-        public Optional<CreateAuthorizedUserError> authorizedUser() {
-            return (Optional<CreateAuthorizedUserError>) authorizedUser;
+        public Optional<AddressError> billingAddress() {
+            return (Optional<AddressError>) billingAddress;
         }
 
         public static Builder builder() {
@@ -147,29 +166,42 @@ public class UpdateIssuedCardError extends MoovError {
             return this;
         }
 
-        public Data withMemo(String memo) {
-            Utils.checkNotNull(memo, "memo");
-            this.memo = Optional.ofNullable(memo);
+        public Data withNickname(String nickname) {
+            Utils.checkNotNull(nickname, "nickname");
+            this.nickname = Optional.ofNullable(nickname);
             return this;
         }
 
 
-        public Data withMemo(Optional<String> memo) {
-            Utils.checkNotNull(memo, "memo");
-            this.memo = memo;
+        public Data withNickname(Optional<String> nickname) {
+            Utils.checkNotNull(nickname, "nickname");
+            this.nickname = nickname;
             return this;
         }
 
-        public Data withAuthorizedUser(CreateAuthorizedUserError authorizedUser) {
-            Utils.checkNotNull(authorizedUser, "authorizedUser");
-            this.authorizedUser = Optional.ofNullable(authorizedUser);
+        public Data withMetadata(String metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = Optional.ofNullable(metadata);
             return this;
         }
 
 
-        public Data withAuthorizedUser(Optional<? extends CreateAuthorizedUserError> authorizedUser) {
-            Utils.checkNotNull(authorizedUser, "authorizedUser");
-            this.authorizedUser = authorizedUser;
+        public Data withMetadata(Optional<String> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = metadata;
+            return this;
+        }
+
+        public Data withBillingAddress(AddressError billingAddress) {
+            Utils.checkNotNull(billingAddress, "billingAddress");
+            this.billingAddress = Optional.ofNullable(billingAddress);
+            return this;
+        }
+
+
+        public Data withBillingAddress(Optional<? extends AddressError> billingAddress) {
+            Utils.checkNotNull(billingAddress, "billingAddress");
+            this.billingAddress = billingAddress;
             return this;
         }
 
@@ -184,22 +216,25 @@ public class UpdateIssuedCardError extends MoovError {
             Data other = (Data) o;
             return 
                 Utils.enhancedDeepEquals(this.state, other.state) &&
-                Utils.enhancedDeepEquals(this.memo, other.memo) &&
-                Utils.enhancedDeepEquals(this.authorizedUser, other.authorizedUser);
+                Utils.enhancedDeepEquals(this.nickname, other.nickname) &&
+                Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+                Utils.enhancedDeepEquals(this.billingAddress, other.billingAddress);
         }
         
         @Override
         public int hashCode() {
             return Utils.enhancedHash(
-                state, memo, authorizedUser);
+                state, nickname, metadata,
+                billingAddress);
         }
         
         @Override
         public String toString() {
             return Utils.toString(Data.class,
                     "state", state,
-                    "memo", memo,
-                    "authorizedUser", authorizedUser);
+                    "nickname", nickname,
+                    "metadata", metadata,
+                    "billingAddress", billingAddress);
         }
 
         @SuppressWarnings("UnusedReturnValue")
@@ -207,9 +242,11 @@ public class UpdateIssuedCardError extends MoovError {
 
             private Optional<String> state = Optional.empty();
 
-            private Optional<String> memo = Optional.empty();
+            private Optional<String> nickname = Optional.empty();
 
-            private Optional<? extends CreateAuthorizedUserError> authorizedUser = Optional.empty();
+            private Optional<String> metadata = Optional.empty();
+
+            private Optional<? extends AddressError> billingAddress = Optional.empty();
 
             private Builder() {
               // force use of static builder() method
@@ -229,35 +266,49 @@ public class UpdateIssuedCardError extends MoovError {
             }
 
 
-            public Builder memo(String memo) {
-                Utils.checkNotNull(memo, "memo");
-                this.memo = Optional.ofNullable(memo);
+            public Builder nickname(String nickname) {
+                Utils.checkNotNull(nickname, "nickname");
+                this.nickname = Optional.ofNullable(nickname);
                 return this;
             }
 
-            public Builder memo(Optional<String> memo) {
-                Utils.checkNotNull(memo, "memo");
-                this.memo = memo;
+            public Builder nickname(Optional<String> nickname) {
+                Utils.checkNotNull(nickname, "nickname");
+                this.nickname = nickname;
                 return this;
             }
 
 
-            public Builder authorizedUser(CreateAuthorizedUserError authorizedUser) {
-                Utils.checkNotNull(authorizedUser, "authorizedUser");
-                this.authorizedUser = Optional.ofNullable(authorizedUser);
+            public Builder metadata(String metadata) {
+                Utils.checkNotNull(metadata, "metadata");
+                this.metadata = Optional.ofNullable(metadata);
                 return this;
             }
 
-            public Builder authorizedUser(Optional<? extends CreateAuthorizedUserError> authorizedUser) {
-                Utils.checkNotNull(authorizedUser, "authorizedUser");
-                this.authorizedUser = authorizedUser;
+            public Builder metadata(Optional<String> metadata) {
+                Utils.checkNotNull(metadata, "metadata");
+                this.metadata = metadata;
+                return this;
+            }
+
+
+            public Builder billingAddress(AddressError billingAddress) {
+                Utils.checkNotNull(billingAddress, "billingAddress");
+                this.billingAddress = Optional.ofNullable(billingAddress);
+                return this;
+            }
+
+            public Builder billingAddress(Optional<? extends AddressError> billingAddress) {
+                Utils.checkNotNull(billingAddress, "billingAddress");
+                this.billingAddress = billingAddress;
                 return this;
             }
 
             public Data build() {
 
                 return new Data(
-                    state, memo, authorizedUser);
+                    state, nickname, metadata,
+                    billingAddress);
             }
 
         }

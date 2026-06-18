@@ -14,7 +14,17 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-
+/**
+ * AmountDecimalRangeUpdate
+ * 
+ * <p>A range of values that an AmountDecimal can take.
+ * 
+ * <p>If either `minimum` or `maximum` is omitted, the range is "open" on that end:
+ * 
+ * <p>`minimum` specified: `amt &gt;= minimum`
+ * `maximum` specified: `amt &lt;= maximum`
+ * both specified: `minimum &lt;= amt &lt;= maximum`
+ */
 public class AmountDecimalRangeUpdate {
     /**
      * Minimum amount allowed in the range

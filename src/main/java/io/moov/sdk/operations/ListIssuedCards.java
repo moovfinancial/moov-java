@@ -80,7 +80,7 @@ public class ListIssuedCards {
             String url = Utils.generateURL(
                     klass,
                     this.baseUrl,
-                    "/issuing/{accountID}/issued-cards",
+                    "/issuing/{accountID}/cards",
                     request, null);
             HTTPRequest req = new HTTPRequest(url, "GET");
             req.addHeader("Accept", "application/json")

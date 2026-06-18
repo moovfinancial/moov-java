@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.moov.sdk.models.components.AddressError;
 import io.moov.sdk.models.components.CardExpirationError;
-import io.moov.sdk.models.components.CreateAuthorizedUserError;
 import io.moov.sdk.models.components.IssuingControlsError;
 import io.moov.sdk.utils.Utils;
 import jakarta.annotation.Nullable;
@@ -57,23 +57,23 @@ public class RequestCardError extends MoovError {
     }
 
     @Deprecated
-    public Optional<String> fundingWalletID() {
-        return data().flatMap(Data::fundingWalletID);
+    public Optional<String> authorizedUserAccountID() {
+        return data().flatMap(Data::authorizedUserAccountID);
     }
 
     @Deprecated
-    public Optional<String> formFactor() {
-        return data().flatMap(Data::formFactor);
+    public Optional<String> nickname() {
+        return data().flatMap(Data::nickname);
     }
 
     @Deprecated
-    public Optional<CreateAuthorizedUserError> authorizedUser() {
-        return data().flatMap(Data::authorizedUser);
+    public Optional<String> metadata() {
+        return data().flatMap(Data::metadata);
     }
 
     @Deprecated
-    public Optional<String> memo() {
-        return data().flatMap(Data::memo);
+    public Optional<AddressError> billingAddress() {
+        return data().flatMap(Data::billingAddress);
     }
 
     @Deprecated
@@ -100,23 +100,23 @@ public class RequestCardError extends MoovError {
     public static class Data {
 
         @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("fundingWalletID")
-        private Optional<String> fundingWalletID;
+        @JsonProperty("authorizedUserAccountID")
+        private Optional<String> authorizedUserAccountID;
 
 
         @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("formFactor")
-        private Optional<String> formFactor;
+        @JsonProperty("nickname")
+        private Optional<String> nickname;
 
 
         @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("authorizedUser")
-        private Optional<? extends CreateAuthorizedUserError> authorizedUser;
+        @JsonProperty("metadata")
+        private Optional<String> metadata;
 
 
         @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("memo")
-        private Optional<String> memo;
+        @JsonProperty("billingAddress")
+        private Optional<? extends AddressError> billingAddress;
 
 
         @JsonInclude(Include.NON_ABSENT)
@@ -130,22 +130,22 @@ public class RequestCardError extends MoovError {
 
         @JsonCreator
         public Data(
-                @JsonProperty("fundingWalletID") Optional<String> fundingWalletID,
-                @JsonProperty("formFactor") Optional<String> formFactor,
-                @JsonProperty("authorizedUser") Optional<? extends CreateAuthorizedUserError> authorizedUser,
-                @JsonProperty("memo") Optional<String> memo,
+                @JsonProperty("authorizedUserAccountID") Optional<String> authorizedUserAccountID,
+                @JsonProperty("nickname") Optional<String> nickname,
+                @JsonProperty("metadata") Optional<String> metadata,
+                @JsonProperty("billingAddress") Optional<? extends AddressError> billingAddress,
                 @JsonProperty("expiration") Optional<? extends CardExpirationError> expiration,
                 @JsonProperty("controls") Optional<? extends IssuingControlsError> controls) {
-            Utils.checkNotNull(fundingWalletID, "fundingWalletID");
-            Utils.checkNotNull(formFactor, "formFactor");
-            Utils.checkNotNull(authorizedUser, "authorizedUser");
-            Utils.checkNotNull(memo, "memo");
+            Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+            Utils.checkNotNull(nickname, "nickname");
+            Utils.checkNotNull(metadata, "metadata");
+            Utils.checkNotNull(billingAddress, "billingAddress");
             Utils.checkNotNull(expiration, "expiration");
             Utils.checkNotNull(controls, "controls");
-            this.fundingWalletID = fundingWalletID;
-            this.formFactor = formFactor;
-            this.authorizedUser = authorizedUser;
-            this.memo = memo;
+            this.authorizedUserAccountID = authorizedUserAccountID;
+            this.nickname = nickname;
+            this.metadata = metadata;
+            this.billingAddress = billingAddress;
             this.expiration = expiration;
             this.controls = controls;
         }
@@ -156,24 +156,24 @@ public class RequestCardError extends MoovError {
         }
 
         @JsonIgnore
-        public Optional<String> fundingWalletID() {
-            return fundingWalletID;
+        public Optional<String> authorizedUserAccountID() {
+            return authorizedUserAccountID;
         }
 
         @JsonIgnore
-        public Optional<String> formFactor() {
-            return formFactor;
+        public Optional<String> nickname() {
+            return nickname;
+        }
+
+        @JsonIgnore
+        public Optional<String> metadata() {
+            return metadata;
         }
 
         @SuppressWarnings("unchecked")
         @JsonIgnore
-        public Optional<CreateAuthorizedUserError> authorizedUser() {
-            return (Optional<CreateAuthorizedUserError>) authorizedUser;
-        }
-
-        @JsonIgnore
-        public Optional<String> memo() {
-            return memo;
+        public Optional<AddressError> billingAddress() {
+            return (Optional<AddressError>) billingAddress;
         }
 
         @SuppressWarnings("unchecked")
@@ -193,55 +193,55 @@ public class RequestCardError extends MoovError {
         }
 
 
-        public Data withFundingWalletID(String fundingWalletID) {
-            Utils.checkNotNull(fundingWalletID, "fundingWalletID");
-            this.fundingWalletID = Optional.ofNullable(fundingWalletID);
+        public Data withAuthorizedUserAccountID(String authorizedUserAccountID) {
+            Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+            this.authorizedUserAccountID = Optional.ofNullable(authorizedUserAccountID);
             return this;
         }
 
 
-        public Data withFundingWalletID(Optional<String> fundingWalletID) {
-            Utils.checkNotNull(fundingWalletID, "fundingWalletID");
-            this.fundingWalletID = fundingWalletID;
+        public Data withAuthorizedUserAccountID(Optional<String> authorizedUserAccountID) {
+            Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+            this.authorizedUserAccountID = authorizedUserAccountID;
             return this;
         }
 
-        public Data withFormFactor(String formFactor) {
-            Utils.checkNotNull(formFactor, "formFactor");
-            this.formFactor = Optional.ofNullable(formFactor);
-            return this;
-        }
-
-
-        public Data withFormFactor(Optional<String> formFactor) {
-            Utils.checkNotNull(formFactor, "formFactor");
-            this.formFactor = formFactor;
-            return this;
-        }
-
-        public Data withAuthorizedUser(CreateAuthorizedUserError authorizedUser) {
-            Utils.checkNotNull(authorizedUser, "authorizedUser");
-            this.authorizedUser = Optional.ofNullable(authorizedUser);
+        public Data withNickname(String nickname) {
+            Utils.checkNotNull(nickname, "nickname");
+            this.nickname = Optional.ofNullable(nickname);
             return this;
         }
 
 
-        public Data withAuthorizedUser(Optional<? extends CreateAuthorizedUserError> authorizedUser) {
-            Utils.checkNotNull(authorizedUser, "authorizedUser");
-            this.authorizedUser = authorizedUser;
+        public Data withNickname(Optional<String> nickname) {
+            Utils.checkNotNull(nickname, "nickname");
+            this.nickname = nickname;
             return this;
         }
 
-        public Data withMemo(String memo) {
-            Utils.checkNotNull(memo, "memo");
-            this.memo = Optional.ofNullable(memo);
+        public Data withMetadata(String metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = Optional.ofNullable(metadata);
             return this;
         }
 
 
-        public Data withMemo(Optional<String> memo) {
-            Utils.checkNotNull(memo, "memo");
-            this.memo = memo;
+        public Data withMetadata(Optional<String> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = metadata;
+            return this;
+        }
+
+        public Data withBillingAddress(AddressError billingAddress) {
+            Utils.checkNotNull(billingAddress, "billingAddress");
+            this.billingAddress = Optional.ofNullable(billingAddress);
+            return this;
+        }
+
+
+        public Data withBillingAddress(Optional<? extends AddressError> billingAddress) {
+            Utils.checkNotNull(billingAddress, "billingAddress");
+            this.billingAddress = billingAddress;
             return this;
         }
 
@@ -281,10 +281,10 @@ public class RequestCardError extends MoovError {
             }
             Data other = (Data) o;
             return 
-                Utils.enhancedDeepEquals(this.fundingWalletID, other.fundingWalletID) &&
-                Utils.enhancedDeepEquals(this.formFactor, other.formFactor) &&
-                Utils.enhancedDeepEquals(this.authorizedUser, other.authorizedUser) &&
-                Utils.enhancedDeepEquals(this.memo, other.memo) &&
+                Utils.enhancedDeepEquals(this.authorizedUserAccountID, other.authorizedUserAccountID) &&
+                Utils.enhancedDeepEquals(this.nickname, other.nickname) &&
+                Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+                Utils.enhancedDeepEquals(this.billingAddress, other.billingAddress) &&
                 Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
                 Utils.enhancedDeepEquals(this.controls, other.controls);
         }
@@ -292,17 +292,17 @@ public class RequestCardError extends MoovError {
         @Override
         public int hashCode() {
             return Utils.enhancedHash(
-                fundingWalletID, formFactor, authorizedUser,
-                memo, expiration, controls);
+                authorizedUserAccountID, nickname, metadata,
+                billingAddress, expiration, controls);
         }
         
         @Override
         public String toString() {
             return Utils.toString(Data.class,
-                    "fundingWalletID", fundingWalletID,
-                    "formFactor", formFactor,
-                    "authorizedUser", authorizedUser,
-                    "memo", memo,
+                    "authorizedUserAccountID", authorizedUserAccountID,
+                    "nickname", nickname,
+                    "metadata", metadata,
+                    "billingAddress", billingAddress,
                     "expiration", expiration,
                     "controls", controls);
         }
@@ -310,13 +310,13 @@ public class RequestCardError extends MoovError {
         @SuppressWarnings("UnusedReturnValue")
         public final static class Builder {
 
-            private Optional<String> fundingWalletID = Optional.empty();
+            private Optional<String> authorizedUserAccountID = Optional.empty();
 
-            private Optional<String> formFactor = Optional.empty();
+            private Optional<String> nickname = Optional.empty();
 
-            private Optional<? extends CreateAuthorizedUserError> authorizedUser = Optional.empty();
+            private Optional<String> metadata = Optional.empty();
 
-            private Optional<String> memo = Optional.empty();
+            private Optional<? extends AddressError> billingAddress = Optional.empty();
 
             private Optional<? extends CardExpirationError> expiration = Optional.empty();
 
@@ -327,54 +327,54 @@ public class RequestCardError extends MoovError {
             }
 
 
-            public Builder fundingWalletID(String fundingWalletID) {
-                Utils.checkNotNull(fundingWalletID, "fundingWalletID");
-                this.fundingWalletID = Optional.ofNullable(fundingWalletID);
+            public Builder authorizedUserAccountID(String authorizedUserAccountID) {
+                Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+                this.authorizedUserAccountID = Optional.ofNullable(authorizedUserAccountID);
                 return this;
             }
 
-            public Builder fundingWalletID(Optional<String> fundingWalletID) {
-                Utils.checkNotNull(fundingWalletID, "fundingWalletID");
-                this.fundingWalletID = fundingWalletID;
-                return this;
-            }
-
-
-            public Builder formFactor(String formFactor) {
-                Utils.checkNotNull(formFactor, "formFactor");
-                this.formFactor = Optional.ofNullable(formFactor);
-                return this;
-            }
-
-            public Builder formFactor(Optional<String> formFactor) {
-                Utils.checkNotNull(formFactor, "formFactor");
-                this.formFactor = formFactor;
+            public Builder authorizedUserAccountID(Optional<String> authorizedUserAccountID) {
+                Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+                this.authorizedUserAccountID = authorizedUserAccountID;
                 return this;
             }
 
 
-            public Builder authorizedUser(CreateAuthorizedUserError authorizedUser) {
-                Utils.checkNotNull(authorizedUser, "authorizedUser");
-                this.authorizedUser = Optional.ofNullable(authorizedUser);
+            public Builder nickname(String nickname) {
+                Utils.checkNotNull(nickname, "nickname");
+                this.nickname = Optional.ofNullable(nickname);
                 return this;
             }
 
-            public Builder authorizedUser(Optional<? extends CreateAuthorizedUserError> authorizedUser) {
-                Utils.checkNotNull(authorizedUser, "authorizedUser");
-                this.authorizedUser = authorizedUser;
+            public Builder nickname(Optional<String> nickname) {
+                Utils.checkNotNull(nickname, "nickname");
+                this.nickname = nickname;
                 return this;
             }
 
 
-            public Builder memo(String memo) {
-                Utils.checkNotNull(memo, "memo");
-                this.memo = Optional.ofNullable(memo);
+            public Builder metadata(String metadata) {
+                Utils.checkNotNull(metadata, "metadata");
+                this.metadata = Optional.ofNullable(metadata);
                 return this;
             }
 
-            public Builder memo(Optional<String> memo) {
-                Utils.checkNotNull(memo, "memo");
-                this.memo = memo;
+            public Builder metadata(Optional<String> metadata) {
+                Utils.checkNotNull(metadata, "metadata");
+                this.metadata = metadata;
+                return this;
+            }
+
+
+            public Builder billingAddress(AddressError billingAddress) {
+                Utils.checkNotNull(billingAddress, "billingAddress");
+                this.billingAddress = Optional.ofNullable(billingAddress);
+                return this;
+            }
+
+            public Builder billingAddress(Optional<? extends AddressError> billingAddress) {
+                Utils.checkNotNull(billingAddress, "billingAddress");
+                this.billingAddress = billingAddress;
                 return this;
             }
 
@@ -407,8 +407,8 @@ public class RequestCardError extends MoovError {
             public Data build() {
 
                 return new Data(
-                    fundingWalletID, formFactor, authorizedUser,
-                    memo, expiration, controls);
+                    authorizedUserAccountID, nickname, metadata,
+                    billingAddress, expiration, controls);
             }
 
         }

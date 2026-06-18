@@ -5,49 +5,71 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.Optional;
 
-
+/**
+ * AmountDecimalRange
+ * 
+ * <p>A range of values that an AmountDecimal can take.
+ * 
+ * <p>If either `minimum` or `maximum` is omitted, the range is "open" on that end:
+ * 
+ * <p>`minimum` specified: `amt &gt;= minimum`
+ * `maximum` specified: `amt &lt;= maximum`
+ * both specified: `minimum &lt;= amt &lt;= maximum`
+ */
 public class AmountDecimalRange {
     /**
      * Minimum amount allowed in the range
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("minimum")
-    private AmountDecimal minimum;
+    private Optional<? extends AmountDecimal> minimum;
 
     /**
      * Maximum amount allowed in the range
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("maximum")
-    private AmountDecimal maximum;
+    private Optional<? extends AmountDecimal> maximum;
 
     @JsonCreator
     public AmountDecimalRange(
-            @JsonProperty("minimum") AmountDecimal minimum,
-            @JsonProperty("maximum") AmountDecimal maximum) {
+            @JsonProperty("minimum") Optional<? extends AmountDecimal> minimum,
+            @JsonProperty("maximum") Optional<? extends AmountDecimal> maximum) {
         Utils.checkNotNull(minimum, "minimum");
         Utils.checkNotNull(maximum, "maximum");
         this.minimum = minimum;
         this.maximum = maximum;
     }
+    
+    public AmountDecimalRange() {
+        this(Optional.empty(), Optional.empty());
+    }
 
     /**
      * Minimum amount allowed in the range
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public AmountDecimal minimum() {
-        return minimum;
+    public Optional<AmountDecimal> minimum() {
+        return (Optional<AmountDecimal>) minimum;
     }
 
     /**
      * Maximum amount allowed in the range
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public AmountDecimal maximum() {
-        return maximum;
+    public Optional<AmountDecimal> maximum() {
+        return (Optional<AmountDecimal>) maximum;
     }
 
     public static Builder builder() {
@@ -60,6 +82,16 @@ public class AmountDecimalRange {
      */
     public AmountDecimalRange withMinimum(AmountDecimal minimum) {
         Utils.checkNotNull(minimum, "minimum");
+        this.minimum = Optional.ofNullable(minimum);
+        return this;
+    }
+
+
+    /**
+     * Minimum amount allowed in the range
+     */
+    public AmountDecimalRange withMinimum(Optional<? extends AmountDecimal> minimum) {
+        Utils.checkNotNull(minimum, "minimum");
         this.minimum = minimum;
         return this;
     }
@@ -68,6 +100,16 @@ public class AmountDecimalRange {
      * Maximum amount allowed in the range
      */
     public AmountDecimalRange withMaximum(AmountDecimal maximum) {
+        Utils.checkNotNull(maximum, "maximum");
+        this.maximum = Optional.ofNullable(maximum);
+        return this;
+    }
+
+
+    /**
+     * Maximum amount allowed in the range
+     */
+    public AmountDecimalRange withMaximum(Optional<? extends AmountDecimal> maximum) {
         Utils.checkNotNull(maximum, "maximum");
         this.maximum = maximum;
         return this;
@@ -103,9 +145,9 @@ public class AmountDecimalRange {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private AmountDecimal minimum;
+        private Optional<? extends AmountDecimal> minimum = Optional.empty();
 
-        private AmountDecimal maximum;
+        private Optional<? extends AmountDecimal> maximum = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -117,6 +159,15 @@ public class AmountDecimalRange {
          */
         public Builder minimum(AmountDecimal minimum) {
             Utils.checkNotNull(minimum, "minimum");
+            this.minimum = Optional.ofNullable(minimum);
+            return this;
+        }
+
+        /**
+         * Minimum amount allowed in the range
+         */
+        public Builder minimum(Optional<? extends AmountDecimal> minimum) {
+            Utils.checkNotNull(minimum, "minimum");
             this.minimum = minimum;
             return this;
         }
@@ -126,6 +177,15 @@ public class AmountDecimalRange {
          * Maximum amount allowed in the range
          */
         public Builder maximum(AmountDecimal maximum) {
+            Utils.checkNotNull(maximum, "maximum");
+            this.maximum = Optional.ofNullable(maximum);
+            return this;
+        }
+
+        /**
+         * Maximum amount allowed in the range
+         */
+        public Builder maximum(Optional<? extends AmountDecimal> maximum) {
             Utils.checkNotNull(maximum, "maximum");
             this.maximum = maximum;
             return this;

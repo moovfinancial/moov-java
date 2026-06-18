@@ -12,7 +12,9 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.Map;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class UpdateIssuedCard {
@@ -27,31 +29,38 @@ public class UpdateIssuedCard {
 
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("memo")
-    private Optional<String> memo;
+    @JsonProperty("nickname")
+    private JsonNullable<String> nickname;
 
-    /**
-     * Fields for identifying an authorized individual.
-     */
+
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("authorizedUser")
-    private Optional<? extends CreateAuthorizedUserUpdate> authorizedUser;
+    @JsonProperty("metadata")
+    private JsonNullable<? extends Map<String, String>> metadata;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("billingAddress")
+    private JsonNullable<? extends BillingAddress> billingAddress;
 
     @JsonCreator
     public UpdateIssuedCard(
             @JsonProperty("state") Optional<? extends UpdateIssuedCardState> state,
-            @JsonProperty("memo") Optional<String> memo,
-            @JsonProperty("authorizedUser") Optional<? extends CreateAuthorizedUserUpdate> authorizedUser) {
+            @JsonProperty("nickname") JsonNullable<String> nickname,
+            @JsonProperty("metadata") JsonNullable<? extends Map<String, String>> metadata,
+            @JsonProperty("billingAddress") JsonNullable<? extends BillingAddress> billingAddress) {
         Utils.checkNotNull(state, "state");
-        Utils.checkNotNull(memo, "memo");
-        Utils.checkNotNull(authorizedUser, "authorizedUser");
+        Utils.checkNotNull(nickname, "nickname");
+        Utils.checkNotNull(metadata, "metadata");
+        Utils.checkNotNull(billingAddress, "billingAddress");
         this.state = state;
-        this.memo = memo;
-        this.authorizedUser = authorizedUser;
+        this.nickname = nickname;
+        this.metadata = metadata;
+        this.billingAddress = billingAddress;
     }
     
     public UpdateIssuedCard() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
+            JsonNullable.undefined());
     }
 
     /**
@@ -66,17 +75,20 @@ public class UpdateIssuedCard {
     }
 
     @JsonIgnore
-    public Optional<String> memo() {
-        return memo;
+    public JsonNullable<String> nickname() {
+        return nickname;
     }
 
-    /**
-     * Fields for identifying an authorized individual.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<CreateAuthorizedUserUpdate> authorizedUser() {
-        return (Optional<CreateAuthorizedUserUpdate>) authorizedUser;
+    public JsonNullable<Map<String, String>> metadata() {
+        return (JsonNullable<Map<String, String>>) metadata;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public JsonNullable<BillingAddress> billingAddress() {
+        return (JsonNullable<BillingAddress>) billingAddress;
     }
 
     public static Builder builder() {
@@ -107,35 +119,39 @@ public class UpdateIssuedCard {
         return this;
     }
 
-    public UpdateIssuedCard withMemo(String memo) {
-        Utils.checkNotNull(memo, "memo");
-        this.memo = Optional.ofNullable(memo);
+    public UpdateIssuedCard withNickname(String nickname) {
+        Utils.checkNotNull(nickname, "nickname");
+        this.nickname = JsonNullable.of(nickname);
         return this;
     }
 
-
-    public UpdateIssuedCard withMemo(Optional<String> memo) {
-        Utils.checkNotNull(memo, "memo");
-        this.memo = memo;
+    public UpdateIssuedCard withNickname(JsonNullable<String> nickname) {
+        Utils.checkNotNull(nickname, "nickname");
+        this.nickname = nickname;
         return this;
     }
 
-    /**
-     * Fields for identifying an authorized individual.
-     */
-    public UpdateIssuedCard withAuthorizedUser(CreateAuthorizedUserUpdate authorizedUser) {
-        Utils.checkNotNull(authorizedUser, "authorizedUser");
-        this.authorizedUser = Optional.ofNullable(authorizedUser);
+    public UpdateIssuedCard withMetadata(Map<String, String> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = JsonNullable.of(metadata);
         return this;
     }
 
+    public UpdateIssuedCard withMetadata(JsonNullable<? extends Map<String, String>> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = metadata;
+        return this;
+    }
 
-    /**
-     * Fields for identifying an authorized individual.
-     */
-    public UpdateIssuedCard withAuthorizedUser(Optional<? extends CreateAuthorizedUserUpdate> authorizedUser) {
-        Utils.checkNotNull(authorizedUser, "authorizedUser");
-        this.authorizedUser = authorizedUser;
+    public UpdateIssuedCard withBillingAddress(BillingAddress billingAddress) {
+        Utils.checkNotNull(billingAddress, "billingAddress");
+        this.billingAddress = JsonNullable.of(billingAddress);
+        return this;
+    }
+
+    public UpdateIssuedCard withBillingAddress(JsonNullable<? extends BillingAddress> billingAddress) {
+        Utils.checkNotNull(billingAddress, "billingAddress");
+        this.billingAddress = billingAddress;
         return this;
     }
 
@@ -150,22 +166,25 @@ public class UpdateIssuedCard {
         UpdateIssuedCard other = (UpdateIssuedCard) o;
         return 
             Utils.enhancedDeepEquals(this.state, other.state) &&
-            Utils.enhancedDeepEquals(this.memo, other.memo) &&
-            Utils.enhancedDeepEquals(this.authorizedUser, other.authorizedUser);
+            Utils.enhancedDeepEquals(this.nickname, other.nickname) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.billingAddress, other.billingAddress);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            state, memo, authorizedUser);
+            state, nickname, metadata,
+            billingAddress);
     }
     
     @Override
     public String toString() {
         return Utils.toString(UpdateIssuedCard.class,
                 "state", state,
-                "memo", memo,
-                "authorizedUser", authorizedUser);
+                "nickname", nickname,
+                "metadata", metadata,
+                "billingAddress", billingAddress);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -173,9 +192,11 @@ public class UpdateIssuedCard {
 
         private Optional<? extends UpdateIssuedCardState> state = Optional.empty();
 
-        private Optional<String> memo = Optional.empty();
+        private JsonNullable<String> nickname = JsonNullable.undefined();
 
-        private Optional<? extends CreateAuthorizedUserUpdate> authorizedUser = Optional.empty();
+        private JsonNullable<? extends Map<String, String>> metadata = JsonNullable.undefined();
+
+        private JsonNullable<? extends BillingAddress> billingAddress = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -205,41 +226,49 @@ public class UpdateIssuedCard {
         }
 
 
-        public Builder memo(String memo) {
-            Utils.checkNotNull(memo, "memo");
-            this.memo = Optional.ofNullable(memo);
+        public Builder nickname(String nickname) {
+            Utils.checkNotNull(nickname, "nickname");
+            this.nickname = JsonNullable.of(nickname);
             return this;
         }
 
-        public Builder memo(Optional<String> memo) {
-            Utils.checkNotNull(memo, "memo");
-            this.memo = memo;
+        public Builder nickname(JsonNullable<String> nickname) {
+            Utils.checkNotNull(nickname, "nickname");
+            this.nickname = nickname;
             return this;
         }
 
 
-        /**
-         * Fields for identifying an authorized individual.
-         */
-        public Builder authorizedUser(CreateAuthorizedUserUpdate authorizedUser) {
-            Utils.checkNotNull(authorizedUser, "authorizedUser");
-            this.authorizedUser = Optional.ofNullable(authorizedUser);
+        public Builder metadata(Map<String, String> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = JsonNullable.of(metadata);
             return this;
         }
 
-        /**
-         * Fields for identifying an authorized individual.
-         */
-        public Builder authorizedUser(Optional<? extends CreateAuthorizedUserUpdate> authorizedUser) {
-            Utils.checkNotNull(authorizedUser, "authorizedUser");
-            this.authorizedUser = authorizedUser;
+        public Builder metadata(JsonNullable<? extends Map<String, String>> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = metadata;
+            return this;
+        }
+
+
+        public Builder billingAddress(BillingAddress billingAddress) {
+            Utils.checkNotNull(billingAddress, "billingAddress");
+            this.billingAddress = JsonNullable.of(billingAddress);
+            return this;
+        }
+
+        public Builder billingAddress(JsonNullable<? extends BillingAddress> billingAddress) {
+            Utils.checkNotNull(billingAddress, "billingAddress");
+            this.billingAddress = billingAddress;
             return this;
         }
 
         public UpdateIssuedCard build() {
 
             return new UpdateIssuedCard(
-                state, memo, authorizedUser);
+                state, nickname, metadata,
+                billingAddress);
         }
 
     }

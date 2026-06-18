@@ -214,6 +214,11 @@ public class WebhookData {
         Utils.checkNotNull(value, "value");
         return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
+
+    public static WebhookData of(WebhookDataAuthorizationExpiring value) {
+        Utils.checkNotNull(value, "value");
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
+    }
     
     /**
      * Returns an instance of one of these types:
@@ -255,6 +260,7 @@ public class WebhookData {
      * <li>{@code io.moov.sdk.models.components.WebhookDataWalletUpdated}</li>
      * <li>{@code io.moov.sdk.models.components.WebhookDataWalletTransactionUpdated}</li>
      * <li>{@code io.moov.sdk.models.components.WebhookBillingStatementCreated}</li>
+     * <li>{@code io.moov.sdk.models.components.WebhookDataAuthorizationExpiring}</li>
      * </ul>
      * 
      * <p>Use {@code instanceof} to determine what type is returned. For example:
@@ -330,7 +336,8 @@ public class WebhookData {
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataWalletCreated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataWalletUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataWalletTransactionUpdated>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<WebhookBillingStatementCreated>() {}, JsonShape.DEFAULT));
+                  TypeReferenceWithShape.of(new TypeReference<WebhookBillingStatementCreated>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<WebhookDataAuthorizationExpiring>() {}, JsonShape.DEFAULT));
         }
     }
     

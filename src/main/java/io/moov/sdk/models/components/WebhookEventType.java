@@ -51,7 +51,8 @@ public enum WebhookEventType {
     WALLET_CREATED("wallet.created"),
     WALLET_UPDATED("wallet.updated"),
     WALLET_TRANSACTION_UPDATED("walletTransaction.updated"),
-    BILLING_STATEMENT_CREATED("billingStatement.created");
+    BILLING_STATEMENT_CREATED("billingStatement.created"),
+    AUTHORIZATION_EXPIRING("authorization.expiring");
 
     @JsonValue
     private final String value;

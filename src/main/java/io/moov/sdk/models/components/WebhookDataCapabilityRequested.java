@@ -27,10 +27,18 @@ public class WebhookDataCapabilityRequested {
     /**
      * Moov account capabilities.
      * 
+     * <p>**Deprecated capabilities**
+     * 
+     * <p>The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Request granular
+     * capabilities instead (for example, `send-funds.ach`, `collect-funds.card-payments`, or
+     * `wallet.balance`). Deprecated values will be removed in a future API version.
+     * 
+     * <p>Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to
+     * choose the right capabilities for your integration.
+     * 
      * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities
-     * might appear in your list. These are read-only capabilities that Moov requests and uses for account
-     * verification purposes. These capabilities remains active with your account and require no additional
-     * action.
+     * might appear in the list for your Partner account. These are read-only capabilities that Moov
+     * requests. These capabilities remain active with your account and require no additional action.
      */
     @JsonProperty("capabilityID")
     private CapabilityID capabilityID;
@@ -67,10 +75,18 @@ public class WebhookDataCapabilityRequested {
     /**
      * Moov account capabilities.
      * 
+     * <p>**Deprecated capabilities**
+     * 
+     * <p>The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Request granular
+     * capabilities instead (for example, `send-funds.ach`, `collect-funds.card-payments`, or
+     * `wallet.balance`). Deprecated values will be removed in a future API version.
+     * 
+     * <p>Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to
+     * choose the right capabilities for your integration.
+     * 
      * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities
-     * might appear in your list. These are read-only capabilities that Moov requests and uses for account
-     * verification purposes. These capabilities remains active with your account and require no additional
-     * action.
+     * might appear in the list for your Partner account. These are read-only capabilities that Moov
+     * requests. These capabilities remain active with your account and require no additional action.
      */
     @JsonIgnore
     public CapabilityID capabilityID() {
@@ -104,10 +120,18 @@ public class WebhookDataCapabilityRequested {
     /**
      * Moov account capabilities.
      * 
+     * <p>**Deprecated capabilities**
+     * 
+     * <p>The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Request granular
+     * capabilities instead (for example, `send-funds.ach`, `collect-funds.card-payments`, or
+     * `wallet.balance`). Deprecated values will be removed in a future API version.
+     * 
+     * <p>Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to
+     * choose the right capabilities for your integration.
+     * 
      * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities
-     * might appear in your list. These are read-only capabilities that Moov requests and uses for account
-     * verification purposes. These capabilities remains active with your account and require no additional
-     * action.
+     * might appear in the list for your Partner account. These are read-only capabilities that Moov
+     * requests. These capabilities remain active with your account and require no additional action.
      */
     public WebhookDataCapabilityRequested withCapabilityID(CapabilityID capabilityID) {
         Utils.checkNotNull(capabilityID, "capabilityID");
@@ -181,10 +205,18 @@ public class WebhookDataCapabilityRequested {
         /**
          * Moov account capabilities.
          * 
+         * <p>**Deprecated capabilities**
+         * 
+         * <p>The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Request granular
+         * capabilities instead (for example, `send-funds.ach`, `collect-funds.card-payments`, or
+         * `wallet.balance`). Deprecated values will be removed in a future API version.
+         * 
+         * <p>Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to
+         * choose the right capabilities for your integration.
+         * 
          * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities
-         * might appear in your list. These are read-only capabilities that Moov requests and uses for account
-         * verification purposes. These capabilities remains active with your account and require no additional
-         * action.
+         * might appear in the list for your Partner account. These are read-only capabilities that Moov
+         * requests. These capabilities remain active with your account and require no additional action.
          */
         public Builder capabilityID(CapabilityID capabilityID) {
             Utils.checkNotNull(capabilityID, "capabilityID");

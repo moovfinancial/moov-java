@@ -38,7 +38,8 @@ public class Capabilities {
     /**
      * Retrieve all the capabilities an account has requested.
      * 
-     * <p>Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+     * <p>Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to
+     * learn more.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
@@ -53,7 +54,8 @@ public class Capabilities {
     /**
      * Retrieve all the capabilities an account has requested.
      * 
-     * <p>Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+     * <p>Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to
+     * learn more.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
@@ -76,7 +78,7 @@ public class Capabilities {
 
     /**
      * Request capabilities for a specific account. Read our [capabilities
-     * guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+     * reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
@@ -90,7 +92,7 @@ public class Capabilities {
 
     /**
      * Request capabilities for a specific account. Read our [capabilities
-     * guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+     * reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
@@ -115,7 +117,7 @@ public class Capabilities {
 
     /**
      * Retrieve a specific capability that an account has requested. Read our [capabilities
-     * guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+     * reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
@@ -129,7 +131,7 @@ public class Capabilities {
 
     /**
      * Retrieve a specific capability that an account has requested. Read our [capabilities
-     * guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+     * reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
@@ -138,7 +140,13 @@ public class Capabilities {
      * @param accountID 
      * @param capabilityID Moov account capabilities.
      *         
-     *         The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
+     *         **Deprecated capabilities**
+     *         
+     *         The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Request granular capabilities instead (for example, `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance`). Deprecated values will be removed in a future API version.
+     *         
+     *         Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to choose the right capabilities for your integration.
+     *         
+     *         The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in the list for your Partner account. These are read-only capabilities that Moov requests. These capabilities remain active with your account and require no additional action.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
@@ -156,7 +164,7 @@ public class Capabilities {
 
     /**
      * Disable a specific capability that an account has requested. Read our [capabilities
-     * guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+     * reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
@@ -170,7 +178,7 @@ public class Capabilities {
 
     /**
      * Disable a specific capability that an account has requested. Read our [capabilities
-     * guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+     * reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
@@ -179,7 +187,13 @@ public class Capabilities {
      * @param accountID 
      * @param capabilityID Moov account capabilities.
      *         
-     *         The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
+     *         **Deprecated capabilities**
+     *         
+     *         The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Request granular capabilities instead (for example, `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance`). Deprecated values will be removed in a future API version.
+     *         
+     *         Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to choose the right capabilities for your integration.
+     *         
+     *         The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in the list for your Partner account. These are read-only capabilities that Moov requests. These capabilities remain active with your account and require no additional action.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */

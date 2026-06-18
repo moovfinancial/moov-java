@@ -9,10 +9,10 @@ import static io.moov.sdk.utils.Exceptions.unchecked;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.SecuritySource;
-import io.moov.sdk.models.components.IssuedCard;
+import io.moov.sdk.models.components.Cancellation;
 import io.moov.sdk.models.errors.APIException;
-import io.moov.sdk.models.operations.ListIssuedCardsRequest;
-import io.moov.sdk.models.operations.ListIssuedCardsResponse;
+import io.moov.sdk.models.operations.ListCancellationsRequest;
+import io.moov.sdk.models.operations.ListCancellationsResponse;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Headers;
@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class ListIssuedCards {
+public class ListCancellations {
 
     static abstract class Base {
         final SDKConfiguration sdkConfiguration;
@@ -54,7 +54,7 @@ public class ListIssuedCards {
             return new BeforeRequestContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "listIssuedCards",
+                    "listCancellations",
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -63,7 +63,7 @@ public class ListIssuedCards {
             return new AfterSuccessContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "listIssuedCards",
+                    "listCancellations",
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -72,7 +72,7 @@ public class ListIssuedCards {
             return new AfterErrorContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "listIssuedCards",
+                    "listCancellations",
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -80,17 +80,12 @@ public class ListIssuedCards {
             String url = Utils.generateURL(
                     klass,
                     this.baseUrl,
-                    "/issuing/{accountID}/cards",
+                    "/accounts/{accountID}/transfers/{transferID}/cancellations",
                     request, null);
             HTTPRequest req = new HTTPRequest(url, "GET");
             req.addHeader("Accept", "application/json")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
             _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
-
-            req.addQueryParams(Utils.getQueryParams(
-                    klass,
-                    request,
-                    null));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
             return req.build();
@@ -98,13 +93,13 @@ public class ListIssuedCards {
     }
 
     public static class Sync extends Base
-            implements RequestOperation<ListIssuedCardsRequest, ListIssuedCardsResponse> {
+            implements RequestOperation<ListCancellationsRequest, ListCancellationsResponse> {
         public Sync(SDKConfiguration sdkConfiguration, Headers _headers) {
             super(sdkConfiguration, _headers);
         }
 
-        private HttpRequest onBuildRequest(ListIssuedCardsRequest request) throws Exception {
-            HttpRequest req = buildRequest(request, ListIssuedCardsRequest.class);
+        private HttpRequest onBuildRequest(ListCancellationsRequest request) throws Exception {
+            HttpRequest req = buildRequest(request, ListCancellationsRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 
@@ -120,7 +115,7 @@ public class ListIssuedCards {
         }
 
         @Override
-        public HttpResponse<InputStream> doRequest(ListIssuedCardsRequest request) {
+        public HttpResponse<InputStream> doRequest(ListCancellationsRequest request) {
             HttpRequest r = unchecked(() -> onBuildRequest(request)).get();
             HttpResponse<InputStream> httpRes;
             try {
@@ -139,24 +134,24 @@ public class ListIssuedCards {
 
 
         @Override
-        public ListIssuedCardsResponse handleResponse(HttpResponse<InputStream> response) {
+        public ListCancellationsResponse handleResponse(HttpResponse<InputStream> response) {
             String contentType = response
                     .headers()
                     .firstValue("Content-Type")
                     .orElse("application/octet-stream");
-            ListIssuedCardsResponse.Builder resBuilder =
-                    ListIssuedCardsResponse
+            ListCancellationsResponse.Builder resBuilder =
+                    ListCancellationsResponse
                             .builder()
                             .contentType(contentType)
                             .statusCode(response.statusCode())
                             .rawResponse(response);
 
-            ListIssuedCardsResponse res = resBuilder.build();
+            ListCancellationsResponse res = resBuilder.build();
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return res.withIssuedCards(Utils.unmarshal(response, new TypeReference<List<IssuedCard>>() {}));
+                    return res.withCancellations(Utils.unmarshal(response, new TypeReference<List<Cancellation>>() {}));
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }

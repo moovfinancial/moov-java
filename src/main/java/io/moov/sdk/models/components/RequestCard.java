@@ -12,33 +12,32 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.Map;
 import java.util.Optional;
 
 
 public class RequestCard {
 
-    @JsonProperty("fundingWalletID")
-    private String fundingWalletID;
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("authorizedUserAccountID")
+    private Optional<String> authorizedUserAccountID;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("nickname")
+    private Optional<String> nickname;
 
     /**
-     * Fields for identifying an authorized individual.
-     */
-    @JsonProperty("authorizedUser")
-    private CreateAuthorizedUser authorizedUser;
-
-    /**
-     * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital
-     * number without a physical card.
-     */
-    @JsonProperty("formFactor")
-    private IssuedCardFormFactor formFactor;
-
-    /**
-     * An optional descriptive name for the card.
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("memo")
-    private Optional<String> memo;
+    @JsonProperty("metadata")
+    private Optional<? extends Map<String, String>> metadata;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("billingAddress")
+    private Optional<? extends Address> billingAddress;
 
     /**
      * The expiration date of the card or token.
@@ -54,62 +53,54 @@ public class RequestCard {
 
     @JsonCreator
     public RequestCard(
-            @JsonProperty("fundingWalletID") String fundingWalletID,
-            @JsonProperty("authorizedUser") CreateAuthorizedUser authorizedUser,
-            @JsonProperty("formFactor") IssuedCardFormFactor formFactor,
-            @JsonProperty("memo") Optional<String> memo,
+            @JsonProperty("authorizedUserAccountID") Optional<String> authorizedUserAccountID,
+            @JsonProperty("nickname") Optional<String> nickname,
+            @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata,
+            @JsonProperty("billingAddress") Optional<? extends Address> billingAddress,
             @JsonProperty("expiration") Optional<? extends CardExpiration> expiration,
             @JsonProperty("controls") Optional<? extends IssuingControls> controls) {
-        Utils.checkNotNull(fundingWalletID, "fundingWalletID");
-        Utils.checkNotNull(authorizedUser, "authorizedUser");
-        Utils.checkNotNull(formFactor, "formFactor");
-        Utils.checkNotNull(memo, "memo");
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+        Utils.checkNotNull(nickname, "nickname");
+        Utils.checkNotNull(metadata, "metadata");
+        Utils.checkNotNull(billingAddress, "billingAddress");
         Utils.checkNotNull(expiration, "expiration");
         Utils.checkNotNull(controls, "controls");
-        this.fundingWalletID = fundingWalletID;
-        this.authorizedUser = authorizedUser;
-        this.formFactor = formFactor;
-        this.memo = memo;
+        this.authorizedUserAccountID = authorizedUserAccountID;
+        this.nickname = nickname;
+        this.metadata = metadata;
+        this.billingAddress = billingAddress;
         this.expiration = expiration;
         this.controls = controls;
     }
     
-    public RequestCard(
-            String fundingWalletID,
-            CreateAuthorizedUser authorizedUser,
-            IssuedCardFormFactor formFactor) {
-        this(fundingWalletID, authorizedUser, formFactor,
+    public RequestCard() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
-    public String fundingWalletID() {
-        return fundingWalletID;
+    public Optional<String> authorizedUserAccountID() {
+        return authorizedUserAccountID;
+    }
+
+    @JsonIgnore
+    public Optional<String> nickname() {
+        return nickname;
     }
 
     /**
-     * Fields for identifying an authorized individual.
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public CreateAuthorizedUser authorizedUser() {
-        return authorizedUser;
+    public Optional<Map<String, String>> metadata() {
+        return (Optional<Map<String, String>>) metadata;
     }
 
-    /**
-     * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital
-     * number without a physical card.
-     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public IssuedCardFormFactor formFactor() {
-        return formFactor;
-    }
-
-    /**
-     * An optional descriptive name for the card.
-     */
-    @JsonIgnore
-    public Optional<String> memo() {
-        return memo;
+    public Optional<Address> billingAddress() {
+        return (Optional<Address>) billingAddress;
     }
 
     /**
@@ -132,47 +123,61 @@ public class RequestCard {
     }
 
 
-    public RequestCard withFundingWalletID(String fundingWalletID) {
-        Utils.checkNotNull(fundingWalletID, "fundingWalletID");
-        this.fundingWalletID = fundingWalletID;
-        return this;
-    }
-
-    /**
-     * Fields for identifying an authorized individual.
-     */
-    public RequestCard withAuthorizedUser(CreateAuthorizedUser authorizedUser) {
-        Utils.checkNotNull(authorizedUser, "authorizedUser");
-        this.authorizedUser = authorizedUser;
-        return this;
-    }
-
-    /**
-     * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital
-     * number without a physical card.
-     */
-    public RequestCard withFormFactor(IssuedCardFormFactor formFactor) {
-        Utils.checkNotNull(formFactor, "formFactor");
-        this.formFactor = formFactor;
-        return this;
-    }
-
-    /**
-     * An optional descriptive name for the card.
-     */
-    public RequestCard withMemo(String memo) {
-        Utils.checkNotNull(memo, "memo");
-        this.memo = Optional.ofNullable(memo);
+    public RequestCard withAuthorizedUserAccountID(String authorizedUserAccountID) {
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+        this.authorizedUserAccountID = Optional.ofNullable(authorizedUserAccountID);
         return this;
     }
 
 
+    public RequestCard withAuthorizedUserAccountID(Optional<String> authorizedUserAccountID) {
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+        this.authorizedUserAccountID = authorizedUserAccountID;
+        return this;
+    }
+
+    public RequestCard withNickname(String nickname) {
+        Utils.checkNotNull(nickname, "nickname");
+        this.nickname = Optional.ofNullable(nickname);
+        return this;
+    }
+
+
+    public RequestCard withNickname(Optional<String> nickname) {
+        Utils.checkNotNull(nickname, "nickname");
+        this.nickname = nickname;
+        return this;
+    }
+
     /**
-     * An optional descriptive name for the card.
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
      */
-    public RequestCard withMemo(Optional<String> memo) {
-        Utils.checkNotNull(memo, "memo");
-        this.memo = memo;
+    public RequestCard withMetadata(Map<String, String> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = Optional.ofNullable(metadata);
+        return this;
+    }
+
+
+    /**
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+     */
+    public RequestCard withMetadata(Optional<? extends Map<String, String>> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = metadata;
+        return this;
+    }
+
+    public RequestCard withBillingAddress(Address billingAddress) {
+        Utils.checkNotNull(billingAddress, "billingAddress");
+        this.billingAddress = Optional.ofNullable(billingAddress);
+        return this;
+    }
+
+
+    public RequestCard withBillingAddress(Optional<? extends Address> billingAddress) {
+        Utils.checkNotNull(billingAddress, "billingAddress");
+        this.billingAddress = billingAddress;
         return this;
     }
 
@@ -218,10 +223,10 @@ public class RequestCard {
         }
         RequestCard other = (RequestCard) o;
         return 
-            Utils.enhancedDeepEquals(this.fundingWalletID, other.fundingWalletID) &&
-            Utils.enhancedDeepEquals(this.authorizedUser, other.authorizedUser) &&
-            Utils.enhancedDeepEquals(this.formFactor, other.formFactor) &&
-            Utils.enhancedDeepEquals(this.memo, other.memo) &&
+            Utils.enhancedDeepEquals(this.authorizedUserAccountID, other.authorizedUserAccountID) &&
+            Utils.enhancedDeepEquals(this.nickname, other.nickname) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.billingAddress, other.billingAddress) &&
             Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
             Utils.enhancedDeepEquals(this.controls, other.controls);
     }
@@ -229,17 +234,17 @@ public class RequestCard {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            fundingWalletID, authorizedUser, formFactor,
-            memo, expiration, controls);
+            authorizedUserAccountID, nickname, metadata,
+            billingAddress, expiration, controls);
     }
     
     @Override
     public String toString() {
         return Utils.toString(RequestCard.class,
-                "fundingWalletID", fundingWalletID,
-                "authorizedUser", authorizedUser,
-                "formFactor", formFactor,
-                "memo", memo,
+                "authorizedUserAccountID", authorizedUserAccountID,
+                "nickname", nickname,
+                "metadata", metadata,
+                "billingAddress", billingAddress,
                 "expiration", expiration,
                 "controls", controls);
     }
@@ -247,13 +252,13 @@ public class RequestCard {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String fundingWalletID;
+        private Optional<String> authorizedUserAccountID = Optional.empty();
 
-        private CreateAuthorizedUser authorizedUser;
+        private Optional<String> nickname = Optional.empty();
 
-        private IssuedCardFormFactor formFactor;
+        private Optional<? extends Map<String, String>> metadata = Optional.empty();
 
-        private Optional<String> memo = Optional.empty();
+        private Optional<? extends Address> billingAddress = Optional.empty();
 
         private Optional<? extends CardExpiration> expiration = Optional.empty();
 
@@ -264,49 +269,60 @@ public class RequestCard {
         }
 
 
-        public Builder fundingWalletID(String fundingWalletID) {
-            Utils.checkNotNull(fundingWalletID, "fundingWalletID");
-            this.fundingWalletID = fundingWalletID;
+        public Builder authorizedUserAccountID(String authorizedUserAccountID) {
+            Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+            this.authorizedUserAccountID = Optional.ofNullable(authorizedUserAccountID);
+            return this;
+        }
+
+        public Builder authorizedUserAccountID(Optional<String> authorizedUserAccountID) {
+            Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+            this.authorizedUserAccountID = authorizedUserAccountID;
+            return this;
+        }
+
+
+        public Builder nickname(String nickname) {
+            Utils.checkNotNull(nickname, "nickname");
+            this.nickname = Optional.ofNullable(nickname);
+            return this;
+        }
+
+        public Builder nickname(Optional<String> nickname) {
+            Utils.checkNotNull(nickname, "nickname");
+            this.nickname = nickname;
             return this;
         }
 
 
         /**
-         * Fields for identifying an authorized individual.
+         * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
          */
-        public Builder authorizedUser(CreateAuthorizedUser authorizedUser) {
-            Utils.checkNotNull(authorizedUser, "authorizedUser");
-            this.authorizedUser = authorizedUser;
-            return this;
-        }
-
-
-        /**
-         * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital
-         * number without a physical card.
-         */
-        public Builder formFactor(IssuedCardFormFactor formFactor) {
-            Utils.checkNotNull(formFactor, "formFactor");
-            this.formFactor = formFactor;
-            return this;
-        }
-
-
-        /**
-         * An optional descriptive name for the card.
-         */
-        public Builder memo(String memo) {
-            Utils.checkNotNull(memo, "memo");
-            this.memo = Optional.ofNullable(memo);
+        public Builder metadata(Map<String, String> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = Optional.ofNullable(metadata);
             return this;
         }
 
         /**
-         * An optional descriptive name for the card.
+         * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
          */
-        public Builder memo(Optional<String> memo) {
-            Utils.checkNotNull(memo, "memo");
-            this.memo = memo;
+        public Builder metadata(Optional<? extends Map<String, String>> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = metadata;
+            return this;
+        }
+
+
+        public Builder billingAddress(Address billingAddress) {
+            Utils.checkNotNull(billingAddress, "billingAddress");
+            this.billingAddress = Optional.ofNullable(billingAddress);
+            return this;
+        }
+
+        public Builder billingAddress(Optional<? extends Address> billingAddress) {
+            Utils.checkNotNull(billingAddress, "billingAddress");
+            this.billingAddress = billingAddress;
             return this;
         }
 
@@ -345,8 +361,8 @@ public class RequestCard {
         public RequestCard build() {
 
             return new RequestCard(
-                fundingWalletID, authorizedUser, formFactor,
-                memo, expiration, controls);
+                authorizedUserAccountID, nickname, metadata,
+                billingAddress, expiration, controls);
         }
 
     }

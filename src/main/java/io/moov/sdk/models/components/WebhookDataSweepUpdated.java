@@ -15,6 +15,12 @@ import java.util.Optional;
 
 
 public class WebhookDataSweepUpdated {
+    /**
+     * The accountID associated with the wallet being swept.
+     */
+    @JsonProperty("accountID")
+    private String accountID;
+
 
     @JsonProperty("walletID")
     private String walletID;
@@ -34,14 +40,17 @@ public class WebhookDataSweepUpdated {
 
     @JsonCreator
     public WebhookDataSweepUpdated(
+            @JsonProperty("accountID") String accountID,
             @JsonProperty("walletID") String walletID,
             @JsonProperty("sweepID") String sweepID,
             @JsonProperty("transferID") Optional<String> transferID,
             @JsonProperty("status") SweepStatus status) {
+        Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(walletID, "walletID");
         Utils.checkNotNull(sweepID, "sweepID");
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(status, "status");
+        this.accountID = accountID;
         this.walletID = walletID;
         this.sweepID = sweepID;
         this.transferID = transferID;
@@ -49,11 +58,20 @@ public class WebhookDataSweepUpdated {
     }
     
     public WebhookDataSweepUpdated(
+            String accountID,
             String walletID,
             String sweepID,
             SweepStatus status) {
-        this(walletID, sweepID, Optional.empty(),
-            status);
+        this(accountID, walletID, sweepID,
+            Optional.empty(), status);
+    }
+
+    /**
+     * The accountID associated with the wallet being swept.
+     */
+    @JsonIgnore
+    public String accountID() {
+        return accountID;
     }
 
     @JsonIgnore
@@ -80,6 +98,15 @@ public class WebhookDataSweepUpdated {
         return new Builder();
     }
 
+
+    /**
+     * The accountID associated with the wallet being swept.
+     */
+    public WebhookDataSweepUpdated withAccountID(String accountID) {
+        Utils.checkNotNull(accountID, "accountID");
+        this.accountID = accountID;
+        return this;
+    }
 
     public WebhookDataSweepUpdated withWalletID(String walletID) {
         Utils.checkNotNull(walletID, "walletID");
@@ -122,6 +149,7 @@ public class WebhookDataSweepUpdated {
         }
         WebhookDataSweepUpdated other = (WebhookDataSweepUpdated) o;
         return 
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
             Utils.enhancedDeepEquals(this.walletID, other.walletID) &&
             Utils.enhancedDeepEquals(this.sweepID, other.sweepID) &&
             Utils.enhancedDeepEquals(this.transferID, other.transferID) &&
@@ -131,13 +159,14 @@ public class WebhookDataSweepUpdated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            walletID, sweepID, transferID,
-            status);
+            accountID, walletID, sweepID,
+            transferID, status);
     }
     
     @Override
     public String toString() {
         return Utils.toString(WebhookDataSweepUpdated.class,
+                "accountID", accountID,
                 "walletID", walletID,
                 "sweepID", sweepID,
                 "transferID", transferID,
@@ -146,6 +175,8 @@ public class WebhookDataSweepUpdated {
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
+
+        private String accountID;
 
         private String walletID;
 
@@ -157,6 +188,16 @@ public class WebhookDataSweepUpdated {
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * The accountID associated with the wallet being swept.
+         */
+        public Builder accountID(String accountID) {
+            Utils.checkNotNull(accountID, "accountID");
+            this.accountID = accountID;
+            return this;
         }
 
 
@@ -196,8 +237,8 @@ public class WebhookDataSweepUpdated {
         public WebhookDataSweepUpdated build() {
 
             return new WebhookDataSweepUpdated(
-                walletID, sweepID, transferID,
-                status);
+                accountID, walletID, sweepID,
+                transferID, status);
         }
 
     }

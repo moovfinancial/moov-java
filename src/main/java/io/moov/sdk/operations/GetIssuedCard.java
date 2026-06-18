@@ -79,7 +79,7 @@ public class GetIssuedCard {
             String url = Utils.generateURL(
                     klass,
                     this.baseUrl,
-                    "/issuing/{accountID}/issued-cards/{issuedCardID}",
+                    "/issuing/{accountID}/cards/{issuedCardID}",
                     request, null);
             HTTPRequest req = new HTTPRequest(url, "GET");
             req.addHeader("Accept", "application/json")

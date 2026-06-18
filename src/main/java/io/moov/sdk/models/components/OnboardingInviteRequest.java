@@ -52,8 +52,8 @@ public class OnboardingInviteRequest {
     private Optional<? extends List<ApplicationScope>> grantScopes;
 
     /**
-     * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for
-     * this
+     * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/reference/) you intend to
+     * request for this
      * account. These values are used to determine what information to collect from the user during
      * onboarding.
      */
@@ -142,8 +142,8 @@ public class OnboardingInviteRequest {
     }
 
     /**
-     * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for
-     * this
+     * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/reference/) you intend to
+     * request for this
      * account. These values are used to determine what information to collect from the user during
      * onboarding.
      */
@@ -243,8 +243,8 @@ public class OnboardingInviteRequest {
     }
 
     /**
-     * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for
-     * this
+     * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/reference/) you intend to
+     * request for this
      * account. These values are used to determine what information to collect from the user during
      * onboarding.
      */
@@ -410,8 +410,8 @@ public class OnboardingInviteRequest {
 
 
         /**
-         * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for
-         * this
+         * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/reference/) you intend to
+         * request for this
          * account. These values are used to determine what information to collect from the user during
          * onboarding.
          */

@@ -12,6 +12,12 @@ import java.lang.String;
 
 
 public class WebhookDataSweepCreated {
+    /**
+     * The accountID associated with the wallet being swept.
+     */
+    @JsonProperty("accountID")
+    private String accountID;
+
 
     @JsonProperty("walletID")
     private String walletID;
@@ -22,12 +28,23 @@ public class WebhookDataSweepCreated {
 
     @JsonCreator
     public WebhookDataSweepCreated(
+            @JsonProperty("accountID") String accountID,
             @JsonProperty("walletID") String walletID,
             @JsonProperty("sweepID") String sweepID) {
+        Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(walletID, "walletID");
         Utils.checkNotNull(sweepID, "sweepID");
+        this.accountID = accountID;
         this.walletID = walletID;
         this.sweepID = sweepID;
+    }
+
+    /**
+     * The accountID associated with the wallet being swept.
+     */
+    @JsonIgnore
+    public String accountID() {
+        return accountID;
     }
 
     @JsonIgnore
@@ -44,6 +61,15 @@ public class WebhookDataSweepCreated {
         return new Builder();
     }
 
+
+    /**
+     * The accountID associated with the wallet being swept.
+     */
+    public WebhookDataSweepCreated withAccountID(String accountID) {
+        Utils.checkNotNull(accountID, "accountID");
+        this.accountID = accountID;
+        return this;
+    }
 
     public WebhookDataSweepCreated withWalletID(String walletID) {
         Utils.checkNotNull(walletID, "walletID");
@@ -67,6 +93,7 @@ public class WebhookDataSweepCreated {
         }
         WebhookDataSweepCreated other = (WebhookDataSweepCreated) o;
         return 
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
             Utils.enhancedDeepEquals(this.walletID, other.walletID) &&
             Utils.enhancedDeepEquals(this.sweepID, other.sweepID);
     }
@@ -74,12 +101,13 @@ public class WebhookDataSweepCreated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            walletID, sweepID);
+            accountID, walletID, sweepID);
     }
     
     @Override
     public String toString() {
         return Utils.toString(WebhookDataSweepCreated.class,
+                "accountID", accountID,
                 "walletID", walletID,
                 "sweepID", sweepID);
     }
@@ -87,12 +115,24 @@ public class WebhookDataSweepCreated {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private String accountID;
+
         private String walletID;
 
         private String sweepID;
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * The accountID associated with the wallet being swept.
+         */
+        public Builder accountID(String accountID) {
+            Utils.checkNotNull(accountID, "accountID");
+            this.accountID = accountID;
+            return this;
         }
 
 
@@ -112,7 +152,7 @@ public class WebhookDataSweepCreated {
         public WebhookDataSweepCreated build() {
 
             return new WebhookDataSweepCreated(
-                walletID, sweepID);
+                accountID, walletID, sweepID);
         }
 
     }

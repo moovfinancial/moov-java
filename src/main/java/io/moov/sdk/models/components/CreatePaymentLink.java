@@ -21,8 +21,8 @@ import java.util.Optional;
  * 
  * <p>Request to create a new payment link.
  * 
- * <p>A payment link must include either `payment` or `payout` details, but not both. For payout payment
- * links,
+ * <p>A payment link must include exactly one of `payment`, `payout`, or `customAmountPayment` details.
+ * For payout payment links,
  * `maxUses` will automatically be set to 1, as these are intended for a one-time disbursement
  * to a specific recipient.
  */
@@ -44,9 +44,9 @@ public class CreatePaymentLink {
      * 
      * <p>In API versions before `2026.07.00`, this was a required field.
      * 
-     * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
-     * omitted
-     * for `open` payment amount types.
+     * <p>In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and
+     * must be
+     * omitted for `customAmountPayment` links, where the payor chooses the amount.
      */
     @JsonProperty("amount")
     private Amount amount;
@@ -174,9 +174,9 @@ public class CreatePaymentLink {
      * 
      * <p>In API versions before `2026.07.00`, this was a required field.
      * 
-     * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
-     * omitted
-     * for `open` payment amount types.
+     * <p>In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and
+     * must be
+     * omitted for `customAmountPayment` links, where the payor chooses the amount.
      */
     @JsonIgnore
     public Amount amount() {
@@ -277,9 +277,9 @@ public class CreatePaymentLink {
      * 
      * <p>In API versions before `2026.07.00`, this was a required field.
      * 
-     * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
-     * omitted
-     * for `open` payment amount types.
+     * <p>In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and
+     * must be
+     * omitted for `customAmountPayment` links, where the payor chooses the amount.
      */
     public CreatePaymentLink withAmount(Amount amount) {
         Utils.checkNotNull(amount, "amount");
@@ -526,9 +526,9 @@ public class CreatePaymentLink {
          * 
          * <p>In API versions before `2026.07.00`, this was a required field.
          * 
-         * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
-         * omitted
-         * for `open` payment amount types.
+         * <p>In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and
+         * must be
+         * omitted for `customAmountPayment` links, where the payor chooses the amount.
          */
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");

@@ -55,6 +55,10 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
   
   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
   to specify the `/accounts/{accountID}/transfers.write` scope.
+* [listCancellations](#listcancellations) -   Get a list of cancellations for a transfer.
+  
+  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+  to specify the `/accounts/{accountID}/transfers.read` scope.
 * [getCancellation](#getcancellation) -   Get details of a cancellation for a transfer.
   
   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
@@ -617,6 +621,64 @@ public class Application {
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/GenericError | 400                        | application/json           |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## listCancellations
+
+  Get a list of cancellations for a transfer.
+  
+  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+  to specify the `/accounts/{accountID}/transfers.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="listCancellations" method="get" path="/accounts/{accountID}/transfers/{transferID}/cancellations" example="Cancellations" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListCancellationsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        ListCancellationsResponse res = sdk.transfers().listCancellations()
+                .accountID("<id>")
+                .transferID("<id>")
+                .call();
+
+        if (res.cancellations().isPresent()) {
+            System.out.println(res.cancellations().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `accountID`                                                         | *String*                                                            | :heavy_check_mark:                                                  | Moov account ID of the partner or transfer's source or destination. |
+| `transferID`                                                        | *String*                                                            | :heavy_check_mark:                                                  | Identifier for the transfer.                                        |
+
+### Response
+
+**[ListCancellationsResponse](../../models/operations/ListCancellationsResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
 ## getCancellation

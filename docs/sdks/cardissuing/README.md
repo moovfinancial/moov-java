@@ -36,7 +36,7 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="requestCard" method="post" path="/issuing/{accountID}/issued-cards" -->
+<!-- UsageSnippet language="java" operationID="requestCard" method="post" path="/issuing/{accountID}/cards" -->
 ```java
 package hello.world;
 
@@ -47,6 +47,7 @@ import io.moov.sdk.models.errors.RequestCardError;
 import io.moov.sdk.models.operations.RequestCardResponse;
 import java.lang.Exception;
 import java.util.List;
+import java.util.Map;
 
 public class Application {
 
@@ -62,17 +63,16 @@ public class Application {
         RequestCardResponse res = sdk.cardIssuing().request()
                 .accountID("d9ac71ae-fccb-4dfc-9fed-710ca654e3ed")
                 .requestCard(RequestCard.builder()
-                    .fundingWalletID("fd98e3b2-696f-4f67-9250-17b3474ababf")
-                    .authorizedUser(CreateAuthorizedUser.builder()
-                        .firstName("Milton")
-                        .lastName("Stiedemann")
-                        .birthDate(BirthDate.builder()
-                            .day(9L)
-                            .month(11L)
-                            .year(1989L)
-                            .build())
+                    .metadata(Map.ofEntries(
+                        Map.entry("optional", "metadata")))
+                    .billingAddress(Address.builder()
+                        .addressLine1("123 Main Street")
+                        .city("Boulder")
+                        .stateOrProvince("CO")
+                        .postalCode("80301")
+                        .country("US")
+                        .addressLine2("Apt 302")
                         .build())
-                    .formFactor(IssuedCardFormFactor.VIRTUAL)
                     .expiration(CardExpiration.builder()
                         .month("01")
                         .year("21")
@@ -122,7 +122,7 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="listIssuedCards" method="get" path="/issuing/{accountID}/issued-cards" -->
+<!-- UsageSnippet language="java" operationID="listIssuedCards" method="get" path="/issuing/{accountID}/cards" -->
 ```java
 package hello.world;
 
@@ -183,7 +183,7 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="getIssuedCard" method="get" path="/issuing/{accountID}/issued-cards/{issuedCardID}" -->
+<!-- UsageSnippet language="java" operationID="getIssuedCard" method="get" path="/issuing/{accountID}/cards/{issuedCardID}" -->
 ```java
 package hello.world;
 
@@ -241,7 +241,7 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="updateIssuedCard" method="patch" path="/issuing/{accountID}/issued-cards/{issuedCardID}" -->
+<!-- UsageSnippet language="java" operationID="updateIssuedCard" method="patch" path="/issuing/{accountID}/cards/{issuedCardID}" -->
 ```java
 package hello.world;
 
@@ -251,6 +251,7 @@ import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.UpdateIssuedCardError;
 import io.moov.sdk.models.operations.UpdateIssuedCardResponse;
 import java.lang.Exception;
+import java.util.Map;
 
 public class Application {
 
@@ -267,12 +268,15 @@ public class Application {
                 .accountID("44db31bc-2813-424b-9b8c-2d3f5f1300e3")
                 .issuedCardID("69ca2a7e-7bbc-4176-9d0c-2a1aa7143006")
                 .updateIssuedCard(UpdateIssuedCard.builder()
-                    .authorizedUser(CreateAuthorizedUserUpdate.builder()
-                        .birthDate(BirthDateUpdate.builder()
-                            .day(9L)
-                            .month(11L)
-                            .year(1989L)
-                            .build())
+                    .metadata(Map.ofEntries(
+                        Map.entry("optional", "metadata")))
+                    .billingAddress(BillingAddress.builder()
+                        .addressLine1("123 Main Street")
+                        .addressLine2("Apt 302")
+                        .city("Boulder")
+                        .stateOrProvince("CO")
+                        .postalCode("80301")
+                        .country("US")
                         .build())
                     .build())
                 .call();
@@ -315,7 +319,7 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scop
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="getFullIssuedCard" method="get" path="/issuing/{accountID}/issued-cards/{issuedCardID}/details" -->
+<!-- UsageSnippet language="java" operationID="getFullIssuedCard" method="get" path="/issuing/{accountID}/cards/{issuedCardID}/details" -->
 ```java
 package hello.world;
 

@@ -21,8 +21,8 @@ import java.util.Optional;
  * 
  * <p>Request to create a new payment link.
  * 
- * <p>A payment link must include either `payment` or `payout` details, but not both. For payout payment
- * links,
+ * <p>A payment link must include exactly one of `payment`, `payout`, or `customAmountPayment` details.
+ * For payout payment links,
  * `maxUses` will automatically be set to 1, as these are intended for a one-time disbursement
  * to a specific recipient.
  */
@@ -44,9 +44,9 @@ public class CreatePaymentLink {
      * 
      * <p>In API versions before `2026.07.00`, this was a required field.
      * 
-     * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
-     * omitted
-     * for `open` payment amount types.
+     * <p>In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and
+     * must be
+     * omitted for `customAmountPayment` links, where the payor chooses the amount.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
@@ -92,6 +92,13 @@ public class CreatePaymentLink {
     private Optional<? extends PaymentLinkPayoutDetails> payout;
 
     /**
+     * Options for a custom amount payment link. Mutually exclusive with `payment` and `payout`.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("customAmountPayment")
+    private Optional<? extends PaymentLinkCustomAmountPaymentDetails> customAmountPayment;
+
+    /**
      * An optional collection of line items for a payment link.
      * When line items are provided, their total plus tax must equal the payment link amount.
      */
@@ -115,6 +122,7 @@ public class CreatePaymentLink {
             @JsonProperty("customer") Optional<? extends PaymentLinkCustomerOptions> customer,
             @JsonProperty("payment") Optional<? extends PaymentLinkPaymentDetails> payment,
             @JsonProperty("payout") Optional<? extends PaymentLinkPayoutDetails> payout,
+            @JsonProperty("customAmountPayment") Optional<? extends PaymentLinkCustomAmountPaymentDetails> customAmountPayment,
             @JsonProperty("lineItems") Optional<? extends CreatePaymentLinkLineItems> lineItems,
             @JsonProperty("amountDetails") Optional<? extends CreatePaymentLinkAmountDetails> amountDetails) {
         Utils.checkNotNull(partnerAccountID, "partnerAccountID");
@@ -126,6 +134,7 @@ public class CreatePaymentLink {
         Utils.checkNotNull(customer, "customer");
         Utils.checkNotNull(payment, "payment");
         Utils.checkNotNull(payout, "payout");
+        Utils.checkNotNull(customAmountPayment, "customAmountPayment");
         Utils.checkNotNull(lineItems, "lineItems");
         Utils.checkNotNull(amountDetails, "amountDetails");
         this.partnerAccountID = partnerAccountID;
@@ -137,6 +146,7 @@ public class CreatePaymentLink {
         this.customer = customer;
         this.payment = payment;
         this.payout = payout;
+        this.customAmountPayment = customAmountPayment;
         this.lineItems = lineItems;
         this.amountDetails = amountDetails;
     }
@@ -148,7 +158,7 @@ public class CreatePaymentLink {
         this(partnerAccountID, merchantPaymentMethodID, Optional.empty(),
             Optional.empty(), Optional.empty(), display,
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -172,9 +182,9 @@ public class CreatePaymentLink {
      * 
      * <p>In API versions before `2026.07.00`, this was a required field.
      * 
-     * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
-     * omitted
-     * for `open` payment amount types.
+     * <p>In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and
+     * must be
+     * omitted for `customAmountPayment` links, where the payor chooses the amount.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -230,6 +240,15 @@ public class CreatePaymentLink {
     }
 
     /**
+     * Options for a custom amount payment link. Mutually exclusive with `payment` and `payout`.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PaymentLinkCustomAmountPaymentDetails> customAmountPayment() {
+        return (Optional<PaymentLinkCustomAmountPaymentDetails>) customAmountPayment;
+    }
+
+    /**
      * An optional collection of line items for a payment link.
      * When line items are provided, their total plus tax must equal the payment link amount.
      */
@@ -273,9 +292,9 @@ public class CreatePaymentLink {
      * 
      * <p>In API versions before `2026.07.00`, this was a required field.
      * 
-     * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
-     * omitted
-     * for `open` payment amount types.
+     * <p>In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and
+     * must be
+     * omitted for `customAmountPayment` links, where the payor chooses the amount.
      */
     public CreatePaymentLink withAmount(Amount amount) {
         Utils.checkNotNull(amount, "amount");
@@ -289,9 +308,9 @@ public class CreatePaymentLink {
      * 
      * <p>In API versions before `2026.07.00`, this was a required field.
      * 
-     * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
-     * omitted
-     * for `open` payment amount types.
+     * <p>In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and
+     * must be
+     * omitted for `customAmountPayment` links, where the payor chooses the amount.
      */
     public CreatePaymentLink withAmount(Optional<? extends Amount> amount) {
         Utils.checkNotNull(amount, "amount");
@@ -396,6 +415,25 @@ public class CreatePaymentLink {
     }
 
     /**
+     * Options for a custom amount payment link. Mutually exclusive with `payment` and `payout`.
+     */
+    public CreatePaymentLink withCustomAmountPayment(PaymentLinkCustomAmountPaymentDetails customAmountPayment) {
+        Utils.checkNotNull(customAmountPayment, "customAmountPayment");
+        this.customAmountPayment = Optional.ofNullable(customAmountPayment);
+        return this;
+    }
+
+
+    /**
+     * Options for a custom amount payment link. Mutually exclusive with `payment` and `payout`.
+     */
+    public CreatePaymentLink withCustomAmountPayment(Optional<? extends PaymentLinkCustomAmountPaymentDetails> customAmountPayment) {
+        Utils.checkNotNull(customAmountPayment, "customAmountPayment");
+        this.customAmountPayment = customAmountPayment;
+        return this;
+    }
+
+    /**
      * An optional collection of line items for a payment link.
      * When line items are provided, their total plus tax must equal the payment link amount.
      */
@@ -448,6 +486,7 @@ public class CreatePaymentLink {
             Utils.enhancedDeepEquals(this.customer, other.customer) &&
             Utils.enhancedDeepEquals(this.payment, other.payment) &&
             Utils.enhancedDeepEquals(this.payout, other.payout) &&
+            Utils.enhancedDeepEquals(this.customAmountPayment, other.customAmountPayment) &&
             Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
             Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
     }
@@ -458,7 +497,7 @@ public class CreatePaymentLink {
             partnerAccountID, merchantPaymentMethodID, amount,
             maxUses, expiresOn, display,
             customer, payment, payout,
-            lineItems, amountDetails);
+            customAmountPayment, lineItems, amountDetails);
     }
     
     @Override
@@ -473,6 +512,7 @@ public class CreatePaymentLink {
                 "customer", customer,
                 "payment", payment,
                 "payout", payout,
+                "customAmountPayment", customAmountPayment,
                 "lineItems", lineItems,
                 "amountDetails", amountDetails);
     }
@@ -497,6 +537,8 @@ public class CreatePaymentLink {
         private Optional<? extends PaymentLinkPaymentDetails> payment = Optional.empty();
 
         private Optional<? extends PaymentLinkPayoutDetails> payout = Optional.empty();
+
+        private Optional<? extends PaymentLinkCustomAmountPaymentDetails> customAmountPayment = Optional.empty();
 
         private Optional<? extends CreatePaymentLinkLineItems> lineItems = Optional.empty();
 
@@ -532,9 +574,9 @@ public class CreatePaymentLink {
          * 
          * <p>In API versions before `2026.07.00`, this was a required field.
          * 
-         * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
-         * omitted
-         * for `open` payment amount types.
+         * <p>In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and
+         * must be
+         * omitted for `customAmountPayment` links, where the payor chooses the amount.
          */
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
@@ -547,9 +589,9 @@ public class CreatePaymentLink {
          * 
          * <p>In API versions before `2026.07.00`, this was a required field.
          * 
-         * <p>In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and
-         * omitted
-         * for `open` payment amount types.
+         * <p>In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and
+         * must be
+         * omitted for `customAmountPayment` links, where the payor chooses the amount.
          */
         public Builder amount(Optional<? extends Amount> amount) {
             Utils.checkNotNull(amount, "amount");
@@ -656,6 +698,25 @@ public class CreatePaymentLink {
 
 
         /**
+         * Options for a custom amount payment link. Mutually exclusive with `payment` and `payout`.
+         */
+        public Builder customAmountPayment(PaymentLinkCustomAmountPaymentDetails customAmountPayment) {
+            Utils.checkNotNull(customAmountPayment, "customAmountPayment");
+            this.customAmountPayment = Optional.ofNullable(customAmountPayment);
+            return this;
+        }
+
+        /**
+         * Options for a custom amount payment link. Mutually exclusive with `payment` and `payout`.
+         */
+        public Builder customAmountPayment(Optional<? extends PaymentLinkCustomAmountPaymentDetails> customAmountPayment) {
+            Utils.checkNotNull(customAmountPayment, "customAmountPayment");
+            this.customAmountPayment = customAmountPayment;
+            return this;
+        }
+
+
+        /**
          * An optional collection of line items for a payment link.
          * When line items are provided, their total plus tax must equal the payment link amount.
          */
@@ -694,7 +755,7 @@ public class CreatePaymentLink {
                 partnerAccountID, merchantPaymentMethodID, amount,
                 maxUses, expiresOn, display,
                 customer, payment, payout,
-                lineItems, amountDetails);
+                customAmountPayment, lineItems, amountDetails);
         }
 
     }

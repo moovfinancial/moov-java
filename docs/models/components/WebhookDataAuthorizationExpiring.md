@@ -1,0 +1,11 @@
+# WebhookDataAuthorizationExpiring
+
+
+## Fields
+
+| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `merchantAccountID`                                                                       | *String*                                                                                  | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| `partnerAccountID`                                                                        | *String*                                                                                  | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| `authorizationID`                                                                         | *String*                                                                                  | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| `expiresOn`                                                                               | [OffsetDateTime](https://docs.oracle.com/javase/8/docs/api/java/time/OffsetDateTime.html) | :heavy_check_mark:                                                                        | N/A                                                                                       |

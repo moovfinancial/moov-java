@@ -11,7 +11,8 @@ import java.util.Optional;
 public enum PaymentLinkType {
     PAYMENT("payment"),
     PAYOUT("payout"),
-    INVOICE_PAYMENT("invoice-payment");
+    INVOICE_PAYMENT("invoice-payment"),
+    CUSTOM_AMOUNT_PAYMENT("custom-amount-payment");
 
     @JsonValue
     private final String value;

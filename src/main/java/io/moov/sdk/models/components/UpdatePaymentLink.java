@@ -53,6 +53,13 @@ public class UpdatePaymentLink {
     private Optional<? extends PaymentLinkPayoutDetailsUpdate> payout;
 
     /**
+     * Options for a custom amount payment link. A payment link's type cannot be changed after creation.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("customAmountPayment")
+    private Optional<? extends PaymentLinkCustomAmountPaymentDetailsUpdate> customAmountPayment;
+
+    /**
      * An optional collection of line items for a payment link.
      * When line items are provided, their total plus tax must equal the payment link amount.
      */
@@ -73,6 +80,7 @@ public class UpdatePaymentLink {
             @JsonProperty("customer") Optional<? extends PaymentLinkCustomerOptions> customer,
             @JsonProperty("payment") Optional<? extends PaymentLinkPaymentDetailsUpdate> payment,
             @JsonProperty("payout") Optional<? extends PaymentLinkPayoutDetailsUpdate> payout,
+            @JsonProperty("customAmountPayment") Optional<? extends PaymentLinkCustomAmountPaymentDetailsUpdate> customAmountPayment,
             @JsonProperty("lineItems") Optional<? extends CreatePaymentLinkLineItemsUpdate> lineItems,
             @JsonProperty("amountDetails") Optional<? extends UpdatePaymentLinkAmountDetails> amountDetails) {
         Utils.checkNotNull(amount, "amount");
@@ -81,6 +89,7 @@ public class UpdatePaymentLink {
         Utils.checkNotNull(customer, "customer");
         Utils.checkNotNull(payment, "payment");
         Utils.checkNotNull(payout, "payout");
+        Utils.checkNotNull(customAmountPayment, "customAmountPayment");
         Utils.checkNotNull(lineItems, "lineItems");
         Utils.checkNotNull(amountDetails, "amountDetails");
         this.amount = amount;
@@ -89,6 +98,7 @@ public class UpdatePaymentLink {
         this.customer = customer;
         this.payment = payment;
         this.payout = payout;
+        this.customAmountPayment = customAmountPayment;
         this.lineItems = lineItems;
         this.amountDetails = amountDetails;
     }
@@ -96,7 +106,7 @@ public class UpdatePaymentLink {
     public UpdatePaymentLink() {
         this(Optional.empty(), JsonNullable.undefined(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -138,6 +148,15 @@ public class UpdatePaymentLink {
     @JsonIgnore
     public Optional<PaymentLinkPayoutDetailsUpdate> payout() {
         return (Optional<PaymentLinkPayoutDetailsUpdate>) payout;
+    }
+
+    /**
+     * Options for a custom amount payment link. A payment link's type cannot be changed after creation.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PaymentLinkCustomAmountPaymentDetailsUpdate> customAmountPayment() {
+        return (Optional<PaymentLinkCustomAmountPaymentDetailsUpdate>) customAmountPayment;
     }
 
     /**
@@ -251,6 +270,25 @@ public class UpdatePaymentLink {
     }
 
     /**
+     * Options for a custom amount payment link. A payment link's type cannot be changed after creation.
+     */
+    public UpdatePaymentLink withCustomAmountPayment(PaymentLinkCustomAmountPaymentDetailsUpdate customAmountPayment) {
+        Utils.checkNotNull(customAmountPayment, "customAmountPayment");
+        this.customAmountPayment = Optional.ofNullable(customAmountPayment);
+        return this;
+    }
+
+
+    /**
+     * Options for a custom amount payment link. A payment link's type cannot be changed after creation.
+     */
+    public UpdatePaymentLink withCustomAmountPayment(Optional<? extends PaymentLinkCustomAmountPaymentDetailsUpdate> customAmountPayment) {
+        Utils.checkNotNull(customAmountPayment, "customAmountPayment");
+        this.customAmountPayment = customAmountPayment;
+        return this;
+    }
+
+    /**
      * An optional collection of line items for a payment link.
      * When line items are provided, their total plus tax must equal the payment link amount.
      */
@@ -300,6 +338,7 @@ public class UpdatePaymentLink {
             Utils.enhancedDeepEquals(this.customer, other.customer) &&
             Utils.enhancedDeepEquals(this.payment, other.payment) &&
             Utils.enhancedDeepEquals(this.payout, other.payout) &&
+            Utils.enhancedDeepEquals(this.customAmountPayment, other.customAmountPayment) &&
             Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
             Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
     }
@@ -309,7 +348,7 @@ public class UpdatePaymentLink {
         return Utils.enhancedHash(
             amount, expiresOn, display,
             customer, payment, payout,
-            lineItems, amountDetails);
+            customAmountPayment, lineItems, amountDetails);
     }
     
     @Override
@@ -321,6 +360,7 @@ public class UpdatePaymentLink {
                 "customer", customer,
                 "payment", payment,
                 "payout", payout,
+                "customAmountPayment", customAmountPayment,
                 "lineItems", lineItems,
                 "amountDetails", amountDetails);
     }
@@ -339,6 +379,8 @@ public class UpdatePaymentLink {
         private Optional<? extends PaymentLinkPaymentDetailsUpdate> payment = Optional.empty();
 
         private Optional<? extends PaymentLinkPayoutDetailsUpdate> payout = Optional.empty();
+
+        private Optional<? extends PaymentLinkCustomAmountPaymentDetailsUpdate> customAmountPayment = Optional.empty();
 
         private Optional<? extends CreatePaymentLinkLineItemsUpdate> lineItems = Optional.empty();
 
@@ -440,6 +482,25 @@ public class UpdatePaymentLink {
 
 
         /**
+         * Options for a custom amount payment link. A payment link's type cannot be changed after creation.
+         */
+        public Builder customAmountPayment(PaymentLinkCustomAmountPaymentDetailsUpdate customAmountPayment) {
+            Utils.checkNotNull(customAmountPayment, "customAmountPayment");
+            this.customAmountPayment = Optional.ofNullable(customAmountPayment);
+            return this;
+        }
+
+        /**
+         * Options for a custom amount payment link. A payment link's type cannot be changed after creation.
+         */
+        public Builder customAmountPayment(Optional<? extends PaymentLinkCustomAmountPaymentDetailsUpdate> customAmountPayment) {
+            Utils.checkNotNull(customAmountPayment, "customAmountPayment");
+            this.customAmountPayment = customAmountPayment;
+            return this;
+        }
+
+
+        /**
          * An optional collection of line items for a payment link.
          * When line items are provided, their total plus tax must equal the payment link amount.
          */
@@ -477,7 +538,7 @@ public class UpdatePaymentLink {
             return new UpdatePaymentLink(
                 amount, expiresOn, display,
                 customer, payment, payout,
-                lineItems, amountDetails);
+                customAmountPayment, lineItems, amountDetails);
         }
 
     }

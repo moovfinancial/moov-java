@@ -8,8 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
@@ -30,27 +28,6 @@ public class PaymentLinkPaymentDetailsUpdate {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("allowedMethods")
     private Optional<? extends List<CollectionPaymentMethodType>> allowedMethods;
-
-    /**
-     * Indicates whether the payment amount is fixed by the merchant or open for the buyer to choose.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("amountType")
-    private Optional<? extends PaymentLinkPaymentDetailsUpdateAmountType> amountType;
-
-    /**
-     * The minimum and maximum amounts the buyer can specify when `amountType` is `open`.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("amountRange")
-    private Optional<? extends AmountDecimalRangeUpdate> amountRange;
-
-    /**
-     * Optional preset amounts displayed to the buyer when `amountType` is `open`.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("suggestedAmounts")
-    private Optional<? extends List<AmountDecimal>> suggestedAmounts;
 
     /**
      * Options for payment links used to collect a card payment.
@@ -76,23 +53,14 @@ public class PaymentLinkPaymentDetailsUpdate {
     @JsonCreator
     public PaymentLinkPaymentDetailsUpdate(
             @JsonProperty("allowedMethods") Optional<? extends List<CollectionPaymentMethodType>> allowedMethods,
-            @JsonProperty("amountType") Optional<? extends PaymentLinkPaymentDetailsUpdateAmountType> amountType,
-            @JsonProperty("amountRange") Optional<? extends AmountDecimalRangeUpdate> amountRange,
-            @JsonProperty("suggestedAmounts") Optional<? extends List<AmountDecimal>> suggestedAmounts,
             @JsonProperty("cardDetails") Optional<? extends CardPaymentDetails> cardDetails,
             @JsonProperty("achDetails") Optional<? extends ACHPaymentDetails> achDetails,
             @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata) {
         Utils.checkNotNull(allowedMethods, "allowedMethods");
-        Utils.checkNotNull(amountType, "amountType");
-        Utils.checkNotNull(amountRange, "amountRange");
-        Utils.checkNotNull(suggestedAmounts, "suggestedAmounts");
         Utils.checkNotNull(cardDetails, "cardDetails");
         Utils.checkNotNull(achDetails, "achDetails");
         Utils.checkNotNull(metadata, "metadata");
         this.allowedMethods = allowedMethods;
-        this.amountType = amountType;
-        this.amountRange = amountRange;
-        this.suggestedAmounts = suggestedAmounts;
         this.cardDetails = cardDetails;
         this.achDetails = achDetails;
         this.metadata = metadata;
@@ -100,7 +68,6 @@ public class PaymentLinkPaymentDetailsUpdate {
     
     public PaymentLinkPaymentDetailsUpdate() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty());
     }
 
@@ -111,33 +78,6 @@ public class PaymentLinkPaymentDetailsUpdate {
     @JsonIgnore
     public Optional<List<CollectionPaymentMethodType>> allowedMethods() {
         return (Optional<List<CollectionPaymentMethodType>>) allowedMethods;
-    }
-
-    /**
-     * Indicates whether the payment amount is fixed by the merchant or open for the buyer to choose.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<PaymentLinkPaymentDetailsUpdateAmountType> amountType() {
-        return (Optional<PaymentLinkPaymentDetailsUpdateAmountType>) amountType;
-    }
-
-    /**
-     * The minimum and maximum amounts the buyer can specify when `amountType` is `open`.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<AmountDecimalRangeUpdate> amountRange() {
-        return (Optional<AmountDecimalRangeUpdate>) amountRange;
-    }
-
-    /**
-     * Optional preset amounts displayed to the buyer when `amountType` is `open`.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<AmountDecimal>> suggestedAmounts() {
-        return (Optional<List<AmountDecimal>>) suggestedAmounts;
     }
 
     /**
@@ -188,63 +128,6 @@ public class PaymentLinkPaymentDetailsUpdate {
     public PaymentLinkPaymentDetailsUpdate withAllowedMethods(Optional<? extends List<CollectionPaymentMethodType>> allowedMethods) {
         Utils.checkNotNull(allowedMethods, "allowedMethods");
         this.allowedMethods = allowedMethods;
-        return this;
-    }
-
-    /**
-     * Indicates whether the payment amount is fixed by the merchant or open for the buyer to choose.
-     */
-    public PaymentLinkPaymentDetailsUpdate withAmountType(PaymentLinkPaymentDetailsUpdateAmountType amountType) {
-        Utils.checkNotNull(amountType, "amountType");
-        this.amountType = Optional.ofNullable(amountType);
-        return this;
-    }
-
-
-    /**
-     * Indicates whether the payment amount is fixed by the merchant or open for the buyer to choose.
-     */
-    public PaymentLinkPaymentDetailsUpdate withAmountType(Optional<? extends PaymentLinkPaymentDetailsUpdateAmountType> amountType) {
-        Utils.checkNotNull(amountType, "amountType");
-        this.amountType = amountType;
-        return this;
-    }
-
-    /**
-     * The minimum and maximum amounts the buyer can specify when `amountType` is `open`.
-     */
-    public PaymentLinkPaymentDetailsUpdate withAmountRange(AmountDecimalRangeUpdate amountRange) {
-        Utils.checkNotNull(amountRange, "amountRange");
-        this.amountRange = Optional.ofNullable(amountRange);
-        return this;
-    }
-
-
-    /**
-     * The minimum and maximum amounts the buyer can specify when `amountType` is `open`.
-     */
-    public PaymentLinkPaymentDetailsUpdate withAmountRange(Optional<? extends AmountDecimalRangeUpdate> amountRange) {
-        Utils.checkNotNull(amountRange, "amountRange");
-        this.amountRange = amountRange;
-        return this;
-    }
-
-    /**
-     * Optional preset amounts displayed to the buyer when `amountType` is `open`.
-     */
-    public PaymentLinkPaymentDetailsUpdate withSuggestedAmounts(List<AmountDecimal> suggestedAmounts) {
-        Utils.checkNotNull(suggestedAmounts, "suggestedAmounts");
-        this.suggestedAmounts = Optional.ofNullable(suggestedAmounts);
-        return this;
-    }
-
-
-    /**
-     * Optional preset amounts displayed to the buyer when `amountType` is `open`.
-     */
-    public PaymentLinkPaymentDetailsUpdate withSuggestedAmounts(Optional<? extends List<AmountDecimal>> suggestedAmounts) {
-        Utils.checkNotNull(suggestedAmounts, "suggestedAmounts");
-        this.suggestedAmounts = suggestedAmounts;
         return this;
     }
 
@@ -316,9 +199,6 @@ public class PaymentLinkPaymentDetailsUpdate {
         PaymentLinkPaymentDetailsUpdate other = (PaymentLinkPaymentDetailsUpdate) o;
         return 
             Utils.enhancedDeepEquals(this.allowedMethods, other.allowedMethods) &&
-            Utils.enhancedDeepEquals(this.amountType, other.amountType) &&
-            Utils.enhancedDeepEquals(this.amountRange, other.amountRange) &&
-            Utils.enhancedDeepEquals(this.suggestedAmounts, other.suggestedAmounts) &&
             Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails) &&
             Utils.enhancedDeepEquals(this.achDetails, other.achDetails) &&
             Utils.enhancedDeepEquals(this.metadata, other.metadata);
@@ -327,8 +207,7 @@ public class PaymentLinkPaymentDetailsUpdate {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            allowedMethods, amountType, amountRange,
-            suggestedAmounts, cardDetails, achDetails,
+            allowedMethods, cardDetails, achDetails,
             metadata);
     }
     
@@ -336,9 +215,6 @@ public class PaymentLinkPaymentDetailsUpdate {
     public String toString() {
         return Utils.toString(PaymentLinkPaymentDetailsUpdate.class,
                 "allowedMethods", allowedMethods,
-                "amountType", amountType,
-                "amountRange", amountRange,
-                "suggestedAmounts", suggestedAmounts,
                 "cardDetails", cardDetails,
                 "achDetails", achDetails,
                 "metadata", metadata);
@@ -348,12 +224,6 @@ public class PaymentLinkPaymentDetailsUpdate {
     public final static class Builder {
 
         private Optional<? extends List<CollectionPaymentMethodType>> allowedMethods = Optional.empty();
-
-        private Optional<? extends PaymentLinkPaymentDetailsUpdateAmountType> amountType;
-
-        private Optional<? extends AmountDecimalRangeUpdate> amountRange = Optional.empty();
-
-        private Optional<? extends List<AmountDecimal>> suggestedAmounts = Optional.empty();
 
         private Optional<? extends CardPaymentDetails> cardDetails = Optional.empty();
 
@@ -381,63 +251,6 @@ public class PaymentLinkPaymentDetailsUpdate {
         public Builder allowedMethods(Optional<? extends List<CollectionPaymentMethodType>> allowedMethods) {
             Utils.checkNotNull(allowedMethods, "allowedMethods");
             this.allowedMethods = allowedMethods;
-            return this;
-        }
-
-
-        /**
-         * Indicates whether the payment amount is fixed by the merchant or open for the buyer to choose.
-         */
-        public Builder amountType(PaymentLinkPaymentDetailsUpdateAmountType amountType) {
-            Utils.checkNotNull(amountType, "amountType");
-            this.amountType = Optional.ofNullable(amountType);
-            return this;
-        }
-
-        /**
-         * Indicates whether the payment amount is fixed by the merchant or open for the buyer to choose.
-         */
-        public Builder amountType(Optional<? extends PaymentLinkPaymentDetailsUpdateAmountType> amountType) {
-            Utils.checkNotNull(amountType, "amountType");
-            this.amountType = amountType;
-            return this;
-        }
-
-
-        /**
-         * The minimum and maximum amounts the buyer can specify when `amountType` is `open`.
-         */
-        public Builder amountRange(AmountDecimalRangeUpdate amountRange) {
-            Utils.checkNotNull(amountRange, "amountRange");
-            this.amountRange = Optional.ofNullable(amountRange);
-            return this;
-        }
-
-        /**
-         * The minimum and maximum amounts the buyer can specify when `amountType` is `open`.
-         */
-        public Builder amountRange(Optional<? extends AmountDecimalRangeUpdate> amountRange) {
-            Utils.checkNotNull(amountRange, "amountRange");
-            this.amountRange = amountRange;
-            return this;
-        }
-
-
-        /**
-         * Optional preset amounts displayed to the buyer when `amountType` is `open`.
-         */
-        public Builder suggestedAmounts(List<AmountDecimal> suggestedAmounts) {
-            Utils.checkNotNull(suggestedAmounts, "suggestedAmounts");
-            this.suggestedAmounts = Optional.ofNullable(suggestedAmounts);
-            return this;
-        }
-
-        /**
-         * Optional preset amounts displayed to the buyer when `amountType` is `open`.
-         */
-        public Builder suggestedAmounts(Optional<? extends List<AmountDecimal>> suggestedAmounts) {
-            Utils.checkNotNull(suggestedAmounts, "suggestedAmounts");
-            this.suggestedAmounts = suggestedAmounts;
             return this;
         }
 
@@ -499,21 +312,11 @@ public class PaymentLinkPaymentDetailsUpdate {
         }
 
         public PaymentLinkPaymentDetailsUpdate build() {
-            if (amountType == null) {
-                amountType = _SINGLETON_VALUE_AmountType.value();
-            }
 
             return new PaymentLinkPaymentDetailsUpdate(
-                allowedMethods, amountType, amountRange,
-                suggestedAmounts, cardDetails, achDetails,
+                allowedMethods, cardDetails, achDetails,
                 metadata);
         }
 
-
-        private static final LazySingletonValue<Optional<? extends PaymentLinkPaymentDetailsUpdateAmountType>> _SINGLETON_VALUE_AmountType =
-                new LazySingletonValue<>(
-                        "amountType",
-                        "\"fixed\"",
-                        new TypeReference<Optional<? extends PaymentLinkPaymentDetailsUpdateAmountType>>() {});
     }
 }

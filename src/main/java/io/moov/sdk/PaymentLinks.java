@@ -68,7 +68,7 @@ public class PaymentLinks {
      * @param accountID The merchant account ID.
      * @param createPaymentLink Request to create a new payment link.
      *         
-     *         A payment link must include either `payment` or `payout` details, but not both. For payout payment links,
+     *         A payment link must include exactly one of `payment`, `payout`, or `customAmountPayment` details. For payout payment links,
      *         `maxUses` will automatically be set to 1, as these are intended for a one-time disbursement
      *         to a specific recipient.
      *         

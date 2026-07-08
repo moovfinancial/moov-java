@@ -28,7 +28,7 @@ public class ManualTermsOfServiceUpdate {
     private Optional<OffsetDateTime> acceptedDate;
 
     /**
-     * The IP address from which the terms of service were accepted.
+     * The IP address (IPv4 or IPv6) from which the terms of service were accepted.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("acceptedIP")
@@ -76,7 +76,7 @@ public class ManualTermsOfServiceUpdate {
     }
 
     /**
-     * The IP address from which the terms of service were accepted.
+     * The IP address (IPv4 or IPv6) from which the terms of service were accepted.
      */
     @JsonIgnore
     public Optional<String> acceptedIP() {
@@ -121,7 +121,7 @@ public class ManualTermsOfServiceUpdate {
     }
 
     /**
-     * The IP address from which the terms of service were accepted.
+     * The IP address (IPv4 or IPv6) from which the terms of service were accepted.
      */
     public ManualTermsOfServiceUpdate withAcceptedIP(String acceptedIP) {
         Utils.checkNotNull(acceptedIP, "acceptedIP");
@@ -131,7 +131,7 @@ public class ManualTermsOfServiceUpdate {
 
 
     /**
-     * The IP address from which the terms of service were accepted.
+     * The IP address (IPv4 or IPv6) from which the terms of service were accepted.
      */
     public ManualTermsOfServiceUpdate withAcceptedIP(Optional<String> acceptedIP) {
         Utils.checkNotNull(acceptedIP, "acceptedIP");
@@ -239,7 +239,7 @@ public class ManualTermsOfServiceUpdate {
 
 
         /**
-         * The IP address from which the terms of service were accepted.
+         * The IP address (IPv4 or IPv6) from which the terms of service were accepted.
          */
         public Builder acceptedIP(String acceptedIP) {
             Utils.checkNotNull(acceptedIP, "acceptedIP");
@@ -248,7 +248,7 @@ public class ManualTermsOfServiceUpdate {
         }
 
         /**
-         * The IP address from which the terms of service were accepted.
+         * The IP address (IPv4 or IPv6) from which the terms of service were accepted.
          */
         public Builder acceptedIP(Optional<String> acceptedIP) {
             Utils.checkNotNull(acceptedIP, "acceptedIP");

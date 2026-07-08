@@ -117,7 +117,7 @@ public class CardIssuing {
      * @param accountID The Moov business account for which the cards have been issued.
      * @param skip 
      * @param count 
-     * @param states Optional, comma-separated states to filter the Moov list issued cards response. For example `active,pending-verification`
+     * @param states Optional, comma-separated states to filter the Moov list issued cards response. For example `active,closed`
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */

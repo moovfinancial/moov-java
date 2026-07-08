@@ -24,7 +24,7 @@ public class ManualTermsOfService {
     private OffsetDateTime acceptedDate;
 
     /**
-     * The IP address from which the terms of service were accepted.
+     * The IP address (IPv4 or IPv6) from which the terms of service were accepted.
      */
     @JsonProperty("acceptedIP")
     private String acceptedIP;
@@ -64,7 +64,7 @@ public class ManualTermsOfService {
     }
 
     /**
-     * The IP address from which the terms of service were accepted.
+     * The IP address (IPv4 or IPv6) from which the terms of service were accepted.
      */
     @JsonIgnore
     public String acceptedIP() {
@@ -99,7 +99,7 @@ public class ManualTermsOfService {
     }
 
     /**
-     * The IP address from which the terms of service were accepted.
+     * The IP address (IPv4 or IPv6) from which the terms of service were accepted.
      */
     public ManualTermsOfService withAcceptedIP(String acceptedIP) {
         Utils.checkNotNull(acceptedIP, "acceptedIP");
@@ -181,7 +181,7 @@ public class ManualTermsOfService {
 
 
         /**
-         * The IP address from which the terms of service were accepted.
+         * The IP address (IPv4 or IPv6) from which the terms of service were accepted.
          */
         public Builder acceptedIP(String acceptedIP) {
             Utils.checkNotNull(acceptedIP, "acceptedIP");

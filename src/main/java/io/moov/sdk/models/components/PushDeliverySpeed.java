@@ -9,23 +9,18 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * CardTransactionStatus
+ * PushDeliverySpeed
  * 
- * <p>Status of a transaction within the card payment lifecycle.
+ * <p>Delivery speed options for push-to-card payouts.
  */
-public enum CardTransactionStatus {
-    INITIATED("initiated"),
-    CONFIRMED("confirmed"),
-    CANCELED("canceled"),
-    SETTLED("settled"),
-    FAILED("failed"),
-    COMPLETED("completed"),
+public enum PushDeliverySpeed {
+    INSTANT("instant"),
     DEFERRED("deferred");
 
     @JsonValue
     private final String value;
 
-    CardTransactionStatus(String value) {
+    PushDeliverySpeed(String value) {
         this.value = value;
     }
     
@@ -33,8 +28,8 @@ public enum CardTransactionStatus {
         return value;
     }
     
-    public static Optional<CardTransactionStatus> fromValue(String value) {
-        for (CardTransactionStatus o: CardTransactionStatus.values()) {
+    public static Optional<PushDeliverySpeed> fromValue(String value) {
+        for (PushDeliverySpeed o: PushDeliverySpeed.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);
             }

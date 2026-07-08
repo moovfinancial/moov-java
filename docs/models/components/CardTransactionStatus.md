@@ -21,3 +21,4 @@ CardTransactionStatus value = CardTransactionStatus.INITIATED;
 | `SETTLED`   | settled     |
 | `FAILED`    | failed      |
 | `COMPLETED` | completed   |
+| `DEFERRED`  | deferred    |

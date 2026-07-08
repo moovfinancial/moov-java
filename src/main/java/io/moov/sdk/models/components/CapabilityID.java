@@ -41,6 +41,7 @@ public enum CapabilityID {
     WALLET("wallet"),
     WALLET_BALANCE("wallet.balance"),
     CARD_ISSUING("card-issuing"),
+    ISSUING_CARDHOLDER("issuing.cardholder"),
     PRODUCTION_APP("production-app"),
     PLATFORM_PRODUCTION_APP("platform.production-app"),
     PLATFORM_WALLET_TRANSFERS("platform.wallet-transfers");

@@ -33,7 +33,7 @@ public class ListIssuedCardsRequest {
 
     /**
      * Optional, comma-separated states to filter the Moov list issued cards response. For example
-     * `active,pending-verification`
+     * `active,closed`
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=states")
     private Optional<? extends List<IssuedCardState>> states;
@@ -80,7 +80,7 @@ public class ListIssuedCardsRequest {
 
     /**
      * Optional, comma-separated states to filter the Moov list issued cards response. For example
-     * `active,pending-verification`
+     * `active,closed`
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -130,7 +130,7 @@ public class ListIssuedCardsRequest {
 
     /**
      * Optional, comma-separated states to filter the Moov list issued cards response. For example
-     * `active,pending-verification`
+     * `active,closed`
      */
     public ListIssuedCardsRequest withStates(List<IssuedCardState> states) {
         Utils.checkNotNull(states, "states");
@@ -141,7 +141,7 @@ public class ListIssuedCardsRequest {
 
     /**
      * Optional, comma-separated states to filter the Moov list issued cards response. For example
-     * `active,pending-verification`
+     * `active,closed`
      */
     public ListIssuedCardsRequest withStates(Optional<? extends List<IssuedCardState>> states) {
         Utils.checkNotNull(states, "states");
@@ -235,7 +235,7 @@ public class ListIssuedCardsRequest {
 
         /**
          * Optional, comma-separated states to filter the Moov list issued cards response. For example
-         * `active,pending-verification`
+         * `active,closed`
          */
         public Builder states(List<IssuedCardState> states) {
             Utils.checkNotNull(states, "states");
@@ -245,7 +245,7 @@ public class ListIssuedCardsRequest {
 
         /**
          * Optional, comma-separated states to filter the Moov list issued cards response. For example
-         * `active,pending-verification`
+         * `active,closed`
          */
         public Builder states(Optional<? extends List<IssuedCardState>> states) {
             Utils.checkNotNull(states, "states");

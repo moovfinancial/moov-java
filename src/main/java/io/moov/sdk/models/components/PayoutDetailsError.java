@@ -31,21 +31,30 @@ public class PayoutDetailsError {
     @JsonProperty("metadata")
     private Optional<String> metadata;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("pushOptions")
+    private Optional<? extends PushOptionsError> pushOptions;
+
     @JsonCreator
     public PayoutDetailsError(
             @JsonProperty("allowedMethods") Optional<String> allowedMethods,
             @JsonProperty("recipient") Optional<? extends PayoutRecipientError> recipient,
-            @JsonProperty("metadata") Optional<String> metadata) {
+            @JsonProperty("metadata") Optional<String> metadata,
+            @JsonProperty("pushOptions") Optional<? extends PushOptionsError> pushOptions) {
         Utils.checkNotNull(allowedMethods, "allowedMethods");
         Utils.checkNotNull(recipient, "recipient");
         Utils.checkNotNull(metadata, "metadata");
+        Utils.checkNotNull(pushOptions, "pushOptions");
         this.allowedMethods = allowedMethods;
         this.recipient = recipient;
         this.metadata = metadata;
+        this.pushOptions = pushOptions;
     }
     
     public PayoutDetailsError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -62,6 +71,12 @@ public class PayoutDetailsError {
     @JsonIgnore
     public Optional<String> metadata() {
         return metadata;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PushOptionsError> pushOptions() {
+        return (Optional<PushOptionsError>) pushOptions;
     }
 
     public static Builder builder() {
@@ -108,6 +123,19 @@ public class PayoutDetailsError {
         return this;
     }
 
+    public PayoutDetailsError withPushOptions(PushOptionsError pushOptions) {
+        Utils.checkNotNull(pushOptions, "pushOptions");
+        this.pushOptions = Optional.ofNullable(pushOptions);
+        return this;
+    }
+
+
+    public PayoutDetailsError withPushOptions(Optional<? extends PushOptionsError> pushOptions) {
+        Utils.checkNotNull(pushOptions, "pushOptions");
+        this.pushOptions = pushOptions;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -120,13 +148,15 @@ public class PayoutDetailsError {
         return 
             Utils.enhancedDeepEquals(this.allowedMethods, other.allowedMethods) &&
             Utils.enhancedDeepEquals(this.recipient, other.recipient) &&
-            Utils.enhancedDeepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.pushOptions, other.pushOptions);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            allowedMethods, recipient, metadata);
+            allowedMethods, recipient, metadata,
+            pushOptions);
     }
     
     @Override
@@ -134,7 +164,8 @@ public class PayoutDetailsError {
         return Utils.toString(PayoutDetailsError.class,
                 "allowedMethods", allowedMethods,
                 "recipient", recipient,
-                "metadata", metadata);
+                "metadata", metadata,
+                "pushOptions", pushOptions);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -145,6 +176,8 @@ public class PayoutDetailsError {
         private Optional<? extends PayoutRecipientError> recipient = Optional.empty();
 
         private Optional<String> metadata = Optional.empty();
+
+        private Optional<? extends PushOptionsError> pushOptions = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -189,10 +222,24 @@ public class PayoutDetailsError {
             return this;
         }
 
+
+        public Builder pushOptions(PushOptionsError pushOptions) {
+            Utils.checkNotNull(pushOptions, "pushOptions");
+            this.pushOptions = Optional.ofNullable(pushOptions);
+            return this;
+        }
+
+        public Builder pushOptions(Optional<? extends PushOptionsError> pushOptions) {
+            Utils.checkNotNull(pushOptions, "pushOptions");
+            this.pushOptions = pushOptions;
+            return this;
+        }
+
         public PayoutDetailsError build() {
 
             return new PayoutDetailsError(
-                allowedMethods, recipient, metadata);
+                allowedMethods, recipient, metadata,
+                pushOptions);
         }
 
     }

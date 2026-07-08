@@ -42,21 +42,37 @@ public class PaymentLinkPayoutDetailsUpdate {
     @JsonProperty("metadata")
     private Optional<? extends Map<String, String>> metadata;
 
+    /**
+     * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
+     * `push-to-card`.
+     * 
+     * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
+     * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
+     * options.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("pushOptions")
+    private Optional<? extends PushOptionsUpdate> pushOptions;
+
     @JsonCreator
     public PaymentLinkPayoutDetailsUpdate(
             @JsonProperty("allowedMethods") Optional<? extends List<DisbursementPaymentMethodType>> allowedMethods,
             @JsonProperty("recipient") Optional<? extends PayoutRecipient> recipient,
-            @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata) {
+            @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata,
+            @JsonProperty("pushOptions") Optional<? extends PushOptionsUpdate> pushOptions) {
         Utils.checkNotNull(allowedMethods, "allowedMethods");
         Utils.checkNotNull(recipient, "recipient");
         Utils.checkNotNull(metadata, "metadata");
+        Utils.checkNotNull(pushOptions, "pushOptions");
         this.allowedMethods = allowedMethods;
         this.recipient = recipient;
         this.metadata = metadata;
+        this.pushOptions = pushOptions;
     }
     
     public PaymentLinkPayoutDetailsUpdate() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -87,6 +103,20 @@ public class PaymentLinkPayoutDetailsUpdate {
     @JsonIgnore
     public Optional<Map<String, String>> metadata() {
         return (Optional<Map<String, String>>) metadata;
+    }
+
+    /**
+     * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
+     * `push-to-card`.
+     * 
+     * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
+     * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
+     * options.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PushOptionsUpdate> pushOptions() {
+        return (Optional<PushOptionsUpdate>) pushOptions;
     }
 
     public static Builder builder() {
@@ -157,6 +187,35 @@ public class PaymentLinkPayoutDetailsUpdate {
         return this;
     }
 
+    /**
+     * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
+     * `push-to-card`.
+     * 
+     * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
+     * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
+     * options.
+     */
+    public PaymentLinkPayoutDetailsUpdate withPushOptions(PushOptionsUpdate pushOptions) {
+        Utils.checkNotNull(pushOptions, "pushOptions");
+        this.pushOptions = Optional.ofNullable(pushOptions);
+        return this;
+    }
+
+
+    /**
+     * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
+     * `push-to-card`.
+     * 
+     * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
+     * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
+     * options.
+     */
+    public PaymentLinkPayoutDetailsUpdate withPushOptions(Optional<? extends PushOptionsUpdate> pushOptions) {
+        Utils.checkNotNull(pushOptions, "pushOptions");
+        this.pushOptions = pushOptions;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -169,13 +228,15 @@ public class PaymentLinkPayoutDetailsUpdate {
         return 
             Utils.enhancedDeepEquals(this.allowedMethods, other.allowedMethods) &&
             Utils.enhancedDeepEquals(this.recipient, other.recipient) &&
-            Utils.enhancedDeepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.pushOptions, other.pushOptions);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            allowedMethods, recipient, metadata);
+            allowedMethods, recipient, metadata,
+            pushOptions);
     }
     
     @Override
@@ -183,7 +244,8 @@ public class PaymentLinkPayoutDetailsUpdate {
         return Utils.toString(PaymentLinkPayoutDetailsUpdate.class,
                 "allowedMethods", allowedMethods,
                 "recipient", recipient,
-                "metadata", metadata);
+                "metadata", metadata,
+                "pushOptions", pushOptions);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -194,6 +256,8 @@ public class PaymentLinkPayoutDetailsUpdate {
         private Optional<? extends PayoutRecipient> recipient = Optional.empty();
 
         private Optional<? extends Map<String, String>> metadata = Optional.empty();
+
+        private Optional<? extends PushOptionsUpdate> pushOptions = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -262,10 +326,40 @@ public class PaymentLinkPayoutDetailsUpdate {
             return this;
         }
 
+
+        /**
+         * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
+         * `push-to-card`.
+         * 
+         * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
+         * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
+         * options.
+         */
+        public Builder pushOptions(PushOptionsUpdate pushOptions) {
+            Utils.checkNotNull(pushOptions, "pushOptions");
+            this.pushOptions = Optional.ofNullable(pushOptions);
+            return this;
+        }
+
+        /**
+         * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
+         * `push-to-card`.
+         * 
+         * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
+         * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
+         * options.
+         */
+        public Builder pushOptions(Optional<? extends PushOptionsUpdate> pushOptions) {
+            Utils.checkNotNull(pushOptions, "pushOptions");
+            this.pushOptions = pushOptions;
+            return this;
+        }
+
         public PaymentLinkPayoutDetailsUpdate build() {
 
             return new PaymentLinkPayoutDetailsUpdate(
-                allowedMethods, recipient, metadata);
+                allowedMethods, recipient, metadata,
+                pushOptions);
         }
 
     }

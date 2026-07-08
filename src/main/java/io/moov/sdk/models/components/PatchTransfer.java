@@ -18,7 +18,9 @@ import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class PatchTransfer {
-
+    /**
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("metadata")
     private JsonNullable<? extends Map<String, String>> metadata;
@@ -44,6 +46,9 @@ public class PatchTransfer {
         this(JsonNullable.undefined(), Optional.empty());
     }
 
+    /**
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public JsonNullable<Map<String, String>> metadata() {
@@ -63,12 +68,18 @@ public class PatchTransfer {
     }
 
 
+    /**
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+     */
     public PatchTransfer withMetadata(Map<String, String> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = JsonNullable.of(metadata);
         return this;
     }
 
+    /**
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+     */
     public PatchTransfer withMetadata(JsonNullable<? extends Map<String, String>> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
@@ -133,12 +144,18 @@ public class PatchTransfer {
         }
 
 
+        /**
+         * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+         */
         public Builder metadata(Map<String, String> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = JsonNullable.of(metadata);
             return this;
         }
 
+        /**
+         * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+         */
         public Builder metadata(JsonNullable<? extends Map<String, String>> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = metadata;

@@ -166,6 +166,9 @@ public class Moov {
     private final TerminalApplications terminalApplications;
 
 
+    private final DepositView depositView;
+
+
     public Accounts accounts() {
         return accounts;
     }
@@ -375,6 +378,11 @@ public class Moov {
         return terminalApplications;
     }
 
+
+    public DepositView depositView() {
+        return depositView;
+    }
+
     /**
      * The Builder class allows the configuration of a new instance of the SDK.
      */
@@ -564,6 +572,7 @@ public class Moov {
         this.ping = new Ping(sdkConfiguration);
         this.receipts = new Receipts(sdkConfiguration);
         this.terminalApplications = new TerminalApplications(sdkConfiguration);
+        this.depositView = new DepositView(sdkConfiguration);
         sdkConfiguration = sdkConfiguration.hooks().sdkInit(sdkConfiguration);
     }
 }

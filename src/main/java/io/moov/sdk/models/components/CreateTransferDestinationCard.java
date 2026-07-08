@@ -12,6 +12,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 
 
@@ -25,6 +26,17 @@ public class CreateTransferDestinationCard {
     private Optional<String> dynamicDescriptor;
 
     /**
+     * The scheduled date and time for the transfer to be delivered. This field is only valid for
+     * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+     * 
+     * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+     * delivery using the sandbox test cards with relaxed wait times.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("scheduledDeliveryOn")
+    private Optional<OffsetDateTime> scheduledDeliveryOn;
+
+    /**
      * An optional field to specify the type of card payout, used to route the transfer with the
      * appropriate business application identifier (BAI).
      */
@@ -35,15 +47,18 @@ public class CreateTransferDestinationCard {
     @JsonCreator
     public CreateTransferDestinationCard(
             @JsonProperty("dynamicDescriptor") Optional<String> dynamicDescriptor,
+            @JsonProperty("scheduledDeliveryOn") Optional<OffsetDateTime> scheduledDeliveryOn,
             @JsonProperty("payoutType") Optional<? extends CardPayoutType> payoutType) {
         Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");
+        Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
         Utils.checkNotNull(payoutType, "payoutType");
         this.dynamicDescriptor = dynamicDescriptor;
+        this.scheduledDeliveryOn = scheduledDeliveryOn;
         this.payoutType = payoutType;
     }
     
     public CreateTransferDestinationCard() {
-        this(Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -53,6 +68,18 @@ public class CreateTransferDestinationCard {
     @JsonIgnore
     public Optional<String> dynamicDescriptor() {
         return dynamicDescriptor;
+    }
+
+    /**
+     * The scheduled date and time for the transfer to be delivered. This field is only valid for
+     * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+     * 
+     * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+     * delivery using the sandbox test cards with relaxed wait times.
+     */
+    @JsonIgnore
+    public Optional<OffsetDateTime> scheduledDeliveryOn() {
+        return scheduledDeliveryOn;
     }
 
     /**
@@ -92,6 +119,33 @@ public class CreateTransferDestinationCard {
     }
 
     /**
+     * The scheduled date and time for the transfer to be delivered. This field is only valid for
+     * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+     * 
+     * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+     * delivery using the sandbox test cards with relaxed wait times.
+     */
+    public CreateTransferDestinationCard withScheduledDeliveryOn(OffsetDateTime scheduledDeliveryOn) {
+        Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
+        this.scheduledDeliveryOn = Optional.ofNullable(scheduledDeliveryOn);
+        return this;
+    }
+
+
+    /**
+     * The scheduled date and time for the transfer to be delivered. This field is only valid for
+     * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+     * 
+     * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+     * delivery using the sandbox test cards with relaxed wait times.
+     */
+    public CreateTransferDestinationCard withScheduledDeliveryOn(Optional<OffsetDateTime> scheduledDeliveryOn) {
+        Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
+        this.scheduledDeliveryOn = scheduledDeliveryOn;
+        return this;
+    }
+
+    /**
      * An optional field to specify the type of card payout, used to route the transfer with the
      * appropriate business application identifier (BAI).
      */
@@ -123,19 +177,21 @@ public class CreateTransferDestinationCard {
         CreateTransferDestinationCard other = (CreateTransferDestinationCard) o;
         return 
             Utils.enhancedDeepEquals(this.dynamicDescriptor, other.dynamicDescriptor) &&
+            Utils.enhancedDeepEquals(this.scheduledDeliveryOn, other.scheduledDeliveryOn) &&
             Utils.enhancedDeepEquals(this.payoutType, other.payoutType);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            dynamicDescriptor, payoutType);
+            dynamicDescriptor, scheduledDeliveryOn, payoutType);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CreateTransferDestinationCard.class,
                 "dynamicDescriptor", dynamicDescriptor,
+                "scheduledDeliveryOn", scheduledDeliveryOn,
                 "payoutType", payoutType);
     }
 
@@ -143,6 +199,8 @@ public class CreateTransferDestinationCard {
     public final static class Builder {
 
         private Optional<String> dynamicDescriptor = Optional.empty();
+
+        private Optional<OffsetDateTime> scheduledDeliveryOn = Optional.empty();
 
         private Optional<? extends CardPayoutType> payoutType = Optional.empty();
 
@@ -173,6 +231,33 @@ public class CreateTransferDestinationCard {
 
 
         /**
+         * The scheduled date and time for the transfer to be delivered. This field is only valid for
+         * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+         * 
+         * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+         * delivery using the sandbox test cards with relaxed wait times.
+         */
+        public Builder scheduledDeliveryOn(OffsetDateTime scheduledDeliveryOn) {
+            Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
+            this.scheduledDeliveryOn = Optional.ofNullable(scheduledDeliveryOn);
+            return this;
+        }
+
+        /**
+         * The scheduled date and time for the transfer to be delivered. This field is only valid for
+         * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+         * 
+         * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+         * delivery using the sandbox test cards with relaxed wait times.
+         */
+        public Builder scheduledDeliveryOn(Optional<OffsetDateTime> scheduledDeliveryOn) {
+            Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
+            this.scheduledDeliveryOn = scheduledDeliveryOn;
+            return this;
+        }
+
+
+        /**
          * An optional field to specify the type of card payout, used to route the transfer with the
          * appropriate business application identifier (BAI).
          */
@@ -195,7 +280,7 @@ public class CreateTransferDestinationCard {
         public CreateTransferDestinationCard build() {
 
             return new CreateTransferDestinationCard(
-                dynamicDescriptor, payoutType);
+                dynamicDescriptor, scheduledDeliveryOn, payoutType);
         }
 
     }

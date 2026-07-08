@@ -19,7 +19,8 @@ public enum CardTransactionStatus {
     CANCELED("canceled"),
     SETTLED("settled"),
     FAILED("failed"),
-    COMPLETED("completed");
+    COMPLETED("completed"),
+    DEFERRED("deferred");
 
     @JsonValue
     private final String value;

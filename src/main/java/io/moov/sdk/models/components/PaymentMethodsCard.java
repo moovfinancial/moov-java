@@ -138,6 +138,15 @@ public class PaymentMethodsCard {
     @JsonProperty("domesticPullFromCard")
     private Optional<? extends DomesticPullFromCard> domesticPullFromCard;
 
+    /**
+     * The category or level of the card defined by the issuer.
+     * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE
+     * PURCHASING".
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("cardCategory")
+    private Optional<String> cardCategory;
+
     @JsonCreator
     public PaymentMethodsCard(
             @JsonProperty("cardID") String cardID,
@@ -156,7 +165,8 @@ public class PaymentMethodsCard {
             @JsonProperty("merchantAccountID") Optional<String> merchantAccountID,
             @JsonProperty("cardAccountUpdater") Optional<? extends CardAccountUpdater> cardAccountUpdater,
             @JsonProperty("domesticPushToCard") Optional<? extends DomesticPushToCard> domesticPushToCard,
-            @JsonProperty("domesticPullFromCard") Optional<? extends DomesticPullFromCard> domesticPullFromCard) {
+            @JsonProperty("domesticPullFromCard") Optional<? extends DomesticPullFromCard> domesticPullFromCard,
+            @JsonProperty("cardCategory") Optional<String> cardCategory) {
         Utils.checkNotNull(cardID, "cardID");
         Utils.checkNotNull(fingerprint, "fingerprint");
         Utils.checkNotNull(brand, "brand");
@@ -174,6 +184,7 @@ public class PaymentMethodsCard {
         Utils.checkNotNull(cardAccountUpdater, "cardAccountUpdater");
         Utils.checkNotNull(domesticPushToCard, "domesticPushToCard");
         Utils.checkNotNull(domesticPullFromCard, "domesticPullFromCard");
+        Utils.checkNotNull(cardCategory, "cardCategory");
         this.cardID = cardID;
         this.fingerprint = fingerprint;
         this.brand = brand;
@@ -191,6 +202,7 @@ public class PaymentMethodsCard {
         this.cardAccountUpdater = cardAccountUpdater;
         this.domesticPushToCard = domesticPushToCard;
         this.domesticPullFromCard = domesticPullFromCard;
+        this.cardCategory = cardCategory;
     }
     
     public PaymentMethodsCard(
@@ -208,7 +220,7 @@ public class PaymentMethodsCard {
             expiration, Optional.empty(), billingAddress,
             cardVerification, Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -355,6 +367,16 @@ public class PaymentMethodsCard {
     @JsonIgnore
     public Optional<DomesticPullFromCard> domesticPullFromCard() {
         return (Optional<DomesticPullFromCard>) domesticPullFromCard;
+    }
+
+    /**
+     * The category or level of the card defined by the issuer.
+     * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE
+     * PURCHASING".
+     */
+    @JsonIgnore
+    public Optional<String> cardCategory() {
+        return cardCategory;
     }
 
     public static Builder builder() {
@@ -604,6 +626,29 @@ public class PaymentMethodsCard {
         return this;
     }
 
+    /**
+     * The category or level of the card defined by the issuer.
+     * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE
+     * PURCHASING".
+     */
+    public PaymentMethodsCard withCardCategory(String cardCategory) {
+        Utils.checkNotNull(cardCategory, "cardCategory");
+        this.cardCategory = Optional.ofNullable(cardCategory);
+        return this;
+    }
+
+
+    /**
+     * The category or level of the card defined by the issuer.
+     * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE
+     * PURCHASING".
+     */
+    public PaymentMethodsCard withCardCategory(Optional<String> cardCategory) {
+        Utils.checkNotNull(cardCategory, "cardCategory");
+        this.cardCategory = cardCategory;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -630,7 +675,8 @@ public class PaymentMethodsCard {
             Utils.enhancedDeepEquals(this.merchantAccountID, other.merchantAccountID) &&
             Utils.enhancedDeepEquals(this.cardAccountUpdater, other.cardAccountUpdater) &&
             Utils.enhancedDeepEquals(this.domesticPushToCard, other.domesticPushToCard) &&
-            Utils.enhancedDeepEquals(this.domesticPullFromCard, other.domesticPullFromCard);
+            Utils.enhancedDeepEquals(this.domesticPullFromCard, other.domesticPullFromCard) &&
+            Utils.enhancedDeepEquals(this.cardCategory, other.cardCategory);
     }
     
     @Override
@@ -641,7 +687,7 @@ public class PaymentMethodsCard {
             expiration, holderName, billingAddress,
             cardVerification, issuer, issuerCountry,
             cardOnFile, merchantAccountID, cardAccountUpdater,
-            domesticPushToCard, domesticPullFromCard);
+            domesticPushToCard, domesticPullFromCard, cardCategory);
     }
     
     @Override
@@ -663,7 +709,8 @@ public class PaymentMethodsCard {
                 "merchantAccountID", merchantAccountID,
                 "cardAccountUpdater", cardAccountUpdater,
                 "domesticPushToCard", domesticPushToCard,
-                "domesticPullFromCard", domesticPullFromCard);
+                "domesticPullFromCard", domesticPullFromCard,
+                "cardCategory", cardCategory);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -702,6 +749,8 @@ public class PaymentMethodsCard {
         private Optional<? extends DomesticPushToCard> domesticPushToCard = Optional.empty();
 
         private Optional<? extends DomesticPullFromCard> domesticPullFromCard = Optional.empty();
+
+        private Optional<String> cardCategory = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -958,6 +1007,29 @@ public class PaymentMethodsCard {
             return this;
         }
 
+
+        /**
+         * The category or level of the card defined by the issuer.
+         * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE
+         * PURCHASING".
+         */
+        public Builder cardCategory(String cardCategory) {
+            Utils.checkNotNull(cardCategory, "cardCategory");
+            this.cardCategory = Optional.ofNullable(cardCategory);
+            return this;
+        }
+
+        /**
+         * The category or level of the card defined by the issuer.
+         * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE
+         * PURCHASING".
+         */
+        public Builder cardCategory(Optional<String> cardCategory) {
+            Utils.checkNotNull(cardCategory, "cardCategory");
+            this.cardCategory = cardCategory;
+            return this;
+        }
+
         public PaymentMethodsCard build() {
 
             return new PaymentMethodsCard(
@@ -966,7 +1038,7 @@ public class PaymentMethodsCard {
                 expiration, holderName, billingAddress,
                 cardVerification, issuer, issuerCountry,
                 cardOnFile, merchantAccountID, cardAccountUpdater,
-                domesticPushToCard, domesticPullFromCard);
+                domesticPushToCard, domesticPullFromCard, cardCategory);
         }
 
     }

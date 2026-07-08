@@ -43,6 +43,17 @@ public class CardTransactionDetails {
     private Optional<String> dynamicDescriptor;
 
     /**
+     * The scheduled date and time for the transfer to be delivered. This field is only valid for
+     * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+     * 
+     * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+     * delivery using the sandbox test cards with relaxed wait times.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("scheduledDeliveryOn")
+    private Optional<OffsetDateTime> scheduledDeliveryOn;
+
+    /**
      * Specifies the nature and initiator of a transaction.
      * 
      * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules.
@@ -82,6 +93,11 @@ public class CardTransactionDetails {
     @JsonProperty("completedOn")
     private Optional<OffsetDateTime> completedOn;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("deferredOn")
+    private Optional<OffsetDateTime> deferredOn;
+
     /**
      * The program assigned by the card network that determines the interchange rate for the transfer.
      * 
@@ -111,6 +127,7 @@ public class CardTransactionDetails {
             @JsonProperty("status") Optional<? extends CardTransactionStatus> status,
             @JsonProperty("failureCode") Optional<? extends CardTransactionFailureCode> failureCode,
             @JsonProperty("dynamicDescriptor") Optional<String> dynamicDescriptor,
+            @JsonProperty("scheduledDeliveryOn") Optional<OffsetDateTime> scheduledDeliveryOn,
             @JsonProperty("transactionSource") Optional<? extends TransactionSource> transactionSource,
             @JsonProperty("initiatedOn") Optional<OffsetDateTime> initiatedOn,
             @JsonProperty("confirmedOn") Optional<OffsetDateTime> confirmedOn,
@@ -118,12 +135,14 @@ public class CardTransactionDetails {
             @JsonProperty("failedOn") Optional<OffsetDateTime> failedOn,
             @JsonProperty("canceledOn") Optional<OffsetDateTime> canceledOn,
             @JsonProperty("completedOn") Optional<OffsetDateTime> completedOn,
+            @JsonProperty("deferredOn") Optional<OffsetDateTime> deferredOn,
             @JsonProperty("interchangeQualification") Optional<String> interchangeQualification,
             @JsonProperty("feeProgram") Optional<String> feeProgram,
             @JsonProperty("authorizationCode") Optional<String> authorizationCode) {
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(failureCode, "failureCode");
         Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");
+        Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
         Utils.checkNotNull(transactionSource, "transactionSource");
         Utils.checkNotNull(initiatedOn, "initiatedOn");
         Utils.checkNotNull(confirmedOn, "confirmedOn");
@@ -131,12 +150,14 @@ public class CardTransactionDetails {
         Utils.checkNotNull(failedOn, "failedOn");
         Utils.checkNotNull(canceledOn, "canceledOn");
         Utils.checkNotNull(completedOn, "completedOn");
+        Utils.checkNotNull(deferredOn, "deferredOn");
         Utils.checkNotNull(interchangeQualification, "interchangeQualification");
         Utils.checkNotNull(feeProgram, "feeProgram");
         Utils.checkNotNull(authorizationCode, "authorizationCode");
         this.status = status;
         this.failureCode = failureCode;
         this.dynamicDescriptor = dynamicDescriptor;
+        this.scheduledDeliveryOn = scheduledDeliveryOn;
         this.transactionSource = transactionSource;
         this.initiatedOn = initiatedOn;
         this.confirmedOn = confirmedOn;
@@ -144,6 +165,7 @@ public class CardTransactionDetails {
         this.failedOn = failedOn;
         this.canceledOn = canceledOn;
         this.completedOn = completedOn;
+        this.deferredOn = deferredOn;
         this.interchangeQualification = interchangeQualification;
         this.feeProgram = feeProgram;
         this.authorizationCode = authorizationCode;
@@ -154,7 +176,7 @@ public class CardTransactionDetails {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -179,6 +201,18 @@ public class CardTransactionDetails {
     @JsonIgnore
     public Optional<String> dynamicDescriptor() {
         return dynamicDescriptor;
+    }
+
+    /**
+     * The scheduled date and time for the transfer to be delivered. This field is only valid for
+     * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+     * 
+     * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+     * delivery using the sandbox test cards with relaxed wait times.
+     */
+    @JsonIgnore
+    public Optional<OffsetDateTime> scheduledDeliveryOn() {
+        return scheduledDeliveryOn;
     }
 
     /**
@@ -221,6 +255,11 @@ public class CardTransactionDetails {
     @JsonIgnore
     public Optional<OffsetDateTime> completedOn() {
         return completedOn;
+    }
+
+    @JsonIgnore
+    public Optional<OffsetDateTime> deferredOn() {
+        return deferredOn;
     }
 
     /**
@@ -305,6 +344,33 @@ public class CardTransactionDetails {
     public CardTransactionDetails withDynamicDescriptor(Optional<String> dynamicDescriptor) {
         Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");
         this.dynamicDescriptor = dynamicDescriptor;
+        return this;
+    }
+
+    /**
+     * The scheduled date and time for the transfer to be delivered. This field is only valid for
+     * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+     * 
+     * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+     * delivery using the sandbox test cards with relaxed wait times.
+     */
+    public CardTransactionDetails withScheduledDeliveryOn(OffsetDateTime scheduledDeliveryOn) {
+        Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
+        this.scheduledDeliveryOn = Optional.ofNullable(scheduledDeliveryOn);
+        return this;
+    }
+
+
+    /**
+     * The scheduled date and time for the transfer to be delivered. This field is only valid for
+     * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+     * 
+     * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+     * delivery using the sandbox test cards with relaxed wait times.
+     */
+    public CardTransactionDetails withScheduledDeliveryOn(Optional<OffsetDateTime> scheduledDeliveryOn) {
+        Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
+        this.scheduledDeliveryOn = scheduledDeliveryOn;
         return this;
     }
 
@@ -411,6 +477,19 @@ public class CardTransactionDetails {
         return this;
     }
 
+    public CardTransactionDetails withDeferredOn(OffsetDateTime deferredOn) {
+        Utils.checkNotNull(deferredOn, "deferredOn");
+        this.deferredOn = Optional.ofNullable(deferredOn);
+        return this;
+    }
+
+
+    public CardTransactionDetails withDeferredOn(Optional<OffsetDateTime> deferredOn) {
+        Utils.checkNotNull(deferredOn, "deferredOn");
+        this.deferredOn = deferredOn;
+        return this;
+    }
+
     /**
      * The program assigned by the card network that determines the interchange rate for the transfer.
      * 
@@ -487,6 +566,7 @@ public class CardTransactionDetails {
             Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.failureCode, other.failureCode) &&
             Utils.enhancedDeepEquals(this.dynamicDescriptor, other.dynamicDescriptor) &&
+            Utils.enhancedDeepEquals(this.scheduledDeliveryOn, other.scheduledDeliveryOn) &&
             Utils.enhancedDeepEquals(this.transactionSource, other.transactionSource) &&
             Utils.enhancedDeepEquals(this.initiatedOn, other.initiatedOn) &&
             Utils.enhancedDeepEquals(this.confirmedOn, other.confirmedOn) &&
@@ -494,6 +574,7 @@ public class CardTransactionDetails {
             Utils.enhancedDeepEquals(this.failedOn, other.failedOn) &&
             Utils.enhancedDeepEquals(this.canceledOn, other.canceledOn) &&
             Utils.enhancedDeepEquals(this.completedOn, other.completedOn) &&
+            Utils.enhancedDeepEquals(this.deferredOn, other.deferredOn) &&
             Utils.enhancedDeepEquals(this.interchangeQualification, other.interchangeQualification) &&
             Utils.enhancedDeepEquals(this.feeProgram, other.feeProgram) &&
             Utils.enhancedDeepEquals(this.authorizationCode, other.authorizationCode);
@@ -503,10 +584,10 @@ public class CardTransactionDetails {
     public int hashCode() {
         return Utils.enhancedHash(
             status, failureCode, dynamicDescriptor,
-            transactionSource, initiatedOn, confirmedOn,
-            settledOn, failedOn, canceledOn,
-            completedOn, interchangeQualification, feeProgram,
-            authorizationCode);
+            scheduledDeliveryOn, transactionSource, initiatedOn,
+            confirmedOn, settledOn, failedOn,
+            canceledOn, completedOn, deferredOn,
+            interchangeQualification, feeProgram, authorizationCode);
     }
     
     @Override
@@ -515,6 +596,7 @@ public class CardTransactionDetails {
                 "status", status,
                 "failureCode", failureCode,
                 "dynamicDescriptor", dynamicDescriptor,
+                "scheduledDeliveryOn", scheduledDeliveryOn,
                 "transactionSource", transactionSource,
                 "initiatedOn", initiatedOn,
                 "confirmedOn", confirmedOn,
@@ -522,6 +604,7 @@ public class CardTransactionDetails {
                 "failedOn", failedOn,
                 "canceledOn", canceledOn,
                 "completedOn", completedOn,
+                "deferredOn", deferredOn,
                 "interchangeQualification", interchangeQualification,
                 "feeProgram", feeProgram,
                 "authorizationCode", authorizationCode);
@@ -536,6 +619,8 @@ public class CardTransactionDetails {
 
         private Optional<String> dynamicDescriptor = Optional.empty();
 
+        private Optional<OffsetDateTime> scheduledDeliveryOn = Optional.empty();
+
         private Optional<? extends TransactionSource> transactionSource = Optional.empty();
 
         private Optional<OffsetDateTime> initiatedOn = Optional.empty();
@@ -549,6 +634,8 @@ public class CardTransactionDetails {
         private Optional<OffsetDateTime> canceledOn = Optional.empty();
 
         private Optional<OffsetDateTime> completedOn = Optional.empty();
+
+        private Optional<OffsetDateTime> deferredOn = Optional.empty();
 
         @Deprecated
         private Optional<String> interchangeQualification = Optional.empty();
@@ -611,6 +698,33 @@ public class CardTransactionDetails {
         public Builder dynamicDescriptor(Optional<String> dynamicDescriptor) {
             Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");
             this.dynamicDescriptor = dynamicDescriptor;
+            return this;
+        }
+
+
+        /**
+         * The scheduled date and time for the transfer to be delivered. This field is only valid for
+         * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+         * 
+         * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+         * delivery using the sandbox test cards with relaxed wait times.
+         */
+        public Builder scheduledDeliveryOn(OffsetDateTime scheduledDeliveryOn) {
+            Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
+            this.scheduledDeliveryOn = Optional.ofNullable(scheduledDeliveryOn);
+            return this;
+        }
+
+        /**
+         * The scheduled date and time for the transfer to be delivered. This field is only valid for
+         * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+         * 
+         * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+         * delivery using the sandbox test cards with relaxed wait times.
+         */
+        public Builder scheduledDeliveryOn(Optional<OffsetDateTime> scheduledDeliveryOn) {
+            Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
+            this.scheduledDeliveryOn = scheduledDeliveryOn;
             return this;
         }
 
@@ -718,6 +832,19 @@ public class CardTransactionDetails {
         }
 
 
+        public Builder deferredOn(OffsetDateTime deferredOn) {
+            Utils.checkNotNull(deferredOn, "deferredOn");
+            this.deferredOn = Optional.ofNullable(deferredOn);
+            return this;
+        }
+
+        public Builder deferredOn(Optional<OffsetDateTime> deferredOn) {
+            Utils.checkNotNull(deferredOn, "deferredOn");
+            this.deferredOn = deferredOn;
+            return this;
+        }
+
+
         /**
          * The program assigned by the card network that determines the interchange rate for the transfer.
          * 
@@ -784,10 +911,10 @@ public class CardTransactionDetails {
 
             return new CardTransactionDetails(
                 status, failureCode, dynamicDescriptor,
-                transactionSource, initiatedOn, confirmedOn,
-                settledOn, failedOn, canceledOn,
-                completedOn, interchangeQualification, feeProgram,
-                authorizationCode);
+                scheduledDeliveryOn, transactionSource, initiatedOn,
+                confirmedOn, settledOn, failedOn,
+                canceledOn, completedOn, deferredOn,
+                interchangeQualification, feeProgram, authorizationCode);
         }
 
     }

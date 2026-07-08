@@ -22,8 +22,8 @@ public class LinkBankAccountRequest {
      * 
      * <p>When this header is set to `payment-method`, the response will include any payment methods that were
      * created for the newly
-     * linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted
-     * from the response.
+     * linked bank account in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be
+     * omitted from the response.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-wait-for")
     private Optional<? extends BankAccountWaitFor> xWaitFor;
@@ -61,8 +61,8 @@ public class LinkBankAccountRequest {
      * 
      * <p>When this header is set to `payment-method`, the response will include any payment methods that were
      * created for the newly
-     * linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted
-     * from the response.
+     * linked bank account in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be
+     * omitted from the response.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -91,8 +91,8 @@ public class LinkBankAccountRequest {
      * 
      * <p>When this header is set to `payment-method`, the response will include any payment methods that were
      * created for the newly
-     * linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted
-     * from the response.
+     * linked bank account in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be
+     * omitted from the response.
      */
     public LinkBankAccountRequest withXWaitFor(BankAccountWaitFor xWaitFor) {
         Utils.checkNotNull(xWaitFor, "xWaitFor");
@@ -107,8 +107,8 @@ public class LinkBankAccountRequest {
      * 
      * <p>When this header is set to `payment-method`, the response will include any payment methods that were
      * created for the newly
-     * linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted
-     * from the response.
+     * linked bank account in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be
+     * omitted from the response.
      */
     public LinkBankAccountRequest withXWaitFor(Optional<? extends BankAccountWaitFor> xWaitFor) {
         Utils.checkNotNull(xWaitFor, "xWaitFor");
@@ -177,8 +177,8 @@ public class LinkBankAccountRequest {
          * 
          * <p>When this header is set to `payment-method`, the response will include any payment methods that were
          * created for the newly
-         * linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted
-         * from the response.
+         * linked bank account in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be
+         * omitted from the response.
          */
         public Builder xWaitFor(BankAccountWaitFor xWaitFor) {
             Utils.checkNotNull(xWaitFor, "xWaitFor");
@@ -192,8 +192,8 @@ public class LinkBankAccountRequest {
          * 
          * <p>When this header is set to `payment-method`, the response will include any payment methods that were
          * created for the newly
-         * linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted
-         * from the response.
+         * linked bank account in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be
+         * omitted from the response.
          */
         public Builder xWaitFor(Optional<? extends BankAccountWaitFor> xWaitFor) {
             Utils.checkNotNull(xWaitFor, "xWaitFor");

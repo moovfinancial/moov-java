@@ -32,6 +32,7 @@ public enum CapabilityID {
     COLLECT_FUNDS("collect-funds"),
     WALLET("wallet"),
     CARD_ISSUING("card-issuing"),
+    ISSUING_CARDHOLDER("issuing.cardholder"),
     PRODUCTION_APP("production-app");
 
     @JsonValue

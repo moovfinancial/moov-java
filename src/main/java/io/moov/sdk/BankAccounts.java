@@ -61,7 +61,7 @@ public class BankAccounts {
      * 
      * <p>It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if
      * the newly linked
-     * bank-account is intended to be used right away. If this header is not included, the caller will need
+     * bank account is intended to be used right away. If this header is not included, the caller will need
      * to poll the [List Payment
      * Methods](https://docs.moov.io/api/sources/payment-methods/list/)
      * endpoint to wait for the new payment methods to be available for use.
@@ -82,7 +82,7 @@ public class BankAccounts {
      * 
      * <p>It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if
      * the newly linked
-     * bank-account is intended to be used right away. If this header is not included, the caller will need
+     * bank account is intended to be used right away. If this header is not included, the caller will need
      * to poll the [List Payment
      * Methods](https://docs.moov.io/api/sources/payment-methods/list/)
      * endpoint to wait for the new payment methods to be available for use.
@@ -106,7 +106,7 @@ public class BankAccounts {
      * 
      * <p>It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if
      * the newly linked
-     * bank-account is intended to be used right away. If this header is not included, the caller will need
+     * bank account is intended to be used right away. If this header is not included, the caller will need
      * to poll the [List Payment
      * Methods](https://docs.moov.io/api/sources/payment-methods/list/)
      * endpoint to wait for the new payment methods to be available for use.

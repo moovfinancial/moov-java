@@ -300,7 +300,7 @@ public class Application {
                         .requirePhone(true)
                         .build())
                     .amountDetails(UpdatePaymentLinkAmountDetails.builder()
-                        .tax(AmountDecimalUpdate.builder()
+                        .tax(Tax.builder()
                             .currency("USD")
                             .valueDecimal("9.25")
                             .build())

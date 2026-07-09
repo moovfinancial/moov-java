@@ -13,12 +13,13 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Map;
-import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class PatchTransfer {
-
+    /**
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("metadata")
     private JsonNullable<? extends Map<String, String>> metadata;
@@ -28,12 +29,12 @@ public class PatchTransfer {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("foreignID")
-    private Optional<String> foreignID;
+    private JsonNullable<String> foreignID;
 
     @JsonCreator
     public PatchTransfer(
             @JsonProperty("metadata") JsonNullable<? extends Map<String, String>> metadata,
-            @JsonProperty("foreignID") Optional<String> foreignID) {
+            @JsonProperty("foreignID") JsonNullable<String> foreignID) {
         Utils.checkNotNull(metadata, "metadata");
         Utils.checkNotNull(foreignID, "foreignID");
         this.metadata = metadata;
@@ -41,9 +42,12 @@ public class PatchTransfer {
     }
     
     public PatchTransfer() {
-        this(JsonNullable.undefined(), Optional.empty());
+        this(JsonNullable.undefined(), JsonNullable.undefined());
     }
 
+    /**
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public JsonNullable<Map<String, String>> metadata() {
@@ -54,7 +58,7 @@ public class PatchTransfer {
      * Optional alias from a foreign/external system which can be used to reference this resource.
      */
     @JsonIgnore
-    public Optional<String> foreignID() {
+    public JsonNullable<String> foreignID() {
         return foreignID;
     }
 
@@ -63,12 +67,18 @@ public class PatchTransfer {
     }
 
 
+    /**
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+     */
     public PatchTransfer withMetadata(Map<String, String> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = JsonNullable.of(metadata);
         return this;
     }
 
+    /**
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+     */
     public PatchTransfer withMetadata(JsonNullable<? extends Map<String, String>> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
@@ -80,15 +90,14 @@ public class PatchTransfer {
      */
     public PatchTransfer withForeignID(String foreignID) {
         Utils.checkNotNull(foreignID, "foreignID");
-        this.foreignID = Optional.ofNullable(foreignID);
+        this.foreignID = JsonNullable.of(foreignID);
         return this;
     }
-
 
     /**
      * Optional alias from a foreign/external system which can be used to reference this resource.
      */
-    public PatchTransfer withForeignID(Optional<String> foreignID) {
+    public PatchTransfer withForeignID(JsonNullable<String> foreignID) {
         Utils.checkNotNull(foreignID, "foreignID");
         this.foreignID = foreignID;
         return this;
@@ -126,19 +135,25 @@ public class PatchTransfer {
 
         private JsonNullable<? extends Map<String, String>> metadata = JsonNullable.undefined();
 
-        private Optional<String> foreignID = Optional.empty();
+        private JsonNullable<String> foreignID = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
+        /**
+         * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+         */
         public Builder metadata(Map<String, String> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = JsonNullable.of(metadata);
             return this;
         }
 
+        /**
+         * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+         */
         public Builder metadata(JsonNullable<? extends Map<String, String>> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = metadata;
@@ -151,14 +166,14 @@ public class PatchTransfer {
          */
         public Builder foreignID(String foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
-            this.foreignID = Optional.ofNullable(foreignID);
+            this.foreignID = JsonNullable.of(foreignID);
             return this;
         }
 
         /**
          * Optional alias from a foreign/external system which can be used to reference this resource.
          */
-        public Builder foreignID(Optional<String> foreignID) {
+        public Builder foreignID(JsonNullable<String> foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
             this.foreignID = foreignID;
             return this;

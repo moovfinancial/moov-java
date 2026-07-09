@@ -14,6 +14,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Map;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class PatchWallet {
@@ -34,21 +35,19 @@ public class PatchWallet {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
-    private Optional<String> description;
+    private JsonNullable<String> description;
 
-    /**
-     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
-     */
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("metadata")
-    private Optional<? extends Map<String, String>> metadata;
+    private JsonNullable<? extends Map<String, String>> metadata;
 
     @JsonCreator
     public PatchWallet(
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("status") Optional<? extends WalletStatus> status,
-            @JsonProperty("description") Optional<String> description,
-            @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata) {
+            @JsonProperty("description") JsonNullable<String> description,
+            @JsonProperty("metadata") JsonNullable<? extends Map<String, String>> metadata) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(description, "description");
@@ -60,8 +59,8 @@ public class PatchWallet {
     }
     
     public PatchWallet() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+        this(Optional.empty(), Optional.empty(), JsonNullable.undefined(),
+            JsonNullable.undefined());
     }
 
     @JsonIgnore
@@ -81,17 +80,14 @@ public class PatchWallet {
     }
 
     @JsonIgnore
-    public Optional<String> description() {
+    public JsonNullable<String> description() {
         return description;
     }
 
-    /**
-     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Map<String, String>> metadata() {
-        return (Optional<Map<String, String>>) metadata;
+    public JsonNullable<Map<String, String>> metadata() {
+        return (JsonNullable<Map<String, String>>) metadata;
     }
 
     public static Builder builder() {
@@ -137,31 +133,23 @@ public class PatchWallet {
 
     public PatchWallet withDescription(String description) {
         Utils.checkNotNull(description, "description");
-        this.description = Optional.ofNullable(description);
+        this.description = JsonNullable.of(description);
         return this;
     }
 
-
-    public PatchWallet withDescription(Optional<String> description) {
+    public PatchWallet withDescription(JsonNullable<String> description) {
         Utils.checkNotNull(description, "description");
         this.description = description;
         return this;
     }
 
-    /**
-     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
-     */
     public PatchWallet withMetadata(Map<String, String> metadata) {
         Utils.checkNotNull(metadata, "metadata");
-        this.metadata = Optional.ofNullable(metadata);
+        this.metadata = JsonNullable.of(metadata);
         return this;
     }
 
-
-    /**
-     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
-     */
-    public PatchWallet withMetadata(Optional<? extends Map<String, String>> metadata) {
+    public PatchWallet withMetadata(JsonNullable<? extends Map<String, String>> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
@@ -206,9 +194,9 @@ public class PatchWallet {
 
         private Optional<? extends WalletStatus> status = Optional.empty();
 
-        private Optional<String> description = Optional.empty();
+        private JsonNullable<String> description = JsonNullable.undefined();
 
-        private Optional<? extends Map<String, String>> metadata = Optional.empty();
+        private JsonNullable<? extends Map<String, String>> metadata = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -253,30 +241,24 @@ public class PatchWallet {
 
         public Builder description(String description) {
             Utils.checkNotNull(description, "description");
-            this.description = Optional.ofNullable(description);
+            this.description = JsonNullable.of(description);
             return this;
         }
 
-        public Builder description(Optional<String> description) {
+        public Builder description(JsonNullable<String> description) {
             Utils.checkNotNull(description, "description");
             this.description = description;
             return this;
         }
 
 
-        /**
-         * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
-         */
         public Builder metadata(Map<String, String> metadata) {
             Utils.checkNotNull(metadata, "metadata");
-            this.metadata = Optional.ofNullable(metadata);
+            this.metadata = JsonNullable.of(metadata);
             return this;
         }
 
-        /**
-         * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
-         */
-        public Builder metadata(Optional<? extends Map<String, String>> metadata) {
+        public Builder metadata(JsonNullable<? extends Map<String, String>> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = metadata;
             return this;

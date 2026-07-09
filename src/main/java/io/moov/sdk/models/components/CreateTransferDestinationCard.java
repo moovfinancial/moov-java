@@ -27,7 +27,10 @@ public class CreateTransferDestinationCard {
 
     /**
      * The scheduled date and time for the transfer to be delivered. This field is only valid for
-     * push-to-card transfers. Must be between 24 and 48 hours in the future.
+     * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+     * 
+     * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+     * delivery using the sandbox test cards with relaxed wait times.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("scheduledDeliveryOn")
@@ -69,7 +72,10 @@ public class CreateTransferDestinationCard {
 
     /**
      * The scheduled date and time for the transfer to be delivered. This field is only valid for
-     * push-to-card transfers. Must be between 24 and 48 hours in the future.
+     * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+     * 
+     * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+     * delivery using the sandbox test cards with relaxed wait times.
      */
     @JsonIgnore
     public Optional<OffsetDateTime> scheduledDeliveryOn() {
@@ -114,7 +120,10 @@ public class CreateTransferDestinationCard {
 
     /**
      * The scheduled date and time for the transfer to be delivered. This field is only valid for
-     * push-to-card transfers. Must be between 24 and 48 hours in the future.
+     * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+     * 
+     * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+     * delivery using the sandbox test cards with relaxed wait times.
      */
     public CreateTransferDestinationCard withScheduledDeliveryOn(OffsetDateTime scheduledDeliveryOn) {
         Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
@@ -125,7 +134,10 @@ public class CreateTransferDestinationCard {
 
     /**
      * The scheduled date and time for the transfer to be delivered. This field is only valid for
-     * push-to-card transfers. Must be between 24 and 48 hours in the future.
+     * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+     * 
+     * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+     * delivery using the sandbox test cards with relaxed wait times.
      */
     public CreateTransferDestinationCard withScheduledDeliveryOn(Optional<OffsetDateTime> scheduledDeliveryOn) {
         Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
@@ -220,7 +232,10 @@ public class CreateTransferDestinationCard {
 
         /**
          * The scheduled date and time for the transfer to be delivered. This field is only valid for
-         * push-to-card transfers. Must be between 24 and 48 hours in the future.
+         * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+         * 
+         * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+         * delivery using the sandbox test cards with relaxed wait times.
          */
         public Builder scheduledDeliveryOn(OffsetDateTime scheduledDeliveryOn) {
             Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
@@ -230,7 +245,10 @@ public class CreateTransferDestinationCard {
 
         /**
          * The scheduled date and time for the transfer to be delivered. This field is only valid for
-         * push-to-card transfers. Must be between 24 and 48 hours in the future.
+         * push-to-card transfers. Must be between 24 and 48 hours in the future in production.
+         * 
+         * <p>In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred
+         * delivery using the sandbox test cards with relaxed wait times.
          */
         public Builder scheduledDeliveryOn(Optional<OffsetDateTime> scheduledDeliveryOn) {
             Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");

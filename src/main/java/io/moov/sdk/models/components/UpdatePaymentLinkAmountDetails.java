@@ -12,7 +12,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class UpdatePaymentLinkAmountDetails {
@@ -21,19 +21,19 @@ public class UpdatePaymentLinkAmountDetails {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tax")
-    private Optional<? extends AmountDecimalUpdate> tax;
+    private JsonNullable<? extends Tax> tax;
 
     /**
      * The amount of surcharge applied to the payment link.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("surcharge")
-    private Optional<? extends AmountDecimalUpdate> surcharge;
+    private JsonNullable<? extends Surcharge> surcharge;
 
     @JsonCreator
     public UpdatePaymentLinkAmountDetails(
-            @JsonProperty("tax") Optional<? extends AmountDecimalUpdate> tax,
-            @JsonProperty("surcharge") Optional<? extends AmountDecimalUpdate> surcharge) {
+            @JsonProperty("tax") JsonNullable<? extends Tax> tax,
+            @JsonProperty("surcharge") JsonNullable<? extends Surcharge> surcharge) {
         Utils.checkNotNull(tax, "tax");
         Utils.checkNotNull(surcharge, "surcharge");
         this.tax = tax;
@@ -41,7 +41,7 @@ public class UpdatePaymentLinkAmountDetails {
     }
     
     public UpdatePaymentLinkAmountDetails() {
-        this(Optional.empty(), Optional.empty());
+        this(JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     /**
@@ -49,8 +49,8 @@ public class UpdatePaymentLinkAmountDetails {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<AmountDecimalUpdate> tax() {
-        return (Optional<AmountDecimalUpdate>) tax;
+    public JsonNullable<Tax> tax() {
+        return (JsonNullable<Tax>) tax;
     }
 
     /**
@@ -58,8 +58,8 @@ public class UpdatePaymentLinkAmountDetails {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<AmountDecimalUpdate> surcharge() {
-        return (Optional<AmountDecimalUpdate>) surcharge;
+    public JsonNullable<Surcharge> surcharge() {
+        return (JsonNullable<Surcharge>) surcharge;
     }
 
     public static Builder builder() {
@@ -70,17 +70,16 @@ public class UpdatePaymentLinkAmountDetails {
     /**
      * The amount of tax applied to the payment link.
      */
-    public UpdatePaymentLinkAmountDetails withTax(AmountDecimalUpdate tax) {
+    public UpdatePaymentLinkAmountDetails withTax(Tax tax) {
         Utils.checkNotNull(tax, "tax");
-        this.tax = Optional.ofNullable(tax);
+        this.tax = JsonNullable.of(tax);
         return this;
     }
-
 
     /**
      * The amount of tax applied to the payment link.
      */
-    public UpdatePaymentLinkAmountDetails withTax(Optional<? extends AmountDecimalUpdate> tax) {
+    public UpdatePaymentLinkAmountDetails withTax(JsonNullable<? extends Tax> tax) {
         Utils.checkNotNull(tax, "tax");
         this.tax = tax;
         return this;
@@ -89,17 +88,16 @@ public class UpdatePaymentLinkAmountDetails {
     /**
      * The amount of surcharge applied to the payment link.
      */
-    public UpdatePaymentLinkAmountDetails withSurcharge(AmountDecimalUpdate surcharge) {
+    public UpdatePaymentLinkAmountDetails withSurcharge(Surcharge surcharge) {
         Utils.checkNotNull(surcharge, "surcharge");
-        this.surcharge = Optional.ofNullable(surcharge);
+        this.surcharge = JsonNullable.of(surcharge);
         return this;
     }
-
 
     /**
      * The amount of surcharge applied to the payment link.
      */
-    public UpdatePaymentLinkAmountDetails withSurcharge(Optional<? extends AmountDecimalUpdate> surcharge) {
+    public UpdatePaymentLinkAmountDetails withSurcharge(JsonNullable<? extends Surcharge> surcharge) {
         Utils.checkNotNull(surcharge, "surcharge");
         this.surcharge = surcharge;
         return this;
@@ -135,9 +133,9 @@ public class UpdatePaymentLinkAmountDetails {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends AmountDecimalUpdate> tax = Optional.empty();
+        private JsonNullable<? extends Tax> tax = JsonNullable.undefined();
 
-        private Optional<? extends AmountDecimalUpdate> surcharge = Optional.empty();
+        private JsonNullable<? extends Surcharge> surcharge = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -147,16 +145,16 @@ public class UpdatePaymentLinkAmountDetails {
         /**
          * The amount of tax applied to the payment link.
          */
-        public Builder tax(AmountDecimalUpdate tax) {
+        public Builder tax(Tax tax) {
             Utils.checkNotNull(tax, "tax");
-            this.tax = Optional.ofNullable(tax);
+            this.tax = JsonNullable.of(tax);
             return this;
         }
 
         /**
          * The amount of tax applied to the payment link.
          */
-        public Builder tax(Optional<? extends AmountDecimalUpdate> tax) {
+        public Builder tax(JsonNullable<? extends Tax> tax) {
             Utils.checkNotNull(tax, "tax");
             this.tax = tax;
             return this;
@@ -166,16 +164,16 @@ public class UpdatePaymentLinkAmountDetails {
         /**
          * The amount of surcharge applied to the payment link.
          */
-        public Builder surcharge(AmountDecimalUpdate surcharge) {
+        public Builder surcharge(Surcharge surcharge) {
             Utils.checkNotNull(surcharge, "surcharge");
-            this.surcharge = Optional.ofNullable(surcharge);
+            this.surcharge = JsonNullable.of(surcharge);
             return this;
         }
 
         /**
          * The amount of surcharge applied to the payment link.
          */
-        public Builder surcharge(Optional<? extends AmountDecimalUpdate> surcharge) {
+        public Builder surcharge(JsonNullable<? extends Surcharge> surcharge) {
             Utils.checkNotNull(surcharge, "surcharge");
             this.surcharge = surcharge;
             return this;

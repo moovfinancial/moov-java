@@ -81,6 +81,13 @@ public class CardBrandFees {
     private Optional<? extends BillingCountAndAmount> refunds;
 
     /**
+     * Details of card cancellations.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("cardCancellations")
+    private Optional<? extends BillingCountAndAmount> cardCancellations;
+
+    /**
      * Total fees for this card brand.
      */
     @JsonProperty("total")
@@ -97,6 +104,7 @@ public class CardBrandFees {
             @JsonProperty("completedInternationalInPerson") Optional<? extends BillingCountAndAmount> completedInternationalInPerson,
             @JsonProperty("declines") Optional<? extends BillingCountAndAmount> declines,
             @JsonProperty("refunds") Optional<? extends BillingCountAndAmount> refunds,
+            @JsonProperty("cardCancellations") Optional<? extends BillingCountAndAmount> cardCancellations,
             @JsonProperty("total") BillingCountAndAmount total) {
         Utils.checkNotNull(interchange, "interchange");
         Utils.checkNotNull(interchangePrograms, "interchangePrograms");
@@ -107,6 +115,7 @@ public class CardBrandFees {
         Utils.checkNotNull(completedInternationalInPerson, "completedInternationalInPerson");
         Utils.checkNotNull(declines, "declines");
         Utils.checkNotNull(refunds, "refunds");
+        Utils.checkNotNull(cardCancellations, "cardCancellations");
         Utils.checkNotNull(total, "total");
         this.interchange = interchange;
         this.interchangePrograms = interchangePrograms;
@@ -117,6 +126,7 @@ public class CardBrandFees {
         this.completedInternationalInPerson = completedInternationalInPerson;
         this.declines = declines;
         this.refunds = refunds;
+        this.cardCancellations = cardCancellations;
         this.total = total;
     }
     
@@ -125,7 +135,7 @@ public class CardBrandFees {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            total);
+            Optional.empty(), total);
     }
 
     /**
@@ -207,6 +217,15 @@ public class CardBrandFees {
     @JsonIgnore
     public Optional<BillingCountAndAmount> refunds() {
         return (Optional<BillingCountAndAmount>) refunds;
+    }
+
+    /**
+     * Details of card cancellations.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<BillingCountAndAmount> cardCancellations() {
+        return (Optional<BillingCountAndAmount>) cardCancellations;
     }
 
     /**
@@ -394,6 +413,25 @@ public class CardBrandFees {
     }
 
     /**
+     * Details of card cancellations.
+     */
+    public CardBrandFees withCardCancellations(BillingCountAndAmount cardCancellations) {
+        Utils.checkNotNull(cardCancellations, "cardCancellations");
+        this.cardCancellations = Optional.ofNullable(cardCancellations);
+        return this;
+    }
+
+
+    /**
+     * Details of card cancellations.
+     */
+    public CardBrandFees withCardCancellations(Optional<? extends BillingCountAndAmount> cardCancellations) {
+        Utils.checkNotNull(cardCancellations, "cardCancellations");
+        this.cardCancellations = cardCancellations;
+        return this;
+    }
+
+    /**
      * Total fees for this card brand.
      */
     public CardBrandFees withTotal(BillingCountAndAmount total) {
@@ -421,6 +459,7 @@ public class CardBrandFees {
             Utils.enhancedDeepEquals(this.completedInternationalInPerson, other.completedInternationalInPerson) &&
             Utils.enhancedDeepEquals(this.declines, other.declines) &&
             Utils.enhancedDeepEquals(this.refunds, other.refunds) &&
+            Utils.enhancedDeepEquals(this.cardCancellations, other.cardCancellations) &&
             Utils.enhancedDeepEquals(this.total, other.total);
     }
     
@@ -430,7 +469,7 @@ public class CardBrandFees {
             interchange, interchangePrograms, networkPassthrough,
             completedDomesticOnline, completedDomesticInPerson, completedInternationalOnline,
             completedInternationalInPerson, declines, refunds,
-            total);
+            cardCancellations, total);
     }
     
     @Override
@@ -445,6 +484,7 @@ public class CardBrandFees {
                 "completedInternationalInPerson", completedInternationalInPerson,
                 "declines", declines,
                 "refunds", refunds,
+                "cardCancellations", cardCancellations,
                 "total", total);
     }
 
@@ -468,6 +508,8 @@ public class CardBrandFees {
         private Optional<? extends BillingCountAndAmount> declines = Optional.empty();
 
         private Optional<? extends BillingCountAndAmount> refunds = Optional.empty();
+
+        private Optional<? extends BillingCountAndAmount> cardCancellations = Optional.empty();
 
         private BillingCountAndAmount total;
 
@@ -648,6 +690,25 @@ public class CardBrandFees {
 
 
         /**
+         * Details of card cancellations.
+         */
+        public Builder cardCancellations(BillingCountAndAmount cardCancellations) {
+            Utils.checkNotNull(cardCancellations, "cardCancellations");
+            this.cardCancellations = Optional.ofNullable(cardCancellations);
+            return this;
+        }
+
+        /**
+         * Details of card cancellations.
+         */
+        public Builder cardCancellations(Optional<? extends BillingCountAndAmount> cardCancellations) {
+            Utils.checkNotNull(cardCancellations, "cardCancellations");
+            this.cardCancellations = cardCancellations;
+            return this;
+        }
+
+
+        /**
          * Total fees for this card brand.
          */
         public Builder total(BillingCountAndAmount total) {
@@ -662,7 +723,7 @@ public class CardBrandFees {
                 interchange, interchangePrograms, networkPassthrough,
                 completedDomesticOnline, completedDomesticInPerson, completedInternationalOnline,
                 completedInternationalInPerson, declines, refunds,
-                total);
+                cardCancellations, total);
         }
 
     }

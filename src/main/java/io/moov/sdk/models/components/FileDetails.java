@@ -34,7 +34,7 @@ public class FileDetails {
     private String accountID;
 
     /**
-     * The file's purpose.
+     * The purpose of the file being uploaded.
      */
     @JsonProperty("filePurpose")
     private FilePurpose filePurpose;
@@ -132,7 +132,7 @@ public class FileDetails {
     }
 
     /**
-     * The file's purpose.
+     * The purpose of the file being uploaded.
      */
     @JsonIgnore
     public FilePurpose filePurpose() {
@@ -196,7 +196,7 @@ public class FileDetails {
     }
 
     /**
-     * The file's purpose.
+     * The purpose of the file being uploaded.
      */
     public FileDetails withFilePurpose(FilePurpose filePurpose) {
         Utils.checkNotNull(filePurpose, "filePurpose");
@@ -346,7 +346,7 @@ public class FileDetails {
 
 
         /**
-         * The file's purpose.
+         * The purpose of the file being uploaded.
          */
         public Builder filePurpose(FilePurpose filePurpose) {
             Utils.checkNotNull(filePurpose, "filePurpose");

@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * FilePurpose
  * 
- * <p>The file's purpose.
+ * <p>The purpose of the file being uploaded.
  */
 public enum FilePurpose {
     BUSINESS_VERIFICATION("business_verification"),

@@ -31,7 +31,7 @@ public class OnboardingInvite {
     private String link;
 
     /**
-     * The scopes requested by the inviter.
+     * Optional URL to redirect the user to after they complete the onboarding process.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("returnURL")
@@ -185,7 +185,7 @@ public class OnboardingInvite {
     }
 
     /**
-     * The scopes requested by the inviter.
+     * Optional URL to redirect the user to after they complete the onboarding process.
      */
     @JsonIgnore
     public Optional<String> returnURL() {
@@ -301,7 +301,7 @@ public class OnboardingInvite {
     }
 
     /**
-     * The scopes requested by the inviter.
+     * Optional URL to redirect the user to after they complete the onboarding process.
      */
     public OnboardingInvite withReturnURL(String returnURL) {
         Utils.checkNotNull(returnURL, "returnURL");
@@ -311,7 +311,7 @@ public class OnboardingInvite {
 
 
     /**
-     * The scopes requested by the inviter.
+     * Optional URL to redirect the user to after they complete the onboarding process.
      */
     public OnboardingInvite withReturnURL(Optional<String> returnURL) {
         Utils.checkNotNull(returnURL, "returnURL");
@@ -587,7 +587,7 @@ public class OnboardingInvite {
 
 
         /**
-         * The scopes requested by the inviter.
+         * Optional URL to redirect the user to after they complete the onboarding process.
          */
         public Builder returnURL(String returnURL) {
             Utils.checkNotNull(returnURL, "returnURL");
@@ -596,7 +596,7 @@ public class OnboardingInvite {
         }
 
         /**
-         * The scopes requested by the inviter.
+         * Optional URL to redirect the user to after they complete the onboarding process.
          */
         public Builder returnURL(Optional<String> returnURL) {
             Utils.checkNotNull(returnURL, "returnURL");

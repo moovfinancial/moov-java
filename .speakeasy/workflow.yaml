@@ -1,15 +1,16 @@
 workflowVersion: 1.0.0
 speakeasyVersion: latest
 sources:
-    dev:
+    latest:
         inputs:
-            - location: registry.speakeasyapi.dev/moov/moov/api-dev
+            - location: registry.speakeasyapi.dev/moov/moov/api-v2026.10.00
+              type: openapi
         registry:
-            location: registry.speakeasyapi.dev/moov/moov/java-dev
+            location: registry.speakeasyapi.dev/moov/moov/java-v2026.10.00
 targets:
     latest:
         target: java
-        source: dev
+        source: latest
         publish:
             java:
                 ossrhUsername: $ossrh_username
@@ -18,7 +19,7 @@ targets:
                 gpgPassPhrase: $java_gpg_passphrase
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/moov/moov/dev-java-code-samples
+                location: registry.speakeasyapi.dev/moov/moov/v2026.10.00-java-code-samples
             labelOverride:
                 fixedValue: Java (SDK)
             blocking: false

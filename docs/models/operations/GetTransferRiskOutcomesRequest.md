@@ -1,0 +1,9 @@
+# GetTransferRiskOutcomesRequest
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `transferID`                                                                                             | *String*                                                                                                 | :heavy_check_mark:                                                                                       | Identifier for the transfer.                                                                             |
+| `xAccountID`                                                                                             | *Optional\<String>*                                                                                      | :heavy_minus_sign:                                                                                       | The account the transfer belongs to. When omitted, the account is resolved<br/>from the calling credentials. |

@@ -34,6 +34,9 @@ import io.moov.sdk.models.operations.GetRefundResponse;
 import io.moov.sdk.models.operations.GetTransferRequest;
 import io.moov.sdk.models.operations.GetTransferRequestBuilder;
 import io.moov.sdk.models.operations.GetTransferResponse;
+import io.moov.sdk.models.operations.GetTransferRiskOutcomesRequest;
+import io.moov.sdk.models.operations.GetTransferRiskOutcomesRequestBuilder;
+import io.moov.sdk.models.operations.GetTransferRiskOutcomesResponse;
 import io.moov.sdk.models.operations.InitiateRefundRequest;
 import io.moov.sdk.models.operations.InitiateRefundRequestBuilder;
 import io.moov.sdk.models.operations.InitiateRefundResponse;
@@ -54,6 +57,7 @@ import io.moov.sdk.operations.CreateCancellation;
 import io.moov.sdk.operations.GetCancellation;
 import io.moov.sdk.operations.GetRefund;
 import io.moov.sdk.operations.GetTransfer;
+import io.moov.sdk.operations.GetTransferRiskOutcomes;
 import io.moov.sdk.operations.InitiateRefund;
 import io.moov.sdk.operations.ListCancellations;
 import io.moov.sdk.operations.ListRefunds;
@@ -696,6 +700,65 @@ public class Transfers {
                 .build();
         RequestOperation<CreateReversalRequest, CreateReversalResponse> operation
               = new io.moov.sdk.operations.CreateReversal.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Retrieve the risk rules that contributed to a transfer's risk decision.
+     * 
+     * <p>This endpoint has limited availability and must be enabled for your account by Moov.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @return The call builder
+     */
+    public GetTransferRiskOutcomesRequestBuilder getRiskOutcomes() {
+        return new GetTransferRiskOutcomesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Retrieve the risk rules that contributed to a transfer's risk decision.
+     * 
+     * <p>This endpoint has limited availability and must be enabled for your account by Moov.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param transferID Identifier for the transfer.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetTransferRiskOutcomesResponse getRiskOutcomes(String transferID) {
+        return getRiskOutcomes(transferID, Optional.empty());
+    }
+
+    /**
+     * Retrieve the risk rules that contributed to a transfer's risk decision.
+     * 
+     * <p>This endpoint has limited availability and must be enabled for your account by Moov.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param transferID Identifier for the transfer.
+     * @param xAccountID The account the transfer belongs to. When omitted, the account is resolved
+     *         from the calling credentials.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetTransferRiskOutcomesResponse getRiskOutcomes(String transferID, Optional<String> xAccountID) {
+        GetTransferRiskOutcomesRequest request =
+            GetTransferRiskOutcomesRequest
+                .builder()
+                .transferID(transferID)
+                .xAccountID(xAccountID)
+                .build();
+        RequestOperation<GetTransferRiskOutcomesRequest, GetTransferRiskOutcomesResponse> operation
+              = new GetTransferRiskOutcomes.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

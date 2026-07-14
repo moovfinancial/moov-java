@@ -84,6 +84,12 @@ to learn more.
 
 To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
 to specify the `/accounts/{accountID}/transfers.write` scope.
+* [getRiskOutcomes](#getriskoutcomes) - Retrieve the risk rules that contributed to a transfer's risk decision.
+
+This endpoint has limited availability and must be enabled for your account by Moov.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ## generateOptions
 
@@ -1205,3 +1211,62 @@ public class Application {
 | models/errors/GenericError            | 400, 409                              | application/json                      |
 | models/errors/ReversalValidationError | 422                                   | application/json                      |
 | models/errors/APIException            | 4XX, 5XX                              | \*/\*                                 |
+
+## getRiskOutcomes
+
+Retrieve the risk rules that contributed to a transfer's risk decision.
+
+This endpoint has limited availability and must be enabled for your account by Moov.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="getTransferRiskOutcomes" method="get" path="/transfers/{transferID}/risk-outcomes" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.GetTransferRiskOutcomesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        GetTransferRiskOutcomesResponse res = sdk.transfers().getRiskOutcomes()
+                .transferID("<id>")
+                .call();
+
+        if (res.partnerRiskOutcomesResponse().isPresent()) {
+            System.out.println(res.partnerRiskOutcomesResponse().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `transferID`                                                                                             | *String*                                                                                                 | :heavy_check_mark:                                                                                       | Identifier for the transfer.                                                                             |
+| `xAccountID`                                                                                             | *Optional\<String>*                                                                                      | :heavy_minus_sign:                                                                                       | The account the transfer belongs to. When omitted, the account is resolved<br/>from the calling credentials. |
+
+### Response
+
+**[GetTransferRiskOutcomesResponse](../../models/operations/GetTransferRiskOutcomesResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |

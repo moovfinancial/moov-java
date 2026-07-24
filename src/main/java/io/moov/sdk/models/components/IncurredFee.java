@@ -87,6 +87,13 @@ public class IncurredFee {
     @JsonProperty("residualID")
     private Optional<String> residualID;
 
+    /**
+     * Indicates which party to the money movement bore this fee.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("feePaidBy")
+    private Optional<? extends FeePaidBy> feePaidBy;
+
     @JsonCreator
     public IncurredFee(
             @JsonProperty("feeID") Optional<String> feeID,
@@ -97,7 +104,8 @@ public class IncurredFee {
             @JsonProperty("amount") Optional<? extends AmountDecimal> amount,
             @JsonProperty("generatedBy") Optional<? extends GeneratedBy> generatedBy,
             @JsonProperty("feeGroup") Optional<String> feeGroup,
-            @JsonProperty("residualID") Optional<String> residualID) {
+            @JsonProperty("residualID") Optional<String> residualID,
+            @JsonProperty("feePaidBy") Optional<? extends FeePaidBy> feePaidBy) {
         Utils.checkNotNull(feeID, "feeID");
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(walletID, "walletID");
@@ -107,6 +115,7 @@ public class IncurredFee {
         Utils.checkNotNull(generatedBy, "generatedBy");
         Utils.checkNotNull(feeGroup, "feeGroup");
         Utils.checkNotNull(residualID, "residualID");
+        Utils.checkNotNull(feePaidBy, "feePaidBy");
         this.feeID = feeID;
         this.accountID = accountID;
         this.walletID = walletID;
@@ -116,12 +125,14 @@ public class IncurredFee {
         this.generatedBy = generatedBy;
         this.feeGroup = feeGroup;
         this.residualID = residualID;
+        this.feePaidBy = feePaidBy;
     }
     
     public IncurredFee() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -199,6 +210,15 @@ public class IncurredFee {
     @JsonIgnore
     public Optional<String> residualID() {
         return residualID;
+    }
+
+    /**
+     * Indicates which party to the money movement bore this fee.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<FeePaidBy> feePaidBy() {
+        return (Optional<FeePaidBy>) feePaidBy;
     }
 
     public static Builder builder() {
@@ -383,6 +403,25 @@ public class IncurredFee {
         return this;
     }
 
+    /**
+     * Indicates which party to the money movement bore this fee.
+     */
+    public IncurredFee withFeePaidBy(FeePaidBy feePaidBy) {
+        Utils.checkNotNull(feePaidBy, "feePaidBy");
+        this.feePaidBy = Optional.ofNullable(feePaidBy);
+        return this;
+    }
+
+
+    /**
+     * Indicates which party to the money movement bore this fee.
+     */
+    public IncurredFee withFeePaidBy(Optional<? extends FeePaidBy> feePaidBy) {
+        Utils.checkNotNull(feePaidBy, "feePaidBy");
+        this.feePaidBy = feePaidBy;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -401,7 +440,8 @@ public class IncurredFee {
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
             Utils.enhancedDeepEquals(this.generatedBy, other.generatedBy) &&
             Utils.enhancedDeepEquals(this.feeGroup, other.feeGroup) &&
-            Utils.enhancedDeepEquals(this.residualID, other.residualID);
+            Utils.enhancedDeepEquals(this.residualID, other.residualID) &&
+            Utils.enhancedDeepEquals(this.feePaidBy, other.feePaidBy);
     }
     
     @Override
@@ -409,7 +449,8 @@ public class IncurredFee {
         return Utils.enhancedHash(
             feeID, accountID, walletID,
             createdOn, feeName, amount,
-            generatedBy, feeGroup, residualID);
+            generatedBy, feeGroup, residualID,
+            feePaidBy);
     }
     
     @Override
@@ -423,7 +464,8 @@ public class IncurredFee {
                 "amount", amount,
                 "generatedBy", generatedBy,
                 "feeGroup", feeGroup,
-                "residualID", residualID);
+                "residualID", residualID,
+                "feePaidBy", feePaidBy);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -446,6 +488,8 @@ public class IncurredFee {
         private Optional<String> feeGroup = Optional.empty();
 
         private Optional<String> residualID = Optional.empty();
+
+        private Optional<? extends FeePaidBy> feePaidBy = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -628,12 +672,32 @@ public class IncurredFee {
             return this;
         }
 
+
+        /**
+         * Indicates which party to the money movement bore this fee.
+         */
+        public Builder feePaidBy(FeePaidBy feePaidBy) {
+            Utils.checkNotNull(feePaidBy, "feePaidBy");
+            this.feePaidBy = Optional.ofNullable(feePaidBy);
+            return this;
+        }
+
+        /**
+         * Indicates which party to the money movement bore this fee.
+         */
+        public Builder feePaidBy(Optional<? extends FeePaidBy> feePaidBy) {
+            Utils.checkNotNull(feePaidBy, "feePaidBy");
+            this.feePaidBy = feePaidBy;
+            return this;
+        }
+
         public IncurredFee build() {
 
             return new IncurredFee(
                 feeID, accountID, walletID,
                 createdOn, feeName, amount,
-                generatedBy, feeGroup, residualID);
+                generatedBy, feeGroup, residualID,
+                feePaidBy);
         }
 
     }

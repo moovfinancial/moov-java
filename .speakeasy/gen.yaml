@@ -51,8 +51,10 @@ java:
   generateOptionalUnionAccessors: false
   generateSpringBootStarter: true
   generateUnionDocs: false
+  getterStyle: presence-aware
   githubURL: github.com/moovfinancial/moov-java
   groupID: io.moov
+  httpClient: jdk
   imports:
     option: openapi
     paths:

@@ -64,6 +64,13 @@ public class Product {
     private Optional<? extends List<ProductImageMetadata>> images;
 
     /**
+     * The product taxonomy category associated with the product, if any.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("category")
+    private Optional<? extends ProductCategory> category;
+
+    /**
      * The date and time when the product was added.
      */
     @JsonProperty("createdOn")
@@ -90,6 +97,7 @@ public class Product {
             @JsonProperty("basePrice") AmountDecimal basePrice,
             @JsonProperty("optionGroups") Optional<? extends List<ProductOptionGroup>> optionGroups,
             @JsonProperty("images") Optional<? extends List<ProductImageMetadata>> images,
+            @JsonProperty("category") Optional<? extends ProductCategory> category,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
             @JsonProperty("updatedOn") OffsetDateTime updatedOn,
             @JsonProperty("disabledOn") Optional<OffsetDateTime> disabledOn) {
@@ -99,6 +107,7 @@ public class Product {
         Utils.checkNotNull(basePrice, "basePrice");
         Utils.checkNotNull(optionGroups, "optionGroups");
         Utils.checkNotNull(images, "images");
+        Utils.checkNotNull(category, "category");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(updatedOn, "updatedOn");
         Utils.checkNotNull(disabledOn, "disabledOn");
@@ -108,6 +117,7 @@ public class Product {
         this.basePrice = basePrice;
         this.optionGroups = optionGroups;
         this.images = images;
+        this.category = category;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
         this.disabledOn = disabledOn;
@@ -121,7 +131,8 @@ public class Product {
             OffsetDateTime updatedOn) {
         this(productID, title, Optional.empty(),
             basePrice, Optional.empty(), Optional.empty(),
-            createdOn, updatedOn, Optional.empty());
+            Optional.empty(), createdOn, updatedOn,
+            Optional.empty());
     }
 
     /**
@@ -173,6 +184,15 @@ public class Product {
     @JsonIgnore
     public Optional<List<ProductImageMetadata>> images() {
         return (Optional<List<ProductImageMetadata>>) images;
+    }
+
+    /**
+     * The product taxonomy category associated with the product, if any.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<ProductCategory> category() {
+        return (Optional<ProductCategory>) category;
     }
 
     /**
@@ -294,6 +314,25 @@ public class Product {
     }
 
     /**
+     * The product taxonomy category associated with the product, if any.
+     */
+    public Product withCategory(ProductCategory category) {
+        Utils.checkNotNull(category, "category");
+        this.category = Optional.ofNullable(category);
+        return this;
+    }
+
+
+    /**
+     * The product taxonomy category associated with the product, if any.
+     */
+    public Product withCategory(Optional<? extends ProductCategory> category) {
+        Utils.checkNotNull(category, "category");
+        this.category = category;
+        return this;
+    }
+
+    /**
      * The date and time when the product was added.
      */
     public Product withCreatedOn(OffsetDateTime createdOn) {
@@ -346,6 +385,7 @@ public class Product {
             Utils.enhancedDeepEquals(this.basePrice, other.basePrice) &&
             Utils.enhancedDeepEquals(this.optionGroups, other.optionGroups) &&
             Utils.enhancedDeepEquals(this.images, other.images) &&
+            Utils.enhancedDeepEquals(this.category, other.category) &&
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
             Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
             Utils.enhancedDeepEquals(this.disabledOn, other.disabledOn);
@@ -356,7 +396,8 @@ public class Product {
         return Utils.enhancedHash(
             productID, title, description,
             basePrice, optionGroups, images,
-            createdOn, updatedOn, disabledOn);
+            category, createdOn, updatedOn,
+            disabledOn);
     }
     
     @Override
@@ -368,6 +409,7 @@ public class Product {
                 "basePrice", basePrice,
                 "optionGroups", optionGroups,
                 "images", images,
+                "category", category,
                 "createdOn", createdOn,
                 "updatedOn", updatedOn,
                 "disabledOn", disabledOn);
@@ -387,6 +429,8 @@ public class Product {
         private Optional<? extends List<ProductOptionGroup>> optionGroups = Optional.empty();
 
         private Optional<? extends List<ProductImageMetadata>> images = Optional.empty();
+
+        private Optional<? extends ProductCategory> category = Optional.empty();
 
         private OffsetDateTime createdOn;
 
@@ -492,6 +536,25 @@ public class Product {
 
 
         /**
+         * The product taxonomy category associated with the product, if any.
+         */
+        public Builder category(ProductCategory category) {
+            Utils.checkNotNull(category, "category");
+            this.category = Optional.ofNullable(category);
+            return this;
+        }
+
+        /**
+         * The product taxonomy category associated with the product, if any.
+         */
+        public Builder category(Optional<? extends ProductCategory> category) {
+            Utils.checkNotNull(category, "category");
+            this.category = category;
+            return this;
+        }
+
+
+        /**
          * The date and time when the product was added.
          */
         public Builder createdOn(OffsetDateTime createdOn) {
@@ -534,7 +597,8 @@ public class Product {
             return new Product(
                 productID, title, description,
                 basePrice, optionGroups, images,
-                createdOn, updatedOn, disabledOn);
+                category, createdOn, updatedOn,
+                disabledOn);
         }
 
     }

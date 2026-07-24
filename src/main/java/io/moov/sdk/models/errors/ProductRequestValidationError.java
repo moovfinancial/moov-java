@@ -82,6 +82,11 @@ public class ProductRequestValidationError extends MoovError {
         return data().flatMap(Data::optionGroups);
     }
 
+    @Deprecated
+    public Optional<String> categoryID() {
+        return data().flatMap(Data::categoryID);
+    }
+
     public Optional<Data> data() {
         return Optional.ofNullable(data);
     }
@@ -119,28 +124,36 @@ public class ProductRequestValidationError extends MoovError {
         @JsonProperty("optionGroups")
         private Optional<? extends Map<String, ProductOptionGroupValidationError>> optionGroups;
 
+
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("categoryID")
+        private Optional<String> categoryID;
+
         @JsonCreator
         public Data(
                 @JsonProperty("title") Optional<String> title,
                 @JsonProperty("description") Optional<String> description,
                 @JsonProperty("basePrice") Optional<? extends AmountDecimalValidationError> basePrice,
                 @JsonProperty("images") Optional<? extends Map<String, AssignProductImageValidationError>> images,
-                @JsonProperty("optionGroups") Optional<? extends Map<String, ProductOptionGroupValidationError>> optionGroups) {
+                @JsonProperty("optionGroups") Optional<? extends Map<String, ProductOptionGroupValidationError>> optionGroups,
+                @JsonProperty("categoryID") Optional<String> categoryID) {
             Utils.checkNotNull(title, "title");
             Utils.checkNotNull(description, "description");
             Utils.checkNotNull(basePrice, "basePrice");
             Utils.checkNotNull(images, "images");
             Utils.checkNotNull(optionGroups, "optionGroups");
+            Utils.checkNotNull(categoryID, "categoryID");
             this.title = title;
             this.description = description;
             this.basePrice = basePrice;
             this.images = images;
             this.optionGroups = optionGroups;
+            this.categoryID = categoryID;
         }
         
         public Data() {
             this(Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty(), Optional.empty());
+                Optional.empty(), Optional.empty(), Optional.empty());
         }
 
         @JsonIgnore
@@ -169,6 +182,11 @@ public class ProductRequestValidationError extends MoovError {
         @JsonIgnore
         public Optional<Map<String, ProductOptionGroupValidationError>> optionGroups() {
             return (Optional<Map<String, ProductOptionGroupValidationError>>) optionGroups;
+        }
+
+        @JsonIgnore
+        public Optional<String> categoryID() {
+            return categoryID;
         }
 
         public static Builder builder() {
@@ -241,6 +259,19 @@ public class ProductRequestValidationError extends MoovError {
             return this;
         }
 
+        public Data withCategoryID(String categoryID) {
+            Utils.checkNotNull(categoryID, "categoryID");
+            this.categoryID = Optional.ofNullable(categoryID);
+            return this;
+        }
+
+
+        public Data withCategoryID(Optional<String> categoryID) {
+            Utils.checkNotNull(categoryID, "categoryID");
+            this.categoryID = categoryID;
+            return this;
+        }
+
         @Override
         public boolean equals(java.lang.Object o) {
             if (this == o) {
@@ -255,14 +286,15 @@ public class ProductRequestValidationError extends MoovError {
                 Utils.enhancedDeepEquals(this.description, other.description) &&
                 Utils.enhancedDeepEquals(this.basePrice, other.basePrice) &&
                 Utils.enhancedDeepEquals(this.images, other.images) &&
-                Utils.enhancedDeepEquals(this.optionGroups, other.optionGroups);
+                Utils.enhancedDeepEquals(this.optionGroups, other.optionGroups) &&
+                Utils.enhancedDeepEquals(this.categoryID, other.categoryID);
         }
         
         @Override
         public int hashCode() {
             return Utils.enhancedHash(
                 title, description, basePrice,
-                images, optionGroups);
+                images, optionGroups, categoryID);
         }
         
         @Override
@@ -272,7 +304,8 @@ public class ProductRequestValidationError extends MoovError {
                     "description", description,
                     "basePrice", basePrice,
                     "images", images,
-                    "optionGroups", optionGroups);
+                    "optionGroups", optionGroups,
+                    "categoryID", categoryID);
         }
 
         @SuppressWarnings("UnusedReturnValue")
@@ -287,6 +320,8 @@ public class ProductRequestValidationError extends MoovError {
             private Optional<? extends Map<String, AssignProductImageValidationError>> images = Optional.empty();
 
             private Optional<? extends Map<String, ProductOptionGroupValidationError>> optionGroups = Optional.empty();
+
+            private Optional<String> categoryID = Optional.empty();
 
             private Builder() {
               // force use of static builder() method
@@ -357,11 +392,24 @@ public class ProductRequestValidationError extends MoovError {
                 return this;
             }
 
+
+            public Builder categoryID(String categoryID) {
+                Utils.checkNotNull(categoryID, "categoryID");
+                this.categoryID = Optional.ofNullable(categoryID);
+                return this;
+            }
+
+            public Builder categoryID(Optional<String> categoryID) {
+                Utils.checkNotNull(categoryID, "categoryID");
+                this.categoryID = categoryID;
+                return this;
+            }
+
             public Data build() {
 
                 return new Data(
                     title, description, basePrice,
-                    images, optionGroups);
+                    images, optionGroups, categoryID);
             }
 
         }

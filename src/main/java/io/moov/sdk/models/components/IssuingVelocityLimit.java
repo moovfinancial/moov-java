@@ -20,7 +20,8 @@ public class IssuingVelocityLimit {
     private long amount;
 
     /**
-     * Specifies the time frame for the velocity limit. Currently supports only per-transaction limits.
+     * Specifies the time frame for a velocity limit. `per-transaction` applies to each individual
+     * authorization and never resets. Time-based intervals (where supported) reset at midnight ET.
      */
     @JsonProperty("interval")
     private IssuingIntervalLimit interval;
@@ -44,7 +45,8 @@ public class IssuingVelocityLimit {
     }
 
     /**
-     * Specifies the time frame for the velocity limit. Currently supports only per-transaction limits.
+     * Specifies the time frame for a velocity limit. `per-transaction` applies to each individual
+     * authorization and never resets. Time-based intervals (where supported) reset at midnight ET.
      */
     @JsonIgnore
     public IssuingIntervalLimit interval() {
@@ -66,7 +68,8 @@ public class IssuingVelocityLimit {
     }
 
     /**
-     * Specifies the time frame for the velocity limit. Currently supports only per-transaction limits.
+     * Specifies the time frame for a velocity limit. `per-transaction` applies to each individual
+     * authorization and never resets. Time-based intervals (where supported) reset at midnight ET.
      */
     public IssuingVelocityLimit withInterval(IssuingIntervalLimit interval) {
         Utils.checkNotNull(interval, "interval");
@@ -124,7 +127,8 @@ public class IssuingVelocityLimit {
 
 
         /**
-         * Specifies the time frame for the velocity limit. Currently supports only per-transaction limits.
+         * Specifies the time frame for a velocity limit. `per-transaction` applies to each individual
+         * authorization and never resets. Time-based intervals (where supported) reset at midnight ET.
          */
         public Builder interval(IssuingIntervalLimit interval) {
             Utils.checkNotNull(interval, "interval");

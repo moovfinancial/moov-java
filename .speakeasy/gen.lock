@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 1edc8b7422e6f7ab025768e32c69a49a
+  docChecksum: 77f41ea0172fd58af23b28c2d5214b6d
   docVersion: v2026.01.00
-  speakeasyVersion: 1.790.0
-  generationVersion: 2.917.0
-  releaseVersion: 26.2.11
-  configChecksum: 84a2ed7ba0eb9ff3545deb68b5a50157
+  speakeasyVersion: 1.791.0
+  generationVersion: 2.924.0
+  releaseVersion: 26.3.0
+  configChecksum: a2d5e274c5eae8bfaedaf7621ab28736
   repoURL: https://github.com/moovfinancial/moov-java.git
   installationURL: https://github.com/moovfinancial/moov-java
   published: true
 persistentEdits:
-  generation_id: 31f382ea-6434-45e0-b268-4487f6e721e9
-  pristine_commit_hash: 5f14459663b661887c547ccd69da563d06d63d58
-  pristine_tree_hash: 1ad1fdc9ce40b6f8582b8ae4471f3962eda5fc63
+  generation_id: 9c5488c6-4769-4f74-a7a2-bce0243a4120
+  pristine_commit_hash: 9f9f2002dc497bda4ee41f8d68acae7e4b5ecbec
+  pristine_tree_hash: de76c78b474c59ab07fa723cfcd3bf6159bc954d
 features:
   java:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.3
-    core: 3.55.30
+    core: 3.56.1
     decimal: 0.0.1
     deprecations: 2.81.2
     downloadStreams: 0.1.1
@@ -30,7 +30,7 @@ features:
     ignores: 2.81.1
     includes: 2.81.1
     nameOverrides: 2.81.5
-    nullables: 0.1.0
+    nullables: 0.1.1
     sdkHooks: 1.2.0
     unions: 0.3.6
     uploadStreams: 0.1.0
@@ -45,8 +45,8 @@ trackedFiles:
     pristine_git_object: 178603c413c28b724e9881b6664c52f3292b767d
   build.gradle:
     id: f07866736216
-    last_write_checksum: sha1:7563ba54f57898fd600f1b53c569090ee2ba99ae
-    pristine_git_object: 4a6d84eb21f7dbd42df4de92aa5ffbff099de066
+    last_write_checksum: sha1:e8314dbd032b1ce12696c1019672ec5e319d59f0
+    pristine_git_object: 3d4a14142bcbd1403d49c2766db2395c26eb7c05
   docs/models/components/ACHException.md:
     id: 6b43eb49b02f
     last_write_checksum: sha1:19f83c40f306d46677d430a58520a03cf4323b3e
@@ -1293,16 +1293,16 @@ trackedFiles:
     pristine_git_object: 7ab7f7b1d8c693ed928a6d770931116388b7197c
   docs/models/components/IssuingIntervalLimit.md:
     id: 6b8b3134a89a
-    last_write_checksum: sha1:4d5b7a28a961b4939da539ea99580a29b172e567
-    pristine_git_object: c8c0c7156c9dc6374f3f340a42100c8178d0ae4a
+    last_write_checksum: sha1:8394806275bc16fff4b452873a606d2e5a2d634e
+    pristine_git_object: fd3f614af3e794fda4ca0c7ca6ef74324cfa7437
   docs/models/components/IssuingMerchantData.md:
     id: f47a6b711326
     last_write_checksum: sha1:27a91e0e951283780fe32af3a4a7080b95b5b7fb
     pristine_git_object: 665cd78a731c9ca6e6800cdd04a5627ad9b3a42f
   docs/models/components/IssuingVelocityLimit.md:
     id: 3f42ff0d7cc3
-    last_write_checksum: sha1:96eb8dca50091dfbf2c5c1d0d17b8d4175ff2dd3
-    pristine_git_object: 13df5c5b9d0d8bff34b2043bdbaf9ae38600ef7d
+    last_write_checksum: sha1:a675db2e5e42327c8d69c4af1a973f105552616f
+    pristine_git_object: d7d5b83c79de6314cc4d91429ec8f71dee6e3d77
   docs/models/components/IssuingVelocityLimitError.md:
     id: 12d00498b89b
     last_write_checksum: sha1:40888f2e05bad6fefd6fa2940c2129cda559196d
@@ -4225,8 +4225,8 @@ trackedFiles:
     pristine_git_object: 9b40f611aaace5afe9cf7cadc73ff2301fe51e80
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:bb89dd735739a651671b58b52484415a12f183a0
-    pristine_git_object: 3d2f53462944f9b57d329b3ffb9ef6f9b76d2b5a
+    last_write_checksum: sha1:064cd94c17d70889c518dac3ea25d38e3ed1d46c
+    pristine_git_object: 542f562b21237d2543e4cf0c3846d2aa33ac88b5
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4369,8 +4369,8 @@ trackedFiles:
     pristine_git_object: 64047d75ebffa5dbfe6b7461ed4d624f01890a51
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:5f35139df5d0368a4ef7a100183c79ba0c96a890
-    pristine_git_object: 2c460a3eaeb4e2e5e23df85775b936d1775f89cc
+    last_write_checksum: sha1:b8c417cfaf74346d1c48346a98e26c9591dc1d97
+    pristine_git_object: 038b1c06956a03a843961c67803b6f01ab86c92f
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:bf0300e770bb968bfc8b5ee2b8d6f05e37e9bb67
@@ -5661,16 +5661,16 @@ trackedFiles:
     pristine_git_object: 9fb8e7481e36aa219a5cf4f8cdd5fafc7bdfca37
   src/main/java/io/moov/sdk/models/components/IssuingIntervalLimit.java:
     id: 0e41229a56bb
-    last_write_checksum: sha1:0a97a6e18cbaa6f82f155368c50225636a4d3b35
-    pristine_git_object: 48421ff9dca1019a69f8856f76701cfed7f3bf73
+    last_write_checksum: sha1:b44d3063156873b4b801a6608a0175d717ed6d00
+    pristine_git_object: 50d9b7f7e977c0353e2cc737ebd7905bff4e2ed0
   src/main/java/io/moov/sdk/models/components/IssuingMerchantData.java:
     id: dc6d16bb3a26
     last_write_checksum: sha1:1290d2dc70b45d14a7e300723fd3d37225b973dd
     pristine_git_object: 2509c8c128aa4cc4e0c36009e2babb7cae724e43
   src/main/java/io/moov/sdk/models/components/IssuingVelocityLimit.java:
     id: b9dc56c2d13e
-    last_write_checksum: sha1:16f35561c2583d227599a77af2d2a7cda5526ca1
-    pristine_git_object: 251e3cdb2511ca2d93c2db29043a12b079b2b38e
+    last_write_checksum: sha1:8e43e9c6d757c8f6f4f07992c19bf990edef65aa
+    pristine_git_object: 48700e8ff58cbb7592abdcc597a955568aec0bbe
   src/main/java/io/moov/sdk/models/components/IssuingVelocityLimitError.java:
     id: be8b5852e949
     last_write_checksum: sha1:6b4fd48de12fdc81495834160bd42b78dbd3ec8f
@@ -9961,8 +9961,8 @@ trackedFiles:
     pristine_git_object: dd836ac16454b04f12cce96cfecfa008734a75fe
   src/main/java/io/moov/sdk/utils/Multipart.java:
     id: caad27016811
-    last_write_checksum: sha1:4b1cc3d6c5e78d47c986e51632483e5e014247bf
-    pristine_git_object: bfb542cf6e66d458ecafe7c54de3eb02d7a96e18
+    last_write_checksum: sha1:11120f54c3ee0f0d60974c172ead223d91f73af4
+    pristine_git_object: f86f7abeadacacc5446ebd290deafa0702e0c912
   src/main/java/io/moov/sdk/utils/MultipartFormMetadata.java:
     id: c8693c10dc25
     last_write_checksum: sha1:0c4cff19e35be3c41e0438060ab595a066d5848f
@@ -10053,8 +10053,8 @@ trackedFiles:
     pristine_git_object: 080dd01ab4f7430982e9a630155c5f505a8514f7
   src/main/java/io/moov/sdk/utils/SpeakeasyHTTPClient.java:
     id: fe054a2267f5
-    last_write_checksum: sha1:91830e7d988bf9ca7fa393a2fef26d861b3db6b3
-    pristine_git_object: a59cda95d393a1b605c5b273d71c6cc86aa324b4
+    last_write_checksum: sha1:69e790f8f89c8c17b812fe8e47f0b8dd7dcd7be4
+    pristine_git_object: db209e5d13d2f518f19bdc06919612a1fdba5333
   src/main/java/io/moov/sdk/utils/SpeakeasyLogger.java:
     id: e5a4b43629a0
     last_write_checksum: sha1:5f767ab2936f0fd17e5e09e35284799bc88994c1

@@ -36,25 +36,33 @@ public class PayoutDetailsError {
     @JsonProperty("pushOptions")
     private Optional<? extends PushOptionsError> pushOptions;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("feePaidBy")
+    private Optional<String> feePaidBy;
+
     @JsonCreator
     public PayoutDetailsError(
             @JsonProperty("allowedMethods") Optional<String> allowedMethods,
             @JsonProperty("recipient") Optional<? extends PayoutRecipientError> recipient,
             @JsonProperty("metadata") Optional<String> metadata,
-            @JsonProperty("pushOptions") Optional<? extends PushOptionsError> pushOptions) {
+            @JsonProperty("pushOptions") Optional<? extends PushOptionsError> pushOptions,
+            @JsonProperty("feePaidBy") Optional<String> feePaidBy) {
         Utils.checkNotNull(allowedMethods, "allowedMethods");
         Utils.checkNotNull(recipient, "recipient");
         Utils.checkNotNull(metadata, "metadata");
         Utils.checkNotNull(pushOptions, "pushOptions");
+        Utils.checkNotNull(feePaidBy, "feePaidBy");
         this.allowedMethods = allowedMethods;
         this.recipient = recipient;
         this.metadata = metadata;
         this.pushOptions = pushOptions;
+        this.feePaidBy = feePaidBy;
     }
     
     public PayoutDetailsError() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -77,6 +85,11 @@ public class PayoutDetailsError {
     @JsonIgnore
     public Optional<PushOptionsError> pushOptions() {
         return (Optional<PushOptionsError>) pushOptions;
+    }
+
+    @JsonIgnore
+    public Optional<String> feePaidBy() {
+        return feePaidBy;
     }
 
     public static Builder builder() {
@@ -136,6 +149,19 @@ public class PayoutDetailsError {
         return this;
     }
 
+    public PayoutDetailsError withFeePaidBy(String feePaidBy) {
+        Utils.checkNotNull(feePaidBy, "feePaidBy");
+        this.feePaidBy = Optional.ofNullable(feePaidBy);
+        return this;
+    }
+
+
+    public PayoutDetailsError withFeePaidBy(Optional<String> feePaidBy) {
+        Utils.checkNotNull(feePaidBy, "feePaidBy");
+        this.feePaidBy = feePaidBy;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -149,14 +175,15 @@ public class PayoutDetailsError {
             Utils.enhancedDeepEquals(this.allowedMethods, other.allowedMethods) &&
             Utils.enhancedDeepEquals(this.recipient, other.recipient) &&
             Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
-            Utils.enhancedDeepEquals(this.pushOptions, other.pushOptions);
+            Utils.enhancedDeepEquals(this.pushOptions, other.pushOptions) &&
+            Utils.enhancedDeepEquals(this.feePaidBy, other.feePaidBy);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             allowedMethods, recipient, metadata,
-            pushOptions);
+            pushOptions, feePaidBy);
     }
     
     @Override
@@ -165,7 +192,8 @@ public class PayoutDetailsError {
                 "allowedMethods", allowedMethods,
                 "recipient", recipient,
                 "metadata", metadata,
-                "pushOptions", pushOptions);
+                "pushOptions", pushOptions,
+                "feePaidBy", feePaidBy);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -178,6 +206,8 @@ public class PayoutDetailsError {
         private Optional<String> metadata = Optional.empty();
 
         private Optional<? extends PushOptionsError> pushOptions = Optional.empty();
+
+        private Optional<String> feePaidBy = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -235,11 +265,24 @@ public class PayoutDetailsError {
             return this;
         }
 
+
+        public Builder feePaidBy(String feePaidBy) {
+            Utils.checkNotNull(feePaidBy, "feePaidBy");
+            this.feePaidBy = Optional.ofNullable(feePaidBy);
+            return this;
+        }
+
+        public Builder feePaidBy(Optional<String> feePaidBy) {
+            Utils.checkNotNull(feePaidBy, "feePaidBy");
+            this.feePaidBy = feePaidBy;
+            return this;
+        }
+
         public PayoutDetailsError build() {
 
             return new PayoutDetailsError(
                 allowedMethods, recipient, metadata,
-                pushOptions);
+                pushOptions, feePaidBy);
         }
 
     }

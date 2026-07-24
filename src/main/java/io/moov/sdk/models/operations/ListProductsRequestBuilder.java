@@ -9,16 +9,10 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListProducts;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Long;
-import java.lang.String;
-import java.util.Optional;
 
 public class ListProductsRequestBuilder {
 
-    private String accountID;
-    private Optional<String> title = Optional.empty();
-    private Optional<Long> skip = Optional.empty();
-    private Optional<Long> count = Optional.empty();
+    private ListProductsRequest request;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -26,64 +20,16 @@ public class ListProductsRequestBuilder {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public ListProductsRequestBuilder accountID(String accountID) {
-        Utils.checkNotNull(accountID, "accountID");
-        this.accountID = accountID;
+    public ListProductsRequestBuilder request(ListProductsRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-                
-    public ListProductsRequestBuilder title(String title) {
-        Utils.checkNotNull(title, "title");
-        this.title = Optional.of(title);
-        return this;
-    }
-
-    public ListProductsRequestBuilder title(Optional<String> title) {
-        Utils.checkNotNull(title, "title");
-        this.title = title;
-        return this;
-    }
-                
-    public ListProductsRequestBuilder skip(long skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = Optional.of(skip);
-        return this;
-    }
-
-    public ListProductsRequestBuilder skip(Optional<Long> skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = skip;
-        return this;
-    }
-                
-    public ListProductsRequestBuilder count(long count) {
-        Utils.checkNotNull(count, "count");
-        this.count = Optional.of(count);
-        return this;
-    }
-
-    public ListProductsRequestBuilder count(Optional<Long> count) {
-        Utils.checkNotNull(count, "count");
-        this.count = count;
-        return this;
-    }
-
-
-    private ListProductsRequest buildRequest() {
-
-        ListProductsRequest request = new ListProductsRequest(accountID,
-            title,
-            skip,
-            count);
-
-        return request;
     }
 
     public ListProductsResponse call() {
         
         RequestOperation<ListProductsRequest, ListProductsResponse> operation
               = new ListProducts.Sync(sdkConfiguration, _headers);
-        ListProductsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));
     }

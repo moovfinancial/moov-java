@@ -80,8 +80,8 @@ public class Application {
                     .controls(IssuingControls.builder()
                         .velocityLimits(List.of(
                             IssuingVelocityLimit.builder()
-                                .amount(10000L)
                                 .interval(IssuingIntervalLimit.PER_TRANSACTION)
+                                .amount(10000L)
                                 .build()))
                         .build())
                     .build())
@@ -251,6 +251,7 @@ import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.UpdateIssuedCardError;
 import io.moov.sdk.models.operations.UpdateIssuedCardResponse;
 import java.lang.Exception;
+import java.util.List;
 import java.util.Map;
 
 public class Application {
@@ -277,6 +278,13 @@ public class Application {
                         .stateOrProvince("CO")
                         .postalCode("80301")
                         .country("US")
+                        .build())
+                    .controls(UpdateIssuingControls.builder()
+                        .velocityLimits(List.of(
+                            IssuingVelocityLimit.builder()
+                                .interval(IssuingIntervalLimit.DAILY)
+                                .amount(10000L)
+                                .build()))
                         .build())
                     .build())
                 .call();

@@ -4,6 +4,7 @@
 package io.moov.sdk;
 
 import static io.moov.sdk.operations.Operations.RequestOperation;
+import static io.moov.sdk.operations.Operations.RequestlessOperation;
 
 import io.moov.sdk.models.components.ProductRequest;
 import io.moov.sdk.models.operations.CreateProductRequest;
@@ -15,6 +16,8 @@ import io.moov.sdk.models.operations.DisableProductResponse;
 import io.moov.sdk.models.operations.GetProductRequest;
 import io.moov.sdk.models.operations.GetProductRequestBuilder;
 import io.moov.sdk.models.operations.GetProductResponse;
+import io.moov.sdk.models.operations.ListProductCategoriesRequestBuilder;
+import io.moov.sdk.models.operations.ListProductCategoriesResponse;
 import io.moov.sdk.models.operations.ListProductsRequest;
 import io.moov.sdk.models.operations.ListProductsRequestBuilder;
 import io.moov.sdk.models.operations.ListProductsResponse;
@@ -24,12 +27,11 @@ import io.moov.sdk.models.operations.UpdateProductResponse;
 import io.moov.sdk.operations.CreateProduct;
 import io.moov.sdk.operations.DisableProduct;
 import io.moov.sdk.operations.GetProduct;
+import io.moov.sdk.operations.ListProductCategories;
 import io.moov.sdk.operations.ListProducts;
 import io.moov.sdk.operations.UpdateProduct;
 import io.moov.sdk.utils.Headers;
-import java.lang.Long;
 import java.lang.String;
-import java.util.Optional;
 
 
 public class Products {
@@ -52,36 +54,11 @@ public class Products {
     /**
      * List active (non-disabled) products for an account.
      * 
-     * @param accountID 
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public ListProductsResponse list(String accountID) {
-        return list(accountID, Optional.empty(), Optional.empty(),
-            Optional.empty());
-    }
-
-    /**
-     * List active (non-disabled) products for an account.
-     * 
-     * @param accountID 
-     * @param title Allows filtering products by title. This supports partial matches and is case-insensitive
-     * @param skip 
-     * @param count 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public ListProductsResponse list(
-            String accountID, Optional<String> title,
-            Optional<Long> skip, Optional<Long> count) {
-        ListProductsRequest request =
-            ListProductsRequest
-                .builder()
-                .accountID(accountID)
-                .title(title)
-                .skip(skip)
-                .count(count)
-                .build();
+    public ListProductsResponse list(ListProductsRequest request) {
         RequestOperation<ListProductsRequest, ListProductsResponse> operation
               = new ListProducts.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -211,6 +188,27 @@ public class Products {
         RequestOperation<DisableProductRequest, DisableProductResponse> operation
               = new DisableProduct.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Returns the full, read-only list of product categories from the product taxonomy.
+     * 
+     * @return The call builder
+     */
+    public ListProductCategoriesRequestBuilder listCategories() {
+        return new ListProductCategoriesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Returns the full, read-only list of product categories from the product taxonomy.
+     * 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListProductCategoriesResponse listCategoriesDirect() {
+        RequestlessOperation<ListProductCategoriesResponse> operation
+            = new ListProductCategories.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest());
     }
 
 }

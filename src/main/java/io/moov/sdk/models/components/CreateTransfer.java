@@ -75,6 +75,13 @@ public class CreateTransfer {
     @JsonProperty("amountDetails")
     private Optional<? extends CreateTransferAmountDetails> amountDetails;
 
+    /**
+     * Indicates which party bears fees for the transfer, keyed by fee type.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("feePaidBy")
+    private Optional<? extends TransferFeePaidBy> feePaidBy;
+
     @JsonCreator
     public CreateTransfer(
             @JsonProperty("source") CreateTransferSource source,
@@ -85,7 +92,8 @@ public class CreateTransfer {
             @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata,
             @JsonProperty("foreignID") Optional<String> foreignID,
             @JsonProperty("lineItems") Optional<? extends CreateTransferLineItems> lineItems,
-            @JsonProperty("amountDetails") Optional<? extends CreateTransferAmountDetails> amountDetails) {
+            @JsonProperty("amountDetails") Optional<? extends CreateTransferAmountDetails> amountDetails,
+            @JsonProperty("feePaidBy") Optional<? extends TransferFeePaidBy> feePaidBy) {
         Utils.checkNotNull(source, "source");
         Utils.checkNotNull(destination, "destination");
         Utils.checkNotNull(amount, "amount");
@@ -95,6 +103,7 @@ public class CreateTransfer {
         Utils.checkNotNull(foreignID, "foreignID");
         Utils.checkNotNull(lineItems, "lineItems");
         Utils.checkNotNull(amountDetails, "amountDetails");
+        Utils.checkNotNull(feePaidBy, "feePaidBy");
         this.source = source;
         this.destination = destination;
         this.amount = amount;
@@ -104,6 +113,7 @@ public class CreateTransfer {
         this.foreignID = foreignID;
         this.lineItems = lineItems;
         this.amountDetails = amountDetails;
+        this.feePaidBy = feePaidBy;
     }
     
     public CreateTransfer(
@@ -112,7 +122,8 @@ public class CreateTransfer {
             Amount amount) {
         this(source, destination, amount,
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -185,6 +196,15 @@ public class CreateTransfer {
     @JsonIgnore
     public Optional<CreateTransferAmountDetails> amountDetails() {
         return (Optional<CreateTransferAmountDetails>) amountDetails;
+    }
+
+    /**
+     * Indicates which party bears fees for the transfer, keyed by fee type.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<TransferFeePaidBy> feePaidBy() {
+        return (Optional<TransferFeePaidBy>) feePaidBy;
     }
 
     public static Builder builder() {
@@ -327,6 +347,25 @@ public class CreateTransfer {
         return this;
     }
 
+    /**
+     * Indicates which party bears fees for the transfer, keyed by fee type.
+     */
+    public CreateTransfer withFeePaidBy(TransferFeePaidBy feePaidBy) {
+        Utils.checkNotNull(feePaidBy, "feePaidBy");
+        this.feePaidBy = Optional.ofNullable(feePaidBy);
+        return this;
+    }
+
+
+    /**
+     * Indicates which party bears fees for the transfer, keyed by fee type.
+     */
+    public CreateTransfer withFeePaidBy(Optional<? extends TransferFeePaidBy> feePaidBy) {
+        Utils.checkNotNull(feePaidBy, "feePaidBy");
+        this.feePaidBy = feePaidBy;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -345,7 +384,8 @@ public class CreateTransfer {
             Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
             Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
-            Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
+            Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails) &&
+            Utils.enhancedDeepEquals(this.feePaidBy, other.feePaidBy);
     }
     
     @Override
@@ -353,7 +393,8 @@ public class CreateTransfer {
         return Utils.enhancedHash(
             source, destination, amount,
             facilitatorFee, description, metadata,
-            foreignID, lineItems, amountDetails);
+            foreignID, lineItems, amountDetails,
+            feePaidBy);
     }
     
     @Override
@@ -367,7 +408,8 @@ public class CreateTransfer {
                 "metadata", metadata,
                 "foreignID", foreignID,
                 "lineItems", lineItems,
-                "amountDetails", amountDetails);
+                "amountDetails", amountDetails,
+                "feePaidBy", feePaidBy);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -390,6 +432,8 @@ public class CreateTransfer {
         private Optional<? extends CreateTransferLineItems> lineItems = Optional.empty();
 
         private Optional<? extends CreateTransferAmountDetails> amountDetails = Optional.empty();
+
+        private Optional<? extends TransferFeePaidBy> feePaidBy = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -533,12 +577,32 @@ public class CreateTransfer {
             return this;
         }
 
+
+        /**
+         * Indicates which party bears fees for the transfer, keyed by fee type.
+         */
+        public Builder feePaidBy(TransferFeePaidBy feePaidBy) {
+            Utils.checkNotNull(feePaidBy, "feePaidBy");
+            this.feePaidBy = Optional.ofNullable(feePaidBy);
+            return this;
+        }
+
+        /**
+         * Indicates which party bears fees for the transfer, keyed by fee type.
+         */
+        public Builder feePaidBy(Optional<? extends TransferFeePaidBy> feePaidBy) {
+            Utils.checkNotNull(feePaidBy, "feePaidBy");
+            this.feePaidBy = feePaidBy;
+            return this;
+        }
+
         public CreateTransfer build() {
 
             return new CreateTransfer(
                 source, destination, amount,
                 facilitatorFee, description, metadata,
-                foreignID, lineItems, amountDetails);
+                foreignID, lineItems, amountDetails,
+                feePaidBy);
         }
 
     }

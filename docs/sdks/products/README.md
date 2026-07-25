@@ -11,6 +11,7 @@
 * [disable](#disable) - Disable a product by ID.
 
 The product will no longer be available, but will remain in the system for historical and reporting purposes.
+* [listCategories](#listcategories) - Returns the full, read-only list of product categories from the product taxonomy.
 
 ## list
 
@@ -24,6 +25,7 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListProductsRequest;
 import io.moov.sdk.models.operations.ListProductsResponse;
 import java.lang.Exception;
 
@@ -38,10 +40,14 @@ public class Application {
                     .build())
             .build();
 
-        ListProductsResponse res = sdk.products().list()
+        ListProductsRequest req = ListProductsRequest.builder()
                 .accountID("cd696219-4308-446c-b0d8-1759254995c2")
                 .skip(60L)
                 .count(20L)
+                .build();
+
+        ListProductsResponse res = sdk.products().list()
+                .request(req)
                 .call();
 
         if (res.products().isPresent()) {
@@ -53,12 +59,9 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `accountID`                                                                               | *String*                                                                                  | :heavy_check_mark:                                                                        | N/A                                                                                       |                                                                                           |
-| `title`                                                                                   | *Optional\<String>*                                                                       | :heavy_minus_sign:                                                                        | Allows filtering products by title. This supports partial matches and is case-insensitive |                                                                                           |
-| `skip`                                                                                    | *Optional\<Long>*                                                                         | :heavy_minus_sign:                                                                        | N/A                                                                                       | 60                                                                                        |
-| `count`                                                                                   | *Optional\<Long>*                                                                         | :heavy_minus_sign:                                                                        | N/A                                                                                       | 20                                                                                        |
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [ListProductsRequest](../../models/operations/ListProductsRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
 
 ### Response
 
@@ -384,4 +387,50 @@ public class Application {
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/GenericError | 400, 409                   | application/json           |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## listCategories
+
+Returns the full, read-only list of product categories from the product taxonomy.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="listProductCategories" method="get" path="/product-categories" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListProductCategoriesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        ListProductCategoriesResponse res = sdk.products().listCategories()
+                .call();
+
+        if (res.productCategories().isPresent()) {
+            System.out.println(res.productCategories().get());
+        }
+    }
+}
+```
+
+### Response
+
+**[ListProductCategoriesResponse](../../models/operations/ListProductCategoriesResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |

@@ -24,6 +24,14 @@ public class ListProductsRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=title")
     private Optional<String> title;
 
+    /**
+     * Filter products by category. Accepts a category ID at any level of the taxonomy;
+     * a product matches when the given category is anywhere in its category's breadcrumb
+     * (i.e. filtering by a top-level category returns products in any of its descendants).
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=category")
+    private Optional<String> category;
+
 
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
@@ -36,14 +44,17 @@ public class ListProductsRequest {
     public ListProductsRequest(
             String accountID,
             Optional<String> title,
+            Optional<String> category,
             Optional<Long> skip,
             Optional<Long> count) {
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(title, "title");
+        Utils.checkNotNull(category, "category");
         Utils.checkNotNull(skip, "skip");
         Utils.checkNotNull(count, "count");
         this.accountID = accountID;
         this.title = title;
+        this.category = category;
         this.skip = skip;
         this.count = count;
     }
@@ -51,7 +62,7 @@ public class ListProductsRequest {
     public ListProductsRequest(
             String accountID) {
         this(accountID, Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -65,6 +76,16 @@ public class ListProductsRequest {
     @JsonIgnore
     public Optional<String> title() {
         return title;
+    }
+
+    /**
+     * Filter products by category. Accepts a category ID at any level of the taxonomy;
+     * a product matches when the given category is anywhere in its category's breadcrumb
+     * (i.e. filtering by a top-level category returns products in any of its descendants).
+     */
+    @JsonIgnore
+    public Optional<String> category() {
+        return category;
     }
 
     @JsonIgnore
@@ -107,6 +128,29 @@ public class ListProductsRequest {
         return this;
     }
 
+    /**
+     * Filter products by category. Accepts a category ID at any level of the taxonomy;
+     * a product matches when the given category is anywhere in its category's breadcrumb
+     * (i.e. filtering by a top-level category returns products in any of its descendants).
+     */
+    public ListProductsRequest withCategory(String category) {
+        Utils.checkNotNull(category, "category");
+        this.category = Optional.ofNullable(category);
+        return this;
+    }
+
+
+    /**
+     * Filter products by category. Accepts a category ID at any level of the taxonomy;
+     * a product matches when the given category is anywhere in its category's breadcrumb
+     * (i.e. filtering by a top-level category returns products in any of its descendants).
+     */
+    public ListProductsRequest withCategory(Optional<String> category) {
+        Utils.checkNotNull(category, "category");
+        this.category = category;
+        return this;
+    }
+
     public ListProductsRequest withSkip(long skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = Optional.ofNullable(skip);
@@ -145,6 +189,7 @@ public class ListProductsRequest {
         return 
             Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
             Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.category, other.category) &&
             Utils.enhancedDeepEquals(this.skip, other.skip) &&
             Utils.enhancedDeepEquals(this.count, other.count);
     }
@@ -152,8 +197,8 @@ public class ListProductsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID, title, skip,
-            count);
+            accountID, title, category,
+            skip, count);
     }
     
     @Override
@@ -161,6 +206,7 @@ public class ListProductsRequest {
         return Utils.toString(ListProductsRequest.class,
                 "accountID", accountID,
                 "title", title,
+                "category", category,
                 "skip", skip,
                 "count", count);
     }
@@ -171,6 +217,8 @@ public class ListProductsRequest {
         private String accountID;
 
         private Optional<String> title = Optional.empty();
+
+        private Optional<String> category = Optional.empty();
 
         private Optional<Long> skip = Optional.empty();
 
@@ -207,6 +255,29 @@ public class ListProductsRequest {
         }
 
 
+        /**
+         * Filter products by category. Accepts a category ID at any level of the taxonomy;
+         * a product matches when the given category is anywhere in its category's breadcrumb
+         * (i.e. filtering by a top-level category returns products in any of its descendants).
+         */
+        public Builder category(String category) {
+            Utils.checkNotNull(category, "category");
+            this.category = Optional.ofNullable(category);
+            return this;
+        }
+
+        /**
+         * Filter products by category. Accepts a category ID at any level of the taxonomy;
+         * a product matches when the given category is anywhere in its category's breadcrumb
+         * (i.e. filtering by a top-level category returns products in any of its descendants).
+         */
+        public Builder category(Optional<String> category) {
+            Utils.checkNotNull(category, "category");
+            this.category = category;
+            return this;
+        }
+
+
         public Builder skip(long skip) {
             Utils.checkNotNull(skip, "skip");
             this.skip = Optional.ofNullable(skip);
@@ -235,8 +306,8 @@ public class ListProductsRequest {
         public ListProductsRequest build() {
 
             return new ListProductsRequest(
-                accountID, title, skip,
-                count);
+                accountID, title, category,
+                skip, count);
         }
 
     }

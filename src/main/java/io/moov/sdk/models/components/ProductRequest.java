@@ -56,30 +56,40 @@ public class ProductRequest {
     @JsonProperty("optionGroups")
     private Optional<? extends List<CreateProductOptionGroup>> optionGroups;
 
+    /**
+     * The ID of a product taxonomy category to associate with the product.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("categoryID")
+    private Optional<String> categoryID;
+
     @JsonCreator
     public ProductRequest(
             @JsonProperty("title") String title,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("basePrice") AmountDecimal basePrice,
             @JsonProperty("images") Optional<? extends List<AssignProductImage>> images,
-            @JsonProperty("optionGroups") Optional<? extends List<CreateProductOptionGroup>> optionGroups) {
+            @JsonProperty("optionGroups") Optional<? extends List<CreateProductOptionGroup>> optionGroups,
+            @JsonProperty("categoryID") Optional<String> categoryID) {
         Utils.checkNotNull(title, "title");
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(basePrice, "basePrice");
         Utils.checkNotNull(images, "images");
         Utils.checkNotNull(optionGroups, "optionGroups");
+        Utils.checkNotNull(categoryID, "categoryID");
         this.title = title;
         this.description = description;
         this.basePrice = basePrice;
         this.images = images;
         this.optionGroups = optionGroups;
+        this.categoryID = categoryID;
     }
     
     public ProductRequest(
             String title,
             AmountDecimal basePrice) {
         this(title, Optional.empty(), basePrice,
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -123,6 +133,14 @@ public class ProductRequest {
     @JsonIgnore
     public Optional<List<CreateProductOptionGroup>> optionGroups() {
         return (Optional<List<CreateProductOptionGroup>>) optionGroups;
+    }
+
+    /**
+     * The ID of a product taxonomy category to associate with the product.
+     */
+    @JsonIgnore
+    public Optional<String> categoryID() {
+        return categoryID;
     }
 
     public static Builder builder() {
@@ -210,6 +228,25 @@ public class ProductRequest {
         return this;
     }
 
+    /**
+     * The ID of a product taxonomy category to associate with the product.
+     */
+    public ProductRequest withCategoryID(String categoryID) {
+        Utils.checkNotNull(categoryID, "categoryID");
+        this.categoryID = Optional.ofNullable(categoryID);
+        return this;
+    }
+
+
+    /**
+     * The ID of a product taxonomy category to associate with the product.
+     */
+    public ProductRequest withCategoryID(Optional<String> categoryID) {
+        Utils.checkNotNull(categoryID, "categoryID");
+        this.categoryID = categoryID;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -224,14 +261,15 @@ public class ProductRequest {
             Utils.enhancedDeepEquals(this.description, other.description) &&
             Utils.enhancedDeepEquals(this.basePrice, other.basePrice) &&
             Utils.enhancedDeepEquals(this.images, other.images) &&
-            Utils.enhancedDeepEquals(this.optionGroups, other.optionGroups);
+            Utils.enhancedDeepEquals(this.optionGroups, other.optionGroups) &&
+            Utils.enhancedDeepEquals(this.categoryID, other.categoryID);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             title, description, basePrice,
-            images, optionGroups);
+            images, optionGroups, categoryID);
     }
     
     @Override
@@ -241,7 +279,8 @@ public class ProductRequest {
                 "description", description,
                 "basePrice", basePrice,
                 "images", images,
-                "optionGroups", optionGroups);
+                "optionGroups", optionGroups,
+                "categoryID", categoryID);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -256,6 +295,8 @@ public class ProductRequest {
         private Optional<? extends List<AssignProductImage>> images = Optional.empty();
 
         private Optional<? extends List<CreateProductOptionGroup>> optionGroups = Optional.empty();
+
+        private Optional<String> categoryID = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -343,11 +384,30 @@ public class ProductRequest {
             return this;
         }
 
+
+        /**
+         * The ID of a product taxonomy category to associate with the product.
+         */
+        public Builder categoryID(String categoryID) {
+            Utils.checkNotNull(categoryID, "categoryID");
+            this.categoryID = Optional.ofNullable(categoryID);
+            return this;
+        }
+
+        /**
+         * The ID of a product taxonomy category to associate with the product.
+         */
+        public Builder categoryID(Optional<String> categoryID) {
+            Utils.checkNotNull(categoryID, "categoryID");
+            this.categoryID = categoryID;
+            return this;
+        }
+
         public ProductRequest build() {
 
             return new ProductRequest(
                 title, description, basePrice,
-                images, optionGroups);
+                images, optionGroups, categoryID);
         }
 
     }

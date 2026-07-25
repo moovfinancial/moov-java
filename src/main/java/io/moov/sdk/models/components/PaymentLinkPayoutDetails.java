@@ -52,27 +52,40 @@ public class PaymentLinkPayoutDetails {
     @JsonProperty("pushOptions")
     private Optional<? extends PushOptions> pushOptions;
 
+    /**
+     * Indicates which party bears the fee, keyed by disbursement payment method
+     * (`DisbursementPaymentMethodType`).
+     * 
+     * <p>Sparse — include only the methods you want to attribute. Any method left unset defaults to `source`.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("feePaidBy")
+    private Optional<? extends Map<String, FeePaidBy>> feePaidBy;
+
     @JsonCreator
     public PaymentLinkPayoutDetails(
             @JsonProperty("allowedMethods") List<DisbursementPaymentMethodType> allowedMethods,
             @JsonProperty("recipient") PayoutRecipient recipient,
             @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata,
-            @JsonProperty("pushOptions") Optional<? extends PushOptions> pushOptions) {
+            @JsonProperty("pushOptions") Optional<? extends PushOptions> pushOptions,
+            @JsonProperty("feePaidBy") Optional<? extends Map<String, FeePaidBy>> feePaidBy) {
         Utils.checkNotNull(allowedMethods, "allowedMethods");
         Utils.checkNotNull(recipient, "recipient");
         Utils.checkNotNull(metadata, "metadata");
         Utils.checkNotNull(pushOptions, "pushOptions");
+        Utils.checkNotNull(feePaidBy, "feePaidBy");
         this.allowedMethods = allowedMethods;
         this.recipient = recipient;
         this.metadata = metadata;
         this.pushOptions = pushOptions;
+        this.feePaidBy = feePaidBy;
     }
     
     public PaymentLinkPayoutDetails(
             List<DisbursementPaymentMethodType> allowedMethods,
             PayoutRecipient recipient) {
         this(allowedMethods, recipient, Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -115,6 +128,18 @@ public class PaymentLinkPayoutDetails {
     @JsonIgnore
     public Optional<PushOptions> pushOptions() {
         return (Optional<PushOptions>) pushOptions;
+    }
+
+    /**
+     * Indicates which party bears the fee, keyed by disbursement payment method
+     * (`DisbursementPaymentMethodType`).
+     * 
+     * <p>Sparse — include only the methods you want to attribute. Any method left unset defaults to `source`.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Map<String, FeePaidBy>> feePaidBy() {
+        return (Optional<Map<String, FeePaidBy>>) feePaidBy;
     }
 
     public static Builder builder() {
@@ -191,6 +216,31 @@ public class PaymentLinkPayoutDetails {
         return this;
     }
 
+    /**
+     * Indicates which party bears the fee, keyed by disbursement payment method
+     * (`DisbursementPaymentMethodType`).
+     * 
+     * <p>Sparse — include only the methods you want to attribute. Any method left unset defaults to `source`.
+     */
+    public PaymentLinkPayoutDetails withFeePaidBy(Map<String, FeePaidBy> feePaidBy) {
+        Utils.checkNotNull(feePaidBy, "feePaidBy");
+        this.feePaidBy = Optional.ofNullable(feePaidBy);
+        return this;
+    }
+
+
+    /**
+     * Indicates which party bears the fee, keyed by disbursement payment method
+     * (`DisbursementPaymentMethodType`).
+     * 
+     * <p>Sparse — include only the methods you want to attribute. Any method left unset defaults to `source`.
+     */
+    public PaymentLinkPayoutDetails withFeePaidBy(Optional<? extends Map<String, FeePaidBy>> feePaidBy) {
+        Utils.checkNotNull(feePaidBy, "feePaidBy");
+        this.feePaidBy = feePaidBy;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -204,14 +254,15 @@ public class PaymentLinkPayoutDetails {
             Utils.enhancedDeepEquals(this.allowedMethods, other.allowedMethods) &&
             Utils.enhancedDeepEquals(this.recipient, other.recipient) &&
             Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
-            Utils.enhancedDeepEquals(this.pushOptions, other.pushOptions);
+            Utils.enhancedDeepEquals(this.pushOptions, other.pushOptions) &&
+            Utils.enhancedDeepEquals(this.feePaidBy, other.feePaidBy);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             allowedMethods, recipient, metadata,
-            pushOptions);
+            pushOptions, feePaidBy);
     }
     
     @Override
@@ -220,7 +271,8 @@ public class PaymentLinkPayoutDetails {
                 "allowedMethods", allowedMethods,
                 "recipient", recipient,
                 "metadata", metadata,
-                "pushOptions", pushOptions);
+                "pushOptions", pushOptions,
+                "feePaidBy", feePaidBy);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -233,6 +285,8 @@ public class PaymentLinkPayoutDetails {
         private Optional<? extends Map<String, String>> metadata = Optional.empty();
 
         private Optional<? extends PushOptions> pushOptions = Optional.empty();
+
+        private Optional<? extends Map<String, FeePaidBy>> feePaidBy = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -309,11 +363,36 @@ public class PaymentLinkPayoutDetails {
             return this;
         }
 
+
+        /**
+         * Indicates which party bears the fee, keyed by disbursement payment method
+         * (`DisbursementPaymentMethodType`).
+         * 
+         * <p>Sparse — include only the methods you want to attribute. Any method left unset defaults to `source`.
+         */
+        public Builder feePaidBy(Map<String, FeePaidBy> feePaidBy) {
+            Utils.checkNotNull(feePaidBy, "feePaidBy");
+            this.feePaidBy = Optional.ofNullable(feePaidBy);
+            return this;
+        }
+
+        /**
+         * Indicates which party bears the fee, keyed by disbursement payment method
+         * (`DisbursementPaymentMethodType`).
+         * 
+         * <p>Sparse — include only the methods you want to attribute. Any method left unset defaults to `source`.
+         */
+        public Builder feePaidBy(Optional<? extends Map<String, FeePaidBy>> feePaidBy) {
+            Utils.checkNotNull(feePaidBy, "feePaidBy");
+            this.feePaidBy = feePaidBy;
+            return this;
+        }
+
         public PaymentLinkPayoutDetails build() {
 
             return new PaymentLinkPayoutDetails(
                 allowedMethods, recipient, metadata,
-                pushOptions);
+                pushOptions, feePaidBy);
         }
 
     }

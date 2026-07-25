@@ -11,10 +11,14 @@ import java.util.Optional;
 /**
  * IssuingIntervalLimit
  * 
- * <p>Specifies the time frame for the velocity limit. Currently supports only per-transaction limits.
+ * <p>Specifies the time frame for a velocity limit. `per-transaction` applies to each individual
+ * authorization and never resets. Time-based intervals (where supported) reset at midnight ET.
  */
 public enum IssuingIntervalLimit {
-    PER_TRANSACTION("per-transaction");
+    PER_TRANSACTION("per-transaction"),
+    DAILY("daily"),
+    WEEKLY("weekly"),
+    MONTHLY("monthly");
 
     @JsonValue
     private final String value;

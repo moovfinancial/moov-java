@@ -53,6 +53,8 @@ public class Wallet {
      * - `default`: The system-generated wallet automatically created when an account is granted the wallet
      * capability.
      * - `general`: An additional, user-defined wallet created via API or Dashboard.
+     * - `card-issuing`: The system-generated wallet automatically created when an account is granted the
+     * card-issuing capability.
      */
     @JsonProperty("walletType")
     private WalletType walletType;
@@ -166,6 +168,8 @@ public class Wallet {
      * - `default`: The system-generated wallet automatically created when an account is granted the wallet
      * capability.
      * - `general`: An additional, user-defined wallet created via API or Dashboard.
+     * - `card-issuing`: The system-generated wallet automatically created when an account is granted the
+     * card-issuing capability.
      */
     @JsonIgnore
     public WalletType walletType() {
@@ -247,6 +251,8 @@ public class Wallet {
      * - `default`: The system-generated wallet automatically created when an account is granted the wallet
      * capability.
      * - `general`: An additional, user-defined wallet created via API or Dashboard.
+     * - `card-issuing`: The system-generated wallet automatically created when an account is granted the
+     * card-issuing capability.
      */
     public Wallet withWalletType(WalletType walletType) {
         Utils.checkNotNull(walletType, "walletType");
@@ -423,6 +429,8 @@ public class Wallet {
          * - `default`: The system-generated wallet automatically created when an account is granted the wallet
          * capability.
          * - `general`: An additional, user-defined wallet created via API or Dashboard.
+         * - `card-issuing`: The system-generated wallet automatically created when an account is granted the
+         * card-issuing capability.
          */
         public Builder walletType(WalletType walletType) {
             Utils.checkNotNull(walletType, "walletType");

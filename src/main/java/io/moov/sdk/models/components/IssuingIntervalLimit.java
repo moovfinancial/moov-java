@@ -15,7 +15,10 @@ import java.util.Optional;
  * authorization and never resets. Time-based intervals (where supported) reset at midnight ET.
  */
 public enum IssuingIntervalLimit {
-    PER_TRANSACTION("per-transaction");
+    PER_TRANSACTION("per-transaction"),
+    DAILY("daily"),
+    WEEKLY("weekly"),
+    MONTHLY("monthly");
 
     @JsonValue
     private final String value;

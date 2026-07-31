@@ -22,21 +22,77 @@ public class IssuingControlsError {
     @JsonProperty("velocityLimits")
     private Optional<? extends Map<String, IssuingVelocityLimitError>> velocityLimits;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("merchantCategoryRestrictions")
+    private Optional<? extends MerchantCategoryRestrictionsError> merchantCategoryRestrictions;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("merchantRestrictions")
+    private Optional<? extends MerchantRestrictionsError> merchantRestrictions;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("allowedSchedule")
+    private Optional<? extends AllowedScheduleError> allowedSchedule;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("expiresOn")
+    private Optional<String> expiresOn;
+
     @JsonCreator
     public IssuingControlsError(
-            @JsonProperty("velocityLimits") Optional<? extends Map<String, IssuingVelocityLimitError>> velocityLimits) {
+            @JsonProperty("velocityLimits") Optional<? extends Map<String, IssuingVelocityLimitError>> velocityLimits,
+            @JsonProperty("merchantCategoryRestrictions") Optional<? extends MerchantCategoryRestrictionsError> merchantCategoryRestrictions,
+            @JsonProperty("merchantRestrictions") Optional<? extends MerchantRestrictionsError> merchantRestrictions,
+            @JsonProperty("allowedSchedule") Optional<? extends AllowedScheduleError> allowedSchedule,
+            @JsonProperty("expiresOn") Optional<String> expiresOn) {
         Utils.checkNotNull(velocityLimits, "velocityLimits");
+        Utils.checkNotNull(merchantCategoryRestrictions, "merchantCategoryRestrictions");
+        Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
+        Utils.checkNotNull(allowedSchedule, "allowedSchedule");
+        Utils.checkNotNull(expiresOn, "expiresOn");
         this.velocityLimits = velocityLimits;
+        this.merchantCategoryRestrictions = merchantCategoryRestrictions;
+        this.merchantRestrictions = merchantRestrictions;
+        this.allowedSchedule = allowedSchedule;
+        this.expiresOn = expiresOn;
     }
     
     public IssuingControlsError() {
-        this(Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<Map<String, IssuingVelocityLimitError>> velocityLimits() {
         return (Optional<Map<String, IssuingVelocityLimitError>>) velocityLimits;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<MerchantCategoryRestrictionsError> merchantCategoryRestrictions() {
+        return (Optional<MerchantCategoryRestrictionsError>) merchantCategoryRestrictions;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<MerchantRestrictionsError> merchantRestrictions() {
+        return (Optional<MerchantRestrictionsError>) merchantRestrictions;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<AllowedScheduleError> allowedSchedule() {
+        return (Optional<AllowedScheduleError>) allowedSchedule;
+    }
+
+    @JsonIgnore
+    public Optional<String> expiresOn() {
+        return expiresOn;
     }
 
     public static Builder builder() {
@@ -57,6 +113,58 @@ public class IssuingControlsError {
         return this;
     }
 
+    public IssuingControlsError withMerchantCategoryRestrictions(MerchantCategoryRestrictionsError merchantCategoryRestrictions) {
+        Utils.checkNotNull(merchantCategoryRestrictions, "merchantCategoryRestrictions");
+        this.merchantCategoryRestrictions = Optional.ofNullable(merchantCategoryRestrictions);
+        return this;
+    }
+
+
+    public IssuingControlsError withMerchantCategoryRestrictions(Optional<? extends MerchantCategoryRestrictionsError> merchantCategoryRestrictions) {
+        Utils.checkNotNull(merchantCategoryRestrictions, "merchantCategoryRestrictions");
+        this.merchantCategoryRestrictions = merchantCategoryRestrictions;
+        return this;
+    }
+
+    public IssuingControlsError withMerchantRestrictions(MerchantRestrictionsError merchantRestrictions) {
+        Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
+        this.merchantRestrictions = Optional.ofNullable(merchantRestrictions);
+        return this;
+    }
+
+
+    public IssuingControlsError withMerchantRestrictions(Optional<? extends MerchantRestrictionsError> merchantRestrictions) {
+        Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
+        this.merchantRestrictions = merchantRestrictions;
+        return this;
+    }
+
+    public IssuingControlsError withAllowedSchedule(AllowedScheduleError allowedSchedule) {
+        Utils.checkNotNull(allowedSchedule, "allowedSchedule");
+        this.allowedSchedule = Optional.ofNullable(allowedSchedule);
+        return this;
+    }
+
+
+    public IssuingControlsError withAllowedSchedule(Optional<? extends AllowedScheduleError> allowedSchedule) {
+        Utils.checkNotNull(allowedSchedule, "allowedSchedule");
+        this.allowedSchedule = allowedSchedule;
+        return this;
+    }
+
+    public IssuingControlsError withExpiresOn(String expiresOn) {
+        Utils.checkNotNull(expiresOn, "expiresOn");
+        this.expiresOn = Optional.ofNullable(expiresOn);
+        return this;
+    }
+
+
+    public IssuingControlsError withExpiresOn(Optional<String> expiresOn) {
+        Utils.checkNotNull(expiresOn, "expiresOn");
+        this.expiresOn = expiresOn;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -67,25 +175,42 @@ public class IssuingControlsError {
         }
         IssuingControlsError other = (IssuingControlsError) o;
         return 
-            Utils.enhancedDeepEquals(this.velocityLimits, other.velocityLimits);
+            Utils.enhancedDeepEquals(this.velocityLimits, other.velocityLimits) &&
+            Utils.enhancedDeepEquals(this.merchantCategoryRestrictions, other.merchantCategoryRestrictions) &&
+            Utils.enhancedDeepEquals(this.merchantRestrictions, other.merchantRestrictions) &&
+            Utils.enhancedDeepEquals(this.allowedSchedule, other.allowedSchedule) &&
+            Utils.enhancedDeepEquals(this.expiresOn, other.expiresOn);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            velocityLimits);
+            velocityLimits, merchantCategoryRestrictions, merchantRestrictions,
+            allowedSchedule, expiresOn);
     }
     
     @Override
     public String toString() {
         return Utils.toString(IssuingControlsError.class,
-                "velocityLimits", velocityLimits);
+                "velocityLimits", velocityLimits,
+                "merchantCategoryRestrictions", merchantCategoryRestrictions,
+                "merchantRestrictions", merchantRestrictions,
+                "allowedSchedule", allowedSchedule,
+                "expiresOn", expiresOn);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
         private Optional<? extends Map<String, IssuingVelocityLimitError>> velocityLimits = Optional.empty();
+
+        private Optional<? extends MerchantCategoryRestrictionsError> merchantCategoryRestrictions = Optional.empty();
+
+        private Optional<? extends MerchantRestrictionsError> merchantRestrictions = Optional.empty();
+
+        private Optional<? extends AllowedScheduleError> allowedSchedule = Optional.empty();
+
+        private Optional<String> expiresOn = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -104,10 +229,63 @@ public class IssuingControlsError {
             return this;
         }
 
+
+        public Builder merchantCategoryRestrictions(MerchantCategoryRestrictionsError merchantCategoryRestrictions) {
+            Utils.checkNotNull(merchantCategoryRestrictions, "merchantCategoryRestrictions");
+            this.merchantCategoryRestrictions = Optional.ofNullable(merchantCategoryRestrictions);
+            return this;
+        }
+
+        public Builder merchantCategoryRestrictions(Optional<? extends MerchantCategoryRestrictionsError> merchantCategoryRestrictions) {
+            Utils.checkNotNull(merchantCategoryRestrictions, "merchantCategoryRestrictions");
+            this.merchantCategoryRestrictions = merchantCategoryRestrictions;
+            return this;
+        }
+
+
+        public Builder merchantRestrictions(MerchantRestrictionsError merchantRestrictions) {
+            Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
+            this.merchantRestrictions = Optional.ofNullable(merchantRestrictions);
+            return this;
+        }
+
+        public Builder merchantRestrictions(Optional<? extends MerchantRestrictionsError> merchantRestrictions) {
+            Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
+            this.merchantRestrictions = merchantRestrictions;
+            return this;
+        }
+
+
+        public Builder allowedSchedule(AllowedScheduleError allowedSchedule) {
+            Utils.checkNotNull(allowedSchedule, "allowedSchedule");
+            this.allowedSchedule = Optional.ofNullable(allowedSchedule);
+            return this;
+        }
+
+        public Builder allowedSchedule(Optional<? extends AllowedScheduleError> allowedSchedule) {
+            Utils.checkNotNull(allowedSchedule, "allowedSchedule");
+            this.allowedSchedule = allowedSchedule;
+            return this;
+        }
+
+
+        public Builder expiresOn(String expiresOn) {
+            Utils.checkNotNull(expiresOn, "expiresOn");
+            this.expiresOn = Optional.ofNullable(expiresOn);
+            return this;
+        }
+
+        public Builder expiresOn(Optional<String> expiresOn) {
+            Utils.checkNotNull(expiresOn, "expiresOn");
+            this.expiresOn = expiresOn;
+            return this;
+        }
+
         public IssuingControlsError build() {
 
             return new IssuingControlsError(
-                velocityLimits);
+                velocityLimits, merchantCategoryRestrictions, merchantRestrictions,
+                allowedSchedule, expiresOn);
         }
 
     }

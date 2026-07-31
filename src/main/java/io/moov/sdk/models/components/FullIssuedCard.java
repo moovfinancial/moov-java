@@ -94,10 +94,12 @@ public class FullIssuedCard {
     @JsonProperty("formFactor")
     private IssuedCardFormFactor formFactor;
 
-
+    /**
+     * Spend controls applied to an issued card, including velocity runtime state.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("controls")
-    private Optional<? extends IssuingControls> controls;
+    private Optional<? extends IssuedControls> controls;
 
 
     @JsonProperty("createdOn")
@@ -132,7 +134,7 @@ public class FullIssuedCard {
             @JsonProperty("billingAddress") Optional<? extends Address> billingAddress,
             @JsonProperty("state") IssuedCardState state,
             @JsonProperty("formFactor") IssuedCardFormFactor formFactor,
-            @JsonProperty("controls") Optional<? extends IssuingControls> controls,
+            @JsonProperty("controls") Optional<? extends IssuedControls> controls,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
             @JsonProperty("updatedOn") OffsetDateTime updatedOn,
             @JsonProperty("pan") String pan,
@@ -281,10 +283,13 @@ public class FullIssuedCard {
         return formFactor;
     }
 
+    /**
+     * Spend controls applied to an issued card, including velocity runtime state.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<IssuingControls> controls() {
-        return (Optional<IssuingControls>) controls;
+    public Optional<IssuedControls> controls() {
+        return (Optional<IssuedControls>) controls;
     }
 
     @JsonIgnore
@@ -457,14 +462,20 @@ public class FullIssuedCard {
         return this;
     }
 
-    public FullIssuedCard withControls(IssuingControls controls) {
+    /**
+     * Spend controls applied to an issued card, including velocity runtime state.
+     */
+    public FullIssuedCard withControls(IssuedControls controls) {
         Utils.checkNotNull(controls, "controls");
         this.controls = Optional.ofNullable(controls);
         return this;
     }
 
 
-    public FullIssuedCard withControls(Optional<? extends IssuingControls> controls) {
+    /**
+     * Spend controls applied to an issued card, including velocity runtime state.
+     */
+    public FullIssuedCard withControls(Optional<? extends IssuedControls> controls) {
         Utils.checkNotNull(controls, "controls");
         this.controls = controls;
         return this;
@@ -585,7 +596,7 @@ public class FullIssuedCard {
 
         private IssuedCardFormFactor formFactor;
 
-        private Optional<? extends IssuingControls> controls = Optional.empty();
+        private Optional<? extends IssuedControls> controls = Optional.empty();
 
         private OffsetDateTime createdOn;
 
@@ -746,13 +757,19 @@ public class FullIssuedCard {
         }
 
 
-        public Builder controls(IssuingControls controls) {
+        /**
+         * Spend controls applied to an issued card, including velocity runtime state.
+         */
+        public Builder controls(IssuedControls controls) {
             Utils.checkNotNull(controls, "controls");
             this.controls = Optional.ofNullable(controls);
             return this;
         }
 
-        public Builder controls(Optional<? extends IssuingControls> controls) {
+        /**
+         * Spend controls applied to an issued card, including velocity runtime state.
+         */
+        public Builder controls(Optional<? extends IssuedControls> controls) {
             Utils.checkNotNull(controls, "controls");
             this.controls = controls;
             return this;

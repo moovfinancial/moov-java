@@ -20,12 +20,13 @@ import java.util.Optional;
  * 
  * <p>Specifies a partial amount to refund.
  * 
- * <p>This request body is optional, an empty body will issue a refund for the full amount of the original
- * transfer.
+ * <p>Before v2026.10, this request body may be omitted. In v2026.10 and later, send an empty object to
+ * refund the full amount of the original transfer.
  */
 public class CreateRefund {
     /**
-     * Amount to refund in cents. If null, the original transfer's full amount will be refunded.
+     * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
+     * transfer's full amount will be refunded.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
@@ -53,7 +54,8 @@ public class CreateRefund {
     }
 
     /**
-     * Amount to refund in cents. If null, the original transfer's full amount will be refunded.
+     * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
+     * transfer's full amount will be refunded.
      */
     @JsonIgnore
     public Optional<Long> amount() {
@@ -75,7 +77,8 @@ public class CreateRefund {
 
 
     /**
-     * Amount to refund in cents. If null, the original transfer's full amount will be refunded.
+     * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
+     * transfer's full amount will be refunded.
      */
     public CreateRefund withAmount(long amount) {
         Utils.checkNotNull(amount, "amount");
@@ -85,7 +88,8 @@ public class CreateRefund {
 
 
     /**
-     * Amount to refund in cents. If null, the original transfer's full amount will be refunded.
+     * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
+     * transfer's full amount will be refunded.
      */
     public CreateRefund withAmount(Optional<Long> amount) {
         Utils.checkNotNull(amount, "amount");
@@ -152,7 +156,8 @@ public class CreateRefund {
 
 
         /**
-         * Amount to refund in cents. If null, the original transfer's full amount will be refunded.
+         * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
+         * transfer's full amount will be refunded.
          */
         public Builder amount(long amount) {
             Utils.checkNotNull(amount, "amount");
@@ -161,7 +166,8 @@ public class CreateRefund {
         }
 
         /**
-         * Amount to refund in cents. If null, the original transfer's full amount will be refunded.
+         * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
+         * transfer's full amount will be refunded.
          */
         public Builder amount(Optional<Long> amount) {
             Utils.checkNotNull(amount, "amount");

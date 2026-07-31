@@ -13,8 +13,10 @@ import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 public class IssuingControls {
@@ -32,18 +34,60 @@ public class IssuingControls {
     @JsonProperty("velocityLimits")
     private Optional<? extends List<IssuingVelocityLimit>> velocityLimits;
 
+    /**
+     * Restricts card usage by merchant category. When not set, all categories are allowed.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("merchantCategoryRestrictions")
+    private Optional<? extends MerchantCategoryRestrictions> merchantCategoryRestrictions;
+
+    /**
+     * Restricts card usage to specific merchants, or blocks specific merchants.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("merchantRestrictions")
+    private Optional<? extends MerchantRestrictions> merchantRestrictions;
+
+    /**
+     * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("allowedSchedule")
+    private JsonNullable<? extends AllowedSchedule> allowedSchedule;
+
+    /**
+     * A spend cutoff date and time. When set, all authorizations after this datetime are declined
+     * regardless of other controls. Set to `null` for no cutoff.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("expiresOn")
+    private JsonNullable<OffsetDateTime> expiresOn;
+
     @JsonCreator
     public IssuingControls(
             @JsonProperty("singleUse") Optional<Boolean> singleUse,
-            @JsonProperty("velocityLimits") Optional<? extends List<IssuingVelocityLimit>> velocityLimits) {
+            @JsonProperty("velocityLimits") Optional<? extends List<IssuingVelocityLimit>> velocityLimits,
+            @JsonProperty("merchantCategoryRestrictions") Optional<? extends MerchantCategoryRestrictions> merchantCategoryRestrictions,
+            @JsonProperty("merchantRestrictions") Optional<? extends MerchantRestrictions> merchantRestrictions,
+            @JsonProperty("allowedSchedule") JsonNullable<? extends AllowedSchedule> allowedSchedule,
+            @JsonProperty("expiresOn") JsonNullable<OffsetDateTime> expiresOn) {
         Utils.checkNotNull(singleUse, "singleUse");
         Utils.checkNotNull(velocityLimits, "velocityLimits");
+        Utils.checkNotNull(merchantCategoryRestrictions, "merchantCategoryRestrictions");
+        Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
+        Utils.checkNotNull(allowedSchedule, "allowedSchedule");
+        Utils.checkNotNull(expiresOn, "expiresOn");
         this.singleUse = singleUse;
         this.velocityLimits = velocityLimits;
+        this.merchantCategoryRestrictions = merchantCategoryRestrictions;
+        this.merchantRestrictions = merchantRestrictions;
+        this.allowedSchedule = allowedSchedule;
+        this.expiresOn = expiresOn;
     }
     
     public IssuingControls() {
-        this(Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     /**
@@ -61,6 +105,42 @@ public class IssuingControls {
     @JsonIgnore
     public Optional<List<IssuingVelocityLimit>> velocityLimits() {
         return (Optional<List<IssuingVelocityLimit>>) velocityLimits;
+    }
+
+    /**
+     * Restricts card usage by merchant category. When not set, all categories are allowed.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<MerchantCategoryRestrictions> merchantCategoryRestrictions() {
+        return (Optional<MerchantCategoryRestrictions>) merchantCategoryRestrictions;
+    }
+
+    /**
+     * Restricts card usage to specific merchants, or blocks specific merchants.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<MerchantRestrictions> merchantRestrictions() {
+        return (Optional<MerchantRestrictions>) merchantRestrictions;
+    }
+
+    /**
+     * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public JsonNullable<AllowedSchedule> allowedSchedule() {
+        return (JsonNullable<AllowedSchedule>) allowedSchedule;
+    }
+
+    /**
+     * A spend cutoff date and time. When set, all authorizations after this datetime are declined
+     * regardless of other controls. Set to `null` for no cutoff.
+     */
+    @JsonIgnore
+    public JsonNullable<OffsetDateTime> expiresOn() {
+        return expiresOn;
     }
 
     public static Builder builder() {
@@ -106,6 +186,82 @@ public class IssuingControls {
         return this;
     }
 
+    /**
+     * Restricts card usage by merchant category. When not set, all categories are allowed.
+     */
+    public IssuingControls withMerchantCategoryRestrictions(MerchantCategoryRestrictions merchantCategoryRestrictions) {
+        Utils.checkNotNull(merchantCategoryRestrictions, "merchantCategoryRestrictions");
+        this.merchantCategoryRestrictions = Optional.ofNullable(merchantCategoryRestrictions);
+        return this;
+    }
+
+
+    /**
+     * Restricts card usage by merchant category. When not set, all categories are allowed.
+     */
+    public IssuingControls withMerchantCategoryRestrictions(Optional<? extends MerchantCategoryRestrictions> merchantCategoryRestrictions) {
+        Utils.checkNotNull(merchantCategoryRestrictions, "merchantCategoryRestrictions");
+        this.merchantCategoryRestrictions = merchantCategoryRestrictions;
+        return this;
+    }
+
+    /**
+     * Restricts card usage to specific merchants, or blocks specific merchants.
+     */
+    public IssuingControls withMerchantRestrictions(MerchantRestrictions merchantRestrictions) {
+        Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
+        this.merchantRestrictions = Optional.ofNullable(merchantRestrictions);
+        return this;
+    }
+
+
+    /**
+     * Restricts card usage to specific merchants, or blocks specific merchants.
+     */
+    public IssuingControls withMerchantRestrictions(Optional<? extends MerchantRestrictions> merchantRestrictions) {
+        Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
+        this.merchantRestrictions = merchantRestrictions;
+        return this;
+    }
+
+    /**
+     * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
+     */
+    public IssuingControls withAllowedSchedule(AllowedSchedule allowedSchedule) {
+        Utils.checkNotNull(allowedSchedule, "allowedSchedule");
+        this.allowedSchedule = JsonNullable.of(allowedSchedule);
+        return this;
+    }
+
+    /**
+     * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
+     */
+    public IssuingControls withAllowedSchedule(JsonNullable<? extends AllowedSchedule> allowedSchedule) {
+        Utils.checkNotNull(allowedSchedule, "allowedSchedule");
+        this.allowedSchedule = allowedSchedule;
+        return this;
+    }
+
+    /**
+     * A spend cutoff date and time. When set, all authorizations after this datetime are declined
+     * regardless of other controls. Set to `null` for no cutoff.
+     */
+    public IssuingControls withExpiresOn(OffsetDateTime expiresOn) {
+        Utils.checkNotNull(expiresOn, "expiresOn");
+        this.expiresOn = JsonNullable.of(expiresOn);
+        return this;
+    }
+
+    /**
+     * A spend cutoff date and time. When set, all authorizations after this datetime are declined
+     * regardless of other controls. Set to `null` for no cutoff.
+     */
+    public IssuingControls withExpiresOn(JsonNullable<OffsetDateTime> expiresOn) {
+        Utils.checkNotNull(expiresOn, "expiresOn");
+        this.expiresOn = expiresOn;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -117,20 +273,29 @@ public class IssuingControls {
         IssuingControls other = (IssuingControls) o;
         return 
             Utils.enhancedDeepEquals(this.singleUse, other.singleUse) &&
-            Utils.enhancedDeepEquals(this.velocityLimits, other.velocityLimits);
+            Utils.enhancedDeepEquals(this.velocityLimits, other.velocityLimits) &&
+            Utils.enhancedDeepEquals(this.merchantCategoryRestrictions, other.merchantCategoryRestrictions) &&
+            Utils.enhancedDeepEquals(this.merchantRestrictions, other.merchantRestrictions) &&
+            Utils.enhancedDeepEquals(this.allowedSchedule, other.allowedSchedule) &&
+            Utils.enhancedDeepEquals(this.expiresOn, other.expiresOn);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            singleUse, velocityLimits);
+            singleUse, velocityLimits, merchantCategoryRestrictions,
+            merchantRestrictions, allowedSchedule, expiresOn);
     }
     
     @Override
     public String toString() {
         return Utils.toString(IssuingControls.class,
                 "singleUse", singleUse,
-                "velocityLimits", velocityLimits);
+                "velocityLimits", velocityLimits,
+                "merchantCategoryRestrictions", merchantCategoryRestrictions,
+                "merchantRestrictions", merchantRestrictions,
+                "allowedSchedule", allowedSchedule,
+                "expiresOn", expiresOn);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -139,6 +304,14 @@ public class IssuingControls {
         private Optional<Boolean> singleUse = Optional.empty();
 
         private Optional<? extends List<IssuingVelocityLimit>> velocityLimits = Optional.empty();
+
+        private Optional<? extends MerchantCategoryRestrictions> merchantCategoryRestrictions = Optional.empty();
+
+        private Optional<? extends MerchantRestrictions> merchantRestrictions = Optional.empty();
+
+        private JsonNullable<? extends AllowedSchedule> allowedSchedule = JsonNullable.undefined();
+
+        private JsonNullable<OffsetDateTime> expiresOn = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -182,10 +355,89 @@ public class IssuingControls {
             return this;
         }
 
+
+        /**
+         * Restricts card usage by merchant category. When not set, all categories are allowed.
+         */
+        public Builder merchantCategoryRestrictions(MerchantCategoryRestrictions merchantCategoryRestrictions) {
+            Utils.checkNotNull(merchantCategoryRestrictions, "merchantCategoryRestrictions");
+            this.merchantCategoryRestrictions = Optional.ofNullable(merchantCategoryRestrictions);
+            return this;
+        }
+
+        /**
+         * Restricts card usage by merchant category. When not set, all categories are allowed.
+         */
+        public Builder merchantCategoryRestrictions(Optional<? extends MerchantCategoryRestrictions> merchantCategoryRestrictions) {
+            Utils.checkNotNull(merchantCategoryRestrictions, "merchantCategoryRestrictions");
+            this.merchantCategoryRestrictions = merchantCategoryRestrictions;
+            return this;
+        }
+
+
+        /**
+         * Restricts card usage to specific merchants, or blocks specific merchants.
+         */
+        public Builder merchantRestrictions(MerchantRestrictions merchantRestrictions) {
+            Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
+            this.merchantRestrictions = Optional.ofNullable(merchantRestrictions);
+            return this;
+        }
+
+        /**
+         * Restricts card usage to specific merchants, or blocks specific merchants.
+         */
+        public Builder merchantRestrictions(Optional<? extends MerchantRestrictions> merchantRestrictions) {
+            Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
+            this.merchantRestrictions = merchantRestrictions;
+            return this;
+        }
+
+
+        /**
+         * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
+         */
+        public Builder allowedSchedule(AllowedSchedule allowedSchedule) {
+            Utils.checkNotNull(allowedSchedule, "allowedSchedule");
+            this.allowedSchedule = JsonNullable.of(allowedSchedule);
+            return this;
+        }
+
+        /**
+         * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
+         */
+        public Builder allowedSchedule(JsonNullable<? extends AllowedSchedule> allowedSchedule) {
+            Utils.checkNotNull(allowedSchedule, "allowedSchedule");
+            this.allowedSchedule = allowedSchedule;
+            return this;
+        }
+
+
+        /**
+         * A spend cutoff date and time. When set, all authorizations after this datetime are declined
+         * regardless of other controls. Set to `null` for no cutoff.
+         */
+        public Builder expiresOn(OffsetDateTime expiresOn) {
+            Utils.checkNotNull(expiresOn, "expiresOn");
+            this.expiresOn = JsonNullable.of(expiresOn);
+            return this;
+        }
+
+        /**
+         * A spend cutoff date and time. When set, all authorizations after this datetime are declined
+         * regardless of other controls. Set to `null` for no cutoff.
+         */
+        public Builder expiresOn(JsonNullable<OffsetDateTime> expiresOn) {
+            Utils.checkNotNull(expiresOn, "expiresOn");
+            this.expiresOn = expiresOn;
+            return this;
+        }
+
         public IssuingControls build() {
 
             return new IssuingControls(
-                singleUse, velocityLimits);
+                singleUse, velocityLimits, merchantCategoryRestrictions,
+                merchantRestrictions, allowedSchedule, expiresOn);
         }
 
     }

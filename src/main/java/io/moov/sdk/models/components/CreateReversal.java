@@ -18,8 +18,8 @@ import java.util.Optional;
 
 public class CreateReversal {
     /**
-     * Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a
-     * cancellation.
+     * Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts
+     * automatically trigger a refund instead of a cancellation.
      */
     @JsonProperty("amount")
     private long amount;
@@ -47,8 +47,8 @@ public class CreateReversal {
     }
 
     /**
-     * Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a
-     * cancellation.
+     * Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts
+     * automatically trigger a refund instead of a cancellation.
      */
     @JsonIgnore
     public long amount() {
@@ -70,8 +70,8 @@ public class CreateReversal {
 
 
     /**
-     * Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a
-     * cancellation.
+     * Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts
+     * automatically trigger a refund instead of a cancellation.
      */
     public CreateReversal withAmount(long amount) {
         Utils.checkNotNull(amount, "amount");
@@ -138,8 +138,8 @@ public class CreateReversal {
 
 
         /**
-         * Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a
-         * cancellation.
+         * Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts
+         * automatically trigger a refund instead of a cancellation.
          */
         public Builder amount(long amount) {
             Utils.checkNotNull(amount, "amount");

@@ -177,6 +177,13 @@ public class CreatedTransfer {
     @JsonProperty("lineItems")
     private Optional<? extends TransferLineItems> lineItems;
 
+    /**
+     * The card authorization and capture IDs associated with a transfer.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("capture")
+    private Optional<? extends TransferCapture> capture;
+
     @JsonCreator
     public CreatedTransfer(
             @JsonProperty("transferID") String transferID,
@@ -205,7 +212,8 @@ public class CreatedTransfer {
             @JsonProperty("paymentLinkCode") Optional<String> paymentLinkCode,
             @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
             @JsonProperty("foreignID") Optional<String> foreignID,
-            @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems) {
+            @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems,
+            @JsonProperty("capture") Optional<? extends TransferCapture> capture) {
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(source, "source");
@@ -233,6 +241,7 @@ public class CreatedTransfer {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         Utils.checkNotNull(foreignID, "foreignID");
         Utils.checkNotNull(lineItems, "lineItems");
+        Utils.checkNotNull(capture, "capture");
         this.transferID = transferID;
         this.createdOn = createdOn;
         this.source = source;
@@ -260,6 +269,7 @@ public class CreatedTransfer {
         this.salesTaxAmount = salesTaxAmount;
         this.foreignID = foreignID;
         this.lineItems = lineItems;
+        this.capture = capture;
     }
     
     public CreatedTransfer(
@@ -273,7 +283,8 @@ public class CreatedTransfer {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -459,6 +470,15 @@ public class CreatedTransfer {
     @JsonIgnore
     public Optional<TransferLineItems> lineItems() {
         return (Optional<TransferLineItems>) lineItems;
+    }
+
+    /**
+     * The card authorization and capture IDs associated with a transfer.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<TransferCapture> capture() {
+        return (Optional<TransferCapture>) capture;
     }
 
     public static Builder builder() {
@@ -873,6 +893,25 @@ public class CreatedTransfer {
         return this;
     }
 
+    /**
+     * The card authorization and capture IDs associated with a transfer.
+     */
+    public CreatedTransfer withCapture(TransferCapture capture) {
+        Utils.checkNotNull(capture, "capture");
+        this.capture = Optional.ofNullable(capture);
+        return this;
+    }
+
+
+    /**
+     * The card authorization and capture IDs associated with a transfer.
+     */
+    public CreatedTransfer withCapture(Optional<? extends TransferCapture> capture) {
+        Utils.checkNotNull(capture, "capture");
+        this.capture = capture;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -909,7 +948,8 @@ public class CreatedTransfer {
             Utils.enhancedDeepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
             Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
-            Utils.enhancedDeepEquals(this.lineItems, other.lineItems);
+            Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
+            Utils.enhancedDeepEquals(this.capture, other.capture);
     }
     
     @Override
@@ -923,7 +963,8 @@ public class CreatedTransfer {
             cancellations, refundedAmount, refunds,
             disputedAmount, disputes, sweepID,
             scheduleID, occurrenceID, paymentLinkCode,
-            salesTaxAmount, foreignID, lineItems);
+            salesTaxAmount, foreignID, lineItems,
+            capture);
     }
     
     @Override
@@ -955,7 +996,8 @@ public class CreatedTransfer {
                 "paymentLinkCode", paymentLinkCode,
                 "salesTaxAmount", salesTaxAmount,
                 "foreignID", foreignID,
-                "lineItems", lineItems);
+                "lineItems", lineItems,
+                "capture", capture);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -1014,6 +1056,8 @@ public class CreatedTransfer {
         private Optional<String> foreignID = Optional.empty();
 
         private Optional<? extends TransferLineItems> lineItems = Optional.empty();
+
+        private Optional<? extends TransferCapture> capture = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -1428,6 +1472,25 @@ public class CreatedTransfer {
             return this;
         }
 
+
+        /**
+         * The card authorization and capture IDs associated with a transfer.
+         */
+        public Builder capture(TransferCapture capture) {
+            Utils.checkNotNull(capture, "capture");
+            this.capture = Optional.ofNullable(capture);
+            return this;
+        }
+
+        /**
+         * The card authorization and capture IDs associated with a transfer.
+         */
+        public Builder capture(Optional<? extends TransferCapture> capture) {
+            Utils.checkNotNull(capture, "capture");
+            this.capture = capture;
+            return this;
+        }
+
         public CreatedTransfer build() {
 
             return new CreatedTransfer(
@@ -1439,7 +1502,8 @@ public class CreatedTransfer {
                 cancellations, refundedAmount, refunds,
                 disputedAmount, disputes, sweepID,
                 scheduleID, occurrenceID, paymentLinkCode,
-                salesTaxAmount, foreignID, lineItems);
+                salesTaxAmount, foreignID, lineItems,
+                capture);
         }
 
     }

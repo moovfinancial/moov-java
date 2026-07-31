@@ -1819,3 +1819,13 @@ Based on:
 - [java v25.6.0] .
 ### Releases
 - [Maven Central v25.6.0] https://central.sonatype.com/artifact/io.moov/sdk/25.6.0 - .
+
+## 2026-07-31 19:06:39
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.791.0 (2.924.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v25.6.1] .
+### Releases
+- [Maven Central v25.6.1] https://central.sonatype.com/artifact/io.moov/sdk/25.6.1 - .

@@ -15,10 +15,13 @@ import java.util.Optional;
  * - `default`: The system-generated wallet automatically created when an account is granted the wallet
  * capability.
  * - `general`: An additional, user-defined wallet created via API or Dashboard.
+ * - `card-issuing`: The system-generated wallet automatically created when an account is granted the
+ * card-issuing capability.
  */
 public enum WalletType {
     DEFAULT("default"),
-    GENERAL("general");
+    GENERAL("general"),
+    CARD_ISSUING("card-issuing");
 
     @JsonValue
     private final String value;

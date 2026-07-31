@@ -32,14 +32,14 @@ public class CreateTransfer {
 
 
     @JsonProperty("amount")
-    private Amount amount;
+    private AmountDecimal amount;
 
     /**
-     * Total or markup fee.
+     * Total or markup fee to apply when creating a transfer.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("facilitatorFee")
-    private Optional<? extends FacilitatorFee> facilitatorFee;
+    private Optional<? extends CreateTransferFacilitatorFee> facilitatorFee;
 
     /**
      * An optional description of the transfer that is used on receipts and for your own internal use.
@@ -86,8 +86,8 @@ public class CreateTransfer {
     public CreateTransfer(
             @JsonProperty("source") CreateTransferSource source,
             @JsonProperty("destination") CreateTransferDestination destination,
-            @JsonProperty("amount") Amount amount,
-            @JsonProperty("facilitatorFee") Optional<? extends FacilitatorFee> facilitatorFee,
+            @JsonProperty("amount") AmountDecimal amount,
+            @JsonProperty("facilitatorFee") Optional<? extends CreateTransferFacilitatorFee> facilitatorFee,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata,
             @JsonProperty("foreignID") Optional<String> foreignID,
@@ -119,7 +119,7 @@ public class CreateTransfer {
     public CreateTransfer(
             CreateTransferSource source,
             CreateTransferDestination destination,
-            Amount amount) {
+            AmountDecimal amount) {
         this(source, destination, amount,
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
@@ -144,17 +144,17 @@ public class CreateTransfer {
     }
 
     @JsonIgnore
-    public Amount amount() {
+    public AmountDecimal amount() {
         return amount;
     }
 
     /**
-     * Total or markup fee.
+     * Total or markup fee to apply when creating a transfer.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<FacilitatorFee> facilitatorFee() {
-        return (Optional<FacilitatorFee>) facilitatorFee;
+    public Optional<CreateTransferFacilitatorFee> facilitatorFee() {
+        return (Optional<CreateTransferFacilitatorFee>) facilitatorFee;
     }
 
     /**
@@ -231,16 +231,16 @@ public class CreateTransfer {
         return this;
     }
 
-    public CreateTransfer withAmount(Amount amount) {
+    public CreateTransfer withAmount(AmountDecimal amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
         return this;
     }
 
     /**
-     * Total or markup fee.
+     * Total or markup fee to apply when creating a transfer.
      */
-    public CreateTransfer withFacilitatorFee(FacilitatorFee facilitatorFee) {
+    public CreateTransfer withFacilitatorFee(CreateTransferFacilitatorFee facilitatorFee) {
         Utils.checkNotNull(facilitatorFee, "facilitatorFee");
         this.facilitatorFee = Optional.ofNullable(facilitatorFee);
         return this;
@@ -248,9 +248,9 @@ public class CreateTransfer {
 
 
     /**
-     * Total or markup fee.
+     * Total or markup fee to apply when creating a transfer.
      */
-    public CreateTransfer withFacilitatorFee(Optional<? extends FacilitatorFee> facilitatorFee) {
+    public CreateTransfer withFacilitatorFee(Optional<? extends CreateTransferFacilitatorFee> facilitatorFee) {
         Utils.checkNotNull(facilitatorFee, "facilitatorFee");
         this.facilitatorFee = facilitatorFee;
         return this;
@@ -419,9 +419,9 @@ public class CreateTransfer {
 
         private CreateTransferDestination destination;
 
-        private Amount amount;
+        private AmountDecimal amount;
 
-        private Optional<? extends FacilitatorFee> facilitatorFee = Optional.empty();
+        private Optional<? extends CreateTransferFacilitatorFee> facilitatorFee = Optional.empty();
 
         private Optional<String> description = Optional.empty();
 
@@ -461,7 +461,7 @@ public class CreateTransfer {
         }
 
 
-        public Builder amount(Amount amount) {
+        public Builder amount(AmountDecimal amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
@@ -469,18 +469,18 @@ public class CreateTransfer {
 
 
         /**
-         * Total or markup fee.
+         * Total or markup fee to apply when creating a transfer.
          */
-        public Builder facilitatorFee(FacilitatorFee facilitatorFee) {
+        public Builder facilitatorFee(CreateTransferFacilitatorFee facilitatorFee) {
             Utils.checkNotNull(facilitatorFee, "facilitatorFee");
             this.facilitatorFee = Optional.ofNullable(facilitatorFee);
             return this;
         }
 
         /**
-         * Total or markup fee.
+         * Total or markup fee to apply when creating a transfer.
          */
-        public Builder facilitatorFee(Optional<? extends FacilitatorFee> facilitatorFee) {
+        public Builder facilitatorFee(Optional<? extends CreateTransferFacilitatorFee> facilitatorFee) {
             Utils.checkNotNull(facilitatorFee, "facilitatorFee");
             this.facilitatorFee = facilitatorFee;
             return this;

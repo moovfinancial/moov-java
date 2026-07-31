@@ -22,26 +22,39 @@ public class IssuingVelocityLimitError {
 
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("count")
+    private Optional<String> count;
+
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("interval")
     private Optional<String> interval;
 
     @JsonCreator
     public IssuingVelocityLimitError(
             @JsonProperty("amount") Optional<String> amount,
+            @JsonProperty("count") Optional<String> count,
             @JsonProperty("interval") Optional<String> interval) {
         Utils.checkNotNull(amount, "amount");
+        Utils.checkNotNull(count, "count");
         Utils.checkNotNull(interval, "interval");
         this.amount = amount;
+        this.count = count;
         this.interval = interval;
     }
     
     public IssuingVelocityLimitError() {
-        this(Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
     public Optional<String> amount() {
         return amount;
+    }
+
+    @JsonIgnore
+    public Optional<String> count() {
+        return count;
     }
 
     @JsonIgnore
@@ -64,6 +77,19 @@ public class IssuingVelocityLimitError {
     public IssuingVelocityLimitError withAmount(Optional<String> amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
+        return this;
+    }
+
+    public IssuingVelocityLimitError withCount(String count) {
+        Utils.checkNotNull(count, "count");
+        this.count = Optional.ofNullable(count);
+        return this;
+    }
+
+
+    public IssuingVelocityLimitError withCount(Optional<String> count) {
+        Utils.checkNotNull(count, "count");
+        this.count = count;
         return this;
     }
 
@@ -91,19 +117,21 @@ public class IssuingVelocityLimitError {
         IssuingVelocityLimitError other = (IssuingVelocityLimitError) o;
         return 
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.count, other.count) &&
             Utils.enhancedDeepEquals(this.interval, other.interval);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            amount, interval);
+            amount, count, interval);
     }
     
     @Override
     public String toString() {
         return Utils.toString(IssuingVelocityLimitError.class,
                 "amount", amount,
+                "count", count,
                 "interval", interval);
     }
 
@@ -111,6 +139,8 @@ public class IssuingVelocityLimitError {
     public final static class Builder {
 
         private Optional<String> amount = Optional.empty();
+
+        private Optional<String> count = Optional.empty();
 
         private Optional<String> interval = Optional.empty();
 
@@ -132,6 +162,19 @@ public class IssuingVelocityLimitError {
         }
 
 
+        public Builder count(String count) {
+            Utils.checkNotNull(count, "count");
+            this.count = Optional.ofNullable(count);
+            return this;
+        }
+
+        public Builder count(Optional<String> count) {
+            Utils.checkNotNull(count, "count");
+            this.count = count;
+            return this;
+        }
+
+
         public Builder interval(String interval) {
             Utils.checkNotNull(interval, "interval");
             this.interval = Optional.ofNullable(interval);
@@ -147,7 +190,7 @@ public class IssuingVelocityLimitError {
         public IssuingVelocityLimitError build() {
 
             return new IssuingVelocityLimitError(
-                amount, interval);
+                amount, count, interval);
         }
 
     }

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.models.components.AddressError;
+import io.moov.sdk.models.components.UpdateIssuingControlsError;
 import io.moov.sdk.utils.Utils;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
@@ -74,6 +75,11 @@ public class UpdateIssuedCardError extends MoovError {
         return data().flatMap(Data::billingAddress);
     }
 
+    @Deprecated
+    public Optional<UpdateIssuingControlsError> controls() {
+        return data().flatMap(Data::controls);
+    }
+
     public Optional<Data> data() {
         return Optional.ofNullable(data);
     }
@@ -106,25 +112,33 @@ public class UpdateIssuedCardError extends MoovError {
         @JsonProperty("billingAddress")
         private Optional<? extends AddressError> billingAddress;
 
+
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("controls")
+        private Optional<? extends UpdateIssuingControlsError> controls;
+
         @JsonCreator
         public Data(
                 @JsonProperty("state") Optional<String> state,
                 @JsonProperty("nickname") Optional<String> nickname,
                 @JsonProperty("metadata") Optional<String> metadata,
-                @JsonProperty("billingAddress") Optional<? extends AddressError> billingAddress) {
+                @JsonProperty("billingAddress") Optional<? extends AddressError> billingAddress,
+                @JsonProperty("controls") Optional<? extends UpdateIssuingControlsError> controls) {
             Utils.checkNotNull(state, "state");
             Utils.checkNotNull(nickname, "nickname");
             Utils.checkNotNull(metadata, "metadata");
             Utils.checkNotNull(billingAddress, "billingAddress");
+            Utils.checkNotNull(controls, "controls");
             this.state = state;
             this.nickname = nickname;
             this.metadata = metadata;
             this.billingAddress = billingAddress;
+            this.controls = controls;
         }
         
         public Data() {
             this(Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty());
+                Optional.empty(), Optional.empty());
         }
 
         @JsonIgnore
@@ -146,6 +160,12 @@ public class UpdateIssuedCardError extends MoovError {
         @JsonIgnore
         public Optional<AddressError> billingAddress() {
             return (Optional<AddressError>) billingAddress;
+        }
+
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<UpdateIssuingControlsError> controls() {
+            return (Optional<UpdateIssuingControlsError>) controls;
         }
 
         public static Builder builder() {
@@ -205,6 +225,19 @@ public class UpdateIssuedCardError extends MoovError {
             return this;
         }
 
+        public Data withControls(UpdateIssuingControlsError controls) {
+            Utils.checkNotNull(controls, "controls");
+            this.controls = Optional.ofNullable(controls);
+            return this;
+        }
+
+
+        public Data withControls(Optional<? extends UpdateIssuingControlsError> controls) {
+            Utils.checkNotNull(controls, "controls");
+            this.controls = controls;
+            return this;
+        }
+
         @Override
         public boolean equals(java.lang.Object o) {
             if (this == o) {
@@ -218,14 +251,15 @@ public class UpdateIssuedCardError extends MoovError {
                 Utils.enhancedDeepEquals(this.state, other.state) &&
                 Utils.enhancedDeepEquals(this.nickname, other.nickname) &&
                 Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
-                Utils.enhancedDeepEquals(this.billingAddress, other.billingAddress);
+                Utils.enhancedDeepEquals(this.billingAddress, other.billingAddress) &&
+                Utils.enhancedDeepEquals(this.controls, other.controls);
         }
         
         @Override
         public int hashCode() {
             return Utils.enhancedHash(
                 state, nickname, metadata,
-                billingAddress);
+                billingAddress, controls);
         }
         
         @Override
@@ -234,7 +268,8 @@ public class UpdateIssuedCardError extends MoovError {
                     "state", state,
                     "nickname", nickname,
                     "metadata", metadata,
-                    "billingAddress", billingAddress);
+                    "billingAddress", billingAddress,
+                    "controls", controls);
         }
 
         @SuppressWarnings("UnusedReturnValue")
@@ -247,6 +282,8 @@ public class UpdateIssuedCardError extends MoovError {
             private Optional<String> metadata = Optional.empty();
 
             private Optional<? extends AddressError> billingAddress = Optional.empty();
+
+            private Optional<? extends UpdateIssuingControlsError> controls = Optional.empty();
 
             private Builder() {
               // force use of static builder() method
@@ -304,11 +341,24 @@ public class UpdateIssuedCardError extends MoovError {
                 return this;
             }
 
+
+            public Builder controls(UpdateIssuingControlsError controls) {
+                Utils.checkNotNull(controls, "controls");
+                this.controls = Optional.ofNullable(controls);
+                return this;
+            }
+
+            public Builder controls(Optional<? extends UpdateIssuingControlsError> controls) {
+                Utils.checkNotNull(controls, "controls");
+                this.controls = controls;
+                return this;
+            }
+
             public Data build() {
 
                 return new Data(
                     state, nickname, metadata,
-                    billingAddress);
+                    billingAddress, controls);
             }
 
         }

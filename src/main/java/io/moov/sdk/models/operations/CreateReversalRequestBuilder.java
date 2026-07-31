@@ -10,14 +10,13 @@ import io.moov.sdk.models.components.CreateReversal;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
-import java.util.Optional;
 
 public class CreateReversalRequestBuilder {
 
     private String xIdempotencyKey;
     private String accountID;
     private String transferID;
-    private Optional<? extends CreateReversal> createReversal = Optional.empty();
+    private CreateReversal createReversal;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -42,14 +41,8 @@ public class CreateReversalRequestBuilder {
         this.transferID = transferID;
         return this;
     }
-                
-    public CreateReversalRequestBuilder createReversal(CreateReversal createReversal) {
-        Utils.checkNotNull(createReversal, "createReversal");
-        this.createReversal = Optional.of(createReversal);
-        return this;
-    }
 
-    public CreateReversalRequestBuilder createReversal(Optional<? extends CreateReversal> createReversal) {
+    public CreateReversalRequestBuilder createReversal(CreateReversal createReversal) {
         Utils.checkNotNull(createReversal, "createReversal");
         this.createReversal = createReversal;
         return this;

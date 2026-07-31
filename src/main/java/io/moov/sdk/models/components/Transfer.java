@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
-import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -27,6 +26,12 @@ public class Transfer {
 
     @JsonProperty("transferID")
     private String transferID;
+
+    /**
+     * The rail and direction used to move funds for a transfer.
+     */
+    @JsonProperty("transferType")
+    private TransferType transferType;
 
 
     @JsonProperty("createdOn")
@@ -60,7 +65,7 @@ public class Transfer {
 
 
     @JsonProperty("amount")
-    private Amount amount;
+    private AmountDecimal amount;
 
     /**
      * An optional description of the transfer that is used on receipts and for your own internal use.
@@ -88,15 +93,7 @@ public class Transfer {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("moovFee")
-    private Optional<Long> moovFee;
-
-    /**
-     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
-     * precision.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("moovFeeDecimal")
-    private Optional<String> moovFeeDecimal;
+    private Optional<? extends AmountDecimal> moovFee;
 
     /**
      * Processing and pass-through costs that add up to the moovFee.
@@ -119,28 +116,13 @@ public class Transfer {
 
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("cancellations")
-    private Optional<? extends List<Cancellation>> cancellations;
-
-
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("refundedAmount")
-    private Optional<? extends Amount> refundedAmount;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("refunds")
-    private Optional<? extends List<CardAcquiringRefund>> refunds;
+    private Optional<? extends AmountDecimal> refundedAmount;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("disputedAmount")
-    private Optional<? extends Amount> disputedAmount;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("disputes")
-    private Optional<? extends List<CardAcquiringDispute>> disputes;
+    private Optional<? extends AmountDecimal> disputedAmount;
 
     /**
      * ID of the sweep that created this transfer.
@@ -191,29 +173,39 @@ public class Transfer {
     @JsonProperty("amountDetails")
     private Optional<? extends TransferAmountDetails> amountDetails;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("authorization")
+    private Optional<? extends TransferAuthorization> authorization;
+
+
+    @JsonProperty("options")
+    private TransferRailOptions options;
+
+
+    @JsonProperty("processingDetails")
+    private TransferProcessingDetails processingDetails;
+
     @JsonCreator
     public Transfer(
             @JsonProperty("transferID") String transferID,
+            @JsonProperty("transferType") TransferType transferType,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
             @JsonProperty("source") TransferSource source,
             @JsonProperty("destination") TransferDestination destination,
             @JsonProperty("completedOn") Optional<OffsetDateTime> completedOn,
             @JsonProperty("status") TransferStatus status,
             @JsonProperty("failureReason") Optional<? extends TransferFailureReason> failureReason,
-            @JsonProperty("amount") Amount amount,
+            @JsonProperty("amount") AmountDecimal amount,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata,
             @JsonProperty("facilitatorFee") Optional<? extends FacilitatorFee> facilitatorFee,
-            @JsonProperty("moovFee") Optional<Long> moovFee,
-            @JsonProperty("moovFeeDecimal") Optional<String> moovFeeDecimal,
+            @JsonProperty("moovFee") Optional<? extends AmountDecimal> moovFee,
             @JsonProperty("moovFeeDetails") Optional<? extends MoovFeeDetails> moovFeeDetails,
             @JsonProperty("moovFees") Optional<? extends List<MoovFee>> moovFees,
             @JsonProperty("groupID") Optional<String> groupID,
-            @JsonProperty("cancellations") Optional<? extends List<Cancellation>> cancellations,
-            @JsonProperty("refundedAmount") Optional<? extends Amount> refundedAmount,
-            @JsonProperty("refunds") Optional<? extends List<CardAcquiringRefund>> refunds,
-            @JsonProperty("disputedAmount") Optional<? extends Amount> disputedAmount,
-            @JsonProperty("disputes") Optional<? extends List<CardAcquiringDispute>> disputes,
+            @JsonProperty("refundedAmount") Optional<? extends AmountDecimal> refundedAmount,
+            @JsonProperty("disputedAmount") Optional<? extends AmountDecimal> disputedAmount,
             @JsonProperty("sweepID") Optional<String> sweepID,
             @JsonProperty("scheduleID") Optional<String> scheduleID,
             @JsonProperty("occurrenceID") Optional<String> occurrenceID,
@@ -221,8 +213,12 @@ public class Transfer {
             @JsonProperty("foreignID") Optional<String> foreignID,
             @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems,
             @JsonProperty("invoiceID") Optional<String> invoiceID,
-            @JsonProperty("amountDetails") Optional<? extends TransferAmountDetails> amountDetails) {
+            @JsonProperty("amountDetails") Optional<? extends TransferAmountDetails> amountDetails,
+            @JsonProperty("authorization") Optional<? extends TransferAuthorization> authorization,
+            @JsonProperty("options") TransferRailOptions options,
+            @JsonProperty("processingDetails") TransferProcessingDetails processingDetails) {
         Utils.checkNotNull(transferID, "transferID");
+        Utils.checkNotNull(transferType, "transferType");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(source, "source");
         Utils.checkNotNull(destination, "destination");
@@ -234,15 +230,11 @@ public class Transfer {
         Utils.checkNotNull(metadata, "metadata");
         Utils.checkNotNull(facilitatorFee, "facilitatorFee");
         Utils.checkNotNull(moovFee, "moovFee");
-        Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
         Utils.checkNotNull(moovFeeDetails, "moovFeeDetails");
         Utils.checkNotNull(moovFees, "moovFees");
         Utils.checkNotNull(groupID, "groupID");
-        Utils.checkNotNull(cancellations, "cancellations");
         Utils.checkNotNull(refundedAmount, "refundedAmount");
-        Utils.checkNotNull(refunds, "refunds");
         Utils.checkNotNull(disputedAmount, "disputedAmount");
-        Utils.checkNotNull(disputes, "disputes");
         Utils.checkNotNull(sweepID, "sweepID");
         Utils.checkNotNull(scheduleID, "scheduleID");
         Utils.checkNotNull(occurrenceID, "occurrenceID");
@@ -251,7 +243,11 @@ public class Transfer {
         Utils.checkNotNull(lineItems, "lineItems");
         Utils.checkNotNull(invoiceID, "invoiceID");
         Utils.checkNotNull(amountDetails, "amountDetails");
+        Utils.checkNotNull(authorization, "authorization");
+        Utils.checkNotNull(options, "options");
+        Utils.checkNotNull(processingDetails, "processingDetails");
         this.transferID = transferID;
+        this.transferType = transferType;
         this.createdOn = createdOn;
         this.source = source;
         this.destination = destination;
@@ -263,15 +259,11 @@ public class Transfer {
         this.metadata = metadata;
         this.facilitatorFee = facilitatorFee;
         this.moovFee = moovFee;
-        this.moovFeeDecimal = moovFeeDecimal;
         this.moovFeeDetails = moovFeeDetails;
         this.moovFees = moovFees;
         this.groupID = groupID;
-        this.cancellations = cancellations;
         this.refundedAmount = refundedAmount;
-        this.refunds = refunds;
         this.disputedAmount = disputedAmount;
-        this.disputes = disputes;
         this.sweepID = sweepID;
         this.scheduleID = scheduleID;
         this.occurrenceID = occurrenceID;
@@ -280,30 +272,44 @@ public class Transfer {
         this.lineItems = lineItems;
         this.invoiceID = invoiceID;
         this.amountDetails = amountDetails;
+        this.authorization = authorization;
+        this.options = options;
+        this.processingDetails = processingDetails;
     }
     
     public Transfer(
             String transferID,
+            TransferType transferType,
             OffsetDateTime createdOn,
             TransferSource source,
             TransferDestination destination,
             TransferStatus status,
-            Amount amount) {
-        this(transferID, createdOn, source,
-            destination, Optional.empty(), status,
-            Optional.empty(), amount, Optional.empty(),
+            AmountDecimal amount,
+            TransferRailOptions options,
+            TransferProcessingDetails processingDetails) {
+        this(transferID, transferType, createdOn,
+            source, destination, Optional.empty(),
+            status, Optional.empty(), amount,
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            options, processingDetails);
     }
 
     @JsonIgnore
     public String transferID() {
         return transferID;
+    }
+
+    /**
+     * The rail and direction used to move funds for a transfer.
+     */
+    @JsonIgnore
+    public TransferType transferType() {
+        return transferType;
     }
 
     @JsonIgnore
@@ -344,7 +350,7 @@ public class Transfer {
     }
 
     @JsonIgnore
-    public Amount amount() {
+    public AmountDecimal amount() {
         return amount;
     }
 
@@ -377,18 +383,10 @@ public class Transfer {
     /**
      * Fees charged to your platform account for transfers.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Long> moovFee() {
-        return moovFee;
-    }
-
-    /**
-     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
-     * precision.
-     */
-    @JsonIgnore
-    public Optional<String> moovFeeDecimal() {
-        return moovFeeDecimal;
+    public Optional<AmountDecimal> moovFee() {
+        return (Optional<AmountDecimal>) moovFee;
     }
 
     /**
@@ -416,32 +414,14 @@ public class Transfer {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Cancellation>> cancellations() {
-        return (Optional<List<Cancellation>>) cancellations;
+    public Optional<AmountDecimal> refundedAmount() {
+        return (Optional<AmountDecimal>) refundedAmount;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Amount> refundedAmount() {
-        return (Optional<Amount>) refundedAmount;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<CardAcquiringRefund>> refunds() {
-        return (Optional<List<CardAcquiringRefund>>) refunds;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Amount> disputedAmount() {
-        return (Optional<Amount>) disputedAmount;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<CardAcquiringDispute>> disputes() {
-        return (Optional<List<CardAcquiringDispute>>) disputes;
+    public Optional<AmountDecimal> disputedAmount() {
+        return (Optional<AmountDecimal>) disputedAmount;
     }
 
     /**
@@ -499,6 +479,22 @@ public class Transfer {
         return (Optional<TransferAmountDetails>) amountDetails;
     }
 
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<TransferAuthorization> authorization() {
+        return (Optional<TransferAuthorization>) authorization;
+    }
+
+    @JsonIgnore
+    public TransferRailOptions options() {
+        return options;
+    }
+
+    @JsonIgnore
+    public TransferProcessingDetails processingDetails() {
+        return processingDetails;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -507,6 +503,15 @@ public class Transfer {
     public Transfer withTransferID(String transferID) {
         Utils.checkNotNull(transferID, "transferID");
         this.transferID = transferID;
+        return this;
+    }
+
+    /**
+     * The rail and direction used to move funds for a transfer.
+     */
+    public Transfer withTransferType(TransferType transferType) {
+        Utils.checkNotNull(transferType, "transferType");
+        this.transferType = transferType;
         return this;
     }
 
@@ -569,7 +574,7 @@ public class Transfer {
         return this;
     }
 
-    public Transfer withAmount(Amount amount) {
+    public Transfer withAmount(AmountDecimal amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
         return this;
@@ -635,7 +640,7 @@ public class Transfer {
     /**
      * Fees charged to your platform account for transfers.
      */
-    public Transfer withMoovFee(long moovFee) {
+    public Transfer withMoovFee(AmountDecimal moovFee) {
         Utils.checkNotNull(moovFee, "moovFee");
         this.moovFee = Optional.ofNullable(moovFee);
         return this;
@@ -645,30 +650,9 @@ public class Transfer {
     /**
      * Fees charged to your platform account for transfers.
      */
-    public Transfer withMoovFee(Optional<Long> moovFee) {
+    public Transfer withMoovFee(Optional<? extends AmountDecimal> moovFee) {
         Utils.checkNotNull(moovFee, "moovFee");
         this.moovFee = moovFee;
-        return this;
-    }
-
-    /**
-     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
-     * precision.
-     */
-    public Transfer withMoovFeeDecimal(String moovFeeDecimal) {
-        Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
-        this.moovFeeDecimal = Optional.ofNullable(moovFeeDecimal);
-        return this;
-    }
-
-
-    /**
-     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
-     * precision.
-     */
-    public Transfer withMoovFeeDecimal(Optional<String> moovFeeDecimal) {
-        Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
-        this.moovFeeDecimal = moovFeeDecimal;
         return this;
     }
 
@@ -723,68 +707,29 @@ public class Transfer {
         return this;
     }
 
-    public Transfer withCancellations(List<Cancellation> cancellations) {
-        Utils.checkNotNull(cancellations, "cancellations");
-        this.cancellations = Optional.ofNullable(cancellations);
-        return this;
-    }
-
-
-    public Transfer withCancellations(Optional<? extends List<Cancellation>> cancellations) {
-        Utils.checkNotNull(cancellations, "cancellations");
-        this.cancellations = cancellations;
-        return this;
-    }
-
-    public Transfer withRefundedAmount(Amount refundedAmount) {
+    public Transfer withRefundedAmount(AmountDecimal refundedAmount) {
         Utils.checkNotNull(refundedAmount, "refundedAmount");
         this.refundedAmount = Optional.ofNullable(refundedAmount);
         return this;
     }
 
 
-    public Transfer withRefundedAmount(Optional<? extends Amount> refundedAmount) {
+    public Transfer withRefundedAmount(Optional<? extends AmountDecimal> refundedAmount) {
         Utils.checkNotNull(refundedAmount, "refundedAmount");
         this.refundedAmount = refundedAmount;
         return this;
     }
 
-    public Transfer withRefunds(List<CardAcquiringRefund> refunds) {
-        Utils.checkNotNull(refunds, "refunds");
-        this.refunds = Optional.ofNullable(refunds);
-        return this;
-    }
-
-
-    public Transfer withRefunds(Optional<? extends List<CardAcquiringRefund>> refunds) {
-        Utils.checkNotNull(refunds, "refunds");
-        this.refunds = refunds;
-        return this;
-    }
-
-    public Transfer withDisputedAmount(Amount disputedAmount) {
+    public Transfer withDisputedAmount(AmountDecimal disputedAmount) {
         Utils.checkNotNull(disputedAmount, "disputedAmount");
         this.disputedAmount = Optional.ofNullable(disputedAmount);
         return this;
     }
 
 
-    public Transfer withDisputedAmount(Optional<? extends Amount> disputedAmount) {
+    public Transfer withDisputedAmount(Optional<? extends AmountDecimal> disputedAmount) {
         Utils.checkNotNull(disputedAmount, "disputedAmount");
         this.disputedAmount = disputedAmount;
-        return this;
-    }
-
-    public Transfer withDisputes(List<CardAcquiringDispute> disputes) {
-        Utils.checkNotNull(disputes, "disputes");
-        this.disputes = Optional.ofNullable(disputes);
-        return this;
-    }
-
-
-    public Transfer withDisputes(Optional<? extends List<CardAcquiringDispute>> disputes) {
-        Utils.checkNotNull(disputes, "disputes");
-        this.disputes = disputes;
         return this;
     }
 
@@ -918,6 +863,31 @@ public class Transfer {
         return this;
     }
 
+    public Transfer withAuthorization(TransferAuthorization authorization) {
+        Utils.checkNotNull(authorization, "authorization");
+        this.authorization = Optional.ofNullable(authorization);
+        return this;
+    }
+
+
+    public Transfer withAuthorization(Optional<? extends TransferAuthorization> authorization) {
+        Utils.checkNotNull(authorization, "authorization");
+        this.authorization = authorization;
+        return this;
+    }
+
+    public Transfer withOptions(TransferRailOptions options) {
+        Utils.checkNotNull(options, "options");
+        this.options = options;
+        return this;
+    }
+
+    public Transfer withProcessingDetails(TransferProcessingDetails processingDetails) {
+        Utils.checkNotNull(processingDetails, "processingDetails");
+        this.processingDetails = processingDetails;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -929,6 +899,7 @@ public class Transfer {
         Transfer other = (Transfer) o;
         return 
             Utils.enhancedDeepEquals(this.transferID, other.transferID) &&
+            Utils.enhancedDeepEquals(this.transferType, other.transferType) &&
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
             Utils.enhancedDeepEquals(this.source, other.source) &&
             Utils.enhancedDeepEquals(this.destination, other.destination) &&
@@ -940,15 +911,11 @@ public class Transfer {
             Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
             Utils.enhancedDeepEquals(this.facilitatorFee, other.facilitatorFee) &&
             Utils.enhancedDeepEquals(this.moovFee, other.moovFee) &&
-            Utils.enhancedDeepEquals(this.moovFeeDecimal, other.moovFeeDecimal) &&
             Utils.enhancedDeepEquals(this.moovFeeDetails, other.moovFeeDetails) &&
             Utils.enhancedDeepEquals(this.moovFees, other.moovFees) &&
             Utils.enhancedDeepEquals(this.groupID, other.groupID) &&
-            Utils.enhancedDeepEquals(this.cancellations, other.cancellations) &&
             Utils.enhancedDeepEquals(this.refundedAmount, other.refundedAmount) &&
-            Utils.enhancedDeepEquals(this.refunds, other.refunds) &&
             Utils.enhancedDeepEquals(this.disputedAmount, other.disputedAmount) &&
-            Utils.enhancedDeepEquals(this.disputes, other.disputes) &&
             Utils.enhancedDeepEquals(this.sweepID, other.sweepID) &&
             Utils.enhancedDeepEquals(this.scheduleID, other.scheduleID) &&
             Utils.enhancedDeepEquals(this.occurrenceID, other.occurrenceID) &&
@@ -956,28 +923,32 @@ public class Transfer {
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
             Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
             Utils.enhancedDeepEquals(this.invoiceID, other.invoiceID) &&
-            Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
+            Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails) &&
+            Utils.enhancedDeepEquals(this.authorization, other.authorization) &&
+            Utils.enhancedDeepEquals(this.options, other.options) &&
+            Utils.enhancedDeepEquals(this.processingDetails, other.processingDetails);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            transferID, createdOn, source,
-            destination, completedOn, status,
-            failureReason, amount, description,
-            metadata, facilitatorFee, moovFee,
-            moovFeeDecimal, moovFeeDetails, moovFees,
-            groupID, cancellations, refundedAmount,
-            refunds, disputedAmount, disputes,
+            transferID, transferType, createdOn,
+            source, destination, completedOn,
+            status, failureReason, amount,
+            description, metadata, facilitatorFee,
+            moovFee, moovFeeDetails, moovFees,
+            groupID, refundedAmount, disputedAmount,
             sweepID, scheduleID, occurrenceID,
             paymentLinkCode, foreignID, lineItems,
-            invoiceID, amountDetails);
+            invoiceID, amountDetails, authorization,
+            options, processingDetails);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Transfer.class,
                 "transferID", transferID,
+                "transferType", transferType,
                 "createdOn", createdOn,
                 "source", source,
                 "destination", destination,
@@ -989,15 +960,11 @@ public class Transfer {
                 "metadata", metadata,
                 "facilitatorFee", facilitatorFee,
                 "moovFee", moovFee,
-                "moovFeeDecimal", moovFeeDecimal,
                 "moovFeeDetails", moovFeeDetails,
                 "moovFees", moovFees,
                 "groupID", groupID,
-                "cancellations", cancellations,
                 "refundedAmount", refundedAmount,
-                "refunds", refunds,
                 "disputedAmount", disputedAmount,
-                "disputes", disputes,
                 "sweepID", sweepID,
                 "scheduleID", scheduleID,
                 "occurrenceID", occurrenceID,
@@ -1005,13 +972,18 @@ public class Transfer {
                 "foreignID", foreignID,
                 "lineItems", lineItems,
                 "invoiceID", invoiceID,
-                "amountDetails", amountDetails);
+                "amountDetails", amountDetails,
+                "authorization", authorization,
+                "options", options,
+                "processingDetails", processingDetails);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
         private String transferID;
+
+        private TransferType transferType;
 
         private OffsetDateTime createdOn;
 
@@ -1025,7 +997,7 @@ public class Transfer {
 
         private Optional<? extends TransferFailureReason> failureReason = Optional.empty();
 
-        private Amount amount;
+        private AmountDecimal amount;
 
         private Optional<String> description = Optional.empty();
 
@@ -1033,9 +1005,7 @@ public class Transfer {
 
         private Optional<? extends FacilitatorFee> facilitatorFee = Optional.empty();
 
-        private Optional<Long> moovFee = Optional.empty();
-
-        private Optional<String> moovFeeDecimal = Optional.empty();
+        private Optional<? extends AmountDecimal> moovFee = Optional.empty();
 
         private Optional<? extends MoovFeeDetails> moovFeeDetails = Optional.empty();
 
@@ -1043,15 +1013,9 @@ public class Transfer {
 
         private Optional<String> groupID = Optional.empty();
 
-        private Optional<? extends List<Cancellation>> cancellations = Optional.empty();
+        private Optional<? extends AmountDecimal> refundedAmount = Optional.empty();
 
-        private Optional<? extends Amount> refundedAmount = Optional.empty();
-
-        private Optional<? extends List<CardAcquiringRefund>> refunds = Optional.empty();
-
-        private Optional<? extends Amount> disputedAmount = Optional.empty();
-
-        private Optional<? extends List<CardAcquiringDispute>> disputes = Optional.empty();
+        private Optional<? extends AmountDecimal> disputedAmount = Optional.empty();
 
         private Optional<String> sweepID = Optional.empty();
 
@@ -1069,6 +1033,12 @@ public class Transfer {
 
         private Optional<? extends TransferAmountDetails> amountDetails = Optional.empty();
 
+        private Optional<? extends TransferAuthorization> authorization = Optional.empty();
+
+        private TransferRailOptions options;
+
+        private TransferProcessingDetails processingDetails;
+
         private Builder() {
           // force use of static builder() method
         }
@@ -1077,6 +1047,16 @@ public class Transfer {
         public Builder transferID(String transferID) {
             Utils.checkNotNull(transferID, "transferID");
             this.transferID = transferID;
+            return this;
+        }
+
+
+        /**
+         * The rail and direction used to move funds for a transfer.
+         */
+        public Builder transferType(TransferType transferType) {
+            Utils.checkNotNull(transferType, "transferType");
+            this.transferType = transferType;
             return this;
         }
 
@@ -1144,7 +1124,7 @@ public class Transfer {
         }
 
 
-        public Builder amount(Amount amount) {
+        public Builder amount(AmountDecimal amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
@@ -1211,7 +1191,7 @@ public class Transfer {
         /**
          * Fees charged to your platform account for transfers.
          */
-        public Builder moovFee(long moovFee) {
+        public Builder moovFee(AmountDecimal moovFee) {
             Utils.checkNotNull(moovFee, "moovFee");
             this.moovFee = Optional.ofNullable(moovFee);
             return this;
@@ -1220,30 +1200,9 @@ public class Transfer {
         /**
          * Fees charged to your platform account for transfers.
          */
-        public Builder moovFee(Optional<Long> moovFee) {
+        public Builder moovFee(Optional<? extends AmountDecimal> moovFee) {
             Utils.checkNotNull(moovFee, "moovFee");
             this.moovFee = moovFee;
-            return this;
-        }
-
-
-        /**
-         * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
-         * precision.
-         */
-        public Builder moovFeeDecimal(String moovFeeDecimal) {
-            Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
-            this.moovFeeDecimal = Optional.ofNullable(moovFeeDecimal);
-            return this;
-        }
-
-        /**
-         * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
-         * precision.
-         */
-        public Builder moovFeeDecimal(Optional<String> moovFeeDecimal) {
-            Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
-            this.moovFeeDecimal = moovFeeDecimal;
             return this;
         }
 
@@ -1299,67 +1258,28 @@ public class Transfer {
         }
 
 
-        public Builder cancellations(List<Cancellation> cancellations) {
-            Utils.checkNotNull(cancellations, "cancellations");
-            this.cancellations = Optional.ofNullable(cancellations);
-            return this;
-        }
-
-        public Builder cancellations(Optional<? extends List<Cancellation>> cancellations) {
-            Utils.checkNotNull(cancellations, "cancellations");
-            this.cancellations = cancellations;
-            return this;
-        }
-
-
-        public Builder refundedAmount(Amount refundedAmount) {
+        public Builder refundedAmount(AmountDecimal refundedAmount) {
             Utils.checkNotNull(refundedAmount, "refundedAmount");
             this.refundedAmount = Optional.ofNullable(refundedAmount);
             return this;
         }
 
-        public Builder refundedAmount(Optional<? extends Amount> refundedAmount) {
+        public Builder refundedAmount(Optional<? extends AmountDecimal> refundedAmount) {
             Utils.checkNotNull(refundedAmount, "refundedAmount");
             this.refundedAmount = refundedAmount;
             return this;
         }
 
 
-        public Builder refunds(List<CardAcquiringRefund> refunds) {
-            Utils.checkNotNull(refunds, "refunds");
-            this.refunds = Optional.ofNullable(refunds);
-            return this;
-        }
-
-        public Builder refunds(Optional<? extends List<CardAcquiringRefund>> refunds) {
-            Utils.checkNotNull(refunds, "refunds");
-            this.refunds = refunds;
-            return this;
-        }
-
-
-        public Builder disputedAmount(Amount disputedAmount) {
+        public Builder disputedAmount(AmountDecimal disputedAmount) {
             Utils.checkNotNull(disputedAmount, "disputedAmount");
             this.disputedAmount = Optional.ofNullable(disputedAmount);
             return this;
         }
 
-        public Builder disputedAmount(Optional<? extends Amount> disputedAmount) {
+        public Builder disputedAmount(Optional<? extends AmountDecimal> disputedAmount) {
             Utils.checkNotNull(disputedAmount, "disputedAmount");
             this.disputedAmount = disputedAmount;
-            return this;
-        }
-
-
-        public Builder disputes(List<CardAcquiringDispute> disputes) {
-            Utils.checkNotNull(disputes, "disputes");
-            this.disputes = Optional.ofNullable(disputes);
-            return this;
-        }
-
-        public Builder disputes(Optional<? extends List<CardAcquiringDispute>> disputes) {
-            Utils.checkNotNull(disputes, "disputes");
-            this.disputes = disputes;
             return this;
         }
 
@@ -1493,19 +1413,46 @@ public class Transfer {
             return this;
         }
 
+
+        public Builder authorization(TransferAuthorization authorization) {
+            Utils.checkNotNull(authorization, "authorization");
+            this.authorization = Optional.ofNullable(authorization);
+            return this;
+        }
+
+        public Builder authorization(Optional<? extends TransferAuthorization> authorization) {
+            Utils.checkNotNull(authorization, "authorization");
+            this.authorization = authorization;
+            return this;
+        }
+
+
+        public Builder options(TransferRailOptions options) {
+            Utils.checkNotNull(options, "options");
+            this.options = options;
+            return this;
+        }
+
+
+        public Builder processingDetails(TransferProcessingDetails processingDetails) {
+            Utils.checkNotNull(processingDetails, "processingDetails");
+            this.processingDetails = processingDetails;
+            return this;
+        }
+
         public Transfer build() {
 
             return new Transfer(
-                transferID, createdOn, source,
-                destination, completedOn, status,
-                failureReason, amount, description,
-                metadata, facilitatorFee, moovFee,
-                moovFeeDecimal, moovFeeDetails, moovFees,
-                groupID, cancellations, refundedAmount,
-                refunds, disputedAmount, disputes,
+                transferID, transferType, createdOn,
+                source, destination, completedOn,
+                status, failureReason, amount,
+                description, metadata, facilitatorFee,
+                moovFee, moovFeeDetails, moovFees,
+                groupID, refundedAmount, disputedAmount,
                 sweepID, scheduleID, occurrenceID,
                 paymentLinkCode, foreignID, lineItems,
-                invoiceID, amountDetails);
+                invoiceID, amountDetails, authorization,
+                options, processingDetails);
         }
 
     }

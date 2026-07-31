@@ -45,7 +45,7 @@ public class InitiateRefundRequest {
 
 
     @SpeakeasyMetadata("request:mediaType=application/json")
-    private Optional<? extends CreateRefund> createRefund;
+    private CreateRefund createRefund;
 
     @JsonCreator
     public InitiateRefundRequest(
@@ -53,7 +53,7 @@ public class InitiateRefundRequest {
             Optional<? extends TransferWaitFor> xWaitFor,
             String accountID,
             String transferID,
-            Optional<? extends CreateRefund> createRefund) {
+            CreateRefund createRefund) {
         Utils.checkNotNull(xIdempotencyKey, "xIdempotencyKey");
         Utils.checkNotNull(xWaitFor, "xWaitFor");
         Utils.checkNotNull(accountID, "accountID");
@@ -69,9 +69,10 @@ public class InitiateRefundRequest {
     public InitiateRefundRequest(
             String xIdempotencyKey,
             String accountID,
-            String transferID) {
+            String transferID,
+            CreateRefund createRefund) {
         this(xIdempotencyKey, Optional.empty(), accountID,
-            transferID, Optional.empty());
+            transferID, createRefund);
     }
 
     /**
@@ -110,10 +111,9 @@ public class InitiateRefundRequest {
         return transferID;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<CreateRefund> createRefund() {
-        return (Optional<CreateRefund>) createRefund;
+    public CreateRefund createRefund() {
+        return createRefund;
     }
 
     public static Builder builder() {
@@ -175,13 +175,6 @@ public class InitiateRefundRequest {
 
     public InitiateRefundRequest withCreateRefund(CreateRefund createRefund) {
         Utils.checkNotNull(createRefund, "createRefund");
-        this.createRefund = Optional.ofNullable(createRefund);
-        return this;
-    }
-
-
-    public InitiateRefundRequest withCreateRefund(Optional<? extends CreateRefund> createRefund) {
-        Utils.checkNotNull(createRefund, "createRefund");
         this.createRefund = createRefund;
         return this;
     }
@@ -231,7 +224,7 @@ public class InitiateRefundRequest {
 
         private String transferID;
 
-        private Optional<? extends CreateRefund> createRefund = Optional.empty();
+        private CreateRefund createRefund;
 
         private Builder() {
           // force use of static builder() method
@@ -294,12 +287,6 @@ public class InitiateRefundRequest {
 
 
         public Builder createRefund(CreateRefund createRefund) {
-            Utils.checkNotNull(createRefund, "createRefund");
-            this.createRefund = Optional.ofNullable(createRefund);
-            return this;
-        }
-
-        public Builder createRefund(Optional<? extends CreateRefund> createRefund) {
             Utils.checkNotNull(createRefund, "createRefund");
             this.createRefund = createRefund;
             return this;

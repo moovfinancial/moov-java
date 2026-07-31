@@ -5,6 +5,7 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.moov.sdk.models.components.CreateCancellation;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
@@ -24,14 +25,21 @@ public class CreateCancellationRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=transferID")
     private String transferID;
 
+
+    @SpeakeasyMetadata("request:mediaType=application/json")
+    private CreateCancellation createCancellation;
+
     @JsonCreator
     public CreateCancellationRequest(
             String accountID,
-            String transferID) {
+            String transferID,
+            CreateCancellation createCancellation) {
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(transferID, "transferID");
+        Utils.checkNotNull(createCancellation, "createCancellation");
         this.accountID = accountID;
         this.transferID = transferID;
+        this.createCancellation = createCancellation;
     }
 
     /**
@@ -48,6 +56,11 @@ public class CreateCancellationRequest {
     @JsonIgnore
     public String transferID() {
         return transferID;
+    }
+
+    @JsonIgnore
+    public CreateCancellation createCancellation() {
+        return createCancellation;
     }
 
     public static Builder builder() {
@@ -73,6 +86,12 @@ public class CreateCancellationRequest {
         return this;
     }
 
+    public CreateCancellationRequest withCreateCancellation(CreateCancellation createCancellation) {
+        Utils.checkNotNull(createCancellation, "createCancellation");
+        this.createCancellation = createCancellation;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -84,20 +103,22 @@ public class CreateCancellationRequest {
         CreateCancellationRequest other = (CreateCancellationRequest) o;
         return 
             Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
-            Utils.enhancedDeepEquals(this.transferID, other.transferID);
+            Utils.enhancedDeepEquals(this.transferID, other.transferID) &&
+            Utils.enhancedDeepEquals(this.createCancellation, other.createCancellation);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID, transferID);
+            accountID, transferID, createCancellation);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CreateCancellationRequest.class,
                 "accountID", accountID,
-                "transferID", transferID);
+                "transferID", transferID,
+                "createCancellation", createCancellation);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -106,6 +127,8 @@ public class CreateCancellationRequest {
         private String accountID;
 
         private String transferID;
+
+        private CreateCancellation createCancellation;
 
         private Builder() {
           // force use of static builder() method
@@ -131,10 +154,17 @@ public class CreateCancellationRequest {
             return this;
         }
 
+
+        public Builder createCancellation(CreateCancellation createCancellation) {
+            Utils.checkNotNull(createCancellation, "createCancellation");
+            this.createCancellation = createCancellation;
+            return this;
+        }
+
         public CreateCancellationRequest build() {
 
             return new CreateCancellationRequest(
-                accountID, transferID);
+                accountID, transferID, createCancellation);
         }
 
     }

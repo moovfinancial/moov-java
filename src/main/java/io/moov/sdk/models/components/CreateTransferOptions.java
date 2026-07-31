@@ -22,13 +22,13 @@ public class CreateTransferOptions {
 
 
     @JsonProperty("amount")
-    private Amount amount;
+    private AmountDecimal amount;
 
     @JsonCreator
     public CreateTransferOptions(
             @JsonProperty("source") SourceDestinationOptions source,
             @JsonProperty("destination") SourceDestinationOptions destination,
-            @JsonProperty("amount") Amount amount) {
+            @JsonProperty("amount") AmountDecimal amount) {
         Utils.checkNotNull(source, "source");
         Utils.checkNotNull(destination, "destination");
         Utils.checkNotNull(amount, "amount");
@@ -48,7 +48,7 @@ public class CreateTransferOptions {
     }
 
     @JsonIgnore
-    public Amount amount() {
+    public AmountDecimal amount() {
         return amount;
     }
 
@@ -69,7 +69,7 @@ public class CreateTransferOptions {
         return this;
     }
 
-    public CreateTransferOptions withAmount(Amount amount) {
+    public CreateTransferOptions withAmount(AmountDecimal amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
         return this;
@@ -111,7 +111,7 @@ public class CreateTransferOptions {
 
         private SourceDestinationOptions destination;
 
-        private Amount amount;
+        private AmountDecimal amount;
 
         private Builder() {
           // force use of static builder() method
@@ -132,7 +132,7 @@ public class CreateTransferOptions {
         }
 
 
-        public Builder amount(Amount amount) {
+        public Builder amount(AmountDecimal amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;

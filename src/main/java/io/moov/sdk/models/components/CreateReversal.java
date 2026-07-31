@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
-import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -18,11 +17,11 @@ import java.util.Optional;
 
 public class CreateReversal {
     /**
-     * Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a
-     * cancellation.
+     * Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts
+     * automatically trigger a refund instead of a cancellation.
      */
     @JsonProperty("amount")
-    private long amount;
+    private AmountDecimal amount;
 
     /**
      * Breakdown of the reversed amount.
@@ -33,7 +32,7 @@ public class CreateReversal {
 
     @JsonCreator
     public CreateReversal(
-            @JsonProperty("amount") long amount,
+            @JsonProperty("amount") AmountDecimal amount,
             @JsonProperty("amountDetails") Optional<? extends ReversalAmountDetails> amountDetails) {
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(amountDetails, "amountDetails");
@@ -42,16 +41,16 @@ public class CreateReversal {
     }
     
     public CreateReversal(
-            long amount) {
+            AmountDecimal amount) {
         this(amount, Optional.empty());
     }
 
     /**
-     * Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a
-     * cancellation.
+     * Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts
+     * automatically trigger a refund instead of a cancellation.
      */
     @JsonIgnore
-    public long amount() {
+    public AmountDecimal amount() {
         return amount;
     }
 
@@ -70,10 +69,10 @@ public class CreateReversal {
 
 
     /**
-     * Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a
-     * cancellation.
+     * Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts
+     * automatically trigger a refund instead of a cancellation.
      */
-    public CreateReversal withAmount(long amount) {
+    public CreateReversal withAmount(AmountDecimal amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
         return this;
@@ -128,7 +127,7 @@ public class CreateReversal {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Long amount;
+        private AmountDecimal amount;
 
         private Optional<? extends ReversalAmountDetails> amountDetails = Optional.empty();
 
@@ -138,10 +137,10 @@ public class CreateReversal {
 
 
         /**
-         * Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a
-         * cancellation.
+         * Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts
+         * automatically trigger a refund instead of a cancellation.
          */
-        public Builder amount(long amount) {
+        public Builder amount(AmountDecimal amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;

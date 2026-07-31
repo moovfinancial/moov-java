@@ -4,6 +4,12 @@
 
 ### Available Operations
 
+* [listMerchantCategories](#listmerchantcategories) - List the predefined merchant category groups available for issued card spend controls, along with
+the merchant category codes (MCCs) each group covers. Use these category names in an issued card's
+`merchantCategoryRestrictions`.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/),
+you'll need to specify the `/issued-cards.read` scope.
 * [request](#request) - Request a virtual card be issued.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
@@ -26,6 +32,57 @@ Only use this endpoint if you have provided Moov with a copy of your PCI attesta
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
+
+## listMerchantCategories
+
+List the predefined merchant category groups available for issued card spend controls, along with
+the merchant category codes (MCCs) each group covers. Use these category names in an issued card's
+`merchantCategoryRestrictions`.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/),
+you'll need to specify the `/issued-cards.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="listIssuingMerchantCategories" method="get" path="/issuing/merchant-categories" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListIssuingMerchantCategoriesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        ListIssuingMerchantCategoriesResponse res = sdk.cardIssuing().listMerchantCategories()
+                .call();
+
+        if (res.merchantCategories().isPresent()) {
+            System.out.println(res.merchantCategories().get());
+        }
+    }
+}
+```
+
+### Response
+
+**[ListIssuingMerchantCategoriesResponse](../../models/operations/ListIssuingMerchantCategoriesResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
 ## request
 
@@ -80,8 +137,8 @@ public class Application {
                     .controls(IssuingControls.builder()
                         .velocityLimits(List.of(
                             IssuingVelocityLimit.builder()
-                                .amount(10000L)
                                 .interval(IssuingIntervalLimit.PER_TRANSACTION)
+                                .amount(10000L)
                                 .build()))
                         .build())
                     .build())
@@ -251,6 +308,7 @@ import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.UpdateIssuedCardError;
 import io.moov.sdk.models.operations.UpdateIssuedCardResponse;
 import java.lang.Exception;
+import java.util.List;
 import java.util.Map;
 
 public class Application {
@@ -277,6 +335,13 @@ public class Application {
                         .stateOrProvince("CO")
                         .postalCode("80301")
                         .country("US")
+                        .build())
+                    .controls(UpdateIssuingControls.builder()
+                        .velocityLimits(List.of(
+                            IssuingVelocityLimit.builder()
+                                .interval(IssuingIntervalLimit.DAILY)
+                                .amount(10000L)
+                                .build()))
                         .build())
                     .build())
                 .call();

@@ -31,7 +31,14 @@ public class AsyncCreatedRefund {
 
 
     @JsonProperty("amount")
-    private Amount amount;
+    private AmountDecimal amount;
+
+    /**
+     * ID of the capture this refund applies to, when applicable.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("captureID")
+    private Optional<String> captureID;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -42,24 +49,27 @@ public class AsyncCreatedRefund {
     public AsyncCreatedRefund(
             @JsonProperty("refundID") String refundID,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
-            @JsonProperty("amount") Amount amount,
+            @JsonProperty("amount") AmountDecimal amount,
+            @JsonProperty("captureID") Optional<String> captureID,
             @JsonProperty("amountDetails") Optional<? extends RefundAmountDetails> amountDetails) {
         Utils.checkNotNull(refundID, "refundID");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(amount, "amount");
+        Utils.checkNotNull(captureID, "captureID");
         Utils.checkNotNull(amountDetails, "amountDetails");
         this.refundID = refundID;
         this.createdOn = createdOn;
         this.amount = amount;
+        this.captureID = captureID;
         this.amountDetails = amountDetails;
     }
     
     public AsyncCreatedRefund(
             String refundID,
             OffsetDateTime createdOn,
-            Amount amount) {
+            AmountDecimal amount) {
         this(refundID, createdOn, amount,
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -73,8 +83,16 @@ public class AsyncCreatedRefund {
     }
 
     @JsonIgnore
-    public Amount amount() {
+    public AmountDecimal amount() {
         return amount;
+    }
+
+    /**
+     * ID of the capture this refund applies to, when applicable.
+     */
+    @JsonIgnore
+    public Optional<String> captureID() {
+        return captureID;
     }
 
     @SuppressWarnings("unchecked")
@@ -100,9 +118,28 @@ public class AsyncCreatedRefund {
         return this;
     }
 
-    public AsyncCreatedRefund withAmount(Amount amount) {
+    public AsyncCreatedRefund withAmount(AmountDecimal amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
+        return this;
+    }
+
+    /**
+     * ID of the capture this refund applies to, when applicable.
+     */
+    public AsyncCreatedRefund withCaptureID(String captureID) {
+        Utils.checkNotNull(captureID, "captureID");
+        this.captureID = Optional.ofNullable(captureID);
+        return this;
+    }
+
+
+    /**
+     * ID of the capture this refund applies to, when applicable.
+     */
+    public AsyncCreatedRefund withCaptureID(Optional<String> captureID) {
+        Utils.checkNotNull(captureID, "captureID");
+        this.captureID = captureID;
         return this;
     }
 
@@ -132,6 +169,7 @@ public class AsyncCreatedRefund {
             Utils.enhancedDeepEquals(this.refundID, other.refundID) &&
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.captureID, other.captureID) &&
             Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
     }
     
@@ -139,7 +177,7 @@ public class AsyncCreatedRefund {
     public int hashCode() {
         return Utils.enhancedHash(
             refundID, createdOn, amount,
-            amountDetails);
+            captureID, amountDetails);
     }
     
     @Override
@@ -148,6 +186,7 @@ public class AsyncCreatedRefund {
                 "refundID", refundID,
                 "createdOn", createdOn,
                 "amount", amount,
+                "captureID", captureID,
                 "amountDetails", amountDetails);
     }
 
@@ -158,7 +197,9 @@ public class AsyncCreatedRefund {
 
         private OffsetDateTime createdOn;
 
-        private Amount amount;
+        private AmountDecimal amount;
+
+        private Optional<String> captureID = Optional.empty();
 
         private Optional<? extends RefundAmountDetails> amountDetails = Optional.empty();
 
@@ -181,9 +222,28 @@ public class AsyncCreatedRefund {
         }
 
 
-        public Builder amount(Amount amount) {
+        public Builder amount(AmountDecimal amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
+            return this;
+        }
+
+
+        /**
+         * ID of the capture this refund applies to, when applicable.
+         */
+        public Builder captureID(String captureID) {
+            Utils.checkNotNull(captureID, "captureID");
+            this.captureID = Optional.ofNullable(captureID);
+            return this;
+        }
+
+        /**
+         * ID of the capture this refund applies to, when applicable.
+         */
+        public Builder captureID(Optional<String> captureID) {
+            Utils.checkNotNull(captureID, "captureID");
+            this.captureID = captureID;
             return this;
         }
 
@@ -204,7 +264,7 @@ public class AsyncCreatedRefund {
 
             return new AsyncCreatedRefund(
                 refundID, createdOn, amount,
-                amountDetails);
+                captureID, amountDetails);
         }
 
     }

@@ -20,6 +20,7 @@ public enum TransferStatus {
     FAILED("failed"),
     REVERSED("reversed"),
     QUEUED("queued"),
+    AWAITING_CAPTURE("awaiting-capture"),
     CANCELED("canceled");
 
     @JsonValue

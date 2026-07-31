@@ -5,19 +5,31 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class IssuingVelocityLimit {
     /**
      * The maximum amount in cents that can be spent in a given interval.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
-    private long amount;
+    private Optional<Long> amount;
+
+    /**
+     * The maximum number of transactions allowed in the given interval. At least one of `amount` or
+     * `count` must be set.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("count")
+    private Optional<Long> count;
 
     /**
      * Specifies the time frame for a velocity limit. `per-transaction` applies to each individual
@@ -28,20 +40,37 @@ public class IssuingVelocityLimit {
 
     @JsonCreator
     public IssuingVelocityLimit(
-            @JsonProperty("amount") long amount,
+            @JsonProperty("amount") Optional<Long> amount,
+            @JsonProperty("count") Optional<Long> count,
             @JsonProperty("interval") IssuingIntervalLimit interval) {
         Utils.checkNotNull(amount, "amount");
+        Utils.checkNotNull(count, "count");
         Utils.checkNotNull(interval, "interval");
         this.amount = amount;
+        this.count = count;
         this.interval = interval;
+    }
+    
+    public IssuingVelocityLimit(
+            IssuingIntervalLimit interval) {
+        this(Optional.empty(), Optional.empty(), interval);
     }
 
     /**
      * The maximum amount in cents that can be spent in a given interval.
      */
     @JsonIgnore
-    public long amount() {
+    public Optional<Long> amount() {
         return amount;
+    }
+
+    /**
+     * The maximum number of transactions allowed in the given interval. At least one of `amount` or
+     * `count` must be set.
+     */
+    @JsonIgnore
+    public Optional<Long> count() {
+        return count;
     }
 
     /**
@@ -63,7 +92,38 @@ public class IssuingVelocityLimit {
      */
     public IssuingVelocityLimit withAmount(long amount) {
         Utils.checkNotNull(amount, "amount");
+        this.amount = Optional.ofNullable(amount);
+        return this;
+    }
+
+
+    /**
+     * The maximum amount in cents that can be spent in a given interval.
+     */
+    public IssuingVelocityLimit withAmount(Optional<Long> amount) {
+        Utils.checkNotNull(amount, "amount");
         this.amount = amount;
+        return this;
+    }
+
+    /**
+     * The maximum number of transactions allowed in the given interval. At least one of `amount` or
+     * `count` must be set.
+     */
+    public IssuingVelocityLimit withCount(long count) {
+        Utils.checkNotNull(count, "count");
+        this.count = Optional.ofNullable(count);
+        return this;
+    }
+
+
+    /**
+     * The maximum number of transactions allowed in the given interval. At least one of `amount` or
+     * `count` must be set.
+     */
+    public IssuingVelocityLimit withCount(Optional<Long> count) {
+        Utils.checkNotNull(count, "count");
+        this.count = count;
         return this;
     }
 
@@ -88,26 +148,30 @@ public class IssuingVelocityLimit {
         IssuingVelocityLimit other = (IssuingVelocityLimit) o;
         return 
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.count, other.count) &&
             Utils.enhancedDeepEquals(this.interval, other.interval);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            amount, interval);
+            amount, count, interval);
     }
     
     @Override
     public String toString() {
         return Utils.toString(IssuingVelocityLimit.class,
                 "amount", amount,
+                "count", count,
                 "interval", interval);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Long amount;
+        private Optional<Long> amount = Optional.empty();
+
+        private Optional<Long> count = Optional.empty();
 
         private IssuingIntervalLimit interval;
 
@@ -121,7 +185,37 @@ public class IssuingVelocityLimit {
          */
         public Builder amount(long amount) {
             Utils.checkNotNull(amount, "amount");
+            this.amount = Optional.ofNullable(amount);
+            return this;
+        }
+
+        /**
+         * The maximum amount in cents that can be spent in a given interval.
+         */
+        public Builder amount(Optional<Long> amount) {
+            Utils.checkNotNull(amount, "amount");
             this.amount = amount;
+            return this;
+        }
+
+
+        /**
+         * The maximum number of transactions allowed in the given interval. At least one of `amount` or
+         * `count` must be set.
+         */
+        public Builder count(long count) {
+            Utils.checkNotNull(count, "count");
+            this.count = Optional.ofNullable(count);
+            return this;
+        }
+
+        /**
+         * The maximum number of transactions allowed in the given interval. At least one of `amount` or
+         * `count` must be set.
+         */
+        public Builder count(Optional<Long> count) {
+            Utils.checkNotNull(count, "count");
+            this.count = count;
             return this;
         }
 
@@ -139,7 +233,7 @@ public class IssuingVelocityLimit {
         public IssuingVelocityLimit build() {
 
             return new IssuingVelocityLimit(
-                amount, interval);
+                amount, count, interval);
         }
 
     }

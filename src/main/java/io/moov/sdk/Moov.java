@@ -145,10 +145,10 @@ public class Moov {
     private final Institutions institutions;
 
 
-    private final IssuingTransactions issuingTransactions;
-
-
     private final CardIssuing cardIssuing;
+
+
+    private final IssuingTransactions issuingTransactions;
 
 
     private final Authentication authentication;
@@ -344,13 +344,13 @@ public class Moov {
     }
 
 
-    public IssuingTransactions issuingTransactions() {
-        return issuingTransactions;
+    public CardIssuing cardIssuing() {
+        return cardIssuing;
     }
 
 
-    public CardIssuing cardIssuing() {
-        return cardIssuing;
+    public IssuingTransactions issuingTransactions() {
+        return issuingTransactions;
     }
 
 
@@ -565,8 +565,8 @@ public class Moov {
         this.webhooks = new Webhooks(sdkConfiguration);
         this.industries = new Industries(sdkConfiguration);
         this.institutions = new Institutions(sdkConfiguration);
-        this.issuingTransactions = new IssuingTransactions(sdkConfiguration);
         this.cardIssuing = new CardIssuing(sdkConfiguration);
+        this.issuingTransactions = new IssuingTransactions(sdkConfiguration);
         this.authentication = new Authentication(sdkConfiguration);
         this.onboarding = new Onboarding(sdkConfiguration);
         this.ping = new Ping(sdkConfiguration);

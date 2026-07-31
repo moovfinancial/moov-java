@@ -42,25 +42,35 @@ public class UpdateIssuedCard {
     @JsonProperty("billingAddress")
     private JsonNullable<? extends BillingAddress> billingAddress;
 
+    /**
+     * Mutable spend controls for the card.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("controls")
+    private Optional<? extends UpdateIssuingControls> controls;
+
     @JsonCreator
     public UpdateIssuedCard(
             @JsonProperty("state") Optional<? extends UpdateIssuedCardState> state,
             @JsonProperty("nickname") JsonNullable<String> nickname,
             @JsonProperty("metadata") JsonNullable<? extends Map<String, String>> metadata,
-            @JsonProperty("billingAddress") JsonNullable<? extends BillingAddress> billingAddress) {
+            @JsonProperty("billingAddress") JsonNullable<? extends BillingAddress> billingAddress,
+            @JsonProperty("controls") Optional<? extends UpdateIssuingControls> controls) {
         Utils.checkNotNull(state, "state");
         Utils.checkNotNull(nickname, "nickname");
         Utils.checkNotNull(metadata, "metadata");
         Utils.checkNotNull(billingAddress, "billingAddress");
+        Utils.checkNotNull(controls, "controls");
         this.state = state;
         this.nickname = nickname;
         this.metadata = metadata;
         this.billingAddress = billingAddress;
+        this.controls = controls;
     }
     
     public UpdateIssuedCard() {
         this(Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
-            JsonNullable.undefined());
+            JsonNullable.undefined(), Optional.empty());
     }
 
     /**
@@ -89,6 +99,15 @@ public class UpdateIssuedCard {
     @JsonIgnore
     public JsonNullable<BillingAddress> billingAddress() {
         return (JsonNullable<BillingAddress>) billingAddress;
+    }
+
+    /**
+     * Mutable spend controls for the card.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<UpdateIssuingControls> controls() {
+        return (Optional<UpdateIssuingControls>) controls;
     }
 
     public static Builder builder() {
@@ -155,6 +174,25 @@ public class UpdateIssuedCard {
         return this;
     }
 
+    /**
+     * Mutable spend controls for the card.
+     */
+    public UpdateIssuedCard withControls(UpdateIssuingControls controls) {
+        Utils.checkNotNull(controls, "controls");
+        this.controls = Optional.ofNullable(controls);
+        return this;
+    }
+
+
+    /**
+     * Mutable spend controls for the card.
+     */
+    public UpdateIssuedCard withControls(Optional<? extends UpdateIssuingControls> controls) {
+        Utils.checkNotNull(controls, "controls");
+        this.controls = controls;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -168,14 +206,15 @@ public class UpdateIssuedCard {
             Utils.enhancedDeepEquals(this.state, other.state) &&
             Utils.enhancedDeepEquals(this.nickname, other.nickname) &&
             Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
-            Utils.enhancedDeepEquals(this.billingAddress, other.billingAddress);
+            Utils.enhancedDeepEquals(this.billingAddress, other.billingAddress) &&
+            Utils.enhancedDeepEquals(this.controls, other.controls);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             state, nickname, metadata,
-            billingAddress);
+            billingAddress, controls);
     }
     
     @Override
@@ -184,7 +223,8 @@ public class UpdateIssuedCard {
                 "state", state,
                 "nickname", nickname,
                 "metadata", metadata,
-                "billingAddress", billingAddress);
+                "billingAddress", billingAddress,
+                "controls", controls);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -197,6 +237,8 @@ public class UpdateIssuedCard {
         private JsonNullable<? extends Map<String, String>> metadata = JsonNullable.undefined();
 
         private JsonNullable<? extends BillingAddress> billingAddress = JsonNullable.undefined();
+
+        private Optional<? extends UpdateIssuingControls> controls = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -264,11 +306,30 @@ public class UpdateIssuedCard {
             return this;
         }
 
+
+        /**
+         * Mutable spend controls for the card.
+         */
+        public Builder controls(UpdateIssuingControls controls) {
+            Utils.checkNotNull(controls, "controls");
+            this.controls = Optional.ofNullable(controls);
+            return this;
+        }
+
+        /**
+         * Mutable spend controls for the card.
+         */
+        public Builder controls(Optional<? extends UpdateIssuingControls> controls) {
+            Utils.checkNotNull(controls, "controls");
+            this.controls = controls;
+            return this;
+        }
+
         public UpdateIssuedCard build() {
 
             return new UpdateIssuedCard(
                 state, nickname, metadata,
-                billingAddress);
+                billingAddress, controls);
         }
 
     }

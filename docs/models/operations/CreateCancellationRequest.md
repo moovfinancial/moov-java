@@ -3,7 +3,8 @@
 
 ## Fields
 
-| Field                          | Type                           | Required                       | Description                    |
-| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
-| `accountID`                    | *String*                       | :heavy_check_mark:             | The partner's Moov account ID. |
-| `transferID`                   | *String*                       | :heavy_check_mark:             | The transfer ID to cancel.     |
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `accountID`                                                         | *String*                                                            | :heavy_check_mark:                                                  | The partner's Moov account ID.                                      |
+| `transferID`                                                        | *String*                                                            | :heavy_check_mark:                                                  | The transfer ID to cancel.                                          |
+| `createCancellation`                                                | [CreateCancellation](../../models/components/CreateCancellation.md) | :heavy_check_mark:                                                  | N/A                                                                 |

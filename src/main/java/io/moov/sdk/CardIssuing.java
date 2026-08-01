@@ -3,6 +3,7 @@
  */
 package io.moov.sdk;
 
+import static io.moov.sdk.operations.Operations.RequestlessOperation;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.models.components.IssuedCardState;
@@ -17,6 +18,8 @@ import io.moov.sdk.models.operations.GetIssuedCardResponse;
 import io.moov.sdk.models.operations.ListIssuedCardsRequest;
 import io.moov.sdk.models.operations.ListIssuedCardsRequestBuilder;
 import io.moov.sdk.models.operations.ListIssuedCardsResponse;
+import io.moov.sdk.models.operations.ListIssuingMerchantCategoriesRequestBuilder;
+import io.moov.sdk.models.operations.ListIssuingMerchantCategoriesResponse;
 import io.moov.sdk.models.operations.RequestCardRequest;
 import io.moov.sdk.models.operations.RequestCardRequestBuilder;
 import io.moov.sdk.models.operations.RequestCardResponse;
@@ -26,6 +29,7 @@ import io.moov.sdk.models.operations.UpdateIssuedCardResponse;
 import io.moov.sdk.operations.GetFullIssuedCard;
 import io.moov.sdk.operations.GetIssuedCard;
 import io.moov.sdk.operations.ListIssuedCards;
+import io.moov.sdk.operations.ListIssuingMerchantCategories;
 import io.moov.sdk.utils.Headers;
 import java.lang.Long;
 import java.lang.String;
@@ -39,6 +43,39 @@ public class CardIssuing {
 
     CardIssuing(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+
+    /**
+     * List the predefined merchant category groups available for issued card spend controls, along with
+     * the merchant category codes (MCCs) each group covers. Use these category names in an issued card's
+     * `merchantCategoryRestrictions`.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/),
+     * you'll need to specify the `/issued-cards.read` scope.
+     * 
+     * @return The call builder
+     */
+    public ListIssuingMerchantCategoriesRequestBuilder listMerchantCategories() {
+        return new ListIssuingMerchantCategoriesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * List the predefined merchant category groups available for issued card spend controls, along with
+     * the merchant category codes (MCCs) each group covers. Use these category names in an issued card's
+     * `merchantCategoryRestrictions`.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/),
+     * you'll need to specify the `/issued-cards.read` scope.
+     * 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListIssuingMerchantCategoriesResponse listMerchantCategoriesDirect() {
+        RequestlessOperation<ListIssuingMerchantCategoriesResponse> operation
+            = new ListIssuingMerchantCategories.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest());
     }
 
     /**

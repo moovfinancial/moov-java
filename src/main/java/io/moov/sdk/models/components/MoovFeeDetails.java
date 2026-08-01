@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 /**
@@ -25,7 +26,7 @@ public class MoovFeeDetails {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardScheme")
-    private Optional<String> cardScheme;
+    private Optional<? extends AmountDecimal> cardScheme;
 
     /**
      * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to
@@ -33,7 +34,7 @@ public class MoovFeeDetails {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("interchange")
-    private Optional<String> interchange;
+    private Optional<? extends AmountDecimal> interchange;
 
     /**
      * Network discount fee for American Express. String type represents dollars with up to 9 decimal place
@@ -41,20 +42,20 @@ public class MoovFeeDetails {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("discount")
-    private Optional<String> discount;
+    private Optional<? extends AmountDecimal> discount;
 
     /**
      * Moov processing fee. String type represents dollars with up to 9 decimal place precision.
      */
     @JsonProperty("moovProcessing")
-    private String moovProcessing;
+    private AmountDecimal moovProcessing;
 
     @JsonCreator
     public MoovFeeDetails(
-            @JsonProperty("cardScheme") Optional<String> cardScheme,
-            @JsonProperty("interchange") Optional<String> interchange,
-            @JsonProperty("discount") Optional<String> discount,
-            @JsonProperty("moovProcessing") String moovProcessing) {
+            @JsonProperty("cardScheme") Optional<? extends AmountDecimal> cardScheme,
+            @JsonProperty("interchange") Optional<? extends AmountDecimal> interchange,
+            @JsonProperty("discount") Optional<? extends AmountDecimal> discount,
+            @JsonProperty("moovProcessing") AmountDecimal moovProcessing) {
         Utils.checkNotNull(cardScheme, "cardScheme");
         Utils.checkNotNull(interchange, "interchange");
         Utils.checkNotNull(discount, "discount");
@@ -66,7 +67,7 @@ public class MoovFeeDetails {
     }
     
     public MoovFeeDetails(
-            String moovProcessing) {
+            AmountDecimal moovProcessing) {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             moovProcessing);
     }
@@ -75,34 +76,37 @@ public class MoovFeeDetails {
      * Card scheme fees accrued during authorization and settlement. String type represents dollars with up
      * to 9 decimal place precision.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> cardScheme() {
-        return cardScheme;
+    public Optional<AmountDecimal> cardScheme() {
+        return (Optional<AmountDecimal>) cardScheme;
     }
 
     /**
      * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to
      * 9 decimal place precision.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> interchange() {
-        return interchange;
+    public Optional<AmountDecimal> interchange() {
+        return (Optional<AmountDecimal>) interchange;
     }
 
     /**
      * Network discount fee for American Express. String type represents dollars with up to 9 decimal place
      * precision.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> discount() {
-        return discount;
+    public Optional<AmountDecimal> discount() {
+        return (Optional<AmountDecimal>) discount;
     }
 
     /**
      * Moov processing fee. String type represents dollars with up to 9 decimal place precision.
      */
     @JsonIgnore
-    public String moovProcessing() {
+    public AmountDecimal moovProcessing() {
         return moovProcessing;
     }
 
@@ -115,7 +119,7 @@ public class MoovFeeDetails {
      * Card scheme fees accrued during authorization and settlement. String type represents dollars with up
      * to 9 decimal place precision.
      */
-    public MoovFeeDetails withCardScheme(String cardScheme) {
+    public MoovFeeDetails withCardScheme(AmountDecimal cardScheme) {
         Utils.checkNotNull(cardScheme, "cardScheme");
         this.cardScheme = Optional.ofNullable(cardScheme);
         return this;
@@ -126,7 +130,7 @@ public class MoovFeeDetails {
      * Card scheme fees accrued during authorization and settlement. String type represents dollars with up
      * to 9 decimal place precision.
      */
-    public MoovFeeDetails withCardScheme(Optional<String> cardScheme) {
+    public MoovFeeDetails withCardScheme(Optional<? extends AmountDecimal> cardScheme) {
         Utils.checkNotNull(cardScheme, "cardScheme");
         this.cardScheme = cardScheme;
         return this;
@@ -136,7 +140,7 @@ public class MoovFeeDetails {
      * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to
      * 9 decimal place precision.
      */
-    public MoovFeeDetails withInterchange(String interchange) {
+    public MoovFeeDetails withInterchange(AmountDecimal interchange) {
         Utils.checkNotNull(interchange, "interchange");
         this.interchange = Optional.ofNullable(interchange);
         return this;
@@ -147,7 +151,7 @@ public class MoovFeeDetails {
      * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to
      * 9 decimal place precision.
      */
-    public MoovFeeDetails withInterchange(Optional<String> interchange) {
+    public MoovFeeDetails withInterchange(Optional<? extends AmountDecimal> interchange) {
         Utils.checkNotNull(interchange, "interchange");
         this.interchange = interchange;
         return this;
@@ -157,7 +161,7 @@ public class MoovFeeDetails {
      * Network discount fee for American Express. String type represents dollars with up to 9 decimal place
      * precision.
      */
-    public MoovFeeDetails withDiscount(String discount) {
+    public MoovFeeDetails withDiscount(AmountDecimal discount) {
         Utils.checkNotNull(discount, "discount");
         this.discount = Optional.ofNullable(discount);
         return this;
@@ -168,7 +172,7 @@ public class MoovFeeDetails {
      * Network discount fee for American Express. String type represents dollars with up to 9 decimal place
      * precision.
      */
-    public MoovFeeDetails withDiscount(Optional<String> discount) {
+    public MoovFeeDetails withDiscount(Optional<? extends AmountDecimal> discount) {
         Utils.checkNotNull(discount, "discount");
         this.discount = discount;
         return this;
@@ -177,7 +181,7 @@ public class MoovFeeDetails {
     /**
      * Moov processing fee. String type represents dollars with up to 9 decimal place precision.
      */
-    public MoovFeeDetails withMoovProcessing(String moovProcessing) {
+    public MoovFeeDetails withMoovProcessing(AmountDecimal moovProcessing) {
         Utils.checkNotNull(moovProcessing, "moovProcessing");
         this.moovProcessing = moovProcessing;
         return this;
@@ -218,13 +222,13 @@ public class MoovFeeDetails {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> cardScheme = Optional.empty();
+        private Optional<? extends AmountDecimal> cardScheme = Optional.empty();
 
-        private Optional<String> interchange = Optional.empty();
+        private Optional<? extends AmountDecimal> interchange = Optional.empty();
 
-        private Optional<String> discount = Optional.empty();
+        private Optional<? extends AmountDecimal> discount = Optional.empty();
 
-        private String moovProcessing;
+        private AmountDecimal moovProcessing;
 
         private Builder() {
           // force use of static builder() method
@@ -235,7 +239,7 @@ public class MoovFeeDetails {
          * Card scheme fees accrued during authorization and settlement. String type represents dollars with up
          * to 9 decimal place precision.
          */
-        public Builder cardScheme(String cardScheme) {
+        public Builder cardScheme(AmountDecimal cardScheme) {
             Utils.checkNotNull(cardScheme, "cardScheme");
             this.cardScheme = Optional.ofNullable(cardScheme);
             return this;
@@ -245,7 +249,7 @@ public class MoovFeeDetails {
          * Card scheme fees accrued during authorization and settlement. String type represents dollars with up
          * to 9 decimal place precision.
          */
-        public Builder cardScheme(Optional<String> cardScheme) {
+        public Builder cardScheme(Optional<? extends AmountDecimal> cardScheme) {
             Utils.checkNotNull(cardScheme, "cardScheme");
             this.cardScheme = cardScheme;
             return this;
@@ -256,7 +260,7 @@ public class MoovFeeDetails {
          * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to
          * 9 decimal place precision.
          */
-        public Builder interchange(String interchange) {
+        public Builder interchange(AmountDecimal interchange) {
             Utils.checkNotNull(interchange, "interchange");
             this.interchange = Optional.ofNullable(interchange);
             return this;
@@ -266,7 +270,7 @@ public class MoovFeeDetails {
          * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to
          * 9 decimal place precision.
          */
-        public Builder interchange(Optional<String> interchange) {
+        public Builder interchange(Optional<? extends AmountDecimal> interchange) {
             Utils.checkNotNull(interchange, "interchange");
             this.interchange = interchange;
             return this;
@@ -277,7 +281,7 @@ public class MoovFeeDetails {
          * Network discount fee for American Express. String type represents dollars with up to 9 decimal place
          * precision.
          */
-        public Builder discount(String discount) {
+        public Builder discount(AmountDecimal discount) {
             Utils.checkNotNull(discount, "discount");
             this.discount = Optional.ofNullable(discount);
             return this;
@@ -287,7 +291,7 @@ public class MoovFeeDetails {
          * Network discount fee for American Express. String type represents dollars with up to 9 decimal place
          * precision.
          */
-        public Builder discount(Optional<String> discount) {
+        public Builder discount(Optional<? extends AmountDecimal> discount) {
             Utils.checkNotNull(discount, "discount");
             this.discount = discount;
             return this;
@@ -297,7 +301,7 @@ public class MoovFeeDetails {
         /**
          * Moov processing fee. String type represents dollars with up to 9 decimal place precision.
          */
-        public Builder moovProcessing(String moovProcessing) {
+        public Builder moovProcessing(AmountDecimal moovProcessing) {
             Utils.checkNotNull(moovProcessing, "moovProcessing");
             this.moovProcessing = moovProcessing;
             return this;

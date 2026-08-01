@@ -36,25 +36,33 @@ public class SendFundsError {
     @JsonProperty("instantBank")
     private Optional<? extends SendFundsInstantBankError> instantBank;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("wire")
+    private Optional<? extends SendFundsWireError> wire;
+
     @JsonCreator
     public SendFundsError(
             @JsonProperty("ach") Optional<? extends SendFundsAchError> ach,
             @JsonProperty("pushToCard") Optional<? extends SendFundsPushToCardError> pushToCard,
             @JsonProperty("rtp") Optional<? extends SendFundsRtpError> rtp,
-            @JsonProperty("instantBank") Optional<? extends SendFundsInstantBankError> instantBank) {
+            @JsonProperty("instantBank") Optional<? extends SendFundsInstantBankError> instantBank,
+            @JsonProperty("wire") Optional<? extends SendFundsWireError> wire) {
         Utils.checkNotNull(ach, "ach");
         Utils.checkNotNull(pushToCard, "pushToCard");
         Utils.checkNotNull(rtp, "rtp");
         Utils.checkNotNull(instantBank, "instantBank");
+        Utils.checkNotNull(wire, "wire");
         this.ach = ach;
         this.pushToCard = pushToCard;
         this.rtp = rtp;
         this.instantBank = instantBank;
+        this.wire = wire;
     }
     
     public SendFundsError() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -79,6 +87,12 @@ public class SendFundsError {
     @JsonIgnore
     public Optional<SendFundsInstantBankError> instantBank() {
         return (Optional<SendFundsInstantBankError>) instantBank;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<SendFundsWireError> wire() {
+        return (Optional<SendFundsWireError>) wire;
     }
 
     public static Builder builder() {
@@ -138,6 +152,19 @@ public class SendFundsError {
         return this;
     }
 
+    public SendFundsError withWire(SendFundsWireError wire) {
+        Utils.checkNotNull(wire, "wire");
+        this.wire = Optional.ofNullable(wire);
+        return this;
+    }
+
+
+    public SendFundsError withWire(Optional<? extends SendFundsWireError> wire) {
+        Utils.checkNotNull(wire, "wire");
+        this.wire = wire;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -151,14 +178,15 @@ public class SendFundsError {
             Utils.enhancedDeepEquals(this.ach, other.ach) &&
             Utils.enhancedDeepEquals(this.pushToCard, other.pushToCard) &&
             Utils.enhancedDeepEquals(this.rtp, other.rtp) &&
-            Utils.enhancedDeepEquals(this.instantBank, other.instantBank);
+            Utils.enhancedDeepEquals(this.instantBank, other.instantBank) &&
+            Utils.enhancedDeepEquals(this.wire, other.wire);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             ach, pushToCard, rtp,
-            instantBank);
+            instantBank, wire);
     }
     
     @Override
@@ -167,7 +195,8 @@ public class SendFundsError {
                 "ach", ach,
                 "pushToCard", pushToCard,
                 "rtp", rtp,
-                "instantBank", instantBank);
+                "instantBank", instantBank,
+                "wire", wire);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -180,6 +209,8 @@ public class SendFundsError {
         private Optional<? extends SendFundsRtpError> rtp = Optional.empty();
 
         private Optional<? extends SendFundsInstantBankError> instantBank = Optional.empty();
+
+        private Optional<? extends SendFundsWireError> wire = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -237,11 +268,24 @@ public class SendFundsError {
             return this;
         }
 
+
+        public Builder wire(SendFundsWireError wire) {
+            Utils.checkNotNull(wire, "wire");
+            this.wire = Optional.ofNullable(wire);
+            return this;
+        }
+
+        public Builder wire(Optional<? extends SendFundsWireError> wire) {
+            Utils.checkNotNull(wire, "wire");
+            this.wire = wire;
+            return this;
+        }
+
         public SendFundsError build() {
 
             return new SendFundsError(
                 ach, pushToCard, rtp,
-                instantBank);
+                instantBank, wire);
         }
 
     }

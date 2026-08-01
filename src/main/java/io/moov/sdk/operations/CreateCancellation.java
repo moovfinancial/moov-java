@@ -20,9 +20,13 @@ import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
 import io.moov.sdk.utils.Hook.AfterSuccessContextImpl;
 import io.moov.sdk.utils.Hook.BeforeRequestContextImpl;
+import io.moov.sdk.utils.SerializedBody;
+import io.moov.sdk.utils.Utils.JsonShape;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Exception;
+import java.lang.IllegalArgumentException;
+import java.lang.Object;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -76,13 +80,26 @@ public class CreateCancellation {
                     java.util.Optional.empty(),
                     securitySource());
         }
-        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
                     klass,
                     this.baseUrl,
                     "/accounts/{accountID}/transfers/{transferID}/cancellations",
                     request, null);
             HTTPRequest req = new HTTPRequest(url, "POST");
+            Object convertedRequest = Utils.convertToShape(
+                    request,
+                    JsonShape.DEFAULT,
+                    typeReference);
+            SerializedBody serializedRequestBody = Utils.serializeRequestBody(
+                    convertedRequest,
+                    "createCancellation",
+                    "json",
+                    false);
+            if (serializedRequestBody == null) {
+                throw new IllegalArgumentException("Request body is required");
+            }
+            req.setBody(Optional.ofNullable(serializedRequestBody));
             req.addHeader("Accept", "application/json")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
             _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
@@ -99,7 +116,7 @@ public class CreateCancellation {
         }
 
         private HttpRequest onBuildRequest(CreateCancellationRequest request) throws Exception {
-            HttpRequest req = buildRequest(request, CreateCancellationRequest.class);
+            HttpRequest req = buildRequest(request, CreateCancellationRequest.class, new TypeReference<CreateCancellationRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

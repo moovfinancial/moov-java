@@ -10,8 +10,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
-import java.util.Optional;
 
 
 public class CreateReversalRequest {
@@ -35,14 +33,14 @@ public class CreateReversalRequest {
 
 
     @SpeakeasyMetadata("request:mediaType=application/json")
-    private Optional<? extends CreateReversal> createReversal;
+    private CreateReversal createReversal;
 
     @JsonCreator
     public CreateReversalRequest(
             String xIdempotencyKey,
             String accountID,
             String transferID,
-            Optional<? extends CreateReversal> createReversal) {
+            CreateReversal createReversal) {
         Utils.checkNotNull(xIdempotencyKey, "xIdempotencyKey");
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(transferID, "transferID");
@@ -51,14 +49,6 @@ public class CreateReversalRequest {
         this.accountID = accountID;
         this.transferID = transferID;
         this.createReversal = createReversal;
-    }
-    
-    public CreateReversalRequest(
-            String xIdempotencyKey,
-            String accountID,
-            String transferID) {
-        this(xIdempotencyKey, accountID, transferID,
-            Optional.empty());
     }
 
     /**
@@ -85,10 +75,9 @@ public class CreateReversalRequest {
         return transferID;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<CreateReversal> createReversal() {
-        return (Optional<CreateReversal>) createReversal;
+    public CreateReversal createReversal() {
+        return createReversal;
     }
 
     public static Builder builder() {
@@ -124,13 +113,6 @@ public class CreateReversalRequest {
     }
 
     public CreateReversalRequest withCreateReversal(CreateReversal createReversal) {
-        Utils.checkNotNull(createReversal, "createReversal");
-        this.createReversal = Optional.ofNullable(createReversal);
-        return this;
-    }
-
-
-    public CreateReversalRequest withCreateReversal(Optional<? extends CreateReversal> createReversal) {
         Utils.checkNotNull(createReversal, "createReversal");
         this.createReversal = createReversal;
         return this;
@@ -177,7 +159,7 @@ public class CreateReversalRequest {
 
         private String transferID;
 
-        private Optional<? extends CreateReversal> createReversal = Optional.empty();
+        private CreateReversal createReversal;
 
         private Builder() {
           // force use of static builder() method
@@ -215,12 +197,6 @@ public class CreateReversalRequest {
 
 
         public Builder createReversal(CreateReversal createReversal) {
-            Utils.checkNotNull(createReversal, "createReversal");
-            this.createReversal = Optional.ofNullable(createReversal);
-            return this;
-        }
-
-        public Builder createReversal(Optional<? extends CreateReversal> createReversal) {
             Utils.checkNotNull(createReversal, "createReversal");
             this.createReversal = createReversal;
             return this;

@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
-import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -20,16 +19,24 @@ import java.util.Optional;
  * 
  * <p>Specifies a partial amount to refund.
  * 
- * <p>This request body is optional, an empty body will issue a refund for the full amount of the original
- * transfer.
+ * <p>Before v2026.10, this request body may be omitted. In v2026.10 and later, send an empty object to
+ * refund the full amount of the original transfer.
  */
 public class CreateRefund {
     /**
-     * Amount to refund in cents. If null, the original transfer's full amount will be refunded.
+     * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
+     * transfer's full amount will be refunded.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
-    private Optional<Long> amount;
+    private Optional<? extends AmountDecimal> amount;
+
+    /**
+     * ID of the capture to refund. Required for multi-capture card payment transfers.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("captureID")
+    private Optional<String> captureID;
 
     /**
      * Breakdown of the refunded amount.
@@ -40,24 +47,37 @@ public class CreateRefund {
 
     @JsonCreator
     public CreateRefund(
-            @JsonProperty("amount") Optional<Long> amount,
+            @JsonProperty("amount") Optional<? extends AmountDecimal> amount,
+            @JsonProperty("captureID") Optional<String> captureID,
             @JsonProperty("amountDetails") Optional<? extends RefundAmountDetails> amountDetails) {
         Utils.checkNotNull(amount, "amount");
+        Utils.checkNotNull(captureID, "captureID");
         Utils.checkNotNull(amountDetails, "amountDetails");
         this.amount = amount;
+        this.captureID = captureID;
         this.amountDetails = amountDetails;
     }
     
     public CreateRefund() {
-        this(Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
-     * Amount to refund in cents. If null, the original transfer's full amount will be refunded.
+     * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
+     * transfer's full amount will be refunded.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<AmountDecimal> amount() {
+        return (Optional<AmountDecimal>) amount;
+    }
+
+    /**
+     * ID of the capture to refund. Required for multi-capture card payment transfers.
      */
     @JsonIgnore
-    public Optional<Long> amount() {
-        return amount;
+    public Optional<String> captureID() {
+        return captureID;
     }
 
     /**
@@ -75,9 +95,10 @@ public class CreateRefund {
 
 
     /**
-     * Amount to refund in cents. If null, the original transfer's full amount will be refunded.
+     * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
+     * transfer's full amount will be refunded.
      */
-    public CreateRefund withAmount(long amount) {
+    public CreateRefund withAmount(AmountDecimal amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = Optional.ofNullable(amount);
         return this;
@@ -85,11 +106,31 @@ public class CreateRefund {
 
 
     /**
-     * Amount to refund in cents. If null, the original transfer's full amount will be refunded.
+     * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
+     * transfer's full amount will be refunded.
      */
-    public CreateRefund withAmount(Optional<Long> amount) {
+    public CreateRefund withAmount(Optional<? extends AmountDecimal> amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
+        return this;
+    }
+
+    /**
+     * ID of the capture to refund. Required for multi-capture card payment transfers.
+     */
+    public CreateRefund withCaptureID(String captureID) {
+        Utils.checkNotNull(captureID, "captureID");
+        this.captureID = Optional.ofNullable(captureID);
+        return this;
+    }
+
+
+    /**
+     * ID of the capture to refund. Required for multi-capture card payment transfers.
+     */
+    public CreateRefund withCaptureID(Optional<String> captureID) {
+        Utils.checkNotNull(captureID, "captureID");
+        this.captureID = captureID;
         return this;
     }
 
@@ -123,26 +164,30 @@ public class CreateRefund {
         CreateRefund other = (CreateRefund) o;
         return 
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.captureID, other.captureID) &&
             Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            amount, amountDetails);
+            amount, captureID, amountDetails);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CreateRefund.class,
                 "amount", amount,
+                "captureID", captureID,
                 "amountDetails", amountDetails);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<Long> amount = Optional.empty();
+        private Optional<? extends AmountDecimal> amount = Optional.empty();
+
+        private Optional<String> captureID = Optional.empty();
 
         private Optional<? extends RefundAmountDetails> amountDetails = Optional.empty();
 
@@ -152,20 +197,41 @@ public class CreateRefund {
 
 
         /**
-         * Amount to refund in cents. If null, the original transfer's full amount will be refunded.
+         * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
+         * transfer's full amount will be refunded.
          */
-        public Builder amount(long amount) {
+        public Builder amount(AmountDecimal amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = Optional.ofNullable(amount);
             return this;
         }
 
         /**
-         * Amount to refund in cents. If null, the original transfer's full amount will be refunded.
+         * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
+         * transfer's full amount will be refunded.
          */
-        public Builder amount(Optional<Long> amount) {
+        public Builder amount(Optional<? extends AmountDecimal> amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
+            return this;
+        }
+
+
+        /**
+         * ID of the capture to refund. Required for multi-capture card payment transfers.
+         */
+        public Builder captureID(String captureID) {
+            Utils.checkNotNull(captureID, "captureID");
+            this.captureID = Optional.ofNullable(captureID);
+            return this;
+        }
+
+        /**
+         * ID of the capture to refund. Required for multi-capture card payment transfers.
+         */
+        public Builder captureID(Optional<String> captureID) {
+            Utils.checkNotNull(captureID, "captureID");
+            this.captureID = captureID;
             return this;
         }
 
@@ -191,7 +257,7 @@ public class CreateRefund {
         public CreateRefund build() {
 
             return new CreateRefund(
-                amount, amountDetails);
+                amount, captureID, amountDetails);
         }
 
     }

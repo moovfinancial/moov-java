@@ -6,6 +6,8 @@ package io.moov.sdk;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.models.components.BatchGetTransfersRequest;
+import io.moov.sdk.models.components.CreateCancellation;
+import io.moov.sdk.models.components.CreateCapture;
 import io.moov.sdk.models.components.CreateReversal;
 import io.moov.sdk.models.components.CreateTransfer;
 import io.moov.sdk.models.components.CreateTransferOptions;
@@ -16,6 +18,9 @@ import io.moov.sdk.models.operations.BatchGetTransfersResponse;
 import io.moov.sdk.models.operations.CreateCancellationRequest;
 import io.moov.sdk.models.operations.CreateCancellationRequestBuilder;
 import io.moov.sdk.models.operations.CreateCancellationResponse;
+import io.moov.sdk.models.operations.CreateCaptureRequest;
+import io.moov.sdk.models.operations.CreateCaptureRequestBuilder;
+import io.moov.sdk.models.operations.CreateCaptureResponse;
 import io.moov.sdk.models.operations.CreateReversalRequest;
 import io.moov.sdk.models.operations.CreateReversalRequestBuilder;
 import io.moov.sdk.models.operations.CreateReversalResponse;
@@ -28,6 +33,9 @@ import io.moov.sdk.models.operations.CreateTransferResponse;
 import io.moov.sdk.models.operations.GetCancellationRequest;
 import io.moov.sdk.models.operations.GetCancellationRequestBuilder;
 import io.moov.sdk.models.operations.GetCancellationResponse;
+import io.moov.sdk.models.operations.GetCaptureRequest;
+import io.moov.sdk.models.operations.GetCaptureRequestBuilder;
+import io.moov.sdk.models.operations.GetCaptureResponse;
 import io.moov.sdk.models.operations.GetRefundRequest;
 import io.moov.sdk.models.operations.GetRefundRequestBuilder;
 import io.moov.sdk.models.operations.GetRefundResponse;
@@ -43,6 +51,9 @@ import io.moov.sdk.models.operations.InitiateRefundResponse;
 import io.moov.sdk.models.operations.ListCancellationsRequest;
 import io.moov.sdk.models.operations.ListCancellationsRequestBuilder;
 import io.moov.sdk.models.operations.ListCancellationsResponse;
+import io.moov.sdk.models.operations.ListCapturesRequest;
+import io.moov.sdk.models.operations.ListCapturesRequestBuilder;
+import io.moov.sdk.models.operations.ListCapturesResponse;
 import io.moov.sdk.models.operations.ListRefundsRequest;
 import io.moov.sdk.models.operations.ListRefundsRequestBuilder;
 import io.moov.sdk.models.operations.ListRefundsResponse;
@@ -53,13 +64,14 @@ import io.moov.sdk.models.operations.UpdateTransferRequest;
 import io.moov.sdk.models.operations.UpdateTransferRequestBuilder;
 import io.moov.sdk.models.operations.UpdateTransferResponse;
 import io.moov.sdk.operations.BatchGetTransfers;
-import io.moov.sdk.operations.CreateCancellation;
 import io.moov.sdk.operations.GetCancellation;
+import io.moov.sdk.operations.GetCapture;
 import io.moov.sdk.operations.GetRefund;
 import io.moov.sdk.operations.GetTransfer;
 import io.moov.sdk.operations.GetTransferRiskOutcomes;
 import io.moov.sdk.operations.InitiateRefund;
 import io.moov.sdk.operations.ListCancellations;
+import io.moov.sdk.operations.ListCaptures;
 import io.moov.sdk.operations.ListRefunds;
 import io.moov.sdk.operations.ListTransfers;
 import io.moov.sdk.operations.UpdateTransfer;
@@ -416,18 +428,22 @@ public class Transfers {
      * 
      * @param accountID The partner's Moov account ID.
      * @param transferID The transfer ID to cancel.
+     * @param createCancellation 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public CreateCancellationResponse createCancellation(String accountID, String transferID) {
+    public CreateCancellationResponse createCancellation(
+            String accountID, String transferID,
+            CreateCancellation createCancellation) {
         CreateCancellationRequest request =
             CreateCancellationRequest
                 .builder()
                 .accountID(accountID)
                 .transferID(transferID)
+                .createCancellation(createCancellation)
                 .build();
         RequestOperation<CreateCancellationRequest, CreateCancellationResponse> operation
-              = new CreateCancellation.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateCancellation.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -506,6 +522,127 @@ public class Transfers {
                 .build();
         RequestOperation<GetCancellationRequest, GetCancellationResponse> operation
               = new GetCancellation.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Create a capture against an authorized transfer.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @return The call builder
+     */
+    public CreateCaptureRequestBuilder createCapture() {
+        return new CreateCaptureRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create a capture against an authorized transfer.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param xIdempotencyKey Prevents duplicate captures from being created.
+     * @param accountID The merchant's Moov account ID.
+     * @param transferID Identifier for the transfer.
+     * @param createCapture Request to capture funds against an authorized transfer.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateCaptureResponse createCapture(
+            String xIdempotencyKey, String accountID,
+            String transferID, CreateCapture createCapture) {
+        CreateCaptureRequest request =
+            CreateCaptureRequest
+                .builder()
+                .xIdempotencyKey(xIdempotencyKey)
+                .accountID(accountID)
+                .transferID(transferID)
+                .createCapture(createCapture)
+                .build();
+        RequestOperation<CreateCaptureRequest, CreateCaptureResponse> operation
+              = new io.moov.sdk.operations.CreateCapture.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get a list of captures for a transfer.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @return The call builder
+     */
+    public ListCapturesRequestBuilder listCaptures() {
+        return new ListCapturesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a list of captures for a transfer.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID The merchant's Moov account ID.
+     * @param transferID Identifier for the transfer.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListCapturesResponse listCaptures(String accountID, String transferID) {
+        ListCapturesRequest request =
+            ListCapturesRequest
+                .builder()
+                .accountID(accountID)
+                .transferID(transferID)
+                .build();
+        RequestOperation<ListCapturesRequest, ListCapturesResponse> operation
+              = new ListCaptures.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get details of a capture for a transfer.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @return The call builder
+     */
+    public GetCaptureRequestBuilder getCapture() {
+        return new GetCaptureRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get details of a capture for a transfer.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID The merchant's Moov account ID.
+     * @param transferID Identifier for the transfer.
+     * @param captureID Identifier for the capture.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetCaptureResponse getCapture(
+            String accountID, String transferID,
+            String captureID) {
+        GetCaptureRequest request =
+            GetCaptureRequest
+                .builder()
+                .accountID(accountID)
+                .transferID(transferID)
+                .captureID(captureID)
+                .build();
+        RequestOperation<GetCaptureRequest, GetCaptureResponse> operation
+              = new GetCapture.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -660,36 +797,13 @@ public class Transfers {
      * @param xIdempotencyKey Prevents duplicate reversals from being created.
      * @param accountID The Moov account ID.
      * @param transferID The transfer ID to reverse.
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public CreateReversalResponse createReversal(
-            String xIdempotencyKey, String accountID,
-            String transferID) {
-        return createReversal(xIdempotencyKey, accountID, transferID,
-            Optional.empty());
-    }
-
-    /**
-     * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status.
-     * Read our [reversals
-     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)
-     * to learn more.
-     * 
-     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
-     * you'll need
-     * to specify the `/accounts/{accountID}/transfers.write` scope.
-     * 
-     * @param xIdempotencyKey Prevents duplicate reversals from being created.
-     * @param accountID The Moov account ID.
-     * @param transferID The transfer ID to reverse.
      * @param createReversal 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateReversalResponse createReversal(
             String xIdempotencyKey, String accountID,
-            String transferID, Optional<? extends CreateReversal> createReversal) {
+            String transferID, CreateReversal createReversal) {
         CreateReversalRequest request =
             CreateReversalRequest
                 .builder()

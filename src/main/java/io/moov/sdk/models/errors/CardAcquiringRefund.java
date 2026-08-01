@@ -8,9 +8,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.moov.sdk.models.components.Amount;
+import io.moov.sdk.models.components.AmountDecimal;
 import io.moov.sdk.models.components.RefundAmountDetails;
-import io.moov.sdk.models.components.RefundCardDetails;
+import io.moov.sdk.models.components.RefundProcessingDetails;
 import io.moov.sdk.models.components.RefundStatus;
 import io.moov.sdk.utils.Utils;
 import jakarta.annotation.Nullable;
@@ -82,8 +82,16 @@ public class CardAcquiringRefund extends MoovError {
     }
 
     @Deprecated
-    public Optional<Amount> amount() {
+    public Optional<AmountDecimal> amount() {
         return data().map(Data::amount);
+    }
+
+    /**
+     * ID of the capture this refund applies to, when applicable.
+     */
+    @Deprecated
+    public Optional<String> captureID() {
+        return data().flatMap(Data::captureID);
     }
 
     @Deprecated
@@ -92,8 +100,8 @@ public class CardAcquiringRefund extends MoovError {
     }
 
     @Deprecated
-    public Optional<RefundCardDetails> cardDetails() {
-        return data().flatMap(Data::cardDetails);
+    public Optional<RefundProcessingDetails> processingDetails() {
+        return data().map(Data::processingDetails);
     }
 
     public Optional<Data> data() {
@@ -132,7 +140,14 @@ public class CardAcquiringRefund extends MoovError {
 
 
         @JsonProperty("amount")
-        private Amount amount;
+        private AmountDecimal amount;
+
+        /**
+         * ID of the capture this refund applies to, when applicable.
+         */
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("captureID")
+        private Optional<String> captureID;
 
 
         @JsonInclude(Include.NON_ABSENT)
@@ -140,9 +155,8 @@ public class CardAcquiringRefund extends MoovError {
         private Optional<? extends RefundAmountDetails> amountDetails;
 
 
-        @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("cardDetails")
-        private Optional<? extends RefundCardDetails> cardDetails;
+        @JsonProperty("processingDetails")
+        private RefundProcessingDetails processingDetails;
 
         @JsonCreator
         public Data(
@@ -150,23 +164,26 @@ public class CardAcquiringRefund extends MoovError {
                 @JsonProperty("createdOn") OffsetDateTime createdOn,
                 @JsonProperty("updatedOn") OffsetDateTime updatedOn,
                 @JsonProperty("status") RefundStatus status,
-                @JsonProperty("amount") Amount amount,
+                @JsonProperty("amount") AmountDecimal amount,
+                @JsonProperty("captureID") Optional<String> captureID,
                 @JsonProperty("amountDetails") Optional<? extends RefundAmountDetails> amountDetails,
-                @JsonProperty("cardDetails") Optional<? extends RefundCardDetails> cardDetails) {
+                @JsonProperty("processingDetails") RefundProcessingDetails processingDetails) {
             Utils.checkNotNull(refundID, "refundID");
             Utils.checkNotNull(createdOn, "createdOn");
             Utils.checkNotNull(updatedOn, "updatedOn");
             Utils.checkNotNull(status, "status");
             Utils.checkNotNull(amount, "amount");
+            Utils.checkNotNull(captureID, "captureID");
             Utils.checkNotNull(amountDetails, "amountDetails");
-            Utils.checkNotNull(cardDetails, "cardDetails");
+            Utils.checkNotNull(processingDetails, "processingDetails");
             this.refundID = refundID;
             this.createdOn = createdOn;
             this.updatedOn = updatedOn;
             this.status = status;
             this.amount = amount;
+            this.captureID = captureID;
             this.amountDetails = amountDetails;
-            this.cardDetails = cardDetails;
+            this.processingDetails = processingDetails;
         }
         
         public Data(
@@ -174,10 +191,11 @@ public class CardAcquiringRefund extends MoovError {
                 OffsetDateTime createdOn,
                 OffsetDateTime updatedOn,
                 RefundStatus status,
-                Amount amount) {
+                AmountDecimal amount,
+                RefundProcessingDetails processingDetails) {
             this(refundID, createdOn, updatedOn,
                 status, amount, Optional.empty(),
-                Optional.empty());
+                Optional.empty(), processingDetails);
         }
 
         /**
@@ -204,8 +222,16 @@ public class CardAcquiringRefund extends MoovError {
         }
 
         @JsonIgnore
-        public Amount amount() {
+        public AmountDecimal amount() {
             return amount;
+        }
+
+        /**
+         * ID of the capture this refund applies to, when applicable.
+         */
+        @JsonIgnore
+        public Optional<String> captureID() {
+            return captureID;
         }
 
         @SuppressWarnings("unchecked")
@@ -214,10 +240,9 @@ public class CardAcquiringRefund extends MoovError {
             return (Optional<RefundAmountDetails>) amountDetails;
         }
 
-        @SuppressWarnings("unchecked")
         @JsonIgnore
-        public Optional<RefundCardDetails> cardDetails() {
-            return (Optional<RefundCardDetails>) cardDetails;
+        public RefundProcessingDetails processingDetails() {
+            return processingDetails;
         }
 
         public static Builder builder() {
@@ -252,9 +277,28 @@ public class CardAcquiringRefund extends MoovError {
             return this;
         }
 
-        public Data withAmount(Amount amount) {
+        public Data withAmount(AmountDecimal amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
+            return this;
+        }
+
+        /**
+         * ID of the capture this refund applies to, when applicable.
+         */
+        public Data withCaptureID(String captureID) {
+            Utils.checkNotNull(captureID, "captureID");
+            this.captureID = Optional.ofNullable(captureID);
+            return this;
+        }
+
+
+        /**
+         * ID of the capture this refund applies to, when applicable.
+         */
+        public Data withCaptureID(Optional<String> captureID) {
+            Utils.checkNotNull(captureID, "captureID");
+            this.captureID = captureID;
             return this;
         }
 
@@ -271,16 +315,9 @@ public class CardAcquiringRefund extends MoovError {
             return this;
         }
 
-        public Data withCardDetails(RefundCardDetails cardDetails) {
-            Utils.checkNotNull(cardDetails, "cardDetails");
-            this.cardDetails = Optional.ofNullable(cardDetails);
-            return this;
-        }
-
-
-        public Data withCardDetails(Optional<? extends RefundCardDetails> cardDetails) {
-            Utils.checkNotNull(cardDetails, "cardDetails");
-            this.cardDetails = cardDetails;
+        public Data withProcessingDetails(RefundProcessingDetails processingDetails) {
+            Utils.checkNotNull(processingDetails, "processingDetails");
+            this.processingDetails = processingDetails;
             return this;
         }
 
@@ -299,16 +336,17 @@ public class CardAcquiringRefund extends MoovError {
                 Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
                 Utils.enhancedDeepEquals(this.status, other.status) &&
                 Utils.enhancedDeepEquals(this.amount, other.amount) &&
+                Utils.enhancedDeepEquals(this.captureID, other.captureID) &&
                 Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails) &&
-                Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails);
+                Utils.enhancedDeepEquals(this.processingDetails, other.processingDetails);
         }
         
         @Override
         public int hashCode() {
             return Utils.enhancedHash(
                 refundID, createdOn, updatedOn,
-                status, amount, amountDetails,
-                cardDetails);
+                status, amount, captureID,
+                amountDetails, processingDetails);
         }
         
         @Override
@@ -319,8 +357,9 @@ public class CardAcquiringRefund extends MoovError {
                     "updatedOn", updatedOn,
                     "status", status,
                     "amount", amount,
+                    "captureID", captureID,
                     "amountDetails", amountDetails,
-                    "cardDetails", cardDetails);
+                    "processingDetails", processingDetails);
         }
 
         @SuppressWarnings("UnusedReturnValue")
@@ -334,11 +373,13 @@ public class CardAcquiringRefund extends MoovError {
 
             private RefundStatus status;
 
-            private Amount amount;
+            private AmountDecimal amount;
+
+            private Optional<String> captureID = Optional.empty();
 
             private Optional<? extends RefundAmountDetails> amountDetails = Optional.empty();
 
-            private Optional<? extends RefundCardDetails> cardDetails = Optional.empty();
+            private RefundProcessingDetails processingDetails;
 
             private Builder() {
               // force use of static builder() method
@@ -376,9 +417,28 @@ public class CardAcquiringRefund extends MoovError {
             }
 
 
-            public Builder amount(Amount amount) {
+            public Builder amount(AmountDecimal amount) {
                 Utils.checkNotNull(amount, "amount");
                 this.amount = amount;
+                return this;
+            }
+
+
+            /**
+             * ID of the capture this refund applies to, when applicable.
+             */
+            public Builder captureID(String captureID) {
+                Utils.checkNotNull(captureID, "captureID");
+                this.captureID = Optional.ofNullable(captureID);
+                return this;
+            }
+
+            /**
+             * ID of the capture this refund applies to, when applicable.
+             */
+            public Builder captureID(Optional<String> captureID) {
+                Utils.checkNotNull(captureID, "captureID");
+                this.captureID = captureID;
                 return this;
             }
 
@@ -396,15 +456,9 @@ public class CardAcquiringRefund extends MoovError {
             }
 
 
-            public Builder cardDetails(RefundCardDetails cardDetails) {
-                Utils.checkNotNull(cardDetails, "cardDetails");
-                this.cardDetails = Optional.ofNullable(cardDetails);
-                return this;
-            }
-
-            public Builder cardDetails(Optional<? extends RefundCardDetails> cardDetails) {
-                Utils.checkNotNull(cardDetails, "cardDetails");
-                this.cardDetails = cardDetails;
+            public Builder processingDetails(RefundProcessingDetails processingDetails) {
+                Utils.checkNotNull(processingDetails, "processingDetails");
+                this.processingDetails = processingDetails;
                 return this;
             }
 
@@ -412,8 +466,8 @@ public class CardAcquiringRefund extends MoovError {
 
                 return new Data(
                     refundID, createdOn, updatedOn,
-                    status, amount, amountDetails,
-                    cardDetails);
+                    status, amount, captureID,
+                    amountDetails, processingDetails);
             }
 
         }

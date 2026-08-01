@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.CreateCancellation;
+import io.moov.sdk.models.components.CreateCancellation;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
@@ -15,6 +15,7 @@ public class CreateCancellationRequestBuilder {
 
     private String accountID;
     private String transferID;
+    private CreateCancellation createCancellation;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -34,11 +35,18 @@ public class CreateCancellationRequestBuilder {
         return this;
     }
 
+    public CreateCancellationRequestBuilder createCancellation(CreateCancellation createCancellation) {
+        Utils.checkNotNull(createCancellation, "createCancellation");
+        this.createCancellation = createCancellation;
+        return this;
+    }
+
 
     private CreateCancellationRequest buildRequest() {
 
         CreateCancellationRequest request = new CreateCancellationRequest(accountID,
-            transferID);
+            transferID,
+            createCancellation);
 
         return request;
     }
@@ -46,7 +54,7 @@ public class CreateCancellationRequestBuilder {
     public CreateCancellationResponse call() {
         
         RequestOperation<CreateCancellationRequest, CreateCancellationResponse> operation
-              = new CreateCancellation.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateCancellation.Sync(sdkConfiguration, _headers);
         CreateCancellationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

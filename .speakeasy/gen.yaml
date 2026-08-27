@@ -46,7 +46,7 @@ java:
   enableStreamingUploads: false
   explicitDocImports: false
   flattenGlobalSecurity: true
-  forwardCompatibleEnumsByDefault: false
+  forwardCompatibleEnumsByDefault: true
   forwardCompatibleUnionsByDefault: "false"
   generateOptionalUnionAccessors: false
   generateSpringBootStarter: true

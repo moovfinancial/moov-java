@@ -10,6 +10,9 @@ Status of a wallet.
 import io.moov.sdk.models.components.WalletStatus;
 
 WalletStatus value = WalletStatus.ACTIVE;
+
+// Open enum: use .of() to create instances from custom string values
+WalletStatus custom = WalletStatus.of("custom_value");
 ```
 
 

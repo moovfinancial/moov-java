@@ -8,6 +8,9 @@ Status of the terminal application.
 import io.moov.sdk.models.components.TerminalApplicationStatus;
 
 TerminalApplicationStatus value = TerminalApplicationStatus.UNDEFINED;
+
+// Open enum: use .of() to create instances from custom string values
+TerminalApplicationStatus custom = TerminalApplicationStatus.of("custom_value");
 ```
 
 

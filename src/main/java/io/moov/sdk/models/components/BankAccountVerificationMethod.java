@@ -3,33 +3,125 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum BankAccountVerificationMethod {
-    INSTANT("instant"),
-    ACH("ach");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class BankAccountVerificationMethod {
 
-    @JsonValue
+    public static final BankAccountVerificationMethod INSTANT = new BankAccountVerificationMethod("instant");
+    public static final BankAccountVerificationMethod ACH = new BankAccountVerificationMethod("ach");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, BankAccountVerificationMethod> values = createValuesMap();
+    private static final Map<String, BankAccountVerificationMethodEnum> enums = createEnumsMap();
+
     private final String value;
 
-    BankAccountVerificationMethod(String value) {
+    private BankAccountVerificationMethod(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a BankAccountVerificationMethod with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as BankAccountVerificationMethod
+     */ 
+    @JsonCreator
+    public static BankAccountVerificationMethod of(String value) {
+        synchronized (BankAccountVerificationMethod.class) {
+            return values.computeIfAbsent(value, v -> new BankAccountVerificationMethod(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<BankAccountVerificationMethod> fromValue(String value) {
-        for (BankAccountVerificationMethod o: BankAccountVerificationMethod.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<BankAccountVerificationMethodEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        BankAccountVerificationMethod other = (BankAccountVerificationMethod) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "BankAccountVerificationMethod [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static BankAccountVerificationMethod[] values() {
+        synchronized (BankAccountVerificationMethod.class) {
+            return values.values().toArray(new BankAccountVerificationMethod[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, BankAccountVerificationMethod> createValuesMap() {
+        Map<String, BankAccountVerificationMethod> map = new LinkedHashMap<>();
+        map.put("instant", INSTANT);
+        map.put("ach", ACH);
+        return map;
+    }
+
+    private static final Map<String, BankAccountVerificationMethodEnum> createEnumsMap() {
+        Map<String, BankAccountVerificationMethodEnum> map = new HashMap<>();
+        map.put("instant", BankAccountVerificationMethodEnum.INSTANT);
+        map.put("ach", BankAccountVerificationMethodEnum.ACH);
+        return map;
+    }
+    
+    
+    public enum BankAccountVerificationMethodEnum {
+
+        INSTANT("instant"),
+        ACH("ach"),;
+
+        private final String value;
+
+        private BankAccountVerificationMethodEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

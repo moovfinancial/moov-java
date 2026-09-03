@@ -10,6 +10,9 @@ Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-paym
 import io.moov.sdk.models.components.DisputeStatus;
 
 DisputeStatus value = DisputeStatus.RESPONSE_NEEDED;
+
+// Open enum: use .of() to create instances from custom string values
+DisputeStatus custom = DisputeStatus.of("custom_value");
 ```
 
 

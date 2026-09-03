@@ -3,46 +3,162 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * PaymentMethodType
  * 
  * <p>The payment method type that represents a payment rail and directionality
  */
-public enum PaymentMethodType {
-    MOOV_WALLET("moov-wallet"),
-    ACH_DEBIT_FUND("ach-debit-fund"),
-    ACH_DEBIT_COLLECT("ach-debit-collect"),
-    ACH_CREDIT_STANDARD("ach-credit-standard"),
-    ACH_CREDIT_SAME_DAY("ach-credit-same-day"),
-    RTP_CREDIT("rtp-credit"),
-    CARD_PAYMENT("card-payment"),
-    PUSH_TO_CARD("push-to-card"),
-    PULL_FROM_CARD("pull-from-card"),
-    APPLE_PAY("apple-pay");
+public class PaymentMethodType {
 
-    @JsonValue
+    public static final PaymentMethodType MOOV_WALLET = new PaymentMethodType("moov-wallet");
+    public static final PaymentMethodType ACH_DEBIT_FUND = new PaymentMethodType("ach-debit-fund");
+    public static final PaymentMethodType ACH_DEBIT_COLLECT = new PaymentMethodType("ach-debit-collect");
+    public static final PaymentMethodType ACH_CREDIT_STANDARD = new PaymentMethodType("ach-credit-standard");
+    public static final PaymentMethodType ACH_CREDIT_SAME_DAY = new PaymentMethodType("ach-credit-same-day");
+    public static final PaymentMethodType RTP_CREDIT = new PaymentMethodType("rtp-credit");
+    public static final PaymentMethodType CARD_PAYMENT = new PaymentMethodType("card-payment");
+    public static final PaymentMethodType PUSH_TO_CARD = new PaymentMethodType("push-to-card");
+    public static final PaymentMethodType PULL_FROM_CARD = new PaymentMethodType("pull-from-card");
+    public static final PaymentMethodType APPLE_PAY = new PaymentMethodType("apple-pay");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, PaymentMethodType> values = createValuesMap();
+    private static final Map<String, PaymentMethodTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    PaymentMethodType(String value) {
+    private PaymentMethodType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a PaymentMethodType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as PaymentMethodType
+     */ 
+    @JsonCreator
+    public static PaymentMethodType of(String value) {
+        synchronized (PaymentMethodType.class) {
+            return values.computeIfAbsent(value, v -> new PaymentMethodType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<PaymentMethodType> fromValue(String value) {
-        for (PaymentMethodType o: PaymentMethodType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<PaymentMethodTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PaymentMethodType other = (PaymentMethodType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "PaymentMethodType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static PaymentMethodType[] values() {
+        synchronized (PaymentMethodType.class) {
+            return values.values().toArray(new PaymentMethodType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, PaymentMethodType> createValuesMap() {
+        Map<String, PaymentMethodType> map = new LinkedHashMap<>();
+        map.put("moov-wallet", MOOV_WALLET);
+        map.put("ach-debit-fund", ACH_DEBIT_FUND);
+        map.put("ach-debit-collect", ACH_DEBIT_COLLECT);
+        map.put("ach-credit-standard", ACH_CREDIT_STANDARD);
+        map.put("ach-credit-same-day", ACH_CREDIT_SAME_DAY);
+        map.put("rtp-credit", RTP_CREDIT);
+        map.put("card-payment", CARD_PAYMENT);
+        map.put("push-to-card", PUSH_TO_CARD);
+        map.put("pull-from-card", PULL_FROM_CARD);
+        map.put("apple-pay", APPLE_PAY);
+        return map;
+    }
+
+    private static final Map<String, PaymentMethodTypeEnum> createEnumsMap() {
+        Map<String, PaymentMethodTypeEnum> map = new HashMap<>();
+        map.put("moov-wallet", PaymentMethodTypeEnum.MOOV_WALLET);
+        map.put("ach-debit-fund", PaymentMethodTypeEnum.ACH_DEBIT_FUND);
+        map.put("ach-debit-collect", PaymentMethodTypeEnum.ACH_DEBIT_COLLECT);
+        map.put("ach-credit-standard", PaymentMethodTypeEnum.ACH_CREDIT_STANDARD);
+        map.put("ach-credit-same-day", PaymentMethodTypeEnum.ACH_CREDIT_SAME_DAY);
+        map.put("rtp-credit", PaymentMethodTypeEnum.RTP_CREDIT);
+        map.put("card-payment", PaymentMethodTypeEnum.CARD_PAYMENT);
+        map.put("push-to-card", PaymentMethodTypeEnum.PUSH_TO_CARD);
+        map.put("pull-from-card", PaymentMethodTypeEnum.PULL_FROM_CARD);
+        map.put("apple-pay", PaymentMethodTypeEnum.APPLE_PAY);
+        return map;
+    }
+    
+    
+    public enum PaymentMethodTypeEnum {
+
+        MOOV_WALLET("moov-wallet"),
+        ACH_DEBIT_FUND("ach-debit-fund"),
+        ACH_DEBIT_COLLECT("ach-debit-collect"),
+        ACH_CREDIT_STANDARD("ach-credit-standard"),
+        ACH_CREDIT_SAME_DAY("ach-credit-same-day"),
+        RTP_CREDIT("rtp-credit"),
+        CARD_PAYMENT("card-payment"),
+        PUSH_TO_CARD("push-to-card"),
+        PULL_FROM_CARD("pull-from-card"),
+        APPLE_PAY("apple-pay"),;
+
+        private final String value;
+
+        private PaymentMethodTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

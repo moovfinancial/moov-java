@@ -8,6 +8,9 @@ The purpose of the file being uploaded.
 import io.moov.sdk.models.components.FilePurpose;
 
 FilePurpose value = FilePurpose.BUSINESS_VERIFICATION;
+
+// Open enum: use .of() to create instances from custom string values
+FilePurpose custom = FilePurpose.of("custom_value");
 ```
 
 

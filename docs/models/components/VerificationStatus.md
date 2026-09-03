@@ -10,6 +10,9 @@ Possible states an account verification can be in.
 import io.moov.sdk.models.components.VerificationStatus;
 
 VerificationStatus value = VerificationStatus.UNVERIFIED;
+
+// Open enum: use .of() to create instances from custom string values
+VerificationStatus custom = VerificationStatus.of("custom_value");
 ```
 
 

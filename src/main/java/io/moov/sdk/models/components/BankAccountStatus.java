@@ -3,36 +3,137 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum BankAccountStatus {
-    NEW("new"),
-    VERIFIED("verified"),
-    VERIFICATION_FAILED("verificationFailed"),
-    PENDING("pending"),
-    ERRORED("errored");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class BankAccountStatus {
 
-    @JsonValue
+    public static final BankAccountStatus NEW = new BankAccountStatus("new");
+    public static final BankAccountStatus VERIFIED = new BankAccountStatus("verified");
+    public static final BankAccountStatus VERIFICATION_FAILED = new BankAccountStatus("verificationFailed");
+    public static final BankAccountStatus PENDING = new BankAccountStatus("pending");
+    public static final BankAccountStatus ERRORED = new BankAccountStatus("errored");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, BankAccountStatus> values = createValuesMap();
+    private static final Map<String, BankAccountStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    BankAccountStatus(String value) {
+    private BankAccountStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a BankAccountStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as BankAccountStatus
+     */ 
+    @JsonCreator
+    public static BankAccountStatus of(String value) {
+        synchronized (BankAccountStatus.class) {
+            return values.computeIfAbsent(value, v -> new BankAccountStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<BankAccountStatus> fromValue(String value) {
-        for (BankAccountStatus o: BankAccountStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<BankAccountStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        BankAccountStatus other = (BankAccountStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "BankAccountStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static BankAccountStatus[] values() {
+        synchronized (BankAccountStatus.class) {
+            return values.values().toArray(new BankAccountStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, BankAccountStatus> createValuesMap() {
+        Map<String, BankAccountStatus> map = new LinkedHashMap<>();
+        map.put("new", NEW);
+        map.put("verified", VERIFIED);
+        map.put("verificationFailed", VERIFICATION_FAILED);
+        map.put("pending", PENDING);
+        map.put("errored", ERRORED);
+        return map;
+    }
+
+    private static final Map<String, BankAccountStatusEnum> createEnumsMap() {
+        Map<String, BankAccountStatusEnum> map = new HashMap<>();
+        map.put("new", BankAccountStatusEnum.NEW);
+        map.put("verified", BankAccountStatusEnum.VERIFIED);
+        map.put("verificationFailed", BankAccountStatusEnum.VERIFICATION_FAILED);
+        map.put("pending", BankAccountStatusEnum.PENDING);
+        map.put("errored", BankAccountStatusEnum.ERRORED);
+        return map;
+    }
+    
+    
+    public enum BankAccountStatusEnum {
+
+        NEW("new"),
+        VERIFIED("verified"),
+        VERIFICATION_FAILED("verificationFailed"),
+        PENDING("pending"),
+        ERRORED("errored"),;
+
+        private final String value;
+
+        private BankAccountStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

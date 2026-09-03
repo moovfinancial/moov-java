@@ -3,32 +3,121 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum AchCreditStandardTransferPaymentMethodPaymentMethodType {
-    ACH_CREDIT_STANDARD("ach-credit-standard");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class AchCreditStandardTransferPaymentMethodPaymentMethodType {
 
-    @JsonValue
+    public static final AchCreditStandardTransferPaymentMethodPaymentMethodType ACH_CREDIT_STANDARD = new AchCreditStandardTransferPaymentMethodPaymentMethodType("ach-credit-standard");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, AchCreditStandardTransferPaymentMethodPaymentMethodType> values = createValuesMap();
+    private static final Map<String, AchCreditStandardTransferPaymentMethodPaymentMethodTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    AchCreditStandardTransferPaymentMethodPaymentMethodType(String value) {
+    private AchCreditStandardTransferPaymentMethodPaymentMethodType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a AchCreditStandardTransferPaymentMethodPaymentMethodType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as AchCreditStandardTransferPaymentMethodPaymentMethodType
+     */ 
+    @JsonCreator
+    public static AchCreditStandardTransferPaymentMethodPaymentMethodType of(String value) {
+        synchronized (AchCreditStandardTransferPaymentMethodPaymentMethodType.class) {
+            return values.computeIfAbsent(value, v -> new AchCreditStandardTransferPaymentMethodPaymentMethodType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<AchCreditStandardTransferPaymentMethodPaymentMethodType> fromValue(String value) {
-        for (AchCreditStandardTransferPaymentMethodPaymentMethodType o: AchCreditStandardTransferPaymentMethodPaymentMethodType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<AchCreditStandardTransferPaymentMethodPaymentMethodTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        AchCreditStandardTransferPaymentMethodPaymentMethodType other = (AchCreditStandardTransferPaymentMethodPaymentMethodType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "AchCreditStandardTransferPaymentMethodPaymentMethodType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static AchCreditStandardTransferPaymentMethodPaymentMethodType[] values() {
+        synchronized (AchCreditStandardTransferPaymentMethodPaymentMethodType.class) {
+            return values.values().toArray(new AchCreditStandardTransferPaymentMethodPaymentMethodType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, AchCreditStandardTransferPaymentMethodPaymentMethodType> createValuesMap() {
+        Map<String, AchCreditStandardTransferPaymentMethodPaymentMethodType> map = new LinkedHashMap<>();
+        map.put("ach-credit-standard", ACH_CREDIT_STANDARD);
+        return map;
+    }
+
+    private static final Map<String, AchCreditStandardTransferPaymentMethodPaymentMethodTypeEnum> createEnumsMap() {
+        Map<String, AchCreditStandardTransferPaymentMethodPaymentMethodTypeEnum> map = new HashMap<>();
+        map.put("ach-credit-standard", AchCreditStandardTransferPaymentMethodPaymentMethodTypeEnum.ACH_CREDIT_STANDARD);
+        return map;
+    }
+    
+    
+    public enum AchCreditStandardTransferPaymentMethodPaymentMethodTypeEnum {
+
+        ACH_CREDIT_STANDARD("ach-credit-standard"),;
+
+        private final String value;
+
+        private AchCreditStandardTransferPaymentMethodPaymentMethodTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

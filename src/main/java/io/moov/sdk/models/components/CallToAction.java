@@ -3,11 +3,21 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * CallToAction
  * 
@@ -16,32 +26,126 @@ import java.util.Optional;
  * <p>If set to "auto" the UI will automatically select between
  * "pay" and "confirm" for payments and payouts respectively.
  */
-public enum CallToAction {
-    PAY("pay"),
-    BOOK("book"),
-    SUBSCRIBE("subscribe"),
-    DONATE("donate"),
-    CONFIRM("confirm"),
-    AUTO("auto");
+public class CallToAction {
 
-    @JsonValue
+    public static final CallToAction PAY = new CallToAction("pay");
+    public static final CallToAction BOOK = new CallToAction("book");
+    public static final CallToAction SUBSCRIBE = new CallToAction("subscribe");
+    public static final CallToAction DONATE = new CallToAction("donate");
+    public static final CallToAction CONFIRM = new CallToAction("confirm");
+    public static final CallToAction AUTO = new CallToAction("auto");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, CallToAction> values = createValuesMap();
+    private static final Map<String, CallToActionEnum> enums = createEnumsMap();
+
     private final String value;
 
-    CallToAction(String value) {
+    private CallToAction(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a CallToAction with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as CallToAction
+     */ 
+    @JsonCreator
+    public static CallToAction of(String value) {
+        synchronized (CallToAction.class) {
+            return values.computeIfAbsent(value, v -> new CallToAction(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<CallToAction> fromValue(String value) {
-        for (CallToAction o: CallToAction.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<CallToActionEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CallToAction other = (CallToAction) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "CallToAction [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static CallToAction[] values() {
+        synchronized (CallToAction.class) {
+            return values.values().toArray(new CallToAction[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, CallToAction> createValuesMap() {
+        Map<String, CallToAction> map = new LinkedHashMap<>();
+        map.put("pay", PAY);
+        map.put("book", BOOK);
+        map.put("subscribe", SUBSCRIBE);
+        map.put("donate", DONATE);
+        map.put("confirm", CONFIRM);
+        map.put("auto", AUTO);
+        return map;
+    }
+
+    private static final Map<String, CallToActionEnum> createEnumsMap() {
+        Map<String, CallToActionEnum> map = new HashMap<>();
+        map.put("pay", CallToActionEnum.PAY);
+        map.put("book", CallToActionEnum.BOOK);
+        map.put("subscribe", CallToActionEnum.SUBSCRIBE);
+        map.put("donate", CallToActionEnum.DONATE);
+        map.put("confirm", CallToActionEnum.CONFIRM);
+        map.put("auto", CallToActionEnum.AUTO);
+        return map;
+    }
+    
+    
+    public enum CallToActionEnum {
+
+        PAY("pay"),
+        BOOK("book"),
+        SUBSCRIBE("subscribe"),
+        DONATE("donate"),
+        CONFIRM("confirm"),
+        AUTO("auto"),;
+
+        private final String value;
+
+        private CallToActionEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

@@ -8,6 +8,9 @@ Platform of the terminal application.
 import io.moov.sdk.models.components.TerminalApplicationPlatform;
 
 TerminalApplicationPlatform value = TerminalApplicationPlatform.UNDEFINED;
+
+// Open enum: use .of() to create instances from custom string values
+TerminalApplicationPlatform custom = TerminalApplicationPlatform.of("custom_value");
 ```
 
 

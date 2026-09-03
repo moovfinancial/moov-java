@@ -3,91 +3,342 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * RequirementID
  * 
  * <p>The unique ID of what the requirement is asking to be filled out.
  */
-public enum RequirementID {
-    ACCOUNT_TOS_ACCEPTANCE("account.tos-acceptance"),
-    INDIVIDUAL_MOBILE("individual.mobile"),
-    INDIVIDUAL_EMAIL("individual.email"),
-    INDIVIDUAL_EMAIL_OR_MOBILE("individual.email-or-mobile"),
-    INDIVIDUAL_FIRSTNAME("individual.firstname"),
-    INDIVIDUAL_LASTNAME("individual.lastname"),
-    INDIVIDUAL_ADDRESS("individual.address"),
-    INDIVIDUAL_SSN_LAST4("individual.ssn-last4"),
-    INDIVIDUAL_SSN("individual.ssn"),
-    INDIVIDUAL_BIRTHDATE("individual.birthdate"),
-    BUSINESS_LEGALNAME("business.legalname"),
-    BUSINESS_DESCRIPTION_OR_WEBSITE("business.description-or-website"),
-    BUSINESS_ENTITY_TYPE("business.entity-type"),
-    BUSINESS_BUSINESS_TYPE("business.business-type"),
-    BUSINESS_DBA("business.dba"),
-    BUSINESS_EIN("business.ein"),
-    BUSINESS_ADDRESS("business.address"),
-    BUSINESS_PHONE("business.phone"),
-    BUSINESS_ADMINS("business.admins"),
-    BUSINESS_CONTROLLERS("business.controllers"),
-    BUSINESS_OWNERS("business.owners"),
-    BUSINESS_CLASSIFICATION("business.classification"),
-    BUSINESS_INDUSTRY_CODE_MCC("business.industry-code-mcc"),
-    BUSINESS_INDUSTRY("business.industry"),
-    BUSINESS_INDICATE_OWNERS_PROVIDED("business.indicate-owners-provided"),
-    BUSINESS_AVERAGE_TRANSACTION_SIZE("business.average-transaction-size"),
-    BUSINESS_MAX_TRANSACTION_SIZE("business.max-transaction-size"),
-    BUSINESS_AVERAGE_MONTHLY_TRANSACTION_VOLUME("business.average-monthly-transaction-volume"),
-    BUSINESS_VOLUME_BY_CUSTOMER_TYPE("business.volume-by-customer-type"),
-    BUSINESS_CARD_VOLUME_DISTRIBUTION("business.card-volume-distribution"),
-    BUSINESS_FULFILLMENT("business.fulfillment"),
-    BUSINESS_DESCRIPTION("business.description"),
-    BUSINESS_UNDERWRITING_DOCUMENTS_TIER_ONE("business.underwriting-documents-tier-one"),
-    BANK_ACCOUNTS_NAME("bank-accounts.name"),
-    BANK_ACCOUNTS_ROUTING_NUMBER("bank-accounts.routing-number"),
-    BANK_ACCOUNTS_ACCOUNT_NUMBER("bank-accounts.account-number"),
-    DOCUMENT_BUSINESS_VERIFICATION("document.business.verification"),
-    DOCUMENT_INDIVIDUAL_TIN("document.individual.tin"),
-    DOCUMENT_INDIVIDUAL_VERIFICATION("document.individual.verification"),
-    DOCUMENT_REPRESENTATIVE_REP_UUID_TIN("document.representative.{rep-uuid}.tin"),
-    DOCUMENT_REPRESENTATIVE_REP_UUID_VERIFICATION("document.representative.{rep-uuid}.verification"),
-    REPRESENTATIVE_REP_UUID_MOBILE("representative.{rep-uuid}.mobile"),
-    REPRESENTATIVE_REP_UUID_EMAIL("representative.{rep-uuid}.email"),
-    REPRESENTATIVE_REP_UUID_EMAIL_OR_MOBILE("representative.{rep-uuid}.email-or-mobile"),
-    REPRESENTATIVE_REP_UUID_FIRSTNAME("representative.{rep-uuid}.firstname"),
-    REPRESENTATIVE_REP_UUID_LASTNAME("representative.{rep-uuid}.lastname"),
-    REPRESENTATIVE_REP_UUID_ADDRESS("representative.{rep-uuid}.address"),
-    REPRESENTATIVE_REP_UUID_SSN_LAST4("representative.{rep-uuid}.ssn-last4"),
-    REPRESENTATIVE_REP_UUID_SSN("representative.{rep-uuid}.ssn"),
-    REPRESENTATIVE_REP_UUID_BIRTHDATE("representative.{rep-uuid}.birthdate"),
-    REPRESENTATIVE_REP_UUID_JOB_TITLE("representative.{rep-uuid}.job-title"),
-    REPRESENTATIVE_REP_UUID_IS_CONTROLLER("representative.{rep-uuid}.is-controller"),
-    REPRESENTATIVE_REP_UUID_IS_OWNER("representative.{rep-uuid}.is-owner"),
-    REPRESENTATIVE_REP_UUID_OWNERSHIP("representative.{rep-uuid}.ownership"),
-    DOCUMENT_DOC_UUID("document.{doc-uuid}");
+public class RequirementID {
 
-    @JsonValue
+    public static final RequirementID ACCOUNT_TOS_ACCEPTANCE = new RequirementID("account.tos-acceptance");
+    public static final RequirementID INDIVIDUAL_MOBILE = new RequirementID("individual.mobile");
+    public static final RequirementID INDIVIDUAL_EMAIL = new RequirementID("individual.email");
+    public static final RequirementID INDIVIDUAL_EMAIL_OR_MOBILE = new RequirementID("individual.email-or-mobile");
+    public static final RequirementID INDIVIDUAL_FIRSTNAME = new RequirementID("individual.firstname");
+    public static final RequirementID INDIVIDUAL_LASTNAME = new RequirementID("individual.lastname");
+    public static final RequirementID INDIVIDUAL_ADDRESS = new RequirementID("individual.address");
+    public static final RequirementID INDIVIDUAL_SSN_LAST4 = new RequirementID("individual.ssn-last4");
+    public static final RequirementID INDIVIDUAL_SSN = new RequirementID("individual.ssn");
+    public static final RequirementID INDIVIDUAL_BIRTHDATE = new RequirementID("individual.birthdate");
+    public static final RequirementID BUSINESS_LEGALNAME = new RequirementID("business.legalname");
+    public static final RequirementID BUSINESS_DESCRIPTION_OR_WEBSITE = new RequirementID("business.description-or-website");
+    public static final RequirementID BUSINESS_ENTITY_TYPE = new RequirementID("business.entity-type");
+    public static final RequirementID BUSINESS_BUSINESS_TYPE = new RequirementID("business.business-type");
+    public static final RequirementID BUSINESS_DBA = new RequirementID("business.dba");
+    public static final RequirementID BUSINESS_EIN = new RequirementID("business.ein");
+    public static final RequirementID BUSINESS_ADDRESS = new RequirementID("business.address");
+    public static final RequirementID BUSINESS_PHONE = new RequirementID("business.phone");
+    public static final RequirementID BUSINESS_ADMINS = new RequirementID("business.admins");
+    public static final RequirementID BUSINESS_CONTROLLERS = new RequirementID("business.controllers");
+    public static final RequirementID BUSINESS_OWNERS = new RequirementID("business.owners");
+    public static final RequirementID BUSINESS_CLASSIFICATION = new RequirementID("business.classification");
+    public static final RequirementID BUSINESS_INDUSTRY_CODE_MCC = new RequirementID("business.industry-code-mcc");
+    public static final RequirementID BUSINESS_INDUSTRY = new RequirementID("business.industry");
+    public static final RequirementID BUSINESS_INDICATE_OWNERS_PROVIDED = new RequirementID("business.indicate-owners-provided");
+    public static final RequirementID BUSINESS_AVERAGE_TRANSACTION_SIZE = new RequirementID("business.average-transaction-size");
+    public static final RequirementID BUSINESS_MAX_TRANSACTION_SIZE = new RequirementID("business.max-transaction-size");
+    public static final RequirementID BUSINESS_AVERAGE_MONTHLY_TRANSACTION_VOLUME = new RequirementID("business.average-monthly-transaction-volume");
+    public static final RequirementID BUSINESS_VOLUME_BY_CUSTOMER_TYPE = new RequirementID("business.volume-by-customer-type");
+    public static final RequirementID BUSINESS_CARD_VOLUME_DISTRIBUTION = new RequirementID("business.card-volume-distribution");
+    public static final RequirementID BUSINESS_FULFILLMENT = new RequirementID("business.fulfillment");
+    public static final RequirementID BUSINESS_DESCRIPTION = new RequirementID("business.description");
+    public static final RequirementID BUSINESS_UNDERWRITING_DOCUMENTS_TIER_ONE = new RequirementID("business.underwriting-documents-tier-one");
+    public static final RequirementID BANK_ACCOUNTS_NAME = new RequirementID("bank-accounts.name");
+    public static final RequirementID BANK_ACCOUNTS_ROUTING_NUMBER = new RequirementID("bank-accounts.routing-number");
+    public static final RequirementID BANK_ACCOUNTS_ACCOUNT_NUMBER = new RequirementID("bank-accounts.account-number");
+    public static final RequirementID DOCUMENT_BUSINESS_VERIFICATION = new RequirementID("document.business.verification");
+    public static final RequirementID DOCUMENT_INDIVIDUAL_TIN = new RequirementID("document.individual.tin");
+    public static final RequirementID DOCUMENT_INDIVIDUAL_VERIFICATION = new RequirementID("document.individual.verification");
+    public static final RequirementID DOCUMENT_REPRESENTATIVE_REP_UUID_TIN = new RequirementID("document.representative.{rep-uuid}.tin");
+    public static final RequirementID DOCUMENT_REPRESENTATIVE_REP_UUID_VERIFICATION = new RequirementID("document.representative.{rep-uuid}.verification");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_MOBILE = new RequirementID("representative.{rep-uuid}.mobile");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_EMAIL = new RequirementID("representative.{rep-uuid}.email");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_EMAIL_OR_MOBILE = new RequirementID("representative.{rep-uuid}.email-or-mobile");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_FIRSTNAME = new RequirementID("representative.{rep-uuid}.firstname");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_LASTNAME = new RequirementID("representative.{rep-uuid}.lastname");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_ADDRESS = new RequirementID("representative.{rep-uuid}.address");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_SSN_LAST4 = new RequirementID("representative.{rep-uuid}.ssn-last4");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_SSN = new RequirementID("representative.{rep-uuid}.ssn");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_BIRTHDATE = new RequirementID("representative.{rep-uuid}.birthdate");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_JOB_TITLE = new RequirementID("representative.{rep-uuid}.job-title");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_IS_CONTROLLER = new RequirementID("representative.{rep-uuid}.is-controller");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_IS_OWNER = new RequirementID("representative.{rep-uuid}.is-owner");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_OWNERSHIP = new RequirementID("representative.{rep-uuid}.ownership");
+    public static final RequirementID DOCUMENT_DOC_UUID = new RequirementID("document.{doc-uuid}");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, RequirementID> values = createValuesMap();
+    private static final Map<String, RequirementIDEnum> enums = createEnumsMap();
+
     private final String value;
 
-    RequirementID(String value) {
+    private RequirementID(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a RequirementID with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as RequirementID
+     */ 
+    @JsonCreator
+    public static RequirementID of(String value) {
+        synchronized (RequirementID.class) {
+            return values.computeIfAbsent(value, v -> new RequirementID(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<RequirementID> fromValue(String value) {
-        for (RequirementID o: RequirementID.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<RequirementIDEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        RequirementID other = (RequirementID) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "RequirementID [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static RequirementID[] values() {
+        synchronized (RequirementID.class) {
+            return values.values().toArray(new RequirementID[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, RequirementID> createValuesMap() {
+        Map<String, RequirementID> map = new LinkedHashMap<>();
+        map.put("account.tos-acceptance", ACCOUNT_TOS_ACCEPTANCE);
+        map.put("individual.mobile", INDIVIDUAL_MOBILE);
+        map.put("individual.email", INDIVIDUAL_EMAIL);
+        map.put("individual.email-or-mobile", INDIVIDUAL_EMAIL_OR_MOBILE);
+        map.put("individual.firstname", INDIVIDUAL_FIRSTNAME);
+        map.put("individual.lastname", INDIVIDUAL_LASTNAME);
+        map.put("individual.address", INDIVIDUAL_ADDRESS);
+        map.put("individual.ssn-last4", INDIVIDUAL_SSN_LAST4);
+        map.put("individual.ssn", INDIVIDUAL_SSN);
+        map.put("individual.birthdate", INDIVIDUAL_BIRTHDATE);
+        map.put("business.legalname", BUSINESS_LEGALNAME);
+        map.put("business.description-or-website", BUSINESS_DESCRIPTION_OR_WEBSITE);
+        map.put("business.entity-type", BUSINESS_ENTITY_TYPE);
+        map.put("business.business-type", BUSINESS_BUSINESS_TYPE);
+        map.put("business.dba", BUSINESS_DBA);
+        map.put("business.ein", BUSINESS_EIN);
+        map.put("business.address", BUSINESS_ADDRESS);
+        map.put("business.phone", BUSINESS_PHONE);
+        map.put("business.admins", BUSINESS_ADMINS);
+        map.put("business.controllers", BUSINESS_CONTROLLERS);
+        map.put("business.owners", BUSINESS_OWNERS);
+        map.put("business.classification", BUSINESS_CLASSIFICATION);
+        map.put("business.industry-code-mcc", BUSINESS_INDUSTRY_CODE_MCC);
+        map.put("business.industry", BUSINESS_INDUSTRY);
+        map.put("business.indicate-owners-provided", BUSINESS_INDICATE_OWNERS_PROVIDED);
+        map.put("business.average-transaction-size", BUSINESS_AVERAGE_TRANSACTION_SIZE);
+        map.put("business.max-transaction-size", BUSINESS_MAX_TRANSACTION_SIZE);
+        map.put("business.average-monthly-transaction-volume", BUSINESS_AVERAGE_MONTHLY_TRANSACTION_VOLUME);
+        map.put("business.volume-by-customer-type", BUSINESS_VOLUME_BY_CUSTOMER_TYPE);
+        map.put("business.card-volume-distribution", BUSINESS_CARD_VOLUME_DISTRIBUTION);
+        map.put("business.fulfillment", BUSINESS_FULFILLMENT);
+        map.put("business.description", BUSINESS_DESCRIPTION);
+        map.put("business.underwriting-documents-tier-one", BUSINESS_UNDERWRITING_DOCUMENTS_TIER_ONE);
+        map.put("bank-accounts.name", BANK_ACCOUNTS_NAME);
+        map.put("bank-accounts.routing-number", BANK_ACCOUNTS_ROUTING_NUMBER);
+        map.put("bank-accounts.account-number", BANK_ACCOUNTS_ACCOUNT_NUMBER);
+        map.put("document.business.verification", DOCUMENT_BUSINESS_VERIFICATION);
+        map.put("document.individual.tin", DOCUMENT_INDIVIDUAL_TIN);
+        map.put("document.individual.verification", DOCUMENT_INDIVIDUAL_VERIFICATION);
+        map.put("document.representative.{rep-uuid}.tin", DOCUMENT_REPRESENTATIVE_REP_UUID_TIN);
+        map.put("document.representative.{rep-uuid}.verification", DOCUMENT_REPRESENTATIVE_REP_UUID_VERIFICATION);
+        map.put("representative.{rep-uuid}.mobile", REPRESENTATIVE_REP_UUID_MOBILE);
+        map.put("representative.{rep-uuid}.email", REPRESENTATIVE_REP_UUID_EMAIL);
+        map.put("representative.{rep-uuid}.email-or-mobile", REPRESENTATIVE_REP_UUID_EMAIL_OR_MOBILE);
+        map.put("representative.{rep-uuid}.firstname", REPRESENTATIVE_REP_UUID_FIRSTNAME);
+        map.put("representative.{rep-uuid}.lastname", REPRESENTATIVE_REP_UUID_LASTNAME);
+        map.put("representative.{rep-uuid}.address", REPRESENTATIVE_REP_UUID_ADDRESS);
+        map.put("representative.{rep-uuid}.ssn-last4", REPRESENTATIVE_REP_UUID_SSN_LAST4);
+        map.put("representative.{rep-uuid}.ssn", REPRESENTATIVE_REP_UUID_SSN);
+        map.put("representative.{rep-uuid}.birthdate", REPRESENTATIVE_REP_UUID_BIRTHDATE);
+        map.put("representative.{rep-uuid}.job-title", REPRESENTATIVE_REP_UUID_JOB_TITLE);
+        map.put("representative.{rep-uuid}.is-controller", REPRESENTATIVE_REP_UUID_IS_CONTROLLER);
+        map.put("representative.{rep-uuid}.is-owner", REPRESENTATIVE_REP_UUID_IS_OWNER);
+        map.put("representative.{rep-uuid}.ownership", REPRESENTATIVE_REP_UUID_OWNERSHIP);
+        map.put("document.{doc-uuid}", DOCUMENT_DOC_UUID);
+        return map;
+    }
+
+    private static final Map<String, RequirementIDEnum> createEnumsMap() {
+        Map<String, RequirementIDEnum> map = new HashMap<>();
+        map.put("account.tos-acceptance", RequirementIDEnum.ACCOUNT_TOS_ACCEPTANCE);
+        map.put("individual.mobile", RequirementIDEnum.INDIVIDUAL_MOBILE);
+        map.put("individual.email", RequirementIDEnum.INDIVIDUAL_EMAIL);
+        map.put("individual.email-or-mobile", RequirementIDEnum.INDIVIDUAL_EMAIL_OR_MOBILE);
+        map.put("individual.firstname", RequirementIDEnum.INDIVIDUAL_FIRSTNAME);
+        map.put("individual.lastname", RequirementIDEnum.INDIVIDUAL_LASTNAME);
+        map.put("individual.address", RequirementIDEnum.INDIVIDUAL_ADDRESS);
+        map.put("individual.ssn-last4", RequirementIDEnum.INDIVIDUAL_SSN_LAST4);
+        map.put("individual.ssn", RequirementIDEnum.INDIVIDUAL_SSN);
+        map.put("individual.birthdate", RequirementIDEnum.INDIVIDUAL_BIRTHDATE);
+        map.put("business.legalname", RequirementIDEnum.BUSINESS_LEGALNAME);
+        map.put("business.description-or-website", RequirementIDEnum.BUSINESS_DESCRIPTION_OR_WEBSITE);
+        map.put("business.entity-type", RequirementIDEnum.BUSINESS_ENTITY_TYPE);
+        map.put("business.business-type", RequirementIDEnum.BUSINESS_BUSINESS_TYPE);
+        map.put("business.dba", RequirementIDEnum.BUSINESS_DBA);
+        map.put("business.ein", RequirementIDEnum.BUSINESS_EIN);
+        map.put("business.address", RequirementIDEnum.BUSINESS_ADDRESS);
+        map.put("business.phone", RequirementIDEnum.BUSINESS_PHONE);
+        map.put("business.admins", RequirementIDEnum.BUSINESS_ADMINS);
+        map.put("business.controllers", RequirementIDEnum.BUSINESS_CONTROLLERS);
+        map.put("business.owners", RequirementIDEnum.BUSINESS_OWNERS);
+        map.put("business.classification", RequirementIDEnum.BUSINESS_CLASSIFICATION);
+        map.put("business.industry-code-mcc", RequirementIDEnum.BUSINESS_INDUSTRY_CODE_MCC);
+        map.put("business.industry", RequirementIDEnum.BUSINESS_INDUSTRY);
+        map.put("business.indicate-owners-provided", RequirementIDEnum.BUSINESS_INDICATE_OWNERS_PROVIDED);
+        map.put("business.average-transaction-size", RequirementIDEnum.BUSINESS_AVERAGE_TRANSACTION_SIZE);
+        map.put("business.max-transaction-size", RequirementIDEnum.BUSINESS_MAX_TRANSACTION_SIZE);
+        map.put("business.average-monthly-transaction-volume", RequirementIDEnum.BUSINESS_AVERAGE_MONTHLY_TRANSACTION_VOLUME);
+        map.put("business.volume-by-customer-type", RequirementIDEnum.BUSINESS_VOLUME_BY_CUSTOMER_TYPE);
+        map.put("business.card-volume-distribution", RequirementIDEnum.BUSINESS_CARD_VOLUME_DISTRIBUTION);
+        map.put("business.fulfillment", RequirementIDEnum.BUSINESS_FULFILLMENT);
+        map.put("business.description", RequirementIDEnum.BUSINESS_DESCRIPTION);
+        map.put("business.underwriting-documents-tier-one", RequirementIDEnum.BUSINESS_UNDERWRITING_DOCUMENTS_TIER_ONE);
+        map.put("bank-accounts.name", RequirementIDEnum.BANK_ACCOUNTS_NAME);
+        map.put("bank-accounts.routing-number", RequirementIDEnum.BANK_ACCOUNTS_ROUTING_NUMBER);
+        map.put("bank-accounts.account-number", RequirementIDEnum.BANK_ACCOUNTS_ACCOUNT_NUMBER);
+        map.put("document.business.verification", RequirementIDEnum.DOCUMENT_BUSINESS_VERIFICATION);
+        map.put("document.individual.tin", RequirementIDEnum.DOCUMENT_INDIVIDUAL_TIN);
+        map.put("document.individual.verification", RequirementIDEnum.DOCUMENT_INDIVIDUAL_VERIFICATION);
+        map.put("document.representative.{rep-uuid}.tin", RequirementIDEnum.DOCUMENT_REPRESENTATIVE_REP_UUID_TIN);
+        map.put("document.representative.{rep-uuid}.verification", RequirementIDEnum.DOCUMENT_REPRESENTATIVE_REP_UUID_VERIFICATION);
+        map.put("representative.{rep-uuid}.mobile", RequirementIDEnum.REPRESENTATIVE_REP_UUID_MOBILE);
+        map.put("representative.{rep-uuid}.email", RequirementIDEnum.REPRESENTATIVE_REP_UUID_EMAIL);
+        map.put("representative.{rep-uuid}.email-or-mobile", RequirementIDEnum.REPRESENTATIVE_REP_UUID_EMAIL_OR_MOBILE);
+        map.put("representative.{rep-uuid}.firstname", RequirementIDEnum.REPRESENTATIVE_REP_UUID_FIRSTNAME);
+        map.put("representative.{rep-uuid}.lastname", RequirementIDEnum.REPRESENTATIVE_REP_UUID_LASTNAME);
+        map.put("representative.{rep-uuid}.address", RequirementIDEnum.REPRESENTATIVE_REP_UUID_ADDRESS);
+        map.put("representative.{rep-uuid}.ssn-last4", RequirementIDEnum.REPRESENTATIVE_REP_UUID_SSN_LAST4);
+        map.put("representative.{rep-uuid}.ssn", RequirementIDEnum.REPRESENTATIVE_REP_UUID_SSN);
+        map.put("representative.{rep-uuid}.birthdate", RequirementIDEnum.REPRESENTATIVE_REP_UUID_BIRTHDATE);
+        map.put("representative.{rep-uuid}.job-title", RequirementIDEnum.REPRESENTATIVE_REP_UUID_JOB_TITLE);
+        map.put("representative.{rep-uuid}.is-controller", RequirementIDEnum.REPRESENTATIVE_REP_UUID_IS_CONTROLLER);
+        map.put("representative.{rep-uuid}.is-owner", RequirementIDEnum.REPRESENTATIVE_REP_UUID_IS_OWNER);
+        map.put("representative.{rep-uuid}.ownership", RequirementIDEnum.REPRESENTATIVE_REP_UUID_OWNERSHIP);
+        map.put("document.{doc-uuid}", RequirementIDEnum.DOCUMENT_DOC_UUID);
+        return map;
+    }
+    
+    
+    public enum RequirementIDEnum {
+
+        ACCOUNT_TOS_ACCEPTANCE("account.tos-acceptance"),
+        INDIVIDUAL_MOBILE("individual.mobile"),
+        INDIVIDUAL_EMAIL("individual.email"),
+        INDIVIDUAL_EMAIL_OR_MOBILE("individual.email-or-mobile"),
+        INDIVIDUAL_FIRSTNAME("individual.firstname"),
+        INDIVIDUAL_LASTNAME("individual.lastname"),
+        INDIVIDUAL_ADDRESS("individual.address"),
+        INDIVIDUAL_SSN_LAST4("individual.ssn-last4"),
+        INDIVIDUAL_SSN("individual.ssn"),
+        INDIVIDUAL_BIRTHDATE("individual.birthdate"),
+        BUSINESS_LEGALNAME("business.legalname"),
+        BUSINESS_DESCRIPTION_OR_WEBSITE("business.description-or-website"),
+        BUSINESS_ENTITY_TYPE("business.entity-type"),
+        BUSINESS_BUSINESS_TYPE("business.business-type"),
+        BUSINESS_DBA("business.dba"),
+        BUSINESS_EIN("business.ein"),
+        BUSINESS_ADDRESS("business.address"),
+        BUSINESS_PHONE("business.phone"),
+        BUSINESS_ADMINS("business.admins"),
+        BUSINESS_CONTROLLERS("business.controllers"),
+        BUSINESS_OWNERS("business.owners"),
+        BUSINESS_CLASSIFICATION("business.classification"),
+        BUSINESS_INDUSTRY_CODE_MCC("business.industry-code-mcc"),
+        BUSINESS_INDUSTRY("business.industry"),
+        BUSINESS_INDICATE_OWNERS_PROVIDED("business.indicate-owners-provided"),
+        BUSINESS_AVERAGE_TRANSACTION_SIZE("business.average-transaction-size"),
+        BUSINESS_MAX_TRANSACTION_SIZE("business.max-transaction-size"),
+        BUSINESS_AVERAGE_MONTHLY_TRANSACTION_VOLUME("business.average-monthly-transaction-volume"),
+        BUSINESS_VOLUME_BY_CUSTOMER_TYPE("business.volume-by-customer-type"),
+        BUSINESS_CARD_VOLUME_DISTRIBUTION("business.card-volume-distribution"),
+        BUSINESS_FULFILLMENT("business.fulfillment"),
+        BUSINESS_DESCRIPTION("business.description"),
+        BUSINESS_UNDERWRITING_DOCUMENTS_TIER_ONE("business.underwriting-documents-tier-one"),
+        BANK_ACCOUNTS_NAME("bank-accounts.name"),
+        BANK_ACCOUNTS_ROUTING_NUMBER("bank-accounts.routing-number"),
+        BANK_ACCOUNTS_ACCOUNT_NUMBER("bank-accounts.account-number"),
+        DOCUMENT_BUSINESS_VERIFICATION("document.business.verification"),
+        DOCUMENT_INDIVIDUAL_TIN("document.individual.tin"),
+        DOCUMENT_INDIVIDUAL_VERIFICATION("document.individual.verification"),
+        DOCUMENT_REPRESENTATIVE_REP_UUID_TIN("document.representative.{rep-uuid}.tin"),
+        DOCUMENT_REPRESENTATIVE_REP_UUID_VERIFICATION("document.representative.{rep-uuid}.verification"),
+        REPRESENTATIVE_REP_UUID_MOBILE("representative.{rep-uuid}.mobile"),
+        REPRESENTATIVE_REP_UUID_EMAIL("representative.{rep-uuid}.email"),
+        REPRESENTATIVE_REP_UUID_EMAIL_OR_MOBILE("representative.{rep-uuid}.email-or-mobile"),
+        REPRESENTATIVE_REP_UUID_FIRSTNAME("representative.{rep-uuid}.firstname"),
+        REPRESENTATIVE_REP_UUID_LASTNAME("representative.{rep-uuid}.lastname"),
+        REPRESENTATIVE_REP_UUID_ADDRESS("representative.{rep-uuid}.address"),
+        REPRESENTATIVE_REP_UUID_SSN_LAST4("representative.{rep-uuid}.ssn-last4"),
+        REPRESENTATIVE_REP_UUID_SSN("representative.{rep-uuid}.ssn"),
+        REPRESENTATIVE_REP_UUID_BIRTHDATE("representative.{rep-uuid}.birthdate"),
+        REPRESENTATIVE_REP_UUID_JOB_TITLE("representative.{rep-uuid}.job-title"),
+        REPRESENTATIVE_REP_UUID_IS_CONTROLLER("representative.{rep-uuid}.is-controller"),
+        REPRESENTATIVE_REP_UUID_IS_OWNER("representative.{rep-uuid}.is-owner"),
+        REPRESENTATIVE_REP_UUID_OWNERSHIP("representative.{rep-uuid}.ownership"),
+        DOCUMENT_DOC_UUID("document.{doc-uuid}"),;
+
+        private final String value;
+
+        private RequirementIDEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

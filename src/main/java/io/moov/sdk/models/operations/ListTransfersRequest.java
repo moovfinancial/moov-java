@@ -81,7 +81,7 @@ public class ListTransfersRequest {
     private Optional<String> foreignID;
 
     /**
-     * Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
+     * Optional comma-separated authorization IDs.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=authorizationIDs")
     private Optional<? extends List<String>> authorizationIDs;
@@ -96,7 +96,9 @@ public class ListTransfersRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
 
-
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
 
@@ -246,7 +248,7 @@ public class ListTransfersRequest {
     }
 
     /**
-     * Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
+     * Optional comma-separated authorization IDs.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -268,6 +270,9 @@ public class ListTransfersRequest {
         return skip;
     }
 
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     @JsonIgnore
     public Optional<Long> count() {
         return count;
@@ -476,7 +481,7 @@ public class ListTransfersRequest {
     }
 
     /**
-     * Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
+     * Optional comma-separated authorization IDs.
      */
     public ListTransfersRequest withAuthorizationIDs(List<String> authorizationIDs) {
         Utils.checkNotNull(authorizationIDs, "authorizationIDs");
@@ -486,7 +491,7 @@ public class ListTransfersRequest {
 
 
     /**
-     * Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
+     * Optional comma-separated authorization IDs.
      */
     public ListTransfersRequest withAuthorizationIDs(Optional<? extends List<String>> authorizationIDs) {
         Utils.checkNotNull(authorizationIDs, "authorizationIDs");
@@ -526,6 +531,9 @@ public class ListTransfersRequest {
         return this;
     }
 
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     public ListTransfersRequest withCount(long count) {
         Utils.checkNotNull(count, "count");
         this.count = Optional.ofNullable(count);
@@ -533,6 +541,9 @@ public class ListTransfersRequest {
     }
 
 
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     public ListTransfersRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
         this.count = count;
@@ -833,7 +844,7 @@ public class ListTransfersRequest {
 
 
         /**
-         * Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
+         * Optional comma-separated authorization IDs.
          */
         public Builder authorizationIDs(List<String> authorizationIDs) {
             Utils.checkNotNull(authorizationIDs, "authorizationIDs");
@@ -842,7 +853,7 @@ public class ListTransfersRequest {
         }
 
         /**
-         * Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
+         * Optional comma-separated authorization IDs.
          */
         public Builder authorizationIDs(Optional<? extends List<String>> authorizationIDs) {
             Utils.checkNotNull(authorizationIDs, "authorizationIDs");
@@ -883,12 +894,18 @@ public class ListTransfersRequest {
         }
 
 
+        /**
+         * Page size. When omitted, the server defaults to `200`.
+         */
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
             return this;
         }
 
+        /**
+         * Page size. When omitted, the server defaults to `200`.
+         */
         public Builder count(Optional<Long> count) {
             Utils.checkNotNull(count, "count");
             this.count = count;

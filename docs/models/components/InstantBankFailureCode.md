@@ -8,6 +8,9 @@ Status codes for instant-bank failures.
 import io.moov.sdk.models.components.InstantBankFailureCode;
 
 InstantBankFailureCode value = InstantBankFailureCode.PROCESSING_ERROR;
+
+// Open enum: use .of() to create instances from custom string values
+InstantBankFailureCode custom = InstantBankFailureCode.of("custom_value");
 ```
 
 

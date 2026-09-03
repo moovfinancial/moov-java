@@ -81,6 +81,8 @@ public class FullIssuedCard {
      * authorizations if it is in an active state.
      * 
      * <p>- `active`: The card is operational and can approve authorizations.
+     * - `frozen`: The card is temporarily suspended and cannot approve authorizations. A frozen card can
+     * be reactivated by setting its state back to `active`.
      * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
      * closed by request or when it expires.
      */
@@ -94,7 +96,9 @@ public class FullIssuedCard {
     @JsonProperty("formFactor")
     private IssuedCardFormFactor formFactor;
 
-
+    /**
+     * Mutable spend controls for the card.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("controls")
     private Optional<? extends IssuingControls> controls;
@@ -264,6 +268,8 @@ public class FullIssuedCard {
      * authorizations if it is in an active state.
      * 
      * <p>- `active`: The card is operational and can approve authorizations.
+     * - `frozen`: The card is temporarily suspended and cannot approve authorizations. A frozen card can
+     * be reactivated by setting its state back to `active`.
      * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
      * closed by request or when it expires.
      */
@@ -281,6 +287,9 @@ public class FullIssuedCard {
         return formFactor;
     }
 
+    /**
+     * Mutable spend controls for the card.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<IssuingControls> controls() {
@@ -438,6 +447,8 @@ public class FullIssuedCard {
      * authorizations if it is in an active state.
      * 
      * <p>- `active`: The card is operational and can approve authorizations.
+     * - `frozen`: The card is temporarily suspended and cannot approve authorizations. A frozen card can
+     * be reactivated by setting its state back to `active`.
      * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
      * closed by request or when it expires.
      */
@@ -457,6 +468,9 @@ public class FullIssuedCard {
         return this;
     }
 
+    /**
+     * Mutable spend controls for the card.
+     */
     public FullIssuedCard withControls(IssuingControls controls) {
         Utils.checkNotNull(controls, "controls");
         this.controls = Optional.ofNullable(controls);
@@ -464,6 +478,9 @@ public class FullIssuedCard {
     }
 
 
+    /**
+     * Mutable spend controls for the card.
+     */
     public FullIssuedCard withControls(Optional<? extends IssuingControls> controls) {
         Utils.checkNotNull(controls, "controls");
         this.controls = controls;
@@ -725,6 +742,8 @@ public class FullIssuedCard {
          * authorizations if it is in an active state.
          * 
          * <p>- `active`: The card is operational and can approve authorizations.
+         * - `frozen`: The card is temporarily suspended and cannot approve authorizations. A frozen card can
+         * be reactivated by setting its state back to `active`.
          * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
          * closed by request or when it expires.
          */
@@ -746,12 +765,18 @@ public class FullIssuedCard {
         }
 
 
+        /**
+         * Mutable spend controls for the card.
+         */
         public Builder controls(IssuingControls controls) {
             Utils.checkNotNull(controls, "controls");
             this.controls = Optional.ofNullable(controls);
             return this;
         }
 
+        /**
+         * Mutable spend controls for the card.
+         */
         public Builder controls(Optional<? extends IssuingControls> controls) {
             Utils.checkNotNull(controls, "controls");
             this.controls = controls;

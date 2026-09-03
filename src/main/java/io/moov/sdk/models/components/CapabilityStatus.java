@@ -3,40 +3,138 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * CapabilityStatus
  * 
  * <p>The status of the capability requested for an account.
  */
-public enum CapabilityStatus {
-    ENABLED("enabled"),
-    DISABLED("disabled"),
-    PENDING("pending"),
-    IN_REVIEW("in-review");
+public class CapabilityStatus {
 
-    @JsonValue
+    public static final CapabilityStatus ENABLED = new CapabilityStatus("enabled");
+    public static final CapabilityStatus DISABLED = new CapabilityStatus("disabled");
+    public static final CapabilityStatus PENDING = new CapabilityStatus("pending");
+    public static final CapabilityStatus IN_REVIEW = new CapabilityStatus("in-review");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, CapabilityStatus> values = createValuesMap();
+    private static final Map<String, CapabilityStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    CapabilityStatus(String value) {
+    private CapabilityStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a CapabilityStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as CapabilityStatus
+     */ 
+    @JsonCreator
+    public static CapabilityStatus of(String value) {
+        synchronized (CapabilityStatus.class) {
+            return values.computeIfAbsent(value, v -> new CapabilityStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<CapabilityStatus> fromValue(String value) {
-        for (CapabilityStatus o: CapabilityStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<CapabilityStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CapabilityStatus other = (CapabilityStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "CapabilityStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static CapabilityStatus[] values() {
+        synchronized (CapabilityStatus.class) {
+            return values.values().toArray(new CapabilityStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, CapabilityStatus> createValuesMap() {
+        Map<String, CapabilityStatus> map = new LinkedHashMap<>();
+        map.put("enabled", ENABLED);
+        map.put("disabled", DISABLED);
+        map.put("pending", PENDING);
+        map.put("in-review", IN_REVIEW);
+        return map;
+    }
+
+    private static final Map<String, CapabilityStatusEnum> createEnumsMap() {
+        Map<String, CapabilityStatusEnum> map = new HashMap<>();
+        map.put("enabled", CapabilityStatusEnum.ENABLED);
+        map.put("disabled", CapabilityStatusEnum.DISABLED);
+        map.put("pending", CapabilityStatusEnum.PENDING);
+        map.put("in-review", CapabilityStatusEnum.IN_REVIEW);
+        return map;
+    }
+    
+    
+    public enum CapabilityStatusEnum {
+
+        ENABLED("enabled"),
+        DISABLED("disabled"),
+        PENDING("pending"),
+        IN_REVIEW("in-review"),;
+
+        private final String value;
+
+        private CapabilityStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

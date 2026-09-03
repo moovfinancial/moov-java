@@ -8,6 +8,9 @@ Indicates if the card supports domestic pull-from-card transfer.
 import io.moov.sdk.models.components.DomesticPullFromCard;
 
 DomesticPullFromCard value = DomesticPullFromCard.NOT_SUPPORTED;
+
+// Open enum: use .of() to create instances from custom string values
+DomesticPullFromCard custom = DomesticPullFromCard.of("custom_value");
 ```
 
 

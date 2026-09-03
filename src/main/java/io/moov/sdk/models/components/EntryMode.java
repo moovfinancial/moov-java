@@ -3,37 +3,126 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * EntryMode
  * 
  * <p>How the card information was entered into the point of sale terminal.
  */
-public enum EntryMode {
-    CONTACTLESS("contactless");
+public class EntryMode {
 
-    @JsonValue
+    public static final EntryMode CONTACTLESS = new EntryMode("contactless");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, EntryMode> values = createValuesMap();
+    private static final Map<String, EntryModeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    EntryMode(String value) {
+    private EntryMode(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a EntryMode with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as EntryMode
+     */ 
+    @JsonCreator
+    public static EntryMode of(String value) {
+        synchronized (EntryMode.class) {
+            return values.computeIfAbsent(value, v -> new EntryMode(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<EntryMode> fromValue(String value) {
-        for (EntryMode o: EntryMode.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<EntryModeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        EntryMode other = (EntryMode) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "EntryMode [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static EntryMode[] values() {
+        synchronized (EntryMode.class) {
+            return values.values().toArray(new EntryMode[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, EntryMode> createValuesMap() {
+        Map<String, EntryMode> map = new LinkedHashMap<>();
+        map.put("contactless", CONTACTLESS);
+        return map;
+    }
+
+    private static final Map<String, EntryModeEnum> createEnumsMap() {
+        Map<String, EntryModeEnum> map = new HashMap<>();
+        map.put("contactless", EntryModeEnum.CONTACTLESS);
+        return map;
+    }
+    
+    
+    public enum EntryModeEnum {
+
+        CONTACTLESS("contactless"),;
+
+        private final String value;
+
+        private EntryModeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

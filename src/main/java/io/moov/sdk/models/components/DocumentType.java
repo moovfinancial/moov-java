@@ -3,40 +3,138 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * DocumentType
  * 
  * <p>Types of documents that can be uploaded.
  */
-public enum DocumentType {
-    DRIVERS_LICENSE("driversLicense"),
-    PASSPORT("passport"),
-    UTILITY_BILL("utilityBill"),
-    BANK_STATEMENT("bankStatement");
+public class DocumentType {
 
-    @JsonValue
+    public static final DocumentType DRIVERS_LICENSE = new DocumentType("driversLicense");
+    public static final DocumentType PASSPORT = new DocumentType("passport");
+    public static final DocumentType UTILITY_BILL = new DocumentType("utilityBill");
+    public static final DocumentType BANK_STATEMENT = new DocumentType("bankStatement");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, DocumentType> values = createValuesMap();
+    private static final Map<String, DocumentTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    DocumentType(String value) {
+    private DocumentType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a DocumentType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as DocumentType
+     */ 
+    @JsonCreator
+    public static DocumentType of(String value) {
+        synchronized (DocumentType.class) {
+            return values.computeIfAbsent(value, v -> new DocumentType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<DocumentType> fromValue(String value) {
-        for (DocumentType o: DocumentType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<DocumentTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DocumentType other = (DocumentType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "DocumentType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static DocumentType[] values() {
+        synchronized (DocumentType.class) {
+            return values.values().toArray(new DocumentType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, DocumentType> createValuesMap() {
+        Map<String, DocumentType> map = new LinkedHashMap<>();
+        map.put("driversLicense", DRIVERS_LICENSE);
+        map.put("passport", PASSPORT);
+        map.put("utilityBill", UTILITY_BILL);
+        map.put("bankStatement", BANK_STATEMENT);
+        return map;
+    }
+
+    private static final Map<String, DocumentTypeEnum> createEnumsMap() {
+        Map<String, DocumentTypeEnum> map = new HashMap<>();
+        map.put("driversLicense", DocumentTypeEnum.DRIVERS_LICENSE);
+        map.put("passport", DocumentTypeEnum.PASSPORT);
+        map.put("utilityBill", DocumentTypeEnum.UTILITY_BILL);
+        map.put("bankStatement", DocumentTypeEnum.BANK_STATEMENT);
+        return map;
+    }
+    
+    
+    public enum DocumentTypeEnum {
+
+        DRIVERS_LICENSE("driversLicense"),
+        PASSPORT("passport"),
+        UTILITY_BILL("utilityBill"),
+        BANK_STATEMENT("bankStatement"),;
+
+        private final String value;
+
+        private DocumentTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

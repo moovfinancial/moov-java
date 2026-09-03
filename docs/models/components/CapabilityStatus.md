@@ -8,6 +8,9 @@ The status of the capability requested for an account.
 import io.moov.sdk.models.components.CapabilityStatus;
 
 CapabilityStatus value = CapabilityStatus.ENABLED;
+
+// Open enum: use .of() to create instances from custom string values
+CapabilityStatus custom = CapabilityStatus.of("custom_value");
 ```
 
 

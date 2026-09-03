@@ -3,33 +3,125 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum CreateAccountType {
-    INDIVIDUAL("individual"),
-    BUSINESS("business");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class CreateAccountType {
 
-    @JsonValue
+    public static final CreateAccountType INDIVIDUAL = new CreateAccountType("individual");
+    public static final CreateAccountType BUSINESS = new CreateAccountType("business");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, CreateAccountType> values = createValuesMap();
+    private static final Map<String, CreateAccountTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    CreateAccountType(String value) {
+    private CreateAccountType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a CreateAccountType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as CreateAccountType
+     */ 
+    @JsonCreator
+    public static CreateAccountType of(String value) {
+        synchronized (CreateAccountType.class) {
+            return values.computeIfAbsent(value, v -> new CreateAccountType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<CreateAccountType> fromValue(String value) {
-        for (CreateAccountType o: CreateAccountType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<CreateAccountTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CreateAccountType other = (CreateAccountType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "CreateAccountType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static CreateAccountType[] values() {
+        synchronized (CreateAccountType.class) {
+            return values.values().toArray(new CreateAccountType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, CreateAccountType> createValuesMap() {
+        Map<String, CreateAccountType> map = new LinkedHashMap<>();
+        map.put("individual", INDIVIDUAL);
+        map.put("business", BUSINESS);
+        return map;
+    }
+
+    private static final Map<String, CreateAccountTypeEnum> createEnumsMap() {
+        Map<String, CreateAccountTypeEnum> map = new HashMap<>();
+        map.put("individual", CreateAccountTypeEnum.INDIVIDUAL);
+        map.put("business", CreateAccountTypeEnum.BUSINESS);
+        return map;
+    }
+    
+    
+    public enum CreateAccountTypeEnum {
+
+        INDIVIDUAL("individual"),
+        BUSINESS("business"),;
+
+        private final String value;
+
+        private CreateAccountTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

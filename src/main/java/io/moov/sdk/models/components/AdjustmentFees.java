@@ -7,60 +7,52 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
-import java.lang.Deprecated;
 import java.lang.Override;
 import java.lang.String;
+import java.util.List;
 
 /**
  * AdjustmentFees
  * 
- * <p>The total amount of adjustment fees. This field is deprecated and will be removed in a future
- * release.
- * 
- * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
+ * <p>A detailed breakdown of adjustment (correction) fees by fee name.
  */
-@Deprecated
 public class AdjustmentFees {
     /**
-     * A 3-letter ISO 4217 currency code.
+     * Adjustment fees grouped by fee name.
      */
-    @JsonProperty("currency")
-    private String currency;
+    @JsonProperty("items")
+    private List<BillingAdjustment> items;
 
     /**
-     * A decimal-formatted numerical string that represents up to 9 decimal place precision.
-     * 
-     * <p>For example, $12.987654321 is '12.987654321'.
+     * Total adjustment fees.
      */
-    @JsonProperty("valueDecimal")
-    private String valueDecimal;
+    @JsonProperty("total")
+    private BillingCountAndAmount total;
 
     @JsonCreator
     public AdjustmentFees(
-            @JsonProperty("currency") String currency,
-            @JsonProperty("valueDecimal") String valueDecimal) {
-        Utils.checkNotNull(currency, "currency");
-        Utils.checkNotNull(valueDecimal, "valueDecimal");
-        this.currency = currency;
-        this.valueDecimal = valueDecimal;
+            @JsonProperty("items") List<BillingAdjustment> items,
+            @JsonProperty("total") BillingCountAndAmount total) {
+        Utils.checkNotNull(items, "items");
+        Utils.checkNotNull(total, "total");
+        this.items = items;
+        this.total = total;
     }
 
     /**
-     * A 3-letter ISO 4217 currency code.
+     * Adjustment fees grouped by fee name.
      */
     @JsonIgnore
-    public String currency() {
-        return currency;
+    public List<BillingAdjustment> items() {
+        return items;
     }
 
     /**
-     * A decimal-formatted numerical string that represents up to 9 decimal place precision.
-     * 
-     * <p>For example, $12.987654321 is '12.987654321'.
+     * Total adjustment fees.
      */
     @JsonIgnore
-    public String valueDecimal() {
-        return valueDecimal;
+    public BillingCountAndAmount total() {
+        return total;
     }
 
     public static Builder builder() {
@@ -69,22 +61,20 @@ public class AdjustmentFees {
 
 
     /**
-     * A 3-letter ISO 4217 currency code.
+     * Adjustment fees grouped by fee name.
      */
-    public AdjustmentFees withCurrency(String currency) {
-        Utils.checkNotNull(currency, "currency");
-        this.currency = currency;
+    public AdjustmentFees withItems(List<BillingAdjustment> items) {
+        Utils.checkNotNull(items, "items");
+        this.items = items;
         return this;
     }
 
     /**
-     * A decimal-formatted numerical string that represents up to 9 decimal place precision.
-     * 
-     * <p>For example, $12.987654321 is '12.987654321'.
+     * Total adjustment fees.
      */
-    public AdjustmentFees withValueDecimal(String valueDecimal) {
-        Utils.checkNotNull(valueDecimal, "valueDecimal");
-        this.valueDecimal = valueDecimal;
+    public AdjustmentFees withTotal(BillingCountAndAmount total) {
+        Utils.checkNotNull(total, "total");
+        this.total = total;
         return this;
     }
 
@@ -98,29 +88,29 @@ public class AdjustmentFees {
         }
         AdjustmentFees other = (AdjustmentFees) o;
         return 
-            Utils.enhancedDeepEquals(this.currency, other.currency) &&
-            Utils.enhancedDeepEquals(this.valueDecimal, other.valueDecimal);
+            Utils.enhancedDeepEquals(this.items, other.items) &&
+            Utils.enhancedDeepEquals(this.total, other.total);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            currency, valueDecimal);
+            items, total);
     }
     
     @Override
     public String toString() {
         return Utils.toString(AdjustmentFees.class,
-                "currency", currency,
-                "valueDecimal", valueDecimal);
+                "items", items,
+                "total", total);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String currency;
+        private List<BillingAdjustment> items;
 
-        private String valueDecimal;
+        private BillingCountAndAmount total;
 
         private Builder() {
           // force use of static builder() method
@@ -128,30 +118,28 @@ public class AdjustmentFees {
 
 
         /**
-         * A 3-letter ISO 4217 currency code.
+         * Adjustment fees grouped by fee name.
          */
-        public Builder currency(String currency) {
-            Utils.checkNotNull(currency, "currency");
-            this.currency = currency;
+        public Builder items(List<BillingAdjustment> items) {
+            Utils.checkNotNull(items, "items");
+            this.items = items;
             return this;
         }
 
 
         /**
-         * A decimal-formatted numerical string that represents up to 9 decimal place precision.
-         * 
-         * <p>For example, $12.987654321 is '12.987654321'.
+         * Total adjustment fees.
          */
-        public Builder valueDecimal(String valueDecimal) {
-            Utils.checkNotNull(valueDecimal, "valueDecimal");
-            this.valueDecimal = valueDecimal;
+        public Builder total(BillingCountAndAmount total) {
+            Utils.checkNotNull(total, "total");
+            this.total = total;
             return this;
         }
 
         public AdjustmentFees build() {
 
             return new AdjustmentFees(
-                currency, valueDecimal);
+                items, total);
         }
 
     }

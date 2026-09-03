@@ -156,7 +156,7 @@ public class ListRefunds {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "401", "403", "429")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "401", "403", "404", "429")) {
                 res.withHeaders(response.headers().map());
                 // no content
                 throw APIException.from("API error occurred", response);

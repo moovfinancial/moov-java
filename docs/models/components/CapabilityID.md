@@ -16,6 +16,9 @@ The `production-app`, `platform.production-app`, and / or `platform.wallet-trans
 import io.moov.sdk.models.components.CapabilityID;
 
 CapabilityID value = CapabilityID.TRANSFERS;
+
+// Open enum: use .of() to create instances from custom string values
+CapabilityID custom = CapabilityID.of("custom_value");
 ```
 
 

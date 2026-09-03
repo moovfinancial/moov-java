@@ -3,11 +3,21 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * TransactionSource
  * 
@@ -16,29 +26,114 @@ import java.util.Optional;
  * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules.
  * Omit for customer-initiated e-commerce transactions.
  */
-public enum TransactionSource {
-    FIRST_RECURRING("first-recurring"),
-    RECURRING("recurring"),
-    UNSCHEDULED("unscheduled");
+public class TransactionSource {
 
-    @JsonValue
+    public static final TransactionSource FIRST_RECURRING = new TransactionSource("first-recurring");
+    public static final TransactionSource RECURRING = new TransactionSource("recurring");
+    public static final TransactionSource UNSCHEDULED = new TransactionSource("unscheduled");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, TransactionSource> values = createValuesMap();
+    private static final Map<String, TransactionSourceEnum> enums = createEnumsMap();
+
     private final String value;
 
-    TransactionSource(String value) {
+    private TransactionSource(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a TransactionSource with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as TransactionSource
+     */ 
+    @JsonCreator
+    public static TransactionSource of(String value) {
+        synchronized (TransactionSource.class) {
+            return values.computeIfAbsent(value, v -> new TransactionSource(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<TransactionSource> fromValue(String value) {
-        for (TransactionSource o: TransactionSource.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<TransactionSourceEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        TransactionSource other = (TransactionSource) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "TransactionSource [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static TransactionSource[] values() {
+        synchronized (TransactionSource.class) {
+            return values.values().toArray(new TransactionSource[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, TransactionSource> createValuesMap() {
+        Map<String, TransactionSource> map = new LinkedHashMap<>();
+        map.put("first-recurring", FIRST_RECURRING);
+        map.put("recurring", RECURRING);
+        map.put("unscheduled", UNSCHEDULED);
+        return map;
+    }
+
+    private static final Map<String, TransactionSourceEnum> createEnumsMap() {
+        Map<String, TransactionSourceEnum> map = new HashMap<>();
+        map.put("first-recurring", TransactionSourceEnum.FIRST_RECURRING);
+        map.put("recurring", TransactionSourceEnum.RECURRING);
+        map.put("unscheduled", TransactionSourceEnum.UNSCHEDULED);
+        return map;
+    }
+    
+    
+    public enum TransactionSourceEnum {
+
+        FIRST_RECURRING("first-recurring"),
+        RECURRING("recurring"),
+        UNSCHEDULED("unscheduled"),;
+
+        private final String value;
+
+        private TransactionSourceEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

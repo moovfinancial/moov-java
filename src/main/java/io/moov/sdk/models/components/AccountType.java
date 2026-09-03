@@ -3,39 +3,134 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * AccountType
  * 
  * <p>The type of entity represented by this account.
  */
-public enum AccountType {
-    INDIVIDUAL("individual"),
-    BUSINESS("business"),
-    GUEST("guest");
+public class AccountType {
 
-    @JsonValue
+    public static final AccountType INDIVIDUAL = new AccountType("individual");
+    public static final AccountType BUSINESS = new AccountType("business");
+    public static final AccountType GUEST = new AccountType("guest");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, AccountType> values = createValuesMap();
+    private static final Map<String, AccountTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    AccountType(String value) {
+    private AccountType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a AccountType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as AccountType
+     */ 
+    @JsonCreator
+    public static AccountType of(String value) {
+        synchronized (AccountType.class) {
+            return values.computeIfAbsent(value, v -> new AccountType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<AccountType> fromValue(String value) {
-        for (AccountType o: AccountType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<AccountTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        AccountType other = (AccountType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "AccountType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static AccountType[] values() {
+        synchronized (AccountType.class) {
+            return values.values().toArray(new AccountType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, AccountType> createValuesMap() {
+        Map<String, AccountType> map = new LinkedHashMap<>();
+        map.put("individual", INDIVIDUAL);
+        map.put("business", BUSINESS);
+        map.put("guest", GUEST);
+        return map;
+    }
+
+    private static final Map<String, AccountTypeEnum> createEnumsMap() {
+        Map<String, AccountTypeEnum> map = new HashMap<>();
+        map.put("individual", AccountTypeEnum.INDIVIDUAL);
+        map.put("business", AccountTypeEnum.BUSINESS);
+        map.put("guest", AccountTypeEnum.GUEST);
+        return map;
+    }
+    
+    
+    public enum AccountTypeEnum {
+
+        INDIVIDUAL("individual"),
+        BUSINESS("business"),
+        GUEST("guest"),;
+
+        private final String value;
+
+        private AccountTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

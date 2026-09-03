@@ -3,40 +3,138 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * SECCode
  * 
  * <p>Code used to identify the ACH authorization method.
  */
-public enum SECCode {
-    WEB("WEB"),
-    PPD("PPD"),
-    CCD("CCD"),
-    TEL("TEL");
+public class SECCode {
 
-    @JsonValue
+    public static final SECCode WEB = new SECCode("WEB");
+    public static final SECCode PPD = new SECCode("PPD");
+    public static final SECCode CCD = new SECCode("CCD");
+    public static final SECCode TEL = new SECCode("TEL");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, SECCode> values = createValuesMap();
+    private static final Map<String, SECCodeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    SECCode(String value) {
+    private SECCode(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a SECCode with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as SECCode
+     */ 
+    @JsonCreator
+    public static SECCode of(String value) {
+        synchronized (SECCode.class) {
+            return values.computeIfAbsent(value, v -> new SECCode(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<SECCode> fromValue(String value) {
-        for (SECCode o: SECCode.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<SECCodeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        SECCode other = (SECCode) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "SECCode [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static SECCode[] values() {
+        synchronized (SECCode.class) {
+            return values.values().toArray(new SECCode[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, SECCode> createValuesMap() {
+        Map<String, SECCode> map = new LinkedHashMap<>();
+        map.put("WEB", WEB);
+        map.put("PPD", PPD);
+        map.put("CCD", CCD);
+        map.put("TEL", TEL);
+        return map;
+    }
+
+    private static final Map<String, SECCodeEnum> createEnumsMap() {
+        Map<String, SECCodeEnum> map = new HashMap<>();
+        map.put("WEB", SECCodeEnum.WEB);
+        map.put("PPD", SECCodeEnum.PPD);
+        map.put("CCD", SECCodeEnum.CCD);
+        map.put("TEL", SECCodeEnum.TEL);
+        return map;
+    }
+    
+    
+    public enum SECCodeEnum {
+
+        WEB("WEB"),
+        PPD("PPD"),
+        CCD("CCD"),
+        TEL("TEL"),;
+
+        private final String value;
+
+        private SECCodeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

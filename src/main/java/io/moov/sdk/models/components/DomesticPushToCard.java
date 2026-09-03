@@ -3,40 +3,138 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * DomesticPushToCard
  * 
  * <p>Indicates which level of domestic push-to-card transfer is supported by the card, if any.
  */
-public enum DomesticPushToCard {
-    NOT_SUPPORTED("not-supported"),
-    STANDARD("standard"),
-    FAST_FUNDS("fast-funds"),
-    UNKNOWN("unknown");
+public class DomesticPushToCard {
 
-    @JsonValue
+    public static final DomesticPushToCard NOT_SUPPORTED = new DomesticPushToCard("not-supported");
+    public static final DomesticPushToCard STANDARD = new DomesticPushToCard("standard");
+    public static final DomesticPushToCard FAST_FUNDS = new DomesticPushToCard("fast-funds");
+    public static final DomesticPushToCard UNKNOWN = new DomesticPushToCard("unknown");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, DomesticPushToCard> values = createValuesMap();
+    private static final Map<String, DomesticPushToCardEnum> enums = createEnumsMap();
+
     private final String value;
 
-    DomesticPushToCard(String value) {
+    private DomesticPushToCard(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a DomesticPushToCard with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as DomesticPushToCard
+     */ 
+    @JsonCreator
+    public static DomesticPushToCard of(String value) {
+        synchronized (DomesticPushToCard.class) {
+            return values.computeIfAbsent(value, v -> new DomesticPushToCard(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<DomesticPushToCard> fromValue(String value) {
-        for (DomesticPushToCard o: DomesticPushToCard.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<DomesticPushToCardEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DomesticPushToCard other = (DomesticPushToCard) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "DomesticPushToCard [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static DomesticPushToCard[] values() {
+        synchronized (DomesticPushToCard.class) {
+            return values.values().toArray(new DomesticPushToCard[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, DomesticPushToCard> createValuesMap() {
+        Map<String, DomesticPushToCard> map = new LinkedHashMap<>();
+        map.put("not-supported", NOT_SUPPORTED);
+        map.put("standard", STANDARD);
+        map.put("fast-funds", FAST_FUNDS);
+        map.put("unknown", UNKNOWN);
+        return map;
+    }
+
+    private static final Map<String, DomesticPushToCardEnum> createEnumsMap() {
+        Map<String, DomesticPushToCardEnum> map = new HashMap<>();
+        map.put("not-supported", DomesticPushToCardEnum.NOT_SUPPORTED);
+        map.put("standard", DomesticPushToCardEnum.STANDARD);
+        map.put("fast-funds", DomesticPushToCardEnum.FAST_FUNDS);
+        map.put("unknown", DomesticPushToCardEnum.UNKNOWN);
+        return map;
+    }
+    
+    
+    public enum DomesticPushToCardEnum {
+
+        NOT_SUPPORTED("not-supported"),
+        STANDARD("standard"),
+        FAST_FUNDS("fast-funds"),
+        UNKNOWN("unknown"),;
+
+        private final String value;
+
+        private DomesticPushToCardEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

@@ -3,43 +3,150 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * ACHTransactionStatus
  * 
  * <p>Status of a transaction within the ACH lifecycle.
  */
-public enum ACHTransactionStatus {
-    UNKNOWN(""),
-    INITIATED("initiated"),
-    ORIGINATED("originated"),
-    CORRECTED("corrected"),
-    RETURNED("returned"),
-    COMPLETED("completed"),
-    CANCELED("canceled");
+public class ACHTransactionStatus {
 
-    @JsonValue
+    public static final ACHTransactionStatus UNKNOWN = new ACHTransactionStatus("");
+    public static final ACHTransactionStatus INITIATED = new ACHTransactionStatus("initiated");
+    public static final ACHTransactionStatus ORIGINATED = new ACHTransactionStatus("originated");
+    public static final ACHTransactionStatus CORRECTED = new ACHTransactionStatus("corrected");
+    public static final ACHTransactionStatus RETURNED = new ACHTransactionStatus("returned");
+    public static final ACHTransactionStatus COMPLETED = new ACHTransactionStatus("completed");
+    public static final ACHTransactionStatus CANCELED = new ACHTransactionStatus("canceled");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, ACHTransactionStatus> values = createValuesMap();
+    private static final Map<String, ACHTransactionStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    ACHTransactionStatus(String value) {
+    private ACHTransactionStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a ACHTransactionStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as ACHTransactionStatus
+     */ 
+    @JsonCreator
+    public static ACHTransactionStatus of(String value) {
+        synchronized (ACHTransactionStatus.class) {
+            return values.computeIfAbsent(value, v -> new ACHTransactionStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<ACHTransactionStatus> fromValue(String value) {
-        for (ACHTransactionStatus o: ACHTransactionStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<ACHTransactionStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ACHTransactionStatus other = (ACHTransactionStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "ACHTransactionStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static ACHTransactionStatus[] values() {
+        synchronized (ACHTransactionStatus.class) {
+            return values.values().toArray(new ACHTransactionStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, ACHTransactionStatus> createValuesMap() {
+        Map<String, ACHTransactionStatus> map = new LinkedHashMap<>();
+        map.put("", UNKNOWN);
+        map.put("initiated", INITIATED);
+        map.put("originated", ORIGINATED);
+        map.put("corrected", CORRECTED);
+        map.put("returned", RETURNED);
+        map.put("completed", COMPLETED);
+        map.put("canceled", CANCELED);
+        return map;
+    }
+
+    private static final Map<String, ACHTransactionStatusEnum> createEnumsMap() {
+        Map<String, ACHTransactionStatusEnum> map = new HashMap<>();
+        map.put("", ACHTransactionStatusEnum.UNKNOWN);
+        map.put("initiated", ACHTransactionStatusEnum.INITIATED);
+        map.put("originated", ACHTransactionStatusEnum.ORIGINATED);
+        map.put("corrected", ACHTransactionStatusEnum.CORRECTED);
+        map.put("returned", ACHTransactionStatusEnum.RETURNED);
+        map.put("completed", ACHTransactionStatusEnum.COMPLETED);
+        map.put("canceled", ACHTransactionStatusEnum.CANCELED);
+        return map;
+    }
+    
+    
+    public enum ACHTransactionStatusEnum {
+
+        UNKNOWN(""),
+        INITIATED("initiated"),
+        ORIGINATED("originated"),
+        CORRECTED("corrected"),
+        RETURNED("returned"),
+        COMPLETED("completed"),
+        CANCELED("canceled"),;
+
+        private final String value;
+
+        private ACHTransactionStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

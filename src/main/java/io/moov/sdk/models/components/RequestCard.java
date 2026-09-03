@@ -46,7 +46,9 @@ public class RequestCard {
     @JsonProperty("expiration")
     private Optional<? extends CardExpiration> expiration;
 
-
+    /**
+     * Mutable spend controls for the card.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("controls")
     private Optional<? extends IssuingControls> controls;
@@ -112,6 +114,9 @@ public class RequestCard {
         return (Optional<CardExpiration>) expiration;
     }
 
+    /**
+     * Mutable spend controls for the card.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<IssuingControls> controls() {
@@ -200,6 +205,9 @@ public class RequestCard {
         return this;
     }
 
+    /**
+     * Mutable spend controls for the card.
+     */
     public RequestCard withControls(IssuingControls controls) {
         Utils.checkNotNull(controls, "controls");
         this.controls = Optional.ofNullable(controls);
@@ -207,6 +215,9 @@ public class RequestCard {
     }
 
 
+    /**
+     * Mutable spend controls for the card.
+     */
     public RequestCard withControls(Optional<? extends IssuingControls> controls) {
         Utils.checkNotNull(controls, "controls");
         this.controls = controls;
@@ -346,12 +357,18 @@ public class RequestCard {
         }
 
 
+        /**
+         * Mutable spend controls for the card.
+         */
         public Builder controls(IssuingControls controls) {
             Utils.checkNotNull(controls, "controls");
             this.controls = Optional.ofNullable(controls);
             return this;
         }
 
+        /**
+         * Mutable spend controls for the card.
+         */
         public Builder controls(Optional<? extends IssuingControls> controls) {
             Utils.checkNotNull(controls, "controls");
             this.controls = controls;

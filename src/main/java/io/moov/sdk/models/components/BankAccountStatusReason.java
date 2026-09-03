@@ -3,51 +3,182 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * BankAccountStatusReason
  * 
  * <p>The reason the bank account status changed to the current value.
  */
-public enum BankAccountStatusReason {
-    BANK_ACCOUNT_CREATED("bank-account-created"),
-    VERIFICATION_INITIATED("verification-initiated"),
-    MICRO_DEPOSIT_ATTEMPTS_EXCEEDED("micro-deposit-attempts-exceeded"),
-    MICRO_DEPOSIT_EXPIRED("micro-deposit-expired"),
-    MAX_VERIFICATION_FAILURES("max-verification-failures"),
-    VERIFICATION_ATTEMPTS_EXCEEDED("verification-attempts-exceeded"),
-    VERIFICATION_EXPIRED("verification-expired"),
-    VERIFICATION_SUCCESSFUL("verification-successful"),
-    ACH_DEBIT_RETURN("ach-debit-return"),
-    ACH_CREDIT_RETURN("ach-credit-return"),
-    RTP_CREDIT_FAILURE("rtp-credit-failure"),
-    FEDNOW_CREDIT_FAILURE("fednow-credit-failure"),
-    MICRO_DEPOSIT_RETURN("micro-deposit-return"),
-    ADMIN_ACTION("admin-action"),
-    OTHER("other");
+public class BankAccountStatusReason {
 
-    @JsonValue
+    public static final BankAccountStatusReason BANK_ACCOUNT_CREATED = new BankAccountStatusReason("bank-account-created");
+    public static final BankAccountStatusReason VERIFICATION_INITIATED = new BankAccountStatusReason("verification-initiated");
+    public static final BankAccountStatusReason MICRO_DEPOSIT_ATTEMPTS_EXCEEDED = new BankAccountStatusReason("micro-deposit-attempts-exceeded");
+    public static final BankAccountStatusReason MICRO_DEPOSIT_EXPIRED = new BankAccountStatusReason("micro-deposit-expired");
+    public static final BankAccountStatusReason MAX_VERIFICATION_FAILURES = new BankAccountStatusReason("max-verification-failures");
+    public static final BankAccountStatusReason VERIFICATION_ATTEMPTS_EXCEEDED = new BankAccountStatusReason("verification-attempts-exceeded");
+    public static final BankAccountStatusReason VERIFICATION_EXPIRED = new BankAccountStatusReason("verification-expired");
+    public static final BankAccountStatusReason VERIFICATION_SUCCESSFUL = new BankAccountStatusReason("verification-successful");
+    public static final BankAccountStatusReason ACH_DEBIT_RETURN = new BankAccountStatusReason("ach-debit-return");
+    public static final BankAccountStatusReason ACH_CREDIT_RETURN = new BankAccountStatusReason("ach-credit-return");
+    public static final BankAccountStatusReason RTP_CREDIT_FAILURE = new BankAccountStatusReason("rtp-credit-failure");
+    public static final BankAccountStatusReason FEDNOW_CREDIT_FAILURE = new BankAccountStatusReason("fednow-credit-failure");
+    public static final BankAccountStatusReason MICRO_DEPOSIT_RETURN = new BankAccountStatusReason("micro-deposit-return");
+    public static final BankAccountStatusReason ADMIN_ACTION = new BankAccountStatusReason("admin-action");
+    public static final BankAccountStatusReason OTHER = new BankAccountStatusReason("other");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, BankAccountStatusReason> values = createValuesMap();
+    private static final Map<String, BankAccountStatusReasonEnum> enums = createEnumsMap();
+
     private final String value;
 
-    BankAccountStatusReason(String value) {
+    private BankAccountStatusReason(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a BankAccountStatusReason with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as BankAccountStatusReason
+     */ 
+    @JsonCreator
+    public static BankAccountStatusReason of(String value) {
+        synchronized (BankAccountStatusReason.class) {
+            return values.computeIfAbsent(value, v -> new BankAccountStatusReason(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<BankAccountStatusReason> fromValue(String value) {
-        for (BankAccountStatusReason o: BankAccountStatusReason.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<BankAccountStatusReasonEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        BankAccountStatusReason other = (BankAccountStatusReason) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "BankAccountStatusReason [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static BankAccountStatusReason[] values() {
+        synchronized (BankAccountStatusReason.class) {
+            return values.values().toArray(new BankAccountStatusReason[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, BankAccountStatusReason> createValuesMap() {
+        Map<String, BankAccountStatusReason> map = new LinkedHashMap<>();
+        map.put("bank-account-created", BANK_ACCOUNT_CREATED);
+        map.put("verification-initiated", VERIFICATION_INITIATED);
+        map.put("micro-deposit-attempts-exceeded", MICRO_DEPOSIT_ATTEMPTS_EXCEEDED);
+        map.put("micro-deposit-expired", MICRO_DEPOSIT_EXPIRED);
+        map.put("max-verification-failures", MAX_VERIFICATION_FAILURES);
+        map.put("verification-attempts-exceeded", VERIFICATION_ATTEMPTS_EXCEEDED);
+        map.put("verification-expired", VERIFICATION_EXPIRED);
+        map.put("verification-successful", VERIFICATION_SUCCESSFUL);
+        map.put("ach-debit-return", ACH_DEBIT_RETURN);
+        map.put("ach-credit-return", ACH_CREDIT_RETURN);
+        map.put("rtp-credit-failure", RTP_CREDIT_FAILURE);
+        map.put("fednow-credit-failure", FEDNOW_CREDIT_FAILURE);
+        map.put("micro-deposit-return", MICRO_DEPOSIT_RETURN);
+        map.put("admin-action", ADMIN_ACTION);
+        map.put("other", OTHER);
+        return map;
+    }
+
+    private static final Map<String, BankAccountStatusReasonEnum> createEnumsMap() {
+        Map<String, BankAccountStatusReasonEnum> map = new HashMap<>();
+        map.put("bank-account-created", BankAccountStatusReasonEnum.BANK_ACCOUNT_CREATED);
+        map.put("verification-initiated", BankAccountStatusReasonEnum.VERIFICATION_INITIATED);
+        map.put("micro-deposit-attempts-exceeded", BankAccountStatusReasonEnum.MICRO_DEPOSIT_ATTEMPTS_EXCEEDED);
+        map.put("micro-deposit-expired", BankAccountStatusReasonEnum.MICRO_DEPOSIT_EXPIRED);
+        map.put("max-verification-failures", BankAccountStatusReasonEnum.MAX_VERIFICATION_FAILURES);
+        map.put("verification-attempts-exceeded", BankAccountStatusReasonEnum.VERIFICATION_ATTEMPTS_EXCEEDED);
+        map.put("verification-expired", BankAccountStatusReasonEnum.VERIFICATION_EXPIRED);
+        map.put("verification-successful", BankAccountStatusReasonEnum.VERIFICATION_SUCCESSFUL);
+        map.put("ach-debit-return", BankAccountStatusReasonEnum.ACH_DEBIT_RETURN);
+        map.put("ach-credit-return", BankAccountStatusReasonEnum.ACH_CREDIT_RETURN);
+        map.put("rtp-credit-failure", BankAccountStatusReasonEnum.RTP_CREDIT_FAILURE);
+        map.put("fednow-credit-failure", BankAccountStatusReasonEnum.FEDNOW_CREDIT_FAILURE);
+        map.put("micro-deposit-return", BankAccountStatusReasonEnum.MICRO_DEPOSIT_RETURN);
+        map.put("admin-action", BankAccountStatusReasonEnum.ADMIN_ACTION);
+        map.put("other", BankAccountStatusReasonEnum.OTHER);
+        return map;
+    }
+    
+    
+    public enum BankAccountStatusReasonEnum {
+
+        BANK_ACCOUNT_CREATED("bank-account-created"),
+        VERIFICATION_INITIATED("verification-initiated"),
+        MICRO_DEPOSIT_ATTEMPTS_EXCEEDED("micro-deposit-attempts-exceeded"),
+        MICRO_DEPOSIT_EXPIRED("micro-deposit-expired"),
+        MAX_VERIFICATION_FAILURES("max-verification-failures"),
+        VERIFICATION_ATTEMPTS_EXCEEDED("verification-attempts-exceeded"),
+        VERIFICATION_EXPIRED("verification-expired"),
+        VERIFICATION_SUCCESSFUL("verification-successful"),
+        ACH_DEBIT_RETURN("ach-debit-return"),
+        ACH_CREDIT_RETURN("ach-credit-return"),
+        RTP_CREDIT_FAILURE("rtp-credit-failure"),
+        FEDNOW_CREDIT_FAILURE("fednow-credit-failure"),
+        MICRO_DEPOSIT_RETURN("micro-deposit-return"),
+        ADMIN_ACTION("admin-action"),
+        OTHER("other"),;
+
+        private final String value;
+
+        private BankAccountStatusReasonEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

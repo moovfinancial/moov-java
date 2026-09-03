@@ -3,38 +3,130 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * BankAccountHolderType
  * 
  * <p>The type of holder on a funding source.
  */
-public enum BankAccountHolderType {
-    INDIVIDUAL("individual"),
-    BUSINESS("business");
+public class BankAccountHolderType {
 
-    @JsonValue
+    public static final BankAccountHolderType INDIVIDUAL = new BankAccountHolderType("individual");
+    public static final BankAccountHolderType BUSINESS = new BankAccountHolderType("business");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, BankAccountHolderType> values = createValuesMap();
+    private static final Map<String, BankAccountHolderTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    BankAccountHolderType(String value) {
+    private BankAccountHolderType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a BankAccountHolderType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as BankAccountHolderType
+     */ 
+    @JsonCreator
+    public static BankAccountHolderType of(String value) {
+        synchronized (BankAccountHolderType.class) {
+            return values.computeIfAbsent(value, v -> new BankAccountHolderType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<BankAccountHolderType> fromValue(String value) {
-        for (BankAccountHolderType o: BankAccountHolderType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<BankAccountHolderTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        BankAccountHolderType other = (BankAccountHolderType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "BankAccountHolderType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static BankAccountHolderType[] values() {
+        synchronized (BankAccountHolderType.class) {
+            return values.values().toArray(new BankAccountHolderType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, BankAccountHolderType> createValuesMap() {
+        Map<String, BankAccountHolderType> map = new LinkedHashMap<>();
+        map.put("individual", INDIVIDUAL);
+        map.put("business", BUSINESS);
+        return map;
+    }
+
+    private static final Map<String, BankAccountHolderTypeEnum> createEnumsMap() {
+        Map<String, BankAccountHolderTypeEnum> map = new HashMap<>();
+        map.put("individual", BankAccountHolderTypeEnum.INDIVIDUAL);
+        map.put("business", BankAccountHolderTypeEnum.BUSINESS);
+        return map;
+    }
+    
+    
+    public enum BankAccountHolderTypeEnum {
+
+        INDIVIDUAL("individual"),
+        BUSINESS("business"),;
+
+        private final String value;
+
+        private BankAccountHolderTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

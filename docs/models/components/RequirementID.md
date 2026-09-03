@@ -8,6 +8,9 @@ The unique ID of what the requirement is asking to be filled out.
 import io.moov.sdk.models.components.RequirementID;
 
 RequirementID value = RequirementID.ACCOUNT_TOS_ACCEPTANCE;
+
+// Open enum: use .of() to create instances from custom string values
+RequirementID custom = RequirementID.of("custom_value");
 ```
 
 

@@ -8,6 +8,9 @@ Types of documents that can be uploaded.
 import io.moov.sdk.models.components.DocumentType;
 
 DocumentType value = DocumentType.DRIVERS_LICENSE;
+
+// Open enum: use .of() to create instances from custom string values
+DocumentType custom = DocumentType.of("custom_value");
 ```
 
 

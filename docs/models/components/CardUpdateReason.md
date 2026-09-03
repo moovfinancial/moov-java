@@ -8,6 +8,9 @@ The results of the card update request.
 import io.moov.sdk.models.components.CardUpdateReason;
 
 CardUpdateReason value = CardUpdateReason.UNSPECIFIED;
+
+// Open enum: use .of() to create instances from custom string values
+CardUpdateReason custom = CardUpdateReason.of("custom_value");
 ```
 
 

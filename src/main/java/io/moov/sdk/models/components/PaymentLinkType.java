@@ -3,34 +3,129 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum PaymentLinkType {
-    PAYMENT("payment"),
-    PAYOUT("payout"),
-    INVOICE_PAYMENT("invoice-payment");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class PaymentLinkType {
 
-    @JsonValue
+    public static final PaymentLinkType PAYMENT = new PaymentLinkType("payment");
+    public static final PaymentLinkType PAYOUT = new PaymentLinkType("payout");
+    public static final PaymentLinkType INVOICE_PAYMENT = new PaymentLinkType("invoice-payment");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, PaymentLinkType> values = createValuesMap();
+    private static final Map<String, PaymentLinkTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    PaymentLinkType(String value) {
+    private PaymentLinkType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a PaymentLinkType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as PaymentLinkType
+     */ 
+    @JsonCreator
+    public static PaymentLinkType of(String value) {
+        synchronized (PaymentLinkType.class) {
+            return values.computeIfAbsent(value, v -> new PaymentLinkType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<PaymentLinkType> fromValue(String value) {
-        for (PaymentLinkType o: PaymentLinkType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<PaymentLinkTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PaymentLinkType other = (PaymentLinkType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "PaymentLinkType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static PaymentLinkType[] values() {
+        synchronized (PaymentLinkType.class) {
+            return values.values().toArray(new PaymentLinkType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, PaymentLinkType> createValuesMap() {
+        Map<String, PaymentLinkType> map = new LinkedHashMap<>();
+        map.put("payment", PAYMENT);
+        map.put("payout", PAYOUT);
+        map.put("invoice-payment", INVOICE_PAYMENT);
+        return map;
+    }
+
+    private static final Map<String, PaymentLinkTypeEnum> createEnumsMap() {
+        Map<String, PaymentLinkTypeEnum> map = new HashMap<>();
+        map.put("payment", PaymentLinkTypeEnum.PAYMENT);
+        map.put("payout", PaymentLinkTypeEnum.PAYOUT);
+        map.put("invoice-payment", PaymentLinkTypeEnum.INVOICE_PAYMENT);
+        return map;
+    }
+    
+    
+    public enum PaymentLinkTypeEnum {
+
+        PAYMENT("payment"),
+        PAYOUT("payout"),
+        INVOICE_PAYMENT("invoice-payment"),;
+
+        private final String value;
+
+        private PaymentLinkTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

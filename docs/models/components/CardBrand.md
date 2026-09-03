@@ -8,6 +8,9 @@ The card brand.
 import io.moov.sdk.models.components.CardBrand;
 
 CardBrand value = CardBrand.AMERICAN_EXPRESS;
+
+// Open enum: use .of() to create instances from custom string values
+CardBrand custom = CardBrand.of("custom_value");
 ```
 
 

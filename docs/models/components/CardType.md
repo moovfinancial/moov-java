@@ -8,6 +8,9 @@ The type of the card.
 import io.moov.sdk.models.components.CardType;
 
 CardType value = CardType.DEBIT;
+
+// Open enum: use .of() to create instances from custom string values
+CardType custom = CardType.of("custom_value");
 ```
 
 

@@ -3,39 +3,134 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * IssuedCardAuthorizationEventResult
  * 
  * <p>The result of an event.
  */
-public enum IssuedCardAuthorizationEventResult {
-    APPROVED("approved"),
-    DECLINED("declined"),
-    PROCESSED("processed");
+public class IssuedCardAuthorizationEventResult {
 
-    @JsonValue
+    public static final IssuedCardAuthorizationEventResult APPROVED = new IssuedCardAuthorizationEventResult("approved");
+    public static final IssuedCardAuthorizationEventResult DECLINED = new IssuedCardAuthorizationEventResult("declined");
+    public static final IssuedCardAuthorizationEventResult PROCESSED = new IssuedCardAuthorizationEventResult("processed");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, IssuedCardAuthorizationEventResult> values = createValuesMap();
+    private static final Map<String, IssuedCardAuthorizationEventResultEnum> enums = createEnumsMap();
+
     private final String value;
 
-    IssuedCardAuthorizationEventResult(String value) {
+    private IssuedCardAuthorizationEventResult(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a IssuedCardAuthorizationEventResult with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as IssuedCardAuthorizationEventResult
+     */ 
+    @JsonCreator
+    public static IssuedCardAuthorizationEventResult of(String value) {
+        synchronized (IssuedCardAuthorizationEventResult.class) {
+            return values.computeIfAbsent(value, v -> new IssuedCardAuthorizationEventResult(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<IssuedCardAuthorizationEventResult> fromValue(String value) {
-        for (IssuedCardAuthorizationEventResult o: IssuedCardAuthorizationEventResult.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<IssuedCardAuthorizationEventResultEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        IssuedCardAuthorizationEventResult other = (IssuedCardAuthorizationEventResult) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "IssuedCardAuthorizationEventResult [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static IssuedCardAuthorizationEventResult[] values() {
+        synchronized (IssuedCardAuthorizationEventResult.class) {
+            return values.values().toArray(new IssuedCardAuthorizationEventResult[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, IssuedCardAuthorizationEventResult> createValuesMap() {
+        Map<String, IssuedCardAuthorizationEventResult> map = new LinkedHashMap<>();
+        map.put("approved", APPROVED);
+        map.put("declined", DECLINED);
+        map.put("processed", PROCESSED);
+        return map;
+    }
+
+    private static final Map<String, IssuedCardAuthorizationEventResultEnum> createEnumsMap() {
+        Map<String, IssuedCardAuthorizationEventResultEnum> map = new HashMap<>();
+        map.put("approved", IssuedCardAuthorizationEventResultEnum.APPROVED);
+        map.put("declined", IssuedCardAuthorizationEventResultEnum.DECLINED);
+        map.put("processed", IssuedCardAuthorizationEventResultEnum.PROCESSED);
+        return map;
+    }
+    
+    
+    public enum IssuedCardAuthorizationEventResultEnum {
+
+        APPROVED("approved"),
+        DECLINED("declined"),
+        PROCESSED("processed"),;
+
+        private final String value;
+
+        private IssuedCardAuthorizationEventResultEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

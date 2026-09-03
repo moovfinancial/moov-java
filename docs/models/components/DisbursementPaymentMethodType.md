@@ -8,6 +8,9 @@ Payment methods allowed for disbursing funds.
 import io.moov.sdk.models.components.DisbursementPaymentMethodType;
 
 DisbursementPaymentMethodType value = DisbursementPaymentMethodType.PUSH_TO_CARD;
+
+// Open enum: use .of() to create instances from custom string values
+DisbursementPaymentMethodType custom = DisbursementPaymentMethodType.of("custom_value");
 ```
 
 

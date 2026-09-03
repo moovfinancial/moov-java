@@ -3,11 +3,21 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * WalletType
  * 
@@ -18,29 +28,114 @@ import java.util.Optional;
  * - `card-issuing`: The system-generated wallet automatically created when an account is granted the
  * card-issuing capability.
  */
-public enum WalletType {
-    DEFAULT("default"),
-    GENERAL("general"),
-    CARD_ISSUING("card-issuing");
+public class WalletType {
 
-    @JsonValue
+    public static final WalletType DEFAULT = new WalletType("default");
+    public static final WalletType GENERAL = new WalletType("general");
+    public static final WalletType CARD_ISSUING = new WalletType("card-issuing");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, WalletType> values = createValuesMap();
+    private static final Map<String, WalletTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    WalletType(String value) {
+    private WalletType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a WalletType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as WalletType
+     */ 
+    @JsonCreator
+    public static WalletType of(String value) {
+        synchronized (WalletType.class) {
+            return values.computeIfAbsent(value, v -> new WalletType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<WalletType> fromValue(String value) {
-        for (WalletType o: WalletType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<WalletTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        WalletType other = (WalletType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "WalletType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static WalletType[] values() {
+        synchronized (WalletType.class) {
+            return values.values().toArray(new WalletType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, WalletType> createValuesMap() {
+        Map<String, WalletType> map = new LinkedHashMap<>();
+        map.put("default", DEFAULT);
+        map.put("general", GENERAL);
+        map.put("card-issuing", CARD_ISSUING);
+        return map;
+    }
+
+    private static final Map<String, WalletTypeEnum> createEnumsMap() {
+        Map<String, WalletTypeEnum> map = new HashMap<>();
+        map.put("default", WalletTypeEnum.DEFAULT);
+        map.put("general", WalletTypeEnum.GENERAL);
+        map.put("card-issuing", WalletTypeEnum.CARD_ISSUING);
+        return map;
+    }
+    
+    
+    public enum WalletTypeEnum {
+
+        DEFAULT("default"),
+        GENERAL("general"),
+        CARD_ISSUING("card-issuing"),;
+
+        private final String value;
+
+        private WalletTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

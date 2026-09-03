@@ -8,6 +8,9 @@
 import io.moov.sdk.models.components.UnderwritingStatus;
 
 UnderwritingStatus value = UnderwritingStatus.APPROVED;
+
+// Open enum: use .of() to create instances from custom string values
+UnderwritingStatus custom = UnderwritingStatus.of("custom_value");
 ```
 
 

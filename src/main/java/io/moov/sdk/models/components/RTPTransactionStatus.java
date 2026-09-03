@@ -3,40 +3,138 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * RTPTransactionStatus
  * 
  * <p>Status of a transaction within the RTP lifecycle.
  */
-public enum RTPTransactionStatus {
-    INITIATED("initiated"),
-    COMPLETED("completed"),
-    FAILED("failed"),
-    ACCEPTED_WITHOUT_POSTING("accepted-without-posting");
+public class RTPTransactionStatus {
 
-    @JsonValue
+    public static final RTPTransactionStatus INITIATED = new RTPTransactionStatus("initiated");
+    public static final RTPTransactionStatus COMPLETED = new RTPTransactionStatus("completed");
+    public static final RTPTransactionStatus FAILED = new RTPTransactionStatus("failed");
+    public static final RTPTransactionStatus ACCEPTED_WITHOUT_POSTING = new RTPTransactionStatus("accepted-without-posting");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, RTPTransactionStatus> values = createValuesMap();
+    private static final Map<String, RTPTransactionStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    RTPTransactionStatus(String value) {
+    private RTPTransactionStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a RTPTransactionStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as RTPTransactionStatus
+     */ 
+    @JsonCreator
+    public static RTPTransactionStatus of(String value) {
+        synchronized (RTPTransactionStatus.class) {
+            return values.computeIfAbsent(value, v -> new RTPTransactionStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<RTPTransactionStatus> fromValue(String value) {
-        for (RTPTransactionStatus o: RTPTransactionStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<RTPTransactionStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        RTPTransactionStatus other = (RTPTransactionStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "RTPTransactionStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static RTPTransactionStatus[] values() {
+        synchronized (RTPTransactionStatus.class) {
+            return values.values().toArray(new RTPTransactionStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, RTPTransactionStatus> createValuesMap() {
+        Map<String, RTPTransactionStatus> map = new LinkedHashMap<>();
+        map.put("initiated", INITIATED);
+        map.put("completed", COMPLETED);
+        map.put("failed", FAILED);
+        map.put("accepted-without-posting", ACCEPTED_WITHOUT_POSTING);
+        return map;
+    }
+
+    private static final Map<String, RTPTransactionStatusEnum> createEnumsMap() {
+        Map<String, RTPTransactionStatusEnum> map = new HashMap<>();
+        map.put("initiated", RTPTransactionStatusEnum.INITIATED);
+        map.put("completed", RTPTransactionStatusEnum.COMPLETED);
+        map.put("failed", RTPTransactionStatusEnum.FAILED);
+        map.put("accepted-without-posting", RTPTransactionStatusEnum.ACCEPTED_WITHOUT_POSTING);
+        return map;
+    }
+    
+    
+    public enum RTPTransactionStatusEnum {
+
+        INITIATED("initiated"),
+        COMPLETED("completed"),
+        FAILED("failed"),
+        ACCEPTED_WITHOUT_POSTING("accepted-without-posting"),;
+
+        private final String value;
+
+        private RTPTransactionStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

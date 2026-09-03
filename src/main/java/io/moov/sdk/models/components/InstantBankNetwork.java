@@ -3,38 +3,130 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * InstantBankNetwork
  * 
  * <p>The network that the transaction was processed on.
  */
-public enum InstantBankNetwork {
-    FEDNOW("fednow"),
-    RTP("rtp");
+public class InstantBankNetwork {
 
-    @JsonValue
+    public static final InstantBankNetwork FEDNOW = new InstantBankNetwork("fednow");
+    public static final InstantBankNetwork RTP = new InstantBankNetwork("rtp");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, InstantBankNetwork> values = createValuesMap();
+    private static final Map<String, InstantBankNetworkEnum> enums = createEnumsMap();
+
     private final String value;
 
-    InstantBankNetwork(String value) {
+    private InstantBankNetwork(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a InstantBankNetwork with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as InstantBankNetwork
+     */ 
+    @JsonCreator
+    public static InstantBankNetwork of(String value) {
+        synchronized (InstantBankNetwork.class) {
+            return values.computeIfAbsent(value, v -> new InstantBankNetwork(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<InstantBankNetwork> fromValue(String value) {
-        for (InstantBankNetwork o: InstantBankNetwork.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<InstantBankNetworkEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        InstantBankNetwork other = (InstantBankNetwork) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "InstantBankNetwork [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static InstantBankNetwork[] values() {
+        synchronized (InstantBankNetwork.class) {
+            return values.values().toArray(new InstantBankNetwork[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, InstantBankNetwork> createValuesMap() {
+        Map<String, InstantBankNetwork> map = new LinkedHashMap<>();
+        map.put("fednow", FEDNOW);
+        map.put("rtp", RTP);
+        return map;
+    }
+
+    private static final Map<String, InstantBankNetworkEnum> createEnumsMap() {
+        Map<String, InstantBankNetworkEnum> map = new HashMap<>();
+        map.put("fednow", InstantBankNetworkEnum.FEDNOW);
+        map.put("rtp", InstantBankNetworkEnum.RTP);
+        return map;
+    }
+    
+    
+    public enum InstantBankNetworkEnum {
+
+        FEDNOW("fednow"),
+        RTP("rtp"),;
+
+        private final String value;
+
+        private InstantBankNetworkEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

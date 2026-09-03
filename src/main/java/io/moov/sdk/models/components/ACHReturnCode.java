@@ -3,11 +3,21 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * ACHReturnCode
  * 
@@ -34,46 +44,182 @@ import java.util.Optional;
  * - R38: Stop Payment on Source Document (Adjustment Entry)
  * - R39: Improper Source Document
  */
-public enum ACHReturnCode {
-    R02("R02"),
-    R03("R03"),
-    R04("R04"),
-    R05("R05"),
-    R07("R07"),
-    R08("R08"),
-    R10("R10"),
-    R11("R11"),
-    R12("R12"),
-    R13("R13"),
-    R14("R14"),
-    R15("R15"),
-    R16("R16"),
-    R17("R17"),
-    R20("R20"),
-    R23("R23"),
-    R29("R29"),
-    R34("R34"),
-    R38("R38"),
-    R39("R39");
+public class ACHReturnCode {
 
-    @JsonValue
+    public static final ACHReturnCode R02 = new ACHReturnCode("R02");
+    public static final ACHReturnCode R03 = new ACHReturnCode("R03");
+    public static final ACHReturnCode R04 = new ACHReturnCode("R04");
+    public static final ACHReturnCode R05 = new ACHReturnCode("R05");
+    public static final ACHReturnCode R07 = new ACHReturnCode("R07");
+    public static final ACHReturnCode R08 = new ACHReturnCode("R08");
+    public static final ACHReturnCode R10 = new ACHReturnCode("R10");
+    public static final ACHReturnCode R11 = new ACHReturnCode("R11");
+    public static final ACHReturnCode R12 = new ACHReturnCode("R12");
+    public static final ACHReturnCode R13 = new ACHReturnCode("R13");
+    public static final ACHReturnCode R14 = new ACHReturnCode("R14");
+    public static final ACHReturnCode R15 = new ACHReturnCode("R15");
+    public static final ACHReturnCode R16 = new ACHReturnCode("R16");
+    public static final ACHReturnCode R17 = new ACHReturnCode("R17");
+    public static final ACHReturnCode R20 = new ACHReturnCode("R20");
+    public static final ACHReturnCode R23 = new ACHReturnCode("R23");
+    public static final ACHReturnCode R29 = new ACHReturnCode("R29");
+    public static final ACHReturnCode R34 = new ACHReturnCode("R34");
+    public static final ACHReturnCode R38 = new ACHReturnCode("R38");
+    public static final ACHReturnCode R39 = new ACHReturnCode("R39");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, ACHReturnCode> values = createValuesMap();
+    private static final Map<String, ACHReturnCodeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    ACHReturnCode(String value) {
+    private ACHReturnCode(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a ACHReturnCode with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as ACHReturnCode
+     */ 
+    @JsonCreator
+    public static ACHReturnCode of(String value) {
+        synchronized (ACHReturnCode.class) {
+            return values.computeIfAbsent(value, v -> new ACHReturnCode(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<ACHReturnCode> fromValue(String value) {
-        for (ACHReturnCode o: ACHReturnCode.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<ACHReturnCodeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ACHReturnCode other = (ACHReturnCode) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "ACHReturnCode [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static ACHReturnCode[] values() {
+        synchronized (ACHReturnCode.class) {
+            return values.values().toArray(new ACHReturnCode[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, ACHReturnCode> createValuesMap() {
+        Map<String, ACHReturnCode> map = new LinkedHashMap<>();
+        map.put("R02", R02);
+        map.put("R03", R03);
+        map.put("R04", R04);
+        map.put("R05", R05);
+        map.put("R07", R07);
+        map.put("R08", R08);
+        map.put("R10", R10);
+        map.put("R11", R11);
+        map.put("R12", R12);
+        map.put("R13", R13);
+        map.put("R14", R14);
+        map.put("R15", R15);
+        map.put("R16", R16);
+        map.put("R17", R17);
+        map.put("R20", R20);
+        map.put("R23", R23);
+        map.put("R29", R29);
+        map.put("R34", R34);
+        map.put("R38", R38);
+        map.put("R39", R39);
+        return map;
+    }
+
+    private static final Map<String, ACHReturnCodeEnum> createEnumsMap() {
+        Map<String, ACHReturnCodeEnum> map = new HashMap<>();
+        map.put("R02", ACHReturnCodeEnum.R02);
+        map.put("R03", ACHReturnCodeEnum.R03);
+        map.put("R04", ACHReturnCodeEnum.R04);
+        map.put("R05", ACHReturnCodeEnum.R05);
+        map.put("R07", ACHReturnCodeEnum.R07);
+        map.put("R08", ACHReturnCodeEnum.R08);
+        map.put("R10", ACHReturnCodeEnum.R10);
+        map.put("R11", ACHReturnCodeEnum.R11);
+        map.put("R12", ACHReturnCodeEnum.R12);
+        map.put("R13", ACHReturnCodeEnum.R13);
+        map.put("R14", ACHReturnCodeEnum.R14);
+        map.put("R15", ACHReturnCodeEnum.R15);
+        map.put("R16", ACHReturnCodeEnum.R16);
+        map.put("R17", ACHReturnCodeEnum.R17);
+        map.put("R20", ACHReturnCodeEnum.R20);
+        map.put("R23", ACHReturnCodeEnum.R23);
+        map.put("R29", ACHReturnCodeEnum.R29);
+        map.put("R34", ACHReturnCodeEnum.R34);
+        map.put("R38", ACHReturnCodeEnum.R38);
+        map.put("R39", ACHReturnCodeEnum.R39);
+        return map;
+    }
+    
+    
+    public enum ACHReturnCodeEnum {
+
+        R02("R02"),
+        R03("R03"),
+        R04("R04"),
+        R05("R05"),
+        R07("R07"),
+        R08("R08"),
+        R10("R10"),
+        R11("R11"),
+        R12("R12"),
+        R13("R13"),
+        R14("R14"),
+        R15("R15"),
+        R16("R16"),
+        R17("R17"),
+        R20("R20"),
+        R23("R23"),
+        R29("R29"),
+        R34("R34"),
+        R38("R38"),
+        R39("R39"),;
+
+        private final String value;
+
+        private ACHReturnCodeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

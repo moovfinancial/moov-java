@@ -6,6 +6,9 @@
 import io.moov.sdk.models.components.EvidenceType;
 
 EvidenceType value = EvidenceType.RECEIPT;
+
+// Open enum: use .of() to create instances from custom string values
+EvidenceType custom = EvidenceType.of("custom_value");
 ```
 
 

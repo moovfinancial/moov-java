@@ -3,36 +3,137 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum RefundCardStatus {
-    INITIATED("initiated"),
-    CONFIRMED("confirmed"),
-    SETTLED("settled"),
-    FAILED("failed"),
-    COMPLETED("completed");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class RefundCardStatus {
 
-    @JsonValue
+    public static final RefundCardStatus INITIATED = new RefundCardStatus("initiated");
+    public static final RefundCardStatus CONFIRMED = new RefundCardStatus("confirmed");
+    public static final RefundCardStatus SETTLED = new RefundCardStatus("settled");
+    public static final RefundCardStatus FAILED = new RefundCardStatus("failed");
+    public static final RefundCardStatus COMPLETED = new RefundCardStatus("completed");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, RefundCardStatus> values = createValuesMap();
+    private static final Map<String, RefundCardStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    RefundCardStatus(String value) {
+    private RefundCardStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a RefundCardStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as RefundCardStatus
+     */ 
+    @JsonCreator
+    public static RefundCardStatus of(String value) {
+        synchronized (RefundCardStatus.class) {
+            return values.computeIfAbsent(value, v -> new RefundCardStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<RefundCardStatus> fromValue(String value) {
-        for (RefundCardStatus o: RefundCardStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<RefundCardStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        RefundCardStatus other = (RefundCardStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "RefundCardStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static RefundCardStatus[] values() {
+        synchronized (RefundCardStatus.class) {
+            return values.values().toArray(new RefundCardStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, RefundCardStatus> createValuesMap() {
+        Map<String, RefundCardStatus> map = new LinkedHashMap<>();
+        map.put("initiated", INITIATED);
+        map.put("confirmed", CONFIRMED);
+        map.put("settled", SETTLED);
+        map.put("failed", FAILED);
+        map.put("completed", COMPLETED);
+        return map;
+    }
+
+    private static final Map<String, RefundCardStatusEnum> createEnumsMap() {
+        Map<String, RefundCardStatusEnum> map = new HashMap<>();
+        map.put("initiated", RefundCardStatusEnum.INITIATED);
+        map.put("confirmed", RefundCardStatusEnum.CONFIRMED);
+        map.put("settled", RefundCardStatusEnum.SETTLED);
+        map.put("failed", RefundCardStatusEnum.FAILED);
+        map.put("completed", RefundCardStatusEnum.COMPLETED);
+        return map;
+    }
+    
+    
+    public enum RefundCardStatusEnum {
+
+        INITIATED("initiated"),
+        CONFIRMED("confirmed"),
+        SETTLED("settled"),
+        FAILED("failed"),
+        COMPLETED("completed"),;
+
+        private final String value;
+
+        private RefundCardStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

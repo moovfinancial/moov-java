@@ -3,39 +3,149 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum FulfillmentTimeframe {
-    IMMEDIATE("immediate"),
-    OTHER("other"),
-    OVER30_DAYS("over-30-days"),
-    PRE_ORDER("pre-order"),
-    RECURRING_SCHEDULE("recurring-schedule"),
-    SCHEDULED_EVENT("scheduled-event"),
-    WITHIN30_DAYS("within-30-days"),
-    WITHIN7_DAYS("within-7-days");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class FulfillmentTimeframe {
 
-    @JsonValue
+    public static final FulfillmentTimeframe IMMEDIATE = new FulfillmentTimeframe("immediate");
+    public static final FulfillmentTimeframe OTHER = new FulfillmentTimeframe("other");
+    public static final FulfillmentTimeframe OVER30_DAYS = new FulfillmentTimeframe("over-30-days");
+    public static final FulfillmentTimeframe PRE_ORDER = new FulfillmentTimeframe("pre-order");
+    public static final FulfillmentTimeframe RECURRING_SCHEDULE = new FulfillmentTimeframe("recurring-schedule");
+    public static final FulfillmentTimeframe SCHEDULED_EVENT = new FulfillmentTimeframe("scheduled-event");
+    public static final FulfillmentTimeframe WITHIN30_DAYS = new FulfillmentTimeframe("within-30-days");
+    public static final FulfillmentTimeframe WITHIN7_DAYS = new FulfillmentTimeframe("within-7-days");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, FulfillmentTimeframe> values = createValuesMap();
+    private static final Map<String, FulfillmentTimeframeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    FulfillmentTimeframe(String value) {
+    private FulfillmentTimeframe(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a FulfillmentTimeframe with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as FulfillmentTimeframe
+     */ 
+    @JsonCreator
+    public static FulfillmentTimeframe of(String value) {
+        synchronized (FulfillmentTimeframe.class) {
+            return values.computeIfAbsent(value, v -> new FulfillmentTimeframe(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<FulfillmentTimeframe> fromValue(String value) {
-        for (FulfillmentTimeframe o: FulfillmentTimeframe.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<FulfillmentTimeframeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        FulfillmentTimeframe other = (FulfillmentTimeframe) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "FulfillmentTimeframe [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static FulfillmentTimeframe[] values() {
+        synchronized (FulfillmentTimeframe.class) {
+            return values.values().toArray(new FulfillmentTimeframe[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, FulfillmentTimeframe> createValuesMap() {
+        Map<String, FulfillmentTimeframe> map = new LinkedHashMap<>();
+        map.put("immediate", IMMEDIATE);
+        map.put("other", OTHER);
+        map.put("over-30-days", OVER30_DAYS);
+        map.put("pre-order", PRE_ORDER);
+        map.put("recurring-schedule", RECURRING_SCHEDULE);
+        map.put("scheduled-event", SCHEDULED_EVENT);
+        map.put("within-30-days", WITHIN30_DAYS);
+        map.put("within-7-days", WITHIN7_DAYS);
+        return map;
+    }
+
+    private static final Map<String, FulfillmentTimeframeEnum> createEnumsMap() {
+        Map<String, FulfillmentTimeframeEnum> map = new HashMap<>();
+        map.put("immediate", FulfillmentTimeframeEnum.IMMEDIATE);
+        map.put("other", FulfillmentTimeframeEnum.OTHER);
+        map.put("over-30-days", FulfillmentTimeframeEnum.OVER30_DAYS);
+        map.put("pre-order", FulfillmentTimeframeEnum.PRE_ORDER);
+        map.put("recurring-schedule", FulfillmentTimeframeEnum.RECURRING_SCHEDULE);
+        map.put("scheduled-event", FulfillmentTimeframeEnum.SCHEDULED_EVENT);
+        map.put("within-30-days", FulfillmentTimeframeEnum.WITHIN30_DAYS);
+        map.put("within-7-days", FulfillmentTimeframeEnum.WITHIN7_DAYS);
+        return map;
+    }
+    
+    
+    public enum FulfillmentTimeframeEnum {
+
+        IMMEDIATE("immediate"),
+        OTHER("other"),
+        OVER30_DAYS("over-30-days"),
+        PRE_ORDER("pre-order"),
+        RECURRING_SCHEDULE("recurring-schedule"),
+        SCHEDULED_EVENT("scheduled-event"),
+        WITHIN30_DAYS("within-30-days"),
+        WITHIN7_DAYS("within-7-days"),;
+
+        private final String value;
+
+        private FulfillmentTimeframeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

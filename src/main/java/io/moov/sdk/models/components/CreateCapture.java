@@ -19,7 +19,7 @@ import java.util.Optional;
 /**
  * CreateCapture
  * 
- * <p>Request to capture funds against an authorized transfer.
+ * <p>Request to capture funds against an authorization.
  */
 public class CreateCapture {
     /**
@@ -30,15 +30,16 @@ public class CreateCapture {
     private String destinationPaymentMethodID;
 
     /**
-     * Amount to capture. If omitted, the remaining authorized amount is captured.
+     * Amount to capture.
+     * If omitted, the remaining capturable amount is captured.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
     private Optional<? extends AmountDecimal> amount;
 
     /**
-     * Indicates whether this is the final capture against the authorization. When `true`, any remaining
-     * authorized amount is voided.
+     * Indicates whether this is intended to be the final capture.
+     * When `true`, any remaining capturable amount is voided.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("isFinal")
@@ -79,7 +80,8 @@ public class CreateCapture {
     private Optional<? extends CreateTransferAmountDetails> amountDetails;
 
     /**
-     * The facilitator fee amount applied to the capture.
+     * The facilitator fee applied to this capture.
+     * The transfer's facilitator fee is the sum of its capture fees.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("facilitatorFeeAmount")
@@ -133,7 +135,8 @@ public class CreateCapture {
     }
 
     /**
-     * Amount to capture. If omitted, the remaining authorized amount is captured.
+     * Amount to capture.
+     * If omitted, the remaining capturable amount is captured.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -142,8 +145,8 @@ public class CreateCapture {
     }
 
     /**
-     * Indicates whether this is the final capture against the authorization. When `true`, any remaining
-     * authorized amount is voided.
+     * Indicates whether this is intended to be the final capture.
+     * When `true`, any remaining capturable amount is voided.
      */
     @JsonIgnore
     public Optional<Boolean> isFinal() {
@@ -192,7 +195,8 @@ public class CreateCapture {
     }
 
     /**
-     * The facilitator fee amount applied to the capture.
+     * The facilitator fee applied to this capture.
+     * The transfer's facilitator fee is the sum of its capture fees.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -216,7 +220,8 @@ public class CreateCapture {
     }
 
     /**
-     * Amount to capture. If omitted, the remaining authorized amount is captured.
+     * Amount to capture.
+     * If omitted, the remaining capturable amount is captured.
      */
     public CreateCapture withAmount(AmountDecimal amount) {
         Utils.checkNotNull(amount, "amount");
@@ -226,7 +231,8 @@ public class CreateCapture {
 
 
     /**
-     * Amount to capture. If omitted, the remaining authorized amount is captured.
+     * Amount to capture.
+     * If omitted, the remaining capturable amount is captured.
      */
     public CreateCapture withAmount(Optional<? extends AmountDecimal> amount) {
         Utils.checkNotNull(amount, "amount");
@@ -235,8 +241,8 @@ public class CreateCapture {
     }
 
     /**
-     * Indicates whether this is the final capture against the authorization. When `true`, any remaining
-     * authorized amount is voided.
+     * Indicates whether this is intended to be the final capture.
+     * When `true`, any remaining capturable amount is voided.
      */
     public CreateCapture withIsFinal(boolean isFinal) {
         Utils.checkNotNull(isFinal, "isFinal");
@@ -246,8 +252,8 @@ public class CreateCapture {
 
 
     /**
-     * Indicates whether this is the final capture against the authorization. When `true`, any remaining
-     * authorized amount is voided.
+     * Indicates whether this is intended to be the final capture.
+     * When `true`, any remaining capturable amount is voided.
      */
     public CreateCapture withIsFinal(Optional<Boolean> isFinal) {
         Utils.checkNotNull(isFinal, "isFinal");
@@ -347,7 +353,8 @@ public class CreateCapture {
     }
 
     /**
-     * The facilitator fee amount applied to the capture.
+     * The facilitator fee applied to this capture.
+     * The transfer's facilitator fee is the sum of its capture fees.
      */
     public CreateCapture withFacilitatorFeeAmount(AmountDecimal facilitatorFeeAmount) {
         Utils.checkNotNull(facilitatorFeeAmount, "facilitatorFeeAmount");
@@ -357,7 +364,8 @@ public class CreateCapture {
 
 
     /**
-     * The facilitator fee amount applied to the capture.
+     * The facilitator fee applied to this capture.
+     * The transfer's facilitator fee is the sum of its capture fees.
      */
     public CreateCapture withFacilitatorFeeAmount(Optional<? extends AmountDecimal> facilitatorFeeAmount) {
         Utils.checkNotNull(facilitatorFeeAmount, "facilitatorFeeAmount");
@@ -446,7 +454,8 @@ public class CreateCapture {
 
 
         /**
-         * Amount to capture. If omitted, the remaining authorized amount is captured.
+         * Amount to capture.
+         * If omitted, the remaining capturable amount is captured.
          */
         public Builder amount(AmountDecimal amount) {
             Utils.checkNotNull(amount, "amount");
@@ -455,7 +464,8 @@ public class CreateCapture {
         }
 
         /**
-         * Amount to capture. If omitted, the remaining authorized amount is captured.
+         * Amount to capture.
+         * If omitted, the remaining capturable amount is captured.
          */
         public Builder amount(Optional<? extends AmountDecimal> amount) {
             Utils.checkNotNull(amount, "amount");
@@ -465,8 +475,8 @@ public class CreateCapture {
 
 
         /**
-         * Indicates whether this is the final capture against the authorization. When `true`, any remaining
-         * authorized amount is voided.
+         * Indicates whether this is intended to be the final capture.
+         * When `true`, any remaining capturable amount is voided.
          */
         public Builder isFinal(boolean isFinal) {
             Utils.checkNotNull(isFinal, "isFinal");
@@ -475,8 +485,8 @@ public class CreateCapture {
         }
 
         /**
-         * Indicates whether this is the final capture against the authorization. When `true`, any remaining
-         * authorized amount is voided.
+         * Indicates whether this is intended to be the final capture.
+         * When `true`, any remaining capturable amount is voided.
          */
         public Builder isFinal(Optional<Boolean> isFinal) {
             Utils.checkNotNull(isFinal, "isFinal");
@@ -577,7 +587,8 @@ public class CreateCapture {
 
 
         /**
-         * The facilitator fee amount applied to the capture.
+         * The facilitator fee applied to this capture.
+         * The transfer's facilitator fee is the sum of its capture fees.
          */
         public Builder facilitatorFeeAmount(AmountDecimal facilitatorFeeAmount) {
             Utils.checkNotNull(facilitatorFeeAmount, "facilitatorFeeAmount");
@@ -586,7 +597,8 @@ public class CreateCapture {
         }
 
         /**
-         * The facilitator fee amount applied to the capture.
+         * The facilitator fee applied to this capture.
+         * The transfer's facilitator fee is the sum of its capture fees.
          */
         public Builder facilitatorFeeAmount(Optional<? extends AmountDecimal> facilitatorFeeAmount) {
             Utils.checkNotNull(facilitatorFeeAmount, "facilitatorFeeAmount");

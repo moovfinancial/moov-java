@@ -6,6 +6,9 @@
 import io.moov.sdk.models.components.RequirementErrorCode;
 
 RequirementErrorCode value = RequirementErrorCode.INVALID_VALUE;
+
+// Open enum: use .of() to create instances from custom string values
+RequirementErrorCode custom = RequirementErrorCode.of("custom_value");
 ```
 
 

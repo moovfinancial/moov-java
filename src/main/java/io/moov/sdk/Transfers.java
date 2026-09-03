@@ -409,7 +409,13 @@ public class Transfers {
     /**
      * Initiate a cancellation for a card, ACH, or queued transfer.
      * 
-     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
+     * <p>In v2026.10 and later, an auth-capture `card-payment` transfer can be canceled before any captures
+     * exist.
+     * For these transfers, a successful cancellation reduces `capturableAmount` without changing
+     * `authorizedAmount`.
+     * For these transfers, a partial cancellation leaves the remaining `capturableAmount` available for
+     * capture.
+     * To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need
      * to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
@@ -422,13 +428,19 @@ public class Transfers {
     /**
      * Initiate a cancellation for a card, ACH, or queued transfer.
      * 
-     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
+     * <p>In v2026.10 and later, an auth-capture `card-payment` transfer can be canceled before any captures
+     * exist.
+     * For these transfers, a successful cancellation reduces `capturableAmount` without changing
+     * `authorizedAmount`.
+     * For these transfers, a partial cancellation leaves the remaining `capturableAmount` available for
+     * capture.
+     * To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need
      * to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param accountID The partner's Moov account ID.
      * @param transferID The transfer ID to cancel.
-     * @param createCancellation 
+     * @param createCancellation Cancellation request.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
@@ -526,7 +538,8 @@ public class Transfers {
     }
 
     /**
-     * Create a capture against an authorized transfer.
+     * Create a capture against an auth-capture `card-payment` transfer.
+     * The `accountID` must identify the partner account for the transfer.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
@@ -539,16 +552,17 @@ public class Transfers {
     }
 
     /**
-     * Create a capture against an authorized transfer.
+     * Create a capture against an auth-capture `card-payment` transfer.
+     * The `accountID` must identify the partner account for the transfer.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param xIdempotencyKey Prevents duplicate captures from being created.
-     * @param accountID The merchant's Moov account ID.
-     * @param transferID Identifier for the transfer.
-     * @param createCapture Request to capture funds against an authorized transfer.
+     * @param accountID Moov account ID of the partner for the transfer.
+     * @param transferID Identifier for the auth-capture `card-payment` transfer.
+     * @param createCapture Request to capture funds against an authorization.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
@@ -569,7 +583,7 @@ public class Transfers {
     }
 
     /**
-     * Get a list of captures for a transfer.
+     * Get a list of captures for an auth-capture `card-payment` transfer.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
@@ -582,14 +596,14 @@ public class Transfers {
     }
 
     /**
-     * Get a list of captures for a transfer.
+     * Get a list of captures for an auth-capture `card-payment` transfer.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
-     * @param accountID The merchant's Moov account ID.
-     * @param transferID Identifier for the transfer.
+     * @param accountID Moov account ID of an authorized partner or the transfer's source or destination.
+     * @param transferID Identifier for the auth-capture `card-payment` transfer.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
@@ -606,7 +620,7 @@ public class Transfers {
     }
 
     /**
-     * Get details of a capture for a transfer.
+     * Get details of a capture for an auth-capture `card-payment` transfer.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
@@ -619,14 +633,14 @@ public class Transfers {
     }
 
     /**
-     * Get details of a capture for a transfer.
+     * Get details of a capture for an auth-capture `card-payment` transfer.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
-     * @param accountID The merchant's Moov account ID.
-     * @param transferID Identifier for the transfer.
+     * @param accountID Moov account ID of an authorized partner or the transfer's source or destination.
+     * @param transferID Identifier for the auth-capture `card-payment` transfer.
      * @param captureID Identifier for the capture.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
@@ -770,6 +784,12 @@ public class Transfers {
 
     /**
      * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status.
+     * In v2026.10 and later, reversing an auth-capture `card-payment` transfer with no captures cancels
+     * the entire `capturableAmount`.
+     * In those API versions, an auth-capture `card-payment` transfer with one final capture is canceled or
+     * refunded depending on its processing state.
+     * Auth-capture `card-payment` transfers with a non-final capture or multiple captures are not
+     * supported in those API versions.
      * Read our [reversals
      * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)
      * to learn more.
@@ -786,6 +806,12 @@ public class Transfers {
 
     /**
      * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status.
+     * In v2026.10 and later, reversing an auth-capture `card-payment` transfer with no captures cancels
+     * the entire `capturableAmount`.
+     * In those API versions, an auth-capture `card-payment` transfer with one final capture is canceled or
+     * refunded depending on its processing state.
+     * Auth-capture `card-payment` transfers with a non-final capture or multiple captures are not
+     * supported in those API versions.
      * Read our [reversals
      * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)
      * to learn more.

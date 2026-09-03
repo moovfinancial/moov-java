@@ -8,6 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.models.components.BankAccountWaitFor;
 import io.moov.sdk.models.components.CompleteBankAccountVerification;
 import io.moov.sdk.models.components.CompleteMicroDeposits;
+import io.moov.sdk.models.components.CreateBankAccountAttestation;
 import io.moov.sdk.models.components.LinkBankAccount;
 import io.moov.sdk.models.operations.CompleteBankAccountVerificationRequest;
 import io.moov.sdk.models.operations.CompleteBankAccountVerificationRequestBuilder;
@@ -15,9 +16,15 @@ import io.moov.sdk.models.operations.CompleteBankAccountVerificationResponse;
 import io.moov.sdk.models.operations.CompleteMicroDepositsRequest;
 import io.moov.sdk.models.operations.CompleteMicroDepositsRequestBuilder;
 import io.moov.sdk.models.operations.CompleteMicroDepositsResponse;
+import io.moov.sdk.models.operations.CreateBankAccountAttestationRequest;
+import io.moov.sdk.models.operations.CreateBankAccountAttestationRequestBuilder;
+import io.moov.sdk.models.operations.CreateBankAccountAttestationResponse;
 import io.moov.sdk.models.operations.DisableBankAccountRequest;
 import io.moov.sdk.models.operations.DisableBankAccountRequestBuilder;
 import io.moov.sdk.models.operations.DisableBankAccountResponse;
+import io.moov.sdk.models.operations.GetBankAccountAttestationEligibilityRequest;
+import io.moov.sdk.models.operations.GetBankAccountAttestationEligibilityRequestBuilder;
+import io.moov.sdk.models.operations.GetBankAccountAttestationEligibilityResponse;
 import io.moov.sdk.models.operations.GetBankAccountRequest;
 import io.moov.sdk.models.operations.GetBankAccountRequestBuilder;
 import io.moov.sdk.models.operations.GetBankAccountResponse;
@@ -33,17 +40,23 @@ import io.moov.sdk.models.operations.InitiateMicroDepositsResponse;
 import io.moov.sdk.models.operations.LinkBankAccountRequest;
 import io.moov.sdk.models.operations.LinkBankAccountRequestBuilder;
 import io.moov.sdk.models.operations.LinkBankAccountResponse;
+import io.moov.sdk.models.operations.ListBankAccountAttestationsRequest;
+import io.moov.sdk.models.operations.ListBankAccountAttestationsRequestBuilder;
+import io.moov.sdk.models.operations.ListBankAccountAttestationsResponse;
 import io.moov.sdk.models.operations.ListBankAccountsRequest;
 import io.moov.sdk.models.operations.ListBankAccountsRequestBuilder;
 import io.moov.sdk.models.operations.ListBankAccountsResponse;
 import io.moov.sdk.operations.DisableBankAccount;
 import io.moov.sdk.operations.GetBankAccount;
+import io.moov.sdk.operations.GetBankAccountAttestationEligibility;
 import io.moov.sdk.operations.GetBankAccountVerification;
 import io.moov.sdk.operations.InitiateBankAccountVerification;
 import io.moov.sdk.operations.InitiateMicroDeposits;
+import io.moov.sdk.operations.ListBankAccountAttestations;
 import io.moov.sdk.operations.ListBankAccounts;
 import io.moov.sdk.utils.Headers;
 import java.lang.String;
+import java.time.LocalDate;
 import java.util.Optional;
 
 
@@ -252,6 +265,188 @@ public class BankAccounts {
                 .build();
         RequestOperation<DisableBankAccountRequest, DisableBankAccountResponse> operation
               = new DisableBankAccount.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Submit a new authorization attestation for a bank account in an `errored` status due to an R29 ACH
+     * return (`Corporate Customer Advises Not Authorized`).
+     * 
+     * <p>After obtaining new authorization from the receiver, submit an attestation with the date the
+     * authorization was obtained and a brief description of how the authorization was obtained. If the
+     * attestation is accepted, the bank account transitions from `errored` to `verified`.
+     * 
+     * <p>Constraints
+     * 
+     * <p>- The bank account's current errored status must be the result of an R29 return.
+     * - `attestedAt` must be on or after the date of the bank account's most recent R29 return and cannot
+     * be a future date.
+     * - Only one attestation may be submitted for a bank account. Use the [Get attestation
+     * eligibility](https://docs.moov.io/api/sources/bank-accounts/attestation-eligibility/) endpoint to
+     * confirm eligibility before submitting an attestation.
+     * 
+     * <p>This endpoint is available only to allowlisted partners. Contact Moov Support for more information.
+     * 
+     * @return The call builder
+     */
+    public CreateBankAccountAttestationRequestBuilder createAttestation() {
+        return new CreateBankAccountAttestationRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Submit a new authorization attestation for a bank account in an `errored` status due to an R29 ACH
+     * return (`Corporate Customer Advises Not Authorized`).
+     * 
+     * <p>After obtaining new authorization from the receiver, submit an attestation with the date the
+     * authorization was obtained and a brief description of how the authorization was obtained. If the
+     * attestation is accepted, the bank account transitions from `errored` to `verified`.
+     * 
+     * <p>Constraints
+     * 
+     * <p>- The bank account's current errored status must be the result of an R29 return.
+     * - `attestedAt` must be on or after the date of the bank account's most recent R29 return and cannot
+     * be a future date.
+     * - Only one attestation may be submitted for a bank account. Use the [Get attestation
+     * eligibility](https://docs.moov.io/api/sources/bank-accounts/attestation-eligibility/) endpoint to
+     * confirm eligibility before submitting an attestation.
+     * 
+     * <p>This endpoint is available only to allowlisted partners. Contact Moov Support for more information.
+     * 
+     * @param accountID 
+     * @param bankAccountID 
+     * @param createBankAccountAttestation Request body for creating a R29 re-authorization attestation for an errored bank account.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateBankAccountAttestationResponse createAttestation(
+            String accountID, String bankAccountID,
+            CreateBankAccountAttestation createBankAccountAttestation) {
+        CreateBankAccountAttestationRequest request =
+            CreateBankAccountAttestationRequest
+                .builder()
+                .accountID(accountID)
+                .bankAccountID(bankAccountID)
+                .createBankAccountAttestation(createBankAccountAttestation)
+                .build();
+        RequestOperation<CreateBankAccountAttestationRequest, CreateBankAccountAttestationResponse> operation
+              = new io.moov.sdk.operations.CreateBankAccountAttestation.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * List the attestations submitted for a bank account.
+     * 
+     * @return The call builder
+     */
+    public ListBankAccountAttestationsRequestBuilder listAttestations() {
+        return new ListBankAccountAttestationsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * List the attestations submitted for a bank account.
+     * 
+     * @param accountID 
+     * @param bankAccountID 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListBankAccountAttestationsResponse listAttestations(String accountID, String bankAccountID) {
+        ListBankAccountAttestationsRequest request =
+            ListBankAccountAttestationsRequest
+                .builder()
+                .accountID(accountID)
+                .bankAccountID(bankAccountID)
+                .build();
+        RequestOperation<ListBankAccountAttestationsRequest, ListBankAccountAttestationsResponse> operation
+              = new ListBankAccountAttestations.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Check whether a bank account is currently eligible for a new authorization attestation without
+     * submitting one.
+     * 
+     * <p>- `enabled` indicates whether the calling account has access to the attestations feature. If
+     * `enabled` is `false`, `eligible` is always `false`.
+     * - When `enabled` is `true`, `eligible` indicates whether the bank account currently meets the
+     * eligibility requirements for a new attestation: the bank account must be `errored` due to an R29
+     * return, with no prior attestations.
+     * 
+     * <p>This endpoint always returns `200`, including when the bank account is not eligible. Check the
+     * `eligible` field to determine eligibility.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
+     * 
+     * @return The call builder
+     */
+    public GetBankAccountAttestationEligibilityRequestBuilder getAttestationEligibility() {
+        return new GetBankAccountAttestationEligibilityRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Check whether a bank account is currently eligible for a new authorization attestation without
+     * submitting one.
+     * 
+     * <p>- `enabled` indicates whether the calling account has access to the attestations feature. If
+     * `enabled` is `false`, `eligible` is always `false`.
+     * - When `enabled` is `true`, `eligible` indicates whether the bank account currently meets the
+     * eligibility requirements for a new attestation: the bank account must be `errored` due to an R29
+     * return, with no prior attestations.
+     * 
+     * <p>This endpoint always returns `200`, including when the bank account is not eligible. Check the
+     * `eligible` field to determine eligibility.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
+     * 
+     * @param accountID 
+     * @param bankAccountID 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetBankAccountAttestationEligibilityResponse getAttestationEligibility(String accountID, String bankAccountID) {
+        return getAttestationEligibility(accountID, bankAccountID, Optional.empty());
+    }
+
+    /**
+     * Check whether a bank account is currently eligible for a new authorization attestation without
+     * submitting one.
+     * 
+     * <p>- `enabled` indicates whether the calling account has access to the attestations feature. If
+     * `enabled` is `false`, `eligible` is always `false`.
+     * - When `enabled` is `true`, `eligible` indicates whether the bank account currently meets the
+     * eligibility requirements for a new attestation: the bank account must be `errored` due to an R29
+     * return, with no prior attestations.
+     * 
+     * <p>This endpoint always returns `200`, including when the bank account is not eligible. Check the
+     * `eligible` field to determine eligibility.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
+     * 
+     * @param accountID 
+     * @param bankAccountID 
+     * @param attestedAt Date to check eligibility against, as if it were the `attestedAt` value of a new attestation. Defaults
+     *         to the current date.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetBankAccountAttestationEligibilityResponse getAttestationEligibility(
+            String accountID, String bankAccountID,
+            Optional<LocalDate> attestedAt) {
+        GetBankAccountAttestationEligibilityRequest request =
+            GetBankAccountAttestationEligibilityRequest
+                .builder()
+                .accountID(accountID)
+                .bankAccountID(bankAccountID)
+                .attestedAt(attestedAt)
+                .build();
+        RequestOperation<GetBankAccountAttestationEligibilityRequest, GetBankAccountAttestationEligibilityResponse> operation
+              = new GetBankAccountAttestationEligibility.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

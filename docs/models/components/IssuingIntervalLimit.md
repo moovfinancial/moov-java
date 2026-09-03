@@ -8,6 +8,9 @@ Specifies the time frame for a velocity limit. `per-transaction` applies to each
 import io.moov.sdk.models.components.IssuingIntervalLimit;
 
 IssuingIntervalLimit value = IssuingIntervalLimit.PER_TRANSACTION;
+
+// Open enum: use .of() to create instances from custom string values
+IssuingIntervalLimit custom = IssuingIntervalLimit.of("custom_value");
 ```
 
 

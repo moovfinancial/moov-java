@@ -8,6 +8,9 @@ The result of an event.
 import io.moov.sdk.models.components.IssuedCardAuthorizationEventResult;
 
 IssuedCardAuthorizationEventResult value = IssuedCardAuthorizationEventResult.APPROVED;
+
+// Open enum: use .of() to create instances from custom string values
+IssuedCardAuthorizationEventResult custom = IssuedCardAuthorizationEventResult.of("custom_value");
 ```
 
 

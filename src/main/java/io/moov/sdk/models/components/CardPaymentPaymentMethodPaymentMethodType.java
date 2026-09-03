@@ -3,32 +3,121 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum CardPaymentPaymentMethodPaymentMethodType {
-    CARD_PAYMENT("card-payment");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class CardPaymentPaymentMethodPaymentMethodType {
 
-    @JsonValue
+    public static final CardPaymentPaymentMethodPaymentMethodType CARD_PAYMENT = new CardPaymentPaymentMethodPaymentMethodType("card-payment");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, CardPaymentPaymentMethodPaymentMethodType> values = createValuesMap();
+    private static final Map<String, CardPaymentPaymentMethodPaymentMethodTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    CardPaymentPaymentMethodPaymentMethodType(String value) {
+    private CardPaymentPaymentMethodPaymentMethodType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a CardPaymentPaymentMethodPaymentMethodType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as CardPaymentPaymentMethodPaymentMethodType
+     */ 
+    @JsonCreator
+    public static CardPaymentPaymentMethodPaymentMethodType of(String value) {
+        synchronized (CardPaymentPaymentMethodPaymentMethodType.class) {
+            return values.computeIfAbsent(value, v -> new CardPaymentPaymentMethodPaymentMethodType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<CardPaymentPaymentMethodPaymentMethodType> fromValue(String value) {
-        for (CardPaymentPaymentMethodPaymentMethodType o: CardPaymentPaymentMethodPaymentMethodType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<CardPaymentPaymentMethodPaymentMethodTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CardPaymentPaymentMethodPaymentMethodType other = (CardPaymentPaymentMethodPaymentMethodType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "CardPaymentPaymentMethodPaymentMethodType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static CardPaymentPaymentMethodPaymentMethodType[] values() {
+        synchronized (CardPaymentPaymentMethodPaymentMethodType.class) {
+            return values.values().toArray(new CardPaymentPaymentMethodPaymentMethodType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, CardPaymentPaymentMethodPaymentMethodType> createValuesMap() {
+        Map<String, CardPaymentPaymentMethodPaymentMethodType> map = new LinkedHashMap<>();
+        map.put("card-payment", CARD_PAYMENT);
+        return map;
+    }
+
+    private static final Map<String, CardPaymentPaymentMethodPaymentMethodTypeEnum> createEnumsMap() {
+        Map<String, CardPaymentPaymentMethodPaymentMethodTypeEnum> map = new HashMap<>();
+        map.put("card-payment", CardPaymentPaymentMethodPaymentMethodTypeEnum.CARD_PAYMENT);
+        return map;
+    }
+    
+    
+    public enum CardPaymentPaymentMethodPaymentMethodTypeEnum {
+
+        CARD_PAYMENT("card-payment"),;
+
+        private final String value;
+
+        private CardPaymentPaymentMethodPaymentMethodTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

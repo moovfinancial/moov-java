@@ -16,6 +16,12 @@ import java.util.Optional;
 
 
 public class PullFromCardTransferProcessingDetails {
+    /**
+     * Status of a pull-from-card transaction.
+     */
+    @JsonProperty("status")
+    private PullFromCardTransactionStatus status;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("authorizationCode")
@@ -38,23 +44,35 @@ public class PullFromCardTransferProcessingDetails {
 
     @JsonCreator
     public PullFromCardTransferProcessingDetails(
+            @JsonProperty("status") PullFromCardTransactionStatus status,
             @JsonProperty("authorizationCode") Optional<String> authorizationCode,
             @JsonProperty("networkTransactionID") Optional<String> networkTransactionID,
             @JsonProperty("networkResponseCode") Optional<String> networkResponseCode,
             @JsonProperty("failureCode") Optional<? extends CardTransactionFailureCode> failureCode) {
+        Utils.checkNotNull(status, "status");
         Utils.checkNotNull(authorizationCode, "authorizationCode");
         Utils.checkNotNull(networkTransactionID, "networkTransactionID");
         Utils.checkNotNull(networkResponseCode, "networkResponseCode");
         Utils.checkNotNull(failureCode, "failureCode");
+        this.status = status;
         this.authorizationCode = authorizationCode;
         this.networkTransactionID = networkTransactionID;
         this.networkResponseCode = networkResponseCode;
         this.failureCode = failureCode;
     }
     
-    public PullFromCardTransferProcessingDetails() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+    public PullFromCardTransferProcessingDetails(
+            PullFromCardTransactionStatus status) {
+        this(status, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * Status of a pull-from-card transaction.
+     */
+    @JsonIgnore
+    public PullFromCardTransactionStatus status() {
+        return status;
     }
 
     @JsonIgnore
@@ -82,6 +100,15 @@ public class PullFromCardTransferProcessingDetails {
         return new Builder();
     }
 
+
+    /**
+     * Status of a pull-from-card transaction.
+     */
+    public PullFromCardTransferProcessingDetails withStatus(PullFromCardTransactionStatus status) {
+        Utils.checkNotNull(status, "status");
+        this.status = status;
+        return this;
+    }
 
     public PullFromCardTransferProcessingDetails withAuthorizationCode(String authorizationCode) {
         Utils.checkNotNull(authorizationCode, "authorizationCode");
@@ -145,6 +172,7 @@ public class PullFromCardTransferProcessingDetails {
         }
         PullFromCardTransferProcessingDetails other = (PullFromCardTransferProcessingDetails) o;
         return 
+            Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.authorizationCode, other.authorizationCode) &&
             Utils.enhancedDeepEquals(this.networkTransactionID, other.networkTransactionID) &&
             Utils.enhancedDeepEquals(this.networkResponseCode, other.networkResponseCode) &&
@@ -154,13 +182,14 @@ public class PullFromCardTransferProcessingDetails {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            authorizationCode, networkTransactionID, networkResponseCode,
-            failureCode);
+            status, authorizationCode, networkTransactionID,
+            networkResponseCode, failureCode);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PullFromCardTransferProcessingDetails.class,
+                "status", status,
                 "authorizationCode", authorizationCode,
                 "networkTransactionID", networkTransactionID,
                 "networkResponseCode", networkResponseCode,
@@ -169,6 +198,8 @@ public class PullFromCardTransferProcessingDetails {
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
+
+        private PullFromCardTransactionStatus status;
 
         private Optional<String> authorizationCode = Optional.empty();
 
@@ -180,6 +211,16 @@ public class PullFromCardTransferProcessingDetails {
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Status of a pull-from-card transaction.
+         */
+        public Builder status(PullFromCardTransactionStatus status) {
+            Utils.checkNotNull(status, "status");
+            this.status = status;
+            return this;
         }
 
 
@@ -237,8 +278,8 @@ public class PullFromCardTransferProcessingDetails {
         public PullFromCardTransferProcessingDetails build() {
 
             return new PullFromCardTransferProcessingDetails(
-                authorizationCode, networkTransactionID, networkResponseCode,
-                failureCode);
+                status, authorizationCode, networkTransactionID,
+                networkResponseCode, failureCode);
         }
 
     }

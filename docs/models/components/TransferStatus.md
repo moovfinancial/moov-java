@@ -8,6 +8,9 @@ Status of a transfer.
 import io.moov.sdk.models.components.TransferStatus;
 
 TransferStatus value = TransferStatus.CREATED;
+
+// Open enum: use .of() to create instances from custom string values
+TransferStatus custom = TransferStatus.of("custom_value");
 ```
 
 

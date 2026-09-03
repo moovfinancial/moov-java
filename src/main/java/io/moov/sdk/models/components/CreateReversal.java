@@ -17,8 +17,12 @@ import java.util.Optional;
 
 public class CreateReversal {
     /**
-     * Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts
-     * automatically trigger a refund instead of a cancellation.
+     * Amount to reverse.
+     * Before v2026.10, specify the amount in integer cents.
+     * For supported auth-capture `card-payment` reversals in v2026.10 and later, a transfer with no
+     * captures uses the full `capturableAmount`.
+     * For those transfers with one final capture, a cancellation uses the full capture amount, while a
+     * refund may be partial.
      */
     @JsonProperty("amount")
     private AmountDecimal amount;
@@ -46,8 +50,12 @@ public class CreateReversal {
     }
 
     /**
-     * Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts
-     * automatically trigger a refund instead of a cancellation.
+     * Amount to reverse.
+     * Before v2026.10, specify the amount in integer cents.
+     * For supported auth-capture `card-payment` reversals in v2026.10 and later, a transfer with no
+     * captures uses the full `capturableAmount`.
+     * For those transfers with one final capture, a cancellation uses the full capture amount, while a
+     * refund may be partial.
      */
     @JsonIgnore
     public AmountDecimal amount() {
@@ -69,8 +77,12 @@ public class CreateReversal {
 
 
     /**
-     * Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts
-     * automatically trigger a refund instead of a cancellation.
+     * Amount to reverse.
+     * Before v2026.10, specify the amount in integer cents.
+     * For supported auth-capture `card-payment` reversals in v2026.10 and later, a transfer with no
+     * captures uses the full `capturableAmount`.
+     * For those transfers with one final capture, a cancellation uses the full capture amount, while a
+     * refund may be partial.
      */
     public CreateReversal withAmount(AmountDecimal amount) {
         Utils.checkNotNull(amount, "amount");
@@ -137,8 +149,12 @@ public class CreateReversal {
 
 
         /**
-         * Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts
-         * automatically trigger a refund instead of a cancellation.
+         * Amount to reverse.
+         * Before v2026.10, specify the amount in integer cents.
+         * For supported auth-capture `card-payment` reversals in v2026.10 and later, a transfer with no
+         * captures uses the full `capturableAmount`.
+         * For those transfers with one final capture, a cancellation uses the full capture amount, while a
+         * refund may be partial.
          */
         public Builder amount(AmountDecimal amount) {
             Utils.checkNotNull(amount, "amount");

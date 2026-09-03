@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.moov.sdk.models.components.CardIssuingError;
 import io.moov.sdk.models.components.CardVolumeDistributionError;
 import io.moov.sdk.models.components.CollectFundsError;
 import io.moov.sdk.models.components.FulfillmentDetailsError;
@@ -96,6 +97,11 @@ public class UpsertUnderwritingError extends MoovError {
     }
 
     @Deprecated
+    public Optional<CardIssuingError> cardIssuing() {
+        return data().flatMap(Data::cardIssuing);
+    }
+
+    @Deprecated
     public Optional<String> averageMonthlyTransactionVolume() {
         return data().flatMap(Data::averageMonthlyTransactionVolume);
     }
@@ -179,6 +185,11 @@ public class UpsertUnderwritingError extends MoovError {
 
 
         @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("cardIssuing")
+        private Optional<? extends CardIssuingError> cardIssuing;
+
+
+        @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("averageMonthlyTransactionVolume")
         private Optional<String> averageMonthlyTransactionVolume;
 
@@ -221,6 +232,7 @@ public class UpsertUnderwritingError extends MoovError {
                 @JsonProperty("collectFunds") Optional<? extends CollectFundsError> collectFunds,
                 @JsonProperty("moneyTransfer") Optional<? extends MoneyTransferError> moneyTransfer,
                 @JsonProperty("sendFunds") Optional<? extends SendFundsError> sendFunds,
+                @JsonProperty("cardIssuing") Optional<? extends CardIssuingError> cardIssuing,
                 @JsonProperty("averageMonthlyTransactionVolume") Optional<String> averageMonthlyTransactionVolume,
                 @JsonProperty("error") Optional<String> error,
                 @JsonProperty("averageTransactionSize") Optional<String> averageTransactionSize,
@@ -235,6 +247,7 @@ public class UpsertUnderwritingError extends MoovError {
             Utils.checkNotNull(collectFunds, "collectFunds");
             Utils.checkNotNull(moneyTransfer, "moneyTransfer");
             Utils.checkNotNull(sendFunds, "sendFunds");
+            Utils.checkNotNull(cardIssuing, "cardIssuing");
             Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
             Utils.checkNotNull(error, "error");
             Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
@@ -249,6 +262,7 @@ public class UpsertUnderwritingError extends MoovError {
             this.collectFunds = collectFunds;
             this.moneyTransfer = moneyTransfer;
             this.sendFunds = sendFunds;
+            this.cardIssuing = cardIssuing;
             this.averageMonthlyTransactionVolume = averageMonthlyTransactionVolume;
             this.error = error;
             this.averageTransactionSize = averageTransactionSize;
@@ -263,7 +277,7 @@ public class UpsertUnderwritingError extends MoovError {
                 Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty(), Optional.empty());
+                Optional.empty(), Optional.empty(), Optional.empty());
         }
 
         @JsonIgnore
@@ -303,6 +317,12 @@ public class UpsertUnderwritingError extends MoovError {
         @JsonIgnore
         public Optional<SendFundsError> sendFunds() {
             return (Optional<SendFundsError>) sendFunds;
+        }
+
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<CardIssuingError> cardIssuing() {
+            return (Optional<CardIssuingError>) cardIssuing;
         }
 
         @JsonIgnore
@@ -439,6 +459,19 @@ public class UpsertUnderwritingError extends MoovError {
             return this;
         }
 
+        public Data withCardIssuing(CardIssuingError cardIssuing) {
+            Utils.checkNotNull(cardIssuing, "cardIssuing");
+            this.cardIssuing = Optional.ofNullable(cardIssuing);
+            return this;
+        }
+
+
+        public Data withCardIssuing(Optional<? extends CardIssuingError> cardIssuing) {
+            Utils.checkNotNull(cardIssuing, "cardIssuing");
+            this.cardIssuing = cardIssuing;
+            return this;
+        }
+
         public Data withAverageMonthlyTransactionVolume(String averageMonthlyTransactionVolume) {
             Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
             this.averageMonthlyTransactionVolume = Optional.ofNullable(averageMonthlyTransactionVolume);
@@ -547,6 +580,7 @@ public class UpsertUnderwritingError extends MoovError {
                 Utils.enhancedDeepEquals(this.collectFunds, other.collectFunds) &&
                 Utils.enhancedDeepEquals(this.moneyTransfer, other.moneyTransfer) &&
                 Utils.enhancedDeepEquals(this.sendFunds, other.sendFunds) &&
+                Utils.enhancedDeepEquals(this.cardIssuing, other.cardIssuing) &&
                 Utils.enhancedDeepEquals(this.averageMonthlyTransactionVolume, other.averageMonthlyTransactionVolume) &&
                 Utils.enhancedDeepEquals(this.error, other.error) &&
                 Utils.enhancedDeepEquals(this.averageTransactionSize, other.averageTransactionSize) &&
@@ -561,9 +595,9 @@ public class UpsertUnderwritingError extends MoovError {
             return Utils.enhancedHash(
                 geographicReach, businessPresence, pendingLitigation,
                 volumeShareByCustomerType, collectFunds, moneyTransfer,
-                sendFunds, averageMonthlyTransactionVolume, error,
-                averageTransactionSize, maxTransactionSize, volumeByCustomerType,
-                cardVolumeDistribution, fulfillment);
+                sendFunds, cardIssuing, averageMonthlyTransactionVolume,
+                error, averageTransactionSize, maxTransactionSize,
+                volumeByCustomerType, cardVolumeDistribution, fulfillment);
         }
         
         @Override
@@ -576,6 +610,7 @@ public class UpsertUnderwritingError extends MoovError {
                     "collectFunds", collectFunds,
                     "moneyTransfer", moneyTransfer,
                     "sendFunds", sendFunds,
+                    "cardIssuing", cardIssuing,
                     "averageMonthlyTransactionVolume", averageMonthlyTransactionVolume,
                     "error", error,
                     "averageTransactionSize", averageTransactionSize,
@@ -601,6 +636,8 @@ public class UpsertUnderwritingError extends MoovError {
             private Optional<? extends MoneyTransferError> moneyTransfer = Optional.empty();
 
             private Optional<? extends SendFundsError> sendFunds = Optional.empty();
+
+            private Optional<? extends CardIssuingError> cardIssuing = Optional.empty();
 
             private Optional<String> averageMonthlyTransactionVolume = Optional.empty();
 
@@ -712,6 +749,19 @@ public class UpsertUnderwritingError extends MoovError {
             }
 
 
+            public Builder cardIssuing(CardIssuingError cardIssuing) {
+                Utils.checkNotNull(cardIssuing, "cardIssuing");
+                this.cardIssuing = Optional.ofNullable(cardIssuing);
+                return this;
+            }
+
+            public Builder cardIssuing(Optional<? extends CardIssuingError> cardIssuing) {
+                Utils.checkNotNull(cardIssuing, "cardIssuing");
+                this.cardIssuing = cardIssuing;
+                return this;
+            }
+
+
             public Builder averageMonthlyTransactionVolume(String averageMonthlyTransactionVolume) {
                 Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
                 this.averageMonthlyTransactionVolume = Optional.ofNullable(averageMonthlyTransactionVolume);
@@ -807,9 +857,9 @@ public class UpsertUnderwritingError extends MoovError {
                 return new Data(
                     geographicReach, businessPresence, pendingLitigation,
                     volumeShareByCustomerType, collectFunds, moneyTransfer,
-                    sendFunds, averageMonthlyTransactionVolume, error,
-                    averageTransactionSize, maxTransactionSize, volumeByCustomerType,
-                    cardVolumeDistribution, fulfillment);
+                    sendFunds, cardIssuing, averageMonthlyTransactionVolume,
+                    error, averageTransactionSize, maxTransactionSize,
+                    volumeByCustomerType, cardVolumeDistribution, fulfillment);
             }
 
         }

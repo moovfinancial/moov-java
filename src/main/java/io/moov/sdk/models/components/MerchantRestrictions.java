@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class MerchantRestrictions {
     /**
-     * Whether the listed merchants are the only ones allowed, or the ones to block.
+     * Whether the listed items should be allowed (`allow`) or blocked (`block`).
      */
     @JsonProperty("mode")
     private IssuingControlsRestrictionMode mode;
@@ -40,7 +40,7 @@ public class MerchantRestrictions {
     }
 
     /**
-     * Whether the listed merchants are the only ones allowed, or the ones to block.
+     * Whether the listed items should be allowed (`allow`) or blocked (`block`).
      */
     @JsonIgnore
     public IssuingControlsRestrictionMode mode() {
@@ -61,7 +61,7 @@ public class MerchantRestrictions {
 
 
     /**
-     * Whether the listed merchants are the only ones allowed, or the ones to block.
+     * Whether the listed items should be allowed (`allow`) or blocked (`block`).
      */
     public MerchantRestrictions withMode(IssuingControlsRestrictionMode mode) {
         Utils.checkNotNull(mode, "mode");
@@ -118,7 +118,7 @@ public class MerchantRestrictions {
 
 
         /**
-         * Whether the listed merchants are the only ones allowed, or the ones to block.
+         * Whether the listed items should be allowed (`allow`) or blocked (`block`).
          */
         public Builder mode(IssuingControlsRestrictionMode mode) {
             Utils.checkNotNull(mode, "mode");

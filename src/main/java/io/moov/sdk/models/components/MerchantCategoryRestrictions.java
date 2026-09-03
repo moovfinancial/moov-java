@@ -18,11 +18,11 @@ import java.util.Optional;
 /**
  * MerchantCategoryRestrictions
  * 
- * <p>Restricts card usage by merchant category.
+ * <p>Restricts card usage by merchant category. When not set, all categories are allowed.
  */
 public class MerchantCategoryRestrictions {
     /**
-     * Whether the listed categories are the only ones allowed, or the ones to block.
+     * Whether the listed items should be allowed (`allow`) or blocked (`block`).
      */
     @JsonProperty("mode")
     private IssuingControlsRestrictionMode mode;
@@ -72,7 +72,7 @@ public class MerchantCategoryRestrictions {
     }
 
     /**
-     * Whether the listed categories are the only ones allowed, or the ones to block.
+     * Whether the listed items should be allowed (`allow`) or blocked (`block`).
      */
     @JsonIgnore
     public IssuingControlsRestrictionMode mode() {
@@ -113,7 +113,7 @@ public class MerchantCategoryRestrictions {
 
 
     /**
-     * Whether the listed categories are the only ones allowed, or the ones to block.
+     * Whether the listed items should be allowed (`allow`) or blocked (`block`).
      */
     public MerchantCategoryRestrictions withMode(IssuingControlsRestrictionMode mode) {
         Utils.checkNotNull(mode, "mode");
@@ -229,7 +229,7 @@ public class MerchantCategoryRestrictions {
 
 
         /**
-         * Whether the listed categories are the only ones allowed, or the ones to block.
+         * Whether the listed items should be allowed (`allow`) or blocked (`block`).
          */
         public Builder mode(IssuingControlsRestrictionMode mode) {
             Utils.checkNotNull(mode, "mode");

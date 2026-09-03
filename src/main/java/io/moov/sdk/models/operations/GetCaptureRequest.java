@@ -13,13 +13,13 @@ import java.lang.String;
 
 public class GetCaptureRequest {
     /**
-     * The merchant's Moov account ID.
+     * Moov account ID of an authorized partner or the transfer's source or destination.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
     /**
-     * Identifier for the transfer.
+     * Identifier for the auth-capture `card-payment` transfer.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=transferID")
     private String transferID;
@@ -44,7 +44,7 @@ public class GetCaptureRequest {
     }
 
     /**
-     * The merchant's Moov account ID.
+     * Moov account ID of an authorized partner or the transfer's source or destination.
      */
     @JsonIgnore
     public String accountID() {
@@ -52,7 +52,7 @@ public class GetCaptureRequest {
     }
 
     /**
-     * Identifier for the transfer.
+     * Identifier for the auth-capture `card-payment` transfer.
      */
     @JsonIgnore
     public String transferID() {
@@ -73,7 +73,7 @@ public class GetCaptureRequest {
 
 
     /**
-     * The merchant's Moov account ID.
+     * Moov account ID of an authorized partner or the transfer's source or destination.
      */
     public GetCaptureRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -82,7 +82,7 @@ public class GetCaptureRequest {
     }
 
     /**
-     * Identifier for the transfer.
+     * Identifier for the auth-capture `card-payment` transfer.
      */
     public GetCaptureRequest withTransferID(String transferID) {
         Utils.checkNotNull(transferID, "transferID");
@@ -143,7 +143,7 @@ public class GetCaptureRequest {
 
 
         /**
-         * The merchant's Moov account ID.
+         * Moov account ID of an authorized partner or the transfer's source or destination.
          */
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -153,7 +153,7 @@ public class GetCaptureRequest {
 
 
         /**
-         * Identifier for the transfer.
+         * Identifier for the auth-capture `card-payment` transfer.
          */
         public Builder transferID(String transferID) {
             Utils.checkNotNull(transferID, "transferID");

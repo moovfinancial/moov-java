@@ -3,11 +3,21 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * DisputeStatus
  * 
@@ -17,34 +27,134 @@ import java.util.Optional;
  * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses)
  * to learn what each status means.
  */
-public enum DisputeStatus {
-    RESPONSE_NEEDED("response-needed"),
-    RESOLVED("resolved"),
-    UNDER_REVIEW("under-review"),
-    CLOSED("closed"),
-    ACCEPTED("accepted"),
-    EXPIRED("expired"),
-    WON("won"),
-    LOST("lost");
+public class DisputeStatus {
 
-    @JsonValue
+    public static final DisputeStatus RESPONSE_NEEDED = new DisputeStatus("response-needed");
+    public static final DisputeStatus RESOLVED = new DisputeStatus("resolved");
+    public static final DisputeStatus UNDER_REVIEW = new DisputeStatus("under-review");
+    public static final DisputeStatus CLOSED = new DisputeStatus("closed");
+    public static final DisputeStatus ACCEPTED = new DisputeStatus("accepted");
+    public static final DisputeStatus EXPIRED = new DisputeStatus("expired");
+    public static final DisputeStatus WON = new DisputeStatus("won");
+    public static final DisputeStatus LOST = new DisputeStatus("lost");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, DisputeStatus> values = createValuesMap();
+    private static final Map<String, DisputeStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    DisputeStatus(String value) {
+    private DisputeStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a DisputeStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as DisputeStatus
+     */ 
+    @JsonCreator
+    public static DisputeStatus of(String value) {
+        synchronized (DisputeStatus.class) {
+            return values.computeIfAbsent(value, v -> new DisputeStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<DisputeStatus> fromValue(String value) {
-        for (DisputeStatus o: DisputeStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<DisputeStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DisputeStatus other = (DisputeStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "DisputeStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static DisputeStatus[] values() {
+        synchronized (DisputeStatus.class) {
+            return values.values().toArray(new DisputeStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, DisputeStatus> createValuesMap() {
+        Map<String, DisputeStatus> map = new LinkedHashMap<>();
+        map.put("response-needed", RESPONSE_NEEDED);
+        map.put("resolved", RESOLVED);
+        map.put("under-review", UNDER_REVIEW);
+        map.put("closed", CLOSED);
+        map.put("accepted", ACCEPTED);
+        map.put("expired", EXPIRED);
+        map.put("won", WON);
+        map.put("lost", LOST);
+        return map;
+    }
+
+    private static final Map<String, DisputeStatusEnum> createEnumsMap() {
+        Map<String, DisputeStatusEnum> map = new HashMap<>();
+        map.put("response-needed", DisputeStatusEnum.RESPONSE_NEEDED);
+        map.put("resolved", DisputeStatusEnum.RESOLVED);
+        map.put("under-review", DisputeStatusEnum.UNDER_REVIEW);
+        map.put("closed", DisputeStatusEnum.CLOSED);
+        map.put("accepted", DisputeStatusEnum.ACCEPTED);
+        map.put("expired", DisputeStatusEnum.EXPIRED);
+        map.put("won", DisputeStatusEnum.WON);
+        map.put("lost", DisputeStatusEnum.LOST);
+        return map;
+    }
+    
+    
+    public enum DisputeStatusEnum {
+
+        RESPONSE_NEEDED("response-needed"),
+        RESOLVED("resolved"),
+        UNDER_REVIEW("under-review"),
+        CLOSED("closed"),
+        ACCEPTED("accepted"),
+        EXPIRED("expired"),
+        WON("won"),
+        LOST("lost"),;
+
+        private final String value;
+
+        private DisputeStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

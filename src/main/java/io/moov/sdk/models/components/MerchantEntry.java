@@ -16,7 +16,7 @@ import java.util.Optional;
 /**
  * MerchantEntry
  * 
- * <p>Identifies a merchant by ID, descriptor pattern, or both. At least one of `mid` or
+ * <p>Identifies a merchant by ID, descriptor pattern, or both. At least one of `networkID` or
  * `descriptorPattern` must be set.
  */
 public class MerchantEntry {
@@ -24,8 +24,8 @@ public class MerchantEntry {
      * The merchant's unique identifier (ISO 8583 DE42), matched exactly.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("mid")
-    private Optional<String> mid;
+    @JsonProperty("networkID")
+    private Optional<String> networkID;
 
     /**
      * A case-insensitive RE2 regular expression matched against the merchant descriptor (ISO 8583 DE43).
@@ -43,13 +43,13 @@ public class MerchantEntry {
 
     @JsonCreator
     public MerchantEntry(
-            @JsonProperty("mid") Optional<String> mid,
+            @JsonProperty("networkID") Optional<String> networkID,
             @JsonProperty("descriptorPattern") Optional<String> descriptorPattern,
             @JsonProperty("name") Optional<String> name) {
-        Utils.checkNotNull(mid, "mid");
+        Utils.checkNotNull(networkID, "networkID");
         Utils.checkNotNull(descriptorPattern, "descriptorPattern");
         Utils.checkNotNull(name, "name");
-        this.mid = mid;
+        this.networkID = networkID;
         this.descriptorPattern = descriptorPattern;
         this.name = name;
     }
@@ -62,8 +62,8 @@ public class MerchantEntry {
      * The merchant's unique identifier (ISO 8583 DE42), matched exactly.
      */
     @JsonIgnore
-    public Optional<String> mid() {
-        return mid;
+    public Optional<String> networkID() {
+        return networkID;
     }
 
     /**
@@ -90,9 +90,9 @@ public class MerchantEntry {
     /**
      * The merchant's unique identifier (ISO 8583 DE42), matched exactly.
      */
-    public MerchantEntry withMid(String mid) {
-        Utils.checkNotNull(mid, "mid");
-        this.mid = Optional.ofNullable(mid);
+    public MerchantEntry withNetworkID(String networkID) {
+        Utils.checkNotNull(networkID, "networkID");
+        this.networkID = Optional.ofNullable(networkID);
         return this;
     }
 
@@ -100,9 +100,9 @@ public class MerchantEntry {
     /**
      * The merchant's unique identifier (ISO 8583 DE42), matched exactly.
      */
-    public MerchantEntry withMid(Optional<String> mid) {
-        Utils.checkNotNull(mid, "mid");
-        this.mid = mid;
+    public MerchantEntry withNetworkID(Optional<String> networkID) {
+        Utils.checkNotNull(networkID, "networkID");
+        this.networkID = networkID;
         return this;
     }
 
@@ -154,7 +154,7 @@ public class MerchantEntry {
         }
         MerchantEntry other = (MerchantEntry) o;
         return 
-            Utils.enhancedDeepEquals(this.mid, other.mid) &&
+            Utils.enhancedDeepEquals(this.networkID, other.networkID) &&
             Utils.enhancedDeepEquals(this.descriptorPattern, other.descriptorPattern) &&
             Utils.enhancedDeepEquals(this.name, other.name);
     }
@@ -162,13 +162,13 @@ public class MerchantEntry {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            mid, descriptorPattern, name);
+            networkID, descriptorPattern, name);
     }
     
     @Override
     public String toString() {
         return Utils.toString(MerchantEntry.class,
-                "mid", mid,
+                "networkID", networkID,
                 "descriptorPattern", descriptorPattern,
                 "name", name);
     }
@@ -176,7 +176,7 @@ public class MerchantEntry {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> mid = Optional.empty();
+        private Optional<String> networkID = Optional.empty();
 
         private Optional<String> descriptorPattern = Optional.empty();
 
@@ -190,18 +190,18 @@ public class MerchantEntry {
         /**
          * The merchant's unique identifier (ISO 8583 DE42), matched exactly.
          */
-        public Builder mid(String mid) {
-            Utils.checkNotNull(mid, "mid");
-            this.mid = Optional.ofNullable(mid);
+        public Builder networkID(String networkID) {
+            Utils.checkNotNull(networkID, "networkID");
+            this.networkID = Optional.ofNullable(networkID);
             return this;
         }
 
         /**
          * The merchant's unique identifier (ISO 8583 DE42), matched exactly.
          */
-        public Builder mid(Optional<String> mid) {
-            Utils.checkNotNull(mid, "mid");
-            this.mid = mid;
+        public Builder networkID(Optional<String> networkID) {
+            Utils.checkNotNull(networkID, "networkID");
+            this.networkID = networkID;
             return this;
         }
 
@@ -246,7 +246,7 @@ public class MerchantEntry {
         public MerchantEntry build() {
 
             return new MerchantEntry(
-                mid, descriptorPattern, name);
+                networkID, descriptorPattern, name);
         }
 
     }

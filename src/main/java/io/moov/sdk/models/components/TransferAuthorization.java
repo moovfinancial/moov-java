@@ -14,29 +14,45 @@ import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 
-
+/**
+ * TransferAuthorization
+ * 
+ * <p>Authorization and capture amounts for an auth-capture `card-payment` transfer.
+ */
 public class TransferAuthorization {
-
+    /**
+     * Identifier for the authorization.
+     */
     @JsonProperty("authorizationID")
     private String authorizationID;
 
-
+    /**
+     * Amount submitted for authorization.
+     */
     @JsonProperty("requestedAmount")
     private AmountDecimal requestedAmount;
 
-
+    /**
+     * Hold approved by the issuer.
+     */
     @JsonProperty("authorizedAmount")
     private AmountDecimal authorizedAmount;
 
-
+    /**
+     * Cumulative amount of captures that have not failed or been canceled.
+     */
     @JsonProperty("capturedAmount")
     private AmountDecimal capturedAmount;
 
-
+    /**
+     * Amount of the authorization still available after captures and authorization cancellations.
+     */
     @JsonProperty("capturableAmount")
     private AmountDecimal capturableAmount;
 
-
+    /**
+     * Expiration time for the approved authorization, when available.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("expiresOn")
     private Optional<OffsetDateTime> expiresOn;
@@ -73,31 +89,49 @@ public class TransferAuthorization {
             capturedAmount, capturableAmount, Optional.empty());
     }
 
+    /**
+     * Identifier for the authorization.
+     */
     @JsonIgnore
     public String authorizationID() {
         return authorizationID;
     }
 
+    /**
+     * Amount submitted for authorization.
+     */
     @JsonIgnore
     public AmountDecimal requestedAmount() {
         return requestedAmount;
     }
 
+    /**
+     * Hold approved by the issuer.
+     */
     @JsonIgnore
     public AmountDecimal authorizedAmount() {
         return authorizedAmount;
     }
 
+    /**
+     * Cumulative amount of captures that have not failed or been canceled.
+     */
     @JsonIgnore
     public AmountDecimal capturedAmount() {
         return capturedAmount;
     }
 
+    /**
+     * Amount of the authorization still available after captures and authorization cancellations.
+     */
     @JsonIgnore
     public AmountDecimal capturableAmount() {
         return capturableAmount;
     }
 
+    /**
+     * Expiration time for the approved authorization, when available.
+     */
     @JsonIgnore
     public Optional<OffsetDateTime> expiresOn() {
         return expiresOn;
@@ -108,36 +142,54 @@ public class TransferAuthorization {
     }
 
 
+    /**
+     * Identifier for the authorization.
+     */
     public TransferAuthorization withAuthorizationID(String authorizationID) {
         Utils.checkNotNull(authorizationID, "authorizationID");
         this.authorizationID = authorizationID;
         return this;
     }
 
+    /**
+     * Amount submitted for authorization.
+     */
     public TransferAuthorization withRequestedAmount(AmountDecimal requestedAmount) {
         Utils.checkNotNull(requestedAmount, "requestedAmount");
         this.requestedAmount = requestedAmount;
         return this;
     }
 
+    /**
+     * Hold approved by the issuer.
+     */
     public TransferAuthorization withAuthorizedAmount(AmountDecimal authorizedAmount) {
         Utils.checkNotNull(authorizedAmount, "authorizedAmount");
         this.authorizedAmount = authorizedAmount;
         return this;
     }
 
+    /**
+     * Cumulative amount of captures that have not failed or been canceled.
+     */
     public TransferAuthorization withCapturedAmount(AmountDecimal capturedAmount) {
         Utils.checkNotNull(capturedAmount, "capturedAmount");
         this.capturedAmount = capturedAmount;
         return this;
     }
 
+    /**
+     * Amount of the authorization still available after captures and authorization cancellations.
+     */
     public TransferAuthorization withCapturableAmount(AmountDecimal capturableAmount) {
         Utils.checkNotNull(capturableAmount, "capturableAmount");
         this.capturableAmount = capturableAmount;
         return this;
     }
 
+    /**
+     * Expiration time for the approved authorization, when available.
+     */
     public TransferAuthorization withExpiresOn(OffsetDateTime expiresOn) {
         Utils.checkNotNull(expiresOn, "expiresOn");
         this.expiresOn = Optional.ofNullable(expiresOn);
@@ -145,6 +197,9 @@ public class TransferAuthorization {
     }
 
 
+    /**
+     * Expiration time for the approved authorization, when available.
+     */
     public TransferAuthorization withExpiresOn(Optional<OffsetDateTime> expiresOn) {
         Utils.checkNotNull(expiresOn, "expiresOn");
         this.expiresOn = expiresOn;
@@ -207,6 +262,9 @@ public class TransferAuthorization {
         }
 
 
+        /**
+         * Identifier for the authorization.
+         */
         public Builder authorizationID(String authorizationID) {
             Utils.checkNotNull(authorizationID, "authorizationID");
             this.authorizationID = authorizationID;
@@ -214,6 +272,9 @@ public class TransferAuthorization {
         }
 
 
+        /**
+         * Amount submitted for authorization.
+         */
         public Builder requestedAmount(AmountDecimal requestedAmount) {
             Utils.checkNotNull(requestedAmount, "requestedAmount");
             this.requestedAmount = requestedAmount;
@@ -221,6 +282,9 @@ public class TransferAuthorization {
         }
 
 
+        /**
+         * Hold approved by the issuer.
+         */
         public Builder authorizedAmount(AmountDecimal authorizedAmount) {
             Utils.checkNotNull(authorizedAmount, "authorizedAmount");
             this.authorizedAmount = authorizedAmount;
@@ -228,6 +292,9 @@ public class TransferAuthorization {
         }
 
 
+        /**
+         * Cumulative amount of captures that have not failed or been canceled.
+         */
         public Builder capturedAmount(AmountDecimal capturedAmount) {
             Utils.checkNotNull(capturedAmount, "capturedAmount");
             this.capturedAmount = capturedAmount;
@@ -235,6 +302,9 @@ public class TransferAuthorization {
         }
 
 
+        /**
+         * Amount of the authorization still available after captures and authorization cancellations.
+         */
         public Builder capturableAmount(AmountDecimal capturableAmount) {
             Utils.checkNotNull(capturableAmount, "capturableAmount");
             this.capturableAmount = capturableAmount;
@@ -242,12 +312,18 @@ public class TransferAuthorization {
         }
 
 
+        /**
+         * Expiration time for the approved authorization, when available.
+         */
         public Builder expiresOn(OffsetDateTime expiresOn) {
             Utils.checkNotNull(expiresOn, "expiresOn");
             this.expiresOn = Optional.ofNullable(expiresOn);
             return this;
         }
 
+        /**
+         * Expiration time for the approved authorization, when available.
+         */
         public Builder expiresOn(Optional<OffsetDateTime> expiresOn) {
             Utils.checkNotNull(expiresOn, "expiresOn");
             this.expiresOn = expiresOn;

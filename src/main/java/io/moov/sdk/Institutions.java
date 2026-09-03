@@ -106,7 +106,7 @@ public class Institutions {
 
     /**
      * This endpoint has been deprecated and will be removed in a future release. Use
-     * [/institutions](https://docs.moov.io/api/enrichment/form-shortening/institutions/get/).
+     * [/institutions](https://docs.moov.io/api/enrichment/institutions/get/).
      * 
      * <p>Search for institutions by either their name or routing number.
      * 
@@ -124,7 +124,7 @@ public class Institutions {
 
     /**
      * This endpoint has been deprecated and will be removed in a future release. Use
-     * [/institutions](https://docs.moov.io/api/enrichment/form-shortening/institutions/get/).
+     * [/institutions](https://docs.moov.io/api/enrichment/institutions/get/).
      * 
      * <p>Search for institutions by either their name or routing number.
      * 
@@ -144,7 +144,7 @@ public class Institutions {
 
     /**
      * This endpoint has been deprecated and will be removed in a future release. Use
-     * [/institutions](https://docs.moov.io/api/enrichment/form-shortening/institutions/get/).
+     * [/institutions](https://docs.moov.io/api/enrichment/institutions/get/).
      * 
      * <p>Search for institutions by either their name or routing number.
      * 

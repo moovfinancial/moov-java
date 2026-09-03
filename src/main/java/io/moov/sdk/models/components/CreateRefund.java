@@ -24,15 +24,15 @@ import java.util.Optional;
  */
 public class CreateRefund {
     /**
-     * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
-     * transfer's full amount will be refunded.
+     * Amount to refund. If omitted, the original transfer's full amount will be refunded.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
     private Optional<? extends AmountDecimal> amount;
 
     /**
-     * ID of the capture to refund. Required for multi-capture card payment transfers.
+     * ID of the capture to refund. This field is only relevant for an auth-capture `card-payment`
+     * transfer.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("captureID")
@@ -63,8 +63,7 @@ public class CreateRefund {
     }
 
     /**
-     * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
-     * transfer's full amount will be refunded.
+     * Amount to refund. If omitted, the original transfer's full amount will be refunded.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -73,7 +72,8 @@ public class CreateRefund {
     }
 
     /**
-     * ID of the capture to refund. Required for multi-capture card payment transfers.
+     * ID of the capture to refund. This field is only relevant for an auth-capture `card-payment`
+     * transfer.
      */
     @JsonIgnore
     public Optional<String> captureID() {
@@ -95,8 +95,7 @@ public class CreateRefund {
 
 
     /**
-     * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
-     * transfer's full amount will be refunded.
+     * Amount to refund. If omitted, the original transfer's full amount will be refunded.
      */
     public CreateRefund withAmount(AmountDecimal amount) {
         Utils.checkNotNull(amount, "amount");
@@ -106,8 +105,7 @@ public class CreateRefund {
 
 
     /**
-     * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
-     * transfer's full amount will be refunded.
+     * Amount to refund. If omitted, the original transfer's full amount will be refunded.
      */
     public CreateRefund withAmount(Optional<? extends AmountDecimal> amount) {
         Utils.checkNotNull(amount, "amount");
@@ -116,7 +114,8 @@ public class CreateRefund {
     }
 
     /**
-     * ID of the capture to refund. Required for multi-capture card payment transfers.
+     * ID of the capture to refund. This field is only relevant for an auth-capture `card-payment`
+     * transfer.
      */
     public CreateRefund withCaptureID(String captureID) {
         Utils.checkNotNull(captureID, "captureID");
@@ -126,7 +125,8 @@ public class CreateRefund {
 
 
     /**
-     * ID of the capture to refund. Required for multi-capture card payment transfers.
+     * ID of the capture to refund. This field is only relevant for an auth-capture `card-payment`
+     * transfer.
      */
     public CreateRefund withCaptureID(Optional<String> captureID) {
         Utils.checkNotNull(captureID, "captureID");
@@ -197,8 +197,7 @@ public class CreateRefund {
 
 
         /**
-         * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
-         * transfer's full amount will be refunded.
+         * Amount to refund. If omitted, the original transfer's full amount will be refunded.
          */
         public Builder amount(AmountDecimal amount) {
             Utils.checkNotNull(amount, "amount");
@@ -207,8 +206,7 @@ public class CreateRefund {
         }
 
         /**
-         * Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original
-         * transfer's full amount will be refunded.
+         * Amount to refund. If omitted, the original transfer's full amount will be refunded.
          */
         public Builder amount(Optional<? extends AmountDecimal> amount) {
             Utils.checkNotNull(amount, "amount");
@@ -218,7 +216,8 @@ public class CreateRefund {
 
 
         /**
-         * ID of the capture to refund. Required for multi-capture card payment transfers.
+         * ID of the capture to refund. This field is only relevant for an auth-capture `card-payment`
+         * transfer.
          */
         public Builder captureID(String captureID) {
             Utils.checkNotNull(captureID, "captureID");
@@ -227,7 +226,8 @@ public class CreateRefund {
         }
 
         /**
-         * ID of the capture to refund. Required for multi-capture card payment transfers.
+         * ID of the capture to refund. This field is only relevant for an auth-capture `card-payment`
+         * transfer.
          */
         public Builder captureID(Optional<String> captureID) {
             Utils.checkNotNull(captureID, "captureID");

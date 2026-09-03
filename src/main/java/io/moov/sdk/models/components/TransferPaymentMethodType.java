@@ -3,53 +3,194 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * TransferPaymentMethodType
  * 
  * <p>The payment method type that represents a payment rail and directionality
  */
-public enum TransferPaymentMethodType {
-    MOOV_WALLET("moov-wallet"),
-    ACH_DEBIT_FUND("ach-debit-fund"),
-    ACH_DEBIT_COLLECT("ach-debit-collect"),
-    ACH_CREDIT_STANDARD("ach-credit-standard"),
-    ACH_CREDIT_SAME_DAY("ach-credit-same-day"),
-    RTP_CREDIT("rtp-credit"),
-    CARD_PAYMENT("card-payment"),
-    PUSH_TO_CARD("push-to-card"),
-    PULL_FROM_CARD("pull-from-card"),
-    APPLE_PAY("apple-pay"),
-    CARD_PRESENT_PAYMENT("card-present-payment"),
-    INSTANT_BANK_CREDIT("instant-bank-credit"),
-    PUSH_TO_APPLE_PAY("push-to-apple-pay"),
-    PULL_FROM_APPLE_PAY("pull-from-apple-pay"),
-    GOOGLE_PAY("google-pay"),
-    PUSH_TO_GOOGLE_PAY("push-to-google-pay"),
-    PULL_FROM_GOOGLE_PAY("pull-from-google-pay");
+public class TransferPaymentMethodType {
 
-    @JsonValue
+    public static final TransferPaymentMethodType MOOV_WALLET = new TransferPaymentMethodType("moov-wallet");
+    public static final TransferPaymentMethodType ACH_DEBIT_FUND = new TransferPaymentMethodType("ach-debit-fund");
+    public static final TransferPaymentMethodType ACH_DEBIT_COLLECT = new TransferPaymentMethodType("ach-debit-collect");
+    public static final TransferPaymentMethodType ACH_CREDIT_STANDARD = new TransferPaymentMethodType("ach-credit-standard");
+    public static final TransferPaymentMethodType ACH_CREDIT_SAME_DAY = new TransferPaymentMethodType("ach-credit-same-day");
+    public static final TransferPaymentMethodType RTP_CREDIT = new TransferPaymentMethodType("rtp-credit");
+    public static final TransferPaymentMethodType CARD_PAYMENT = new TransferPaymentMethodType("card-payment");
+    public static final TransferPaymentMethodType PUSH_TO_CARD = new TransferPaymentMethodType("push-to-card");
+    public static final TransferPaymentMethodType PULL_FROM_CARD = new TransferPaymentMethodType("pull-from-card");
+    public static final TransferPaymentMethodType APPLE_PAY = new TransferPaymentMethodType("apple-pay");
+    public static final TransferPaymentMethodType CARD_PRESENT_PAYMENT = new TransferPaymentMethodType("card-present-payment");
+    public static final TransferPaymentMethodType INSTANT_BANK_CREDIT = new TransferPaymentMethodType("instant-bank-credit");
+    public static final TransferPaymentMethodType PUSH_TO_APPLE_PAY = new TransferPaymentMethodType("push-to-apple-pay");
+    public static final TransferPaymentMethodType PULL_FROM_APPLE_PAY = new TransferPaymentMethodType("pull-from-apple-pay");
+    public static final TransferPaymentMethodType GOOGLE_PAY = new TransferPaymentMethodType("google-pay");
+    public static final TransferPaymentMethodType PUSH_TO_GOOGLE_PAY = new TransferPaymentMethodType("push-to-google-pay");
+    public static final TransferPaymentMethodType PULL_FROM_GOOGLE_PAY = new TransferPaymentMethodType("pull-from-google-pay");
+    public static final TransferPaymentMethodType WIRE_CREDIT = new TransferPaymentMethodType("wire-credit");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, TransferPaymentMethodType> values = createValuesMap();
+    private static final Map<String, TransferPaymentMethodTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    TransferPaymentMethodType(String value) {
+    private TransferPaymentMethodType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a TransferPaymentMethodType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as TransferPaymentMethodType
+     */ 
+    @JsonCreator
+    public static TransferPaymentMethodType of(String value) {
+        synchronized (TransferPaymentMethodType.class) {
+            return values.computeIfAbsent(value, v -> new TransferPaymentMethodType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<TransferPaymentMethodType> fromValue(String value) {
-        for (TransferPaymentMethodType o: TransferPaymentMethodType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<TransferPaymentMethodTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        TransferPaymentMethodType other = (TransferPaymentMethodType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "TransferPaymentMethodType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static TransferPaymentMethodType[] values() {
+        synchronized (TransferPaymentMethodType.class) {
+            return values.values().toArray(new TransferPaymentMethodType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, TransferPaymentMethodType> createValuesMap() {
+        Map<String, TransferPaymentMethodType> map = new LinkedHashMap<>();
+        map.put("moov-wallet", MOOV_WALLET);
+        map.put("ach-debit-fund", ACH_DEBIT_FUND);
+        map.put("ach-debit-collect", ACH_DEBIT_COLLECT);
+        map.put("ach-credit-standard", ACH_CREDIT_STANDARD);
+        map.put("ach-credit-same-day", ACH_CREDIT_SAME_DAY);
+        map.put("rtp-credit", RTP_CREDIT);
+        map.put("card-payment", CARD_PAYMENT);
+        map.put("push-to-card", PUSH_TO_CARD);
+        map.put("pull-from-card", PULL_FROM_CARD);
+        map.put("apple-pay", APPLE_PAY);
+        map.put("card-present-payment", CARD_PRESENT_PAYMENT);
+        map.put("instant-bank-credit", INSTANT_BANK_CREDIT);
+        map.put("push-to-apple-pay", PUSH_TO_APPLE_PAY);
+        map.put("pull-from-apple-pay", PULL_FROM_APPLE_PAY);
+        map.put("google-pay", GOOGLE_PAY);
+        map.put("push-to-google-pay", PUSH_TO_GOOGLE_PAY);
+        map.put("pull-from-google-pay", PULL_FROM_GOOGLE_PAY);
+        map.put("wire-credit", WIRE_CREDIT);
+        return map;
+    }
+
+    private static final Map<String, TransferPaymentMethodTypeEnum> createEnumsMap() {
+        Map<String, TransferPaymentMethodTypeEnum> map = new HashMap<>();
+        map.put("moov-wallet", TransferPaymentMethodTypeEnum.MOOV_WALLET);
+        map.put("ach-debit-fund", TransferPaymentMethodTypeEnum.ACH_DEBIT_FUND);
+        map.put("ach-debit-collect", TransferPaymentMethodTypeEnum.ACH_DEBIT_COLLECT);
+        map.put("ach-credit-standard", TransferPaymentMethodTypeEnum.ACH_CREDIT_STANDARD);
+        map.put("ach-credit-same-day", TransferPaymentMethodTypeEnum.ACH_CREDIT_SAME_DAY);
+        map.put("rtp-credit", TransferPaymentMethodTypeEnum.RTP_CREDIT);
+        map.put("card-payment", TransferPaymentMethodTypeEnum.CARD_PAYMENT);
+        map.put("push-to-card", TransferPaymentMethodTypeEnum.PUSH_TO_CARD);
+        map.put("pull-from-card", TransferPaymentMethodTypeEnum.PULL_FROM_CARD);
+        map.put("apple-pay", TransferPaymentMethodTypeEnum.APPLE_PAY);
+        map.put("card-present-payment", TransferPaymentMethodTypeEnum.CARD_PRESENT_PAYMENT);
+        map.put("instant-bank-credit", TransferPaymentMethodTypeEnum.INSTANT_BANK_CREDIT);
+        map.put("push-to-apple-pay", TransferPaymentMethodTypeEnum.PUSH_TO_APPLE_PAY);
+        map.put("pull-from-apple-pay", TransferPaymentMethodTypeEnum.PULL_FROM_APPLE_PAY);
+        map.put("google-pay", TransferPaymentMethodTypeEnum.GOOGLE_PAY);
+        map.put("push-to-google-pay", TransferPaymentMethodTypeEnum.PUSH_TO_GOOGLE_PAY);
+        map.put("pull-from-google-pay", TransferPaymentMethodTypeEnum.PULL_FROM_GOOGLE_PAY);
+        map.put("wire-credit", TransferPaymentMethodTypeEnum.WIRE_CREDIT);
+        return map;
+    }
+    
+    
+    public enum TransferPaymentMethodTypeEnum {
+
+        MOOV_WALLET("moov-wallet"),
+        ACH_DEBIT_FUND("ach-debit-fund"),
+        ACH_DEBIT_COLLECT("ach-debit-collect"),
+        ACH_CREDIT_STANDARD("ach-credit-standard"),
+        ACH_CREDIT_SAME_DAY("ach-credit-same-day"),
+        RTP_CREDIT("rtp-credit"),
+        CARD_PAYMENT("card-payment"),
+        PUSH_TO_CARD("push-to-card"),
+        PULL_FROM_CARD("pull-from-card"),
+        APPLE_PAY("apple-pay"),
+        CARD_PRESENT_PAYMENT("card-present-payment"),
+        INSTANT_BANK_CREDIT("instant-bank-credit"),
+        PUSH_TO_APPLE_PAY("push-to-apple-pay"),
+        PULL_FROM_APPLE_PAY("pull-from-apple-pay"),
+        GOOGLE_PAY("google-pay"),
+        PUSH_TO_GOOGLE_PAY("push-to-google-pay"),
+        PULL_FROM_GOOGLE_PAY("pull-from-google-pay"),
+        WIRE_CREDIT("wire-credit"),;
+
+        private final String value;
+
+        private TransferPaymentMethodTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

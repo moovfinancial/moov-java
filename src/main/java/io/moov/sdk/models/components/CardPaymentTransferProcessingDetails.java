@@ -16,6 +16,13 @@ import java.util.Optional;
 
 
 public class CardPaymentTransferProcessingDetails {
+    /**
+     * Status of a card payment transaction.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("status")
+    private Optional<? extends CardPaymentTransactionStatus> status;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("authorizationCode")
@@ -28,33 +35,47 @@ public class CardPaymentTransferProcessingDetails {
 
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("networkResponseCode")
-    private Optional<String> networkResponseCode;
-
-
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("failureCode")
     private Optional<? extends CardTransactionFailureCode> failureCode;
 
+    /**
+     * The retrieval reference number assigned by the card network to the card payment.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("retrievalReferenceNumber")
+    private Optional<String> retrievalReferenceNumber;
+
     @JsonCreator
     public CardPaymentTransferProcessingDetails(
+            @JsonProperty("status") Optional<? extends CardPaymentTransactionStatus> status,
             @JsonProperty("authorizationCode") Optional<String> authorizationCode,
             @JsonProperty("networkTransactionID") Optional<String> networkTransactionID,
-            @JsonProperty("networkResponseCode") Optional<String> networkResponseCode,
-            @JsonProperty("failureCode") Optional<? extends CardTransactionFailureCode> failureCode) {
+            @JsonProperty("failureCode") Optional<? extends CardTransactionFailureCode> failureCode,
+            @JsonProperty("retrievalReferenceNumber") Optional<String> retrievalReferenceNumber) {
+        Utils.checkNotNull(status, "status");
         Utils.checkNotNull(authorizationCode, "authorizationCode");
         Utils.checkNotNull(networkTransactionID, "networkTransactionID");
-        Utils.checkNotNull(networkResponseCode, "networkResponseCode");
         Utils.checkNotNull(failureCode, "failureCode");
+        Utils.checkNotNull(retrievalReferenceNumber, "retrievalReferenceNumber");
+        this.status = status;
         this.authorizationCode = authorizationCode;
         this.networkTransactionID = networkTransactionID;
-        this.networkResponseCode = networkResponseCode;
         this.failureCode = failureCode;
+        this.retrievalReferenceNumber = retrievalReferenceNumber;
     }
     
     public CardPaymentTransferProcessingDetails() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * Status of a card payment transaction.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<CardPaymentTransactionStatus> status() {
+        return (Optional<CardPaymentTransactionStatus>) status;
     }
 
     @JsonIgnore
@@ -67,21 +88,43 @@ public class CardPaymentTransferProcessingDetails {
         return networkTransactionID;
     }
 
-    @JsonIgnore
-    public Optional<String> networkResponseCode() {
-        return networkResponseCode;
-    }
-
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<CardTransactionFailureCode> failureCode() {
         return (Optional<CardTransactionFailureCode>) failureCode;
     }
 
+    /**
+     * The retrieval reference number assigned by the card network to the card payment.
+     */
+    @JsonIgnore
+    public Optional<String> retrievalReferenceNumber() {
+        return retrievalReferenceNumber;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
+
+    /**
+     * Status of a card payment transaction.
+     */
+    public CardPaymentTransferProcessingDetails withStatus(CardPaymentTransactionStatus status) {
+        Utils.checkNotNull(status, "status");
+        this.status = Optional.ofNullable(status);
+        return this;
+    }
+
+
+    /**
+     * Status of a card payment transaction.
+     */
+    public CardPaymentTransferProcessingDetails withStatus(Optional<? extends CardPaymentTransactionStatus> status) {
+        Utils.checkNotNull(status, "status");
+        this.status = status;
+        return this;
+    }
 
     public CardPaymentTransferProcessingDetails withAuthorizationCode(String authorizationCode) {
         Utils.checkNotNull(authorizationCode, "authorizationCode");
@@ -109,19 +152,6 @@ public class CardPaymentTransferProcessingDetails {
         return this;
     }
 
-    public CardPaymentTransferProcessingDetails withNetworkResponseCode(String networkResponseCode) {
-        Utils.checkNotNull(networkResponseCode, "networkResponseCode");
-        this.networkResponseCode = Optional.ofNullable(networkResponseCode);
-        return this;
-    }
-
-
-    public CardPaymentTransferProcessingDetails withNetworkResponseCode(Optional<String> networkResponseCode) {
-        Utils.checkNotNull(networkResponseCode, "networkResponseCode");
-        this.networkResponseCode = networkResponseCode;
-        return this;
-    }
-
     public CardPaymentTransferProcessingDetails withFailureCode(CardTransactionFailureCode failureCode) {
         Utils.checkNotNull(failureCode, "failureCode");
         this.failureCode = Optional.ofNullable(failureCode);
@@ -135,6 +165,25 @@ public class CardPaymentTransferProcessingDetails {
         return this;
     }
 
+    /**
+     * The retrieval reference number assigned by the card network to the card payment.
+     */
+    public CardPaymentTransferProcessingDetails withRetrievalReferenceNumber(String retrievalReferenceNumber) {
+        Utils.checkNotNull(retrievalReferenceNumber, "retrievalReferenceNumber");
+        this.retrievalReferenceNumber = Optional.ofNullable(retrievalReferenceNumber);
+        return this;
+    }
+
+
+    /**
+     * The retrieval reference number assigned by the card network to the card payment.
+     */
+    public CardPaymentTransferProcessingDetails withRetrievalReferenceNumber(Optional<String> retrievalReferenceNumber) {
+        Utils.checkNotNull(retrievalReferenceNumber, "retrievalReferenceNumber");
+        this.retrievalReferenceNumber = retrievalReferenceNumber;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -145,41 +194,64 @@ public class CardPaymentTransferProcessingDetails {
         }
         CardPaymentTransferProcessingDetails other = (CardPaymentTransferProcessingDetails) o;
         return 
+            Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.authorizationCode, other.authorizationCode) &&
             Utils.enhancedDeepEquals(this.networkTransactionID, other.networkTransactionID) &&
-            Utils.enhancedDeepEquals(this.networkResponseCode, other.networkResponseCode) &&
-            Utils.enhancedDeepEquals(this.failureCode, other.failureCode);
+            Utils.enhancedDeepEquals(this.failureCode, other.failureCode) &&
+            Utils.enhancedDeepEquals(this.retrievalReferenceNumber, other.retrievalReferenceNumber);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            authorizationCode, networkTransactionID, networkResponseCode,
-            failureCode);
+            status, authorizationCode, networkTransactionID,
+            failureCode, retrievalReferenceNumber);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CardPaymentTransferProcessingDetails.class,
+                "status", status,
                 "authorizationCode", authorizationCode,
                 "networkTransactionID", networkTransactionID,
-                "networkResponseCode", networkResponseCode,
-                "failureCode", failureCode);
+                "failureCode", failureCode,
+                "retrievalReferenceNumber", retrievalReferenceNumber);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends CardPaymentTransactionStatus> status = Optional.empty();
+
         private Optional<String> authorizationCode = Optional.empty();
 
         private Optional<String> networkTransactionID = Optional.empty();
 
-        private Optional<String> networkResponseCode = Optional.empty();
-
         private Optional<? extends CardTransactionFailureCode> failureCode = Optional.empty();
+
+        private Optional<String> retrievalReferenceNumber = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Status of a card payment transaction.
+         */
+        public Builder status(CardPaymentTransactionStatus status) {
+            Utils.checkNotNull(status, "status");
+            this.status = Optional.ofNullable(status);
+            return this;
+        }
+
+        /**
+         * Status of a card payment transaction.
+         */
+        public Builder status(Optional<? extends CardPaymentTransactionStatus> status) {
+            Utils.checkNotNull(status, "status");
+            this.status = status;
+            return this;
         }
 
 
@@ -209,19 +281,6 @@ public class CardPaymentTransferProcessingDetails {
         }
 
 
-        public Builder networkResponseCode(String networkResponseCode) {
-            Utils.checkNotNull(networkResponseCode, "networkResponseCode");
-            this.networkResponseCode = Optional.ofNullable(networkResponseCode);
-            return this;
-        }
-
-        public Builder networkResponseCode(Optional<String> networkResponseCode) {
-            Utils.checkNotNull(networkResponseCode, "networkResponseCode");
-            this.networkResponseCode = networkResponseCode;
-            return this;
-        }
-
-
         public Builder failureCode(CardTransactionFailureCode failureCode) {
             Utils.checkNotNull(failureCode, "failureCode");
             this.failureCode = Optional.ofNullable(failureCode);
@@ -234,11 +293,30 @@ public class CardPaymentTransferProcessingDetails {
             return this;
         }
 
+
+        /**
+         * The retrieval reference number assigned by the card network to the card payment.
+         */
+        public Builder retrievalReferenceNumber(String retrievalReferenceNumber) {
+            Utils.checkNotNull(retrievalReferenceNumber, "retrievalReferenceNumber");
+            this.retrievalReferenceNumber = Optional.ofNullable(retrievalReferenceNumber);
+            return this;
+        }
+
+        /**
+         * The retrieval reference number assigned by the card network to the card payment.
+         */
+        public Builder retrievalReferenceNumber(Optional<String> retrievalReferenceNumber) {
+            Utils.checkNotNull(retrievalReferenceNumber, "retrievalReferenceNumber");
+            this.retrievalReferenceNumber = retrievalReferenceNumber;
+            return this;
+        }
+
         public CardPaymentTransferProcessingDetails build() {
 
             return new CardPaymentTransferProcessingDetails(
-                authorizationCode, networkTransactionID, networkResponseCode,
-                failureCode);
+                status, authorizationCode, networkTransactionID,
+                failureCode, retrievalReferenceNumber);
         }
 
     }

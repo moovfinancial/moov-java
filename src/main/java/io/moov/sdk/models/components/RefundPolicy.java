@@ -3,40 +3,153 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum RefundPolicy {
-    CONDITIONAL_REFUND("conditional-refund"),
-    CUSTOM_POLICY("custom-policy"),
-    EVENT_BASED_POLICY("event-based-policy"),
-    FULL_REFUND_EXTENDED_WINDOW("full-refund-extended-window"),
-    FULL_REFUND_WITHIN30_DAYS("full-refund-within-30-days"),
-    NO_REFUNDS("no-refunds"),
-    PARTIAL_REFUND("partial-refund"),
-    PRORATED_REFUND("prorated-refund"),
-    STORE_CREDIT_ONLY("store-credit-only");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class RefundPolicy {
 
-    @JsonValue
+    public static final RefundPolicy CONDITIONAL_REFUND = new RefundPolicy("conditional-refund");
+    public static final RefundPolicy CUSTOM_POLICY = new RefundPolicy("custom-policy");
+    public static final RefundPolicy EVENT_BASED_POLICY = new RefundPolicy("event-based-policy");
+    public static final RefundPolicy FULL_REFUND_EXTENDED_WINDOW = new RefundPolicy("full-refund-extended-window");
+    public static final RefundPolicy FULL_REFUND_WITHIN30_DAYS = new RefundPolicy("full-refund-within-30-days");
+    public static final RefundPolicy NO_REFUNDS = new RefundPolicy("no-refunds");
+    public static final RefundPolicy PARTIAL_REFUND = new RefundPolicy("partial-refund");
+    public static final RefundPolicy PRORATED_REFUND = new RefundPolicy("prorated-refund");
+    public static final RefundPolicy STORE_CREDIT_ONLY = new RefundPolicy("store-credit-only");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, RefundPolicy> values = createValuesMap();
+    private static final Map<String, RefundPolicyEnum> enums = createEnumsMap();
+
     private final String value;
 
-    RefundPolicy(String value) {
+    private RefundPolicy(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a RefundPolicy with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as RefundPolicy
+     */ 
+    @JsonCreator
+    public static RefundPolicy of(String value) {
+        synchronized (RefundPolicy.class) {
+            return values.computeIfAbsent(value, v -> new RefundPolicy(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<RefundPolicy> fromValue(String value) {
-        for (RefundPolicy o: RefundPolicy.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<RefundPolicyEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        RefundPolicy other = (RefundPolicy) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "RefundPolicy [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static RefundPolicy[] values() {
+        synchronized (RefundPolicy.class) {
+            return values.values().toArray(new RefundPolicy[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, RefundPolicy> createValuesMap() {
+        Map<String, RefundPolicy> map = new LinkedHashMap<>();
+        map.put("conditional-refund", CONDITIONAL_REFUND);
+        map.put("custom-policy", CUSTOM_POLICY);
+        map.put("event-based-policy", EVENT_BASED_POLICY);
+        map.put("full-refund-extended-window", FULL_REFUND_EXTENDED_WINDOW);
+        map.put("full-refund-within-30-days", FULL_REFUND_WITHIN30_DAYS);
+        map.put("no-refunds", NO_REFUNDS);
+        map.put("partial-refund", PARTIAL_REFUND);
+        map.put("prorated-refund", PRORATED_REFUND);
+        map.put("store-credit-only", STORE_CREDIT_ONLY);
+        return map;
+    }
+
+    private static final Map<String, RefundPolicyEnum> createEnumsMap() {
+        Map<String, RefundPolicyEnum> map = new HashMap<>();
+        map.put("conditional-refund", RefundPolicyEnum.CONDITIONAL_REFUND);
+        map.put("custom-policy", RefundPolicyEnum.CUSTOM_POLICY);
+        map.put("event-based-policy", RefundPolicyEnum.EVENT_BASED_POLICY);
+        map.put("full-refund-extended-window", RefundPolicyEnum.FULL_REFUND_EXTENDED_WINDOW);
+        map.put("full-refund-within-30-days", RefundPolicyEnum.FULL_REFUND_WITHIN30_DAYS);
+        map.put("no-refunds", RefundPolicyEnum.NO_REFUNDS);
+        map.put("partial-refund", RefundPolicyEnum.PARTIAL_REFUND);
+        map.put("prorated-refund", RefundPolicyEnum.PRORATED_REFUND);
+        map.put("store-credit-only", RefundPolicyEnum.STORE_CREDIT_ONLY);
+        return map;
+    }
+    
+    
+    public enum RefundPolicyEnum {
+
+        CONDITIONAL_REFUND("conditional-refund"),
+        CUSTOM_POLICY("custom-policy"),
+        EVENT_BASED_POLICY("event-based-policy"),
+        FULL_REFUND_EXTENDED_WINDOW("full-refund-extended-window"),
+        FULL_REFUND_WITHIN30_DAYS("full-refund-within-30-days"),
+        NO_REFUNDS("no-refunds"),
+        PARTIAL_REFUND("partial-refund"),
+        PRORATED_REFUND("prorated-refund"),
+        STORE_CREDIT_ONLY("store-credit-only"),;
+
+        private final String value;
+
+        private RefundPolicyEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

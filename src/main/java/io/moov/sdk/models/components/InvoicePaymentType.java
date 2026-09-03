@@ -3,33 +3,125 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum InvoicePaymentType {
-    TRANSFER("transfer"),
-    EXTERNAL("external");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class InvoicePaymentType {
 
-    @JsonValue
+    public static final InvoicePaymentType TRANSFER = new InvoicePaymentType("transfer");
+    public static final InvoicePaymentType EXTERNAL = new InvoicePaymentType("external");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, InvoicePaymentType> values = createValuesMap();
+    private static final Map<String, InvoicePaymentTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    InvoicePaymentType(String value) {
+    private InvoicePaymentType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a InvoicePaymentType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as InvoicePaymentType
+     */ 
+    @JsonCreator
+    public static InvoicePaymentType of(String value) {
+        synchronized (InvoicePaymentType.class) {
+            return values.computeIfAbsent(value, v -> new InvoicePaymentType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<InvoicePaymentType> fromValue(String value) {
-        for (InvoicePaymentType o: InvoicePaymentType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<InvoicePaymentTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        InvoicePaymentType other = (InvoicePaymentType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "InvoicePaymentType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static InvoicePaymentType[] values() {
+        synchronized (InvoicePaymentType.class) {
+            return values.values().toArray(new InvoicePaymentType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, InvoicePaymentType> createValuesMap() {
+        Map<String, InvoicePaymentType> map = new LinkedHashMap<>();
+        map.put("transfer", TRANSFER);
+        map.put("external", EXTERNAL);
+        return map;
+    }
+
+    private static final Map<String, InvoicePaymentTypeEnum> createEnumsMap() {
+        Map<String, InvoicePaymentTypeEnum> map = new HashMap<>();
+        map.put("transfer", InvoicePaymentTypeEnum.TRANSFER);
+        map.put("external", InvoicePaymentTypeEnum.EXTERNAL);
+        return map;
+    }
+    
+    
+    public enum InvoicePaymentTypeEnum {
+
+        TRANSFER("transfer"),
+        EXTERNAL("external"),;
+
+        private final String value;
+
+        private InvoicePaymentTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

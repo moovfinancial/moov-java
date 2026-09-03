@@ -11,6 +11,9 @@ in the `X-Source-System` header on every request.
 import io.moov.sdk.models.components.SourceSystem;
 
 SourceSystem value = SourceSystem.JH_SILVERLAKE;
+
+// Open enum: use .of() to create instances from custom string values
+SourceSystem custom = SourceSystem.of("custom_value");
 ```
 
 

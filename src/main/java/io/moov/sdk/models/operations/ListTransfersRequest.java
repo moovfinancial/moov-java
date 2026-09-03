@@ -82,16 +82,10 @@ public class ListTransfersRequest {
     private Optional<String> foreignID;
 
     /**
-     * Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
+     * Optional comma-separated authorization IDs.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=authorizationIDs")
     private Optional<? extends List<String>> authorizationIDs;
-
-    /**
-     * Optional comma-separated IDs to filter for transfers associated with specific card captures.
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=captureIDs")
-    private Optional<? extends List<String>> captureIDs;
 
     /**
      * Optional, comma-separated transfer types by which the response is filtered.
@@ -103,7 +97,9 @@ public class ListTransfersRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
 
-
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
 
@@ -124,7 +120,6 @@ public class ListTransfersRequest {
             Optional<Boolean> disputed,
             Optional<String> foreignID,
             Optional<? extends List<String>> authorizationIDs,
-            Optional<? extends List<String>> captureIDs,
             Optional<? extends List<TransferType>> transferTypes,
             Optional<Long> skip,
             Optional<Long> count,
@@ -140,7 +135,6 @@ public class ListTransfersRequest {
         Utils.checkNotNull(disputed, "disputed");
         Utils.checkNotNull(foreignID, "foreignID");
         Utils.checkNotNull(authorizationIDs, "authorizationIDs");
-        Utils.checkNotNull(captureIDs, "captureIDs");
         Utils.checkNotNull(transferTypes, "transferTypes");
         Utils.checkNotNull(skip, "skip");
         Utils.checkNotNull(count, "count");
@@ -156,7 +150,6 @@ public class ListTransfersRequest {
         this.disputed = disputed;
         this.foreignID = foreignID;
         this.authorizationIDs = authorizationIDs;
-        this.captureIDs = captureIDs;
         this.transferTypes = transferTypes;
         this.skip = skip;
         this.count = count;
@@ -169,8 +162,7 @@ public class ListTransfersRequest {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            accountID);
+            Optional.empty(), Optional.empty(), accountID);
     }
 
     /**
@@ -257,21 +249,12 @@ public class ListTransfersRequest {
     }
 
     /**
-     * Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
+     * Optional comma-separated authorization IDs.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<String>> authorizationIDs() {
         return (Optional<List<String>>) authorizationIDs;
-    }
-
-    /**
-     * Optional comma-separated IDs to filter for transfers associated with specific card captures.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<String>> captureIDs() {
-        return (Optional<List<String>>) captureIDs;
     }
 
     /**
@@ -288,6 +271,9 @@ public class ListTransfersRequest {
         return skip;
     }
 
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     @JsonIgnore
     public Optional<Long> count() {
         return count;
@@ -496,7 +482,7 @@ public class ListTransfersRequest {
     }
 
     /**
-     * Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
+     * Optional comma-separated authorization IDs.
      */
     public ListTransfersRequest withAuthorizationIDs(List<String> authorizationIDs) {
         Utils.checkNotNull(authorizationIDs, "authorizationIDs");
@@ -506,30 +492,11 @@ public class ListTransfersRequest {
 
 
     /**
-     * Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
+     * Optional comma-separated authorization IDs.
      */
     public ListTransfersRequest withAuthorizationIDs(Optional<? extends List<String>> authorizationIDs) {
         Utils.checkNotNull(authorizationIDs, "authorizationIDs");
         this.authorizationIDs = authorizationIDs;
-        return this;
-    }
-
-    /**
-     * Optional comma-separated IDs to filter for transfers associated with specific card captures.
-     */
-    public ListTransfersRequest withCaptureIDs(List<String> captureIDs) {
-        Utils.checkNotNull(captureIDs, "captureIDs");
-        this.captureIDs = Optional.ofNullable(captureIDs);
-        return this;
-    }
-
-
-    /**
-     * Optional comma-separated IDs to filter for transfers associated with specific card captures.
-     */
-    public ListTransfersRequest withCaptureIDs(Optional<? extends List<String>> captureIDs) {
-        Utils.checkNotNull(captureIDs, "captureIDs");
-        this.captureIDs = captureIDs;
         return this;
     }
 
@@ -565,6 +532,9 @@ public class ListTransfersRequest {
         return this;
     }
 
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     public ListTransfersRequest withCount(long count) {
         Utils.checkNotNull(count, "count");
         this.count = Optional.ofNullable(count);
@@ -572,6 +542,9 @@ public class ListTransfersRequest {
     }
 
 
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     public ListTransfersRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
         this.count = count;
@@ -605,7 +578,6 @@ public class ListTransfersRequest {
             Utils.enhancedDeepEquals(this.disputed, other.disputed) &&
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
             Utils.enhancedDeepEquals(this.authorizationIDs, other.authorizationIDs) &&
-            Utils.enhancedDeepEquals(this.captureIDs, other.captureIDs) &&
             Utils.enhancedDeepEquals(this.transferTypes, other.transferTypes) &&
             Utils.enhancedDeepEquals(this.skip, other.skip) &&
             Utils.enhancedDeepEquals(this.count, other.count) &&
@@ -618,9 +590,8 @@ public class ListTransfersRequest {
             accountIDs, status, startDateTime,
             endDateTime, groupID, scheduleID,
             paymentLinkCode, refunded, disputed,
-            foreignID, authorizationIDs, captureIDs,
-            transferTypes, skip, count,
-            accountID);
+            foreignID, authorizationIDs, transferTypes,
+            skip, count, accountID);
     }
     
     @Override
@@ -637,7 +608,6 @@ public class ListTransfersRequest {
                 "disputed", disputed,
                 "foreignID", foreignID,
                 "authorizationIDs", authorizationIDs,
-                "captureIDs", captureIDs,
                 "transferTypes", transferTypes,
                 "skip", skip,
                 "count", count,
@@ -668,8 +638,6 @@ public class ListTransfersRequest {
         private Optional<String> foreignID = Optional.empty();
 
         private Optional<? extends List<String>> authorizationIDs = Optional.empty();
-
-        private Optional<? extends List<String>> captureIDs = Optional.empty();
 
         private Optional<? extends List<TransferType>> transferTypes = Optional.empty();
 
@@ -877,7 +845,7 @@ public class ListTransfersRequest {
 
 
         /**
-         * Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
+         * Optional comma-separated authorization IDs.
          */
         public Builder authorizationIDs(List<String> authorizationIDs) {
             Utils.checkNotNull(authorizationIDs, "authorizationIDs");
@@ -886,30 +854,11 @@ public class ListTransfersRequest {
         }
 
         /**
-         * Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
+         * Optional comma-separated authorization IDs.
          */
         public Builder authorizationIDs(Optional<? extends List<String>> authorizationIDs) {
             Utils.checkNotNull(authorizationIDs, "authorizationIDs");
             this.authorizationIDs = authorizationIDs;
-            return this;
-        }
-
-
-        /**
-         * Optional comma-separated IDs to filter for transfers associated with specific card captures.
-         */
-        public Builder captureIDs(List<String> captureIDs) {
-            Utils.checkNotNull(captureIDs, "captureIDs");
-            this.captureIDs = Optional.ofNullable(captureIDs);
-            return this;
-        }
-
-        /**
-         * Optional comma-separated IDs to filter for transfers associated with specific card captures.
-         */
-        public Builder captureIDs(Optional<? extends List<String>> captureIDs) {
-            Utils.checkNotNull(captureIDs, "captureIDs");
-            this.captureIDs = captureIDs;
             return this;
         }
 
@@ -946,12 +895,18 @@ public class ListTransfersRequest {
         }
 
 
+        /**
+         * Page size. When omitted, the server defaults to `200`.
+         */
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
             return this;
         }
 
+        /**
+         * Page size. When omitted, the server defaults to `200`.
+         */
         public Builder count(Optional<Long> count) {
             Utils.checkNotNull(count, "count");
             this.count = count;
@@ -971,9 +926,8 @@ public class ListTransfersRequest {
                 accountIDs, status, startDateTime,
                 endDateTime, groupID, scheduleID,
                 paymentLinkCode, refunded, disputed,
-                foreignID, authorizationIDs, captureIDs,
-                transferTypes, skip, count,
-                accountID);
+                foreignID, authorizationIDs, transferTypes,
+                skip, count, accountID);
         }
 
     }

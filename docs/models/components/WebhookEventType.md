@@ -8,6 +8,9 @@ The type of event that occurred.
 import io.moov.sdk.models.components.WebhookEventType;
 
 WebhookEventType value = WebhookEventType.WILDCARD;
+
+// Open enum: use .of() to create instances from custom string values
+WebhookEventType custom = WebhookEventType.of("custom_value");
 ```
 
 
@@ -23,6 +26,7 @@ WebhookEventType value = WebhookEventType.WILDCARD;
 | `BANK_ACCOUNT_CREATED`         | bankAccount.created            |
 | `BANK_ACCOUNT_UPDATED`         | bankAccount.updated            |
 | `BANK_ACCOUNT_DELETED`         | bankAccount.deleted            |
+| `CAPTURE_UPDATED`              | capture.updated                |
 | `CANCELLATION_CREATED`         | cancellation.created           |
 | `CANCELLATION_UPDATED`         | cancellation.updated           |
 | `CARD_AUTO_UPDATED`            | card.autoUpdated               |

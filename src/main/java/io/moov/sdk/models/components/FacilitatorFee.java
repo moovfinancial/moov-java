@@ -9,9 +9,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
-import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 /**
@@ -21,98 +21,49 @@ import java.util.Optional;
  */
 public class FacilitatorFee {
     /**
-     * Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set.
+     * Total facilitator fee.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("total")
-    private Optional<Long> total;
+    private Optional<? extends AmountDecimal> total;
 
     /**
-     * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place
-     * precision.
-     * 
-     * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in
-     * fractions of a cent.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("totalDecimal")
-    private Optional<String> totalDecimal;
-
-    /**
-     * Markup facilitator fee in cents. Only either `markup` or `markupDecimal` can be set.
+     * Markup facilitator fee.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("markup")
-    private Optional<Long> markup;
-
-    /**
-     * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place
-     * precision.
-     * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in
-     * fractions of a cent.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("markupDecimal")
-    private Optional<String> markupDecimal;
+    private Optional<? extends AmountDecimal> markup;
 
     @JsonCreator
     public FacilitatorFee(
-            @JsonProperty("total") Optional<Long> total,
-            @JsonProperty("totalDecimal") Optional<String> totalDecimal,
-            @JsonProperty("markup") Optional<Long> markup,
-            @JsonProperty("markupDecimal") Optional<String> markupDecimal) {
+            @JsonProperty("total") Optional<? extends AmountDecimal> total,
+            @JsonProperty("markup") Optional<? extends AmountDecimal> markup) {
         Utils.checkNotNull(total, "total");
-        Utils.checkNotNull(totalDecimal, "totalDecimal");
         Utils.checkNotNull(markup, "markup");
-        Utils.checkNotNull(markupDecimal, "markupDecimal");
         this.total = total;
-        this.totalDecimal = totalDecimal;
         this.markup = markup;
-        this.markupDecimal = markupDecimal;
     }
     
     public FacilitatorFee() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+        this(Optional.empty(), Optional.empty());
     }
 
     /**
-     * Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set.
+     * Total facilitator fee.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Long> total() {
-        return total;
+    public Optional<AmountDecimal> total() {
+        return (Optional<AmountDecimal>) total;
     }
 
     /**
-     * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place
-     * precision.
-     * 
-     * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in
-     * fractions of a cent.
+     * Markup facilitator fee.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> totalDecimal() {
-        return totalDecimal;
-    }
-
-    /**
-     * Markup facilitator fee in cents. Only either `markup` or `markupDecimal` can be set.
-     */
-    @JsonIgnore
-    public Optional<Long> markup() {
-        return markup;
-    }
-
-    /**
-     * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place
-     * precision.
-     * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in
-     * fractions of a cent.
-     */
-    @JsonIgnore
-    public Optional<String> markupDecimal() {
-        return markupDecimal;
+    public Optional<AmountDecimal> markup() {
+        return (Optional<AmountDecimal>) markup;
     }
 
     public static Builder builder() {
@@ -121,9 +72,9 @@ public class FacilitatorFee {
 
 
     /**
-     * Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set.
+     * Total facilitator fee.
      */
-    public FacilitatorFee withTotal(long total) {
+    public FacilitatorFee withTotal(AmountDecimal total) {
         Utils.checkNotNull(total, "total");
         this.total = Optional.ofNullable(total);
         return this;
@@ -131,45 +82,18 @@ public class FacilitatorFee {
 
 
     /**
-     * Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set.
+     * Total facilitator fee.
      */
-    public FacilitatorFee withTotal(Optional<Long> total) {
+    public FacilitatorFee withTotal(Optional<? extends AmountDecimal> total) {
         Utils.checkNotNull(total, "total");
         this.total = total;
         return this;
     }
 
     /**
-     * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place
-     * precision.
-     * 
-     * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in
-     * fractions of a cent.
+     * Markup facilitator fee.
      */
-    public FacilitatorFee withTotalDecimal(String totalDecimal) {
-        Utils.checkNotNull(totalDecimal, "totalDecimal");
-        this.totalDecimal = Optional.ofNullable(totalDecimal);
-        return this;
-    }
-
-
-    /**
-     * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place
-     * precision.
-     * 
-     * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in
-     * fractions of a cent.
-     */
-    public FacilitatorFee withTotalDecimal(Optional<String> totalDecimal) {
-        Utils.checkNotNull(totalDecimal, "totalDecimal");
-        this.totalDecimal = totalDecimal;
-        return this;
-    }
-
-    /**
-     * Markup facilitator fee in cents. Only either `markup` or `markupDecimal` can be set.
-     */
-    public FacilitatorFee withMarkup(long markup) {
+    public FacilitatorFee withMarkup(AmountDecimal markup) {
         Utils.checkNotNull(markup, "markup");
         this.markup = Optional.ofNullable(markup);
         return this;
@@ -177,36 +101,11 @@ public class FacilitatorFee {
 
 
     /**
-     * Markup facilitator fee in cents. Only either `markup` or `markupDecimal` can be set.
+     * Markup facilitator fee.
      */
-    public FacilitatorFee withMarkup(Optional<Long> markup) {
+    public FacilitatorFee withMarkup(Optional<? extends AmountDecimal> markup) {
         Utils.checkNotNull(markup, "markup");
         this.markup = markup;
-        return this;
-    }
-
-    /**
-     * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place
-     * precision.
-     * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in
-     * fractions of a cent.
-     */
-    public FacilitatorFee withMarkupDecimal(String markupDecimal) {
-        Utils.checkNotNull(markupDecimal, "markupDecimal");
-        this.markupDecimal = Optional.ofNullable(markupDecimal);
-        return this;
-    }
-
-
-    /**
-     * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place
-     * precision.
-     * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in
-     * fractions of a cent.
-     */
-    public FacilitatorFee withMarkupDecimal(Optional<String> markupDecimal) {
-        Utils.checkNotNull(markupDecimal, "markupDecimal");
-        this.markupDecimal = markupDecimal;
         return this;
     }
 
@@ -221,37 +120,28 @@ public class FacilitatorFee {
         FacilitatorFee other = (FacilitatorFee) o;
         return 
             Utils.enhancedDeepEquals(this.total, other.total) &&
-            Utils.enhancedDeepEquals(this.totalDecimal, other.totalDecimal) &&
-            Utils.enhancedDeepEquals(this.markup, other.markup) &&
-            Utils.enhancedDeepEquals(this.markupDecimal, other.markupDecimal);
+            Utils.enhancedDeepEquals(this.markup, other.markup);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            total, totalDecimal, markup,
-            markupDecimal);
+            total, markup);
     }
     
     @Override
     public String toString() {
         return Utils.toString(FacilitatorFee.class,
                 "total", total,
-                "totalDecimal", totalDecimal,
-                "markup", markup,
-                "markupDecimal", markupDecimal);
+                "markup", markup);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<Long> total = Optional.empty();
+        private Optional<? extends AmountDecimal> total = Optional.empty();
 
-        private Optional<String> totalDecimal = Optional.empty();
-
-        private Optional<Long> markup = Optional.empty();
-
-        private Optional<String> markupDecimal = Optional.empty();
+        private Optional<? extends AmountDecimal> markup = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -259,18 +149,18 @@ public class FacilitatorFee {
 
 
         /**
-         * Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set.
+         * Total facilitator fee.
          */
-        public Builder total(long total) {
+        public Builder total(AmountDecimal total) {
             Utils.checkNotNull(total, "total");
             this.total = Optional.ofNullable(total);
             return this;
         }
 
         /**
-         * Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set.
+         * Total facilitator fee.
          */
-        public Builder total(Optional<Long> total) {
+        public Builder total(Optional<? extends AmountDecimal> total) {
             Utils.checkNotNull(total, "total");
             this.total = total;
             return this;
@@ -278,80 +168,27 @@ public class FacilitatorFee {
 
 
         /**
-         * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place
-         * precision.
-         * 
-         * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in
-         * fractions of a cent.
+         * Markup facilitator fee.
          */
-        public Builder totalDecimal(String totalDecimal) {
-            Utils.checkNotNull(totalDecimal, "totalDecimal");
-            this.totalDecimal = Optional.ofNullable(totalDecimal);
-            return this;
-        }
-
-        /**
-         * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place
-         * precision.
-         * 
-         * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in
-         * fractions of a cent.
-         */
-        public Builder totalDecimal(Optional<String> totalDecimal) {
-            Utils.checkNotNull(totalDecimal, "totalDecimal");
-            this.totalDecimal = totalDecimal;
-            return this;
-        }
-
-
-        /**
-         * Markup facilitator fee in cents. Only either `markup` or `markupDecimal` can be set.
-         */
-        public Builder markup(long markup) {
+        public Builder markup(AmountDecimal markup) {
             Utils.checkNotNull(markup, "markup");
             this.markup = Optional.ofNullable(markup);
             return this;
         }
 
         /**
-         * Markup facilitator fee in cents. Only either `markup` or `markupDecimal` can be set.
+         * Markup facilitator fee.
          */
-        public Builder markup(Optional<Long> markup) {
+        public Builder markup(Optional<? extends AmountDecimal> markup) {
             Utils.checkNotNull(markup, "markup");
             this.markup = markup;
-            return this;
-        }
-
-
-        /**
-         * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place
-         * precision.
-         * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in
-         * fractions of a cent.
-         */
-        public Builder markupDecimal(String markupDecimal) {
-            Utils.checkNotNull(markupDecimal, "markupDecimal");
-            this.markupDecimal = Optional.ofNullable(markupDecimal);
-            return this;
-        }
-
-        /**
-         * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place
-         * precision.
-         * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in
-         * fractions of a cent.
-         */
-        public Builder markupDecimal(Optional<String> markupDecimal) {
-            Utils.checkNotNull(markupDecimal, "markupDecimal");
-            this.markupDecimal = markupDecimal;
             return this;
         }
 
         public FacilitatorFee build() {
 
             return new FacilitatorFee(
-                total, totalDecimal, markup,
-                markupDecimal);
+                total, markup);
         }
 
     }

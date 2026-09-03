@@ -16,7 +16,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-
+/**
+ * PaymentLinkPayoutDetails
+ * 
+ * <p>Options for payout links used to send a payout.
+ */
 public class PaymentLinkPayoutDetails {
     /**
      * A list of payment methods that should be supported for this payment link.
@@ -41,22 +45,19 @@ public class PaymentLinkPayoutDetails {
     private Optional<? extends Map<String, String>> metadata;
 
     /**
-     * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-     * `push-to-card`.
-     * 
-     * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-     * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-     * options.
+     * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pushOptions")
     private Optional<? extends PushOptions> pushOptions;
 
     /**
-     * Indicates which party bears the fee, keyed by disbursement payment method
-     * (`DisbursementPaymentMethodType`).
+     * Indicates which party pays the fee, keyed by `PayoutFeePaidByKey`. If keys are not set,
+     * the default is `source`.
      * 
-     * <p>Sparse — include only the methods you want to attribute. Any method left unset defaults to `source`.
+     * <p>Possible `PayoutFeePaidByKey` keys: `instant-push-to-card`, `deferred-push-to-card`,
+     * `instant-push-to-apple-pay`, `deferred-push-to-apple-pay`, `instant-bank-credit` (API v2026.01.00
+     * and later), `rtp-credit`, `ach-credit-same-day`, `ach-credit-standard`, `push-to-google-pay`
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("feePaidBy")
@@ -117,12 +118,7 @@ public class PaymentLinkPayoutDetails {
     }
 
     /**
-     * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-     * `push-to-card`.
-     * 
-     * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-     * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-     * options.
+     * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -131,10 +127,12 @@ public class PaymentLinkPayoutDetails {
     }
 
     /**
-     * Indicates which party bears the fee, keyed by disbursement payment method
-     * (`DisbursementPaymentMethodType`).
+     * Indicates which party pays the fee, keyed by `PayoutFeePaidByKey`. If keys are not set,
+     * the default is `source`.
      * 
-     * <p>Sparse — include only the methods you want to attribute. Any method left unset defaults to `source`.
+     * <p>Possible `PayoutFeePaidByKey` keys: `instant-push-to-card`, `deferred-push-to-card`,
+     * `instant-push-to-apple-pay`, `deferred-push-to-apple-pay`, `instant-bank-credit` (API v2026.01.00
+     * and later), `rtp-credit`, `ach-credit-same-day`, `ach-credit-standard`, `push-to-google-pay`
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -188,12 +186,7 @@ public class PaymentLinkPayoutDetails {
     }
 
     /**
-     * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-     * `push-to-card`.
-     * 
-     * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-     * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-     * options.
+     * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
      */
     public PaymentLinkPayoutDetails withPushOptions(PushOptions pushOptions) {
         Utils.checkNotNull(pushOptions, "pushOptions");
@@ -203,12 +196,7 @@ public class PaymentLinkPayoutDetails {
 
 
     /**
-     * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-     * `push-to-card`.
-     * 
-     * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-     * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-     * options.
+     * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
      */
     public PaymentLinkPayoutDetails withPushOptions(Optional<? extends PushOptions> pushOptions) {
         Utils.checkNotNull(pushOptions, "pushOptions");
@@ -217,10 +205,12 @@ public class PaymentLinkPayoutDetails {
     }
 
     /**
-     * Indicates which party bears the fee, keyed by disbursement payment method
-     * (`DisbursementPaymentMethodType`).
+     * Indicates which party pays the fee, keyed by `PayoutFeePaidByKey`. If keys are not set,
+     * the default is `source`.
      * 
-     * <p>Sparse — include only the methods you want to attribute. Any method left unset defaults to `source`.
+     * <p>Possible `PayoutFeePaidByKey` keys: `instant-push-to-card`, `deferred-push-to-card`,
+     * `instant-push-to-apple-pay`, `deferred-push-to-apple-pay`, `instant-bank-credit` (API v2026.01.00
+     * and later), `rtp-credit`, `ach-credit-same-day`, `ach-credit-standard`, `push-to-google-pay`
      */
     public PaymentLinkPayoutDetails withFeePaidBy(Map<String, FeePaidBy> feePaidBy) {
         Utils.checkNotNull(feePaidBy, "feePaidBy");
@@ -230,10 +220,12 @@ public class PaymentLinkPayoutDetails {
 
 
     /**
-     * Indicates which party bears the fee, keyed by disbursement payment method
-     * (`DisbursementPaymentMethodType`).
+     * Indicates which party pays the fee, keyed by `PayoutFeePaidByKey`. If keys are not set,
+     * the default is `source`.
      * 
-     * <p>Sparse — include only the methods you want to attribute. Any method left unset defaults to `source`.
+     * <p>Possible `PayoutFeePaidByKey` keys: `instant-push-to-card`, `deferred-push-to-card`,
+     * `instant-push-to-apple-pay`, `deferred-push-to-apple-pay`, `instant-bank-credit` (API v2026.01.00
+     * and later), `rtp-credit`, `ach-credit-same-day`, `ach-credit-standard`, `push-to-google-pay`
      */
     public PaymentLinkPayoutDetails withFeePaidBy(Optional<? extends Map<String, FeePaidBy>> feePaidBy) {
         Utils.checkNotNull(feePaidBy, "feePaidBy");
@@ -336,12 +328,7 @@ public class PaymentLinkPayoutDetails {
 
 
         /**
-         * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-         * `push-to-card`.
-         * 
-         * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-         * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-         * options.
+         * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
          */
         public Builder pushOptions(PushOptions pushOptions) {
             Utils.checkNotNull(pushOptions, "pushOptions");
@@ -350,12 +337,7 @@ public class PaymentLinkPayoutDetails {
         }
 
         /**
-         * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-         * `push-to-card`.
-         * 
-         * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-         * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-         * options.
+         * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
          */
         public Builder pushOptions(Optional<? extends PushOptions> pushOptions) {
             Utils.checkNotNull(pushOptions, "pushOptions");
@@ -365,10 +347,12 @@ public class PaymentLinkPayoutDetails {
 
 
         /**
-         * Indicates which party bears the fee, keyed by disbursement payment method
-         * (`DisbursementPaymentMethodType`).
+         * Indicates which party pays the fee, keyed by `PayoutFeePaidByKey`. If keys are not set,
+         * the default is `source`.
          * 
-         * <p>Sparse — include only the methods you want to attribute. Any method left unset defaults to `source`.
+         * <p>Possible `PayoutFeePaidByKey` keys: `instant-push-to-card`, `deferred-push-to-card`,
+         * `instant-push-to-apple-pay`, `deferred-push-to-apple-pay`, `instant-bank-credit` (API v2026.01.00
+         * and later), `rtp-credit`, `ach-credit-same-day`, `ach-credit-standard`, `push-to-google-pay`
          */
         public Builder feePaidBy(Map<String, FeePaidBy> feePaidBy) {
             Utils.checkNotNull(feePaidBy, "feePaidBy");
@@ -377,10 +361,12 @@ public class PaymentLinkPayoutDetails {
         }
 
         /**
-         * Indicates which party bears the fee, keyed by disbursement payment method
-         * (`DisbursementPaymentMethodType`).
+         * Indicates which party pays the fee, keyed by `PayoutFeePaidByKey`. If keys are not set,
+         * the default is `source`.
          * 
-         * <p>Sparse — include only the methods you want to attribute. Any method left unset defaults to `source`.
+         * <p>Possible `PayoutFeePaidByKey` keys: `instant-push-to-card`, `deferred-push-to-card`,
+         * `instant-push-to-apple-pay`, `deferred-push-to-apple-pay`, `instant-bank-credit` (API v2026.01.00
+         * and later), `rtp-credit`, `ach-credit-same-day`, `ach-credit-standard`, `push-to-google-pay`
          */
         public Builder feePaidBy(Optional<? extends Map<String, FeePaidBy>> feePaidBy) {
             Utils.checkNotNull(feePaidBy, "feePaidBy");

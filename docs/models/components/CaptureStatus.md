@@ -6,6 +6,9 @@
 import io.moov.sdk.models.components.CaptureStatus;
 
 CaptureStatus value = CaptureStatus.PENDING;
+
+// Open enum: use .of() to create instances from custom string values
+CaptureStatus custom = CaptureStatus.of("custom_value");
 ```
 
 
@@ -14,8 +17,6 @@ CaptureStatus value = CaptureStatus.PENDING;
 | Name        | Value       |
 | ----------- | ----------- |
 | `PENDING`   | pending     |
-| `SUBMITTED` | submitted   |
-| `SETTLED`   | settled     |
 | `COMPLETED` | completed   |
 | `FAILED`    | failed      |
 | `CANCELED`  | canceled    |

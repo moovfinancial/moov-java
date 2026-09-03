@@ -6,7 +6,7 @@
 
 * [list](#list) - List metadata for all images in the specified account.
 * [upload](#upload) -   Upload a new PNG, JPEG, or WebP image with optional metadata. 
-  Duplicate images, and requests larger than 16MB will be rejected.
+  Duplicate images return the existing image's metadata with a 409 status. Requests larger than 16MB will be rejected.
 * [getMetadata](#getmetadata) - Retrieve metadata for a specific image by its ID.
 * [update](#update) - Replace an existing image and, optionally, its metadata.
 
@@ -79,7 +79,7 @@ public class Application {
 ## upload
 
   Upload a new PNG, JPEG, or WebP image with optional metadata. 
-  Duplicate images, and requests larger than 16MB will be rejected.
+  Duplicate images return the existing image's metadata with a 409 status. Requests larger than 16MB will be rejected.
 
 ### Example Usage
 
@@ -89,8 +89,7 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.*;
-import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.ImageRequestValidationError;
+import io.moov.sdk.models.errors.*;
 import io.moov.sdk.models.operations.UploadImageResponse;
 import io.moov.sdk.utils.Utils;
 import java.io.FileInputStream;
@@ -98,7 +97,7 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws GenericError, ImageRequestValidationError, Exception {
+    public static void main(String[] args) throws GenericError, ImageMetadata, ImageRequestValidationError, Exception {
 
         Moov sdk = Moov.builder()
                 .security(Security.builder()
@@ -136,7 +135,8 @@ public class Application {
 
 | Error Type                                | Status Code                               | Content Type                              |
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| models/errors/GenericError                | 400, 409                                  | application/json                          |
+| models/errors/GenericError                | 400                                       | application/json                          |
+| models/errors/ImageMetadata               | 409                                       | application/json                          |
 | models/errors/ImageRequestValidationError | 422                                       | application/json                          |
 | models/errors/APIException                | 4XX, 5XX                                  | \*/\*                                     |
 

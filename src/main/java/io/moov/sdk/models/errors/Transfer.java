@@ -119,6 +119,14 @@ public class Transfer extends MoovError {
         return data().flatMap(Data::failureReason);
     }
 
+    /**
+     * Amount associated with this transfer.
+     * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+     * amount until a final capture is created.
+     * For these transfers, when a final capture is created, this is updated to the cumulative captured
+     * amount.
+     * For other transfer types, this is the transfer amount.
+     */
     @Deprecated
     public Optional<AmountDecimal> amount() {
         return data().map(Data::amount);
@@ -240,6 +248,10 @@ public class Transfer extends MoovError {
         return data().flatMap(Data::amountDetails);
     }
 
+    /**
+     * Authorization amounts.
+     * This field is present only for an auth-capture `card-payment` transfer.
+     */
     @Deprecated
     public Optional<TransferAuthorization> authorization() {
         return data().flatMap(Data::authorization);
@@ -311,7 +323,14 @@ public class Transfer extends MoovError {
         @JsonProperty("failureReason")
         private Optional<? extends TransferFailureReason> failureReason;
 
-
+        /**
+         * Amount associated with this transfer.
+         * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+         * amount until a final capture is created.
+         * For these transfers, when a final capture is created, this is updated to the cumulative captured
+         * amount.
+         * For other transfer types, this is the transfer amount.
+         */
         @JsonProperty("amount")
         private AmountDecimal amount;
 
@@ -421,7 +440,10 @@ public class Transfer extends MoovError {
         @JsonProperty("amountDetails")
         private Optional<? extends TransferAmountDetails> amountDetails;
 
-
+        /**
+         * Authorization amounts.
+         * This field is present only for an auth-capture `card-payment` transfer.
+         */
         @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("authorization")
         private Optional<? extends TransferAuthorization> authorization;
@@ -597,6 +619,14 @@ public class Transfer extends MoovError {
             return (Optional<TransferFailureReason>) failureReason;
         }
 
+        /**
+         * Amount associated with this transfer.
+         * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+         * amount until a final capture is created.
+         * For these transfers, when a final capture is created, this is updated to the cumulative captured
+         * amount.
+         * For other transfer types, this is the transfer amount.
+         */
         @JsonIgnore
         public AmountDecimal amount() {
             return amount;
@@ -727,6 +757,10 @@ public class Transfer extends MoovError {
             return (Optional<TransferAmountDetails>) amountDetails;
         }
 
+        /**
+         * Authorization amounts.
+         * This field is present only for an auth-capture `card-payment` transfer.
+         */
         @SuppressWarnings("unchecked")
         @JsonIgnore
         public Optional<TransferAuthorization> authorization() {
@@ -822,6 +856,14 @@ public class Transfer extends MoovError {
             return this;
         }
 
+        /**
+         * Amount associated with this transfer.
+         * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+         * amount until a final capture is created.
+         * For these transfers, when a final capture is created, this is updated to the cumulative captured
+         * amount.
+         * For other transfer types, this is the transfer amount.
+         */
         public Data withAmount(AmountDecimal amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
@@ -1111,6 +1153,10 @@ public class Transfer extends MoovError {
             return this;
         }
 
+        /**
+         * Authorization amounts.
+         * This field is present only for an auth-capture `card-payment` transfer.
+         */
         public Data withAuthorization(TransferAuthorization authorization) {
             Utils.checkNotNull(authorization, "authorization");
             this.authorization = Optional.ofNullable(authorization);
@@ -1118,6 +1164,10 @@ public class Transfer extends MoovError {
         }
 
 
+        /**
+         * Authorization amounts.
+         * This field is present only for an auth-capture `card-payment` transfer.
+         */
         public Data withAuthorization(Optional<? extends TransferAuthorization> authorization) {
             Utils.checkNotNull(authorization, "authorization");
             this.authorization = authorization;
@@ -1372,6 +1422,14 @@ public class Transfer extends MoovError {
             }
 
 
+            /**
+             * Amount associated with this transfer.
+             * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+             * amount until a final capture is created.
+             * For these transfers, when a final capture is created, this is updated to the cumulative captured
+             * amount.
+             * For other transfer types, this is the transfer amount.
+             */
             public Builder amount(AmountDecimal amount) {
                 Utils.checkNotNull(amount, "amount");
                 this.amount = amount;
@@ -1662,12 +1720,20 @@ public class Transfer extends MoovError {
             }
 
 
+            /**
+             * Authorization amounts.
+             * This field is present only for an auth-capture `card-payment` transfer.
+             */
             public Builder authorization(TransferAuthorization authorization) {
                 Utils.checkNotNull(authorization, "authorization");
                 this.authorization = Optional.ofNullable(authorization);
                 return this;
             }
 
+            /**
+             * Authorization amounts.
+             * This field is present only for an auth-capture `card-payment` transfer.
+             */
             public Builder authorization(Optional<? extends TransferAuthorization> authorization) {
                 Utils.checkNotNull(authorization, "authorization");
                 this.authorization = authorization;

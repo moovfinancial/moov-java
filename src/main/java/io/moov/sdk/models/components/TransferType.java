@@ -3,44 +3,158 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * TransferType
  * 
  * <p>The rail and direction used to move funds for a transfer.
  */
-public enum TransferType {
-    CARD_PAYMENT("card-payment"),
-    PUSH_TO_CARD("push-to-card"),
-    PULL_FROM_CARD("pull-from-card"),
-    ACH_DEBIT("ach-debit"),
-    ACH_CREDIT("ach-credit"),
-    ACH_DEBIT_TO_ACH_CREDIT("ach-debit-to-ach-credit"),
-    INSTANT_BANK_CREDIT("instant-bank-credit"),
-    WALLET("wallet");
+public class TransferType {
 
-    @JsonValue
+    public static final TransferType CARD_PAYMENT = new TransferType("card-payment");
+    public static final TransferType PUSH_TO_CARD = new TransferType("push-to-card");
+    public static final TransferType PULL_FROM_CARD = new TransferType("pull-from-card");
+    public static final TransferType ACH_DEBIT = new TransferType("ach-debit");
+    public static final TransferType ACH_CREDIT = new TransferType("ach-credit");
+    public static final TransferType ACH_DEBIT_TO_ACH_CREDIT = new TransferType("ach-debit-to-ach-credit");
+    public static final TransferType INSTANT_BANK_CREDIT = new TransferType("instant-bank-credit");
+    public static final TransferType WALLET = new TransferType("wallet");
+    public static final TransferType WIRE_CREDIT = new TransferType("wire-credit");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, TransferType> values = createValuesMap();
+    private static final Map<String, TransferTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    TransferType(String value) {
+    private TransferType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a TransferType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as TransferType
+     */ 
+    @JsonCreator
+    public static TransferType of(String value) {
+        synchronized (TransferType.class) {
+            return values.computeIfAbsent(value, v -> new TransferType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<TransferType> fromValue(String value) {
-        for (TransferType o: TransferType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<TransferTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        TransferType other = (TransferType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "TransferType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static TransferType[] values() {
+        synchronized (TransferType.class) {
+            return values.values().toArray(new TransferType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, TransferType> createValuesMap() {
+        Map<String, TransferType> map = new LinkedHashMap<>();
+        map.put("card-payment", CARD_PAYMENT);
+        map.put("push-to-card", PUSH_TO_CARD);
+        map.put("pull-from-card", PULL_FROM_CARD);
+        map.put("ach-debit", ACH_DEBIT);
+        map.put("ach-credit", ACH_CREDIT);
+        map.put("ach-debit-to-ach-credit", ACH_DEBIT_TO_ACH_CREDIT);
+        map.put("instant-bank-credit", INSTANT_BANK_CREDIT);
+        map.put("wallet", WALLET);
+        map.put("wire-credit", WIRE_CREDIT);
+        return map;
+    }
+
+    private static final Map<String, TransferTypeEnum> createEnumsMap() {
+        Map<String, TransferTypeEnum> map = new HashMap<>();
+        map.put("card-payment", TransferTypeEnum.CARD_PAYMENT);
+        map.put("push-to-card", TransferTypeEnum.PUSH_TO_CARD);
+        map.put("pull-from-card", TransferTypeEnum.PULL_FROM_CARD);
+        map.put("ach-debit", TransferTypeEnum.ACH_DEBIT);
+        map.put("ach-credit", TransferTypeEnum.ACH_CREDIT);
+        map.put("ach-debit-to-ach-credit", TransferTypeEnum.ACH_DEBIT_TO_ACH_CREDIT);
+        map.put("instant-bank-credit", TransferTypeEnum.INSTANT_BANK_CREDIT);
+        map.put("wallet", TransferTypeEnum.WALLET);
+        map.put("wire-credit", TransferTypeEnum.WIRE_CREDIT);
+        return map;
+    }
+    
+    
+    public enum TransferTypeEnum {
+
+        CARD_PAYMENT("card-payment"),
+        PUSH_TO_CARD("push-to-card"),
+        PULL_FROM_CARD("pull-from-card"),
+        ACH_DEBIT("ach-debit"),
+        ACH_CREDIT("ach-credit"),
+        ACH_DEBIT_TO_ACH_CREDIT("ach-debit-to-ach-credit"),
+        INSTANT_BANK_CREDIT("instant-bank-credit"),
+        WALLET("wallet"),
+        WIRE_CREDIT("wire-credit"),;
+
+        private final String value;
+
+        private TransferTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

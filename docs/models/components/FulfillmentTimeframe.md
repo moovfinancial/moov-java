@@ -6,6 +6,9 @@
 import io.moov.sdk.models.components.FulfillmentTimeframe;
 
 FulfillmentTimeframe value = FulfillmentTimeframe.IMMEDIATE;
+
+// Open enum: use .of() to create instances from custom string values
+FulfillmentTimeframe custom = FulfillmentTimeframe.of("custom_value");
 ```
 
 

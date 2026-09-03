@@ -29,6 +29,9 @@ The return code of an ACH transaction that caused the bank account status to cha
 import io.moov.sdk.models.components.ACHReturnCode;
 
 ACHReturnCode value = ACHReturnCode.R02;
+
+// Open enum: use .of() to create instances from custom string values
+ACHReturnCode custom = ACHReturnCode.of("custom_value");
 ```
 
 

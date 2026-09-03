@@ -8,6 +8,9 @@ The authentication method used for the Google Pay token.
 import io.moov.sdk.models.components.AuthMethod;
 
 AuthMethod value = AuthMethod.PAN_ONLY;
+
+// Open enum: use .of() to create instances from custom string values
+AuthMethod custom = AuthMethod.of("custom_value");
 ```
 
 

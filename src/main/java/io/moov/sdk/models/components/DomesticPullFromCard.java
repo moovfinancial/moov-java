@@ -3,39 +3,134 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * DomesticPullFromCard
  * 
  * <p>Indicates if the card supports domestic pull-from-card transfer.
  */
-public enum DomesticPullFromCard {
-    NOT_SUPPORTED("not-supported"),
-    SUPPORTED("supported"),
-    UNKNOWN("unknown");
+public class DomesticPullFromCard {
 
-    @JsonValue
+    public static final DomesticPullFromCard NOT_SUPPORTED = new DomesticPullFromCard("not-supported");
+    public static final DomesticPullFromCard SUPPORTED = new DomesticPullFromCard("supported");
+    public static final DomesticPullFromCard UNKNOWN = new DomesticPullFromCard("unknown");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, DomesticPullFromCard> values = createValuesMap();
+    private static final Map<String, DomesticPullFromCardEnum> enums = createEnumsMap();
+
     private final String value;
 
-    DomesticPullFromCard(String value) {
+    private DomesticPullFromCard(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a DomesticPullFromCard with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as DomesticPullFromCard
+     */ 
+    @JsonCreator
+    public static DomesticPullFromCard of(String value) {
+        synchronized (DomesticPullFromCard.class) {
+            return values.computeIfAbsent(value, v -> new DomesticPullFromCard(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<DomesticPullFromCard> fromValue(String value) {
-        for (DomesticPullFromCard o: DomesticPullFromCard.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<DomesticPullFromCardEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DomesticPullFromCard other = (DomesticPullFromCard) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "DomesticPullFromCard [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static DomesticPullFromCard[] values() {
+        synchronized (DomesticPullFromCard.class) {
+            return values.values().toArray(new DomesticPullFromCard[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, DomesticPullFromCard> createValuesMap() {
+        Map<String, DomesticPullFromCard> map = new LinkedHashMap<>();
+        map.put("not-supported", NOT_SUPPORTED);
+        map.put("supported", SUPPORTED);
+        map.put("unknown", UNKNOWN);
+        return map;
+    }
+
+    private static final Map<String, DomesticPullFromCardEnum> createEnumsMap() {
+        Map<String, DomesticPullFromCardEnum> map = new HashMap<>();
+        map.put("not-supported", DomesticPullFromCardEnum.NOT_SUPPORTED);
+        map.put("supported", DomesticPullFromCardEnum.SUPPORTED);
+        map.put("unknown", DomesticPullFromCardEnum.UNKNOWN);
+        return map;
+    }
+    
+    
+    public enum DomesticPullFromCardEnum {
+
+        NOT_SUPPORTED("not-supported"),
+        SUPPORTED("supported"),
+        UNKNOWN("unknown"),;
+
+        private final String value;
+
+        private DomesticPullFromCardEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

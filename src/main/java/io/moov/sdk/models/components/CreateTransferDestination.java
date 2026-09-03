@@ -34,22 +34,33 @@ public class CreateTransferDestination {
     @JsonProperty("achDetails")
     private Optional<? extends CreateTransferDestinationACH> achDetails;
 
+    /**
+     * Wire-specific options supplied when creating a transfer.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("wireDetails")
+    private Optional<? extends CreateTransferDestinationWire> wireDetails;
+
     @JsonCreator
     public CreateTransferDestination(
             @JsonProperty("paymentMethodID") String paymentMethodID,
             @JsonProperty("cardDetails") Optional<? extends CreateTransferDestinationCard> cardDetails,
-            @JsonProperty("achDetails") Optional<? extends CreateTransferDestinationACH> achDetails) {
+            @JsonProperty("achDetails") Optional<? extends CreateTransferDestinationACH> achDetails,
+            @JsonProperty("wireDetails") Optional<? extends CreateTransferDestinationWire> wireDetails) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
         Utils.checkNotNull(cardDetails, "cardDetails");
         Utils.checkNotNull(achDetails, "achDetails");
+        Utils.checkNotNull(wireDetails, "wireDetails");
         this.paymentMethodID = paymentMethodID;
         this.cardDetails = cardDetails;
         this.achDetails = achDetails;
+        this.wireDetails = wireDetails;
     }
     
     public CreateTransferDestination(
             String paymentMethodID) {
-        this(paymentMethodID, Optional.empty(), Optional.empty());
+        this(paymentMethodID, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -67,6 +78,15 @@ public class CreateTransferDestination {
     @JsonIgnore
     public Optional<CreateTransferDestinationACH> achDetails() {
         return (Optional<CreateTransferDestinationACH>) achDetails;
+    }
+
+    /**
+     * Wire-specific options supplied when creating a transfer.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<CreateTransferDestinationWire> wireDetails() {
+        return (Optional<CreateTransferDestinationWire>) wireDetails;
     }
 
     public static Builder builder() {
@@ -106,6 +126,25 @@ public class CreateTransferDestination {
         return this;
     }
 
+    /**
+     * Wire-specific options supplied when creating a transfer.
+     */
+    public CreateTransferDestination withWireDetails(CreateTransferDestinationWire wireDetails) {
+        Utils.checkNotNull(wireDetails, "wireDetails");
+        this.wireDetails = Optional.ofNullable(wireDetails);
+        return this;
+    }
+
+
+    /**
+     * Wire-specific options supplied when creating a transfer.
+     */
+    public CreateTransferDestination withWireDetails(Optional<? extends CreateTransferDestinationWire> wireDetails) {
+        Utils.checkNotNull(wireDetails, "wireDetails");
+        this.wireDetails = wireDetails;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -118,13 +157,15 @@ public class CreateTransferDestination {
         return 
             Utils.enhancedDeepEquals(this.paymentMethodID, other.paymentMethodID) &&
             Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails) &&
-            Utils.enhancedDeepEquals(this.achDetails, other.achDetails);
+            Utils.enhancedDeepEquals(this.achDetails, other.achDetails) &&
+            Utils.enhancedDeepEquals(this.wireDetails, other.wireDetails);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            paymentMethodID, cardDetails, achDetails);
+            paymentMethodID, cardDetails, achDetails,
+            wireDetails);
     }
     
     @Override
@@ -132,7 +173,8 @@ public class CreateTransferDestination {
         return Utils.toString(CreateTransferDestination.class,
                 "paymentMethodID", paymentMethodID,
                 "cardDetails", cardDetails,
-                "achDetails", achDetails);
+                "achDetails", achDetails,
+                "wireDetails", wireDetails);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -143,6 +185,8 @@ public class CreateTransferDestination {
         private Optional<? extends CreateTransferDestinationCard> cardDetails = Optional.empty();
 
         private Optional<? extends CreateTransferDestinationACH> achDetails = Optional.empty();
+
+        private Optional<? extends CreateTransferDestinationWire> wireDetails = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -181,10 +225,30 @@ public class CreateTransferDestination {
             return this;
         }
 
+
+        /**
+         * Wire-specific options supplied when creating a transfer.
+         */
+        public Builder wireDetails(CreateTransferDestinationWire wireDetails) {
+            Utils.checkNotNull(wireDetails, "wireDetails");
+            this.wireDetails = Optional.ofNullable(wireDetails);
+            return this;
+        }
+
+        /**
+         * Wire-specific options supplied when creating a transfer.
+         */
+        public Builder wireDetails(Optional<? extends CreateTransferDestinationWire> wireDetails) {
+            Utils.checkNotNull(wireDetails, "wireDetails");
+            this.wireDetails = wireDetails;
+            return this;
+        }
+
         public CreateTransferDestination build() {
 
             return new CreateTransferDestination(
-                paymentMethodID, cardDetails, achDetails);
+                paymentMethodID, cardDetails, achDetails,
+                wireDetails);
         }
 
     }

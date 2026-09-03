@@ -3,32 +3,121 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum PushToCardTransferPaymentMethodPaymentMethodType {
-    PUSH_TO_CARD("push-to-card");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class PushToCardTransferPaymentMethodPaymentMethodType {
 
-    @JsonValue
+    public static final PushToCardTransferPaymentMethodPaymentMethodType PUSH_TO_CARD = new PushToCardTransferPaymentMethodPaymentMethodType("push-to-card");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, PushToCardTransferPaymentMethodPaymentMethodType> values = createValuesMap();
+    private static final Map<String, PushToCardTransferPaymentMethodPaymentMethodTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    PushToCardTransferPaymentMethodPaymentMethodType(String value) {
+    private PushToCardTransferPaymentMethodPaymentMethodType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a PushToCardTransferPaymentMethodPaymentMethodType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as PushToCardTransferPaymentMethodPaymentMethodType
+     */ 
+    @JsonCreator
+    public static PushToCardTransferPaymentMethodPaymentMethodType of(String value) {
+        synchronized (PushToCardTransferPaymentMethodPaymentMethodType.class) {
+            return values.computeIfAbsent(value, v -> new PushToCardTransferPaymentMethodPaymentMethodType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<PushToCardTransferPaymentMethodPaymentMethodType> fromValue(String value) {
-        for (PushToCardTransferPaymentMethodPaymentMethodType o: PushToCardTransferPaymentMethodPaymentMethodType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<PushToCardTransferPaymentMethodPaymentMethodTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PushToCardTransferPaymentMethodPaymentMethodType other = (PushToCardTransferPaymentMethodPaymentMethodType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "PushToCardTransferPaymentMethodPaymentMethodType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static PushToCardTransferPaymentMethodPaymentMethodType[] values() {
+        synchronized (PushToCardTransferPaymentMethodPaymentMethodType.class) {
+            return values.values().toArray(new PushToCardTransferPaymentMethodPaymentMethodType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, PushToCardTransferPaymentMethodPaymentMethodType> createValuesMap() {
+        Map<String, PushToCardTransferPaymentMethodPaymentMethodType> map = new LinkedHashMap<>();
+        map.put("push-to-card", PUSH_TO_CARD);
+        return map;
+    }
+
+    private static final Map<String, PushToCardTransferPaymentMethodPaymentMethodTypeEnum> createEnumsMap() {
+        Map<String, PushToCardTransferPaymentMethodPaymentMethodTypeEnum> map = new HashMap<>();
+        map.put("push-to-card", PushToCardTransferPaymentMethodPaymentMethodTypeEnum.PUSH_TO_CARD);
+        return map;
+    }
+    
+    
+    public enum PushToCardTransferPaymentMethodPaymentMethodTypeEnum {
+
+        PUSH_TO_CARD("push-to-card"),;
+
+        private final String value;
+
+        private PushToCardTransferPaymentMethodPaymentMethodTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

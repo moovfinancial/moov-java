@@ -20,7 +20,7 @@ import java.util.Optional;
 /**
  * Capture
  * 
- * <p>Details of a capture against an authorized transfer.
+ * <p>Details of a capture against an authorization.
  */
 public class Capture {
     /**
@@ -34,8 +34,7 @@ public class Capture {
     private AmountDecimal amount;
 
     /**
-     * Indicates whether this is the final capture against the authorization. When `true`, no further
-     * captures can be made.
+     * Indicates whether this is intended to be the final capture.
      */
     @JsonProperty("isFinal")
     private boolean isFinal;
@@ -90,11 +89,17 @@ public class Capture {
     private Optional<? extends TransferAmountDetails> amountDetails;
 
     /**
-     * The facilitator fee amount applied to the capture.
+     * The facilitator fee applied to this capture.
+     * The transfer's facilitator fee is the sum of its capture fees.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("facilitatorFeeAmount")
     private Optional<? extends AmountDecimal> facilitatorFeeAmount;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("failureCode")
+    private Optional<? extends CardTransactionFailureCode> failureCode;
 
     @JsonCreator
     public Capture(
@@ -109,7 +114,8 @@ public class Capture {
             @JsonProperty("foreignID") Optional<String> foreignID,
             @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems,
             @JsonProperty("amountDetails") Optional<? extends TransferAmountDetails> amountDetails,
-            @JsonProperty("facilitatorFeeAmount") Optional<? extends AmountDecimal> facilitatorFeeAmount) {
+            @JsonProperty("facilitatorFeeAmount") Optional<? extends AmountDecimal> facilitatorFeeAmount,
+            @JsonProperty("failureCode") Optional<? extends CardTransactionFailureCode> failureCode) {
         Utils.checkNotNull(captureID, "captureID");
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(isFinal, "isFinal");
@@ -122,6 +128,7 @@ public class Capture {
         Utils.checkNotNull(lineItems, "lineItems");
         Utils.checkNotNull(amountDetails, "amountDetails");
         Utils.checkNotNull(facilitatorFeeAmount, "facilitatorFeeAmount");
+        Utils.checkNotNull(failureCode, "failureCode");
         this.captureID = captureID;
         this.amount = amount;
         this.isFinal = isFinal;
@@ -134,6 +141,7 @@ public class Capture {
         this.lineItems = lineItems;
         this.amountDetails = amountDetails;
         this.facilitatorFeeAmount = facilitatorFeeAmount;
+        this.failureCode = failureCode;
     }
     
     public Capture(
@@ -146,7 +154,8 @@ public class Capture {
         this(captureID, amount, isFinal,
             status, createdOn, destinationPaymentMethodID,
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -163,8 +172,7 @@ public class Capture {
     }
 
     /**
-     * Indicates whether this is the final capture against the authorization. When `true`, no further
-     * captures can be made.
+     * Indicates whether this is intended to be the final capture.
      */
     @JsonIgnore
     public boolean isFinal() {
@@ -232,12 +240,19 @@ public class Capture {
     }
 
     /**
-     * The facilitator fee amount applied to the capture.
+     * The facilitator fee applied to this capture.
+     * The transfer's facilitator fee is the sum of its capture fees.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<AmountDecimal> facilitatorFeeAmount() {
         return (Optional<AmountDecimal>) facilitatorFeeAmount;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<CardTransactionFailureCode> failureCode() {
+        return (Optional<CardTransactionFailureCode>) failureCode;
     }
 
     public static Builder builder() {
@@ -261,8 +276,7 @@ public class Capture {
     }
 
     /**
-     * Indicates whether this is the final capture against the authorization. When `true`, no further
-     * captures can be made.
+     * Indicates whether this is intended to be the final capture.
      */
     public Capture withIsFinal(boolean isFinal) {
         Utils.checkNotNull(isFinal, "isFinal");
@@ -384,7 +398,8 @@ public class Capture {
     }
 
     /**
-     * The facilitator fee amount applied to the capture.
+     * The facilitator fee applied to this capture.
+     * The transfer's facilitator fee is the sum of its capture fees.
      */
     public Capture withFacilitatorFeeAmount(AmountDecimal facilitatorFeeAmount) {
         Utils.checkNotNull(facilitatorFeeAmount, "facilitatorFeeAmount");
@@ -394,11 +409,25 @@ public class Capture {
 
 
     /**
-     * The facilitator fee amount applied to the capture.
+     * The facilitator fee applied to this capture.
+     * The transfer's facilitator fee is the sum of its capture fees.
      */
     public Capture withFacilitatorFeeAmount(Optional<? extends AmountDecimal> facilitatorFeeAmount) {
         Utils.checkNotNull(facilitatorFeeAmount, "facilitatorFeeAmount");
         this.facilitatorFeeAmount = facilitatorFeeAmount;
+        return this;
+    }
+
+    public Capture withFailureCode(CardTransactionFailureCode failureCode) {
+        Utils.checkNotNull(failureCode, "failureCode");
+        this.failureCode = Optional.ofNullable(failureCode);
+        return this;
+    }
+
+
+    public Capture withFailureCode(Optional<? extends CardTransactionFailureCode> failureCode) {
+        Utils.checkNotNull(failureCode, "failureCode");
+        this.failureCode = failureCode;
         return this;
     }
 
@@ -423,7 +452,8 @@ public class Capture {
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
             Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
             Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails) &&
-            Utils.enhancedDeepEquals(this.facilitatorFeeAmount, other.facilitatorFeeAmount);
+            Utils.enhancedDeepEquals(this.facilitatorFeeAmount, other.facilitatorFeeAmount) &&
+            Utils.enhancedDeepEquals(this.failureCode, other.failureCode);
     }
     
     @Override
@@ -432,7 +462,8 @@ public class Capture {
             captureID, amount, isFinal,
             status, createdOn, destinationPaymentMethodID,
             description, metadata, foreignID,
-            lineItems, amountDetails, facilitatorFeeAmount);
+            lineItems, amountDetails, facilitatorFeeAmount,
+            failureCode);
     }
     
     @Override
@@ -449,7 +480,8 @@ public class Capture {
                 "foreignID", foreignID,
                 "lineItems", lineItems,
                 "amountDetails", amountDetails,
-                "facilitatorFeeAmount", facilitatorFeeAmount);
+                "facilitatorFeeAmount", facilitatorFeeAmount,
+                "failureCode", failureCode);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -479,6 +511,8 @@ public class Capture {
 
         private Optional<? extends AmountDecimal> facilitatorFeeAmount = Optional.empty();
 
+        private Optional<? extends CardTransactionFailureCode> failureCode = Optional.empty();
+
         private Builder() {
           // force use of static builder() method
         }
@@ -502,8 +536,7 @@ public class Capture {
 
 
         /**
-         * Indicates whether this is the final capture against the authorization. When `true`, no further
-         * captures can be made.
+         * Indicates whether this is intended to be the final capture.
          */
         public Builder isFinal(boolean isFinal) {
             Utils.checkNotNull(isFinal, "isFinal");
@@ -629,7 +662,8 @@ public class Capture {
 
 
         /**
-         * The facilitator fee amount applied to the capture.
+         * The facilitator fee applied to this capture.
+         * The transfer's facilitator fee is the sum of its capture fees.
          */
         public Builder facilitatorFeeAmount(AmountDecimal facilitatorFeeAmount) {
             Utils.checkNotNull(facilitatorFeeAmount, "facilitatorFeeAmount");
@@ -638,11 +672,25 @@ public class Capture {
         }
 
         /**
-         * The facilitator fee amount applied to the capture.
+         * The facilitator fee applied to this capture.
+         * The transfer's facilitator fee is the sum of its capture fees.
          */
         public Builder facilitatorFeeAmount(Optional<? extends AmountDecimal> facilitatorFeeAmount) {
             Utils.checkNotNull(facilitatorFeeAmount, "facilitatorFeeAmount");
             this.facilitatorFeeAmount = facilitatorFeeAmount;
+            return this;
+        }
+
+
+        public Builder failureCode(CardTransactionFailureCode failureCode) {
+            Utils.checkNotNull(failureCode, "failureCode");
+            this.failureCode = Optional.ofNullable(failureCode);
+            return this;
+        }
+
+        public Builder failureCode(Optional<? extends CardTransactionFailureCode> failureCode) {
+            Utils.checkNotNull(failureCode, "failureCode");
+            this.failureCode = failureCode;
             return this;
         }
 
@@ -652,7 +700,8 @@ public class Capture {
                 captureID, amount, isFinal,
                 status, createdOn, destinationPaymentMethodID,
                 description, metadata, foreignID,
-                lineItems, amountDetails, facilitatorFeeAmount);
+                lineItems, amountDetails, facilitatorFeeAmount,
+                failureCode);
         }
 
     }

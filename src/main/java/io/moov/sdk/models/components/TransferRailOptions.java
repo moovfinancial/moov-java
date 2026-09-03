@@ -41,28 +41,38 @@ public class TransferRailOptions {
     @JsonProperty("achCredit")
     private Optional<? extends ACHCreditOptions> achCredit;
 
+    /**
+     * Wire-specific options returned on a transfer.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("wire")
+    private Optional<? extends WireOptions> wire;
+
     @JsonCreator
     public TransferRailOptions(
             @JsonProperty("cardPayment") Optional<? extends CardPaymentOptions> cardPayment,
             @JsonProperty("pushToCard") Optional<? extends PushToCardOptions> pushToCard,
             @JsonProperty("pullFromCard") Optional<? extends PullFromCardOptions> pullFromCard,
             @JsonProperty("achDebit") Optional<? extends ACHDebitOptions> achDebit,
-            @JsonProperty("achCredit") Optional<? extends ACHCreditOptions> achCredit) {
+            @JsonProperty("achCredit") Optional<? extends ACHCreditOptions> achCredit,
+            @JsonProperty("wire") Optional<? extends WireOptions> wire) {
         Utils.checkNotNull(cardPayment, "cardPayment");
         Utils.checkNotNull(pushToCard, "pushToCard");
         Utils.checkNotNull(pullFromCard, "pullFromCard");
         Utils.checkNotNull(achDebit, "achDebit");
         Utils.checkNotNull(achCredit, "achCredit");
+        Utils.checkNotNull(wire, "wire");
         this.cardPayment = cardPayment;
         this.pushToCard = pushToCard;
         this.pullFromCard = pullFromCard;
         this.achDebit = achDebit;
         this.achCredit = achCredit;
+        this.wire = wire;
     }
     
     public TransferRailOptions() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -93,6 +103,15 @@ public class TransferRailOptions {
     @JsonIgnore
     public Optional<ACHCreditOptions> achCredit() {
         return (Optional<ACHCreditOptions>) achCredit;
+    }
+
+    /**
+     * Wire-specific options returned on a transfer.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<WireOptions> wire() {
+        return (Optional<WireOptions>) wire;
     }
 
     public static Builder builder() {
@@ -165,6 +184,25 @@ public class TransferRailOptions {
         return this;
     }
 
+    /**
+     * Wire-specific options returned on a transfer.
+     */
+    public TransferRailOptions withWire(WireOptions wire) {
+        Utils.checkNotNull(wire, "wire");
+        this.wire = Optional.ofNullable(wire);
+        return this;
+    }
+
+
+    /**
+     * Wire-specific options returned on a transfer.
+     */
+    public TransferRailOptions withWire(Optional<? extends WireOptions> wire) {
+        Utils.checkNotNull(wire, "wire");
+        this.wire = wire;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -179,14 +217,15 @@ public class TransferRailOptions {
             Utils.enhancedDeepEquals(this.pushToCard, other.pushToCard) &&
             Utils.enhancedDeepEquals(this.pullFromCard, other.pullFromCard) &&
             Utils.enhancedDeepEquals(this.achDebit, other.achDebit) &&
-            Utils.enhancedDeepEquals(this.achCredit, other.achCredit);
+            Utils.enhancedDeepEquals(this.achCredit, other.achCredit) &&
+            Utils.enhancedDeepEquals(this.wire, other.wire);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             cardPayment, pushToCard, pullFromCard,
-            achDebit, achCredit);
+            achDebit, achCredit, wire);
     }
     
     @Override
@@ -196,7 +235,8 @@ public class TransferRailOptions {
                 "pushToCard", pushToCard,
                 "pullFromCard", pullFromCard,
                 "achDebit", achDebit,
-                "achCredit", achCredit);
+                "achCredit", achCredit,
+                "wire", wire);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -211,6 +251,8 @@ public class TransferRailOptions {
         private Optional<? extends ACHDebitOptions> achDebit = Optional.empty();
 
         private Optional<? extends ACHCreditOptions> achCredit = Optional.empty();
+
+        private Optional<? extends WireOptions> wire = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -281,11 +323,30 @@ public class TransferRailOptions {
             return this;
         }
 
+
+        /**
+         * Wire-specific options returned on a transfer.
+         */
+        public Builder wire(WireOptions wire) {
+            Utils.checkNotNull(wire, "wire");
+            this.wire = Optional.ofNullable(wire);
+            return this;
+        }
+
+        /**
+         * Wire-specific options returned on a transfer.
+         */
+        public Builder wire(Optional<? extends WireOptions> wire) {
+            Utils.checkNotNull(wire, "wire");
+            this.wire = wire;
+            return this;
+        }
+
         public TransferRailOptions build() {
 
             return new TransferRailOptions(
                 cardPayment, pushToCard, pullFromCard,
-                achDebit, achCredit);
+                achDebit, achCredit, wire);
         }
 
     }

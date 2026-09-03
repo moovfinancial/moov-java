@@ -96,6 +96,16 @@ public class Underwriting {
     @JsonProperty("sendFunds")
     private Optional<? extends SendFunds> sendFunds;
 
+    /**
+     * Underwriting data for the `card-issuing` capability.
+     * 
+     * <p>Issued cards are funded from the account's card-issuing wallet before they can be spent, so
+     * estimated activity is the only data collected.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("cardIssuing")
+    private Optional<? extends CardIssuing> cardIssuing;
+
     @JsonCreator
     public Underwriting(
             @JsonProperty("averageTransactionSize") Optional<Long> averageTransactionSize,
@@ -111,7 +121,8 @@ public class Underwriting {
             @JsonProperty("volumeShareByCustomerType") Optional<? extends VolumeShareByCustomerType> volumeShareByCustomerType,
             @JsonProperty("collectFunds") Optional<? extends CollectFunds> collectFunds,
             @JsonProperty("moneyTransfer") Optional<? extends MoneyTransfer> moneyTransfer,
-            @JsonProperty("sendFunds") Optional<? extends SendFunds> sendFunds) {
+            @JsonProperty("sendFunds") Optional<? extends SendFunds> sendFunds,
+            @JsonProperty("cardIssuing") Optional<? extends CardIssuing> cardIssuing) {
         Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
         Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
         Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
@@ -126,6 +137,7 @@ public class Underwriting {
         Utils.checkNotNull(collectFunds, "collectFunds");
         Utils.checkNotNull(moneyTransfer, "moneyTransfer");
         Utils.checkNotNull(sendFunds, "sendFunds");
+        Utils.checkNotNull(cardIssuing, "cardIssuing");
         this.averageTransactionSize = averageTransactionSize;
         this.maxTransactionSize = maxTransactionSize;
         this.averageMonthlyTransactionVolume = averageMonthlyTransactionVolume;
@@ -140,6 +152,7 @@ public class Underwriting {
         this.collectFunds = collectFunds;
         this.moneyTransfer = moneyTransfer;
         this.sendFunds = sendFunds;
+        this.cardIssuing = cardIssuing;
     }
     
     public Underwriting() {
@@ -147,7 +160,7 @@ public class Underwriting {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -234,6 +247,18 @@ public class Underwriting {
     @JsonIgnore
     public Optional<SendFunds> sendFunds() {
         return (Optional<SendFunds>) sendFunds;
+    }
+
+    /**
+     * Underwriting data for the `card-issuing` capability.
+     * 
+     * <p>Issued cards are funded from the account's card-issuing wallet before they can be spent, so
+     * estimated activity is the only data collected.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<CardIssuing> cardIssuing() {
+        return (Optional<CardIssuing>) cardIssuing;
     }
 
     public static Builder builder() {
@@ -433,6 +458,31 @@ public class Underwriting {
         return this;
     }
 
+    /**
+     * Underwriting data for the `card-issuing` capability.
+     * 
+     * <p>Issued cards are funded from the account's card-issuing wallet before they can be spent, so
+     * estimated activity is the only data collected.
+     */
+    public Underwriting withCardIssuing(CardIssuing cardIssuing) {
+        Utils.checkNotNull(cardIssuing, "cardIssuing");
+        this.cardIssuing = Optional.ofNullable(cardIssuing);
+        return this;
+    }
+
+
+    /**
+     * Underwriting data for the `card-issuing` capability.
+     * 
+     * <p>Issued cards are funded from the account's card-issuing wallet before they can be spent, so
+     * estimated activity is the only data collected.
+     */
+    public Underwriting withCardIssuing(Optional<? extends CardIssuing> cardIssuing) {
+        Utils.checkNotNull(cardIssuing, "cardIssuing");
+        this.cardIssuing = cardIssuing;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -456,7 +506,8 @@ public class Underwriting {
             Utils.enhancedDeepEquals(this.volumeShareByCustomerType, other.volumeShareByCustomerType) &&
             Utils.enhancedDeepEquals(this.collectFunds, other.collectFunds) &&
             Utils.enhancedDeepEquals(this.moneyTransfer, other.moneyTransfer) &&
-            Utils.enhancedDeepEquals(this.sendFunds, other.sendFunds);
+            Utils.enhancedDeepEquals(this.sendFunds, other.sendFunds) &&
+            Utils.enhancedDeepEquals(this.cardIssuing, other.cardIssuing);
     }
     
     @Override
@@ -466,7 +517,7 @@ public class Underwriting {
             status, volumeByCustomerType, cardVolumeDistribution,
             fulfillment, geographicReach, businessPresence,
             pendingLitigation, volumeShareByCustomerType, collectFunds,
-            moneyTransfer, sendFunds);
+            moneyTransfer, sendFunds, cardIssuing);
     }
     
     @Override
@@ -485,7 +536,8 @@ public class Underwriting {
                 "volumeShareByCustomerType", volumeShareByCustomerType,
                 "collectFunds", collectFunds,
                 "moneyTransfer", moneyTransfer,
-                "sendFunds", sendFunds);
+                "sendFunds", sendFunds,
+                "cardIssuing", cardIssuing);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -519,6 +571,8 @@ public class Underwriting {
         private Optional<? extends MoneyTransfer> moneyTransfer = Optional.empty();
 
         private Optional<? extends SendFunds> sendFunds = Optional.empty();
+
+        private Optional<? extends CardIssuing> cardIssuing = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -716,6 +770,31 @@ public class Underwriting {
             return this;
         }
 
+
+        /**
+         * Underwriting data for the `card-issuing` capability.
+         * 
+         * <p>Issued cards are funded from the account's card-issuing wallet before they can be spent, so
+         * estimated activity is the only data collected.
+         */
+        public Builder cardIssuing(CardIssuing cardIssuing) {
+            Utils.checkNotNull(cardIssuing, "cardIssuing");
+            this.cardIssuing = Optional.ofNullable(cardIssuing);
+            return this;
+        }
+
+        /**
+         * Underwriting data for the `card-issuing` capability.
+         * 
+         * <p>Issued cards are funded from the account's card-issuing wallet before they can be spent, so
+         * estimated activity is the only data collected.
+         */
+        public Builder cardIssuing(Optional<? extends CardIssuing> cardIssuing) {
+            Utils.checkNotNull(cardIssuing, "cardIssuing");
+            this.cardIssuing = cardIssuing;
+            return this;
+        }
+
         public Underwriting build() {
 
             return new Underwriting(
@@ -723,7 +802,7 @@ public class Underwriting {
                 status, volumeByCustomerType, cardVolumeDistribution,
                 fulfillment, geographicReach, businessPresence,
                 pendingLitigation, volumeShareByCustomerType, collectFunds,
-                moneyTransfer, sendFunds);
+                moneyTransfer, sendFunds, cardIssuing);
         }
 
     }

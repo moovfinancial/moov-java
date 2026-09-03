@@ -3,32 +3,121 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum PushToGooglePayTransferPaymentMethodPaymentMethodType {
-    PUSH_TO_GOOGLE_PAY("push-to-google-pay");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class PushToGooglePayTransferPaymentMethodPaymentMethodType {
 
-    @JsonValue
+    public static final PushToGooglePayTransferPaymentMethodPaymentMethodType PUSH_TO_GOOGLE_PAY = new PushToGooglePayTransferPaymentMethodPaymentMethodType("push-to-google-pay");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, PushToGooglePayTransferPaymentMethodPaymentMethodType> values = createValuesMap();
+    private static final Map<String, PushToGooglePayTransferPaymentMethodPaymentMethodTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    PushToGooglePayTransferPaymentMethodPaymentMethodType(String value) {
+    private PushToGooglePayTransferPaymentMethodPaymentMethodType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a PushToGooglePayTransferPaymentMethodPaymentMethodType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as PushToGooglePayTransferPaymentMethodPaymentMethodType
+     */ 
+    @JsonCreator
+    public static PushToGooglePayTransferPaymentMethodPaymentMethodType of(String value) {
+        synchronized (PushToGooglePayTransferPaymentMethodPaymentMethodType.class) {
+            return values.computeIfAbsent(value, v -> new PushToGooglePayTransferPaymentMethodPaymentMethodType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<PushToGooglePayTransferPaymentMethodPaymentMethodType> fromValue(String value) {
-        for (PushToGooglePayTransferPaymentMethodPaymentMethodType o: PushToGooglePayTransferPaymentMethodPaymentMethodType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<PushToGooglePayTransferPaymentMethodPaymentMethodTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PushToGooglePayTransferPaymentMethodPaymentMethodType other = (PushToGooglePayTransferPaymentMethodPaymentMethodType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "PushToGooglePayTransferPaymentMethodPaymentMethodType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static PushToGooglePayTransferPaymentMethodPaymentMethodType[] values() {
+        synchronized (PushToGooglePayTransferPaymentMethodPaymentMethodType.class) {
+            return values.values().toArray(new PushToGooglePayTransferPaymentMethodPaymentMethodType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, PushToGooglePayTransferPaymentMethodPaymentMethodType> createValuesMap() {
+        Map<String, PushToGooglePayTransferPaymentMethodPaymentMethodType> map = new LinkedHashMap<>();
+        map.put("push-to-google-pay", PUSH_TO_GOOGLE_PAY);
+        return map;
+    }
+
+    private static final Map<String, PushToGooglePayTransferPaymentMethodPaymentMethodTypeEnum> createEnumsMap() {
+        Map<String, PushToGooglePayTransferPaymentMethodPaymentMethodTypeEnum> map = new HashMap<>();
+        map.put("push-to-google-pay", PushToGooglePayTransferPaymentMethodPaymentMethodTypeEnum.PUSH_TO_GOOGLE_PAY);
+        return map;
+    }
+    
+    
+    public enum PushToGooglePayTransferPaymentMethodPaymentMethodTypeEnum {
+
+        PUSH_TO_GOOGLE_PAY("push-to-google-pay"),;
+
+        private final String value;
+
+        private PushToGooglePayTransferPaymentMethodPaymentMethodTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

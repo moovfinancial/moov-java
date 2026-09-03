@@ -8,6 +8,9 @@ The type of entity represented by this account.
 import io.moov.sdk.models.components.AccountType;
 
 AccountType value = AccountType.INDIVIDUAL;
+
+// Open enum: use .of() to create instances from custom string values
+AccountType custom = AccountType.of("custom_value");
 ```
 
 

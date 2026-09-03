@@ -12,7 +12,9 @@ import java.lang.String;
 
 
 public class ReversedWithCancellation {
-
+    /**
+     * Cancellation of a transfer.
+     */
     @JsonProperty("cancellation")
     private Cancellation cancellation;
 
@@ -23,6 +25,9 @@ public class ReversedWithCancellation {
         this.cancellation = cancellation;
     }
 
+    /**
+     * Cancellation of a transfer.
+     */
     @JsonIgnore
     public Cancellation cancellation() {
         return cancellation;
@@ -33,6 +38,9 @@ public class ReversedWithCancellation {
     }
 
 
+    /**
+     * Cancellation of a transfer.
+     */
     public ReversedWithCancellation withCancellation(Cancellation cancellation) {
         Utils.checkNotNull(cancellation, "cancellation");
         this.cancellation = cancellation;
@@ -74,6 +82,9 @@ public class ReversedWithCancellation {
         }
 
 
+        /**
+         * Cancellation of a transfer.
+         */
         public Builder cancellation(Cancellation cancellation) {
             Utils.checkNotNull(cancellation, "cancellation");
             this.cancellation = cancellation;

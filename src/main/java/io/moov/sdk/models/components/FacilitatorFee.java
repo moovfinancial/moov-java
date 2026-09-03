@@ -21,7 +21,7 @@ import java.util.Optional;
  */
 public class FacilitatorFee {
     /**
-     * Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set.
+     * Total facilitator fee.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("total")
@@ -39,7 +39,7 @@ public class FacilitatorFee {
     private Optional<String> totalDecimal;
 
     /**
-     * Markup facilitator fee in cents. Only either `markup` or `markupDecimal` can be set.
+     * Markup facilitator fee.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("markup")
@@ -77,7 +77,7 @@ public class FacilitatorFee {
     }
 
     /**
-     * Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set.
+     * Total facilitator fee.
      */
     @JsonIgnore
     public Optional<Long> total() {
@@ -97,7 +97,7 @@ public class FacilitatorFee {
     }
 
     /**
-     * Markup facilitator fee in cents. Only either `markup` or `markupDecimal` can be set.
+     * Markup facilitator fee.
      */
     @JsonIgnore
     public Optional<Long> markup() {
@@ -121,7 +121,7 @@ public class FacilitatorFee {
 
 
     /**
-     * Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set.
+     * Total facilitator fee.
      */
     public FacilitatorFee withTotal(long total) {
         Utils.checkNotNull(total, "total");
@@ -131,7 +131,7 @@ public class FacilitatorFee {
 
 
     /**
-     * Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set.
+     * Total facilitator fee.
      */
     public FacilitatorFee withTotal(Optional<Long> total) {
         Utils.checkNotNull(total, "total");
@@ -167,7 +167,7 @@ public class FacilitatorFee {
     }
 
     /**
-     * Markup facilitator fee in cents. Only either `markup` or `markupDecimal` can be set.
+     * Markup facilitator fee.
      */
     public FacilitatorFee withMarkup(long markup) {
         Utils.checkNotNull(markup, "markup");
@@ -177,7 +177,7 @@ public class FacilitatorFee {
 
 
     /**
-     * Markup facilitator fee in cents. Only either `markup` or `markupDecimal` can be set.
+     * Markup facilitator fee.
      */
     public FacilitatorFee withMarkup(Optional<Long> markup) {
         Utils.checkNotNull(markup, "markup");
@@ -259,7 +259,7 @@ public class FacilitatorFee {
 
 
         /**
-         * Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set.
+         * Total facilitator fee.
          */
         public Builder total(long total) {
             Utils.checkNotNull(total, "total");
@@ -268,7 +268,7 @@ public class FacilitatorFee {
         }
 
         /**
-         * Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set.
+         * Total facilitator fee.
          */
         public Builder total(Optional<Long> total) {
             Utils.checkNotNull(total, "total");
@@ -305,7 +305,7 @@ public class FacilitatorFee {
 
 
         /**
-         * Markup facilitator fee in cents. Only either `markup` or `markupDecimal` can be set.
+         * Markup facilitator fee.
          */
         public Builder markup(long markup) {
             Utils.checkNotNull(markup, "markup");
@@ -314,7 +314,7 @@ public class FacilitatorFee {
         }
 
         /**
-         * Markup facilitator fee in cents. Only either `markup` or `markupDecimal` can be set.
+         * Markup facilitator fee.
          */
         public Builder markup(Optional<Long> markup) {
             Utils.checkNotNull(markup, "markup");

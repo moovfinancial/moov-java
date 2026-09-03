@@ -3,40 +3,153 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum FulfillmentMethod {
-    BILL_OR_DEBT_PAYMENT("bill-or-debt-payment"),
-    DIGITAL_CONTENT("digital-content"),
-    DONATION("donation"),
-    IN_PERSON_SERVICE("in-person-service"),
-    LOCAL_PICKUP_OR_DELIVERY("local-pickup-or-delivery"),
-    OTHER("other"),
-    REMOTE_SERVICE("remote-service"),
-    SHIPPED_PHYSICAL_GOODS("shipped-physical-goods"),
-    SUBSCRIPTION_OR_MEMBERSHIP("subscription-or-membership");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class FulfillmentMethod {
 
-    @JsonValue
+    public static final FulfillmentMethod BILL_OR_DEBT_PAYMENT = new FulfillmentMethod("bill-or-debt-payment");
+    public static final FulfillmentMethod DIGITAL_CONTENT = new FulfillmentMethod("digital-content");
+    public static final FulfillmentMethod DONATION = new FulfillmentMethod("donation");
+    public static final FulfillmentMethod IN_PERSON_SERVICE = new FulfillmentMethod("in-person-service");
+    public static final FulfillmentMethod LOCAL_PICKUP_OR_DELIVERY = new FulfillmentMethod("local-pickup-or-delivery");
+    public static final FulfillmentMethod OTHER = new FulfillmentMethod("other");
+    public static final FulfillmentMethod REMOTE_SERVICE = new FulfillmentMethod("remote-service");
+    public static final FulfillmentMethod SHIPPED_PHYSICAL_GOODS = new FulfillmentMethod("shipped-physical-goods");
+    public static final FulfillmentMethod SUBSCRIPTION_OR_MEMBERSHIP = new FulfillmentMethod("subscription-or-membership");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, FulfillmentMethod> values = createValuesMap();
+    private static final Map<String, FulfillmentMethodEnum> enums = createEnumsMap();
+
     private final String value;
 
-    FulfillmentMethod(String value) {
+    private FulfillmentMethod(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a FulfillmentMethod with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as FulfillmentMethod
+     */ 
+    @JsonCreator
+    public static FulfillmentMethod of(String value) {
+        synchronized (FulfillmentMethod.class) {
+            return values.computeIfAbsent(value, v -> new FulfillmentMethod(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<FulfillmentMethod> fromValue(String value) {
-        for (FulfillmentMethod o: FulfillmentMethod.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<FulfillmentMethodEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        FulfillmentMethod other = (FulfillmentMethod) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "FulfillmentMethod [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static FulfillmentMethod[] values() {
+        synchronized (FulfillmentMethod.class) {
+            return values.values().toArray(new FulfillmentMethod[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, FulfillmentMethod> createValuesMap() {
+        Map<String, FulfillmentMethod> map = new LinkedHashMap<>();
+        map.put("bill-or-debt-payment", BILL_OR_DEBT_PAYMENT);
+        map.put("digital-content", DIGITAL_CONTENT);
+        map.put("donation", DONATION);
+        map.put("in-person-service", IN_PERSON_SERVICE);
+        map.put("local-pickup-or-delivery", LOCAL_PICKUP_OR_DELIVERY);
+        map.put("other", OTHER);
+        map.put("remote-service", REMOTE_SERVICE);
+        map.put("shipped-physical-goods", SHIPPED_PHYSICAL_GOODS);
+        map.put("subscription-or-membership", SUBSCRIPTION_OR_MEMBERSHIP);
+        return map;
+    }
+
+    private static final Map<String, FulfillmentMethodEnum> createEnumsMap() {
+        Map<String, FulfillmentMethodEnum> map = new HashMap<>();
+        map.put("bill-or-debt-payment", FulfillmentMethodEnum.BILL_OR_DEBT_PAYMENT);
+        map.put("digital-content", FulfillmentMethodEnum.DIGITAL_CONTENT);
+        map.put("donation", FulfillmentMethodEnum.DONATION);
+        map.put("in-person-service", FulfillmentMethodEnum.IN_PERSON_SERVICE);
+        map.put("local-pickup-or-delivery", FulfillmentMethodEnum.LOCAL_PICKUP_OR_DELIVERY);
+        map.put("other", FulfillmentMethodEnum.OTHER);
+        map.put("remote-service", FulfillmentMethodEnum.REMOTE_SERVICE);
+        map.put("shipped-physical-goods", FulfillmentMethodEnum.SHIPPED_PHYSICAL_GOODS);
+        map.put("subscription-or-membership", FulfillmentMethodEnum.SUBSCRIPTION_OR_MEMBERSHIP);
+        return map;
+    }
+    
+    
+    public enum FulfillmentMethodEnum {
+
+        BILL_OR_DEBT_PAYMENT("bill-or-debt-payment"),
+        DIGITAL_CONTENT("digital-content"),
+        DONATION("donation"),
+        IN_PERSON_SERVICE("in-person-service"),
+        LOCAL_PICKUP_OR_DELIVERY("local-pickup-or-delivery"),
+        OTHER("other"),
+        REMOTE_SERVICE("remote-service"),
+        SHIPPED_PHYSICAL_GOODS("shipped-physical-goods"),
+        SUBSCRIPTION_OR_MEMBERSHIP("subscription-or-membership"),;
+
+        private final String value;
+
+        private FulfillmentMethodEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

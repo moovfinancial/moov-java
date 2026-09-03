@@ -3,33 +3,125 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum FeePlanAgreementStatus {
-    ACTIVE("active"),
-    TERMINATED("terminated");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class FeePlanAgreementStatus {
 
-    @JsonValue
+    public static final FeePlanAgreementStatus ACTIVE = new FeePlanAgreementStatus("active");
+    public static final FeePlanAgreementStatus TERMINATED = new FeePlanAgreementStatus("terminated");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, FeePlanAgreementStatus> values = createValuesMap();
+    private static final Map<String, FeePlanAgreementStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    FeePlanAgreementStatus(String value) {
+    private FeePlanAgreementStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a FeePlanAgreementStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as FeePlanAgreementStatus
+     */ 
+    @JsonCreator
+    public static FeePlanAgreementStatus of(String value) {
+        synchronized (FeePlanAgreementStatus.class) {
+            return values.computeIfAbsent(value, v -> new FeePlanAgreementStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<FeePlanAgreementStatus> fromValue(String value) {
-        for (FeePlanAgreementStatus o: FeePlanAgreementStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<FeePlanAgreementStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        FeePlanAgreementStatus other = (FeePlanAgreementStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "FeePlanAgreementStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static FeePlanAgreementStatus[] values() {
+        synchronized (FeePlanAgreementStatus.class) {
+            return values.values().toArray(new FeePlanAgreementStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, FeePlanAgreementStatus> createValuesMap() {
+        Map<String, FeePlanAgreementStatus> map = new LinkedHashMap<>();
+        map.put("active", ACTIVE);
+        map.put("terminated", TERMINATED);
+        return map;
+    }
+
+    private static final Map<String, FeePlanAgreementStatusEnum> createEnumsMap() {
+        Map<String, FeePlanAgreementStatusEnum> map = new HashMap<>();
+        map.put("active", FeePlanAgreementStatusEnum.ACTIVE);
+        map.put("terminated", FeePlanAgreementStatusEnum.TERMINATED);
+        return map;
+    }
+    
+    
+    public enum FeePlanAgreementStatusEnum {
+
+        ACTIVE("active"),
+        TERMINATED("terminated"),;
+
+        private final String value;
+
+        private FeePlanAgreementStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

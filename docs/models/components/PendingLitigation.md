@@ -6,6 +6,9 @@
 import io.moov.sdk.models.components.PendingLitigation;
 
 PendingLitigation value = PendingLitigation.BANKRUPTCY_OR_INSOLVENCY;
+
+// Open enum: use .of() to create instances from custom string values
+PendingLitigation custom = PendingLitigation.of("custom_value");
 ```
 
 

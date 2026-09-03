@@ -3,35 +3,133 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum ReturnPolicyType {
-    NONE("none"),
-    EXCHANGE_ONLY("exchangeOnly"),
-    WITHIN_THIRTY_DAYS("withinThirtyDays"),
-    OTHER("other");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class ReturnPolicyType {
 
-    @JsonValue
+    public static final ReturnPolicyType NONE = new ReturnPolicyType("none");
+    public static final ReturnPolicyType EXCHANGE_ONLY = new ReturnPolicyType("exchangeOnly");
+    public static final ReturnPolicyType WITHIN_THIRTY_DAYS = new ReturnPolicyType("withinThirtyDays");
+    public static final ReturnPolicyType OTHER = new ReturnPolicyType("other");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, ReturnPolicyType> values = createValuesMap();
+    private static final Map<String, ReturnPolicyTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    ReturnPolicyType(String value) {
+    private ReturnPolicyType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a ReturnPolicyType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as ReturnPolicyType
+     */ 
+    @JsonCreator
+    public static ReturnPolicyType of(String value) {
+        synchronized (ReturnPolicyType.class) {
+            return values.computeIfAbsent(value, v -> new ReturnPolicyType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<ReturnPolicyType> fromValue(String value) {
-        for (ReturnPolicyType o: ReturnPolicyType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<ReturnPolicyTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ReturnPolicyType other = (ReturnPolicyType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "ReturnPolicyType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static ReturnPolicyType[] values() {
+        synchronized (ReturnPolicyType.class) {
+            return values.values().toArray(new ReturnPolicyType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, ReturnPolicyType> createValuesMap() {
+        Map<String, ReturnPolicyType> map = new LinkedHashMap<>();
+        map.put("none", NONE);
+        map.put("exchangeOnly", EXCHANGE_ONLY);
+        map.put("withinThirtyDays", WITHIN_THIRTY_DAYS);
+        map.put("other", OTHER);
+        return map;
+    }
+
+    private static final Map<String, ReturnPolicyTypeEnum> createEnumsMap() {
+        Map<String, ReturnPolicyTypeEnum> map = new HashMap<>();
+        map.put("none", ReturnPolicyTypeEnum.NONE);
+        map.put("exchangeOnly", ReturnPolicyTypeEnum.EXCHANGE_ONLY);
+        map.put("withinThirtyDays", ReturnPolicyTypeEnum.WITHIN_THIRTY_DAYS);
+        map.put("other", ReturnPolicyTypeEnum.OTHER);
+        return map;
+    }
+    
+    
+    public enum ReturnPolicyTypeEnum {
+
+        NONE("none"),
+        EXCHANGE_ONLY("exchangeOnly"),
+        WITHIN_THIRTY_DAYS("withinThirtyDays"),
+        OTHER("other"),;
+
+        private final String value;
+
+        private ReturnPolicyTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

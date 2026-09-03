@@ -3,44 +3,154 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * MonthlyVolumeRange
  * 
  * <p>The low value in each range is included. The high value in each range is excluded.
  */
-public enum MonthlyVolumeRange {
-    UNDER10K("under-10k"),
-    TENK50K("10k-50k"),
-    FIFTYK100K("50k-100k"),
-    ONE_HUNDREDK250K("100k-250k"),
-    TWO_HUNDRED_AND_FIFTYK500K("250k-500k"),
-    FIVE_HUNDREDK1M("500k-1m"),
-    ONEM5M("1m-5m"),
-    OVER5M("over-5m");
+public class MonthlyVolumeRange {
 
-    @JsonValue
+    public static final MonthlyVolumeRange UNDER10K = new MonthlyVolumeRange("under-10k");
+    public static final MonthlyVolumeRange TENK50K = new MonthlyVolumeRange("10k-50k");
+    public static final MonthlyVolumeRange FIFTYK100K = new MonthlyVolumeRange("50k-100k");
+    public static final MonthlyVolumeRange ONE_HUNDREDK250K = new MonthlyVolumeRange("100k-250k");
+    public static final MonthlyVolumeRange TWO_HUNDRED_AND_FIFTYK500K = new MonthlyVolumeRange("250k-500k");
+    public static final MonthlyVolumeRange FIVE_HUNDREDK1M = new MonthlyVolumeRange("500k-1m");
+    public static final MonthlyVolumeRange ONEM5M = new MonthlyVolumeRange("1m-5m");
+    public static final MonthlyVolumeRange OVER5M = new MonthlyVolumeRange("over-5m");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, MonthlyVolumeRange> values = createValuesMap();
+    private static final Map<String, MonthlyVolumeRangeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    MonthlyVolumeRange(String value) {
+    private MonthlyVolumeRange(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a MonthlyVolumeRange with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as MonthlyVolumeRange
+     */ 
+    @JsonCreator
+    public static MonthlyVolumeRange of(String value) {
+        synchronized (MonthlyVolumeRange.class) {
+            return values.computeIfAbsent(value, v -> new MonthlyVolumeRange(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<MonthlyVolumeRange> fromValue(String value) {
-        for (MonthlyVolumeRange o: MonthlyVolumeRange.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<MonthlyVolumeRangeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        MonthlyVolumeRange other = (MonthlyVolumeRange) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "MonthlyVolumeRange [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static MonthlyVolumeRange[] values() {
+        synchronized (MonthlyVolumeRange.class) {
+            return values.values().toArray(new MonthlyVolumeRange[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, MonthlyVolumeRange> createValuesMap() {
+        Map<String, MonthlyVolumeRange> map = new LinkedHashMap<>();
+        map.put("under-10k", UNDER10K);
+        map.put("10k-50k", TENK50K);
+        map.put("50k-100k", FIFTYK100K);
+        map.put("100k-250k", ONE_HUNDREDK250K);
+        map.put("250k-500k", TWO_HUNDRED_AND_FIFTYK500K);
+        map.put("500k-1m", FIVE_HUNDREDK1M);
+        map.put("1m-5m", ONEM5M);
+        map.put("over-5m", OVER5M);
+        return map;
+    }
+
+    private static final Map<String, MonthlyVolumeRangeEnum> createEnumsMap() {
+        Map<String, MonthlyVolumeRangeEnum> map = new HashMap<>();
+        map.put("under-10k", MonthlyVolumeRangeEnum.UNDER10K);
+        map.put("10k-50k", MonthlyVolumeRangeEnum.TENK50K);
+        map.put("50k-100k", MonthlyVolumeRangeEnum.FIFTYK100K);
+        map.put("100k-250k", MonthlyVolumeRangeEnum.ONE_HUNDREDK250K);
+        map.put("250k-500k", MonthlyVolumeRangeEnum.TWO_HUNDRED_AND_FIFTYK500K);
+        map.put("500k-1m", MonthlyVolumeRangeEnum.FIVE_HUNDREDK1M);
+        map.put("1m-5m", MonthlyVolumeRangeEnum.ONEM5M);
+        map.put("over-5m", MonthlyVolumeRangeEnum.OVER5M);
+        return map;
+    }
+    
+    
+    public enum MonthlyVolumeRangeEnum {
+
+        UNDER10K("under-10k"),
+        TENK50K("10k-50k"),
+        FIFTYK100K("50k-100k"),
+        ONE_HUNDREDK250K("100k-250k"),
+        TWO_HUNDRED_AND_FIFTYK500K("250k-500k"),
+        FIVE_HUNDREDK1M("500k-1m"),
+        ONEM5M("1m-5m"),
+        OVER5M("over-5m"),;
+
+        private final String value;
+
+        private MonthlyVolumeRangeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

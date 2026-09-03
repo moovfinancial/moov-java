@@ -124,7 +124,7 @@ public class PaymentLinks {
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param skip 
-     * @param count 
+     * @param count Page size. When omitted, the server defaults to `200`.
      * @param types A comma-separated list of payment link types to filter results.
      * @param accountID The merchant account ID.
      * @return The response from the API call

@@ -67,7 +67,7 @@ public class Products {
      * @param accountID 
      * @param title Allows filtering products by title. This supports partial matches and is case-insensitive
      * @param skip 
-     * @param count 
+     * @param count Page size. When omitted, the server defaults to `200`.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */

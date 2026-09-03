@@ -6,6 +6,9 @@
 import io.moov.sdk.models.components.TicketStatus;
 
 TicketStatus value = TicketStatus.NEW;
+
+// Open enum: use .of() to create instances from custom string values
+TicketStatus custom = TicketStatus.of("custom_value");
 ```
 
 

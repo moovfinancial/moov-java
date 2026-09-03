@@ -6,6 +6,9 @@
 import io.moov.sdk.models.components.FeeCategory;
 
 FeeCategory value = FeeCategory.ACH;
+
+// Open enum: use .of() to create instances from custom string values
+FeeCategory custom = FeeCategory.of("custom_value");
 ```
 
 

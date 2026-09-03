@@ -8,6 +8,9 @@ Status of a transaction within the RTP lifecycle.
 import io.moov.sdk.models.components.RTPTransactionStatus;
 
 RTPTransactionStatus value = RTPTransactionStatus.INITIATED;
+
+// Open enum: use .of() to create instances from custom string values
+RTPTransactionStatus custom = RTPTransactionStatus.of("custom_value");
 ```
 
 

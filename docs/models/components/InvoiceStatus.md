@@ -6,6 +6,9 @@
 import io.moov.sdk.models.components.InvoiceStatus;
 
 InvoiceStatus value = InvoiceStatus.DRAFT;
+
+// Open enum: use .of() to create instances from custom string values
+InvoiceStatus custom = InvoiceStatus.of("custom_value");
 ```
 
 

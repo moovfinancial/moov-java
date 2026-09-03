@@ -3,34 +3,129 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum CancellationStatus {
-    PENDING("pending"),
-    COMPLETED("completed"),
-    FAILED("failed");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class CancellationStatus {
 
-    @JsonValue
+    public static final CancellationStatus PENDING = new CancellationStatus("pending");
+    public static final CancellationStatus COMPLETED = new CancellationStatus("completed");
+    public static final CancellationStatus FAILED = new CancellationStatus("failed");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, CancellationStatus> values = createValuesMap();
+    private static final Map<String, CancellationStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    CancellationStatus(String value) {
+    private CancellationStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a CancellationStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as CancellationStatus
+     */ 
+    @JsonCreator
+    public static CancellationStatus of(String value) {
+        synchronized (CancellationStatus.class) {
+            return values.computeIfAbsent(value, v -> new CancellationStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<CancellationStatus> fromValue(String value) {
-        for (CancellationStatus o: CancellationStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<CancellationStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CancellationStatus other = (CancellationStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "CancellationStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static CancellationStatus[] values() {
+        synchronized (CancellationStatus.class) {
+            return values.values().toArray(new CancellationStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, CancellationStatus> createValuesMap() {
+        Map<String, CancellationStatus> map = new LinkedHashMap<>();
+        map.put("pending", PENDING);
+        map.put("completed", COMPLETED);
+        map.put("failed", FAILED);
+        return map;
+    }
+
+    private static final Map<String, CancellationStatusEnum> createEnumsMap() {
+        Map<String, CancellationStatusEnum> map = new HashMap<>();
+        map.put("pending", CancellationStatusEnum.PENDING);
+        map.put("completed", CancellationStatusEnum.COMPLETED);
+        map.put("failed", CancellationStatusEnum.FAILED);
+        return map;
+    }
+    
+    
+    public enum CancellationStatusEnum {
+
+        PENDING("pending"),
+        COMPLETED("completed"),
+        FAILED("failed"),;
+
+        private final String value;
+
+        private CancellationStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

@@ -3,38 +3,130 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * AuthMethod
  * 
  * <p>The authentication method used for the Google Pay token.
  */
-public enum AuthMethod {
-    PAN_ONLY("PAN_ONLY"),
-    CRYPTOGRAM3_DS("CRYPTOGRAM_3DS");
+public class AuthMethod {
 
-    @JsonValue
+    public static final AuthMethod PAN_ONLY = new AuthMethod("PAN_ONLY");
+    public static final AuthMethod CRYPTOGRAM3_DS = new AuthMethod("CRYPTOGRAM_3DS");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, AuthMethod> values = createValuesMap();
+    private static final Map<String, AuthMethodEnum> enums = createEnumsMap();
+
     private final String value;
 
-    AuthMethod(String value) {
+    private AuthMethod(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a AuthMethod with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as AuthMethod
+     */ 
+    @JsonCreator
+    public static AuthMethod of(String value) {
+        synchronized (AuthMethod.class) {
+            return values.computeIfAbsent(value, v -> new AuthMethod(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<AuthMethod> fromValue(String value) {
-        for (AuthMethod o: AuthMethod.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<AuthMethodEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        AuthMethod other = (AuthMethod) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "AuthMethod [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static AuthMethod[] values() {
+        synchronized (AuthMethod.class) {
+            return values.values().toArray(new AuthMethod[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, AuthMethod> createValuesMap() {
+        Map<String, AuthMethod> map = new LinkedHashMap<>();
+        map.put("PAN_ONLY", PAN_ONLY);
+        map.put("CRYPTOGRAM_3DS", CRYPTOGRAM3_DS);
+        return map;
+    }
+
+    private static final Map<String, AuthMethodEnum> createEnumsMap() {
+        Map<String, AuthMethodEnum> map = new HashMap<>();
+        map.put("PAN_ONLY", AuthMethodEnum.PAN_ONLY);
+        map.put("CRYPTOGRAM_3DS", AuthMethodEnum.CRYPTOGRAM3_DS);
+        return map;
+    }
+    
+    
+    public enum AuthMethodEnum {
+
+        PAN_ONLY("PAN_ONLY"),
+        CRYPTOGRAM3_DS("CRYPTOGRAM_3DS"),;
+
+        private final String value;
+
+        private AuthMethodEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

@@ -8,6 +8,9 @@ The status of a webhook.
 import io.moov.sdk.models.components.WebhookStatus;
 
 WebhookStatus value = WebhookStatus.ENABLED;
+
+// Open enum: use .of() to create instances from custom string values
+WebhookStatus custom = WebhookStatus.of("custom_value");
 ```
 
 

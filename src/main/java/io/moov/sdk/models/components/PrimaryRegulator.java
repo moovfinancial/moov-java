@@ -3,41 +3,142 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * PrimaryRegulator
  * 
  * <p>If the business is a financial institution, this field describes its primary regulator.
  */
-public enum PrimaryRegulator {
-    OCC("OCC"),
-    FDIC("FDIC"),
-    NCUA("NCUA"),
-    FRB("FRB"),
-    STATE_CU_REGULATOR("state-cu-regulator");
+public class PrimaryRegulator {
 
-    @JsonValue
+    public static final PrimaryRegulator OCC = new PrimaryRegulator("OCC");
+    public static final PrimaryRegulator FDIC = new PrimaryRegulator("FDIC");
+    public static final PrimaryRegulator NCUA = new PrimaryRegulator("NCUA");
+    public static final PrimaryRegulator FRB = new PrimaryRegulator("FRB");
+    public static final PrimaryRegulator STATE_CU_REGULATOR = new PrimaryRegulator("state-cu-regulator");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, PrimaryRegulator> values = createValuesMap();
+    private static final Map<String, PrimaryRegulatorEnum> enums = createEnumsMap();
+
     private final String value;
 
-    PrimaryRegulator(String value) {
+    private PrimaryRegulator(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a PrimaryRegulator with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as PrimaryRegulator
+     */ 
+    @JsonCreator
+    public static PrimaryRegulator of(String value) {
+        synchronized (PrimaryRegulator.class) {
+            return values.computeIfAbsent(value, v -> new PrimaryRegulator(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<PrimaryRegulator> fromValue(String value) {
-        for (PrimaryRegulator o: PrimaryRegulator.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<PrimaryRegulatorEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PrimaryRegulator other = (PrimaryRegulator) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "PrimaryRegulator [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static PrimaryRegulator[] values() {
+        synchronized (PrimaryRegulator.class) {
+            return values.values().toArray(new PrimaryRegulator[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, PrimaryRegulator> createValuesMap() {
+        Map<String, PrimaryRegulator> map = new LinkedHashMap<>();
+        map.put("OCC", OCC);
+        map.put("FDIC", FDIC);
+        map.put("NCUA", NCUA);
+        map.put("FRB", FRB);
+        map.put("state-cu-regulator", STATE_CU_REGULATOR);
+        return map;
+    }
+
+    private static final Map<String, PrimaryRegulatorEnum> createEnumsMap() {
+        Map<String, PrimaryRegulatorEnum> map = new HashMap<>();
+        map.put("OCC", PrimaryRegulatorEnum.OCC);
+        map.put("FDIC", PrimaryRegulatorEnum.FDIC);
+        map.put("NCUA", PrimaryRegulatorEnum.NCUA);
+        map.put("FRB", PrimaryRegulatorEnum.FRB);
+        map.put("state-cu-regulator", PrimaryRegulatorEnum.STATE_CU_REGULATOR);
+        return map;
+    }
+    
+    
+    public enum PrimaryRegulatorEnum {
+
+        OCC("OCC"),
+        FDIC("FDIC"),
+        NCUA("NCUA"),
+        FRB("FRB"),
+        STATE_CU_REGULATOR("state-cu-regulator"),;
+
+        private final String value;
+
+        private PrimaryRegulatorEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

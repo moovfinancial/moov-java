@@ -6,6 +6,9 @@
 import io.moov.sdk.models.components.ReturnPolicyType;
 
 ReturnPolicyType value = ReturnPolicyType.NONE;
+
+// Open enum: use .of() to create instances from custom string values
+ReturnPolicyType custom = ReturnPolicyType.of("custom_value");
 ```
 
 

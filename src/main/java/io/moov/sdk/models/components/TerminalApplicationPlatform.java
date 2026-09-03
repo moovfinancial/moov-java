@@ -3,39 +3,134 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * TerminalApplicationPlatform
  * 
  * <p>Platform of the terminal application.
  */
-public enum TerminalApplicationPlatform {
-    UNDEFINED("undefined"),
-    IOS("ios"),
-    ANDROID("android");
+public class TerminalApplicationPlatform {
 
-    @JsonValue
+    public static final TerminalApplicationPlatform UNDEFINED = new TerminalApplicationPlatform("undefined");
+    public static final TerminalApplicationPlatform IOS = new TerminalApplicationPlatform("ios");
+    public static final TerminalApplicationPlatform ANDROID = new TerminalApplicationPlatform("android");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, TerminalApplicationPlatform> values = createValuesMap();
+    private static final Map<String, TerminalApplicationPlatformEnum> enums = createEnumsMap();
+
     private final String value;
 
-    TerminalApplicationPlatform(String value) {
+    private TerminalApplicationPlatform(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a TerminalApplicationPlatform with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as TerminalApplicationPlatform
+     */ 
+    @JsonCreator
+    public static TerminalApplicationPlatform of(String value) {
+        synchronized (TerminalApplicationPlatform.class) {
+            return values.computeIfAbsent(value, v -> new TerminalApplicationPlatform(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<TerminalApplicationPlatform> fromValue(String value) {
-        for (TerminalApplicationPlatform o: TerminalApplicationPlatform.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<TerminalApplicationPlatformEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        TerminalApplicationPlatform other = (TerminalApplicationPlatform) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "TerminalApplicationPlatform [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static TerminalApplicationPlatform[] values() {
+        synchronized (TerminalApplicationPlatform.class) {
+            return values.values().toArray(new TerminalApplicationPlatform[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, TerminalApplicationPlatform> createValuesMap() {
+        Map<String, TerminalApplicationPlatform> map = new LinkedHashMap<>();
+        map.put("undefined", UNDEFINED);
+        map.put("ios", IOS);
+        map.put("android", ANDROID);
+        return map;
+    }
+
+    private static final Map<String, TerminalApplicationPlatformEnum> createEnumsMap() {
+        Map<String, TerminalApplicationPlatformEnum> map = new HashMap<>();
+        map.put("undefined", TerminalApplicationPlatformEnum.UNDEFINED);
+        map.put("ios", TerminalApplicationPlatformEnum.IOS);
+        map.put("android", TerminalApplicationPlatformEnum.ANDROID);
+        return map;
+    }
+    
+    
+    public enum TerminalApplicationPlatformEnum {
+
+        UNDEFINED("undefined"),
+        IOS("ios"),
+        ANDROID("android"),;
+
+        private final String value;
+
+        private TerminalApplicationPlatformEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

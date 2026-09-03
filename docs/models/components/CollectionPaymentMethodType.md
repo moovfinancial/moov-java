@@ -8,6 +8,9 @@ Payment methods allowed for collecting a payment.
 import io.moov.sdk.models.components.CollectionPaymentMethodType;
 
 CollectionPaymentMethodType value = CollectionPaymentMethodType.APPLE_PAY;
+
+// Open enum: use .of() to create instances from custom string values
+CollectionPaymentMethodType custom = CollectionPaymentMethodType.of("custom_value");
 ```
 
 

@@ -16,7 +16,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-
+/**
+ * PaymentLinkPayoutDetails
+ * 
+ * <p>Options for payout links used to send a payout.
+ */
 public class PaymentLinkPayoutDetails {
     /**
      * A list of payment methods that should be supported for this payment link.
@@ -41,12 +45,7 @@ public class PaymentLinkPayoutDetails {
     private Optional<? extends Map<String, String>> metadata;
 
     /**
-     * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-     * `push-to-card`.
-     * 
-     * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-     * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-     * options.
+     * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pushOptions")
@@ -104,12 +103,7 @@ public class PaymentLinkPayoutDetails {
     }
 
     /**
-     * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-     * `push-to-card`.
-     * 
-     * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-     * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-     * options.
+     * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -163,12 +157,7 @@ public class PaymentLinkPayoutDetails {
     }
 
     /**
-     * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-     * `push-to-card`.
-     * 
-     * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-     * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-     * options.
+     * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
      */
     public PaymentLinkPayoutDetails withPushOptions(PushOptions pushOptions) {
         Utils.checkNotNull(pushOptions, "pushOptions");
@@ -178,12 +167,7 @@ public class PaymentLinkPayoutDetails {
 
 
     /**
-     * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-     * `push-to-card`.
-     * 
-     * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-     * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-     * options.
+     * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
      */
     public PaymentLinkPayoutDetails withPushOptions(Optional<? extends PushOptions> pushOptions) {
         Utils.checkNotNull(pushOptions, "pushOptions");
@@ -282,12 +266,7 @@ public class PaymentLinkPayoutDetails {
 
 
         /**
-         * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-         * `push-to-card`.
-         * 
-         * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-         * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-         * options.
+         * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
          */
         public Builder pushOptions(PushOptions pushOptions) {
             Utils.checkNotNull(pushOptions, "pushOptions");
@@ -296,12 +275,7 @@ public class PaymentLinkPayoutDetails {
         }
 
         /**
-         * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-         * `push-to-card`.
-         * 
-         * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-         * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-         * options.
+         * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
          */
         public Builder pushOptions(Optional<? extends PushOptions> pushOptions) {
             Utils.checkNotNull(pushOptions, "pushOptions");

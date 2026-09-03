@@ -3,37 +3,141 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum SweepStatus {
-    ACCRUING("accruing"),
-    ACTION_REQUIRED("action-required"),
-    CANCELED("canceled"),
-    CLOSED("closed"),
-    FAILED("failed"),
-    PAID("paid");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class SweepStatus {
 
-    @JsonValue
+    public static final SweepStatus ACCRUING = new SweepStatus("accruing");
+    public static final SweepStatus ACTION_REQUIRED = new SweepStatus("action-required");
+    public static final SweepStatus CANCELED = new SweepStatus("canceled");
+    public static final SweepStatus CLOSED = new SweepStatus("closed");
+    public static final SweepStatus FAILED = new SweepStatus("failed");
+    public static final SweepStatus PAID = new SweepStatus("paid");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, SweepStatus> values = createValuesMap();
+    private static final Map<String, SweepStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    SweepStatus(String value) {
+    private SweepStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a SweepStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as SweepStatus
+     */ 
+    @JsonCreator
+    public static SweepStatus of(String value) {
+        synchronized (SweepStatus.class) {
+            return values.computeIfAbsent(value, v -> new SweepStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<SweepStatus> fromValue(String value) {
-        for (SweepStatus o: SweepStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<SweepStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        SweepStatus other = (SweepStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "SweepStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static SweepStatus[] values() {
+        synchronized (SweepStatus.class) {
+            return values.values().toArray(new SweepStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, SweepStatus> createValuesMap() {
+        Map<String, SweepStatus> map = new LinkedHashMap<>();
+        map.put("accruing", ACCRUING);
+        map.put("action-required", ACTION_REQUIRED);
+        map.put("canceled", CANCELED);
+        map.put("closed", CLOSED);
+        map.put("failed", FAILED);
+        map.put("paid", PAID);
+        return map;
+    }
+
+    private static final Map<String, SweepStatusEnum> createEnumsMap() {
+        Map<String, SweepStatusEnum> map = new HashMap<>();
+        map.put("accruing", SweepStatusEnum.ACCRUING);
+        map.put("action-required", SweepStatusEnum.ACTION_REQUIRED);
+        map.put("canceled", SweepStatusEnum.CANCELED);
+        map.put("closed", SweepStatusEnum.CLOSED);
+        map.put("failed", SweepStatusEnum.FAILED);
+        map.put("paid", SweepStatusEnum.PAID);
+        return map;
+    }
+    
+    
+    public enum SweepStatusEnum {
+
+        ACCRUING("accruing"),
+        ACTION_REQUIRED("action-required"),
+        CANCELED("canceled"),
+        CLOSED("closed"),
+        FAILED("failed"),
+        PAID("paid"),;
+
+        private final String value;
+
+        private SweepStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

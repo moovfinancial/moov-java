@@ -3,11 +3,21 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * IssuedCardState
  * 
@@ -15,31 +25,119 @@ import java.util.Optional;
  * authorizations if it is in an active state.
  * 
  * <p>- `active`: The card is operational and can approve authorizations.
+ * - `frozen`: The card is temporarily suspended and cannot approve authorizations. A frozen card can
+ * be reactivated by setting its state back to `active`.
  * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
  * closed by request or when it expires.
  */
-public enum IssuedCardState {
-    ACTIVE("active"),
-    CLOSED("closed");
+public class IssuedCardState {
 
-    @JsonValue
+    public static final IssuedCardState ACTIVE = new IssuedCardState("active");
+    public static final IssuedCardState FROZEN = new IssuedCardState("frozen");
+    public static final IssuedCardState CLOSED = new IssuedCardState("closed");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, IssuedCardState> values = createValuesMap();
+    private static final Map<String, IssuedCardStateEnum> enums = createEnumsMap();
+
     private final String value;
 
-    IssuedCardState(String value) {
+    private IssuedCardState(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a IssuedCardState with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as IssuedCardState
+     */ 
+    @JsonCreator
+    public static IssuedCardState of(String value) {
+        synchronized (IssuedCardState.class) {
+            return values.computeIfAbsent(value, v -> new IssuedCardState(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<IssuedCardState> fromValue(String value) {
-        for (IssuedCardState o: IssuedCardState.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<IssuedCardStateEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        IssuedCardState other = (IssuedCardState) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "IssuedCardState [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static IssuedCardState[] values() {
+        synchronized (IssuedCardState.class) {
+            return values.values().toArray(new IssuedCardState[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, IssuedCardState> createValuesMap() {
+        Map<String, IssuedCardState> map = new LinkedHashMap<>();
+        map.put("active", ACTIVE);
+        map.put("frozen", FROZEN);
+        map.put("closed", CLOSED);
+        return map;
+    }
+
+    private static final Map<String, IssuedCardStateEnum> createEnumsMap() {
+        Map<String, IssuedCardStateEnum> map = new HashMap<>();
+        map.put("active", IssuedCardStateEnum.ACTIVE);
+        map.put("frozen", IssuedCardStateEnum.FROZEN);
+        map.put("closed", IssuedCardStateEnum.CLOSED);
+        return map;
+    }
+    
+    
+    public enum IssuedCardStateEnum {
+
+        ACTIVE("active"),
+        FROZEN("frozen"),
+        CLOSED("closed"),;
+
+        private final String value;
+
+        private IssuedCardStateEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

@@ -3,11 +3,21 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * TipCalculationBasis
  * 
@@ -16,28 +26,110 @@ import java.util.Optional;
  * - `pre-tax`: Tip amounts are calculated using the subtotal amount before taxes
  * - `post-tax`: Tip amounts are calculated using the subtotal amount + taxes
  */
-public enum TipCalculationBasis {
-    PRE_TAX("pre-tax"),
-    POST_TAX("post-tax");
+public class TipCalculationBasis {
 
-    @JsonValue
+    public static final TipCalculationBasis PRE_TAX = new TipCalculationBasis("pre-tax");
+    public static final TipCalculationBasis POST_TAX = new TipCalculationBasis("post-tax");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, TipCalculationBasis> values = createValuesMap();
+    private static final Map<String, TipCalculationBasisEnum> enums = createEnumsMap();
+
     private final String value;
 
-    TipCalculationBasis(String value) {
+    private TipCalculationBasis(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a TipCalculationBasis with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as TipCalculationBasis
+     */ 
+    @JsonCreator
+    public static TipCalculationBasis of(String value) {
+        synchronized (TipCalculationBasis.class) {
+            return values.computeIfAbsent(value, v -> new TipCalculationBasis(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<TipCalculationBasis> fromValue(String value) {
-        for (TipCalculationBasis o: TipCalculationBasis.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<TipCalculationBasisEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        TipCalculationBasis other = (TipCalculationBasis) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "TipCalculationBasis [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static TipCalculationBasis[] values() {
+        synchronized (TipCalculationBasis.class) {
+            return values.values().toArray(new TipCalculationBasis[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, TipCalculationBasis> createValuesMap() {
+        Map<String, TipCalculationBasis> map = new LinkedHashMap<>();
+        map.put("pre-tax", PRE_TAX);
+        map.put("post-tax", POST_TAX);
+        return map;
+    }
+
+    private static final Map<String, TipCalculationBasisEnum> createEnumsMap() {
+        Map<String, TipCalculationBasisEnum> map = new HashMap<>();
+        map.put("pre-tax", TipCalculationBasisEnum.PRE_TAX);
+        map.put("post-tax", TipCalculationBasisEnum.POST_TAX);
+        return map;
+    }
+    
+    
+    public enum TipCalculationBasisEnum {
+
+        PRE_TAX("pre-tax"),
+        POST_TAX("post-tax"),;
+
+        private final String value;
+
+        private TipCalculationBasisEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

@@ -16,7 +16,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-
+/**
+ * PaymentLinkPayoutDetailsUpdate
+ * 
+ * <p>Options for payout links used to send a payout.
+ */
 public class PaymentLinkPayoutDetailsUpdate {
     /**
      * A list of payment methods that should be supported for this payment link.
@@ -43,12 +47,7 @@ public class PaymentLinkPayoutDetailsUpdate {
     private Optional<? extends Map<String, String>> metadata;
 
     /**
-     * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-     * `push-to-card`.
-     * 
-     * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-     * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-     * options.
+     * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pushOptions")
@@ -106,12 +105,7 @@ public class PaymentLinkPayoutDetailsUpdate {
     }
 
     /**
-     * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-     * `push-to-card`.
-     * 
-     * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-     * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-     * options.
+     * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -188,12 +182,7 @@ public class PaymentLinkPayoutDetailsUpdate {
     }
 
     /**
-     * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-     * `push-to-card`.
-     * 
-     * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-     * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-     * options.
+     * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
      */
     public PaymentLinkPayoutDetailsUpdate withPushOptions(PushOptionsUpdate pushOptions) {
         Utils.checkNotNull(pushOptions, "pushOptions");
@@ -203,12 +192,7 @@ public class PaymentLinkPayoutDetailsUpdate {
 
 
     /**
-     * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-     * `push-to-card`.
-     * 
-     * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-     * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-     * options.
+     * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
      */
     public PaymentLinkPayoutDetailsUpdate withPushOptions(Optional<? extends PushOptionsUpdate> pushOptions) {
         Utils.checkNotNull(pushOptions, "pushOptions");
@@ -328,12 +312,7 @@ public class PaymentLinkPayoutDetailsUpdate {
 
 
         /**
-         * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-         * `push-to-card`.
-         * 
-         * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-         * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-         * options.
+         * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
          */
         public Builder pushOptions(PushOptionsUpdate pushOptions) {
             Utils.checkNotNull(pushOptions, "pushOptions");
@@ -342,12 +321,7 @@ public class PaymentLinkPayoutDetailsUpdate {
         }
 
         /**
-         * Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes
-         * `push-to-card`.
-         * 
-         * <p>The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-         * (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these
-         * options.
+         * Delivery options for `push-to-card` and `push-to-apple-pay` payouts.
          */
         public Builder pushOptions(Optional<? extends PushOptionsUpdate> pushOptions) {
             Utils.checkNotNull(pushOptions, "pushOptions");

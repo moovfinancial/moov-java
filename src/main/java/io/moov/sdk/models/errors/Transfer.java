@@ -112,6 +112,14 @@ public class Transfer extends MoovError {
         return data().flatMap(Data::failureReason);
     }
 
+    /**
+     * Amount associated with this transfer.
+     * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+     * amount until a final capture is created.
+     * For these transfers, when a final capture is created, this is updated to the cumulative captured
+     * amount.
+     * For other transfer types, this is the transfer amount.
+     */
     @Deprecated
     public Optional<Amount> amount() {
         return data().map(Data::amount);
@@ -320,7 +328,14 @@ public class Transfer extends MoovError {
         @JsonProperty("failureReason")
         private Optional<? extends TransferFailureReason> failureReason;
 
-
+        /**
+         * Amount associated with this transfer.
+         * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+         * amount until a final capture is created.
+         * For these transfers, when a final capture is created, this is updated to the cumulative captured
+         * amount.
+         * For other transfer types, this is the transfer amount.
+         */
         @JsonProperty("amount")
         private Amount amount;
 
@@ -624,6 +639,14 @@ public class Transfer extends MoovError {
             return (Optional<TransferFailureReason>) failureReason;
         }
 
+        /**
+         * Amount associated with this transfer.
+         * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+         * amount until a final capture is created.
+         * For these transfers, when a final capture is created, this is updated to the cumulative captured
+         * amount.
+         * For other transfer types, this is the transfer amount.
+         */
         @JsonIgnore
         public Amount amount() {
             return amount;
@@ -865,6 +888,14 @@ public class Transfer extends MoovError {
             return this;
         }
 
+        /**
+         * Amount associated with this transfer.
+         * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+         * amount until a final capture is created.
+         * For these transfers, when a final capture is created, this is updated to the cumulative captured
+         * amount.
+         * For other transfer types, this is the transfer amount.
+         */
         public Data withAmount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
@@ -1481,6 +1512,14 @@ public class Transfer extends MoovError {
             }
 
 
+            /**
+             * Amount associated with this transfer.
+             * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+             * amount until a final capture is created.
+             * For these transfers, when a final capture is created, this is updated to the cumulative captured
+             * amount.
+             * For other transfer types, this is the transfer amount.
+             */
             public Builder amount(Amount amount) {
                 Utils.checkNotNull(amount, "amount");
                 this.amount = amount;

@@ -8,6 +8,9 @@ The reason the bank account status changed to the current value.
 import io.moov.sdk.models.components.BankAccountStatusReason;
 
 BankAccountStatusReason value = BankAccountStatusReason.BANK_ACCOUNT_CREATED;
+
+// Open enum: use .of() to create instances from custom string values
+BankAccountStatusReason custom = BankAccountStatusReason.of("custom_value");
 ```
 
 

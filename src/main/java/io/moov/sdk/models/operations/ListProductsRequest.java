@@ -28,7 +28,9 @@ public class ListProductsRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
 
-
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
 
@@ -72,6 +74,9 @@ public class ListProductsRequest {
         return skip;
     }
 
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     @JsonIgnore
     public Optional<Long> count() {
         return count;
@@ -120,6 +125,9 @@ public class ListProductsRequest {
         return this;
     }
 
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     public ListProductsRequest withCount(long count) {
         Utils.checkNotNull(count, "count");
         this.count = Optional.ofNullable(count);
@@ -127,6 +135,9 @@ public class ListProductsRequest {
     }
 
 
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     public ListProductsRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
         this.count = count;
@@ -220,12 +231,18 @@ public class ListProductsRequest {
         }
 
 
+        /**
+         * Page size. When omitted, the server defaults to `200`.
+         */
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
             return this;
         }
 
+        /**
+         * Page size. When omitted, the server defaults to `200`.
+         */
         public Builder count(Optional<Long> count) {
             Utils.checkNotNull(count, "count");
             this.count = count;

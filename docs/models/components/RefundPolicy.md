@@ -6,6 +6,9 @@
 import io.moov.sdk.models.components.RefundPolicy;
 
 RefundPolicy value = RefundPolicy.CONDITIONAL_REFUND;
+
+// Open enum: use .of() to create instances from custom string values
+RefundPolicy custom = RefundPolicy.of("custom_value");
 ```
 
 

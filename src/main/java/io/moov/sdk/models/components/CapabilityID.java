@@ -3,11 +3,21 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * CapabilityID
  * 
@@ -26,44 +36,174 @@ import java.util.Optional;
  * might appear in the list for your Partner account. These are read-only capabilities that Moov
  * requests. These capabilities remain active with your account and require no additional action.
  */
-public enum CapabilityID {
-    TRANSFERS("transfers"),
-    SEND_FUNDS("send-funds"),
-    SEND_FUNDS_PUSH_TO_CARD("send-funds.push-to-card"),
-    MONEY_TRANSFER_PUSH_TO_CARD("money-transfer.push-to-card"),
-    SEND_FUNDS_ACH("send-funds.ach"),
-    SEND_FUNDS_RTP("send-funds.rtp"),
-    SEND_FUNDS_INSTANT_BANK("send-funds.instant-bank"),
-    COLLECT_FUNDS("collect-funds"),
-    COLLECT_FUNDS_CARD_PAYMENTS("collect-funds.card-payments"),
-    MONEY_TRANSFER_PULL_FROM_CARD("money-transfer.pull-from-card"),
-    COLLECT_FUNDS_ACH("collect-funds.ach"),
-    WALLET("wallet"),
-    WALLET_BALANCE("wallet.balance"),
-    CARD_ISSUING("card-issuing"),
-    ISSUING_CARDHOLDER("issuing.cardholder"),
-    PRODUCTION_APP("production-app"),
-    PLATFORM_PRODUCTION_APP("platform.production-app"),
-    PLATFORM_WALLET_TRANSFERS("platform.wallet-transfers");
+public class CapabilityID {
 
-    @JsonValue
+    public static final CapabilityID TRANSFERS = new CapabilityID("transfers");
+    public static final CapabilityID SEND_FUNDS = new CapabilityID("send-funds");
+    public static final CapabilityID SEND_FUNDS_PUSH_TO_CARD = new CapabilityID("send-funds.push-to-card");
+    public static final CapabilityID MONEY_TRANSFER_PUSH_TO_CARD = new CapabilityID("money-transfer.push-to-card");
+    public static final CapabilityID SEND_FUNDS_ACH = new CapabilityID("send-funds.ach");
+    public static final CapabilityID SEND_FUNDS_RTP = new CapabilityID("send-funds.rtp");
+    public static final CapabilityID SEND_FUNDS_INSTANT_BANK = new CapabilityID("send-funds.instant-bank");
+    public static final CapabilityID COLLECT_FUNDS = new CapabilityID("collect-funds");
+    public static final CapabilityID COLLECT_FUNDS_CARD_PAYMENTS = new CapabilityID("collect-funds.card-payments");
+    public static final CapabilityID MONEY_TRANSFER_PULL_FROM_CARD = new CapabilityID("money-transfer.pull-from-card");
+    public static final CapabilityID COLLECT_FUNDS_ACH = new CapabilityID("collect-funds.ach");
+    public static final CapabilityID WALLET = new CapabilityID("wallet");
+    public static final CapabilityID WALLET_BALANCE = new CapabilityID("wallet.balance");
+    public static final CapabilityID CARD_ISSUING = new CapabilityID("card-issuing");
+    public static final CapabilityID ISSUING_CARDHOLDER = new CapabilityID("issuing.cardholder");
+    public static final CapabilityID PRODUCTION_APP = new CapabilityID("production-app");
+    public static final CapabilityID PLATFORM_PRODUCTION_APP = new CapabilityID("platform.production-app");
+    public static final CapabilityID PLATFORM_WALLET_TRANSFERS = new CapabilityID("platform.wallet-transfers");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, CapabilityID> values = createValuesMap();
+    private static final Map<String, CapabilityIDEnum> enums = createEnumsMap();
+
     private final String value;
 
-    CapabilityID(String value) {
+    private CapabilityID(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a CapabilityID with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as CapabilityID
+     */ 
+    @JsonCreator
+    public static CapabilityID of(String value) {
+        synchronized (CapabilityID.class) {
+            return values.computeIfAbsent(value, v -> new CapabilityID(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<CapabilityID> fromValue(String value) {
-        for (CapabilityID o: CapabilityID.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<CapabilityIDEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CapabilityID other = (CapabilityID) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "CapabilityID [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static CapabilityID[] values() {
+        synchronized (CapabilityID.class) {
+            return values.values().toArray(new CapabilityID[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, CapabilityID> createValuesMap() {
+        Map<String, CapabilityID> map = new LinkedHashMap<>();
+        map.put("transfers", TRANSFERS);
+        map.put("send-funds", SEND_FUNDS);
+        map.put("send-funds.push-to-card", SEND_FUNDS_PUSH_TO_CARD);
+        map.put("money-transfer.push-to-card", MONEY_TRANSFER_PUSH_TO_CARD);
+        map.put("send-funds.ach", SEND_FUNDS_ACH);
+        map.put("send-funds.rtp", SEND_FUNDS_RTP);
+        map.put("send-funds.instant-bank", SEND_FUNDS_INSTANT_BANK);
+        map.put("collect-funds", COLLECT_FUNDS);
+        map.put("collect-funds.card-payments", COLLECT_FUNDS_CARD_PAYMENTS);
+        map.put("money-transfer.pull-from-card", MONEY_TRANSFER_PULL_FROM_CARD);
+        map.put("collect-funds.ach", COLLECT_FUNDS_ACH);
+        map.put("wallet", WALLET);
+        map.put("wallet.balance", WALLET_BALANCE);
+        map.put("card-issuing", CARD_ISSUING);
+        map.put("issuing.cardholder", ISSUING_CARDHOLDER);
+        map.put("production-app", PRODUCTION_APP);
+        map.put("platform.production-app", PLATFORM_PRODUCTION_APP);
+        map.put("platform.wallet-transfers", PLATFORM_WALLET_TRANSFERS);
+        return map;
+    }
+
+    private static final Map<String, CapabilityIDEnum> createEnumsMap() {
+        Map<String, CapabilityIDEnum> map = new HashMap<>();
+        map.put("transfers", CapabilityIDEnum.TRANSFERS);
+        map.put("send-funds", CapabilityIDEnum.SEND_FUNDS);
+        map.put("send-funds.push-to-card", CapabilityIDEnum.SEND_FUNDS_PUSH_TO_CARD);
+        map.put("money-transfer.push-to-card", CapabilityIDEnum.MONEY_TRANSFER_PUSH_TO_CARD);
+        map.put("send-funds.ach", CapabilityIDEnum.SEND_FUNDS_ACH);
+        map.put("send-funds.rtp", CapabilityIDEnum.SEND_FUNDS_RTP);
+        map.put("send-funds.instant-bank", CapabilityIDEnum.SEND_FUNDS_INSTANT_BANK);
+        map.put("collect-funds", CapabilityIDEnum.COLLECT_FUNDS);
+        map.put("collect-funds.card-payments", CapabilityIDEnum.COLLECT_FUNDS_CARD_PAYMENTS);
+        map.put("money-transfer.pull-from-card", CapabilityIDEnum.MONEY_TRANSFER_PULL_FROM_CARD);
+        map.put("collect-funds.ach", CapabilityIDEnum.COLLECT_FUNDS_ACH);
+        map.put("wallet", CapabilityIDEnum.WALLET);
+        map.put("wallet.balance", CapabilityIDEnum.WALLET_BALANCE);
+        map.put("card-issuing", CapabilityIDEnum.CARD_ISSUING);
+        map.put("issuing.cardholder", CapabilityIDEnum.ISSUING_CARDHOLDER);
+        map.put("production-app", CapabilityIDEnum.PRODUCTION_APP);
+        map.put("platform.production-app", CapabilityIDEnum.PLATFORM_PRODUCTION_APP);
+        map.put("platform.wallet-transfers", CapabilityIDEnum.PLATFORM_WALLET_TRANSFERS);
+        return map;
+    }
+    
+    
+    public enum CapabilityIDEnum {
+
+        TRANSFERS("transfers"),
+        SEND_FUNDS("send-funds"),
+        SEND_FUNDS_PUSH_TO_CARD("send-funds.push-to-card"),
+        MONEY_TRANSFER_PUSH_TO_CARD("money-transfer.push-to-card"),
+        SEND_FUNDS_ACH("send-funds.ach"),
+        SEND_FUNDS_RTP("send-funds.rtp"),
+        SEND_FUNDS_INSTANT_BANK("send-funds.instant-bank"),
+        COLLECT_FUNDS("collect-funds"),
+        COLLECT_FUNDS_CARD_PAYMENTS("collect-funds.card-payments"),
+        MONEY_TRANSFER_PULL_FROM_CARD("money-transfer.pull-from-card"),
+        COLLECT_FUNDS_ACH("collect-funds.ach"),
+        WALLET("wallet"),
+        WALLET_BALANCE("wallet.balance"),
+        CARD_ISSUING("card-issuing"),
+        ISSUING_CARDHOLDER("issuing.cardholder"),
+        PRODUCTION_APP("production-app"),
+        PLATFORM_PRODUCTION_APP("platform.production-app"),
+        PLATFORM_WALLET_TRANSFERS("platform.wallet-transfers"),;
+
+        private final String value;
+
+        private CapabilityIDEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

@@ -3,43 +3,150 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * TransferStatus
  * 
  * <p>Status of a transfer.
  */
-public enum TransferStatus {
-    CREATED("created"),
-    PENDING("pending"),
-    COMPLETED("completed"),
-    FAILED("failed"),
-    REVERSED("reversed"),
-    QUEUED("queued"),
-    CANCELED("canceled");
+public class TransferStatus {
 
-    @JsonValue
+    public static final TransferStatus CREATED = new TransferStatus("created");
+    public static final TransferStatus PENDING = new TransferStatus("pending");
+    public static final TransferStatus COMPLETED = new TransferStatus("completed");
+    public static final TransferStatus FAILED = new TransferStatus("failed");
+    public static final TransferStatus REVERSED = new TransferStatus("reversed");
+    public static final TransferStatus QUEUED = new TransferStatus("queued");
+    public static final TransferStatus CANCELED = new TransferStatus("canceled");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, TransferStatus> values = createValuesMap();
+    private static final Map<String, TransferStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    TransferStatus(String value) {
+    private TransferStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a TransferStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as TransferStatus
+     */ 
+    @JsonCreator
+    public static TransferStatus of(String value) {
+        synchronized (TransferStatus.class) {
+            return values.computeIfAbsent(value, v -> new TransferStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<TransferStatus> fromValue(String value) {
-        for (TransferStatus o: TransferStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<TransferStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        TransferStatus other = (TransferStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "TransferStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static TransferStatus[] values() {
+        synchronized (TransferStatus.class) {
+            return values.values().toArray(new TransferStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, TransferStatus> createValuesMap() {
+        Map<String, TransferStatus> map = new LinkedHashMap<>();
+        map.put("created", CREATED);
+        map.put("pending", PENDING);
+        map.put("completed", COMPLETED);
+        map.put("failed", FAILED);
+        map.put("reversed", REVERSED);
+        map.put("queued", QUEUED);
+        map.put("canceled", CANCELED);
+        return map;
+    }
+
+    private static final Map<String, TransferStatusEnum> createEnumsMap() {
+        Map<String, TransferStatusEnum> map = new HashMap<>();
+        map.put("created", TransferStatusEnum.CREATED);
+        map.put("pending", TransferStatusEnum.PENDING);
+        map.put("completed", TransferStatusEnum.COMPLETED);
+        map.put("failed", TransferStatusEnum.FAILED);
+        map.put("reversed", TransferStatusEnum.REVERSED);
+        map.put("queued", TransferStatusEnum.QUEUED);
+        map.put("canceled", TransferStatusEnum.CANCELED);
+        return map;
+    }
+    
+    
+    public enum TransferStatusEnum {
+
+        CREATED("created"),
+        PENDING("pending"),
+        COMPLETED("completed"),
+        FAILED("failed"),
+        REVERSED("reversed"),
+        QUEUED("queued"),
+        CANCELED("canceled"),;
+
+        private final String value;
+
+        private TransferStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

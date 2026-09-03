@@ -3,37 +3,126 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * TransferEntryMode
  * 
  * <p>How the card information was entered into the point of sale terminal.
  */
-public enum TransferEntryMode {
-    CONTACTLESS("contactless");
+public class TransferEntryMode {
 
-    @JsonValue
+    public static final TransferEntryMode CONTACTLESS = new TransferEntryMode("contactless");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, TransferEntryMode> values = createValuesMap();
+    private static final Map<String, TransferEntryModeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    TransferEntryMode(String value) {
+    private TransferEntryMode(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a TransferEntryMode with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as TransferEntryMode
+     */ 
+    @JsonCreator
+    public static TransferEntryMode of(String value) {
+        synchronized (TransferEntryMode.class) {
+            return values.computeIfAbsent(value, v -> new TransferEntryMode(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<TransferEntryMode> fromValue(String value) {
-        for (TransferEntryMode o: TransferEntryMode.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<TransferEntryModeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        TransferEntryMode other = (TransferEntryMode) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "TransferEntryMode [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static TransferEntryMode[] values() {
+        synchronized (TransferEntryMode.class) {
+            return values.values().toArray(new TransferEntryMode[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, TransferEntryMode> createValuesMap() {
+        Map<String, TransferEntryMode> map = new LinkedHashMap<>();
+        map.put("contactless", CONTACTLESS);
+        return map;
+    }
+
+    private static final Map<String, TransferEntryModeEnum> createEnumsMap() {
+        Map<String, TransferEntryModeEnum> map = new HashMap<>();
+        map.put("contactless", TransferEntryModeEnum.CONTACTLESS);
+        return map;
+    }
+    
+    
+    public enum TransferEntryModeEnum {
+
+        CONTACTLESS("contactless"),;
+
+        private final String value;
+
+        private TransferEntryModeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

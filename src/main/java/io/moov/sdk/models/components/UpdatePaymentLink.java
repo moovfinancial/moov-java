@@ -52,7 +52,9 @@ public class UpdatePaymentLink {
     @JsonProperty("payment")
     private Optional<? extends PaymentLinkPaymentDetailsUpdate> payment;
 
-
+    /**
+     * Options for payout links used to send a payout.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payout")
     private Optional<? extends PaymentLinkPayoutDetailsUpdate> payout;
@@ -140,6 +142,9 @@ public class UpdatePaymentLink {
         return (Optional<PaymentLinkPaymentDetailsUpdate>) payment;
     }
 
+    /**
+     * Options for payout links used to send a payout.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<PaymentLinkPayoutDetailsUpdate> payout() {
@@ -250,6 +255,9 @@ public class UpdatePaymentLink {
         return this;
     }
 
+    /**
+     * Options for payout links used to send a payout.
+     */
     public UpdatePaymentLink withPayout(PaymentLinkPayoutDetailsUpdate payout) {
         Utils.checkNotNull(payout, "payout");
         this.payout = Optional.ofNullable(payout);
@@ -257,6 +265,9 @@ public class UpdatePaymentLink {
     }
 
 
+    /**
+     * Options for payout links used to send a payout.
+     */
     public UpdatePaymentLink withPayout(Optional<? extends PaymentLinkPayoutDetailsUpdate> payout) {
         Utils.checkNotNull(payout, "payout");
         this.payout = payout;
@@ -439,12 +450,18 @@ public class UpdatePaymentLink {
         }
 
 
+        /**
+         * Options for payout links used to send a payout.
+         */
         public Builder payout(PaymentLinkPayoutDetailsUpdate payout) {
             Utils.checkNotNull(payout, "payout");
             this.payout = Optional.ofNullable(payout);
             return this;
         }
 
+        /**
+         * Options for payout links used to send a payout.
+         */
         public Builder payout(Optional<? extends PaymentLinkPayoutDetailsUpdate> payout) {
             Utils.checkNotNull(payout, "payout");
             this.payout = payout;

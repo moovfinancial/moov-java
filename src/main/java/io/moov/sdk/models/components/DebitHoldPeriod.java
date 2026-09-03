@@ -3,40 +3,135 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * DebitHoldPeriod
  * 
  * <p>An optional override of your default ACH hold period in banking days. The hold period must be longer
  * than or equal to your default setting.
  */
-public enum DebitHoldPeriod {
-    NO_HOLD("no-hold"),
-    ONE_MINUS_DAY("1-day"),
-    TWO_MINUS_DAYS("2-days");
+public class DebitHoldPeriod {
 
-    @JsonValue
+    public static final DebitHoldPeriod NO_HOLD = new DebitHoldPeriod("no-hold");
+    public static final DebitHoldPeriod ONE_MINUS_DAY = new DebitHoldPeriod("1-day");
+    public static final DebitHoldPeriod TWO_MINUS_DAYS = new DebitHoldPeriod("2-days");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, DebitHoldPeriod> values = createValuesMap();
+    private static final Map<String, DebitHoldPeriodEnum> enums = createEnumsMap();
+
     private final String value;
 
-    DebitHoldPeriod(String value) {
+    private DebitHoldPeriod(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a DebitHoldPeriod with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as DebitHoldPeriod
+     */ 
+    @JsonCreator
+    public static DebitHoldPeriod of(String value) {
+        synchronized (DebitHoldPeriod.class) {
+            return values.computeIfAbsent(value, v -> new DebitHoldPeriod(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<DebitHoldPeriod> fromValue(String value) {
-        for (DebitHoldPeriod o: DebitHoldPeriod.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<DebitHoldPeriodEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DebitHoldPeriod other = (DebitHoldPeriod) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "DebitHoldPeriod [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static DebitHoldPeriod[] values() {
+        synchronized (DebitHoldPeriod.class) {
+            return values.values().toArray(new DebitHoldPeriod[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, DebitHoldPeriod> createValuesMap() {
+        Map<String, DebitHoldPeriod> map = new LinkedHashMap<>();
+        map.put("no-hold", NO_HOLD);
+        map.put("1-day", ONE_MINUS_DAY);
+        map.put("2-days", TWO_MINUS_DAYS);
+        return map;
+    }
+
+    private static final Map<String, DebitHoldPeriodEnum> createEnumsMap() {
+        Map<String, DebitHoldPeriodEnum> map = new HashMap<>();
+        map.put("no-hold", DebitHoldPeriodEnum.NO_HOLD);
+        map.put("1-day", DebitHoldPeriodEnum.ONE_MINUS_DAY);
+        map.put("2-days", DebitHoldPeriodEnum.TWO_MINUS_DAYS);
+        return map;
+    }
+    
+    
+    public enum DebitHoldPeriodEnum {
+
+        NO_HOLD("no-hold"),
+        ONE_MINUS_DAY("1-day"),
+        TWO_MINUS_DAYS("2-days"),;
+
+        private final String value;
+
+        private DebitHoldPeriodEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

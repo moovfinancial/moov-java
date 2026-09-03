@@ -8,6 +8,9 @@ The network that the transaction was processed on.
 import io.moov.sdk.models.components.InstantBankNetwork;
 
 InstantBankNetwork value = InstantBankNetwork.FEDNOW;
+
+// Open enum: use .of() to create instances from custom string values
+InstantBankNetwork custom = InstantBankNetwork.of("custom_value");
 ```
 
 

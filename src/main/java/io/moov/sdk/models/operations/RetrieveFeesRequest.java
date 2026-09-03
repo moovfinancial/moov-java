@@ -52,7 +52,9 @@ public class RetrieveFeesRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
 
-
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
 
@@ -141,6 +143,9 @@ public class RetrieveFeesRequest {
         return skip;
     }
 
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     @JsonIgnore
     public Optional<Long> count() {
         return count;
@@ -265,6 +270,9 @@ public class RetrieveFeesRequest {
         return this;
     }
 
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     public RetrieveFeesRequest withCount(long count) {
         Utils.checkNotNull(count, "count");
         this.count = Optional.ofNullable(count);
@@ -272,6 +280,9 @@ public class RetrieveFeesRequest {
     }
 
 
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     public RetrieveFeesRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
         this.count = count;
@@ -458,12 +469,18 @@ public class RetrieveFeesRequest {
         }
 
 
+        /**
+         * Page size. When omitted, the server defaults to `200`.
+         */
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
             return this;
         }
 
+        /**
+         * Page size. When omitted, the server defaults to `200`.
+         */
         public Builder count(Optional<Long> count) {
             Utils.checkNotNull(count, "count");
             this.count = count;

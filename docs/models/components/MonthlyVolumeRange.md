@@ -8,6 +8,9 @@ The low value in each range is included. The high value in each range is exclude
 import io.moov.sdk.models.components.MonthlyVolumeRange;
 
 MonthlyVolumeRange value = MonthlyVolumeRange.UNDER10K;
+
+// Open enum: use .of() to create instances from custom string values
+MonthlyVolumeRange custom = MonthlyVolumeRange.of("custom_value");
 ```
 
 

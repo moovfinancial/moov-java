@@ -8,6 +8,9 @@ Specifies the card processing pricing model
 import io.moov.sdk.models.components.CardAcquiringModel;
 
 CardAcquiringModel value = CardAcquiringModel.COST_PLUS;
+
+// Open enum: use .of() to create instances from custom string values
+CardAcquiringModel custom = CardAcquiringModel.of("custom_value");
 ```
 
 

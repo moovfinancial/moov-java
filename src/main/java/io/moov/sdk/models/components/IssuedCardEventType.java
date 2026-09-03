@@ -3,42 +3,146 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * IssuedCardEventType
  * 
  * <p>The type of event that occurred on the card.
  */
-public enum IssuedCardEventType {
-    AUTHORIZATION("authorization"),
-    REVERSAL("reversal"),
-    AUTHORIZATION_ADVICE("authorization-advice"),
-    AUTHORIZATION_EXPIRATION("authorization-expiration"),
-    AUTHORIZATION_INCREMENTAL("authorization-incremental"),
-    CLEARING("clearing");
+public class IssuedCardEventType {
 
-    @JsonValue
+    public static final IssuedCardEventType AUTHORIZATION = new IssuedCardEventType("authorization");
+    public static final IssuedCardEventType REVERSAL = new IssuedCardEventType("reversal");
+    public static final IssuedCardEventType AUTHORIZATION_ADVICE = new IssuedCardEventType("authorization-advice");
+    public static final IssuedCardEventType AUTHORIZATION_EXPIRATION = new IssuedCardEventType("authorization-expiration");
+    public static final IssuedCardEventType AUTHORIZATION_INCREMENTAL = new IssuedCardEventType("authorization-incremental");
+    public static final IssuedCardEventType CLEARING = new IssuedCardEventType("clearing");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, IssuedCardEventType> values = createValuesMap();
+    private static final Map<String, IssuedCardEventTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    IssuedCardEventType(String value) {
+    private IssuedCardEventType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a IssuedCardEventType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as IssuedCardEventType
+     */ 
+    @JsonCreator
+    public static IssuedCardEventType of(String value) {
+        synchronized (IssuedCardEventType.class) {
+            return values.computeIfAbsent(value, v -> new IssuedCardEventType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<IssuedCardEventType> fromValue(String value) {
-        for (IssuedCardEventType o: IssuedCardEventType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<IssuedCardEventTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        IssuedCardEventType other = (IssuedCardEventType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "IssuedCardEventType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static IssuedCardEventType[] values() {
+        synchronized (IssuedCardEventType.class) {
+            return values.values().toArray(new IssuedCardEventType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, IssuedCardEventType> createValuesMap() {
+        Map<String, IssuedCardEventType> map = new LinkedHashMap<>();
+        map.put("authorization", AUTHORIZATION);
+        map.put("reversal", REVERSAL);
+        map.put("authorization-advice", AUTHORIZATION_ADVICE);
+        map.put("authorization-expiration", AUTHORIZATION_EXPIRATION);
+        map.put("authorization-incremental", AUTHORIZATION_INCREMENTAL);
+        map.put("clearing", CLEARING);
+        return map;
+    }
+
+    private static final Map<String, IssuedCardEventTypeEnum> createEnumsMap() {
+        Map<String, IssuedCardEventTypeEnum> map = new HashMap<>();
+        map.put("authorization", IssuedCardEventTypeEnum.AUTHORIZATION);
+        map.put("reversal", IssuedCardEventTypeEnum.REVERSAL);
+        map.put("authorization-advice", IssuedCardEventTypeEnum.AUTHORIZATION_ADVICE);
+        map.put("authorization-expiration", IssuedCardEventTypeEnum.AUTHORIZATION_EXPIRATION);
+        map.put("authorization-incremental", IssuedCardEventTypeEnum.AUTHORIZATION_INCREMENTAL);
+        map.put("clearing", IssuedCardEventTypeEnum.CLEARING);
+        return map;
+    }
+    
+    
+    public enum IssuedCardEventTypeEnum {
+
+        AUTHORIZATION("authorization"),
+        REVERSAL("reversal"),
+        AUTHORIZATION_ADVICE("authorization-advice"),
+        AUTHORIZATION_EXPIRATION("authorization-expiration"),
+        AUTHORIZATION_INCREMENTAL("authorization-incremental"),
+        CLEARING("clearing"),;
+
+        private final String value;
+
+        private IssuedCardEventTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

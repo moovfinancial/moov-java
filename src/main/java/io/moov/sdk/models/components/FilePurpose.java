@@ -3,42 +3,146 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * FilePurpose
  * 
  * <p>The purpose of the file being uploaded.
  */
-public enum FilePurpose {
-    BUSINESS_VERIFICATION("business_verification"),
-    REPRESENTATIVE_VERIFICATION("representative_verification"),
-    INDIVIDUAL_VERIFICATION("individual_verification"),
-    MERCHANT_UNDERWRITING("merchant_underwriting"),
-    ACCOUNT_REQUIREMENT("account_requirement"),
-    IDENTITY_VERIFICATION("identity_verification");
+public class FilePurpose {
 
-    @JsonValue
+    public static final FilePurpose BUSINESS_VERIFICATION = new FilePurpose("business_verification");
+    public static final FilePurpose REPRESENTATIVE_VERIFICATION = new FilePurpose("representative_verification");
+    public static final FilePurpose INDIVIDUAL_VERIFICATION = new FilePurpose("individual_verification");
+    public static final FilePurpose MERCHANT_UNDERWRITING = new FilePurpose("merchant_underwriting");
+    public static final FilePurpose ACCOUNT_REQUIREMENT = new FilePurpose("account_requirement");
+    public static final FilePurpose IDENTITY_VERIFICATION = new FilePurpose("identity_verification");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, FilePurpose> values = createValuesMap();
+    private static final Map<String, FilePurposeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    FilePurpose(String value) {
+    private FilePurpose(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a FilePurpose with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as FilePurpose
+     */ 
+    @JsonCreator
+    public static FilePurpose of(String value) {
+        synchronized (FilePurpose.class) {
+            return values.computeIfAbsent(value, v -> new FilePurpose(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<FilePurpose> fromValue(String value) {
-        for (FilePurpose o: FilePurpose.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<FilePurposeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        FilePurpose other = (FilePurpose) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "FilePurpose [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static FilePurpose[] values() {
+        synchronized (FilePurpose.class) {
+            return values.values().toArray(new FilePurpose[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, FilePurpose> createValuesMap() {
+        Map<String, FilePurpose> map = new LinkedHashMap<>();
+        map.put("business_verification", BUSINESS_VERIFICATION);
+        map.put("representative_verification", REPRESENTATIVE_VERIFICATION);
+        map.put("individual_verification", INDIVIDUAL_VERIFICATION);
+        map.put("merchant_underwriting", MERCHANT_UNDERWRITING);
+        map.put("account_requirement", ACCOUNT_REQUIREMENT);
+        map.put("identity_verification", IDENTITY_VERIFICATION);
+        return map;
+    }
+
+    private static final Map<String, FilePurposeEnum> createEnumsMap() {
+        Map<String, FilePurposeEnum> map = new HashMap<>();
+        map.put("business_verification", FilePurposeEnum.BUSINESS_VERIFICATION);
+        map.put("representative_verification", FilePurposeEnum.REPRESENTATIVE_VERIFICATION);
+        map.put("individual_verification", FilePurposeEnum.INDIVIDUAL_VERIFICATION);
+        map.put("merchant_underwriting", FilePurposeEnum.MERCHANT_UNDERWRITING);
+        map.put("account_requirement", FilePurposeEnum.ACCOUNT_REQUIREMENT);
+        map.put("identity_verification", FilePurposeEnum.IDENTITY_VERIFICATION);
+        return map;
+    }
+    
+    
+    public enum FilePurposeEnum {
+
+        BUSINESS_VERIFICATION("business_verification"),
+        REPRESENTATIVE_VERIFICATION("representative_verification"),
+        INDIVIDUAL_VERIFICATION("individual_verification"),
+        MERCHANT_UNDERWRITING("merchant_underwriting"),
+        ACCOUNT_REQUIREMENT("account_requirement"),
+        IDENTITY_VERIFICATION("identity_verification"),;
+
+        private final String value;
+
+        private FilePurposeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

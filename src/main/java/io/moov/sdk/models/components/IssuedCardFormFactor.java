@@ -3,38 +3,127 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * IssuedCardFormFactor
  * 
  * <p>Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital
  * number without a physical card.
  */
-public enum IssuedCardFormFactor {
-    VIRTUAL("virtual");
+public class IssuedCardFormFactor {
 
-    @JsonValue
+    public static final IssuedCardFormFactor VIRTUAL = new IssuedCardFormFactor("virtual");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, IssuedCardFormFactor> values = createValuesMap();
+    private static final Map<String, IssuedCardFormFactorEnum> enums = createEnumsMap();
+
     private final String value;
 
-    IssuedCardFormFactor(String value) {
+    private IssuedCardFormFactor(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a IssuedCardFormFactor with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as IssuedCardFormFactor
+     */ 
+    @JsonCreator
+    public static IssuedCardFormFactor of(String value) {
+        synchronized (IssuedCardFormFactor.class) {
+            return values.computeIfAbsent(value, v -> new IssuedCardFormFactor(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<IssuedCardFormFactor> fromValue(String value) {
-        for (IssuedCardFormFactor o: IssuedCardFormFactor.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<IssuedCardFormFactorEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        IssuedCardFormFactor other = (IssuedCardFormFactor) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "IssuedCardFormFactor [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static IssuedCardFormFactor[] values() {
+        synchronized (IssuedCardFormFactor.class) {
+            return values.values().toArray(new IssuedCardFormFactor[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, IssuedCardFormFactor> createValuesMap() {
+        Map<String, IssuedCardFormFactor> map = new LinkedHashMap<>();
+        map.put("virtual", VIRTUAL);
+        return map;
+    }
+
+    private static final Map<String, IssuedCardFormFactorEnum> createEnumsMap() {
+        Map<String, IssuedCardFormFactorEnum> map = new HashMap<>();
+        map.put("virtual", IssuedCardFormFactorEnum.VIRTUAL);
+        return map;
+    }
+    
+    
+    public enum IssuedCardFormFactorEnum {
+
+        VIRTUAL("virtual"),;
+
+        private final String value;
+
+        private IssuedCardFormFactorEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

@@ -3,39 +3,149 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum WalletTransactionSourceType {
-    TRANSFER("transfer"),
-    DISPUTE("dispute"),
-    ISSUING_CARD_TRANSACTION("issuing-card-transaction"),
-    ISSUING_AUTHORIZATION("issuing-authorization"),
-    SWEEP("sweep"),
-    ADJUSTMENT("adjustment"),
-    FEE("fee"),
-    RESIDUAL("residual");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class WalletTransactionSourceType {
 
-    @JsonValue
+    public static final WalletTransactionSourceType TRANSFER = new WalletTransactionSourceType("transfer");
+    public static final WalletTransactionSourceType DISPUTE = new WalletTransactionSourceType("dispute");
+    public static final WalletTransactionSourceType ISSUING_CARD_TRANSACTION = new WalletTransactionSourceType("issuing-card-transaction");
+    public static final WalletTransactionSourceType ISSUING_AUTHORIZATION = new WalletTransactionSourceType("issuing-authorization");
+    public static final WalletTransactionSourceType SWEEP = new WalletTransactionSourceType("sweep");
+    public static final WalletTransactionSourceType ADJUSTMENT = new WalletTransactionSourceType("adjustment");
+    public static final WalletTransactionSourceType FEE = new WalletTransactionSourceType("fee");
+    public static final WalletTransactionSourceType RESIDUAL = new WalletTransactionSourceType("residual");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, WalletTransactionSourceType> values = createValuesMap();
+    private static final Map<String, WalletTransactionSourceTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    WalletTransactionSourceType(String value) {
+    private WalletTransactionSourceType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a WalletTransactionSourceType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as WalletTransactionSourceType
+     */ 
+    @JsonCreator
+    public static WalletTransactionSourceType of(String value) {
+        synchronized (WalletTransactionSourceType.class) {
+            return values.computeIfAbsent(value, v -> new WalletTransactionSourceType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<WalletTransactionSourceType> fromValue(String value) {
-        for (WalletTransactionSourceType o: WalletTransactionSourceType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<WalletTransactionSourceTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        WalletTransactionSourceType other = (WalletTransactionSourceType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "WalletTransactionSourceType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static WalletTransactionSourceType[] values() {
+        synchronized (WalletTransactionSourceType.class) {
+            return values.values().toArray(new WalletTransactionSourceType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, WalletTransactionSourceType> createValuesMap() {
+        Map<String, WalletTransactionSourceType> map = new LinkedHashMap<>();
+        map.put("transfer", TRANSFER);
+        map.put("dispute", DISPUTE);
+        map.put("issuing-card-transaction", ISSUING_CARD_TRANSACTION);
+        map.put("issuing-authorization", ISSUING_AUTHORIZATION);
+        map.put("sweep", SWEEP);
+        map.put("adjustment", ADJUSTMENT);
+        map.put("fee", FEE);
+        map.put("residual", RESIDUAL);
+        return map;
+    }
+
+    private static final Map<String, WalletTransactionSourceTypeEnum> createEnumsMap() {
+        Map<String, WalletTransactionSourceTypeEnum> map = new HashMap<>();
+        map.put("transfer", WalletTransactionSourceTypeEnum.TRANSFER);
+        map.put("dispute", WalletTransactionSourceTypeEnum.DISPUTE);
+        map.put("issuing-card-transaction", WalletTransactionSourceTypeEnum.ISSUING_CARD_TRANSACTION);
+        map.put("issuing-authorization", WalletTransactionSourceTypeEnum.ISSUING_AUTHORIZATION);
+        map.put("sweep", WalletTransactionSourceTypeEnum.SWEEP);
+        map.put("adjustment", WalletTransactionSourceTypeEnum.ADJUSTMENT);
+        map.put("fee", WalletTransactionSourceTypeEnum.FEE);
+        map.put("residual", WalletTransactionSourceTypeEnum.RESIDUAL);
+        return map;
+    }
+    
+    
+    public enum WalletTransactionSourceTypeEnum {
+
+        TRANSFER("transfer"),
+        DISPUTE("dispute"),
+        ISSUING_CARD_TRANSACTION("issuing-card-transaction"),
+        ISSUING_AUTHORIZATION("issuing-authorization"),
+        SWEEP("sweep"),
+        ADJUSTMENT("adjustment"),
+        FEE("fee"),
+        RESIDUAL("residual"),;
+
+        private final String value;
+
+        private WalletTransactionSourceTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

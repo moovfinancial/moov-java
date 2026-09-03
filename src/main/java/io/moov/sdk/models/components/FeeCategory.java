@@ -3,40 +3,153 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum FeeCategory {
-    ACH("ach"),
-    CARD_ACQUIRING("card-acquiring"),
-    CARD_OTHER("card-other"),
-    CARD_PULL("card-pull"),
-    CARD_PUSH("card-push"),
-    MONTHLY_PLATFORM("monthly-platform"),
-    NETWORK_PASSTHROUGH("network-passthrough"),
-    OTHER("other"),
-    RTP("rtp");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class FeeCategory {
 
-    @JsonValue
+    public static final FeeCategory ACH = new FeeCategory("ach");
+    public static final FeeCategory CARD_ACQUIRING = new FeeCategory("card-acquiring");
+    public static final FeeCategory CARD_OTHER = new FeeCategory("card-other");
+    public static final FeeCategory CARD_PULL = new FeeCategory("card-pull");
+    public static final FeeCategory CARD_PUSH = new FeeCategory("card-push");
+    public static final FeeCategory MONTHLY_PLATFORM = new FeeCategory("monthly-platform");
+    public static final FeeCategory NETWORK_PASSTHROUGH = new FeeCategory("network-passthrough");
+    public static final FeeCategory OTHER = new FeeCategory("other");
+    public static final FeeCategory RTP = new FeeCategory("rtp");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, FeeCategory> values = createValuesMap();
+    private static final Map<String, FeeCategoryEnum> enums = createEnumsMap();
+
     private final String value;
 
-    FeeCategory(String value) {
+    private FeeCategory(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a FeeCategory with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as FeeCategory
+     */ 
+    @JsonCreator
+    public static FeeCategory of(String value) {
+        synchronized (FeeCategory.class) {
+            return values.computeIfAbsent(value, v -> new FeeCategory(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<FeeCategory> fromValue(String value) {
-        for (FeeCategory o: FeeCategory.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<FeeCategoryEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        FeeCategory other = (FeeCategory) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "FeeCategory [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static FeeCategory[] values() {
+        synchronized (FeeCategory.class) {
+            return values.values().toArray(new FeeCategory[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, FeeCategory> createValuesMap() {
+        Map<String, FeeCategory> map = new LinkedHashMap<>();
+        map.put("ach", ACH);
+        map.put("card-acquiring", CARD_ACQUIRING);
+        map.put("card-other", CARD_OTHER);
+        map.put("card-pull", CARD_PULL);
+        map.put("card-push", CARD_PUSH);
+        map.put("monthly-platform", MONTHLY_PLATFORM);
+        map.put("network-passthrough", NETWORK_PASSTHROUGH);
+        map.put("other", OTHER);
+        map.put("rtp", RTP);
+        return map;
+    }
+
+    private static final Map<String, FeeCategoryEnum> createEnumsMap() {
+        Map<String, FeeCategoryEnum> map = new HashMap<>();
+        map.put("ach", FeeCategoryEnum.ACH);
+        map.put("card-acquiring", FeeCategoryEnum.CARD_ACQUIRING);
+        map.put("card-other", FeeCategoryEnum.CARD_OTHER);
+        map.put("card-pull", FeeCategoryEnum.CARD_PULL);
+        map.put("card-push", FeeCategoryEnum.CARD_PUSH);
+        map.put("monthly-platform", FeeCategoryEnum.MONTHLY_PLATFORM);
+        map.put("network-passthrough", FeeCategoryEnum.NETWORK_PASSTHROUGH);
+        map.put("other", FeeCategoryEnum.OTHER);
+        map.put("rtp", FeeCategoryEnum.RTP);
+        return map;
+    }
+    
+    
+    public enum FeeCategoryEnum {
+
+        ACH("ach"),
+        CARD_ACQUIRING("card-acquiring"),
+        CARD_OTHER("card-other"),
+        CARD_PULL("card-pull"),
+        CARD_PUSH("card-push"),
+        MONTHLY_PLATFORM("monthly-platform"),
+        NETWORK_PASSTHROUGH("network-passthrough"),
+        OTHER("other"),
+        RTP("rtp"),;
+
+        private final String value;
+
+        private FeeCategoryEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

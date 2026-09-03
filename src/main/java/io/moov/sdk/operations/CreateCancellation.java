@@ -156,7 +156,7 @@ public class CreateCancellation {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "400", "409", "422")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     throw GenericError.from(response);

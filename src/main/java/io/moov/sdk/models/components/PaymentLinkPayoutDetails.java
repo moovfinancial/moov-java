@@ -16,7 +16,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-
+/**
+ * PaymentLinkPayoutDetails
+ * 
+ * <p>Options for payout links used to send a payout.
+ */
 public class PaymentLinkPayoutDetails {
     /**
      * A list of payment methods that should be supported for this payment link.

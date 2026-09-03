@@ -3,41 +3,157 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum PendingLitigation {
-    BANKRUPTCY_OR_INSOLVENCY("bankruptcy-or-insolvency"),
-    CONSUMER_PROTECTION_OR_CLASS_ACTION("consumer-protection-or-class-action"),
-    DATA_BREACH_OR_PRIVACY("data-breach-or-privacy"),
-    EMPLOYMENT_OR_WORKPLACE_DISPUTES("employment-or-workplace-disputes"),
-    FRAUD_OR_FINANCIAL_CRIME("fraud-or-financial-crime"),
-    GOVERNMENT_ENFORCEMENT_OR_INVESTIGATION("government-enforcement-or-investigation"),
-    INTELLECTUAL_PROPERTY("intellectual-property"),
-    NONE("none"),
-    OTHER("other"),
-    PERSONAL_INJURY_OR_MEDICAL("personal-injury-or-medical");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class PendingLitigation {
 
-    @JsonValue
+    public static final PendingLitigation BANKRUPTCY_OR_INSOLVENCY = new PendingLitigation("bankruptcy-or-insolvency");
+    public static final PendingLitigation CONSUMER_PROTECTION_OR_CLASS_ACTION = new PendingLitigation("consumer-protection-or-class-action");
+    public static final PendingLitigation DATA_BREACH_OR_PRIVACY = new PendingLitigation("data-breach-or-privacy");
+    public static final PendingLitigation EMPLOYMENT_OR_WORKPLACE_DISPUTES = new PendingLitigation("employment-or-workplace-disputes");
+    public static final PendingLitigation FRAUD_OR_FINANCIAL_CRIME = new PendingLitigation("fraud-or-financial-crime");
+    public static final PendingLitigation GOVERNMENT_ENFORCEMENT_OR_INVESTIGATION = new PendingLitigation("government-enforcement-or-investigation");
+    public static final PendingLitigation INTELLECTUAL_PROPERTY = new PendingLitigation("intellectual-property");
+    public static final PendingLitigation NONE = new PendingLitigation("none");
+    public static final PendingLitigation OTHER = new PendingLitigation("other");
+    public static final PendingLitigation PERSONAL_INJURY_OR_MEDICAL = new PendingLitigation("personal-injury-or-medical");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, PendingLitigation> values = createValuesMap();
+    private static final Map<String, PendingLitigationEnum> enums = createEnumsMap();
+
     private final String value;
 
-    PendingLitigation(String value) {
+    private PendingLitigation(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a PendingLitigation with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as PendingLitigation
+     */ 
+    @JsonCreator
+    public static PendingLitigation of(String value) {
+        synchronized (PendingLitigation.class) {
+            return values.computeIfAbsent(value, v -> new PendingLitigation(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<PendingLitigation> fromValue(String value) {
-        for (PendingLitigation o: PendingLitigation.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<PendingLitigationEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PendingLitigation other = (PendingLitigation) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "PendingLitigation [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static PendingLitigation[] values() {
+        synchronized (PendingLitigation.class) {
+            return values.values().toArray(new PendingLitigation[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, PendingLitigation> createValuesMap() {
+        Map<String, PendingLitigation> map = new LinkedHashMap<>();
+        map.put("bankruptcy-or-insolvency", BANKRUPTCY_OR_INSOLVENCY);
+        map.put("consumer-protection-or-class-action", CONSUMER_PROTECTION_OR_CLASS_ACTION);
+        map.put("data-breach-or-privacy", DATA_BREACH_OR_PRIVACY);
+        map.put("employment-or-workplace-disputes", EMPLOYMENT_OR_WORKPLACE_DISPUTES);
+        map.put("fraud-or-financial-crime", FRAUD_OR_FINANCIAL_CRIME);
+        map.put("government-enforcement-or-investigation", GOVERNMENT_ENFORCEMENT_OR_INVESTIGATION);
+        map.put("intellectual-property", INTELLECTUAL_PROPERTY);
+        map.put("none", NONE);
+        map.put("other", OTHER);
+        map.put("personal-injury-or-medical", PERSONAL_INJURY_OR_MEDICAL);
+        return map;
+    }
+
+    private static final Map<String, PendingLitigationEnum> createEnumsMap() {
+        Map<String, PendingLitigationEnum> map = new HashMap<>();
+        map.put("bankruptcy-or-insolvency", PendingLitigationEnum.BANKRUPTCY_OR_INSOLVENCY);
+        map.put("consumer-protection-or-class-action", PendingLitigationEnum.CONSUMER_PROTECTION_OR_CLASS_ACTION);
+        map.put("data-breach-or-privacy", PendingLitigationEnum.DATA_BREACH_OR_PRIVACY);
+        map.put("employment-or-workplace-disputes", PendingLitigationEnum.EMPLOYMENT_OR_WORKPLACE_DISPUTES);
+        map.put("fraud-or-financial-crime", PendingLitigationEnum.FRAUD_OR_FINANCIAL_CRIME);
+        map.put("government-enforcement-or-investigation", PendingLitigationEnum.GOVERNMENT_ENFORCEMENT_OR_INVESTIGATION);
+        map.put("intellectual-property", PendingLitigationEnum.INTELLECTUAL_PROPERTY);
+        map.put("none", PendingLitigationEnum.NONE);
+        map.put("other", PendingLitigationEnum.OTHER);
+        map.put("personal-injury-or-medical", PendingLitigationEnum.PERSONAL_INJURY_OR_MEDICAL);
+        return map;
+    }
+    
+    
+    public enum PendingLitigationEnum {
+
+        BANKRUPTCY_OR_INSOLVENCY("bankruptcy-or-insolvency"),
+        CONSUMER_PROTECTION_OR_CLASS_ACTION("consumer-protection-or-class-action"),
+        DATA_BREACH_OR_PRIVACY("data-breach-or-privacy"),
+        EMPLOYMENT_OR_WORKPLACE_DISPUTES("employment-or-workplace-disputes"),
+        FRAUD_OR_FINANCIAL_CRIME("fraud-or-financial-crime"),
+        GOVERNMENT_ENFORCEMENT_OR_INVESTIGATION("government-enforcement-or-investigation"),
+        INTELLECTUAL_PROPERTY("intellectual-property"),
+        NONE("none"),
+        OTHER("other"),
+        PERSONAL_INJURY_OR_MEDICAL("personal-injury-or-medical"),;
+
+        private final String value;
+
+        private PendingLitigationEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

@@ -127,6 +127,13 @@ public class Statement {
     private Optional<? extends PartnerFees> partnerFees;
 
     /**
+     * A detailed breakdown of adjustment (correction) fees by fee name.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("adjustments")
+    private Optional<? extends AdjustmentFees> adjustments;
+
+    /**
      * The date and time the statement was created.
      */
     @JsonProperty("createdOn")
@@ -155,6 +162,7 @@ public class Statement {
             @JsonProperty("accountFees") Optional<? extends AccountFees> accountFees,
             @JsonProperty("otherCardFees") Optional<? extends OtherCardFees> otherCardFees,
             @JsonProperty("partnerFees") Optional<? extends PartnerFees> partnerFees,
+            @JsonProperty("adjustments") Optional<? extends AdjustmentFees> adjustments,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
             @JsonProperty("updatedOn") OffsetDateTime updatedOn) {
         Utils.checkNotNull(statementID, "statementID");
@@ -172,6 +180,7 @@ public class Statement {
         Utils.checkNotNull(accountFees, "accountFees");
         Utils.checkNotNull(otherCardFees, "otherCardFees");
         Utils.checkNotNull(partnerFees, "partnerFees");
+        Utils.checkNotNull(adjustments, "adjustments");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(updatedOn, "updatedOn");
         this.statementID = statementID;
@@ -189,6 +198,7 @@ public class Statement {
         this.accountFees = accountFees;
         this.otherCardFees = otherCardFees;
         this.partnerFees = partnerFees;
+        this.adjustments = adjustments;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
     }
@@ -209,7 +219,7 @@ public class Statement {
             subscriptionIDs, summary, Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            createdOn, updatedOn);
+            Optional.empty(), createdOn, updatedOn);
     }
 
     /**
@@ -342,6 +352,15 @@ public class Statement {
     @JsonIgnore
     public Optional<PartnerFees> partnerFees() {
         return (Optional<PartnerFees>) partnerFees;
+    }
+
+    /**
+     * A detailed breakdown of adjustment (correction) fees by fee name.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<AdjustmentFees> adjustments() {
+        return (Optional<AdjustmentFees>) adjustments;
     }
 
     /**
@@ -581,6 +600,25 @@ public class Statement {
     }
 
     /**
+     * A detailed breakdown of adjustment (correction) fees by fee name.
+     */
+    public Statement withAdjustments(AdjustmentFees adjustments) {
+        Utils.checkNotNull(adjustments, "adjustments");
+        this.adjustments = Optional.ofNullable(adjustments);
+        return this;
+    }
+
+
+    /**
+     * A detailed breakdown of adjustment (correction) fees by fee name.
+     */
+    public Statement withAdjustments(Optional<? extends AdjustmentFees> adjustments) {
+        Utils.checkNotNull(adjustments, "adjustments");
+        this.adjustments = adjustments;
+        return this;
+    }
+
+    /**
      * The date and time the statement was created.
      */
     public Statement withCreatedOn(OffsetDateTime createdOn) {
@@ -623,6 +661,7 @@ public class Statement {
             Utils.enhancedDeepEquals(this.accountFees, other.accountFees) &&
             Utils.enhancedDeepEquals(this.otherCardFees, other.otherCardFees) &&
             Utils.enhancedDeepEquals(this.partnerFees, other.partnerFees) &&
+            Utils.enhancedDeepEquals(this.adjustments, other.adjustments) &&
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
             Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn);
     }
@@ -635,7 +674,7 @@ public class Statement {
             subscriptionIDs, summary, cardAcquiringFees,
             achFees, instantPaymentFees, platformFees,
             accountFees, otherCardFees, partnerFees,
-            createdOn, updatedOn);
+            adjustments, createdOn, updatedOn);
     }
     
     @Override
@@ -656,6 +695,7 @@ public class Statement {
                 "accountFees", accountFees,
                 "otherCardFees", otherCardFees,
                 "partnerFees", partnerFees,
+                "adjustments", adjustments,
                 "createdOn", createdOn,
                 "updatedOn", updatedOn);
     }
@@ -693,6 +733,8 @@ public class Statement {
         private Optional<? extends OtherCardFees> otherCardFees = Optional.empty();
 
         private Optional<? extends PartnerFees> partnerFees = Optional.empty();
+
+        private Optional<? extends AdjustmentFees> adjustments = Optional.empty();
 
         private OffsetDateTime createdOn;
 
@@ -927,6 +969,25 @@ public class Statement {
 
 
         /**
+         * A detailed breakdown of adjustment (correction) fees by fee name.
+         */
+        public Builder adjustments(AdjustmentFees adjustments) {
+            Utils.checkNotNull(adjustments, "adjustments");
+            this.adjustments = Optional.ofNullable(adjustments);
+            return this;
+        }
+
+        /**
+         * A detailed breakdown of adjustment (correction) fees by fee name.
+         */
+        public Builder adjustments(Optional<? extends AdjustmentFees> adjustments) {
+            Utils.checkNotNull(adjustments, "adjustments");
+            this.adjustments = adjustments;
+            return this;
+        }
+
+
+        /**
          * The date and time the statement was created.
          */
         public Builder createdOn(OffsetDateTime createdOn) {
@@ -953,7 +1014,7 @@ public class Statement {
                 subscriptionIDs, summary, cardAcquiringFees,
                 achFees, instantPaymentFees, platformFees,
                 accountFees, otherCardFees, partnerFees,
-                createdOn, updatedOn);
+                adjustments, createdOn, updatedOn);
         }
 
     }

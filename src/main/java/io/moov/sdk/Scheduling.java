@@ -122,7 +122,7 @@ public class Scheduling {
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param skip 
-     * @param count 
+     * @param count Page size. When omitted, the server defaults to `200`.
      * @param hydrate 
      * @param accountID 
      * @return The response from the API call

@@ -18,7 +18,11 @@ import java.util.List;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
-
+/**
+ * IssuingControls
+ * 
+ * <p>Mutable spend controls for the card.
+ */
 public class IssuingControls {
     /**
      * Indicates if the card is single-use. If true, the card closes after the first authorization.
@@ -42,15 +46,13 @@ public class IssuingControls {
     private Optional<? extends MerchantCategoryRestrictions> merchantCategoryRestrictions;
 
     /**
-     * Restricts card usage to specific merchants, or blocks specific merchants.
+     * Restricts card usage to specific merchants, independent of merchant category.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("merchantRestrictions")
     private Optional<? extends MerchantRestrictions> merchantRestrictions;
 
-    /**
-     * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
-     */
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("allowedSchedule")
     private JsonNullable<? extends AllowedSchedule> allowedSchedule;
@@ -117,7 +119,7 @@ public class IssuingControls {
     }
 
     /**
-     * Restricts card usage to specific merchants, or blocks specific merchants.
+     * Restricts card usage to specific merchants, independent of merchant category.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -125,9 +127,6 @@ public class IssuingControls {
         return (Optional<MerchantRestrictions>) merchantRestrictions;
     }
 
-    /**
-     * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public JsonNullable<AllowedSchedule> allowedSchedule() {
@@ -206,7 +205,7 @@ public class IssuingControls {
     }
 
     /**
-     * Restricts card usage to specific merchants, or blocks specific merchants.
+     * Restricts card usage to specific merchants, independent of merchant category.
      */
     public IssuingControls withMerchantRestrictions(MerchantRestrictions merchantRestrictions) {
         Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
@@ -216,7 +215,7 @@ public class IssuingControls {
 
 
     /**
-     * Restricts card usage to specific merchants, or blocks specific merchants.
+     * Restricts card usage to specific merchants, independent of merchant category.
      */
     public IssuingControls withMerchantRestrictions(Optional<? extends MerchantRestrictions> merchantRestrictions) {
         Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
@@ -224,18 +223,12 @@ public class IssuingControls {
         return this;
     }
 
-    /**
-     * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
-     */
     public IssuingControls withAllowedSchedule(AllowedSchedule allowedSchedule) {
         Utils.checkNotNull(allowedSchedule, "allowedSchedule");
         this.allowedSchedule = JsonNullable.of(allowedSchedule);
         return this;
     }
 
-    /**
-     * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
-     */
     public IssuingControls withAllowedSchedule(JsonNullable<? extends AllowedSchedule> allowedSchedule) {
         Utils.checkNotNull(allowedSchedule, "allowedSchedule");
         this.allowedSchedule = allowedSchedule;
@@ -376,7 +369,7 @@ public class IssuingControls {
 
 
         /**
-         * Restricts card usage to specific merchants, or blocks specific merchants.
+         * Restricts card usage to specific merchants, independent of merchant category.
          */
         public Builder merchantRestrictions(MerchantRestrictions merchantRestrictions) {
             Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
@@ -385,7 +378,7 @@ public class IssuingControls {
         }
 
         /**
-         * Restricts card usage to specific merchants, or blocks specific merchants.
+         * Restricts card usage to specific merchants, independent of merchant category.
          */
         public Builder merchantRestrictions(Optional<? extends MerchantRestrictions> merchantRestrictions) {
             Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
@@ -394,18 +387,12 @@ public class IssuingControls {
         }
 
 
-        /**
-         * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
-         */
         public Builder allowedSchedule(AllowedSchedule allowedSchedule) {
             Utils.checkNotNull(allowedSchedule, "allowedSchedule");
             this.allowedSchedule = JsonNullable.of(allowedSchedule);
             return this;
         }
 
-        /**
-         * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
-         */
         public Builder allowedSchedule(JsonNullable<? extends AllowedSchedule> allowedSchedule) {
             Utils.checkNotNull(allowedSchedule, "allowedSchedule");
             this.allowedSchedule = allowedSchedule;

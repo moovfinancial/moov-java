@@ -16,6 +16,9 @@ The rejection code of an RTP transaction that caused the bank account status to 
 import io.moov.sdk.models.components.RTPRejectionCode;
 
 RTPRejectionCode value = RTPRejectionCode.AC03;
+
+// Open enum: use .of() to create instances from custom string values
+RTPRejectionCode custom = RTPRejectionCode.of("custom_value");
 ```
 
 

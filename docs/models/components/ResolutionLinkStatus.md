@@ -8,6 +8,9 @@ The status of a resolution link.
 import io.moov.sdk.models.components.ResolutionLinkStatus;
 
 ResolutionLinkStatus value = ResolutionLinkStatus.ACTIVE;
+
+// Open enum: use .of() to create instances from custom string values
+ResolutionLinkStatus custom = ResolutionLinkStatus.of("custom_value");
 ```
 
 

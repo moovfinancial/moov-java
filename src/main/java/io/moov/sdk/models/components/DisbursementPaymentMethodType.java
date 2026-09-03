@@ -3,42 +3,146 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * DisbursementPaymentMethodType
  * 
  * <p>Payment methods allowed for disbursing funds.
  */
-public enum DisbursementPaymentMethodType {
-    PUSH_TO_CARD("push-to-card"),
-    RTP_CREDIT("rtp-credit"),
-    ACH_CREDIT_SAME_DAY("ach-credit-same-day"),
-    ACH_CREDIT_STANDARD("ach-credit-standard"),
-    PUSH_TO_APPLE_PAY("push-to-apple-pay"),
-    PUSH_TO_GOOGLE_PAY("push-to-google-pay");
+public class DisbursementPaymentMethodType {
 
-    @JsonValue
+    public static final DisbursementPaymentMethodType PUSH_TO_CARD = new DisbursementPaymentMethodType("push-to-card");
+    public static final DisbursementPaymentMethodType RTP_CREDIT = new DisbursementPaymentMethodType("rtp-credit");
+    public static final DisbursementPaymentMethodType ACH_CREDIT_SAME_DAY = new DisbursementPaymentMethodType("ach-credit-same-day");
+    public static final DisbursementPaymentMethodType ACH_CREDIT_STANDARD = new DisbursementPaymentMethodType("ach-credit-standard");
+    public static final DisbursementPaymentMethodType PUSH_TO_APPLE_PAY = new DisbursementPaymentMethodType("push-to-apple-pay");
+    public static final DisbursementPaymentMethodType PUSH_TO_GOOGLE_PAY = new DisbursementPaymentMethodType("push-to-google-pay");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, DisbursementPaymentMethodType> values = createValuesMap();
+    private static final Map<String, DisbursementPaymentMethodTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    DisbursementPaymentMethodType(String value) {
+    private DisbursementPaymentMethodType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a DisbursementPaymentMethodType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as DisbursementPaymentMethodType
+     */ 
+    @JsonCreator
+    public static DisbursementPaymentMethodType of(String value) {
+        synchronized (DisbursementPaymentMethodType.class) {
+            return values.computeIfAbsent(value, v -> new DisbursementPaymentMethodType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<DisbursementPaymentMethodType> fromValue(String value) {
-        for (DisbursementPaymentMethodType o: DisbursementPaymentMethodType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<DisbursementPaymentMethodTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DisbursementPaymentMethodType other = (DisbursementPaymentMethodType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "DisbursementPaymentMethodType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static DisbursementPaymentMethodType[] values() {
+        synchronized (DisbursementPaymentMethodType.class) {
+            return values.values().toArray(new DisbursementPaymentMethodType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, DisbursementPaymentMethodType> createValuesMap() {
+        Map<String, DisbursementPaymentMethodType> map = new LinkedHashMap<>();
+        map.put("push-to-card", PUSH_TO_CARD);
+        map.put("rtp-credit", RTP_CREDIT);
+        map.put("ach-credit-same-day", ACH_CREDIT_SAME_DAY);
+        map.put("ach-credit-standard", ACH_CREDIT_STANDARD);
+        map.put("push-to-apple-pay", PUSH_TO_APPLE_PAY);
+        map.put("push-to-google-pay", PUSH_TO_GOOGLE_PAY);
+        return map;
+    }
+
+    private static final Map<String, DisbursementPaymentMethodTypeEnum> createEnumsMap() {
+        Map<String, DisbursementPaymentMethodTypeEnum> map = new HashMap<>();
+        map.put("push-to-card", DisbursementPaymentMethodTypeEnum.PUSH_TO_CARD);
+        map.put("rtp-credit", DisbursementPaymentMethodTypeEnum.RTP_CREDIT);
+        map.put("ach-credit-same-day", DisbursementPaymentMethodTypeEnum.ACH_CREDIT_SAME_DAY);
+        map.put("ach-credit-standard", DisbursementPaymentMethodTypeEnum.ACH_CREDIT_STANDARD);
+        map.put("push-to-apple-pay", DisbursementPaymentMethodTypeEnum.PUSH_TO_APPLE_PAY);
+        map.put("push-to-google-pay", DisbursementPaymentMethodTypeEnum.PUSH_TO_GOOGLE_PAY);
+        return map;
+    }
+    
+    
+    public enum DisbursementPaymentMethodTypeEnum {
+
+        PUSH_TO_CARD("push-to-card"),
+        RTP_CREDIT("rtp-credit"),
+        ACH_CREDIT_SAME_DAY("ach-credit-same-day"),
+        ACH_CREDIT_STANDARD("ach-credit-standard"),
+        PUSH_TO_APPLE_PAY("push-to-apple-pay"),
+        PUSH_TO_GOOGLE_PAY("push-to-google-pay"),;
+
+        private final String value;
+
+        private DisbursementPaymentMethodTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

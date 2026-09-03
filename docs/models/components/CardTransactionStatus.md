@@ -8,6 +8,9 @@ Status of a transaction within the card payment lifecycle.
 import io.moov.sdk.models.components.CardTransactionStatus;
 
 CardTransactionStatus value = CardTransactionStatus.INITIATED;
+
+// Open enum: use .of() to create instances from custom string values
+CardTransactionStatus custom = CardTransactionStatus.of("custom_value");
 ```
 
 

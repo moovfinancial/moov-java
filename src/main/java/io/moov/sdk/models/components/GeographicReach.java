@@ -3,34 +3,129 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum GeographicReach {
-    INTERNATIONAL_ONLY("international-only"),
-    US_AND_INTERNATIONAL("us-and-international"),
-    US_ONLY("us-only");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class GeographicReach {
 
-    @JsonValue
+    public static final GeographicReach INTERNATIONAL_ONLY = new GeographicReach("international-only");
+    public static final GeographicReach US_AND_INTERNATIONAL = new GeographicReach("us-and-international");
+    public static final GeographicReach US_ONLY = new GeographicReach("us-only");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, GeographicReach> values = createValuesMap();
+    private static final Map<String, GeographicReachEnum> enums = createEnumsMap();
+
     private final String value;
 
-    GeographicReach(String value) {
+    private GeographicReach(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a GeographicReach with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as GeographicReach
+     */ 
+    @JsonCreator
+    public static GeographicReach of(String value) {
+        synchronized (GeographicReach.class) {
+            return values.computeIfAbsent(value, v -> new GeographicReach(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<GeographicReach> fromValue(String value) {
-        for (GeographicReach o: GeographicReach.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<GeographicReachEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        GeographicReach other = (GeographicReach) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "GeographicReach [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static GeographicReach[] values() {
+        synchronized (GeographicReach.class) {
+            return values.values().toArray(new GeographicReach[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, GeographicReach> createValuesMap() {
+        Map<String, GeographicReach> map = new LinkedHashMap<>();
+        map.put("international-only", INTERNATIONAL_ONLY);
+        map.put("us-and-international", US_AND_INTERNATIONAL);
+        map.put("us-only", US_ONLY);
+        return map;
+    }
+
+    private static final Map<String, GeographicReachEnum> createEnumsMap() {
+        Map<String, GeographicReachEnum> map = new HashMap<>();
+        map.put("international-only", GeographicReachEnum.INTERNATIONAL_ONLY);
+        map.put("us-and-international", GeographicReachEnum.US_AND_INTERNATIONAL);
+        map.put("us-only", GeographicReachEnum.US_ONLY);
+        return map;
+    }
+    
+    
+    public enum GeographicReachEnum {
+
+        INTERNATIONAL_ONLY("international-only"),
+        US_AND_INTERNATIONAL("us-and-international"),
+        US_ONLY("us-only"),;
+
+        private final String value;
+
+        private GeographicReachEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

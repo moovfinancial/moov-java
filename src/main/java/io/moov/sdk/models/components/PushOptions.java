@@ -14,23 +14,18 @@ import java.lang.String;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * PushOptions
- * 
- * <p>Delivery options for push-to-card payouts.
- */
+
 public class PushOptions {
     /**
-     * Delivery speeds the recipient may choose from for `push-to-card`. Include `instant` to allow
-     * immediate
-     * delivery, `deferred` to allow delayed delivery, or both to let the recipient choose at checkout.
+     * Delivery speeds the recipient may choose from for `push-to-card` and `push-to-apple-pay`.
+     * Include `instant` to allow immediate delivery, `deferred` to allow delayed delivery, or both
+     * to let the recipient choose at checkout.
      */
     @JsonProperty("allowedSpeeds")
     private List<PushDeliverySpeed> allowedSpeeds;
 
     /**
-     * Delay before delivering a deferred `push-to-card` payout. Required when `allowedSpeeds` includes
-     * `deferred`.
+     * Delay before delivering a deferred payout. Required when `allowedSpeeds` includes `deferred`.
      * Accepted values are `24h` or `48h`.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -53,9 +48,9 @@ public class PushOptions {
     }
 
     /**
-     * Delivery speeds the recipient may choose from for `push-to-card`. Include `instant` to allow
-     * immediate
-     * delivery, `deferred` to allow delayed delivery, or both to let the recipient choose at checkout.
+     * Delivery speeds the recipient may choose from for `push-to-card` and `push-to-apple-pay`.
+     * Include `instant` to allow immediate delivery, `deferred` to allow delayed delivery, or both
+     * to let the recipient choose at checkout.
      */
     @JsonIgnore
     public List<PushDeliverySpeed> allowedSpeeds() {
@@ -63,8 +58,7 @@ public class PushOptions {
     }
 
     /**
-     * Delay before delivering a deferred `push-to-card` payout. Required when `allowedSpeeds` includes
-     * `deferred`.
+     * Delay before delivering a deferred payout. Required when `allowedSpeeds` includes `deferred`.
      * Accepted values are `24h` or `48h`.
      */
     @JsonIgnore
@@ -78,9 +72,9 @@ public class PushOptions {
 
 
     /**
-     * Delivery speeds the recipient may choose from for `push-to-card`. Include `instant` to allow
-     * immediate
-     * delivery, `deferred` to allow delayed delivery, or both to let the recipient choose at checkout.
+     * Delivery speeds the recipient may choose from for `push-to-card` and `push-to-apple-pay`.
+     * Include `instant` to allow immediate delivery, `deferred` to allow delayed delivery, or both
+     * to let the recipient choose at checkout.
      */
     public PushOptions withAllowedSpeeds(List<PushDeliverySpeed> allowedSpeeds) {
         Utils.checkNotNull(allowedSpeeds, "allowedSpeeds");
@@ -89,8 +83,7 @@ public class PushOptions {
     }
 
     /**
-     * Delay before delivering a deferred `push-to-card` payout. Required when `allowedSpeeds` includes
-     * `deferred`.
+     * Delay before delivering a deferred payout. Required when `allowedSpeeds` includes `deferred`.
      * Accepted values are `24h` or `48h`.
      */
     public PushOptions withDeferredBy(String deferredBy) {
@@ -101,8 +94,7 @@ public class PushOptions {
 
 
     /**
-     * Delay before delivering a deferred `push-to-card` payout. Required when `allowedSpeeds` includes
-     * `deferred`.
+     * Delay before delivering a deferred payout. Required when `allowedSpeeds` includes `deferred`.
      * Accepted values are `24h` or `48h`.
      */
     public PushOptions withDeferredBy(Optional<String> deferredBy) {
@@ -151,9 +143,9 @@ public class PushOptions {
 
 
         /**
-         * Delivery speeds the recipient may choose from for `push-to-card`. Include `instant` to allow
-         * immediate
-         * delivery, `deferred` to allow delayed delivery, or both to let the recipient choose at checkout.
+         * Delivery speeds the recipient may choose from for `push-to-card` and `push-to-apple-pay`.
+         * Include `instant` to allow immediate delivery, `deferred` to allow delayed delivery, or both
+         * to let the recipient choose at checkout.
          */
         public Builder allowedSpeeds(List<PushDeliverySpeed> allowedSpeeds) {
             Utils.checkNotNull(allowedSpeeds, "allowedSpeeds");
@@ -163,8 +155,7 @@ public class PushOptions {
 
 
         /**
-         * Delay before delivering a deferred `push-to-card` payout. Required when `allowedSpeeds` includes
-         * `deferred`.
+         * Delay before delivering a deferred payout. Required when `allowedSpeeds` includes `deferred`.
          * Accepted values are `24h` or `48h`.
          */
         public Builder deferredBy(String deferredBy) {
@@ -174,8 +165,7 @@ public class PushOptions {
         }
 
         /**
-         * Delay before delivering a deferred `push-to-card` payout. Required when `allowedSpeeds` includes
-         * `deferred`.
+         * Delay before delivering a deferred payout. Required when `allowedSpeeds` includes `deferred`.
          * Accepted values are `24h` or `48h`.
          */
         public Builder deferredBy(Optional<String> deferredBy) {

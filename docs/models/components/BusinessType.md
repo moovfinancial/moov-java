@@ -8,6 +8,9 @@ The type of entity represented by this business.
 import io.moov.sdk.models.components.BusinessType;
 
 BusinessType value = BusinessType.SOLE_PROPRIETORSHIP;
+
+// Open enum: use .of() to create instances from custom string values
+BusinessType custom = BusinessType.of("custom_value");
 ```
 
 

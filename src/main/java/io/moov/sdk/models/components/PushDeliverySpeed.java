@@ -3,38 +3,130 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * PushDeliverySpeed
  * 
  * <p>Delivery speed options for push-to-card payouts.
  */
-public enum PushDeliverySpeed {
-    INSTANT("instant"),
-    DEFERRED("deferred");
+public class PushDeliverySpeed {
 
-    @JsonValue
+    public static final PushDeliverySpeed INSTANT = new PushDeliverySpeed("instant");
+    public static final PushDeliverySpeed DEFERRED = new PushDeliverySpeed("deferred");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, PushDeliverySpeed> values = createValuesMap();
+    private static final Map<String, PushDeliverySpeedEnum> enums = createEnumsMap();
+
     private final String value;
 
-    PushDeliverySpeed(String value) {
+    private PushDeliverySpeed(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a PushDeliverySpeed with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as PushDeliverySpeed
+     */ 
+    @JsonCreator
+    public static PushDeliverySpeed of(String value) {
+        synchronized (PushDeliverySpeed.class) {
+            return values.computeIfAbsent(value, v -> new PushDeliverySpeed(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<PushDeliverySpeed> fromValue(String value) {
-        for (PushDeliverySpeed o: PushDeliverySpeed.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<PushDeliverySpeedEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PushDeliverySpeed other = (PushDeliverySpeed) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "PushDeliverySpeed [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static PushDeliverySpeed[] values() {
+        synchronized (PushDeliverySpeed.class) {
+            return values.values().toArray(new PushDeliverySpeed[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, PushDeliverySpeed> createValuesMap() {
+        Map<String, PushDeliverySpeed> map = new LinkedHashMap<>();
+        map.put("instant", INSTANT);
+        map.put("deferred", DEFERRED);
+        return map;
+    }
+
+    private static final Map<String, PushDeliverySpeedEnum> createEnumsMap() {
+        Map<String, PushDeliverySpeedEnum> map = new HashMap<>();
+        map.put("instant", PushDeliverySpeedEnum.INSTANT);
+        map.put("deferred", PushDeliverySpeedEnum.DEFERRED);
+        return map;
+    }
+    
+    
+    public enum PushDeliverySpeedEnum {
+
+        INSTANT("instant"),
+        DEFERRED("deferred"),;
+
+        private final String value;
+
+        private PushDeliverySpeedEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

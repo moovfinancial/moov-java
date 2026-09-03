@@ -3,37 +3,141 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum InvoiceStatus {
-    DRAFT("draft"),
-    UNPAID("unpaid"),
-    PAYMENT_PENDING("payment-pending"),
-    PAID("paid"),
-    OVERDUE("overdue"),
-    CANCELED("canceled");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class InvoiceStatus {
 
-    @JsonValue
+    public static final InvoiceStatus DRAFT = new InvoiceStatus("draft");
+    public static final InvoiceStatus UNPAID = new InvoiceStatus("unpaid");
+    public static final InvoiceStatus PAYMENT_PENDING = new InvoiceStatus("payment-pending");
+    public static final InvoiceStatus PAID = new InvoiceStatus("paid");
+    public static final InvoiceStatus OVERDUE = new InvoiceStatus("overdue");
+    public static final InvoiceStatus CANCELED = new InvoiceStatus("canceled");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, InvoiceStatus> values = createValuesMap();
+    private static final Map<String, InvoiceStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    InvoiceStatus(String value) {
+    private InvoiceStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a InvoiceStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as InvoiceStatus
+     */ 
+    @JsonCreator
+    public static InvoiceStatus of(String value) {
+        synchronized (InvoiceStatus.class) {
+            return values.computeIfAbsent(value, v -> new InvoiceStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<InvoiceStatus> fromValue(String value) {
-        for (InvoiceStatus o: InvoiceStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<InvoiceStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        InvoiceStatus other = (InvoiceStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "InvoiceStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static InvoiceStatus[] values() {
+        synchronized (InvoiceStatus.class) {
+            return values.values().toArray(new InvoiceStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, InvoiceStatus> createValuesMap() {
+        Map<String, InvoiceStatus> map = new LinkedHashMap<>();
+        map.put("draft", DRAFT);
+        map.put("unpaid", UNPAID);
+        map.put("payment-pending", PAYMENT_PENDING);
+        map.put("paid", PAID);
+        map.put("overdue", OVERDUE);
+        map.put("canceled", CANCELED);
+        return map;
+    }
+
+    private static final Map<String, InvoiceStatusEnum> createEnumsMap() {
+        Map<String, InvoiceStatusEnum> map = new HashMap<>();
+        map.put("draft", InvoiceStatusEnum.DRAFT);
+        map.put("unpaid", InvoiceStatusEnum.UNPAID);
+        map.put("payment-pending", InvoiceStatusEnum.PAYMENT_PENDING);
+        map.put("paid", InvoiceStatusEnum.PAID);
+        map.put("overdue", InvoiceStatusEnum.OVERDUE);
+        map.put("canceled", InvoiceStatusEnum.CANCELED);
+        return map;
+    }
+    
+    
+    public enum InvoiceStatusEnum {
+
+        DRAFT("draft"),
+        UNPAID("unpaid"),
+        PAYMENT_PENDING("payment-pending"),
+        PAID("paid"),
+        OVERDUE("overdue"),
+        CANCELED("canceled"),;
+
+        private final String value;
+
+        private InvoiceStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

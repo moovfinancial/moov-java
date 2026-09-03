@@ -11,6 +11,9 @@ Omit for customer-initiated e-commerce transactions.
 import io.moov.sdk.models.components.TransactionSource;
 
 TransactionSource value = TransactionSource.FIRST_RECURRING;
+
+// Open enum: use .of() to create instances from custom string values
+TransactionSource custom = TransactionSource.of("custom_value");
 ```
 
 

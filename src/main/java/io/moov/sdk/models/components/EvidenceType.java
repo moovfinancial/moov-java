@@ -3,39 +3,149 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum EvidenceType {
-    RECEIPT("receipt"),
-    PROOF_OF_DELIVERY("proof-of-delivery"),
-    CANCELATION_POLICY("cancelation-policy"),
-    TERMS_OF_SERVICE("terms-of-service"),
-    CUSTOMER_COMMUNICATION("customer-communication"),
-    GENERIC_EVIDENCE("generic-evidence"),
-    COVER_LETTER("cover-letter"),
-    OTHER("other");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class EvidenceType {
 
-    @JsonValue
+    public static final EvidenceType RECEIPT = new EvidenceType("receipt");
+    public static final EvidenceType PROOF_OF_DELIVERY = new EvidenceType("proof-of-delivery");
+    public static final EvidenceType CANCELATION_POLICY = new EvidenceType("cancelation-policy");
+    public static final EvidenceType TERMS_OF_SERVICE = new EvidenceType("terms-of-service");
+    public static final EvidenceType CUSTOMER_COMMUNICATION = new EvidenceType("customer-communication");
+    public static final EvidenceType GENERIC_EVIDENCE = new EvidenceType("generic-evidence");
+    public static final EvidenceType COVER_LETTER = new EvidenceType("cover-letter");
+    public static final EvidenceType OTHER = new EvidenceType("other");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, EvidenceType> values = createValuesMap();
+    private static final Map<String, EvidenceTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    EvidenceType(String value) {
+    private EvidenceType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a EvidenceType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as EvidenceType
+     */ 
+    @JsonCreator
+    public static EvidenceType of(String value) {
+        synchronized (EvidenceType.class) {
+            return values.computeIfAbsent(value, v -> new EvidenceType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<EvidenceType> fromValue(String value) {
-        for (EvidenceType o: EvidenceType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<EvidenceTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        EvidenceType other = (EvidenceType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "EvidenceType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static EvidenceType[] values() {
+        synchronized (EvidenceType.class) {
+            return values.values().toArray(new EvidenceType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, EvidenceType> createValuesMap() {
+        Map<String, EvidenceType> map = new LinkedHashMap<>();
+        map.put("receipt", RECEIPT);
+        map.put("proof-of-delivery", PROOF_OF_DELIVERY);
+        map.put("cancelation-policy", CANCELATION_POLICY);
+        map.put("terms-of-service", TERMS_OF_SERVICE);
+        map.put("customer-communication", CUSTOMER_COMMUNICATION);
+        map.put("generic-evidence", GENERIC_EVIDENCE);
+        map.put("cover-letter", COVER_LETTER);
+        map.put("other", OTHER);
+        return map;
+    }
+
+    private static final Map<String, EvidenceTypeEnum> createEnumsMap() {
+        Map<String, EvidenceTypeEnum> map = new HashMap<>();
+        map.put("receipt", EvidenceTypeEnum.RECEIPT);
+        map.put("proof-of-delivery", EvidenceTypeEnum.PROOF_OF_DELIVERY);
+        map.put("cancelation-policy", EvidenceTypeEnum.CANCELATION_POLICY);
+        map.put("terms-of-service", EvidenceTypeEnum.TERMS_OF_SERVICE);
+        map.put("customer-communication", EvidenceTypeEnum.CUSTOMER_COMMUNICATION);
+        map.put("generic-evidence", EvidenceTypeEnum.GENERIC_EVIDENCE);
+        map.put("cover-letter", EvidenceTypeEnum.COVER_LETTER);
+        map.put("other", EvidenceTypeEnum.OTHER);
+        return map;
+    }
+    
+    
+    public enum EvidenceTypeEnum {
+
+        RECEIPT("receipt"),
+        PROOF_OF_DELIVERY("proof-of-delivery"),
+        CANCELATION_POLICY("cancelation-policy"),
+        TERMS_OF_SERVICE("terms-of-service"),
+        CUSTOMER_COMMUNICATION("customer-communication"),
+        GENERIC_EVIDENCE("generic-evidence"),
+        COVER_LETTER("cover-letter"),
+        OTHER("other"),;
+
+        private final String value;
+
+        private EvidenceTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

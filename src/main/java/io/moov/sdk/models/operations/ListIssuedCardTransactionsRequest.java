@@ -25,7 +25,9 @@ public class ListIssuedCardTransactionsRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
 
-
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
 
@@ -34,6 +36,12 @@ public class ListIssuedCardTransactionsRequest {
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=issuedCardID")
     private Optional<String> issuedCardID;
+
+    /**
+     * Optional case-insensitive substring match on the merchant name to filter results.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=merchantName")
+    private Optional<String> merchantName;
 
     /**
      * Optional date-time which inclusively filters all card transactions created after this date-time.
@@ -53,18 +61,21 @@ public class ListIssuedCardTransactionsRequest {
             Optional<Long> skip,
             Optional<Long> count,
             Optional<String> issuedCardID,
+            Optional<String> merchantName,
             Optional<OffsetDateTime> startDateTime,
             Optional<OffsetDateTime> endDateTime) {
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(skip, "skip");
         Utils.checkNotNull(count, "count");
         Utils.checkNotNull(issuedCardID, "issuedCardID");
+        Utils.checkNotNull(merchantName, "merchantName");
         Utils.checkNotNull(startDateTime, "startDateTime");
         Utils.checkNotNull(endDateTime, "endDateTime");
         this.accountID = accountID;
         this.skip = skip;
         this.count = count;
         this.issuedCardID = issuedCardID;
+        this.merchantName = merchantName;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
     }
@@ -72,7 +83,8 @@ public class ListIssuedCardTransactionsRequest {
     public ListIssuedCardTransactionsRequest(
             String accountID) {
         this(accountID, Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -88,6 +100,9 @@ public class ListIssuedCardTransactionsRequest {
         return skip;
     }
 
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     @JsonIgnore
     public Optional<Long> count() {
         return count;
@@ -99,6 +114,14 @@ public class ListIssuedCardTransactionsRequest {
     @JsonIgnore
     public Optional<String> issuedCardID() {
         return issuedCardID;
+    }
+
+    /**
+     * Optional case-insensitive substring match on the merchant name to filter results.
+     */
+    @JsonIgnore
+    public Optional<String> merchantName() {
+        return merchantName;
     }
 
     /**
@@ -144,6 +167,9 @@ public class ListIssuedCardTransactionsRequest {
         return this;
     }
 
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     public ListIssuedCardTransactionsRequest withCount(long count) {
         Utils.checkNotNull(count, "count");
         this.count = Optional.ofNullable(count);
@@ -151,6 +177,9 @@ public class ListIssuedCardTransactionsRequest {
     }
 
 
+    /**
+     * Page size. When omitted, the server defaults to `200`.
+     */
     public ListIssuedCardTransactionsRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
         this.count = count;
@@ -173,6 +202,25 @@ public class ListIssuedCardTransactionsRequest {
     public ListIssuedCardTransactionsRequest withIssuedCardID(Optional<String> issuedCardID) {
         Utils.checkNotNull(issuedCardID, "issuedCardID");
         this.issuedCardID = issuedCardID;
+        return this;
+    }
+
+    /**
+     * Optional case-insensitive substring match on the merchant name to filter results.
+     */
+    public ListIssuedCardTransactionsRequest withMerchantName(String merchantName) {
+        Utils.checkNotNull(merchantName, "merchantName");
+        this.merchantName = Optional.ofNullable(merchantName);
+        return this;
+    }
+
+
+    /**
+     * Optional case-insensitive substring match on the merchant name to filter results.
+     */
+    public ListIssuedCardTransactionsRequest withMerchantName(Optional<String> merchantName) {
+        Utils.checkNotNull(merchantName, "merchantName");
+        this.merchantName = merchantName;
         return this;
     }
 
@@ -228,6 +276,7 @@ public class ListIssuedCardTransactionsRequest {
             Utils.enhancedDeepEquals(this.skip, other.skip) &&
             Utils.enhancedDeepEquals(this.count, other.count) &&
             Utils.enhancedDeepEquals(this.issuedCardID, other.issuedCardID) &&
+            Utils.enhancedDeepEquals(this.merchantName, other.merchantName) &&
             Utils.enhancedDeepEquals(this.startDateTime, other.startDateTime) &&
             Utils.enhancedDeepEquals(this.endDateTime, other.endDateTime);
     }
@@ -236,7 +285,8 @@ public class ListIssuedCardTransactionsRequest {
     public int hashCode() {
         return Utils.enhancedHash(
             accountID, skip, count,
-            issuedCardID, startDateTime, endDateTime);
+            issuedCardID, merchantName, startDateTime,
+            endDateTime);
     }
     
     @Override
@@ -246,6 +296,7 @@ public class ListIssuedCardTransactionsRequest {
                 "skip", skip,
                 "count", count,
                 "issuedCardID", issuedCardID,
+                "merchantName", merchantName,
                 "startDateTime", startDateTime,
                 "endDateTime", endDateTime);
     }
@@ -260,6 +311,8 @@ public class ListIssuedCardTransactionsRequest {
         private Optional<Long> count = Optional.empty();
 
         private Optional<String> issuedCardID = Optional.empty();
+
+        private Optional<String> merchantName = Optional.empty();
 
         private Optional<OffsetDateTime> startDateTime = Optional.empty();
 
@@ -293,12 +346,18 @@ public class ListIssuedCardTransactionsRequest {
         }
 
 
+        /**
+         * Page size. When omitted, the server defaults to `200`.
+         */
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
             return this;
         }
 
+        /**
+         * Page size. When omitted, the server defaults to `200`.
+         */
         public Builder count(Optional<Long> count) {
             Utils.checkNotNull(count, "count");
             this.count = count;
@@ -321,6 +380,25 @@ public class ListIssuedCardTransactionsRequest {
         public Builder issuedCardID(Optional<String> issuedCardID) {
             Utils.checkNotNull(issuedCardID, "issuedCardID");
             this.issuedCardID = issuedCardID;
+            return this;
+        }
+
+
+        /**
+         * Optional case-insensitive substring match on the merchant name to filter results.
+         */
+        public Builder merchantName(String merchantName) {
+            Utils.checkNotNull(merchantName, "merchantName");
+            this.merchantName = Optional.ofNullable(merchantName);
+            return this;
+        }
+
+        /**
+         * Optional case-insensitive substring match on the merchant name to filter results.
+         */
+        public Builder merchantName(Optional<String> merchantName) {
+            Utils.checkNotNull(merchantName, "merchantName");
+            this.merchantName = merchantName;
             return this;
         }
 
@@ -366,7 +444,8 @@ public class ListIssuedCardTransactionsRequest {
 
             return new ListIssuedCardTransactionsRequest(
                 accountID, skip, count,
-                issuedCardID, startDateTime, endDateTime);
+                issuedCardID, merchantName, startDateTime,
+                endDateTime);
         }
 
     }

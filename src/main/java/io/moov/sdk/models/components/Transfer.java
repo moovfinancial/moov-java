@@ -58,7 +58,14 @@ public class Transfer {
     @JsonProperty("failureReason")
     private Optional<? extends TransferFailureReason> failureReason;
 
-
+    /**
+     * Amount associated with this transfer.
+     * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+     * amount until a final capture is created.
+     * For these transfers, when a final capture is created, this is updated to the cumulative captured
+     * amount.
+     * For other transfer types, this is the transfer amount.
+     */
     @JsonProperty("amount")
     private Amount amount;
 
@@ -353,6 +360,14 @@ public class Transfer {
         return (Optional<TransferFailureReason>) failureReason;
     }
 
+    /**
+     * Amount associated with this transfer.
+     * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+     * amount until a final capture is created.
+     * For these transfers, when a final capture is created, this is updated to the cumulative captured
+     * amount.
+     * For other transfer types, this is the transfer amount.
+     */
     @JsonIgnore
     public Amount amount() {
         return amount;
@@ -588,6 +603,14 @@ public class Transfer {
         return this;
     }
 
+    /**
+     * Amount associated with this transfer.
+     * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+     * amount until a final capture is created.
+     * For these transfers, when a final capture is created, this is updated to the cumulative captured
+     * amount.
+     * For other transfer types, this is the transfer amount.
+     */
     public Transfer withAmount(Amount amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
@@ -1186,6 +1209,14 @@ public class Transfer {
         }
 
 
+        /**
+         * Amount associated with this transfer.
+         * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+         * amount until a final capture is created.
+         * For these transfers, when a final capture is created, this is updated to the cumulative captured
+         * amount.
+         * For other transfer types, this is the transfer amount.
+         */
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;

@@ -57,7 +57,14 @@ public class CreatedTransfer {
     @JsonProperty("failureReason")
     private Optional<? extends TransferFailureReason> failureReason;
 
-
+    /**
+     * Amount associated with this transfer.
+     * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+     * amount until a final capture is created.
+     * For these transfers, when a final capture is created, this is updated to the cumulative captured
+     * amount.
+     * For other transfer types, this is the transfer amount.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
     private Optional<? extends Amount> amount;
@@ -330,6 +337,14 @@ public class CreatedTransfer {
         return (Optional<TransferFailureReason>) failureReason;
     }
 
+    /**
+     * Amount associated with this transfer.
+     * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+     * amount until a final capture is created.
+     * For these transfers, when a final capture is created, this is updated to the cumulative captured
+     * amount.
+     * For other transfer types, this is the transfer amount.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<Amount> amount() {
@@ -570,6 +585,14 @@ public class CreatedTransfer {
         return this;
     }
 
+    /**
+     * Amount associated with this transfer.
+     * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+     * amount until a final capture is created.
+     * For these transfers, when a final capture is created, this is updated to the cumulative captured
+     * amount.
+     * For other transfer types, this is the transfer amount.
+     */
     public CreatedTransfer withAmount(Amount amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = Optional.ofNullable(amount);
@@ -577,6 +600,14 @@ public class CreatedTransfer {
     }
 
 
+    /**
+     * Amount associated with this transfer.
+     * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+     * amount until a final capture is created.
+     * For these transfers, when a final capture is created, this is updated to the cumulative captured
+     * amount.
+     * For other transfer types, this is the transfer amount.
+     */
     public CreatedTransfer withAmount(Optional<? extends Amount> amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
@@ -1144,12 +1175,28 @@ public class CreatedTransfer {
         }
 
 
+        /**
+         * Amount associated with this transfer.
+         * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+         * amount until a final capture is created.
+         * For these transfers, when a final capture is created, this is updated to the cumulative captured
+         * amount.
+         * For other transfer types, this is the transfer amount.
+         */
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = Optional.ofNullable(amount);
             return this;
         }
 
+        /**
+         * Amount associated with this transfer.
+         * In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization
+         * amount until a final capture is created.
+         * For these transfers, when a final capture is created, this is updated to the cumulative captured
+         * amount.
+         * For other transfer types, this is the transfer amount.
+         */
         public Builder amount(Optional<? extends Amount> amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;

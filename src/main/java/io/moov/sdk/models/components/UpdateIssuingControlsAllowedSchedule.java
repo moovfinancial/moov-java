@@ -18,7 +18,7 @@ import java.util.Optional;
 /**
  * UpdateIssuingControlsAllowedSchedule
  * 
- * <p>Replaces the allowed schedule. Set to `null` to remove all schedule restrictions.
+ * <p>Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
  */
 public class UpdateIssuingControlsAllowedSchedule {
     /**

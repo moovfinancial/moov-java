@@ -3,11 +3,21 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * RTPRejectionCode
  * 
@@ -21,33 +31,130 @@ import java.util.Optional;
  * - AG03: Transaction Type Not Supported
  * - MD07: Customer Deceased
  */
-public enum RTPRejectionCode {
-    AC03("AC03"),
-    AC04("AC04"),
-    AC06("AC06"),
-    AC14("AC14"),
-    AG01("AG01"),
-    AG03("AG03"),
-    MD07("MD07");
+public class RTPRejectionCode {
 
-    @JsonValue
+    public static final RTPRejectionCode AC03 = new RTPRejectionCode("AC03");
+    public static final RTPRejectionCode AC04 = new RTPRejectionCode("AC04");
+    public static final RTPRejectionCode AC06 = new RTPRejectionCode("AC06");
+    public static final RTPRejectionCode AC14 = new RTPRejectionCode("AC14");
+    public static final RTPRejectionCode AG01 = new RTPRejectionCode("AG01");
+    public static final RTPRejectionCode AG03 = new RTPRejectionCode("AG03");
+    public static final RTPRejectionCode MD07 = new RTPRejectionCode("MD07");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, RTPRejectionCode> values = createValuesMap();
+    private static final Map<String, RTPRejectionCodeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    RTPRejectionCode(String value) {
+    private RTPRejectionCode(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a RTPRejectionCode with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as RTPRejectionCode
+     */ 
+    @JsonCreator
+    public static RTPRejectionCode of(String value) {
+        synchronized (RTPRejectionCode.class) {
+            return values.computeIfAbsent(value, v -> new RTPRejectionCode(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<RTPRejectionCode> fromValue(String value) {
-        for (RTPRejectionCode o: RTPRejectionCode.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<RTPRejectionCodeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        RTPRejectionCode other = (RTPRejectionCode) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "RTPRejectionCode [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static RTPRejectionCode[] values() {
+        synchronized (RTPRejectionCode.class) {
+            return values.values().toArray(new RTPRejectionCode[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, RTPRejectionCode> createValuesMap() {
+        Map<String, RTPRejectionCode> map = new LinkedHashMap<>();
+        map.put("AC03", AC03);
+        map.put("AC04", AC04);
+        map.put("AC06", AC06);
+        map.put("AC14", AC14);
+        map.put("AG01", AG01);
+        map.put("AG03", AG03);
+        map.put("MD07", MD07);
+        return map;
+    }
+
+    private static final Map<String, RTPRejectionCodeEnum> createEnumsMap() {
+        Map<String, RTPRejectionCodeEnum> map = new HashMap<>();
+        map.put("AC03", RTPRejectionCodeEnum.AC03);
+        map.put("AC04", RTPRejectionCodeEnum.AC04);
+        map.put("AC06", RTPRejectionCodeEnum.AC06);
+        map.put("AC14", RTPRejectionCodeEnum.AC14);
+        map.put("AG01", RTPRejectionCodeEnum.AG01);
+        map.put("AG03", RTPRejectionCodeEnum.AG03);
+        map.put("MD07", RTPRejectionCodeEnum.MD07);
+        return map;
+    }
+    
+    
+    public enum RTPRejectionCodeEnum {
+
+        AC03("AC03"),
+        AC04("AC04"),
+        AC06("AC06"),
+        AC14("AC14"),
+        AG01("AG01"),
+        AG03("AG03"),
+        MD07("MD07"),;
+
+        private final String value;
+
+        private RTPRejectionCodeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

@@ -3,62 +3,226 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * IssuingMerchantCategory
  * 
  * <p>Predefined merchant category groups.
  */
-public enum IssuingMerchantCategory {
-    ADVERTISING("advertising"),
-    AIRLINES("airlines"),
-    ALCOHOL_AND_BARS("alcohol-and-bars"),
-    CAR_RENTAL("car-rental"),
-    EDUCATION("education"),
-    ELECTRONICS("electronics"),
-    FUEL_AND_GAS("fuel-and-gas"),
-    GAMBLING("gambling"),
-    GROCERIES("groceries"),
-    GROUND_TRANSPORTATION("ground-transportation"),
-    HARDWARE_AND_HOME("hardware-and-home"),
-    HEALTHCARE("healthcare"),
-    LIVE_ENTERTAINMENT("live-entertainment"),
-    LODGING("lodging"),
-    MOVIES("movies"),
-    OFFICE_SUPPLIES("office-supplies"),
-    PARKING("parking"),
-    PERSONAL_CARE("personal-care"),
-    PROFESSIONAL_SERVICES("professional-services"),
-    RESTAURANTS_AND_DINING("restaurants-and-dining"),
-    RETAIL_GENERAL("retail-general"),
-    RIDESHARE_AND_TAXIS("rideshare-and-taxis"),
-    SOFTWARE_AND_SAAS("software-and-saas"),
-    SPORTS_AND_RECREATION("sports-and-recreation"),
-    SUBSCRIPTIONS("subscriptions"),
-    TRAVEL_AGENCIES("travel-agencies");
+public class IssuingMerchantCategory {
 
-    @JsonValue
+    public static final IssuingMerchantCategory ADVERTISING = new IssuingMerchantCategory("advertising");
+    public static final IssuingMerchantCategory AIRLINES = new IssuingMerchantCategory("airlines");
+    public static final IssuingMerchantCategory ALCOHOL_AND_BARS = new IssuingMerchantCategory("alcohol-and-bars");
+    public static final IssuingMerchantCategory CAR_RENTAL = new IssuingMerchantCategory("car-rental");
+    public static final IssuingMerchantCategory EDUCATION = new IssuingMerchantCategory("education");
+    public static final IssuingMerchantCategory ELECTRONICS = new IssuingMerchantCategory("electronics");
+    public static final IssuingMerchantCategory FUEL_AND_GAS = new IssuingMerchantCategory("fuel-and-gas");
+    public static final IssuingMerchantCategory GAMBLING = new IssuingMerchantCategory("gambling");
+    public static final IssuingMerchantCategory GROCERIES = new IssuingMerchantCategory("groceries");
+    public static final IssuingMerchantCategory GROUND_TRANSPORTATION = new IssuingMerchantCategory("ground-transportation");
+    public static final IssuingMerchantCategory HARDWARE_AND_HOME = new IssuingMerchantCategory("hardware-and-home");
+    public static final IssuingMerchantCategory HEALTHCARE = new IssuingMerchantCategory("healthcare");
+    public static final IssuingMerchantCategory LIVE_ENTERTAINMENT = new IssuingMerchantCategory("live-entertainment");
+    public static final IssuingMerchantCategory LODGING = new IssuingMerchantCategory("lodging");
+    public static final IssuingMerchantCategory MOVIES = new IssuingMerchantCategory("movies");
+    public static final IssuingMerchantCategory OFFICE_SUPPLIES = new IssuingMerchantCategory("office-supplies");
+    public static final IssuingMerchantCategory PARKING = new IssuingMerchantCategory("parking");
+    public static final IssuingMerchantCategory PERSONAL_CARE = new IssuingMerchantCategory("personal-care");
+    public static final IssuingMerchantCategory PROFESSIONAL_SERVICES = new IssuingMerchantCategory("professional-services");
+    public static final IssuingMerchantCategory RESTAURANTS_AND_DINING = new IssuingMerchantCategory("restaurants-and-dining");
+    public static final IssuingMerchantCategory RETAIL_GENERAL = new IssuingMerchantCategory("retail-general");
+    public static final IssuingMerchantCategory RIDESHARE_AND_TAXIS = new IssuingMerchantCategory("rideshare-and-taxis");
+    public static final IssuingMerchantCategory SOFTWARE_AND_SAAS = new IssuingMerchantCategory("software-and-saas");
+    public static final IssuingMerchantCategory SPORTS_AND_RECREATION = new IssuingMerchantCategory("sports-and-recreation");
+    public static final IssuingMerchantCategory SUBSCRIPTIONS = new IssuingMerchantCategory("subscriptions");
+    public static final IssuingMerchantCategory TRAVEL_AGENCIES = new IssuingMerchantCategory("travel-agencies");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, IssuingMerchantCategory> values = createValuesMap();
+    private static final Map<String, IssuingMerchantCategoryEnum> enums = createEnumsMap();
+
     private final String value;
 
-    IssuingMerchantCategory(String value) {
+    private IssuingMerchantCategory(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a IssuingMerchantCategory with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as IssuingMerchantCategory
+     */ 
+    @JsonCreator
+    public static IssuingMerchantCategory of(String value) {
+        synchronized (IssuingMerchantCategory.class) {
+            return values.computeIfAbsent(value, v -> new IssuingMerchantCategory(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<IssuingMerchantCategory> fromValue(String value) {
-        for (IssuingMerchantCategory o: IssuingMerchantCategory.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<IssuingMerchantCategoryEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        IssuingMerchantCategory other = (IssuingMerchantCategory) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "IssuingMerchantCategory [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static IssuingMerchantCategory[] values() {
+        synchronized (IssuingMerchantCategory.class) {
+            return values.values().toArray(new IssuingMerchantCategory[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, IssuingMerchantCategory> createValuesMap() {
+        Map<String, IssuingMerchantCategory> map = new LinkedHashMap<>();
+        map.put("advertising", ADVERTISING);
+        map.put("airlines", AIRLINES);
+        map.put("alcohol-and-bars", ALCOHOL_AND_BARS);
+        map.put("car-rental", CAR_RENTAL);
+        map.put("education", EDUCATION);
+        map.put("electronics", ELECTRONICS);
+        map.put("fuel-and-gas", FUEL_AND_GAS);
+        map.put("gambling", GAMBLING);
+        map.put("groceries", GROCERIES);
+        map.put("ground-transportation", GROUND_TRANSPORTATION);
+        map.put("hardware-and-home", HARDWARE_AND_HOME);
+        map.put("healthcare", HEALTHCARE);
+        map.put("live-entertainment", LIVE_ENTERTAINMENT);
+        map.put("lodging", LODGING);
+        map.put("movies", MOVIES);
+        map.put("office-supplies", OFFICE_SUPPLIES);
+        map.put("parking", PARKING);
+        map.put("personal-care", PERSONAL_CARE);
+        map.put("professional-services", PROFESSIONAL_SERVICES);
+        map.put("restaurants-and-dining", RESTAURANTS_AND_DINING);
+        map.put("retail-general", RETAIL_GENERAL);
+        map.put("rideshare-and-taxis", RIDESHARE_AND_TAXIS);
+        map.put("software-and-saas", SOFTWARE_AND_SAAS);
+        map.put("sports-and-recreation", SPORTS_AND_RECREATION);
+        map.put("subscriptions", SUBSCRIPTIONS);
+        map.put("travel-agencies", TRAVEL_AGENCIES);
+        return map;
+    }
+
+    private static final Map<String, IssuingMerchantCategoryEnum> createEnumsMap() {
+        Map<String, IssuingMerchantCategoryEnum> map = new HashMap<>();
+        map.put("advertising", IssuingMerchantCategoryEnum.ADVERTISING);
+        map.put("airlines", IssuingMerchantCategoryEnum.AIRLINES);
+        map.put("alcohol-and-bars", IssuingMerchantCategoryEnum.ALCOHOL_AND_BARS);
+        map.put("car-rental", IssuingMerchantCategoryEnum.CAR_RENTAL);
+        map.put("education", IssuingMerchantCategoryEnum.EDUCATION);
+        map.put("electronics", IssuingMerchantCategoryEnum.ELECTRONICS);
+        map.put("fuel-and-gas", IssuingMerchantCategoryEnum.FUEL_AND_GAS);
+        map.put("gambling", IssuingMerchantCategoryEnum.GAMBLING);
+        map.put("groceries", IssuingMerchantCategoryEnum.GROCERIES);
+        map.put("ground-transportation", IssuingMerchantCategoryEnum.GROUND_TRANSPORTATION);
+        map.put("hardware-and-home", IssuingMerchantCategoryEnum.HARDWARE_AND_HOME);
+        map.put("healthcare", IssuingMerchantCategoryEnum.HEALTHCARE);
+        map.put("live-entertainment", IssuingMerchantCategoryEnum.LIVE_ENTERTAINMENT);
+        map.put("lodging", IssuingMerchantCategoryEnum.LODGING);
+        map.put("movies", IssuingMerchantCategoryEnum.MOVIES);
+        map.put("office-supplies", IssuingMerchantCategoryEnum.OFFICE_SUPPLIES);
+        map.put("parking", IssuingMerchantCategoryEnum.PARKING);
+        map.put("personal-care", IssuingMerchantCategoryEnum.PERSONAL_CARE);
+        map.put("professional-services", IssuingMerchantCategoryEnum.PROFESSIONAL_SERVICES);
+        map.put("restaurants-and-dining", IssuingMerchantCategoryEnum.RESTAURANTS_AND_DINING);
+        map.put("retail-general", IssuingMerchantCategoryEnum.RETAIL_GENERAL);
+        map.put("rideshare-and-taxis", IssuingMerchantCategoryEnum.RIDESHARE_AND_TAXIS);
+        map.put("software-and-saas", IssuingMerchantCategoryEnum.SOFTWARE_AND_SAAS);
+        map.put("sports-and-recreation", IssuingMerchantCategoryEnum.SPORTS_AND_RECREATION);
+        map.put("subscriptions", IssuingMerchantCategoryEnum.SUBSCRIPTIONS);
+        map.put("travel-agencies", IssuingMerchantCategoryEnum.TRAVEL_AGENCIES);
+        return map;
+    }
+    
+    
+    public enum IssuingMerchantCategoryEnum {
+
+        ADVERTISING("advertising"),
+        AIRLINES("airlines"),
+        ALCOHOL_AND_BARS("alcohol-and-bars"),
+        CAR_RENTAL("car-rental"),
+        EDUCATION("education"),
+        ELECTRONICS("electronics"),
+        FUEL_AND_GAS("fuel-and-gas"),
+        GAMBLING("gambling"),
+        GROCERIES("groceries"),
+        GROUND_TRANSPORTATION("ground-transportation"),
+        HARDWARE_AND_HOME("hardware-and-home"),
+        HEALTHCARE("healthcare"),
+        LIVE_ENTERTAINMENT("live-entertainment"),
+        LODGING("lodging"),
+        MOVIES("movies"),
+        OFFICE_SUPPLIES("office-supplies"),
+        PARKING("parking"),
+        PERSONAL_CARE("personal-care"),
+        PROFESSIONAL_SERVICES("professional-services"),
+        RESTAURANTS_AND_DINING("restaurants-and-dining"),
+        RETAIL_GENERAL("retail-general"),
+        RIDESHARE_AND_TAXIS("rideshare-and-taxis"),
+        SOFTWARE_AND_SAAS("software-and-saas"),
+        SPORTS_AND_RECREATION("sports-and-recreation"),
+        SUBSCRIPTIONS("subscriptions"),
+        TRAVEL_AGENCIES("travel-agencies"),;
+
+        private final String value;
+
+        private IssuingMerchantCategoryEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

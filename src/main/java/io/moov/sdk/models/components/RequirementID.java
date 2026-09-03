@@ -3,145 +3,614 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * RequirementID
  * 
  * <p>The unique ID of what the requirement is asking to be filled out.
  */
-public enum RequirementID {
-    ACCOUNT_TOS_ACCEPTANCE("account.tos-acceptance"),
-    INDIVIDUAL_MOBILE("individual.mobile"),
-    INDIVIDUAL_EMAIL("individual.email"),
-    INDIVIDUAL_EMAIL_OR_MOBILE("individual.email-or-mobile"),
-    INDIVIDUAL_FIRSTNAME("individual.firstname"),
-    INDIVIDUAL_LASTNAME("individual.lastname"),
-    INDIVIDUAL_ADDRESS("individual.address"),
-    INDIVIDUAL_SSN_LAST4("individual.ssn-last4"),
-    INDIVIDUAL_SSN("individual.ssn"),
-    INDIVIDUAL_BIRTHDATE("individual.birthdate"),
-    BUSINESS_LEGALNAME("business.legalname"),
-    BUSINESS_DESCRIPTION_OR_WEBSITE("business.description-or-website"),
-    BUSINESS_ENTITY_TYPE("business.entity-type"),
-    BUSINESS_BUSINESS_TYPE("business.business-type"),
-    BUSINESS_DBA("business.dba"),
-    BUSINESS_EIN("business.ein"),
-    BUSINESS_ADDRESS("business.address"),
-    BUSINESS_PHONE("business.phone"),
-    BUSINESS_ADMINS("business.admins"),
-    BUSINESS_CONTROLLERS("business.controllers"),
-    BUSINESS_OWNERS("business.owners"),
-    BUSINESS_CLASSIFICATION("business.classification"),
-    BUSINESS_INDUSTRY_CODE_MCC("business.industry-code-mcc"),
-    BUSINESS_INDUSTRY("business.industry"),
-    BUSINESS_INDICATE_OWNERS_PROVIDED("business.indicate-owners-provided"),
-    BUSINESS_AVERAGE_TRANSACTION_SIZE("business.average-transaction-size"),
-    BUSINESS_MAX_TRANSACTION_SIZE("business.max-transaction-size"),
-    BUSINESS_AVERAGE_MONTHLY_TRANSACTION_VOLUME("business.average-monthly-transaction-volume"),
-    BUSINESS_VOLUME_BY_CUSTOMER_TYPE("business.volume-by-customer-type"),
-    BUSINESS_CARD_VOLUME_DISTRIBUTION("business.card-volume-distribution"),
-    BUSINESS_FULFILLMENT("business.fulfillment"),
-    BUSINESS_DESCRIPTION("business.description"),
-    BUSINESS_UNDERWRITING_DOCUMENTS_TIER_ONE("business.underwriting-documents-tier-one"),
-    BANK_ACCOUNTS_NAME("bank-accounts.name"),
-    BANK_ACCOUNTS_ROUTING_NUMBER("bank-accounts.routing-number"),
-    BANK_ACCOUNTS_ACCOUNT_NUMBER("bank-accounts.account-number"),
-    DOCUMENT_BUSINESS_VERIFICATION("document.business.verification"),
-    DOCUMENT_INDIVIDUAL_TIN("document.individual.tin"),
-    DOCUMENT_INDIVIDUAL_VERIFICATION("document.individual.verification"),
-    DOCUMENT_REPRESENTATIVE_REP_UUID_TIN("document.representative.{rep-uuid}.tin"),
-    DOCUMENT_REPRESENTATIVE_REP_UUID_VERIFICATION("document.representative.{rep-uuid}.verification"),
-    REPRESENTATIVE_REP_UUID_MOBILE("representative.{rep-uuid}.mobile"),
-    REPRESENTATIVE_REP_UUID_EMAIL("representative.{rep-uuid}.email"),
-    REPRESENTATIVE_REP_UUID_EMAIL_OR_MOBILE("representative.{rep-uuid}.email-or-mobile"),
-    REPRESENTATIVE_REP_UUID_FIRSTNAME("representative.{rep-uuid}.firstname"),
-    REPRESENTATIVE_REP_UUID_LASTNAME("representative.{rep-uuid}.lastname"),
-    REPRESENTATIVE_REP_UUID_ADDRESS("representative.{rep-uuid}.address"),
-    REPRESENTATIVE_REP_UUID_SSN_LAST4("representative.{rep-uuid}.ssn-last4"),
-    REPRESENTATIVE_REP_UUID_SSN("representative.{rep-uuid}.ssn"),
-    REPRESENTATIVE_REP_UUID_BIRTHDATE("representative.{rep-uuid}.birthdate"),
-    REPRESENTATIVE_REP_UUID_JOB_TITLE("representative.{rep-uuid}.job-title"),
-    REPRESENTATIVE_REP_UUID_IS_CONTROLLER("representative.{rep-uuid}.is-controller"),
-    REPRESENTATIVE_REP_UUID_IS_OWNER("representative.{rep-uuid}.is-owner"),
-    REPRESENTATIVE_REP_UUID_OWNERSHIP("representative.{rep-uuid}.ownership"),
-    DOCUMENT_DOC_UUID("document.{doc-uuid}"),
-    UNDERWRITING_BUSINESS_PRESENCE("underwriting.businessPresence"),
-    UNDERWRITING_GEOGRAPHIC_REACH("underwriting.geographicReach"),
-    UNDERWRITING_VOLUME_SHARE_BY_CUSTOMER_TYPE("underwriting.volumeShareByCustomerType"),
-    UNDERWRITING_PENDING_LITIGATION("underwriting.pendingLitigation"),
-    UNDERWRITING_DOCUMENTS_PROCESSING_STATEMENTS_PAST3_MONTHS("underwriting.documents.processingStatementsPast3Months"),
-    UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_CARD_ACCEPTANCE_METHODS("underwriting.collectFunds.cardPayments.cardAcceptanceMethods"),
-    UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_CURRENTLY_ACCEPTS_CARDS("underwriting.collectFunds.cardPayments.currentlyAcceptsCards"),
-    UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT("underwriting.collectFunds.cardPayments.estimatedActivity.averageTransactionAmount"),
-    UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT("underwriting.collectFunds.cardPayments.estimatedActivity.maximumTransactionAmount"),
-    UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE("underwriting.collectFunds.cardPayments.estimatedActivity.monthlyVolumeRange"),
-    UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_FULFILLMENT("underwriting.collectFunds.cardPayments.fulfillment"),
-    UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_REFUND_POLICY("underwriting.collectFunds.cardPayments.refundPolicy"),
-    UNDERWRITING_COLLECT_FUNDS_ACH_CARD_ACCEPTANCE_METHODS("underwriting.collectFunds.ach.cardAcceptanceMethods"),
-    UNDERWRITING_COLLECT_FUNDS_ACH_CURRENTLY_ACCEPTS_CARDS("underwriting.collectFunds.ach.currentlyAcceptsCards"),
-    UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT("underwriting.collectFunds.ach.estimatedActivity.averageTransactionAmount"),
-    UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT("underwriting.collectFunds.ach.estimatedActivity.maximumTransactionAmount"),
-    UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE("underwriting.collectFunds.ach.estimatedActivity.monthlyVolumeRange"),
-    UNDERWRITING_COLLECT_FUNDS_ACH_FULFILLMENT("underwriting.collectFunds.ach.fulfillment"),
-    UNDERWRITING_COLLECT_FUNDS_ACH_REFUND_POLICY("underwriting.collectFunds.ach.refundPolicy"),
-    UNDERWRITING_SEND_FUNDS_ACH_CARD_ACCEPTANCE_METHODS("underwriting.sendFunds.ach.cardAcceptanceMethods"),
-    UNDERWRITING_SEND_FUNDS_ACH_CURRENTLY_ACCEPTS_CARDS("underwriting.sendFunds.ach.currentlyAcceptsCards"),
-    UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT("underwriting.sendFunds.ach.estimatedActivity.averageTransactionAmount"),
-    UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT("underwriting.sendFunds.ach.estimatedActivity.maximumTransactionAmount"),
-    UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE("underwriting.sendFunds.ach.estimatedActivity.monthlyVolumeRange"),
-    UNDERWRITING_SEND_FUNDS_ACH_FULFILLMENT("underwriting.sendFunds.ach.fulfillment"),
-    UNDERWRITING_SEND_FUNDS_ACH_REFUND_POLICY("underwriting.sendFunds.ach.refundPolicy"),
-    UNDERWRITING_SEND_FUNDS_RTP_CARD_ACCEPTANCE_METHODS("underwriting.sendFunds.rtp.cardAcceptanceMethods"),
-    UNDERWRITING_SEND_FUNDS_RTP_CURRENTLY_ACCEPTS_CARDS("underwriting.sendFunds.rtp.currentlyAcceptsCards"),
-    UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT("underwriting.sendFunds.rtp.estimatedActivity.averageTransactionAmount"),
-    UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT("underwriting.sendFunds.rtp.estimatedActivity.maximumTransactionAmount"),
-    UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE("underwriting.sendFunds.rtp.estimatedActivity.monthlyVolumeRange"),
-    UNDERWRITING_SEND_FUNDS_RTP_FULFILLMENT("underwriting.sendFunds.rtp.fulfillment"),
-    UNDERWRITING_SEND_FUNDS_RTP_REFUND_POLICY("underwriting.sendFunds.rtp.refundPolicy"),
-    UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_CARD_ACCEPTANCE_METHODS("underwriting.sendFunds.pushToCard.cardAcceptanceMethods"),
-    UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_CURRENTLY_ACCEPTS_CARDS("underwriting.sendFunds.pushToCard.currentlyAcceptsCards"),
-    UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT("underwriting.sendFunds.pushToCard.estimatedActivity.averageTransactionAmount"),
-    UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT("underwriting.sendFunds.pushToCard.estimatedActivity.maximumTransactionAmount"),
-    UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE("underwriting.sendFunds.pushToCard.estimatedActivity.monthlyVolumeRange"),
-    UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_FULFILLMENT("underwriting.sendFunds.pushToCard.fulfillment"),
-    UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_REFUND_POLICY("underwriting.sendFunds.pushToCard.refundPolicy"),
-    UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_CARD_ACCEPTANCE_METHODS("underwriting.moneyTransfer.pullFromCard.cardAcceptanceMethods"),
-    UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_CURRENTLY_ACCEPTS_CARDS("underwriting.moneyTransfer.pullFromCard.currentlyAcceptsCards"),
-    UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT("underwriting.moneyTransfer.pullFromCard.estimatedActivity.averageTransactionAmount"),
-    UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT("underwriting.moneyTransfer.pullFromCard.estimatedActivity.maximumTransactionAmount"),
-    UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE("underwriting.moneyTransfer.pullFromCard.estimatedActivity.monthlyVolumeRange"),
-    UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_FULFILLMENT("underwriting.moneyTransfer.pullFromCard.fulfillment"),
-    UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_REFUND_POLICY("underwriting.moneyTransfer.pullFromCard.refundPolicy"),
-    UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_CARD_ACCEPTANCE_METHODS("underwriting.moneyTransfer.pushToCard.cardAcceptanceMethods"),
-    UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_CURRENTLY_ACCEPTS_CARDS("underwriting.moneyTransfer.pushToCard.currentlyAcceptsCards"),
-    UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT("underwriting.moneyTransfer.pushToCard.estimatedActivity.averageTransactionAmount"),
-    UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT("underwriting.moneyTransfer.pushToCard.estimatedActivity.maximumTransactionAmount"),
-    UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE("underwriting.moneyTransfer.pushToCard.estimatedActivity.monthlyVolumeRange"),
-    UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_FULFILLMENT("underwriting.moneyTransfer.pushToCard.fulfillment"),
-    UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_REFUND_POLICY("underwriting.moneyTransfer.pushToCard.refundPolicy");
+public class RequirementID {
 
-    @JsonValue
+    public static final RequirementID ACCOUNT_TOS_ACCEPTANCE = new RequirementID("account.tos-acceptance");
+    public static final RequirementID INDIVIDUAL_MOBILE = new RequirementID("individual.mobile");
+    public static final RequirementID INDIVIDUAL_EMAIL = new RequirementID("individual.email");
+    public static final RequirementID INDIVIDUAL_EMAIL_OR_MOBILE = new RequirementID("individual.email-or-mobile");
+    public static final RequirementID INDIVIDUAL_FIRSTNAME = new RequirementID("individual.firstname");
+    public static final RequirementID INDIVIDUAL_LASTNAME = new RequirementID("individual.lastname");
+    public static final RequirementID INDIVIDUAL_ADDRESS = new RequirementID("individual.address");
+    public static final RequirementID INDIVIDUAL_SSN_LAST4 = new RequirementID("individual.ssn-last4");
+    public static final RequirementID INDIVIDUAL_SSN = new RequirementID("individual.ssn");
+    public static final RequirementID INDIVIDUAL_BIRTHDATE = new RequirementID("individual.birthdate");
+    public static final RequirementID BUSINESS_LEGALNAME = new RequirementID("business.legalname");
+    public static final RequirementID BUSINESS_DESCRIPTION_OR_WEBSITE = new RequirementID("business.description-or-website");
+    public static final RequirementID BUSINESS_ENTITY_TYPE = new RequirementID("business.entity-type");
+    public static final RequirementID BUSINESS_BUSINESS_TYPE = new RequirementID("business.business-type");
+    public static final RequirementID BUSINESS_DBA = new RequirementID("business.dba");
+    public static final RequirementID BUSINESS_EIN = new RequirementID("business.ein");
+    public static final RequirementID BUSINESS_ADDRESS = new RequirementID("business.address");
+    public static final RequirementID BUSINESS_PHONE = new RequirementID("business.phone");
+    public static final RequirementID BUSINESS_ADMINS = new RequirementID("business.admins");
+    public static final RequirementID BUSINESS_CONTROLLERS = new RequirementID("business.controllers");
+    public static final RequirementID BUSINESS_OWNERS = new RequirementID("business.owners");
+    public static final RequirementID BUSINESS_CLASSIFICATION = new RequirementID("business.classification");
+    public static final RequirementID BUSINESS_INDUSTRY_CODE_MCC = new RequirementID("business.industry-code-mcc");
+    public static final RequirementID BUSINESS_INDUSTRY = new RequirementID("business.industry");
+    public static final RequirementID BUSINESS_INDICATE_OWNERS_PROVIDED = new RequirementID("business.indicate-owners-provided");
+    public static final RequirementID BUSINESS_AVERAGE_TRANSACTION_SIZE = new RequirementID("business.average-transaction-size");
+    public static final RequirementID BUSINESS_MAX_TRANSACTION_SIZE = new RequirementID("business.max-transaction-size");
+    public static final RequirementID BUSINESS_AVERAGE_MONTHLY_TRANSACTION_VOLUME = new RequirementID("business.average-monthly-transaction-volume");
+    public static final RequirementID BUSINESS_VOLUME_BY_CUSTOMER_TYPE = new RequirementID("business.volume-by-customer-type");
+    public static final RequirementID BUSINESS_CARD_VOLUME_DISTRIBUTION = new RequirementID("business.card-volume-distribution");
+    public static final RequirementID BUSINESS_FULFILLMENT = new RequirementID("business.fulfillment");
+    public static final RequirementID BUSINESS_DESCRIPTION = new RequirementID("business.description");
+    public static final RequirementID BUSINESS_UNDERWRITING_DOCUMENTS_TIER_ONE = new RequirementID("business.underwriting-documents-tier-one");
+    public static final RequirementID BANK_ACCOUNTS_NAME = new RequirementID("bank-accounts.name");
+    public static final RequirementID BANK_ACCOUNTS_ROUTING_NUMBER = new RequirementID("bank-accounts.routing-number");
+    public static final RequirementID BANK_ACCOUNTS_ACCOUNT_NUMBER = new RequirementID("bank-accounts.account-number");
+    public static final RequirementID DOCUMENT_BUSINESS_VERIFICATION = new RequirementID("document.business.verification");
+    public static final RequirementID DOCUMENT_INDIVIDUAL_TIN = new RequirementID("document.individual.tin");
+    public static final RequirementID DOCUMENT_INDIVIDUAL_VERIFICATION = new RequirementID("document.individual.verification");
+    public static final RequirementID DOCUMENT_REPRESENTATIVE_REP_UUID_TIN = new RequirementID("document.representative.{rep-uuid}.tin");
+    public static final RequirementID DOCUMENT_REPRESENTATIVE_REP_UUID_VERIFICATION = new RequirementID("document.representative.{rep-uuid}.verification");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_MOBILE = new RequirementID("representative.{rep-uuid}.mobile");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_EMAIL = new RequirementID("representative.{rep-uuid}.email");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_EMAIL_OR_MOBILE = new RequirementID("representative.{rep-uuid}.email-or-mobile");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_FIRSTNAME = new RequirementID("representative.{rep-uuid}.firstname");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_LASTNAME = new RequirementID("representative.{rep-uuid}.lastname");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_ADDRESS = new RequirementID("representative.{rep-uuid}.address");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_SSN_LAST4 = new RequirementID("representative.{rep-uuid}.ssn-last4");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_SSN = new RequirementID("representative.{rep-uuid}.ssn");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_BIRTHDATE = new RequirementID("representative.{rep-uuid}.birthdate");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_JOB_TITLE = new RequirementID("representative.{rep-uuid}.job-title");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_IS_CONTROLLER = new RequirementID("representative.{rep-uuid}.is-controller");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_IS_OWNER = new RequirementID("representative.{rep-uuid}.is-owner");
+    public static final RequirementID REPRESENTATIVE_REP_UUID_OWNERSHIP = new RequirementID("representative.{rep-uuid}.ownership");
+    public static final RequirementID DOCUMENT_DOC_UUID = new RequirementID("document.{doc-uuid}");
+    public static final RequirementID UNDERWRITING_BUSINESS_PRESENCE = new RequirementID("underwriting.businessPresence");
+    public static final RequirementID UNDERWRITING_GEOGRAPHIC_REACH = new RequirementID("underwriting.geographicReach");
+    public static final RequirementID UNDERWRITING_VOLUME_SHARE_BY_CUSTOMER_TYPE = new RequirementID("underwriting.volumeShareByCustomerType");
+    public static final RequirementID UNDERWRITING_PENDING_LITIGATION = new RequirementID("underwriting.pendingLitigation");
+    public static final RequirementID UNDERWRITING_DOCUMENTS_PROCESSING_STATEMENTS_PAST3_MONTHS = new RequirementID("underwriting.documents.processingStatementsPast3Months");
+    public static final RequirementID UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_CARD_ACCEPTANCE_METHODS = new RequirementID("underwriting.collectFunds.cardPayments.cardAcceptanceMethods");
+    public static final RequirementID UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_CURRENTLY_ACCEPTS_CARDS = new RequirementID("underwriting.collectFunds.cardPayments.currentlyAcceptsCards");
+    public static final RequirementID UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = new RequirementID("underwriting.collectFunds.cardPayments.estimatedActivity.averageTransactionAmount");
+    public static final RequirementID UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = new RequirementID("underwriting.collectFunds.cardPayments.estimatedActivity.maximumTransactionAmount");
+    public static final RequirementID UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = new RequirementID("underwriting.collectFunds.cardPayments.estimatedActivity.monthlyVolumeRange");
+    public static final RequirementID UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_FULFILLMENT = new RequirementID("underwriting.collectFunds.cardPayments.fulfillment");
+    public static final RequirementID UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_REFUND_POLICY = new RequirementID("underwriting.collectFunds.cardPayments.refundPolicy");
+    public static final RequirementID UNDERWRITING_COLLECT_FUNDS_ACH_CARD_ACCEPTANCE_METHODS = new RequirementID("underwriting.collectFunds.ach.cardAcceptanceMethods");
+    public static final RequirementID UNDERWRITING_COLLECT_FUNDS_ACH_CURRENTLY_ACCEPTS_CARDS = new RequirementID("underwriting.collectFunds.ach.currentlyAcceptsCards");
+    public static final RequirementID UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = new RequirementID("underwriting.collectFunds.ach.estimatedActivity.averageTransactionAmount");
+    public static final RequirementID UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = new RequirementID("underwriting.collectFunds.ach.estimatedActivity.maximumTransactionAmount");
+    public static final RequirementID UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = new RequirementID("underwriting.collectFunds.ach.estimatedActivity.monthlyVolumeRange");
+    public static final RequirementID UNDERWRITING_COLLECT_FUNDS_ACH_FULFILLMENT = new RequirementID("underwriting.collectFunds.ach.fulfillment");
+    public static final RequirementID UNDERWRITING_COLLECT_FUNDS_ACH_REFUND_POLICY = new RequirementID("underwriting.collectFunds.ach.refundPolicy");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_ACH_CARD_ACCEPTANCE_METHODS = new RequirementID("underwriting.sendFunds.ach.cardAcceptanceMethods");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_ACH_CURRENTLY_ACCEPTS_CARDS = new RequirementID("underwriting.sendFunds.ach.currentlyAcceptsCards");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = new RequirementID("underwriting.sendFunds.ach.estimatedActivity.averageTransactionAmount");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = new RequirementID("underwriting.sendFunds.ach.estimatedActivity.maximumTransactionAmount");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = new RequirementID("underwriting.sendFunds.ach.estimatedActivity.monthlyVolumeRange");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_ACH_FULFILLMENT = new RequirementID("underwriting.sendFunds.ach.fulfillment");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_ACH_REFUND_POLICY = new RequirementID("underwriting.sendFunds.ach.refundPolicy");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_RTP_CARD_ACCEPTANCE_METHODS = new RequirementID("underwriting.sendFunds.rtp.cardAcceptanceMethods");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_RTP_CURRENTLY_ACCEPTS_CARDS = new RequirementID("underwriting.sendFunds.rtp.currentlyAcceptsCards");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = new RequirementID("underwriting.sendFunds.rtp.estimatedActivity.averageTransactionAmount");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = new RequirementID("underwriting.sendFunds.rtp.estimatedActivity.maximumTransactionAmount");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = new RequirementID("underwriting.sendFunds.rtp.estimatedActivity.monthlyVolumeRange");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_RTP_FULFILLMENT = new RequirementID("underwriting.sendFunds.rtp.fulfillment");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_RTP_REFUND_POLICY = new RequirementID("underwriting.sendFunds.rtp.refundPolicy");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_CARD_ACCEPTANCE_METHODS = new RequirementID("underwriting.sendFunds.pushToCard.cardAcceptanceMethods");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_CURRENTLY_ACCEPTS_CARDS = new RequirementID("underwriting.sendFunds.pushToCard.currentlyAcceptsCards");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = new RequirementID("underwriting.sendFunds.pushToCard.estimatedActivity.averageTransactionAmount");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = new RequirementID("underwriting.sendFunds.pushToCard.estimatedActivity.maximumTransactionAmount");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = new RequirementID("underwriting.sendFunds.pushToCard.estimatedActivity.monthlyVolumeRange");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_FULFILLMENT = new RequirementID("underwriting.sendFunds.pushToCard.fulfillment");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_REFUND_POLICY = new RequirementID("underwriting.sendFunds.pushToCard.refundPolicy");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_INSTANT_BANK_CARD_ACCEPTANCE_METHODS = new RequirementID("underwriting.sendFunds.instantBank.cardAcceptanceMethods");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_INSTANT_BANK_CURRENTLY_ACCEPTS_CARDS = new RequirementID("underwriting.sendFunds.instantBank.currentlyAcceptsCards");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_INSTANT_BANK_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = new RequirementID("underwriting.sendFunds.instantBank.estimatedActivity.averageTransactionAmount");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_INSTANT_BANK_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = new RequirementID("underwriting.sendFunds.instantBank.estimatedActivity.maximumTransactionAmount");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_INSTANT_BANK_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = new RequirementID("underwriting.sendFunds.instantBank.estimatedActivity.monthlyVolumeRange");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_INSTANT_BANK_FULFILLMENT = new RequirementID("underwriting.sendFunds.instantBank.fulfillment");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_INSTANT_BANK_REFUND_POLICY = new RequirementID("underwriting.sendFunds.instantBank.refundPolicy");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_WIRE_CARD_ACCEPTANCE_METHODS = new RequirementID("underwriting.sendFunds.wire.cardAcceptanceMethods");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_WIRE_CURRENTLY_ACCEPTS_CARDS = new RequirementID("underwriting.sendFunds.wire.currentlyAcceptsCards");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_WIRE_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = new RequirementID("underwriting.sendFunds.wire.estimatedActivity.averageTransactionAmount");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_WIRE_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = new RequirementID("underwriting.sendFunds.wire.estimatedActivity.maximumTransactionAmount");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_WIRE_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = new RequirementID("underwriting.sendFunds.wire.estimatedActivity.monthlyVolumeRange");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_WIRE_FULFILLMENT = new RequirementID("underwriting.sendFunds.wire.fulfillment");
+    public static final RequirementID UNDERWRITING_SEND_FUNDS_WIRE_REFUND_POLICY = new RequirementID("underwriting.sendFunds.wire.refundPolicy");
+    public static final RequirementID UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_CARD_ACCEPTANCE_METHODS = new RequirementID("underwriting.moneyTransfer.pullFromCard.cardAcceptanceMethods");
+    public static final RequirementID UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_CURRENTLY_ACCEPTS_CARDS = new RequirementID("underwriting.moneyTransfer.pullFromCard.currentlyAcceptsCards");
+    public static final RequirementID UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = new RequirementID("underwriting.moneyTransfer.pullFromCard.estimatedActivity.averageTransactionAmount");
+    public static final RequirementID UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = new RequirementID("underwriting.moneyTransfer.pullFromCard.estimatedActivity.maximumTransactionAmount");
+    public static final RequirementID UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = new RequirementID("underwriting.moneyTransfer.pullFromCard.estimatedActivity.monthlyVolumeRange");
+    public static final RequirementID UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_FULFILLMENT = new RequirementID("underwriting.moneyTransfer.pullFromCard.fulfillment");
+    public static final RequirementID UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_REFUND_POLICY = new RequirementID("underwriting.moneyTransfer.pullFromCard.refundPolicy");
+    public static final RequirementID UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_CARD_ACCEPTANCE_METHODS = new RequirementID("underwriting.moneyTransfer.pushToCard.cardAcceptanceMethods");
+    public static final RequirementID UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_CURRENTLY_ACCEPTS_CARDS = new RequirementID("underwriting.moneyTransfer.pushToCard.currentlyAcceptsCards");
+    public static final RequirementID UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = new RequirementID("underwriting.moneyTransfer.pushToCard.estimatedActivity.averageTransactionAmount");
+    public static final RequirementID UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = new RequirementID("underwriting.moneyTransfer.pushToCard.estimatedActivity.maximumTransactionAmount");
+    public static final RequirementID UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = new RequirementID("underwriting.moneyTransfer.pushToCard.estimatedActivity.monthlyVolumeRange");
+    public static final RequirementID UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_FULFILLMENT = new RequirementID("underwriting.moneyTransfer.pushToCard.fulfillment");
+    public static final RequirementID UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_REFUND_POLICY = new RequirementID("underwriting.moneyTransfer.pushToCard.refundPolicy");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, RequirementID> values = createValuesMap();
+    private static final Map<String, RequirementIDEnum> enums = createEnumsMap();
+
     private final String value;
 
-    RequirementID(String value) {
+    private RequirementID(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a RequirementID with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as RequirementID
+     */ 
+    @JsonCreator
+    public static RequirementID of(String value) {
+        synchronized (RequirementID.class) {
+            return values.computeIfAbsent(value, v -> new RequirementID(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<RequirementID> fromValue(String value) {
-        for (RequirementID o: RequirementID.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<RequirementIDEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        RequirementID other = (RequirementID) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "RequirementID [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static RequirementID[] values() {
+        synchronized (RequirementID.class) {
+            return values.values().toArray(new RequirementID[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, RequirementID> createValuesMap() {
+        Map<String, RequirementID> map = new LinkedHashMap<>();
+        map.put("account.tos-acceptance", ACCOUNT_TOS_ACCEPTANCE);
+        map.put("individual.mobile", INDIVIDUAL_MOBILE);
+        map.put("individual.email", INDIVIDUAL_EMAIL);
+        map.put("individual.email-or-mobile", INDIVIDUAL_EMAIL_OR_MOBILE);
+        map.put("individual.firstname", INDIVIDUAL_FIRSTNAME);
+        map.put("individual.lastname", INDIVIDUAL_LASTNAME);
+        map.put("individual.address", INDIVIDUAL_ADDRESS);
+        map.put("individual.ssn-last4", INDIVIDUAL_SSN_LAST4);
+        map.put("individual.ssn", INDIVIDUAL_SSN);
+        map.put("individual.birthdate", INDIVIDUAL_BIRTHDATE);
+        map.put("business.legalname", BUSINESS_LEGALNAME);
+        map.put("business.description-or-website", BUSINESS_DESCRIPTION_OR_WEBSITE);
+        map.put("business.entity-type", BUSINESS_ENTITY_TYPE);
+        map.put("business.business-type", BUSINESS_BUSINESS_TYPE);
+        map.put("business.dba", BUSINESS_DBA);
+        map.put("business.ein", BUSINESS_EIN);
+        map.put("business.address", BUSINESS_ADDRESS);
+        map.put("business.phone", BUSINESS_PHONE);
+        map.put("business.admins", BUSINESS_ADMINS);
+        map.put("business.controllers", BUSINESS_CONTROLLERS);
+        map.put("business.owners", BUSINESS_OWNERS);
+        map.put("business.classification", BUSINESS_CLASSIFICATION);
+        map.put("business.industry-code-mcc", BUSINESS_INDUSTRY_CODE_MCC);
+        map.put("business.industry", BUSINESS_INDUSTRY);
+        map.put("business.indicate-owners-provided", BUSINESS_INDICATE_OWNERS_PROVIDED);
+        map.put("business.average-transaction-size", BUSINESS_AVERAGE_TRANSACTION_SIZE);
+        map.put("business.max-transaction-size", BUSINESS_MAX_TRANSACTION_SIZE);
+        map.put("business.average-monthly-transaction-volume", BUSINESS_AVERAGE_MONTHLY_TRANSACTION_VOLUME);
+        map.put("business.volume-by-customer-type", BUSINESS_VOLUME_BY_CUSTOMER_TYPE);
+        map.put("business.card-volume-distribution", BUSINESS_CARD_VOLUME_DISTRIBUTION);
+        map.put("business.fulfillment", BUSINESS_FULFILLMENT);
+        map.put("business.description", BUSINESS_DESCRIPTION);
+        map.put("business.underwriting-documents-tier-one", BUSINESS_UNDERWRITING_DOCUMENTS_TIER_ONE);
+        map.put("bank-accounts.name", BANK_ACCOUNTS_NAME);
+        map.put("bank-accounts.routing-number", BANK_ACCOUNTS_ROUTING_NUMBER);
+        map.put("bank-accounts.account-number", BANK_ACCOUNTS_ACCOUNT_NUMBER);
+        map.put("document.business.verification", DOCUMENT_BUSINESS_VERIFICATION);
+        map.put("document.individual.tin", DOCUMENT_INDIVIDUAL_TIN);
+        map.put("document.individual.verification", DOCUMENT_INDIVIDUAL_VERIFICATION);
+        map.put("document.representative.{rep-uuid}.tin", DOCUMENT_REPRESENTATIVE_REP_UUID_TIN);
+        map.put("document.representative.{rep-uuid}.verification", DOCUMENT_REPRESENTATIVE_REP_UUID_VERIFICATION);
+        map.put("representative.{rep-uuid}.mobile", REPRESENTATIVE_REP_UUID_MOBILE);
+        map.put("representative.{rep-uuid}.email", REPRESENTATIVE_REP_UUID_EMAIL);
+        map.put("representative.{rep-uuid}.email-or-mobile", REPRESENTATIVE_REP_UUID_EMAIL_OR_MOBILE);
+        map.put("representative.{rep-uuid}.firstname", REPRESENTATIVE_REP_UUID_FIRSTNAME);
+        map.put("representative.{rep-uuid}.lastname", REPRESENTATIVE_REP_UUID_LASTNAME);
+        map.put("representative.{rep-uuid}.address", REPRESENTATIVE_REP_UUID_ADDRESS);
+        map.put("representative.{rep-uuid}.ssn-last4", REPRESENTATIVE_REP_UUID_SSN_LAST4);
+        map.put("representative.{rep-uuid}.ssn", REPRESENTATIVE_REP_UUID_SSN);
+        map.put("representative.{rep-uuid}.birthdate", REPRESENTATIVE_REP_UUID_BIRTHDATE);
+        map.put("representative.{rep-uuid}.job-title", REPRESENTATIVE_REP_UUID_JOB_TITLE);
+        map.put("representative.{rep-uuid}.is-controller", REPRESENTATIVE_REP_UUID_IS_CONTROLLER);
+        map.put("representative.{rep-uuid}.is-owner", REPRESENTATIVE_REP_UUID_IS_OWNER);
+        map.put("representative.{rep-uuid}.ownership", REPRESENTATIVE_REP_UUID_OWNERSHIP);
+        map.put("document.{doc-uuid}", DOCUMENT_DOC_UUID);
+        map.put("underwriting.businessPresence", UNDERWRITING_BUSINESS_PRESENCE);
+        map.put("underwriting.geographicReach", UNDERWRITING_GEOGRAPHIC_REACH);
+        map.put("underwriting.volumeShareByCustomerType", UNDERWRITING_VOLUME_SHARE_BY_CUSTOMER_TYPE);
+        map.put("underwriting.pendingLitigation", UNDERWRITING_PENDING_LITIGATION);
+        map.put("underwriting.documents.processingStatementsPast3Months", UNDERWRITING_DOCUMENTS_PROCESSING_STATEMENTS_PAST3_MONTHS);
+        map.put("underwriting.collectFunds.cardPayments.cardAcceptanceMethods", UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.collectFunds.cardPayments.currentlyAcceptsCards", UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.collectFunds.cardPayments.estimatedActivity.averageTransactionAmount", UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.collectFunds.cardPayments.estimatedActivity.maximumTransactionAmount", UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.collectFunds.cardPayments.estimatedActivity.monthlyVolumeRange", UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.collectFunds.cardPayments.fulfillment", UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_FULFILLMENT);
+        map.put("underwriting.collectFunds.cardPayments.refundPolicy", UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_REFUND_POLICY);
+        map.put("underwriting.collectFunds.ach.cardAcceptanceMethods", UNDERWRITING_COLLECT_FUNDS_ACH_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.collectFunds.ach.currentlyAcceptsCards", UNDERWRITING_COLLECT_FUNDS_ACH_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.collectFunds.ach.estimatedActivity.averageTransactionAmount", UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.collectFunds.ach.estimatedActivity.maximumTransactionAmount", UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.collectFunds.ach.estimatedActivity.monthlyVolumeRange", UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.collectFunds.ach.fulfillment", UNDERWRITING_COLLECT_FUNDS_ACH_FULFILLMENT);
+        map.put("underwriting.collectFunds.ach.refundPolicy", UNDERWRITING_COLLECT_FUNDS_ACH_REFUND_POLICY);
+        map.put("underwriting.sendFunds.ach.cardAcceptanceMethods", UNDERWRITING_SEND_FUNDS_ACH_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.sendFunds.ach.currentlyAcceptsCards", UNDERWRITING_SEND_FUNDS_ACH_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.sendFunds.ach.estimatedActivity.averageTransactionAmount", UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.ach.estimatedActivity.maximumTransactionAmount", UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.ach.estimatedActivity.monthlyVolumeRange", UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.sendFunds.ach.fulfillment", UNDERWRITING_SEND_FUNDS_ACH_FULFILLMENT);
+        map.put("underwriting.sendFunds.ach.refundPolicy", UNDERWRITING_SEND_FUNDS_ACH_REFUND_POLICY);
+        map.put("underwriting.sendFunds.rtp.cardAcceptanceMethods", UNDERWRITING_SEND_FUNDS_RTP_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.sendFunds.rtp.currentlyAcceptsCards", UNDERWRITING_SEND_FUNDS_RTP_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.sendFunds.rtp.estimatedActivity.averageTransactionAmount", UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.rtp.estimatedActivity.maximumTransactionAmount", UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.rtp.estimatedActivity.monthlyVolumeRange", UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.sendFunds.rtp.fulfillment", UNDERWRITING_SEND_FUNDS_RTP_FULFILLMENT);
+        map.put("underwriting.sendFunds.rtp.refundPolicy", UNDERWRITING_SEND_FUNDS_RTP_REFUND_POLICY);
+        map.put("underwriting.sendFunds.pushToCard.cardAcceptanceMethods", UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.sendFunds.pushToCard.currentlyAcceptsCards", UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.sendFunds.pushToCard.estimatedActivity.averageTransactionAmount", UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.pushToCard.estimatedActivity.maximumTransactionAmount", UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.pushToCard.estimatedActivity.monthlyVolumeRange", UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.sendFunds.pushToCard.fulfillment", UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_FULFILLMENT);
+        map.put("underwriting.sendFunds.pushToCard.refundPolicy", UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_REFUND_POLICY);
+        map.put("underwriting.sendFunds.instantBank.cardAcceptanceMethods", UNDERWRITING_SEND_FUNDS_INSTANT_BANK_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.sendFunds.instantBank.currentlyAcceptsCards", UNDERWRITING_SEND_FUNDS_INSTANT_BANK_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.sendFunds.instantBank.estimatedActivity.averageTransactionAmount", UNDERWRITING_SEND_FUNDS_INSTANT_BANK_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.instantBank.estimatedActivity.maximumTransactionAmount", UNDERWRITING_SEND_FUNDS_INSTANT_BANK_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.instantBank.estimatedActivity.monthlyVolumeRange", UNDERWRITING_SEND_FUNDS_INSTANT_BANK_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.sendFunds.instantBank.fulfillment", UNDERWRITING_SEND_FUNDS_INSTANT_BANK_FULFILLMENT);
+        map.put("underwriting.sendFunds.instantBank.refundPolicy", UNDERWRITING_SEND_FUNDS_INSTANT_BANK_REFUND_POLICY);
+        map.put("underwriting.sendFunds.wire.cardAcceptanceMethods", UNDERWRITING_SEND_FUNDS_WIRE_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.sendFunds.wire.currentlyAcceptsCards", UNDERWRITING_SEND_FUNDS_WIRE_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.sendFunds.wire.estimatedActivity.averageTransactionAmount", UNDERWRITING_SEND_FUNDS_WIRE_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.wire.estimatedActivity.maximumTransactionAmount", UNDERWRITING_SEND_FUNDS_WIRE_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.wire.estimatedActivity.monthlyVolumeRange", UNDERWRITING_SEND_FUNDS_WIRE_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.sendFunds.wire.fulfillment", UNDERWRITING_SEND_FUNDS_WIRE_FULFILLMENT);
+        map.put("underwriting.sendFunds.wire.refundPolicy", UNDERWRITING_SEND_FUNDS_WIRE_REFUND_POLICY);
+        map.put("underwriting.moneyTransfer.pullFromCard.cardAcceptanceMethods", UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.moneyTransfer.pullFromCard.currentlyAcceptsCards", UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.moneyTransfer.pullFromCard.estimatedActivity.averageTransactionAmount", UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.moneyTransfer.pullFromCard.estimatedActivity.maximumTransactionAmount", UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.moneyTransfer.pullFromCard.estimatedActivity.monthlyVolumeRange", UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.moneyTransfer.pullFromCard.fulfillment", UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_FULFILLMENT);
+        map.put("underwriting.moneyTransfer.pullFromCard.refundPolicy", UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_REFUND_POLICY);
+        map.put("underwriting.moneyTransfer.pushToCard.cardAcceptanceMethods", UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.moneyTransfer.pushToCard.currentlyAcceptsCards", UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.moneyTransfer.pushToCard.estimatedActivity.averageTransactionAmount", UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.moneyTransfer.pushToCard.estimatedActivity.maximumTransactionAmount", UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.moneyTransfer.pushToCard.estimatedActivity.monthlyVolumeRange", UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.moneyTransfer.pushToCard.fulfillment", UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_FULFILLMENT);
+        map.put("underwriting.moneyTransfer.pushToCard.refundPolicy", UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_REFUND_POLICY);
+        return map;
+    }
+
+    private static final Map<String, RequirementIDEnum> createEnumsMap() {
+        Map<String, RequirementIDEnum> map = new HashMap<>();
+        map.put("account.tos-acceptance", RequirementIDEnum.ACCOUNT_TOS_ACCEPTANCE);
+        map.put("individual.mobile", RequirementIDEnum.INDIVIDUAL_MOBILE);
+        map.put("individual.email", RequirementIDEnum.INDIVIDUAL_EMAIL);
+        map.put("individual.email-or-mobile", RequirementIDEnum.INDIVIDUAL_EMAIL_OR_MOBILE);
+        map.put("individual.firstname", RequirementIDEnum.INDIVIDUAL_FIRSTNAME);
+        map.put("individual.lastname", RequirementIDEnum.INDIVIDUAL_LASTNAME);
+        map.put("individual.address", RequirementIDEnum.INDIVIDUAL_ADDRESS);
+        map.put("individual.ssn-last4", RequirementIDEnum.INDIVIDUAL_SSN_LAST4);
+        map.put("individual.ssn", RequirementIDEnum.INDIVIDUAL_SSN);
+        map.put("individual.birthdate", RequirementIDEnum.INDIVIDUAL_BIRTHDATE);
+        map.put("business.legalname", RequirementIDEnum.BUSINESS_LEGALNAME);
+        map.put("business.description-or-website", RequirementIDEnum.BUSINESS_DESCRIPTION_OR_WEBSITE);
+        map.put("business.entity-type", RequirementIDEnum.BUSINESS_ENTITY_TYPE);
+        map.put("business.business-type", RequirementIDEnum.BUSINESS_BUSINESS_TYPE);
+        map.put("business.dba", RequirementIDEnum.BUSINESS_DBA);
+        map.put("business.ein", RequirementIDEnum.BUSINESS_EIN);
+        map.put("business.address", RequirementIDEnum.BUSINESS_ADDRESS);
+        map.put("business.phone", RequirementIDEnum.BUSINESS_PHONE);
+        map.put("business.admins", RequirementIDEnum.BUSINESS_ADMINS);
+        map.put("business.controllers", RequirementIDEnum.BUSINESS_CONTROLLERS);
+        map.put("business.owners", RequirementIDEnum.BUSINESS_OWNERS);
+        map.put("business.classification", RequirementIDEnum.BUSINESS_CLASSIFICATION);
+        map.put("business.industry-code-mcc", RequirementIDEnum.BUSINESS_INDUSTRY_CODE_MCC);
+        map.put("business.industry", RequirementIDEnum.BUSINESS_INDUSTRY);
+        map.put("business.indicate-owners-provided", RequirementIDEnum.BUSINESS_INDICATE_OWNERS_PROVIDED);
+        map.put("business.average-transaction-size", RequirementIDEnum.BUSINESS_AVERAGE_TRANSACTION_SIZE);
+        map.put("business.max-transaction-size", RequirementIDEnum.BUSINESS_MAX_TRANSACTION_SIZE);
+        map.put("business.average-monthly-transaction-volume", RequirementIDEnum.BUSINESS_AVERAGE_MONTHLY_TRANSACTION_VOLUME);
+        map.put("business.volume-by-customer-type", RequirementIDEnum.BUSINESS_VOLUME_BY_CUSTOMER_TYPE);
+        map.put("business.card-volume-distribution", RequirementIDEnum.BUSINESS_CARD_VOLUME_DISTRIBUTION);
+        map.put("business.fulfillment", RequirementIDEnum.BUSINESS_FULFILLMENT);
+        map.put("business.description", RequirementIDEnum.BUSINESS_DESCRIPTION);
+        map.put("business.underwriting-documents-tier-one", RequirementIDEnum.BUSINESS_UNDERWRITING_DOCUMENTS_TIER_ONE);
+        map.put("bank-accounts.name", RequirementIDEnum.BANK_ACCOUNTS_NAME);
+        map.put("bank-accounts.routing-number", RequirementIDEnum.BANK_ACCOUNTS_ROUTING_NUMBER);
+        map.put("bank-accounts.account-number", RequirementIDEnum.BANK_ACCOUNTS_ACCOUNT_NUMBER);
+        map.put("document.business.verification", RequirementIDEnum.DOCUMENT_BUSINESS_VERIFICATION);
+        map.put("document.individual.tin", RequirementIDEnum.DOCUMENT_INDIVIDUAL_TIN);
+        map.put("document.individual.verification", RequirementIDEnum.DOCUMENT_INDIVIDUAL_VERIFICATION);
+        map.put("document.representative.{rep-uuid}.tin", RequirementIDEnum.DOCUMENT_REPRESENTATIVE_REP_UUID_TIN);
+        map.put("document.representative.{rep-uuid}.verification", RequirementIDEnum.DOCUMENT_REPRESENTATIVE_REP_UUID_VERIFICATION);
+        map.put("representative.{rep-uuid}.mobile", RequirementIDEnum.REPRESENTATIVE_REP_UUID_MOBILE);
+        map.put("representative.{rep-uuid}.email", RequirementIDEnum.REPRESENTATIVE_REP_UUID_EMAIL);
+        map.put("representative.{rep-uuid}.email-or-mobile", RequirementIDEnum.REPRESENTATIVE_REP_UUID_EMAIL_OR_MOBILE);
+        map.put("representative.{rep-uuid}.firstname", RequirementIDEnum.REPRESENTATIVE_REP_UUID_FIRSTNAME);
+        map.put("representative.{rep-uuid}.lastname", RequirementIDEnum.REPRESENTATIVE_REP_UUID_LASTNAME);
+        map.put("representative.{rep-uuid}.address", RequirementIDEnum.REPRESENTATIVE_REP_UUID_ADDRESS);
+        map.put("representative.{rep-uuid}.ssn-last4", RequirementIDEnum.REPRESENTATIVE_REP_UUID_SSN_LAST4);
+        map.put("representative.{rep-uuid}.ssn", RequirementIDEnum.REPRESENTATIVE_REP_UUID_SSN);
+        map.put("representative.{rep-uuid}.birthdate", RequirementIDEnum.REPRESENTATIVE_REP_UUID_BIRTHDATE);
+        map.put("representative.{rep-uuid}.job-title", RequirementIDEnum.REPRESENTATIVE_REP_UUID_JOB_TITLE);
+        map.put("representative.{rep-uuid}.is-controller", RequirementIDEnum.REPRESENTATIVE_REP_UUID_IS_CONTROLLER);
+        map.put("representative.{rep-uuid}.is-owner", RequirementIDEnum.REPRESENTATIVE_REP_UUID_IS_OWNER);
+        map.put("representative.{rep-uuid}.ownership", RequirementIDEnum.REPRESENTATIVE_REP_UUID_OWNERSHIP);
+        map.put("document.{doc-uuid}", RequirementIDEnum.DOCUMENT_DOC_UUID);
+        map.put("underwriting.businessPresence", RequirementIDEnum.UNDERWRITING_BUSINESS_PRESENCE);
+        map.put("underwriting.geographicReach", RequirementIDEnum.UNDERWRITING_GEOGRAPHIC_REACH);
+        map.put("underwriting.volumeShareByCustomerType", RequirementIDEnum.UNDERWRITING_VOLUME_SHARE_BY_CUSTOMER_TYPE);
+        map.put("underwriting.pendingLitigation", RequirementIDEnum.UNDERWRITING_PENDING_LITIGATION);
+        map.put("underwriting.documents.processingStatementsPast3Months", RequirementIDEnum.UNDERWRITING_DOCUMENTS_PROCESSING_STATEMENTS_PAST3_MONTHS);
+        map.put("underwriting.collectFunds.cardPayments.cardAcceptanceMethods", RequirementIDEnum.UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.collectFunds.cardPayments.currentlyAcceptsCards", RequirementIDEnum.UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.collectFunds.cardPayments.estimatedActivity.averageTransactionAmount", RequirementIDEnum.UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.collectFunds.cardPayments.estimatedActivity.maximumTransactionAmount", RequirementIDEnum.UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.collectFunds.cardPayments.estimatedActivity.monthlyVolumeRange", RequirementIDEnum.UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.collectFunds.cardPayments.fulfillment", RequirementIDEnum.UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_FULFILLMENT);
+        map.put("underwriting.collectFunds.cardPayments.refundPolicy", RequirementIDEnum.UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_REFUND_POLICY);
+        map.put("underwriting.collectFunds.ach.cardAcceptanceMethods", RequirementIDEnum.UNDERWRITING_COLLECT_FUNDS_ACH_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.collectFunds.ach.currentlyAcceptsCards", RequirementIDEnum.UNDERWRITING_COLLECT_FUNDS_ACH_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.collectFunds.ach.estimatedActivity.averageTransactionAmount", RequirementIDEnum.UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.collectFunds.ach.estimatedActivity.maximumTransactionAmount", RequirementIDEnum.UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.collectFunds.ach.estimatedActivity.monthlyVolumeRange", RequirementIDEnum.UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.collectFunds.ach.fulfillment", RequirementIDEnum.UNDERWRITING_COLLECT_FUNDS_ACH_FULFILLMENT);
+        map.put("underwriting.collectFunds.ach.refundPolicy", RequirementIDEnum.UNDERWRITING_COLLECT_FUNDS_ACH_REFUND_POLICY);
+        map.put("underwriting.sendFunds.ach.cardAcceptanceMethods", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_ACH_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.sendFunds.ach.currentlyAcceptsCards", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_ACH_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.sendFunds.ach.estimatedActivity.averageTransactionAmount", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.ach.estimatedActivity.maximumTransactionAmount", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.ach.estimatedActivity.monthlyVolumeRange", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.sendFunds.ach.fulfillment", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_ACH_FULFILLMENT);
+        map.put("underwriting.sendFunds.ach.refundPolicy", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_ACH_REFUND_POLICY);
+        map.put("underwriting.sendFunds.rtp.cardAcceptanceMethods", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_RTP_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.sendFunds.rtp.currentlyAcceptsCards", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_RTP_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.sendFunds.rtp.estimatedActivity.averageTransactionAmount", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.rtp.estimatedActivity.maximumTransactionAmount", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.rtp.estimatedActivity.monthlyVolumeRange", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.sendFunds.rtp.fulfillment", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_RTP_FULFILLMENT);
+        map.put("underwriting.sendFunds.rtp.refundPolicy", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_RTP_REFUND_POLICY);
+        map.put("underwriting.sendFunds.pushToCard.cardAcceptanceMethods", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.sendFunds.pushToCard.currentlyAcceptsCards", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.sendFunds.pushToCard.estimatedActivity.averageTransactionAmount", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.pushToCard.estimatedActivity.maximumTransactionAmount", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.pushToCard.estimatedActivity.monthlyVolumeRange", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.sendFunds.pushToCard.fulfillment", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_FULFILLMENT);
+        map.put("underwriting.sendFunds.pushToCard.refundPolicy", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_REFUND_POLICY);
+        map.put("underwriting.sendFunds.instantBank.cardAcceptanceMethods", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_INSTANT_BANK_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.sendFunds.instantBank.currentlyAcceptsCards", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_INSTANT_BANK_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.sendFunds.instantBank.estimatedActivity.averageTransactionAmount", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_INSTANT_BANK_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.instantBank.estimatedActivity.maximumTransactionAmount", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_INSTANT_BANK_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.instantBank.estimatedActivity.monthlyVolumeRange", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_INSTANT_BANK_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.sendFunds.instantBank.fulfillment", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_INSTANT_BANK_FULFILLMENT);
+        map.put("underwriting.sendFunds.instantBank.refundPolicy", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_INSTANT_BANK_REFUND_POLICY);
+        map.put("underwriting.sendFunds.wire.cardAcceptanceMethods", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_WIRE_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.sendFunds.wire.currentlyAcceptsCards", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_WIRE_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.sendFunds.wire.estimatedActivity.averageTransactionAmount", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_WIRE_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.wire.estimatedActivity.maximumTransactionAmount", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_WIRE_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.sendFunds.wire.estimatedActivity.monthlyVolumeRange", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_WIRE_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.sendFunds.wire.fulfillment", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_WIRE_FULFILLMENT);
+        map.put("underwriting.sendFunds.wire.refundPolicy", RequirementIDEnum.UNDERWRITING_SEND_FUNDS_WIRE_REFUND_POLICY);
+        map.put("underwriting.moneyTransfer.pullFromCard.cardAcceptanceMethods", RequirementIDEnum.UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.moneyTransfer.pullFromCard.currentlyAcceptsCards", RequirementIDEnum.UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.moneyTransfer.pullFromCard.estimatedActivity.averageTransactionAmount", RequirementIDEnum.UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.moneyTransfer.pullFromCard.estimatedActivity.maximumTransactionAmount", RequirementIDEnum.UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.moneyTransfer.pullFromCard.estimatedActivity.monthlyVolumeRange", RequirementIDEnum.UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.moneyTransfer.pullFromCard.fulfillment", RequirementIDEnum.UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_FULFILLMENT);
+        map.put("underwriting.moneyTransfer.pullFromCard.refundPolicy", RequirementIDEnum.UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_REFUND_POLICY);
+        map.put("underwriting.moneyTransfer.pushToCard.cardAcceptanceMethods", RequirementIDEnum.UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_CARD_ACCEPTANCE_METHODS);
+        map.put("underwriting.moneyTransfer.pushToCard.currentlyAcceptsCards", RequirementIDEnum.UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_CURRENTLY_ACCEPTS_CARDS);
+        map.put("underwriting.moneyTransfer.pushToCard.estimatedActivity.averageTransactionAmount", RequirementIDEnum.UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT);
+        map.put("underwriting.moneyTransfer.pushToCard.estimatedActivity.maximumTransactionAmount", RequirementIDEnum.UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT);
+        map.put("underwriting.moneyTransfer.pushToCard.estimatedActivity.monthlyVolumeRange", RequirementIDEnum.UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE);
+        map.put("underwriting.moneyTransfer.pushToCard.fulfillment", RequirementIDEnum.UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_FULFILLMENT);
+        map.put("underwriting.moneyTransfer.pushToCard.refundPolicy", RequirementIDEnum.UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_REFUND_POLICY);
+        return map;
+    }
+    
+    
+    public enum RequirementIDEnum {
+
+        ACCOUNT_TOS_ACCEPTANCE("account.tos-acceptance"),
+        INDIVIDUAL_MOBILE("individual.mobile"),
+        INDIVIDUAL_EMAIL("individual.email"),
+        INDIVIDUAL_EMAIL_OR_MOBILE("individual.email-or-mobile"),
+        INDIVIDUAL_FIRSTNAME("individual.firstname"),
+        INDIVIDUAL_LASTNAME("individual.lastname"),
+        INDIVIDUAL_ADDRESS("individual.address"),
+        INDIVIDUAL_SSN_LAST4("individual.ssn-last4"),
+        INDIVIDUAL_SSN("individual.ssn"),
+        INDIVIDUAL_BIRTHDATE("individual.birthdate"),
+        BUSINESS_LEGALNAME("business.legalname"),
+        BUSINESS_DESCRIPTION_OR_WEBSITE("business.description-or-website"),
+        BUSINESS_ENTITY_TYPE("business.entity-type"),
+        BUSINESS_BUSINESS_TYPE("business.business-type"),
+        BUSINESS_DBA("business.dba"),
+        BUSINESS_EIN("business.ein"),
+        BUSINESS_ADDRESS("business.address"),
+        BUSINESS_PHONE("business.phone"),
+        BUSINESS_ADMINS("business.admins"),
+        BUSINESS_CONTROLLERS("business.controllers"),
+        BUSINESS_OWNERS("business.owners"),
+        BUSINESS_CLASSIFICATION("business.classification"),
+        BUSINESS_INDUSTRY_CODE_MCC("business.industry-code-mcc"),
+        BUSINESS_INDUSTRY("business.industry"),
+        BUSINESS_INDICATE_OWNERS_PROVIDED("business.indicate-owners-provided"),
+        BUSINESS_AVERAGE_TRANSACTION_SIZE("business.average-transaction-size"),
+        BUSINESS_MAX_TRANSACTION_SIZE("business.max-transaction-size"),
+        BUSINESS_AVERAGE_MONTHLY_TRANSACTION_VOLUME("business.average-monthly-transaction-volume"),
+        BUSINESS_VOLUME_BY_CUSTOMER_TYPE("business.volume-by-customer-type"),
+        BUSINESS_CARD_VOLUME_DISTRIBUTION("business.card-volume-distribution"),
+        BUSINESS_FULFILLMENT("business.fulfillment"),
+        BUSINESS_DESCRIPTION("business.description"),
+        BUSINESS_UNDERWRITING_DOCUMENTS_TIER_ONE("business.underwriting-documents-tier-one"),
+        BANK_ACCOUNTS_NAME("bank-accounts.name"),
+        BANK_ACCOUNTS_ROUTING_NUMBER("bank-accounts.routing-number"),
+        BANK_ACCOUNTS_ACCOUNT_NUMBER("bank-accounts.account-number"),
+        DOCUMENT_BUSINESS_VERIFICATION("document.business.verification"),
+        DOCUMENT_INDIVIDUAL_TIN("document.individual.tin"),
+        DOCUMENT_INDIVIDUAL_VERIFICATION("document.individual.verification"),
+        DOCUMENT_REPRESENTATIVE_REP_UUID_TIN("document.representative.{rep-uuid}.tin"),
+        DOCUMENT_REPRESENTATIVE_REP_UUID_VERIFICATION("document.representative.{rep-uuid}.verification"),
+        REPRESENTATIVE_REP_UUID_MOBILE("representative.{rep-uuid}.mobile"),
+        REPRESENTATIVE_REP_UUID_EMAIL("representative.{rep-uuid}.email"),
+        REPRESENTATIVE_REP_UUID_EMAIL_OR_MOBILE("representative.{rep-uuid}.email-or-mobile"),
+        REPRESENTATIVE_REP_UUID_FIRSTNAME("representative.{rep-uuid}.firstname"),
+        REPRESENTATIVE_REP_UUID_LASTNAME("representative.{rep-uuid}.lastname"),
+        REPRESENTATIVE_REP_UUID_ADDRESS("representative.{rep-uuid}.address"),
+        REPRESENTATIVE_REP_UUID_SSN_LAST4("representative.{rep-uuid}.ssn-last4"),
+        REPRESENTATIVE_REP_UUID_SSN("representative.{rep-uuid}.ssn"),
+        REPRESENTATIVE_REP_UUID_BIRTHDATE("representative.{rep-uuid}.birthdate"),
+        REPRESENTATIVE_REP_UUID_JOB_TITLE("representative.{rep-uuid}.job-title"),
+        REPRESENTATIVE_REP_UUID_IS_CONTROLLER("representative.{rep-uuid}.is-controller"),
+        REPRESENTATIVE_REP_UUID_IS_OWNER("representative.{rep-uuid}.is-owner"),
+        REPRESENTATIVE_REP_UUID_OWNERSHIP("representative.{rep-uuid}.ownership"),
+        DOCUMENT_DOC_UUID("document.{doc-uuid}"),
+        UNDERWRITING_BUSINESS_PRESENCE("underwriting.businessPresence"),
+        UNDERWRITING_GEOGRAPHIC_REACH("underwriting.geographicReach"),
+        UNDERWRITING_VOLUME_SHARE_BY_CUSTOMER_TYPE("underwriting.volumeShareByCustomerType"),
+        UNDERWRITING_PENDING_LITIGATION("underwriting.pendingLitigation"),
+        UNDERWRITING_DOCUMENTS_PROCESSING_STATEMENTS_PAST3_MONTHS("underwriting.documents.processingStatementsPast3Months"),
+        UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_CARD_ACCEPTANCE_METHODS("underwriting.collectFunds.cardPayments.cardAcceptanceMethods"),
+        UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_CURRENTLY_ACCEPTS_CARDS("underwriting.collectFunds.cardPayments.currentlyAcceptsCards"),
+        UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT("underwriting.collectFunds.cardPayments.estimatedActivity.averageTransactionAmount"),
+        UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT("underwriting.collectFunds.cardPayments.estimatedActivity.maximumTransactionAmount"),
+        UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE("underwriting.collectFunds.cardPayments.estimatedActivity.monthlyVolumeRange"),
+        UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_FULFILLMENT("underwriting.collectFunds.cardPayments.fulfillment"),
+        UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_REFUND_POLICY("underwriting.collectFunds.cardPayments.refundPolicy"),
+        UNDERWRITING_COLLECT_FUNDS_ACH_CARD_ACCEPTANCE_METHODS("underwriting.collectFunds.ach.cardAcceptanceMethods"),
+        UNDERWRITING_COLLECT_FUNDS_ACH_CURRENTLY_ACCEPTS_CARDS("underwriting.collectFunds.ach.currentlyAcceptsCards"),
+        UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT("underwriting.collectFunds.ach.estimatedActivity.averageTransactionAmount"),
+        UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT("underwriting.collectFunds.ach.estimatedActivity.maximumTransactionAmount"),
+        UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE("underwriting.collectFunds.ach.estimatedActivity.monthlyVolumeRange"),
+        UNDERWRITING_COLLECT_FUNDS_ACH_FULFILLMENT("underwriting.collectFunds.ach.fulfillment"),
+        UNDERWRITING_COLLECT_FUNDS_ACH_REFUND_POLICY("underwriting.collectFunds.ach.refundPolicy"),
+        UNDERWRITING_SEND_FUNDS_ACH_CARD_ACCEPTANCE_METHODS("underwriting.sendFunds.ach.cardAcceptanceMethods"),
+        UNDERWRITING_SEND_FUNDS_ACH_CURRENTLY_ACCEPTS_CARDS("underwriting.sendFunds.ach.currentlyAcceptsCards"),
+        UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT("underwriting.sendFunds.ach.estimatedActivity.averageTransactionAmount"),
+        UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT("underwriting.sendFunds.ach.estimatedActivity.maximumTransactionAmount"),
+        UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE("underwriting.sendFunds.ach.estimatedActivity.monthlyVolumeRange"),
+        UNDERWRITING_SEND_FUNDS_ACH_FULFILLMENT("underwriting.sendFunds.ach.fulfillment"),
+        UNDERWRITING_SEND_FUNDS_ACH_REFUND_POLICY("underwriting.sendFunds.ach.refundPolicy"),
+        UNDERWRITING_SEND_FUNDS_RTP_CARD_ACCEPTANCE_METHODS("underwriting.sendFunds.rtp.cardAcceptanceMethods"),
+        UNDERWRITING_SEND_FUNDS_RTP_CURRENTLY_ACCEPTS_CARDS("underwriting.sendFunds.rtp.currentlyAcceptsCards"),
+        UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT("underwriting.sendFunds.rtp.estimatedActivity.averageTransactionAmount"),
+        UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT("underwriting.sendFunds.rtp.estimatedActivity.maximumTransactionAmount"),
+        UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE("underwriting.sendFunds.rtp.estimatedActivity.monthlyVolumeRange"),
+        UNDERWRITING_SEND_FUNDS_RTP_FULFILLMENT("underwriting.sendFunds.rtp.fulfillment"),
+        UNDERWRITING_SEND_FUNDS_RTP_REFUND_POLICY("underwriting.sendFunds.rtp.refundPolicy"),
+        UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_CARD_ACCEPTANCE_METHODS("underwriting.sendFunds.pushToCard.cardAcceptanceMethods"),
+        UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_CURRENTLY_ACCEPTS_CARDS("underwriting.sendFunds.pushToCard.currentlyAcceptsCards"),
+        UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT("underwriting.sendFunds.pushToCard.estimatedActivity.averageTransactionAmount"),
+        UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT("underwriting.sendFunds.pushToCard.estimatedActivity.maximumTransactionAmount"),
+        UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE("underwriting.sendFunds.pushToCard.estimatedActivity.monthlyVolumeRange"),
+        UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_FULFILLMENT("underwriting.sendFunds.pushToCard.fulfillment"),
+        UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_REFUND_POLICY("underwriting.sendFunds.pushToCard.refundPolicy"),
+        UNDERWRITING_SEND_FUNDS_INSTANT_BANK_CARD_ACCEPTANCE_METHODS("underwriting.sendFunds.instantBank.cardAcceptanceMethods"),
+        UNDERWRITING_SEND_FUNDS_INSTANT_BANK_CURRENTLY_ACCEPTS_CARDS("underwriting.sendFunds.instantBank.currentlyAcceptsCards"),
+        UNDERWRITING_SEND_FUNDS_INSTANT_BANK_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT("underwriting.sendFunds.instantBank.estimatedActivity.averageTransactionAmount"),
+        UNDERWRITING_SEND_FUNDS_INSTANT_BANK_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT("underwriting.sendFunds.instantBank.estimatedActivity.maximumTransactionAmount"),
+        UNDERWRITING_SEND_FUNDS_INSTANT_BANK_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE("underwriting.sendFunds.instantBank.estimatedActivity.monthlyVolumeRange"),
+        UNDERWRITING_SEND_FUNDS_INSTANT_BANK_FULFILLMENT("underwriting.sendFunds.instantBank.fulfillment"),
+        UNDERWRITING_SEND_FUNDS_INSTANT_BANK_REFUND_POLICY("underwriting.sendFunds.instantBank.refundPolicy"),
+        UNDERWRITING_SEND_FUNDS_WIRE_CARD_ACCEPTANCE_METHODS("underwriting.sendFunds.wire.cardAcceptanceMethods"),
+        UNDERWRITING_SEND_FUNDS_WIRE_CURRENTLY_ACCEPTS_CARDS("underwriting.sendFunds.wire.currentlyAcceptsCards"),
+        UNDERWRITING_SEND_FUNDS_WIRE_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT("underwriting.sendFunds.wire.estimatedActivity.averageTransactionAmount"),
+        UNDERWRITING_SEND_FUNDS_WIRE_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT("underwriting.sendFunds.wire.estimatedActivity.maximumTransactionAmount"),
+        UNDERWRITING_SEND_FUNDS_WIRE_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE("underwriting.sendFunds.wire.estimatedActivity.monthlyVolumeRange"),
+        UNDERWRITING_SEND_FUNDS_WIRE_FULFILLMENT("underwriting.sendFunds.wire.fulfillment"),
+        UNDERWRITING_SEND_FUNDS_WIRE_REFUND_POLICY("underwriting.sendFunds.wire.refundPolicy"),
+        UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_CARD_ACCEPTANCE_METHODS("underwriting.moneyTransfer.pullFromCard.cardAcceptanceMethods"),
+        UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_CURRENTLY_ACCEPTS_CARDS("underwriting.moneyTransfer.pullFromCard.currentlyAcceptsCards"),
+        UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT("underwriting.moneyTransfer.pullFromCard.estimatedActivity.averageTransactionAmount"),
+        UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT("underwriting.moneyTransfer.pullFromCard.estimatedActivity.maximumTransactionAmount"),
+        UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE("underwriting.moneyTransfer.pullFromCard.estimatedActivity.monthlyVolumeRange"),
+        UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_FULFILLMENT("underwriting.moneyTransfer.pullFromCard.fulfillment"),
+        UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_REFUND_POLICY("underwriting.moneyTransfer.pullFromCard.refundPolicy"),
+        UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_CARD_ACCEPTANCE_METHODS("underwriting.moneyTransfer.pushToCard.cardAcceptanceMethods"),
+        UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_CURRENTLY_ACCEPTS_CARDS("underwriting.moneyTransfer.pushToCard.currentlyAcceptsCards"),
+        UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT("underwriting.moneyTransfer.pushToCard.estimatedActivity.averageTransactionAmount"),
+        UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT("underwriting.moneyTransfer.pushToCard.estimatedActivity.maximumTransactionAmount"),
+        UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE("underwriting.moneyTransfer.pushToCard.estimatedActivity.monthlyVolumeRange"),
+        UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_FULFILLMENT("underwriting.moneyTransfer.pushToCard.fulfillment"),
+        UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_REFUND_POLICY("underwriting.moneyTransfer.pushToCard.refundPolicy"),;
+
+        private final String value;
+
+        private RequirementIDEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

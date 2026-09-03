@@ -3,32 +3,121 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum InstantBankCreditPaymentMethodPaymentMethodType {
-    INSTANT_BANK_CREDIT("instant-bank-credit");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class InstantBankCreditPaymentMethodPaymentMethodType {
 
-    @JsonValue
+    public static final InstantBankCreditPaymentMethodPaymentMethodType INSTANT_BANK_CREDIT = new InstantBankCreditPaymentMethodPaymentMethodType("instant-bank-credit");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, InstantBankCreditPaymentMethodPaymentMethodType> values = createValuesMap();
+    private static final Map<String, InstantBankCreditPaymentMethodPaymentMethodTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    InstantBankCreditPaymentMethodPaymentMethodType(String value) {
+    private InstantBankCreditPaymentMethodPaymentMethodType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a InstantBankCreditPaymentMethodPaymentMethodType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as InstantBankCreditPaymentMethodPaymentMethodType
+     */ 
+    @JsonCreator
+    public static InstantBankCreditPaymentMethodPaymentMethodType of(String value) {
+        synchronized (InstantBankCreditPaymentMethodPaymentMethodType.class) {
+            return values.computeIfAbsent(value, v -> new InstantBankCreditPaymentMethodPaymentMethodType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<InstantBankCreditPaymentMethodPaymentMethodType> fromValue(String value) {
-        for (InstantBankCreditPaymentMethodPaymentMethodType o: InstantBankCreditPaymentMethodPaymentMethodType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<InstantBankCreditPaymentMethodPaymentMethodTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        InstantBankCreditPaymentMethodPaymentMethodType other = (InstantBankCreditPaymentMethodPaymentMethodType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "InstantBankCreditPaymentMethodPaymentMethodType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static InstantBankCreditPaymentMethodPaymentMethodType[] values() {
+        synchronized (InstantBankCreditPaymentMethodPaymentMethodType.class) {
+            return values.values().toArray(new InstantBankCreditPaymentMethodPaymentMethodType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, InstantBankCreditPaymentMethodPaymentMethodType> createValuesMap() {
+        Map<String, InstantBankCreditPaymentMethodPaymentMethodType> map = new LinkedHashMap<>();
+        map.put("instant-bank-credit", INSTANT_BANK_CREDIT);
+        return map;
+    }
+
+    private static final Map<String, InstantBankCreditPaymentMethodPaymentMethodTypeEnum> createEnumsMap() {
+        Map<String, InstantBankCreditPaymentMethodPaymentMethodTypeEnum> map = new HashMap<>();
+        map.put("instant-bank-credit", InstantBankCreditPaymentMethodPaymentMethodTypeEnum.INSTANT_BANK_CREDIT);
+        return map;
+    }
+    
+    
+    public enum InstantBankCreditPaymentMethodPaymentMethodTypeEnum {
+
+        INSTANT_BANK_CREDIT("instant-bank-credit"),;
+
+        private final String value;
+
+        private InstantBankCreditPaymentMethodPaymentMethodTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

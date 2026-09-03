@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * AllowedSchedule
  * 
- * <p>Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
+ * <p>Limits card usage to specific days and times.
  */
 public class AllowedSchedule {
     /**

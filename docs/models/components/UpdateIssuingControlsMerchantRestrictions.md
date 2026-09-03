@@ -1,11 +1,11 @@
 # UpdateIssuingControlsMerchantRestrictions
 
-Replaces the merchant restrictions. Set to `null` to remove.
+Restricts card usage to specific merchants, independent of merchant category. Set to `null` to remove merchant restrictions.
 
 
 ## Fields
 
 | Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
 | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `mode`                                                                                                 | [Optional\<IssuingControlsRestrictionMode>](../../models/components/IssuingControlsRestrictionMode.md) | :heavy_minus_sign:                                                                                     | Whether the listed merchants are the only ones allowed, or the ones to block.                          |
+| `mode`                                                                                                 | [Optional\<IssuingControlsRestrictionMode>](../../models/components/IssuingControlsRestrictionMode.md) | :heavy_minus_sign:                                                                                     | Whether the listed items should be allowed (`allow`) or blocked (`block`).                             |
 | `merchants`                                                                                            | List\<[MerchantEntry](../../models/components/MerchantEntry.md)>                                       | :heavy_minus_sign:                                                                                     | The merchants to allow or block.                                                                       |

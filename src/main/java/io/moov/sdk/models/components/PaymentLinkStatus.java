@@ -3,35 +3,133 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum PaymentLinkStatus {
-    ACTIVE("active"),
-    USED("used"),
-    DISABLED("disabled"),
-    EXPIRED("expired");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class PaymentLinkStatus {
 
-    @JsonValue
+    public static final PaymentLinkStatus ACTIVE = new PaymentLinkStatus("active");
+    public static final PaymentLinkStatus USED = new PaymentLinkStatus("used");
+    public static final PaymentLinkStatus DISABLED = new PaymentLinkStatus("disabled");
+    public static final PaymentLinkStatus EXPIRED = new PaymentLinkStatus("expired");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, PaymentLinkStatus> values = createValuesMap();
+    private static final Map<String, PaymentLinkStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    PaymentLinkStatus(String value) {
+    private PaymentLinkStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a PaymentLinkStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as PaymentLinkStatus
+     */ 
+    @JsonCreator
+    public static PaymentLinkStatus of(String value) {
+        synchronized (PaymentLinkStatus.class) {
+            return values.computeIfAbsent(value, v -> new PaymentLinkStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<PaymentLinkStatus> fromValue(String value) {
-        for (PaymentLinkStatus o: PaymentLinkStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<PaymentLinkStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PaymentLinkStatus other = (PaymentLinkStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "PaymentLinkStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static PaymentLinkStatus[] values() {
+        synchronized (PaymentLinkStatus.class) {
+            return values.values().toArray(new PaymentLinkStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, PaymentLinkStatus> createValuesMap() {
+        Map<String, PaymentLinkStatus> map = new LinkedHashMap<>();
+        map.put("active", ACTIVE);
+        map.put("used", USED);
+        map.put("disabled", DISABLED);
+        map.put("expired", EXPIRED);
+        return map;
+    }
+
+    private static final Map<String, PaymentLinkStatusEnum> createEnumsMap() {
+        Map<String, PaymentLinkStatusEnum> map = new HashMap<>();
+        map.put("active", PaymentLinkStatusEnum.ACTIVE);
+        map.put("used", PaymentLinkStatusEnum.USED);
+        map.put("disabled", PaymentLinkStatusEnum.DISABLED);
+        map.put("expired", PaymentLinkStatusEnum.EXPIRED);
+        return map;
+    }
+    
+    
+    public enum PaymentLinkStatusEnum {
+
+        ACTIVE("active"),
+        USED("used"),
+        DISABLED("disabled"),
+        EXPIRED("expired"),;
+
+        private final String value;
+
+        private PaymentLinkStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

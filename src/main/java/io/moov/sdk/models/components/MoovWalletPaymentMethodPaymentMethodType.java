@@ -3,32 +3,121 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum MoovWalletPaymentMethodPaymentMethodType {
-    MOOV_WALLET("moov-wallet");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class MoovWalletPaymentMethodPaymentMethodType {
 
-    @JsonValue
+    public static final MoovWalletPaymentMethodPaymentMethodType MOOV_WALLET = new MoovWalletPaymentMethodPaymentMethodType("moov-wallet");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, MoovWalletPaymentMethodPaymentMethodType> values = createValuesMap();
+    private static final Map<String, MoovWalletPaymentMethodPaymentMethodTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    MoovWalletPaymentMethodPaymentMethodType(String value) {
+    private MoovWalletPaymentMethodPaymentMethodType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a MoovWalletPaymentMethodPaymentMethodType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as MoovWalletPaymentMethodPaymentMethodType
+     */ 
+    @JsonCreator
+    public static MoovWalletPaymentMethodPaymentMethodType of(String value) {
+        synchronized (MoovWalletPaymentMethodPaymentMethodType.class) {
+            return values.computeIfAbsent(value, v -> new MoovWalletPaymentMethodPaymentMethodType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<MoovWalletPaymentMethodPaymentMethodType> fromValue(String value) {
-        for (MoovWalletPaymentMethodPaymentMethodType o: MoovWalletPaymentMethodPaymentMethodType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<MoovWalletPaymentMethodPaymentMethodTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        MoovWalletPaymentMethodPaymentMethodType other = (MoovWalletPaymentMethodPaymentMethodType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "MoovWalletPaymentMethodPaymentMethodType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static MoovWalletPaymentMethodPaymentMethodType[] values() {
+        synchronized (MoovWalletPaymentMethodPaymentMethodType.class) {
+            return values.values().toArray(new MoovWalletPaymentMethodPaymentMethodType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, MoovWalletPaymentMethodPaymentMethodType> createValuesMap() {
+        Map<String, MoovWalletPaymentMethodPaymentMethodType> map = new LinkedHashMap<>();
+        map.put("moov-wallet", MOOV_WALLET);
+        return map;
+    }
+
+    private static final Map<String, MoovWalletPaymentMethodPaymentMethodTypeEnum> createEnumsMap() {
+        Map<String, MoovWalletPaymentMethodPaymentMethodTypeEnum> map = new HashMap<>();
+        map.put("moov-wallet", MoovWalletPaymentMethodPaymentMethodTypeEnum.MOOV_WALLET);
+        return map;
+    }
+    
+    
+    public enum MoovWalletPaymentMethodPaymentMethodTypeEnum {
+
+        MOOV_WALLET("moov-wallet"),;
+
+        private final String value;
+
+        private MoovWalletPaymentMethodPaymentMethodTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

@@ -76,7 +76,7 @@ public class CreateTransfer {
     private Optional<? extends CreateTransferAmountDetails> amountDetails;
 
     /**
-     * Indicates which party bears fees for the transfer, keyed by fee type.
+     * Indicates which party bears fees for a transfer, keyed by fee type.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("feePaidBy")
@@ -199,7 +199,7 @@ public class CreateTransfer {
     }
 
     /**
-     * Indicates which party bears fees for the transfer, keyed by fee type.
+     * Indicates which party bears fees for a transfer, keyed by fee type.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -348,7 +348,7 @@ public class CreateTransfer {
     }
 
     /**
-     * Indicates which party bears fees for the transfer, keyed by fee type.
+     * Indicates which party bears fees for a transfer, keyed by fee type.
      */
     public CreateTransfer withFeePaidBy(TransferFeePaidBy feePaidBy) {
         Utils.checkNotNull(feePaidBy, "feePaidBy");
@@ -358,7 +358,7 @@ public class CreateTransfer {
 
 
     /**
-     * Indicates which party bears fees for the transfer, keyed by fee type.
+     * Indicates which party bears fees for a transfer, keyed by fee type.
      */
     public CreateTransfer withFeePaidBy(Optional<? extends TransferFeePaidBy> feePaidBy) {
         Utils.checkNotNull(feePaidBy, "feePaidBy");
@@ -579,7 +579,7 @@ public class CreateTransfer {
 
 
         /**
-         * Indicates which party bears fees for the transfer, keyed by fee type.
+         * Indicates which party bears fees for a transfer, keyed by fee type.
          */
         public Builder feePaidBy(TransferFeePaidBy feePaidBy) {
             Utils.checkNotNull(feePaidBy, "feePaidBy");
@@ -588,7 +588,7 @@ public class CreateTransfer {
         }
 
         /**
-         * Indicates which party bears fees for the transfer, keyed by fee type.
+         * Indicates which party bears fees for a transfer, keyed by fee type.
          */
         public Builder feePaidBy(Optional<? extends TransferFeePaidBy> feePaidBy) {
             Utils.checkNotNull(feePaidBy, "feePaidBy");

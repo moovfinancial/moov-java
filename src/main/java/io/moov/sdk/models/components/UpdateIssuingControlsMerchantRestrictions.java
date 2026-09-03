@@ -18,11 +18,12 @@ import java.util.Optional;
 /**
  * UpdateIssuingControlsMerchantRestrictions
  * 
- * <p>Replaces the merchant restrictions. Set to `null` to remove.
+ * <p>Restricts card usage to specific merchants, independent of merchant category. Set to `null` to
+ * remove merchant restrictions.
  */
 public class UpdateIssuingControlsMerchantRestrictions {
     /**
-     * Whether the listed merchants are the only ones allowed, or the ones to block.
+     * Whether the listed items should be allowed (`allow`) or blocked (`block`).
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mode")
@@ -50,7 +51,7 @@ public class UpdateIssuingControlsMerchantRestrictions {
     }
 
     /**
-     * Whether the listed merchants are the only ones allowed, or the ones to block.
+     * Whether the listed items should be allowed (`allow`) or blocked (`block`).
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -73,7 +74,7 @@ public class UpdateIssuingControlsMerchantRestrictions {
 
 
     /**
-     * Whether the listed merchants are the only ones allowed, or the ones to block.
+     * Whether the listed items should be allowed (`allow`) or blocked (`block`).
      */
     public UpdateIssuingControlsMerchantRestrictions withMode(IssuingControlsRestrictionMode mode) {
         Utils.checkNotNull(mode, "mode");
@@ -83,7 +84,7 @@ public class UpdateIssuingControlsMerchantRestrictions {
 
 
     /**
-     * Whether the listed merchants are the only ones allowed, or the ones to block.
+     * Whether the listed items should be allowed (`allow`) or blocked (`block`).
      */
     public UpdateIssuingControlsMerchantRestrictions withMode(Optional<? extends IssuingControlsRestrictionMode> mode) {
         Utils.checkNotNull(mode, "mode");
@@ -150,7 +151,7 @@ public class UpdateIssuingControlsMerchantRestrictions {
 
 
         /**
-         * Whether the listed merchants are the only ones allowed, or the ones to block.
+         * Whether the listed items should be allowed (`allow`) or blocked (`block`).
          */
         public Builder mode(IssuingControlsRestrictionMode mode) {
             Utils.checkNotNull(mode, "mode");
@@ -159,7 +160,7 @@ public class UpdateIssuingControlsMerchantRestrictions {
         }
 
         /**
-         * Whether the listed merchants are the only ones allowed, or the ones to block.
+         * Whether the listed items should be allowed (`allow`) or blocked (`block`).
          */
         public Builder mode(Optional<? extends IssuingControlsRestrictionMode> mode) {
             Utils.checkNotNull(mode, "mode");

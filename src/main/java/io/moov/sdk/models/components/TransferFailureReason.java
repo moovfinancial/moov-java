@@ -3,41 +3,142 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * TransferFailureReason
  * 
  * <p>Reason for a transfer's failure.
  */
-public enum TransferFailureReason {
-    SOURCE_PAYMENT_ERROR("source-payment-error"),
-    DESTINATION_PAYMENT_ERROR("destination-payment-error"),
-    WALLET_INSUFFICIENT_FUNDS("wallet-insufficient-funds"),
-    REJECTED_HIGH_RISK("rejected-high-risk"),
-    PROCESSING_ERROR("processing-error");
+public class TransferFailureReason {
 
-    @JsonValue
+    public static final TransferFailureReason SOURCE_PAYMENT_ERROR = new TransferFailureReason("source-payment-error");
+    public static final TransferFailureReason DESTINATION_PAYMENT_ERROR = new TransferFailureReason("destination-payment-error");
+    public static final TransferFailureReason WALLET_INSUFFICIENT_FUNDS = new TransferFailureReason("wallet-insufficient-funds");
+    public static final TransferFailureReason REJECTED_HIGH_RISK = new TransferFailureReason("rejected-high-risk");
+    public static final TransferFailureReason PROCESSING_ERROR = new TransferFailureReason("processing-error");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, TransferFailureReason> values = createValuesMap();
+    private static final Map<String, TransferFailureReasonEnum> enums = createEnumsMap();
+
     private final String value;
 
-    TransferFailureReason(String value) {
+    private TransferFailureReason(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a TransferFailureReason with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as TransferFailureReason
+     */ 
+    @JsonCreator
+    public static TransferFailureReason of(String value) {
+        synchronized (TransferFailureReason.class) {
+            return values.computeIfAbsent(value, v -> new TransferFailureReason(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<TransferFailureReason> fromValue(String value) {
-        for (TransferFailureReason o: TransferFailureReason.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<TransferFailureReasonEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        TransferFailureReason other = (TransferFailureReason) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "TransferFailureReason [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static TransferFailureReason[] values() {
+        synchronized (TransferFailureReason.class) {
+            return values.values().toArray(new TransferFailureReason[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, TransferFailureReason> createValuesMap() {
+        Map<String, TransferFailureReason> map = new LinkedHashMap<>();
+        map.put("source-payment-error", SOURCE_PAYMENT_ERROR);
+        map.put("destination-payment-error", DESTINATION_PAYMENT_ERROR);
+        map.put("wallet-insufficient-funds", WALLET_INSUFFICIENT_FUNDS);
+        map.put("rejected-high-risk", REJECTED_HIGH_RISK);
+        map.put("processing-error", PROCESSING_ERROR);
+        return map;
+    }
+
+    private static final Map<String, TransferFailureReasonEnum> createEnumsMap() {
+        Map<String, TransferFailureReasonEnum> map = new HashMap<>();
+        map.put("source-payment-error", TransferFailureReasonEnum.SOURCE_PAYMENT_ERROR);
+        map.put("destination-payment-error", TransferFailureReasonEnum.DESTINATION_PAYMENT_ERROR);
+        map.put("wallet-insufficient-funds", TransferFailureReasonEnum.WALLET_INSUFFICIENT_FUNDS);
+        map.put("rejected-high-risk", TransferFailureReasonEnum.REJECTED_HIGH_RISK);
+        map.put("processing-error", TransferFailureReasonEnum.PROCESSING_ERROR);
+        return map;
+    }
+    
+    
+    public enum TransferFailureReasonEnum {
+
+        SOURCE_PAYMENT_ERROR("source-payment-error"),
+        DESTINATION_PAYMENT_ERROR("destination-payment-error"),
+        WALLET_INSUFFICIENT_FUNDS("wallet-insufficient-funds"),
+        REJECTED_HIGH_RISK("rejected-high-risk"),
+        PROCESSING_ERROR("processing-error"),;
+
+        private final String value;
+
+        private TransferFailureReasonEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

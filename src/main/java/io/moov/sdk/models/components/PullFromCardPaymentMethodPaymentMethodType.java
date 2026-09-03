@@ -3,32 +3,121 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum PullFromCardPaymentMethodPaymentMethodType {
-    PULL_FROM_CARD("pull-from-card");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class PullFromCardPaymentMethodPaymentMethodType {
 
-    @JsonValue
+    public static final PullFromCardPaymentMethodPaymentMethodType PULL_FROM_CARD = new PullFromCardPaymentMethodPaymentMethodType("pull-from-card");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, PullFromCardPaymentMethodPaymentMethodType> values = createValuesMap();
+    private static final Map<String, PullFromCardPaymentMethodPaymentMethodTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    PullFromCardPaymentMethodPaymentMethodType(String value) {
+    private PullFromCardPaymentMethodPaymentMethodType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a PullFromCardPaymentMethodPaymentMethodType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as PullFromCardPaymentMethodPaymentMethodType
+     */ 
+    @JsonCreator
+    public static PullFromCardPaymentMethodPaymentMethodType of(String value) {
+        synchronized (PullFromCardPaymentMethodPaymentMethodType.class) {
+            return values.computeIfAbsent(value, v -> new PullFromCardPaymentMethodPaymentMethodType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<PullFromCardPaymentMethodPaymentMethodType> fromValue(String value) {
-        for (PullFromCardPaymentMethodPaymentMethodType o: PullFromCardPaymentMethodPaymentMethodType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<PullFromCardPaymentMethodPaymentMethodTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PullFromCardPaymentMethodPaymentMethodType other = (PullFromCardPaymentMethodPaymentMethodType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "PullFromCardPaymentMethodPaymentMethodType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static PullFromCardPaymentMethodPaymentMethodType[] values() {
+        synchronized (PullFromCardPaymentMethodPaymentMethodType.class) {
+            return values.values().toArray(new PullFromCardPaymentMethodPaymentMethodType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, PullFromCardPaymentMethodPaymentMethodType> createValuesMap() {
+        Map<String, PullFromCardPaymentMethodPaymentMethodType> map = new LinkedHashMap<>();
+        map.put("pull-from-card", PULL_FROM_CARD);
+        return map;
+    }
+
+    private static final Map<String, PullFromCardPaymentMethodPaymentMethodTypeEnum> createEnumsMap() {
+        Map<String, PullFromCardPaymentMethodPaymentMethodTypeEnum> map = new HashMap<>();
+        map.put("pull-from-card", PullFromCardPaymentMethodPaymentMethodTypeEnum.PULL_FROM_CARD);
+        return map;
+    }
+    
+    
+    public enum PullFromCardPaymentMethodPaymentMethodTypeEnum {
+
+        PULL_FROM_CARD("pull-from-card"),;
+
+        private final String value;
+
+        private PullFromCardPaymentMethodPaymentMethodTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

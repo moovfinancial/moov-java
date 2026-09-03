@@ -3,32 +3,121 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum AchDebitCollectTransferPaymentMethodPaymentMethodType {
-    ACH_DEBIT_COLLECT("ach-debit-collect");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class AchDebitCollectTransferPaymentMethodPaymentMethodType {
 
-    @JsonValue
+    public static final AchDebitCollectTransferPaymentMethodPaymentMethodType ACH_DEBIT_COLLECT = new AchDebitCollectTransferPaymentMethodPaymentMethodType("ach-debit-collect");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, AchDebitCollectTransferPaymentMethodPaymentMethodType> values = createValuesMap();
+    private static final Map<String, AchDebitCollectTransferPaymentMethodPaymentMethodTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    AchDebitCollectTransferPaymentMethodPaymentMethodType(String value) {
+    private AchDebitCollectTransferPaymentMethodPaymentMethodType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a AchDebitCollectTransferPaymentMethodPaymentMethodType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as AchDebitCollectTransferPaymentMethodPaymentMethodType
+     */ 
+    @JsonCreator
+    public static AchDebitCollectTransferPaymentMethodPaymentMethodType of(String value) {
+        synchronized (AchDebitCollectTransferPaymentMethodPaymentMethodType.class) {
+            return values.computeIfAbsent(value, v -> new AchDebitCollectTransferPaymentMethodPaymentMethodType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<AchDebitCollectTransferPaymentMethodPaymentMethodType> fromValue(String value) {
-        for (AchDebitCollectTransferPaymentMethodPaymentMethodType o: AchDebitCollectTransferPaymentMethodPaymentMethodType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<AchDebitCollectTransferPaymentMethodPaymentMethodTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        AchDebitCollectTransferPaymentMethodPaymentMethodType other = (AchDebitCollectTransferPaymentMethodPaymentMethodType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "AchDebitCollectTransferPaymentMethodPaymentMethodType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static AchDebitCollectTransferPaymentMethodPaymentMethodType[] values() {
+        synchronized (AchDebitCollectTransferPaymentMethodPaymentMethodType.class) {
+            return values.values().toArray(new AchDebitCollectTransferPaymentMethodPaymentMethodType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, AchDebitCollectTransferPaymentMethodPaymentMethodType> createValuesMap() {
+        Map<String, AchDebitCollectTransferPaymentMethodPaymentMethodType> map = new LinkedHashMap<>();
+        map.put("ach-debit-collect", ACH_DEBIT_COLLECT);
+        return map;
+    }
+
+    private static final Map<String, AchDebitCollectTransferPaymentMethodPaymentMethodTypeEnum> createEnumsMap() {
+        Map<String, AchDebitCollectTransferPaymentMethodPaymentMethodTypeEnum> map = new HashMap<>();
+        map.put("ach-debit-collect", AchDebitCollectTransferPaymentMethodPaymentMethodTypeEnum.ACH_DEBIT_COLLECT);
+        return map;
+    }
+    
+    
+    public enum AchDebitCollectTransferPaymentMethodPaymentMethodTypeEnum {
+
+        ACH_DEBIT_COLLECT("ach-debit-collect"),;
+
+        private final String value;
+
+        private AchDebitCollectTransferPaymentMethodPaymentMethodTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

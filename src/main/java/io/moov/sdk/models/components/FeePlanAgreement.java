@@ -83,6 +83,20 @@ public class FeePlanAgreement {
     @JsonProperty("monthlyPlatformFee")
     private MonthlyPlatformFee monthlyPlatformFee;
 
+    /**
+     * The agreement this one replaced. Only set when the agreement was created by replacing another.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("priorAgreementID")
+    private Optional<String> priorAgreementID;
+
+    /**
+     * The date and time the prior agreement was terminated.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("priorAgreementTerminatedOn")
+    private Optional<OffsetDateTime> priorAgreementTerminatedOn;
+
     @JsonCreator
     public FeePlanAgreement(
             @JsonProperty("agreementID") String agreementID,
@@ -95,7 +109,9 @@ public class FeePlanAgreement {
             @JsonProperty("cardAcquiringModel") CardAcquiringModel cardAcquiringModel,
             @JsonProperty("billableFees") List<BillableFee> billableFees,
             @JsonProperty("minimumCommitment") MinimumCommitment minimumCommitment,
-            @JsonProperty("monthlyPlatformFee") MonthlyPlatformFee monthlyPlatformFee) {
+            @JsonProperty("monthlyPlatformFee") MonthlyPlatformFee monthlyPlatformFee,
+            @JsonProperty("priorAgreementID") Optional<String> priorAgreementID,
+            @JsonProperty("priorAgreementTerminatedOn") Optional<OffsetDateTime> priorAgreementTerminatedOn) {
         Utils.checkNotNull(agreementID, "agreementID");
         Utils.checkNotNull(planID, "planID");
         Utils.checkNotNull(accountID, "accountID");
@@ -107,6 +123,8 @@ public class FeePlanAgreement {
         Utils.checkNotNull(billableFees, "billableFees");
         Utils.checkNotNull(minimumCommitment, "minimumCommitment");
         Utils.checkNotNull(monthlyPlatformFee, "monthlyPlatformFee");
+        Utils.checkNotNull(priorAgreementID, "priorAgreementID");
+        Utils.checkNotNull(priorAgreementTerminatedOn, "priorAgreementTerminatedOn");
         this.agreementID = agreementID;
         this.planID = planID;
         this.accountID = accountID;
@@ -118,6 +136,8 @@ public class FeePlanAgreement {
         this.billableFees = billableFees;
         this.minimumCommitment = minimumCommitment;
         this.monthlyPlatformFee = monthlyPlatformFee;
+        this.priorAgreementID = priorAgreementID;
+        this.priorAgreementTerminatedOn = priorAgreementTerminatedOn;
     }
     
     public FeePlanAgreement(
@@ -133,7 +153,8 @@ public class FeePlanAgreement {
         this(agreementID, planID, Optional.empty(),
             name, Optional.empty(), acceptedOn,
             status, cardAcquiringModel, billableFees,
-            minimumCommitment, monthlyPlatformFee);
+            minimumCommitment, monthlyPlatformFee, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -217,6 +238,22 @@ public class FeePlanAgreement {
     @JsonIgnore
     public MonthlyPlatformFee monthlyPlatformFee() {
         return monthlyPlatformFee;
+    }
+
+    /**
+     * The agreement this one replaced. Only set when the agreement was created by replacing another.
+     */
+    @JsonIgnore
+    public Optional<String> priorAgreementID() {
+        return priorAgreementID;
+    }
+
+    /**
+     * The date and time the prior agreement was terminated.
+     */
+    @JsonIgnore
+    public Optional<OffsetDateTime> priorAgreementTerminatedOn() {
+        return priorAgreementTerminatedOn;
     }
 
     public static Builder builder() {
@@ -339,6 +376,44 @@ public class FeePlanAgreement {
         return this;
     }
 
+    /**
+     * The agreement this one replaced. Only set when the agreement was created by replacing another.
+     */
+    public FeePlanAgreement withPriorAgreementID(String priorAgreementID) {
+        Utils.checkNotNull(priorAgreementID, "priorAgreementID");
+        this.priorAgreementID = Optional.ofNullable(priorAgreementID);
+        return this;
+    }
+
+
+    /**
+     * The agreement this one replaced. Only set when the agreement was created by replacing another.
+     */
+    public FeePlanAgreement withPriorAgreementID(Optional<String> priorAgreementID) {
+        Utils.checkNotNull(priorAgreementID, "priorAgreementID");
+        this.priorAgreementID = priorAgreementID;
+        return this;
+    }
+
+    /**
+     * The date and time the prior agreement was terminated.
+     */
+    public FeePlanAgreement withPriorAgreementTerminatedOn(OffsetDateTime priorAgreementTerminatedOn) {
+        Utils.checkNotNull(priorAgreementTerminatedOn, "priorAgreementTerminatedOn");
+        this.priorAgreementTerminatedOn = Optional.ofNullable(priorAgreementTerminatedOn);
+        return this;
+    }
+
+
+    /**
+     * The date and time the prior agreement was terminated.
+     */
+    public FeePlanAgreement withPriorAgreementTerminatedOn(Optional<OffsetDateTime> priorAgreementTerminatedOn) {
+        Utils.checkNotNull(priorAgreementTerminatedOn, "priorAgreementTerminatedOn");
+        this.priorAgreementTerminatedOn = priorAgreementTerminatedOn;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -359,7 +434,9 @@ public class FeePlanAgreement {
             Utils.enhancedDeepEquals(this.cardAcquiringModel, other.cardAcquiringModel) &&
             Utils.enhancedDeepEquals(this.billableFees, other.billableFees) &&
             Utils.enhancedDeepEquals(this.minimumCommitment, other.minimumCommitment) &&
-            Utils.enhancedDeepEquals(this.monthlyPlatformFee, other.monthlyPlatformFee);
+            Utils.enhancedDeepEquals(this.monthlyPlatformFee, other.monthlyPlatformFee) &&
+            Utils.enhancedDeepEquals(this.priorAgreementID, other.priorAgreementID) &&
+            Utils.enhancedDeepEquals(this.priorAgreementTerminatedOn, other.priorAgreementTerminatedOn);
     }
     
     @Override
@@ -368,7 +445,8 @@ public class FeePlanAgreement {
             agreementID, planID, accountID,
             name, description, acceptedOn,
             status, cardAcquiringModel, billableFees,
-            minimumCommitment, monthlyPlatformFee);
+            minimumCommitment, monthlyPlatformFee, priorAgreementID,
+            priorAgreementTerminatedOn);
     }
     
     @Override
@@ -384,7 +462,9 @@ public class FeePlanAgreement {
                 "cardAcquiringModel", cardAcquiringModel,
                 "billableFees", billableFees,
                 "minimumCommitment", minimumCommitment,
-                "monthlyPlatformFee", monthlyPlatformFee);
+                "monthlyPlatformFee", monthlyPlatformFee,
+                "priorAgreementID", priorAgreementID,
+                "priorAgreementTerminatedOn", priorAgreementTerminatedOn);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -411,6 +491,10 @@ public class FeePlanAgreement {
         private MinimumCommitment minimumCommitment;
 
         private MonthlyPlatformFee monthlyPlatformFee;
+
+        private Optional<String> priorAgreementID = Optional.empty();
+
+        private Optional<OffsetDateTime> priorAgreementTerminatedOn = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -540,13 +624,52 @@ public class FeePlanAgreement {
             return this;
         }
 
+
+        /**
+         * The agreement this one replaced. Only set when the agreement was created by replacing another.
+         */
+        public Builder priorAgreementID(String priorAgreementID) {
+            Utils.checkNotNull(priorAgreementID, "priorAgreementID");
+            this.priorAgreementID = Optional.ofNullable(priorAgreementID);
+            return this;
+        }
+
+        /**
+         * The agreement this one replaced. Only set when the agreement was created by replacing another.
+         */
+        public Builder priorAgreementID(Optional<String> priorAgreementID) {
+            Utils.checkNotNull(priorAgreementID, "priorAgreementID");
+            this.priorAgreementID = priorAgreementID;
+            return this;
+        }
+
+
+        /**
+         * The date and time the prior agreement was terminated.
+         */
+        public Builder priorAgreementTerminatedOn(OffsetDateTime priorAgreementTerminatedOn) {
+            Utils.checkNotNull(priorAgreementTerminatedOn, "priorAgreementTerminatedOn");
+            this.priorAgreementTerminatedOn = Optional.ofNullable(priorAgreementTerminatedOn);
+            return this;
+        }
+
+        /**
+         * The date and time the prior agreement was terminated.
+         */
+        public Builder priorAgreementTerminatedOn(Optional<OffsetDateTime> priorAgreementTerminatedOn) {
+            Utils.checkNotNull(priorAgreementTerminatedOn, "priorAgreementTerminatedOn");
+            this.priorAgreementTerminatedOn = priorAgreementTerminatedOn;
+            return this;
+        }
+
         public FeePlanAgreement build() {
 
             return new FeePlanAgreement(
                 agreementID, planID, accountID,
                 name, description, acceptedOn,
                 status, cardAcquiringModel, billableFees,
-                minimumCommitment, monthlyPlatformFee);
+                minimumCommitment, monthlyPlatformFee, priorAgreementID,
+                priorAgreementTerminatedOn);
         }
 
     }

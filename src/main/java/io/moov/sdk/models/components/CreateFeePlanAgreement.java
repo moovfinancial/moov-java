@@ -5,34 +5,74 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class CreateFeePlanAgreement {
     /**
-     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
-     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     * A unique identifier for a fee plan: the pricing terms, such as flat-rate or cost-plus, that an
+     * account
+     * is charged under its fee plan agreement. Use GET /accounts/{accountID}/fee-plans to list the fee
+     * plans
+     * available to assign to a given account.
      */
     @JsonProperty("planID")
     private String planID;
 
+    /**
+     * The account's active fee plan agreement to supersede. When set, that agreement is terminated and
+     * the new one takes its place in a single operation, so the account is never without an active fee
+     * plan agreement. This new agreement always receives a newly issued agreementID.
+     * 
+     * <p>Omit it if the account doesn't already have an active fee plan agreement.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("priorAgreementID")
+    private Optional<String> priorAgreementID;
+
     @JsonCreator
     public CreateFeePlanAgreement(
-            @JsonProperty("planID") String planID) {
+            @JsonProperty("planID") String planID,
+            @JsonProperty("priorAgreementID") Optional<String> priorAgreementID) {
         Utils.checkNotNull(planID, "planID");
+        Utils.checkNotNull(priorAgreementID, "priorAgreementID");
         this.planID = planID;
+        this.priorAgreementID = priorAgreementID;
+    }
+    
+    public CreateFeePlanAgreement(
+            String planID) {
+        this(planID, Optional.empty());
     }
 
     /**
-     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
-     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     * A unique identifier for a fee plan: the pricing terms, such as flat-rate or cost-plus, that an
+     * account
+     * is charged under its fee plan agreement. Use GET /accounts/{accountID}/fee-plans to list the fee
+     * plans
+     * available to assign to a given account.
      */
     @JsonIgnore
     public String planID() {
         return planID;
+    }
+
+    /**
+     * The account's active fee plan agreement to supersede. When set, that agreement is terminated and
+     * the new one takes its place in a single operation, so the account is never without an active fee
+     * plan agreement. This new agreement always receives a newly issued agreementID.
+     * 
+     * <p>Omit it if the account doesn't already have an active fee plan agreement.
+     */
+    @JsonIgnore
+    public Optional<String> priorAgreementID() {
+        return priorAgreementID;
     }
 
     public static Builder builder() {
@@ -41,12 +81,42 @@ public class CreateFeePlanAgreement {
 
 
     /**
-     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
-     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     * A unique identifier for a fee plan: the pricing terms, such as flat-rate or cost-plus, that an
+     * account
+     * is charged under its fee plan agreement. Use GET /accounts/{accountID}/fee-plans to list the fee
+     * plans
+     * available to assign to a given account.
      */
     public CreateFeePlanAgreement withPlanID(String planID) {
         Utils.checkNotNull(planID, "planID");
         this.planID = planID;
+        return this;
+    }
+
+    /**
+     * The account's active fee plan agreement to supersede. When set, that agreement is terminated and
+     * the new one takes its place in a single operation, so the account is never without an active fee
+     * plan agreement. This new agreement always receives a newly issued agreementID.
+     * 
+     * <p>Omit it if the account doesn't already have an active fee plan agreement.
+     */
+    public CreateFeePlanAgreement withPriorAgreementID(String priorAgreementID) {
+        Utils.checkNotNull(priorAgreementID, "priorAgreementID");
+        this.priorAgreementID = Optional.ofNullable(priorAgreementID);
+        return this;
+    }
+
+
+    /**
+     * The account's active fee plan agreement to supersede. When set, that agreement is terminated and
+     * the new one takes its place in a single operation, so the account is never without an active fee
+     * plan agreement. This new agreement always receives a newly issued agreementID.
+     * 
+     * <p>Omit it if the account doesn't already have an active fee plan agreement.
+     */
+    public CreateFeePlanAgreement withPriorAgreementID(Optional<String> priorAgreementID) {
+        Utils.checkNotNull(priorAgreementID, "priorAgreementID");
+        this.priorAgreementID = priorAgreementID;
         return this;
     }
 
@@ -60,19 +130,21 @@ public class CreateFeePlanAgreement {
         }
         CreateFeePlanAgreement other = (CreateFeePlanAgreement) o;
         return 
-            Utils.enhancedDeepEquals(this.planID, other.planID);
+            Utils.enhancedDeepEquals(this.planID, other.planID) &&
+            Utils.enhancedDeepEquals(this.priorAgreementID, other.priorAgreementID);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            planID);
+            planID, priorAgreementID);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CreateFeePlanAgreement.class,
-                "planID", planID);
+                "planID", planID,
+                "priorAgreementID", priorAgreementID);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -80,14 +152,19 @@ public class CreateFeePlanAgreement {
 
         private String planID;
 
+        private Optional<String> priorAgreementID = Optional.empty();
+
         private Builder() {
           // force use of static builder() method
         }
 
 
         /**
-         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
-         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         * A unique identifier for a fee plan: the pricing terms, such as flat-rate or cost-plus, that an
+         * account
+         * is charged under its fee plan agreement. Use GET /accounts/{accountID}/fee-plans to list the fee
+         * plans
+         * available to assign to a given account.
          */
         public Builder planID(String planID) {
             Utils.checkNotNull(planID, "planID");
@@ -95,10 +172,37 @@ public class CreateFeePlanAgreement {
             return this;
         }
 
+
+        /**
+         * The account's active fee plan agreement to supersede. When set, that agreement is terminated and
+         * the new one takes its place in a single operation, so the account is never without an active fee
+         * plan agreement. This new agreement always receives a newly issued agreementID.
+         * 
+         * <p>Omit it if the account doesn't already have an active fee plan agreement.
+         */
+        public Builder priorAgreementID(String priorAgreementID) {
+            Utils.checkNotNull(priorAgreementID, "priorAgreementID");
+            this.priorAgreementID = Optional.ofNullable(priorAgreementID);
+            return this;
+        }
+
+        /**
+         * The account's active fee plan agreement to supersede. When set, that agreement is terminated and
+         * the new one takes its place in a single operation, so the account is never without an active fee
+         * plan agreement. This new agreement always receives a newly issued agreementID.
+         * 
+         * <p>Omit it if the account doesn't already have an active fee plan agreement.
+         */
+        public Builder priorAgreementID(Optional<String> priorAgreementID) {
+            Utils.checkNotNull(priorAgreementID, "priorAgreementID");
+            this.priorAgreementID = priorAgreementID;
+            return this;
+        }
+
         public CreateFeePlanAgreement build() {
 
             return new CreateFeePlanAgreement(
-                planID);
+                planID, priorAgreementID);
         }
 
     }

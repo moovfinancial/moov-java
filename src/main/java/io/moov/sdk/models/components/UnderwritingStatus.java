@@ -3,43 +3,144 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.Deprecated;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * UnderwritingStatus
  * 
  * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 @Deprecated
-public enum UnderwritingStatus {
-    APPROVED("approved"),
-    REJECTED("rejected"),
-    PENDING_REVIEW("pendingReview"),
-    PENDING("pending"),
-    NOT_REQUESTED("notRequested");
+public class UnderwritingStatus {
 
-    @JsonValue
+    public static final UnderwritingStatus APPROVED = new UnderwritingStatus("approved");
+    public static final UnderwritingStatus REJECTED = new UnderwritingStatus("rejected");
+    public static final UnderwritingStatus PENDING_REVIEW = new UnderwritingStatus("pendingReview");
+    public static final UnderwritingStatus PENDING = new UnderwritingStatus("pending");
+    public static final UnderwritingStatus NOT_REQUESTED = new UnderwritingStatus("notRequested");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, UnderwritingStatus> values = createValuesMap();
+    private static final Map<String, UnderwritingStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    UnderwritingStatus(String value) {
+    private UnderwritingStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a UnderwritingStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as UnderwritingStatus
+     */ 
+    @JsonCreator
+    public static UnderwritingStatus of(String value) {
+        synchronized (UnderwritingStatus.class) {
+            return values.computeIfAbsent(value, v -> new UnderwritingStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<UnderwritingStatus> fromValue(String value) {
-        for (UnderwritingStatus o: UnderwritingStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<UnderwritingStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        UnderwritingStatus other = (UnderwritingStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "UnderwritingStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static UnderwritingStatus[] values() {
+        synchronized (UnderwritingStatus.class) {
+            return values.values().toArray(new UnderwritingStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, UnderwritingStatus> createValuesMap() {
+        Map<String, UnderwritingStatus> map = new LinkedHashMap<>();
+        map.put("approved", APPROVED);
+        map.put("rejected", REJECTED);
+        map.put("pendingReview", PENDING_REVIEW);
+        map.put("pending", PENDING);
+        map.put("notRequested", NOT_REQUESTED);
+        return map;
+    }
+
+    private static final Map<String, UnderwritingStatusEnum> createEnumsMap() {
+        Map<String, UnderwritingStatusEnum> map = new HashMap<>();
+        map.put("approved", UnderwritingStatusEnum.APPROVED);
+        map.put("rejected", UnderwritingStatusEnum.REJECTED);
+        map.put("pendingReview", UnderwritingStatusEnum.PENDING_REVIEW);
+        map.put("pending", UnderwritingStatusEnum.PENDING);
+        map.put("notRequested", UnderwritingStatusEnum.NOT_REQUESTED);
+        return map;
+    }
+    
+    
+    public enum UnderwritingStatusEnum {
+
+        APPROVED("approved"),
+        REJECTED("rejected"),
+        PENDING_REVIEW("pendingReview"),
+        PENDING("pending"),
+        NOT_REQUESTED("notRequested"),;
+
+        private final String value;
+
+        private UnderwritingStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

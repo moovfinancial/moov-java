@@ -3,39 +3,134 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * FeeModel
  * 
  * <p>Specifies the pricing model used for the calculation of the final fee.
  */
-public enum FeeModel {
-    FIXED("fixed"),
-    BLENDED("blended"),
-    VARIABLE("variable");
+public class FeeModel {
 
-    @JsonValue
+    public static final FeeModel FIXED = new FeeModel("fixed");
+    public static final FeeModel BLENDED = new FeeModel("blended");
+    public static final FeeModel VARIABLE = new FeeModel("variable");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, FeeModel> values = createValuesMap();
+    private static final Map<String, FeeModelEnum> enums = createEnumsMap();
+
     private final String value;
 
-    FeeModel(String value) {
+    private FeeModel(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a FeeModel with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as FeeModel
+     */ 
+    @JsonCreator
+    public static FeeModel of(String value) {
+        synchronized (FeeModel.class) {
+            return values.computeIfAbsent(value, v -> new FeeModel(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<FeeModel> fromValue(String value) {
-        for (FeeModel o: FeeModel.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<FeeModelEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        FeeModel other = (FeeModel) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "FeeModel [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static FeeModel[] values() {
+        synchronized (FeeModel.class) {
+            return values.values().toArray(new FeeModel[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, FeeModel> createValuesMap() {
+        Map<String, FeeModel> map = new LinkedHashMap<>();
+        map.put("fixed", FIXED);
+        map.put("blended", BLENDED);
+        map.put("variable", VARIABLE);
+        return map;
+    }
+
+    private static final Map<String, FeeModelEnum> createEnumsMap() {
+        Map<String, FeeModelEnum> map = new HashMap<>();
+        map.put("fixed", FeeModelEnum.FIXED);
+        map.put("blended", FeeModelEnum.BLENDED);
+        map.put("variable", FeeModelEnum.VARIABLE);
+        return map;
+    }
+    
+    
+    public enum FeeModelEnum {
+
+        FIXED("fixed"),
+        BLENDED("blended"),
+        VARIABLE("variable"),;
+
+        private final String value;
+
+        private FeeModelEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

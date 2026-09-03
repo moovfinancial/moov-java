@@ -3,58 +3,225 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum WalletTransactionType {
-    ACCOUNT_FUNDING("account-funding"),
-    ACH_REVERSAL("ach-reversal"),
-    AUTO_SWEEP("auto-sweep"),
-    CARD_PAYMENT("card-payment"),
-    CARD_DECLINE("card-decline"),
-    CARD_REVERSAL("card-reversal"),
-    CASH_OUT("cash-out"),
-    DISPUTE("dispute"),
-    DISPUTE_REVERSAL("dispute-reversal"),
-    FACILITATOR_FEE("facilitator-fee"),
-    ISSUING_REFUND("issuing-refund"),
-    ISSUING_TRANSACTION("issuing-transaction"),
-    ISSUING_TRANSACTION_ADJUSTMENT("issuing-transaction-adjustment"),
-    ISSUING_AUTH_HOLD("issuing-auth-hold"),
-    ISSUING_AUTH_RELEASE("issuing-auth-release"),
-    ISSUING_DECLINE("issuing-decline"),
-    MOOV_FEE("moov-fee"),
-    PAYMENT("payment"),
-    PAYOUT("payout"),
-    REFUND("refund"),
-    REFUND_FAILURE("refund-failure"),
-    RTP_FAILURE("rtp-failure"),
-    TOP_UP("top-up"),
-    WALLET_TRANSFER("wallet-transfer"),
-    ADJUSTMENT("adjustment"),
-    FEE_REVENUE("fee-revenue"),
-    RESIDUAL("residual");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class WalletTransactionType {
 
-    @JsonValue
+    public static final WalletTransactionType ACCOUNT_FUNDING = new WalletTransactionType("account-funding");
+    public static final WalletTransactionType ACH_REVERSAL = new WalletTransactionType("ach-reversal");
+    public static final WalletTransactionType AUTO_SWEEP = new WalletTransactionType("auto-sweep");
+    public static final WalletTransactionType CARD_PAYMENT = new WalletTransactionType("card-payment");
+    public static final WalletTransactionType CARD_DECLINE = new WalletTransactionType("card-decline");
+    public static final WalletTransactionType CARD_REVERSAL = new WalletTransactionType("card-reversal");
+    public static final WalletTransactionType CASH_OUT = new WalletTransactionType("cash-out");
+    public static final WalletTransactionType DISPUTE = new WalletTransactionType("dispute");
+    public static final WalletTransactionType DISPUTE_REVERSAL = new WalletTransactionType("dispute-reversal");
+    public static final WalletTransactionType FACILITATOR_FEE = new WalletTransactionType("facilitator-fee");
+    public static final WalletTransactionType ISSUING_REFUND = new WalletTransactionType("issuing-refund");
+    public static final WalletTransactionType ISSUING_TRANSACTION = new WalletTransactionType("issuing-transaction");
+    public static final WalletTransactionType ISSUING_TRANSACTION_ADJUSTMENT = new WalletTransactionType("issuing-transaction-adjustment");
+    public static final WalletTransactionType ISSUING_AUTH_HOLD = new WalletTransactionType("issuing-auth-hold");
+    public static final WalletTransactionType ISSUING_AUTH_RELEASE = new WalletTransactionType("issuing-auth-release");
+    public static final WalletTransactionType ISSUING_DECLINE = new WalletTransactionType("issuing-decline");
+    public static final WalletTransactionType MOOV_FEE = new WalletTransactionType("moov-fee");
+    public static final WalletTransactionType PAYMENT = new WalletTransactionType("payment");
+    public static final WalletTransactionType PAYOUT = new WalletTransactionType("payout");
+    public static final WalletTransactionType REFUND = new WalletTransactionType("refund");
+    public static final WalletTransactionType REFUND_FAILURE = new WalletTransactionType("refund-failure");
+    public static final WalletTransactionType RTP_FAILURE = new WalletTransactionType("rtp-failure");
+    public static final WalletTransactionType TOP_UP = new WalletTransactionType("top-up");
+    public static final WalletTransactionType WALLET_TRANSFER = new WalletTransactionType("wallet-transfer");
+    public static final WalletTransactionType ADJUSTMENT = new WalletTransactionType("adjustment");
+    public static final WalletTransactionType FEE_REVENUE = new WalletTransactionType("fee-revenue");
+    public static final WalletTransactionType RESIDUAL = new WalletTransactionType("residual");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, WalletTransactionType> values = createValuesMap();
+    private static final Map<String, WalletTransactionTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    WalletTransactionType(String value) {
+    private WalletTransactionType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a WalletTransactionType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as WalletTransactionType
+     */ 
+    @JsonCreator
+    public static WalletTransactionType of(String value) {
+        synchronized (WalletTransactionType.class) {
+            return values.computeIfAbsent(value, v -> new WalletTransactionType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<WalletTransactionType> fromValue(String value) {
-        for (WalletTransactionType o: WalletTransactionType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<WalletTransactionTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        WalletTransactionType other = (WalletTransactionType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "WalletTransactionType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static WalletTransactionType[] values() {
+        synchronized (WalletTransactionType.class) {
+            return values.values().toArray(new WalletTransactionType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, WalletTransactionType> createValuesMap() {
+        Map<String, WalletTransactionType> map = new LinkedHashMap<>();
+        map.put("account-funding", ACCOUNT_FUNDING);
+        map.put("ach-reversal", ACH_REVERSAL);
+        map.put("auto-sweep", AUTO_SWEEP);
+        map.put("card-payment", CARD_PAYMENT);
+        map.put("card-decline", CARD_DECLINE);
+        map.put("card-reversal", CARD_REVERSAL);
+        map.put("cash-out", CASH_OUT);
+        map.put("dispute", DISPUTE);
+        map.put("dispute-reversal", DISPUTE_REVERSAL);
+        map.put("facilitator-fee", FACILITATOR_FEE);
+        map.put("issuing-refund", ISSUING_REFUND);
+        map.put("issuing-transaction", ISSUING_TRANSACTION);
+        map.put("issuing-transaction-adjustment", ISSUING_TRANSACTION_ADJUSTMENT);
+        map.put("issuing-auth-hold", ISSUING_AUTH_HOLD);
+        map.put("issuing-auth-release", ISSUING_AUTH_RELEASE);
+        map.put("issuing-decline", ISSUING_DECLINE);
+        map.put("moov-fee", MOOV_FEE);
+        map.put("payment", PAYMENT);
+        map.put("payout", PAYOUT);
+        map.put("refund", REFUND);
+        map.put("refund-failure", REFUND_FAILURE);
+        map.put("rtp-failure", RTP_FAILURE);
+        map.put("top-up", TOP_UP);
+        map.put("wallet-transfer", WALLET_TRANSFER);
+        map.put("adjustment", ADJUSTMENT);
+        map.put("fee-revenue", FEE_REVENUE);
+        map.put("residual", RESIDUAL);
+        return map;
+    }
+
+    private static final Map<String, WalletTransactionTypeEnum> createEnumsMap() {
+        Map<String, WalletTransactionTypeEnum> map = new HashMap<>();
+        map.put("account-funding", WalletTransactionTypeEnum.ACCOUNT_FUNDING);
+        map.put("ach-reversal", WalletTransactionTypeEnum.ACH_REVERSAL);
+        map.put("auto-sweep", WalletTransactionTypeEnum.AUTO_SWEEP);
+        map.put("card-payment", WalletTransactionTypeEnum.CARD_PAYMENT);
+        map.put("card-decline", WalletTransactionTypeEnum.CARD_DECLINE);
+        map.put("card-reversal", WalletTransactionTypeEnum.CARD_REVERSAL);
+        map.put("cash-out", WalletTransactionTypeEnum.CASH_OUT);
+        map.put("dispute", WalletTransactionTypeEnum.DISPUTE);
+        map.put("dispute-reversal", WalletTransactionTypeEnum.DISPUTE_REVERSAL);
+        map.put("facilitator-fee", WalletTransactionTypeEnum.FACILITATOR_FEE);
+        map.put("issuing-refund", WalletTransactionTypeEnum.ISSUING_REFUND);
+        map.put("issuing-transaction", WalletTransactionTypeEnum.ISSUING_TRANSACTION);
+        map.put("issuing-transaction-adjustment", WalletTransactionTypeEnum.ISSUING_TRANSACTION_ADJUSTMENT);
+        map.put("issuing-auth-hold", WalletTransactionTypeEnum.ISSUING_AUTH_HOLD);
+        map.put("issuing-auth-release", WalletTransactionTypeEnum.ISSUING_AUTH_RELEASE);
+        map.put("issuing-decline", WalletTransactionTypeEnum.ISSUING_DECLINE);
+        map.put("moov-fee", WalletTransactionTypeEnum.MOOV_FEE);
+        map.put("payment", WalletTransactionTypeEnum.PAYMENT);
+        map.put("payout", WalletTransactionTypeEnum.PAYOUT);
+        map.put("refund", WalletTransactionTypeEnum.REFUND);
+        map.put("refund-failure", WalletTransactionTypeEnum.REFUND_FAILURE);
+        map.put("rtp-failure", WalletTransactionTypeEnum.RTP_FAILURE);
+        map.put("top-up", WalletTransactionTypeEnum.TOP_UP);
+        map.put("wallet-transfer", WalletTransactionTypeEnum.WALLET_TRANSFER);
+        map.put("adjustment", WalletTransactionTypeEnum.ADJUSTMENT);
+        map.put("fee-revenue", WalletTransactionTypeEnum.FEE_REVENUE);
+        map.put("residual", WalletTransactionTypeEnum.RESIDUAL);
+        return map;
+    }
+    
+    
+    public enum WalletTransactionTypeEnum {
+
+        ACCOUNT_FUNDING("account-funding"),
+        ACH_REVERSAL("ach-reversal"),
+        AUTO_SWEEP("auto-sweep"),
+        CARD_PAYMENT("card-payment"),
+        CARD_DECLINE("card-decline"),
+        CARD_REVERSAL("card-reversal"),
+        CASH_OUT("cash-out"),
+        DISPUTE("dispute"),
+        DISPUTE_REVERSAL("dispute-reversal"),
+        FACILITATOR_FEE("facilitator-fee"),
+        ISSUING_REFUND("issuing-refund"),
+        ISSUING_TRANSACTION("issuing-transaction"),
+        ISSUING_TRANSACTION_ADJUSTMENT("issuing-transaction-adjustment"),
+        ISSUING_AUTH_HOLD("issuing-auth-hold"),
+        ISSUING_AUTH_RELEASE("issuing-auth-release"),
+        ISSUING_DECLINE("issuing-decline"),
+        MOOV_FEE("moov-fee"),
+        PAYMENT("payment"),
+        PAYOUT("payout"),
+        REFUND("refund"),
+        REFUND_FAILURE("refund-failure"),
+        RTP_FAILURE("rtp-failure"),
+        TOP_UP("top-up"),
+        WALLET_TRANSFER("wallet-transfer"),
+        ADJUSTMENT("adjustment"),
+        FEE_REVENUE("fee-revenue"),
+        RESIDUAL("residual"),;
+
+        private final String value;
+
+        private WalletTransactionTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

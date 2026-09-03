@@ -11,6 +11,9 @@ Type of a wallet.
 import io.moov.sdk.models.components.WalletType;
 
 WalletType value = WalletType.DEFAULT;
+
+// Open enum: use .of() to create instances from custom string values
+WalletType custom = WalletType.of("custom_value");
 ```
 
 

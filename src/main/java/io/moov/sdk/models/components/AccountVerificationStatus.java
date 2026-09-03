@@ -3,12 +3,22 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.Deprecated;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * AccountVerificationStatus
  * 
@@ -17,32 +27,126 @@ import java.util.Optional;
  * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 @Deprecated
-public enum AccountVerificationStatus {
-    UNVERIFIED("unverified"),
-    PENDING("pending"),
-    RESUBMIT("resubmit"),
-    REVIEW("review"),
-    VERIFIED("verified"),
-    FAILED("failed");
+public class AccountVerificationStatus {
 
-    @JsonValue
+    public static final AccountVerificationStatus UNVERIFIED = new AccountVerificationStatus("unverified");
+    public static final AccountVerificationStatus PENDING = new AccountVerificationStatus("pending");
+    public static final AccountVerificationStatus RESUBMIT = new AccountVerificationStatus("resubmit");
+    public static final AccountVerificationStatus REVIEW = new AccountVerificationStatus("review");
+    public static final AccountVerificationStatus VERIFIED = new AccountVerificationStatus("verified");
+    public static final AccountVerificationStatus FAILED = new AccountVerificationStatus("failed");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, AccountVerificationStatus> values = createValuesMap();
+    private static final Map<String, AccountVerificationStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    AccountVerificationStatus(String value) {
+    private AccountVerificationStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a AccountVerificationStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as AccountVerificationStatus
+     */ 
+    @JsonCreator
+    public static AccountVerificationStatus of(String value) {
+        synchronized (AccountVerificationStatus.class) {
+            return values.computeIfAbsent(value, v -> new AccountVerificationStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<AccountVerificationStatus> fromValue(String value) {
-        for (AccountVerificationStatus o: AccountVerificationStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<AccountVerificationStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        AccountVerificationStatus other = (AccountVerificationStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "AccountVerificationStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static AccountVerificationStatus[] values() {
+        synchronized (AccountVerificationStatus.class) {
+            return values.values().toArray(new AccountVerificationStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, AccountVerificationStatus> createValuesMap() {
+        Map<String, AccountVerificationStatus> map = new LinkedHashMap<>();
+        map.put("unverified", UNVERIFIED);
+        map.put("pending", PENDING);
+        map.put("resubmit", RESUBMIT);
+        map.put("review", REVIEW);
+        map.put("verified", VERIFIED);
+        map.put("failed", FAILED);
+        return map;
+    }
+
+    private static final Map<String, AccountVerificationStatusEnum> createEnumsMap() {
+        Map<String, AccountVerificationStatusEnum> map = new HashMap<>();
+        map.put("unverified", AccountVerificationStatusEnum.UNVERIFIED);
+        map.put("pending", AccountVerificationStatusEnum.PENDING);
+        map.put("resubmit", AccountVerificationStatusEnum.RESUBMIT);
+        map.put("review", AccountVerificationStatusEnum.REVIEW);
+        map.put("verified", AccountVerificationStatusEnum.VERIFIED);
+        map.put("failed", AccountVerificationStatusEnum.FAILED);
+        return map;
+    }
+    
+    
+    public enum AccountVerificationStatusEnum {
+
+        UNVERIFIED("unverified"),
+        PENDING("pending"),
+        RESUBMIT("resubmit"),
+        REVIEW("review"),
+        VERIFIED("verified"),
+        FAILED("failed"),;
+
+        private final String value;
+
+        private AccountVerificationStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

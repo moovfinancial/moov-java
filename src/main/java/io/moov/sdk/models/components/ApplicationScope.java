@@ -3,68 +3,250 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * ApplicationScope
  * 
  * <p>A permission that the application requests on another account.
  */
-public enum ApplicationScope {
-    ACCOUNTS_READ("accounts.read"),
-    ACCOUNTS_WRITE("accounts.write"),
-    ANALYTICS_READ("analytics.read"),
-    APPLE_PAY_MERCHANT_READ("apple-pay-merchant.read"),
-    APPLE_PAY_MERCHANT_WRITE("apple-pay-merchant.write"),
-    APPLE_PAY_READ("apple-pay.read"),
-    APPLE_PAY_WRITE("apple-pay.write"),
-    BANK_ACCOUNTS_READ("bank-accounts.read"),
-    BANK_ACCOUNTS_WRITE("bank-accounts.write"),
-    CAPABILITIES_READ("capabilities.read"),
-    CAPABILITIES_WRITE("capabilities.write"),
-    CARDS_READ("cards.read"),
-    CARDS_WRITE("cards.write"),
-    DOCUMENTS_READ("documents.read"),
-    DOCUMENTS_WRITE("documents.write"),
-    FED_READ("fed.read"),
-    FILES_READ("files.read"),
-    FILES_WRITE("files.write"),
-    ISSUED_CARDS_READ("issued-cards.read"),
-    ISSUED_CARDS_WRITE("issued-cards.write"),
-    ISSUED_CARDS_READ_SECURE("issued-cards.read-secure"),
-    PAYMENT_METHODS_READ("payment-methods.read"),
-    PING_READ("ping.read"),
-    PROFILE_ENRICHMENT_READ("profile-enrichment.read"),
-    PROFILE_READ("profile.read"),
-    PROFILE_WRITE("profile.write"),
-    PROFILE_DISCONNECT("profile.disconnect"),
-    REPRESENTATIVES_READ("representatives.read"),
-    REPRESENTATIVES_WRITE("representatives.write"),
-    TRANSFERS_READ("transfers.read"),
-    TRANSFERS_WRITE("transfers.write"),
-    WALLETS_READ("wallets.read");
+public class ApplicationScope {
 
-    @JsonValue
+    public static final ApplicationScope ACCOUNTS_READ = new ApplicationScope("accounts.read");
+    public static final ApplicationScope ACCOUNTS_WRITE = new ApplicationScope("accounts.write");
+    public static final ApplicationScope ANALYTICS_READ = new ApplicationScope("analytics.read");
+    public static final ApplicationScope APPLE_PAY_MERCHANT_READ = new ApplicationScope("apple-pay-merchant.read");
+    public static final ApplicationScope APPLE_PAY_MERCHANT_WRITE = new ApplicationScope("apple-pay-merchant.write");
+    public static final ApplicationScope APPLE_PAY_READ = new ApplicationScope("apple-pay.read");
+    public static final ApplicationScope APPLE_PAY_WRITE = new ApplicationScope("apple-pay.write");
+    public static final ApplicationScope BANK_ACCOUNTS_READ = new ApplicationScope("bank-accounts.read");
+    public static final ApplicationScope BANK_ACCOUNTS_WRITE = new ApplicationScope("bank-accounts.write");
+    public static final ApplicationScope CAPABILITIES_READ = new ApplicationScope("capabilities.read");
+    public static final ApplicationScope CAPABILITIES_WRITE = new ApplicationScope("capabilities.write");
+    public static final ApplicationScope CARDS_READ = new ApplicationScope("cards.read");
+    public static final ApplicationScope CARDS_WRITE = new ApplicationScope("cards.write");
+    public static final ApplicationScope DOCUMENTS_READ = new ApplicationScope("documents.read");
+    public static final ApplicationScope DOCUMENTS_WRITE = new ApplicationScope("documents.write");
+    public static final ApplicationScope FED_READ = new ApplicationScope("fed.read");
+    public static final ApplicationScope FILES_READ = new ApplicationScope("files.read");
+    public static final ApplicationScope FILES_WRITE = new ApplicationScope("files.write");
+    public static final ApplicationScope ISSUED_CARDS_READ = new ApplicationScope("issued-cards.read");
+    public static final ApplicationScope ISSUED_CARDS_WRITE = new ApplicationScope("issued-cards.write");
+    public static final ApplicationScope ISSUED_CARDS_READ_PRIVATE = new ApplicationScope("issued-cards.read-private");
+    public static final ApplicationScope PAYMENT_METHODS_READ = new ApplicationScope("payment-methods.read");
+    public static final ApplicationScope PING_READ = new ApplicationScope("ping.read");
+    public static final ApplicationScope PROFILE_ENRICHMENT_READ = new ApplicationScope("profile-enrichment.read");
+    public static final ApplicationScope PROFILE_READ = new ApplicationScope("profile.read");
+    public static final ApplicationScope PROFILE_WRITE = new ApplicationScope("profile.write");
+    public static final ApplicationScope PROFILE_DISCONNECT = new ApplicationScope("profile.disconnect");
+    public static final ApplicationScope REPRESENTATIVES_READ = new ApplicationScope("representatives.read");
+    public static final ApplicationScope REPRESENTATIVES_WRITE = new ApplicationScope("representatives.write");
+    public static final ApplicationScope TRANSFERS_READ = new ApplicationScope("transfers.read");
+    public static final ApplicationScope TRANSFERS_WRITE = new ApplicationScope("transfers.write");
+    public static final ApplicationScope WALLETS_READ = new ApplicationScope("wallets.read");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, ApplicationScope> values = createValuesMap();
+    private static final Map<String, ApplicationScopeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    ApplicationScope(String value) {
+    private ApplicationScope(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a ApplicationScope with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as ApplicationScope
+     */ 
+    @JsonCreator
+    public static ApplicationScope of(String value) {
+        synchronized (ApplicationScope.class) {
+            return values.computeIfAbsent(value, v -> new ApplicationScope(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<ApplicationScope> fromValue(String value) {
-        for (ApplicationScope o: ApplicationScope.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<ApplicationScopeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ApplicationScope other = (ApplicationScope) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "ApplicationScope [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static ApplicationScope[] values() {
+        synchronized (ApplicationScope.class) {
+            return values.values().toArray(new ApplicationScope[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, ApplicationScope> createValuesMap() {
+        Map<String, ApplicationScope> map = new LinkedHashMap<>();
+        map.put("accounts.read", ACCOUNTS_READ);
+        map.put("accounts.write", ACCOUNTS_WRITE);
+        map.put("analytics.read", ANALYTICS_READ);
+        map.put("apple-pay-merchant.read", APPLE_PAY_MERCHANT_READ);
+        map.put("apple-pay-merchant.write", APPLE_PAY_MERCHANT_WRITE);
+        map.put("apple-pay.read", APPLE_PAY_READ);
+        map.put("apple-pay.write", APPLE_PAY_WRITE);
+        map.put("bank-accounts.read", BANK_ACCOUNTS_READ);
+        map.put("bank-accounts.write", BANK_ACCOUNTS_WRITE);
+        map.put("capabilities.read", CAPABILITIES_READ);
+        map.put("capabilities.write", CAPABILITIES_WRITE);
+        map.put("cards.read", CARDS_READ);
+        map.put("cards.write", CARDS_WRITE);
+        map.put("documents.read", DOCUMENTS_READ);
+        map.put("documents.write", DOCUMENTS_WRITE);
+        map.put("fed.read", FED_READ);
+        map.put("files.read", FILES_READ);
+        map.put("files.write", FILES_WRITE);
+        map.put("issued-cards.read", ISSUED_CARDS_READ);
+        map.put("issued-cards.write", ISSUED_CARDS_WRITE);
+        map.put("issued-cards.read-private", ISSUED_CARDS_READ_PRIVATE);
+        map.put("payment-methods.read", PAYMENT_METHODS_READ);
+        map.put("ping.read", PING_READ);
+        map.put("profile-enrichment.read", PROFILE_ENRICHMENT_READ);
+        map.put("profile.read", PROFILE_READ);
+        map.put("profile.write", PROFILE_WRITE);
+        map.put("profile.disconnect", PROFILE_DISCONNECT);
+        map.put("representatives.read", REPRESENTATIVES_READ);
+        map.put("representatives.write", REPRESENTATIVES_WRITE);
+        map.put("transfers.read", TRANSFERS_READ);
+        map.put("transfers.write", TRANSFERS_WRITE);
+        map.put("wallets.read", WALLETS_READ);
+        return map;
+    }
+
+    private static final Map<String, ApplicationScopeEnum> createEnumsMap() {
+        Map<String, ApplicationScopeEnum> map = new HashMap<>();
+        map.put("accounts.read", ApplicationScopeEnum.ACCOUNTS_READ);
+        map.put("accounts.write", ApplicationScopeEnum.ACCOUNTS_WRITE);
+        map.put("analytics.read", ApplicationScopeEnum.ANALYTICS_READ);
+        map.put("apple-pay-merchant.read", ApplicationScopeEnum.APPLE_PAY_MERCHANT_READ);
+        map.put("apple-pay-merchant.write", ApplicationScopeEnum.APPLE_PAY_MERCHANT_WRITE);
+        map.put("apple-pay.read", ApplicationScopeEnum.APPLE_PAY_READ);
+        map.put("apple-pay.write", ApplicationScopeEnum.APPLE_PAY_WRITE);
+        map.put("bank-accounts.read", ApplicationScopeEnum.BANK_ACCOUNTS_READ);
+        map.put("bank-accounts.write", ApplicationScopeEnum.BANK_ACCOUNTS_WRITE);
+        map.put("capabilities.read", ApplicationScopeEnum.CAPABILITIES_READ);
+        map.put("capabilities.write", ApplicationScopeEnum.CAPABILITIES_WRITE);
+        map.put("cards.read", ApplicationScopeEnum.CARDS_READ);
+        map.put("cards.write", ApplicationScopeEnum.CARDS_WRITE);
+        map.put("documents.read", ApplicationScopeEnum.DOCUMENTS_READ);
+        map.put("documents.write", ApplicationScopeEnum.DOCUMENTS_WRITE);
+        map.put("fed.read", ApplicationScopeEnum.FED_READ);
+        map.put("files.read", ApplicationScopeEnum.FILES_READ);
+        map.put("files.write", ApplicationScopeEnum.FILES_WRITE);
+        map.put("issued-cards.read", ApplicationScopeEnum.ISSUED_CARDS_READ);
+        map.put("issued-cards.write", ApplicationScopeEnum.ISSUED_CARDS_WRITE);
+        map.put("issued-cards.read-private", ApplicationScopeEnum.ISSUED_CARDS_READ_PRIVATE);
+        map.put("payment-methods.read", ApplicationScopeEnum.PAYMENT_METHODS_READ);
+        map.put("ping.read", ApplicationScopeEnum.PING_READ);
+        map.put("profile-enrichment.read", ApplicationScopeEnum.PROFILE_ENRICHMENT_READ);
+        map.put("profile.read", ApplicationScopeEnum.PROFILE_READ);
+        map.put("profile.write", ApplicationScopeEnum.PROFILE_WRITE);
+        map.put("profile.disconnect", ApplicationScopeEnum.PROFILE_DISCONNECT);
+        map.put("representatives.read", ApplicationScopeEnum.REPRESENTATIVES_READ);
+        map.put("representatives.write", ApplicationScopeEnum.REPRESENTATIVES_WRITE);
+        map.put("transfers.read", ApplicationScopeEnum.TRANSFERS_READ);
+        map.put("transfers.write", ApplicationScopeEnum.TRANSFERS_WRITE);
+        map.put("wallets.read", ApplicationScopeEnum.WALLETS_READ);
+        return map;
+    }
+    
+    
+    public enum ApplicationScopeEnum {
+
+        ACCOUNTS_READ("accounts.read"),
+        ACCOUNTS_WRITE("accounts.write"),
+        ANALYTICS_READ("analytics.read"),
+        APPLE_PAY_MERCHANT_READ("apple-pay-merchant.read"),
+        APPLE_PAY_MERCHANT_WRITE("apple-pay-merchant.write"),
+        APPLE_PAY_READ("apple-pay.read"),
+        APPLE_PAY_WRITE("apple-pay.write"),
+        BANK_ACCOUNTS_READ("bank-accounts.read"),
+        BANK_ACCOUNTS_WRITE("bank-accounts.write"),
+        CAPABILITIES_READ("capabilities.read"),
+        CAPABILITIES_WRITE("capabilities.write"),
+        CARDS_READ("cards.read"),
+        CARDS_WRITE("cards.write"),
+        DOCUMENTS_READ("documents.read"),
+        DOCUMENTS_WRITE("documents.write"),
+        FED_READ("fed.read"),
+        FILES_READ("files.read"),
+        FILES_WRITE("files.write"),
+        ISSUED_CARDS_READ("issued-cards.read"),
+        ISSUED_CARDS_WRITE("issued-cards.write"),
+        ISSUED_CARDS_READ_PRIVATE("issued-cards.read-private"),
+        PAYMENT_METHODS_READ("payment-methods.read"),
+        PING_READ("ping.read"),
+        PROFILE_ENRICHMENT_READ("profile-enrichment.read"),
+        PROFILE_READ("profile.read"),
+        PROFILE_WRITE("profile.write"),
+        PROFILE_DISCONNECT("profile.disconnect"),
+        REPRESENTATIVES_READ("representatives.read"),
+        REPRESENTATIVES_WRITE("representatives.write"),
+        TRANSFERS_READ("transfers.read"),
+        TRANSFERS_WRITE("transfers.write"),
+        WALLETS_READ("wallets.read"),;
+
+        private final String value;
+
+        private ApplicationScopeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

@@ -3,46 +3,162 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * RTPFailureCode
  * 
  * <p>Status codes for RTP failures.
  */
-public enum RTPFailureCode {
-    PROCESSING_ERROR("processing-error"),
-    INVALID_ACCOUNT("invalid-account"),
-    ACCOUNT_CLOSED("account-closed"),
-    ACCOUNT_BLOCKED("account-blocked"),
-    INVALID_FIELD("invalid-field"),
-    TRANSACTION_NOT_SUPPORTED("transaction-not-supported"),
-    LIMIT_EXCEEDED("limit-exceeded"),
-    INVALID_AMOUNT("invalid-amount"),
-    CUSTOMER_DECEASED("customer-deceased"),
-    OTHER("other");
+public class RTPFailureCode {
 
-    @JsonValue
+    public static final RTPFailureCode PROCESSING_ERROR = new RTPFailureCode("processing-error");
+    public static final RTPFailureCode INVALID_ACCOUNT = new RTPFailureCode("invalid-account");
+    public static final RTPFailureCode ACCOUNT_CLOSED = new RTPFailureCode("account-closed");
+    public static final RTPFailureCode ACCOUNT_BLOCKED = new RTPFailureCode("account-blocked");
+    public static final RTPFailureCode INVALID_FIELD = new RTPFailureCode("invalid-field");
+    public static final RTPFailureCode TRANSACTION_NOT_SUPPORTED = new RTPFailureCode("transaction-not-supported");
+    public static final RTPFailureCode LIMIT_EXCEEDED = new RTPFailureCode("limit-exceeded");
+    public static final RTPFailureCode INVALID_AMOUNT = new RTPFailureCode("invalid-amount");
+    public static final RTPFailureCode CUSTOMER_DECEASED = new RTPFailureCode("customer-deceased");
+    public static final RTPFailureCode OTHER = new RTPFailureCode("other");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, RTPFailureCode> values = createValuesMap();
+    private static final Map<String, RTPFailureCodeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    RTPFailureCode(String value) {
+    private RTPFailureCode(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a RTPFailureCode with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as RTPFailureCode
+     */ 
+    @JsonCreator
+    public static RTPFailureCode of(String value) {
+        synchronized (RTPFailureCode.class) {
+            return values.computeIfAbsent(value, v -> new RTPFailureCode(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<RTPFailureCode> fromValue(String value) {
-        for (RTPFailureCode o: RTPFailureCode.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<RTPFailureCodeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        RTPFailureCode other = (RTPFailureCode) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "RTPFailureCode [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static RTPFailureCode[] values() {
+        synchronized (RTPFailureCode.class) {
+            return values.values().toArray(new RTPFailureCode[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, RTPFailureCode> createValuesMap() {
+        Map<String, RTPFailureCode> map = new LinkedHashMap<>();
+        map.put("processing-error", PROCESSING_ERROR);
+        map.put("invalid-account", INVALID_ACCOUNT);
+        map.put("account-closed", ACCOUNT_CLOSED);
+        map.put("account-blocked", ACCOUNT_BLOCKED);
+        map.put("invalid-field", INVALID_FIELD);
+        map.put("transaction-not-supported", TRANSACTION_NOT_SUPPORTED);
+        map.put("limit-exceeded", LIMIT_EXCEEDED);
+        map.put("invalid-amount", INVALID_AMOUNT);
+        map.put("customer-deceased", CUSTOMER_DECEASED);
+        map.put("other", OTHER);
+        return map;
+    }
+
+    private static final Map<String, RTPFailureCodeEnum> createEnumsMap() {
+        Map<String, RTPFailureCodeEnum> map = new HashMap<>();
+        map.put("processing-error", RTPFailureCodeEnum.PROCESSING_ERROR);
+        map.put("invalid-account", RTPFailureCodeEnum.INVALID_ACCOUNT);
+        map.put("account-closed", RTPFailureCodeEnum.ACCOUNT_CLOSED);
+        map.put("account-blocked", RTPFailureCodeEnum.ACCOUNT_BLOCKED);
+        map.put("invalid-field", RTPFailureCodeEnum.INVALID_FIELD);
+        map.put("transaction-not-supported", RTPFailureCodeEnum.TRANSACTION_NOT_SUPPORTED);
+        map.put("limit-exceeded", RTPFailureCodeEnum.LIMIT_EXCEEDED);
+        map.put("invalid-amount", RTPFailureCodeEnum.INVALID_AMOUNT);
+        map.put("customer-deceased", RTPFailureCodeEnum.CUSTOMER_DECEASED);
+        map.put("other", RTPFailureCodeEnum.OTHER);
+        return map;
+    }
+    
+    
+    public enum RTPFailureCodeEnum {
+
+        PROCESSING_ERROR("processing-error"),
+        INVALID_ACCOUNT("invalid-account"),
+        ACCOUNT_CLOSED("account-closed"),
+        ACCOUNT_BLOCKED("account-blocked"),
+        INVALID_FIELD("invalid-field"),
+        TRANSACTION_NOT_SUPPORTED("transaction-not-supported"),
+        LIMIT_EXCEEDED("limit-exceeded"),
+        INVALID_AMOUNT("invalid-amount"),
+        CUSTOMER_DECEASED("customer-deceased"),
+        OTHER("other"),;
+
+        private final String value;
+
+        private RTPFailureCodeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

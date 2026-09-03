@@ -3,40 +3,138 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * DisputePhase
  * 
  * <p>The phase of a dispute within the dispute lifecycle.
  */
-public enum DisputePhase {
-    PRE_DISPUTE("pre-dispute"),
-    INQUIRY("inquiry"),
-    CHARGEBACK("chargeback"),
-    UNKNOWN("unknown");
+public class DisputePhase {
 
-    @JsonValue
+    public static final DisputePhase PRE_DISPUTE = new DisputePhase("pre-dispute");
+    public static final DisputePhase INQUIRY = new DisputePhase("inquiry");
+    public static final DisputePhase CHARGEBACK = new DisputePhase("chargeback");
+    public static final DisputePhase UNKNOWN = new DisputePhase("unknown");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, DisputePhase> values = createValuesMap();
+    private static final Map<String, DisputePhaseEnum> enums = createEnumsMap();
+
     private final String value;
 
-    DisputePhase(String value) {
+    private DisputePhase(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a DisputePhase with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as DisputePhase
+     */ 
+    @JsonCreator
+    public static DisputePhase of(String value) {
+        synchronized (DisputePhase.class) {
+            return values.computeIfAbsent(value, v -> new DisputePhase(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<DisputePhase> fromValue(String value) {
-        for (DisputePhase o: DisputePhase.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<DisputePhaseEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DisputePhase other = (DisputePhase) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "DisputePhase [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static DisputePhase[] values() {
+        synchronized (DisputePhase.class) {
+            return values.values().toArray(new DisputePhase[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, DisputePhase> createValuesMap() {
+        Map<String, DisputePhase> map = new LinkedHashMap<>();
+        map.put("pre-dispute", PRE_DISPUTE);
+        map.put("inquiry", INQUIRY);
+        map.put("chargeback", CHARGEBACK);
+        map.put("unknown", UNKNOWN);
+        return map;
+    }
+
+    private static final Map<String, DisputePhaseEnum> createEnumsMap() {
+        Map<String, DisputePhaseEnum> map = new HashMap<>();
+        map.put("pre-dispute", DisputePhaseEnum.PRE_DISPUTE);
+        map.put("inquiry", DisputePhaseEnum.INQUIRY);
+        map.put("chargeback", DisputePhaseEnum.CHARGEBACK);
+        map.put("unknown", DisputePhaseEnum.UNKNOWN);
+        return map;
+    }
+    
+    
+    public enum DisputePhaseEnum {
+
+        PRE_DISPUTE("pre-dispute"),
+        INQUIRY("inquiry"),
+        CHARGEBACK("chargeback"),
+        UNKNOWN("unknown"),;
+
+        private final String value;
+
+        private DisputePhaseEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

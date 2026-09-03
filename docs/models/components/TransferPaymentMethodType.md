@@ -8,6 +8,9 @@ The payment method type that represents a payment rail and directionality
 import io.moov.sdk.models.components.TransferPaymentMethodType;
 
 TransferPaymentMethodType value = TransferPaymentMethodType.MOOV_WALLET;
+
+// Open enum: use .of() to create instances from custom string values
+TransferPaymentMethodType custom = TransferPaymentMethodType.of("custom_value");
 ```
 
 

@@ -8,6 +8,9 @@ If the business is a financial institution, this field describes its primary reg
 import io.moov.sdk.models.components.PrimaryRegulator;
 
 PrimaryRegulator value = PrimaryRegulator.OCC;
+
+// Open enum: use .of() to create instances from custom string values
+PrimaryRegulator custom = PrimaryRegulator.of("custom_value");
 ```
 
 

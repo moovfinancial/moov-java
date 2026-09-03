@@ -116,7 +116,7 @@ public class CardIssuing {
      * 
      * @param accountID The Moov business account for which the cards have been issued.
      * @param skip 
-     * @param count 
+     * @param count Page size. When omitted, the server defaults to `200`.
      * @param states Optional, comma-separated states to filter the Moov list issued cards response. For example `active,closed`
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
@@ -222,7 +222,7 @@ public class CardIssuing {
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
-     * you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read-private` scope.
      * 
      * @return The call builder
      */
@@ -237,7 +237,7 @@ public class CardIssuing {
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
-     * you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read-private` scope.
      * 
      * @param accountID The Moov business account for which the card was issued.
      * @param issuedCardID 

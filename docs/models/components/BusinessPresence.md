@@ -6,6 +6,9 @@
 import io.moov.sdk.models.components.BusinessPresence;
 
 BusinessPresence value = BusinessPresence.COMMERCIAL_OFFICE;
+
+// Open enum: use .of() to create instances from custom string values
+BusinessPresence custom = BusinessPresence.of("custom_value");
 ```
 
 

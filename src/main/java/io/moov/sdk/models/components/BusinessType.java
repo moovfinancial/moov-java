@@ -3,46 +3,162 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * BusinessType
  * 
  * <p>The type of entity represented by this business.
  */
-public enum BusinessType {
-    SOLE_PROPRIETORSHIP("soleProprietorship"),
-    UNINCORPORATED_ASSOCIATION("unincorporatedAssociation"),
-    TRUST("trust"),
-    PUBLIC_CORPORATION("publicCorporation"),
-    PRIVATE_CORPORATION("privateCorporation"),
-    LLC("llc"),
-    PARTNERSHIP("partnership"),
-    UNINCORPORATED_NON_PROFIT("unincorporatedNonProfit"),
-    INCORPORATED_NON_PROFIT("incorporatedNonProfit"),
-    GOVERNMENT_ENTITY("governmentEntity");
+public class BusinessType {
 
-    @JsonValue
+    public static final BusinessType SOLE_PROPRIETORSHIP = new BusinessType("soleProprietorship");
+    public static final BusinessType UNINCORPORATED_ASSOCIATION = new BusinessType("unincorporatedAssociation");
+    public static final BusinessType TRUST = new BusinessType("trust");
+    public static final BusinessType PUBLIC_CORPORATION = new BusinessType("publicCorporation");
+    public static final BusinessType PRIVATE_CORPORATION = new BusinessType("privateCorporation");
+    public static final BusinessType LLC = new BusinessType("llc");
+    public static final BusinessType PARTNERSHIP = new BusinessType("partnership");
+    public static final BusinessType UNINCORPORATED_NON_PROFIT = new BusinessType("unincorporatedNonProfit");
+    public static final BusinessType INCORPORATED_NON_PROFIT = new BusinessType("incorporatedNonProfit");
+    public static final BusinessType GOVERNMENT_ENTITY = new BusinessType("governmentEntity");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, BusinessType> values = createValuesMap();
+    private static final Map<String, BusinessTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    BusinessType(String value) {
+    private BusinessType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a BusinessType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as BusinessType
+     */ 
+    @JsonCreator
+    public static BusinessType of(String value) {
+        synchronized (BusinessType.class) {
+            return values.computeIfAbsent(value, v -> new BusinessType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<BusinessType> fromValue(String value) {
-        for (BusinessType o: BusinessType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<BusinessTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        BusinessType other = (BusinessType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "BusinessType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static BusinessType[] values() {
+        synchronized (BusinessType.class) {
+            return values.values().toArray(new BusinessType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, BusinessType> createValuesMap() {
+        Map<String, BusinessType> map = new LinkedHashMap<>();
+        map.put("soleProprietorship", SOLE_PROPRIETORSHIP);
+        map.put("unincorporatedAssociation", UNINCORPORATED_ASSOCIATION);
+        map.put("trust", TRUST);
+        map.put("publicCorporation", PUBLIC_CORPORATION);
+        map.put("privateCorporation", PRIVATE_CORPORATION);
+        map.put("llc", LLC);
+        map.put("partnership", PARTNERSHIP);
+        map.put("unincorporatedNonProfit", UNINCORPORATED_NON_PROFIT);
+        map.put("incorporatedNonProfit", INCORPORATED_NON_PROFIT);
+        map.put("governmentEntity", GOVERNMENT_ENTITY);
+        return map;
+    }
+
+    private static final Map<String, BusinessTypeEnum> createEnumsMap() {
+        Map<String, BusinessTypeEnum> map = new HashMap<>();
+        map.put("soleProprietorship", BusinessTypeEnum.SOLE_PROPRIETORSHIP);
+        map.put("unincorporatedAssociation", BusinessTypeEnum.UNINCORPORATED_ASSOCIATION);
+        map.put("trust", BusinessTypeEnum.TRUST);
+        map.put("publicCorporation", BusinessTypeEnum.PUBLIC_CORPORATION);
+        map.put("privateCorporation", BusinessTypeEnum.PRIVATE_CORPORATION);
+        map.put("llc", BusinessTypeEnum.LLC);
+        map.put("partnership", BusinessTypeEnum.PARTNERSHIP);
+        map.put("unincorporatedNonProfit", BusinessTypeEnum.UNINCORPORATED_NON_PROFIT);
+        map.put("incorporatedNonProfit", BusinessTypeEnum.INCORPORATED_NON_PROFIT);
+        map.put("governmentEntity", BusinessTypeEnum.GOVERNMENT_ENTITY);
+        return map;
+    }
+    
+    
+    public enum BusinessTypeEnum {
+
+        SOLE_PROPRIETORSHIP("soleProprietorship"),
+        UNINCORPORATED_ASSOCIATION("unincorporatedAssociation"),
+        TRUST("trust"),
+        PUBLIC_CORPORATION("publicCorporation"),
+        PRIVATE_CORPORATION("privateCorporation"),
+        LLC("llc"),
+        PARTNERSHIP("partnership"),
+        UNINCORPORATED_NON_PROFIT("unincorporatedNonProfit"),
+        INCORPORATED_NON_PROFIT("incorporatedNonProfit"),
+        GOVERNMENT_ENTITY("governmentEntity"),;
+
+        private final String value;
+
+        private BusinessTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

@@ -3,49 +3,189 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum RequirementErrorCode {
-    INVALID_VALUE("invalid-value"),
-    FAILED_AUTOMATIC_VERIFICATION("failed-automatic-verification"),
-    FAILED_OTHER("failed-other"),
-    INVALID_ADDRESS("invalid-address"),
-    ADDRESS_RESTRICTED("address-restricted"),
-    TAX_ID_MISMATCH("tax-id-mismatch"),
-    DOCUMENT_ID_MISMATCH("document-id-mismatch"),
-    DOCUMENT_DATE_OF_BIRTH_MISMATCH("document-date-of-birth-mismatch"),
-    DOCUMENT_NAME_MISMATCH("document-name-mismatch"),
-    DOCUMENT_ADDRESS_MISMATCH("document-address.mismatch"),
-    DOCUMENT_NUMBER_MISMATCH("document-number-mismatch"),
-    DOCUMENT_INCOMPLETE("document-incomplete"),
-    DOCUMENT_FAILED_RISK("document-failed-risk"),
-    DOCUMENT_ILLEGIBLE("document-illegible"),
-    DOCUMENT_UNSUPPORTED("document-unsupported"),
-    DOCUMENT_NOT_UPLOADED("document-not-uploaded"),
-    DOCUMENT_CORRUPT("document-corrupt"),
-    DOCUMENT_EXPIRED("document-expired");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class RequirementErrorCode {
 
-    @JsonValue
+    public static final RequirementErrorCode INVALID_VALUE = new RequirementErrorCode("invalid-value");
+    public static final RequirementErrorCode FAILED_AUTOMATIC_VERIFICATION = new RequirementErrorCode("failed-automatic-verification");
+    public static final RequirementErrorCode FAILED_OTHER = new RequirementErrorCode("failed-other");
+    public static final RequirementErrorCode INVALID_ADDRESS = new RequirementErrorCode("invalid-address");
+    public static final RequirementErrorCode ADDRESS_RESTRICTED = new RequirementErrorCode("address-restricted");
+    public static final RequirementErrorCode TAX_ID_MISMATCH = new RequirementErrorCode("tax-id-mismatch");
+    public static final RequirementErrorCode DOCUMENT_ID_MISMATCH = new RequirementErrorCode("document-id-mismatch");
+    public static final RequirementErrorCode DOCUMENT_DATE_OF_BIRTH_MISMATCH = new RequirementErrorCode("document-date-of-birth-mismatch");
+    public static final RequirementErrorCode DOCUMENT_NAME_MISMATCH = new RequirementErrorCode("document-name-mismatch");
+    public static final RequirementErrorCode DOCUMENT_ADDRESS_MISMATCH = new RequirementErrorCode("document-address.mismatch");
+    public static final RequirementErrorCode DOCUMENT_NUMBER_MISMATCH = new RequirementErrorCode("document-number-mismatch");
+    public static final RequirementErrorCode DOCUMENT_INCOMPLETE = new RequirementErrorCode("document-incomplete");
+    public static final RequirementErrorCode DOCUMENT_FAILED_RISK = new RequirementErrorCode("document-failed-risk");
+    public static final RequirementErrorCode DOCUMENT_ILLEGIBLE = new RequirementErrorCode("document-illegible");
+    public static final RequirementErrorCode DOCUMENT_UNSUPPORTED = new RequirementErrorCode("document-unsupported");
+    public static final RequirementErrorCode DOCUMENT_NOT_UPLOADED = new RequirementErrorCode("document-not-uploaded");
+    public static final RequirementErrorCode DOCUMENT_CORRUPT = new RequirementErrorCode("document-corrupt");
+    public static final RequirementErrorCode DOCUMENT_EXPIRED = new RequirementErrorCode("document-expired");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, RequirementErrorCode> values = createValuesMap();
+    private static final Map<String, RequirementErrorCodeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    RequirementErrorCode(String value) {
+    private RequirementErrorCode(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a RequirementErrorCode with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as RequirementErrorCode
+     */ 
+    @JsonCreator
+    public static RequirementErrorCode of(String value) {
+        synchronized (RequirementErrorCode.class) {
+            return values.computeIfAbsent(value, v -> new RequirementErrorCode(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<RequirementErrorCode> fromValue(String value) {
-        for (RequirementErrorCode o: RequirementErrorCode.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<RequirementErrorCodeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        RequirementErrorCode other = (RequirementErrorCode) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "RequirementErrorCode [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static RequirementErrorCode[] values() {
+        synchronized (RequirementErrorCode.class) {
+            return values.values().toArray(new RequirementErrorCode[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, RequirementErrorCode> createValuesMap() {
+        Map<String, RequirementErrorCode> map = new LinkedHashMap<>();
+        map.put("invalid-value", INVALID_VALUE);
+        map.put("failed-automatic-verification", FAILED_AUTOMATIC_VERIFICATION);
+        map.put("failed-other", FAILED_OTHER);
+        map.put("invalid-address", INVALID_ADDRESS);
+        map.put("address-restricted", ADDRESS_RESTRICTED);
+        map.put("tax-id-mismatch", TAX_ID_MISMATCH);
+        map.put("document-id-mismatch", DOCUMENT_ID_MISMATCH);
+        map.put("document-date-of-birth-mismatch", DOCUMENT_DATE_OF_BIRTH_MISMATCH);
+        map.put("document-name-mismatch", DOCUMENT_NAME_MISMATCH);
+        map.put("document-address.mismatch", DOCUMENT_ADDRESS_MISMATCH);
+        map.put("document-number-mismatch", DOCUMENT_NUMBER_MISMATCH);
+        map.put("document-incomplete", DOCUMENT_INCOMPLETE);
+        map.put("document-failed-risk", DOCUMENT_FAILED_RISK);
+        map.put("document-illegible", DOCUMENT_ILLEGIBLE);
+        map.put("document-unsupported", DOCUMENT_UNSUPPORTED);
+        map.put("document-not-uploaded", DOCUMENT_NOT_UPLOADED);
+        map.put("document-corrupt", DOCUMENT_CORRUPT);
+        map.put("document-expired", DOCUMENT_EXPIRED);
+        return map;
+    }
+
+    private static final Map<String, RequirementErrorCodeEnum> createEnumsMap() {
+        Map<String, RequirementErrorCodeEnum> map = new HashMap<>();
+        map.put("invalid-value", RequirementErrorCodeEnum.INVALID_VALUE);
+        map.put("failed-automatic-verification", RequirementErrorCodeEnum.FAILED_AUTOMATIC_VERIFICATION);
+        map.put("failed-other", RequirementErrorCodeEnum.FAILED_OTHER);
+        map.put("invalid-address", RequirementErrorCodeEnum.INVALID_ADDRESS);
+        map.put("address-restricted", RequirementErrorCodeEnum.ADDRESS_RESTRICTED);
+        map.put("tax-id-mismatch", RequirementErrorCodeEnum.TAX_ID_MISMATCH);
+        map.put("document-id-mismatch", RequirementErrorCodeEnum.DOCUMENT_ID_MISMATCH);
+        map.put("document-date-of-birth-mismatch", RequirementErrorCodeEnum.DOCUMENT_DATE_OF_BIRTH_MISMATCH);
+        map.put("document-name-mismatch", RequirementErrorCodeEnum.DOCUMENT_NAME_MISMATCH);
+        map.put("document-address.mismatch", RequirementErrorCodeEnum.DOCUMENT_ADDRESS_MISMATCH);
+        map.put("document-number-mismatch", RequirementErrorCodeEnum.DOCUMENT_NUMBER_MISMATCH);
+        map.put("document-incomplete", RequirementErrorCodeEnum.DOCUMENT_INCOMPLETE);
+        map.put("document-failed-risk", RequirementErrorCodeEnum.DOCUMENT_FAILED_RISK);
+        map.put("document-illegible", RequirementErrorCodeEnum.DOCUMENT_ILLEGIBLE);
+        map.put("document-unsupported", RequirementErrorCodeEnum.DOCUMENT_UNSUPPORTED);
+        map.put("document-not-uploaded", RequirementErrorCodeEnum.DOCUMENT_NOT_UPLOADED);
+        map.put("document-corrupt", RequirementErrorCodeEnum.DOCUMENT_CORRUPT);
+        map.put("document-expired", RequirementErrorCodeEnum.DOCUMENT_EXPIRED);
+        return map;
+    }
+    
+    
+    public enum RequirementErrorCodeEnum {
+
+        INVALID_VALUE("invalid-value"),
+        FAILED_AUTOMATIC_VERIFICATION("failed-automatic-verification"),
+        FAILED_OTHER("failed-other"),
+        INVALID_ADDRESS("invalid-address"),
+        ADDRESS_RESTRICTED("address-restricted"),
+        TAX_ID_MISMATCH("tax-id-mismatch"),
+        DOCUMENT_ID_MISMATCH("document-id-mismatch"),
+        DOCUMENT_DATE_OF_BIRTH_MISMATCH("document-date-of-birth-mismatch"),
+        DOCUMENT_NAME_MISMATCH("document-name-mismatch"),
+        DOCUMENT_ADDRESS_MISMATCH("document-address.mismatch"),
+        DOCUMENT_NUMBER_MISMATCH("document-number-mismatch"),
+        DOCUMENT_INCOMPLETE("document-incomplete"),
+        DOCUMENT_FAILED_RISK("document-failed-risk"),
+        DOCUMENT_ILLEGIBLE("document-illegible"),
+        DOCUMENT_UNSUPPORTED("document-unsupported"),
+        DOCUMENT_NOT_UPLOADED("document-not-uploaded"),
+        DOCUMENT_CORRUPT("document-corrupt"),
+        DOCUMENT_EXPIRED("document-expired"),;
+
+        private final String value;
+
+        private RequirementErrorCodeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

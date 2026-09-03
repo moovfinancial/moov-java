@@ -6,6 +6,9 @@
 import io.moov.sdk.models.components.BankAccountVerificationStatus;
 
 BankAccountVerificationStatus value = BankAccountVerificationStatus.NEW;
+
+// Open enum: use .of() to create instances from custom string values
+BankAccountVerificationStatus custom = BankAccountVerificationStatus.of("custom_value");
 ```
 
 

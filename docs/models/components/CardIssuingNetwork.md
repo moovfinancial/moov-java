@@ -8,6 +8,9 @@ The name of the network a card transaction is routed through.
 import io.moov.sdk.models.components.CardIssuingNetwork;
 
 CardIssuingNetwork value = CardIssuingNetwork.DISCOVER;
+
+// Open enum: use .of() to create instances from custom string values
+CardIssuingNetwork custom = CardIssuingNetwork.of("custom_value");
 ```
 
 

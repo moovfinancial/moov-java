@@ -6,6 +6,9 @@
 import io.moov.sdk.models.components.CardTransactionFailureCode;
 
 CardTransactionFailureCode value = CardTransactionFailureCode.CALL_ISSUER;
+
+// Open enum: use .of() to create instances from custom string values
+CardTransactionFailureCode custom = CardTransactionFailureCode.of("custom_value");
 ```
 
 

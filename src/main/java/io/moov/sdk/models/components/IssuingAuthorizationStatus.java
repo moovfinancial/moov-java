@@ -3,41 +3,142 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * IssuingAuthorizationStatus
  * 
  * <p>Status of a card issuing authorization.
  */
-public enum IssuingAuthorizationStatus {
-    PENDING("pending"),
-    DECLINED("declined"),
-    CANCELED("canceled"),
-    CLEARED("cleared"),
-    EXPIRED("expired");
+public class IssuingAuthorizationStatus {
 
-    @JsonValue
+    public static final IssuingAuthorizationStatus PENDING = new IssuingAuthorizationStatus("pending");
+    public static final IssuingAuthorizationStatus DECLINED = new IssuingAuthorizationStatus("declined");
+    public static final IssuingAuthorizationStatus CANCELED = new IssuingAuthorizationStatus("canceled");
+    public static final IssuingAuthorizationStatus CLEARED = new IssuingAuthorizationStatus("cleared");
+    public static final IssuingAuthorizationStatus EXPIRED = new IssuingAuthorizationStatus("expired");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, IssuingAuthorizationStatus> values = createValuesMap();
+    private static final Map<String, IssuingAuthorizationStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    IssuingAuthorizationStatus(String value) {
+    private IssuingAuthorizationStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a IssuingAuthorizationStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as IssuingAuthorizationStatus
+     */ 
+    @JsonCreator
+    public static IssuingAuthorizationStatus of(String value) {
+        synchronized (IssuingAuthorizationStatus.class) {
+            return values.computeIfAbsent(value, v -> new IssuingAuthorizationStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<IssuingAuthorizationStatus> fromValue(String value) {
-        for (IssuingAuthorizationStatus o: IssuingAuthorizationStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<IssuingAuthorizationStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        IssuingAuthorizationStatus other = (IssuingAuthorizationStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "IssuingAuthorizationStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static IssuingAuthorizationStatus[] values() {
+        synchronized (IssuingAuthorizationStatus.class) {
+            return values.values().toArray(new IssuingAuthorizationStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, IssuingAuthorizationStatus> createValuesMap() {
+        Map<String, IssuingAuthorizationStatus> map = new LinkedHashMap<>();
+        map.put("pending", PENDING);
+        map.put("declined", DECLINED);
+        map.put("canceled", CANCELED);
+        map.put("cleared", CLEARED);
+        map.put("expired", EXPIRED);
+        return map;
+    }
+
+    private static final Map<String, IssuingAuthorizationStatusEnum> createEnumsMap() {
+        Map<String, IssuingAuthorizationStatusEnum> map = new HashMap<>();
+        map.put("pending", IssuingAuthorizationStatusEnum.PENDING);
+        map.put("declined", IssuingAuthorizationStatusEnum.DECLINED);
+        map.put("canceled", IssuingAuthorizationStatusEnum.CANCELED);
+        map.put("cleared", IssuingAuthorizationStatusEnum.CLEARED);
+        map.put("expired", IssuingAuthorizationStatusEnum.EXPIRED);
+        return map;
+    }
+    
+    
+    public enum IssuingAuthorizationStatusEnum {
+
+        PENDING("pending"),
+        DECLINED("declined"),
+        CANCELED("canceled"),
+        CLEARED("cleared"),
+        EXPIRED("expired"),;
+
+        private final String value;
+
+        private IssuingAuthorizationStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

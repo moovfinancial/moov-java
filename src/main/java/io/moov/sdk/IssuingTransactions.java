@@ -149,7 +149,7 @@ public class IssuingTransactions {
      * @param accountID The Moov business account for which cards have been issued.
      * @param authorizationID 
      * @param skip 
-     * @param count 
+     * @param count Page size. When omitted, the server defaults to `200`.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */

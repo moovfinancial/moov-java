@@ -3,42 +3,146 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * CardTransactionStatus
  * 
  * <p>Status of a transaction within the card payment lifecycle.
  */
-public enum CardTransactionStatus {
-    INITIATED("initiated"),
-    CONFIRMED("confirmed"),
-    CANCELED("canceled"),
-    SETTLED("settled"),
-    FAILED("failed"),
-    COMPLETED("completed");
+public class CardTransactionStatus {
 
-    @JsonValue
+    public static final CardTransactionStatus INITIATED = new CardTransactionStatus("initiated");
+    public static final CardTransactionStatus CONFIRMED = new CardTransactionStatus("confirmed");
+    public static final CardTransactionStatus CANCELED = new CardTransactionStatus("canceled");
+    public static final CardTransactionStatus SETTLED = new CardTransactionStatus("settled");
+    public static final CardTransactionStatus FAILED = new CardTransactionStatus("failed");
+    public static final CardTransactionStatus COMPLETED = new CardTransactionStatus("completed");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, CardTransactionStatus> values = createValuesMap();
+    private static final Map<String, CardTransactionStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    CardTransactionStatus(String value) {
+    private CardTransactionStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a CardTransactionStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as CardTransactionStatus
+     */ 
+    @JsonCreator
+    public static CardTransactionStatus of(String value) {
+        synchronized (CardTransactionStatus.class) {
+            return values.computeIfAbsent(value, v -> new CardTransactionStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<CardTransactionStatus> fromValue(String value) {
-        for (CardTransactionStatus o: CardTransactionStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<CardTransactionStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CardTransactionStatus other = (CardTransactionStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "CardTransactionStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static CardTransactionStatus[] values() {
+        synchronized (CardTransactionStatus.class) {
+            return values.values().toArray(new CardTransactionStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, CardTransactionStatus> createValuesMap() {
+        Map<String, CardTransactionStatus> map = new LinkedHashMap<>();
+        map.put("initiated", INITIATED);
+        map.put("confirmed", CONFIRMED);
+        map.put("canceled", CANCELED);
+        map.put("settled", SETTLED);
+        map.put("failed", FAILED);
+        map.put("completed", COMPLETED);
+        return map;
+    }
+
+    private static final Map<String, CardTransactionStatusEnum> createEnumsMap() {
+        Map<String, CardTransactionStatusEnum> map = new HashMap<>();
+        map.put("initiated", CardTransactionStatusEnum.INITIATED);
+        map.put("confirmed", CardTransactionStatusEnum.CONFIRMED);
+        map.put("canceled", CardTransactionStatusEnum.CANCELED);
+        map.put("settled", CardTransactionStatusEnum.SETTLED);
+        map.put("failed", CardTransactionStatusEnum.FAILED);
+        map.put("completed", CardTransactionStatusEnum.COMPLETED);
+        return map;
+    }
+    
+    
+    public enum CardTransactionStatusEnum {
+
+        INITIATED("initiated"),
+        CONFIRMED("confirmed"),
+        CANCELED("canceled"),
+        SETTLED("settled"),
+        FAILED("failed"),
+        COMPLETED("completed"),;
+
+        private final String value;
+
+        private CardTransactionStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

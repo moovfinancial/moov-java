@@ -11,7 +11,11 @@ import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
 
-
+/**
+ * Cancellation
+ * 
+ * <p>Cancellation of a transfer.
+ */
 public class Cancellation {
 
     @JsonProperty("cancellationID")

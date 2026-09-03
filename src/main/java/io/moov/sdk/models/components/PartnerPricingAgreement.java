@@ -84,6 +84,20 @@ public class PartnerPricingAgreement {
     private MonthlyPlatformFee monthlyPlatformFee;
 
     /**
+     * The agreement this one replaced. Only set when the agreement was created by replacing another.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("priorAgreementID")
+    private Optional<String> priorAgreementID;
+
+    /**
+     * The date and time the prior agreement was terminated.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("priorAgreementTerminatedOn")
+    private Optional<OffsetDateTime> priorAgreementTerminatedOn;
+
+    /**
      * The decimal-formatted numerical string of the revenue split for partner.
      * 
      * <p>For example, 2.25% is '2.25'.
@@ -104,6 +118,8 @@ public class PartnerPricingAgreement {
             @JsonProperty("billableFees") List<BillableFee> billableFees,
             @JsonProperty("minimumCommitment") MinimumCommitment minimumCommitment,
             @JsonProperty("monthlyPlatformFee") MonthlyPlatformFee monthlyPlatformFee,
+            @JsonProperty("priorAgreementID") Optional<String> priorAgreementID,
+            @JsonProperty("priorAgreementTerminatedOn") Optional<OffsetDateTime> priorAgreementTerminatedOn,
             @JsonProperty("revenueShare") String revenueShare) {
         Utils.checkNotNull(agreementID, "agreementID");
         Utils.checkNotNull(planID, "planID");
@@ -116,6 +132,8 @@ public class PartnerPricingAgreement {
         Utils.checkNotNull(billableFees, "billableFees");
         Utils.checkNotNull(minimumCommitment, "minimumCommitment");
         Utils.checkNotNull(monthlyPlatformFee, "monthlyPlatformFee");
+        Utils.checkNotNull(priorAgreementID, "priorAgreementID");
+        Utils.checkNotNull(priorAgreementTerminatedOn, "priorAgreementTerminatedOn");
         Utils.checkNotNull(revenueShare, "revenueShare");
         this.agreementID = agreementID;
         this.planID = planID;
@@ -128,6 +146,8 @@ public class PartnerPricingAgreement {
         this.billableFees = billableFees;
         this.minimumCommitment = minimumCommitment;
         this.monthlyPlatformFee = monthlyPlatformFee;
+        this.priorAgreementID = priorAgreementID;
+        this.priorAgreementTerminatedOn = priorAgreementTerminatedOn;
         this.revenueShare = revenueShare;
     }
     
@@ -145,7 +165,8 @@ public class PartnerPricingAgreement {
         this(agreementID, planID, Optional.empty(),
             name, Optional.empty(), acceptedOn,
             status, cardAcquiringModel, billableFees,
-            minimumCommitment, monthlyPlatformFee, revenueShare);
+            minimumCommitment, monthlyPlatformFee, Optional.empty(),
+            Optional.empty(), revenueShare);
     }
 
     /**
@@ -229,6 +250,22 @@ public class PartnerPricingAgreement {
     @JsonIgnore
     public MonthlyPlatformFee monthlyPlatformFee() {
         return monthlyPlatformFee;
+    }
+
+    /**
+     * The agreement this one replaced. Only set when the agreement was created by replacing another.
+     */
+    @JsonIgnore
+    public Optional<String> priorAgreementID() {
+        return priorAgreementID;
+    }
+
+    /**
+     * The date and time the prior agreement was terminated.
+     */
+    @JsonIgnore
+    public Optional<OffsetDateTime> priorAgreementTerminatedOn() {
+        return priorAgreementTerminatedOn;
     }
 
     /**
@@ -362,6 +399,44 @@ public class PartnerPricingAgreement {
     }
 
     /**
+     * The agreement this one replaced. Only set when the agreement was created by replacing another.
+     */
+    public PartnerPricingAgreement withPriorAgreementID(String priorAgreementID) {
+        Utils.checkNotNull(priorAgreementID, "priorAgreementID");
+        this.priorAgreementID = Optional.ofNullable(priorAgreementID);
+        return this;
+    }
+
+
+    /**
+     * The agreement this one replaced. Only set when the agreement was created by replacing another.
+     */
+    public PartnerPricingAgreement withPriorAgreementID(Optional<String> priorAgreementID) {
+        Utils.checkNotNull(priorAgreementID, "priorAgreementID");
+        this.priorAgreementID = priorAgreementID;
+        return this;
+    }
+
+    /**
+     * The date and time the prior agreement was terminated.
+     */
+    public PartnerPricingAgreement withPriorAgreementTerminatedOn(OffsetDateTime priorAgreementTerminatedOn) {
+        Utils.checkNotNull(priorAgreementTerminatedOn, "priorAgreementTerminatedOn");
+        this.priorAgreementTerminatedOn = Optional.ofNullable(priorAgreementTerminatedOn);
+        return this;
+    }
+
+
+    /**
+     * The date and time the prior agreement was terminated.
+     */
+    public PartnerPricingAgreement withPriorAgreementTerminatedOn(Optional<OffsetDateTime> priorAgreementTerminatedOn) {
+        Utils.checkNotNull(priorAgreementTerminatedOn, "priorAgreementTerminatedOn");
+        this.priorAgreementTerminatedOn = priorAgreementTerminatedOn;
+        return this;
+    }
+
+    /**
      * The decimal-formatted numerical string of the revenue split for partner.
      * 
      * <p>For example, 2.25% is '2.25'.
@@ -393,6 +468,8 @@ public class PartnerPricingAgreement {
             Utils.enhancedDeepEquals(this.billableFees, other.billableFees) &&
             Utils.enhancedDeepEquals(this.minimumCommitment, other.minimumCommitment) &&
             Utils.enhancedDeepEquals(this.monthlyPlatformFee, other.monthlyPlatformFee) &&
+            Utils.enhancedDeepEquals(this.priorAgreementID, other.priorAgreementID) &&
+            Utils.enhancedDeepEquals(this.priorAgreementTerminatedOn, other.priorAgreementTerminatedOn) &&
             Utils.enhancedDeepEquals(this.revenueShare, other.revenueShare);
     }
     
@@ -402,7 +479,8 @@ public class PartnerPricingAgreement {
             agreementID, planID, accountID,
             name, description, acceptedOn,
             status, cardAcquiringModel, billableFees,
-            minimumCommitment, monthlyPlatformFee, revenueShare);
+            minimumCommitment, monthlyPlatformFee, priorAgreementID,
+            priorAgreementTerminatedOn, revenueShare);
     }
     
     @Override
@@ -419,6 +497,8 @@ public class PartnerPricingAgreement {
                 "billableFees", billableFees,
                 "minimumCommitment", minimumCommitment,
                 "monthlyPlatformFee", monthlyPlatformFee,
+                "priorAgreementID", priorAgreementID,
+                "priorAgreementTerminatedOn", priorAgreementTerminatedOn,
                 "revenueShare", revenueShare);
     }
 
@@ -446,6 +526,10 @@ public class PartnerPricingAgreement {
         private MinimumCommitment minimumCommitment;
 
         private MonthlyPlatformFee monthlyPlatformFee;
+
+        private Optional<String> priorAgreementID = Optional.empty();
+
+        private Optional<OffsetDateTime> priorAgreementTerminatedOn = Optional.empty();
 
         private String revenueShare;
 
@@ -579,6 +663,44 @@ public class PartnerPricingAgreement {
 
 
         /**
+         * The agreement this one replaced. Only set when the agreement was created by replacing another.
+         */
+        public Builder priorAgreementID(String priorAgreementID) {
+            Utils.checkNotNull(priorAgreementID, "priorAgreementID");
+            this.priorAgreementID = Optional.ofNullable(priorAgreementID);
+            return this;
+        }
+
+        /**
+         * The agreement this one replaced. Only set when the agreement was created by replacing another.
+         */
+        public Builder priorAgreementID(Optional<String> priorAgreementID) {
+            Utils.checkNotNull(priorAgreementID, "priorAgreementID");
+            this.priorAgreementID = priorAgreementID;
+            return this;
+        }
+
+
+        /**
+         * The date and time the prior agreement was terminated.
+         */
+        public Builder priorAgreementTerminatedOn(OffsetDateTime priorAgreementTerminatedOn) {
+            Utils.checkNotNull(priorAgreementTerminatedOn, "priorAgreementTerminatedOn");
+            this.priorAgreementTerminatedOn = Optional.ofNullable(priorAgreementTerminatedOn);
+            return this;
+        }
+
+        /**
+         * The date and time the prior agreement was terminated.
+         */
+        public Builder priorAgreementTerminatedOn(Optional<OffsetDateTime> priorAgreementTerminatedOn) {
+            Utils.checkNotNull(priorAgreementTerminatedOn, "priorAgreementTerminatedOn");
+            this.priorAgreementTerminatedOn = priorAgreementTerminatedOn;
+            return this;
+        }
+
+
+        /**
          * The decimal-formatted numerical string of the revenue split for partner.
          * 
          * <p>For example, 2.25% is '2.25'.
@@ -595,7 +717,8 @@ public class PartnerPricingAgreement {
                 agreementID, planID, accountID,
                 name, description, acceptedOn,
                 status, cardAcquiringModel, billableFees,
-                minimumCommitment, monthlyPlatformFee, revenueShare);
+                minimumCommitment, monthlyPlatformFee, priorAgreementID,
+                priorAgreementTerminatedOn, revenueShare);
         }
 
     }

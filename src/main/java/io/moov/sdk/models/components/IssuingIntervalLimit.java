@@ -3,38 +3,127 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * IssuingIntervalLimit
  * 
  * <p>Specifies the time frame for a velocity limit. `per-transaction` applies to each individual
  * authorization and never resets. Time-based intervals (where supported) reset at midnight ET.
  */
-public enum IssuingIntervalLimit {
-    PER_TRANSACTION("per-transaction");
+public class IssuingIntervalLimit {
 
-    @JsonValue
+    public static final IssuingIntervalLimit PER_TRANSACTION = new IssuingIntervalLimit("per-transaction");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, IssuingIntervalLimit> values = createValuesMap();
+    private static final Map<String, IssuingIntervalLimitEnum> enums = createEnumsMap();
+
     private final String value;
 
-    IssuingIntervalLimit(String value) {
+    private IssuingIntervalLimit(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a IssuingIntervalLimit with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as IssuingIntervalLimit
+     */ 
+    @JsonCreator
+    public static IssuingIntervalLimit of(String value) {
+        synchronized (IssuingIntervalLimit.class) {
+            return values.computeIfAbsent(value, v -> new IssuingIntervalLimit(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<IssuingIntervalLimit> fromValue(String value) {
-        for (IssuingIntervalLimit o: IssuingIntervalLimit.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<IssuingIntervalLimitEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        IssuingIntervalLimit other = (IssuingIntervalLimit) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "IssuingIntervalLimit [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static IssuingIntervalLimit[] values() {
+        synchronized (IssuingIntervalLimit.class) {
+            return values.values().toArray(new IssuingIntervalLimit[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, IssuingIntervalLimit> createValuesMap() {
+        Map<String, IssuingIntervalLimit> map = new LinkedHashMap<>();
+        map.put("per-transaction", PER_TRANSACTION);
+        return map;
+    }
+
+    private static final Map<String, IssuingIntervalLimitEnum> createEnumsMap() {
+        Map<String, IssuingIntervalLimitEnum> map = new HashMap<>();
+        map.put("per-transaction", IssuingIntervalLimitEnum.PER_TRANSACTION);
+        return map;
+    }
+    
+    
+    public enum IssuingIntervalLimitEnum {
+
+        PER_TRANSACTION("per-transaction"),;
+
+        private final String value;
+
+        private IssuingIntervalLimitEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

@@ -8,6 +8,9 @@ Status codes for RTP failures.
 import io.moov.sdk.models.components.RTPFailureCode;
 
 RTPFailureCode value = RTPFailureCode.PROCESSING_ERROR;
+
+// Open enum: use .of() to create instances from custom string values
+RTPFailureCode custom = RTPFailureCode.of("custom_value");
 ```
 
 

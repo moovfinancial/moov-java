@@ -16,7 +16,11 @@ import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * IssuingControls
+ * 
+ * <p>Mutable spend controls for the card.
+ */
 public class IssuingControls {
     /**
      * Indicates if the card is single-use. If true, the card closes after the first authorization.

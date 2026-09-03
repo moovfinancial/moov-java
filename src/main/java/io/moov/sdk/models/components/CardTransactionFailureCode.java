@@ -3,56 +3,217 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum CardTransactionFailureCode {
-    CALL_ISSUER("call-issuer"),
-    DO_NOT_HONOR("do-not-honor"),
-    PROCESSING_ERROR("processing-error"),
-    INVALID_TRANSACTION("invalid-transaction"),
-    INVALID_AMOUNT("invalid-amount"),
-    NO_SUCH_ISSUER("no-such-issuer"),
-    REENTER_TRANSACTION("reenter-transaction"),
-    CVV_MISMATCH("cvv-mismatch"),
-    LOST_OR_STOLEN("lost-or-stolen"),
-    INSUFFICIENT_FUNDS("insufficient-funds"),
-    INVALID_CARD_NUMBER("invalid-card-number"),
-    INVALID_MERCHANT("invalid-merchant"),
-    EXPIRED_CARD("expired-card"),
-    INCORRECT_PIN("incorrect-pin"),
-    TRANSACTION_NOT_ALLOWED("transaction-not-allowed"),
-    SUSPECTED_FRAUD("suspected-fraud"),
-    AMOUNT_LIMIT_EXCEEDED("amount-limit-exceeded"),
-    VELOCITY_LIMIT_EXCEEDED("velocity-limit-exceeded"),
-    REVOCATION_OF_AUTHORIZATION("revocation-of-authorization"),
-    CARD_NOT_ACTIVATED("card-not-activated"),
-    ISSUER_NOT_AVAILABLE("issuer-not-available"),
-    COULD_NOT_ROUTE("could-not-route"),
-    CARDHOLDER_ACCOUNT_CLOSED("cardholder-account-closed"),
-    UNKNOWN_ISSUE("unknown-issue"),
-    DUPLICATE_TRANSACTION("duplicate-transaction");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class CardTransactionFailureCode {
 
-    @JsonValue
+    public static final CardTransactionFailureCode CALL_ISSUER = new CardTransactionFailureCode("call-issuer");
+    public static final CardTransactionFailureCode DO_NOT_HONOR = new CardTransactionFailureCode("do-not-honor");
+    public static final CardTransactionFailureCode PROCESSING_ERROR = new CardTransactionFailureCode("processing-error");
+    public static final CardTransactionFailureCode INVALID_TRANSACTION = new CardTransactionFailureCode("invalid-transaction");
+    public static final CardTransactionFailureCode INVALID_AMOUNT = new CardTransactionFailureCode("invalid-amount");
+    public static final CardTransactionFailureCode NO_SUCH_ISSUER = new CardTransactionFailureCode("no-such-issuer");
+    public static final CardTransactionFailureCode REENTER_TRANSACTION = new CardTransactionFailureCode("reenter-transaction");
+    public static final CardTransactionFailureCode CVV_MISMATCH = new CardTransactionFailureCode("cvv-mismatch");
+    public static final CardTransactionFailureCode LOST_OR_STOLEN = new CardTransactionFailureCode("lost-or-stolen");
+    public static final CardTransactionFailureCode INSUFFICIENT_FUNDS = new CardTransactionFailureCode("insufficient-funds");
+    public static final CardTransactionFailureCode INVALID_CARD_NUMBER = new CardTransactionFailureCode("invalid-card-number");
+    public static final CardTransactionFailureCode INVALID_MERCHANT = new CardTransactionFailureCode("invalid-merchant");
+    public static final CardTransactionFailureCode EXPIRED_CARD = new CardTransactionFailureCode("expired-card");
+    public static final CardTransactionFailureCode INCORRECT_PIN = new CardTransactionFailureCode("incorrect-pin");
+    public static final CardTransactionFailureCode TRANSACTION_NOT_ALLOWED = new CardTransactionFailureCode("transaction-not-allowed");
+    public static final CardTransactionFailureCode SUSPECTED_FRAUD = new CardTransactionFailureCode("suspected-fraud");
+    public static final CardTransactionFailureCode AMOUNT_LIMIT_EXCEEDED = new CardTransactionFailureCode("amount-limit-exceeded");
+    public static final CardTransactionFailureCode VELOCITY_LIMIT_EXCEEDED = new CardTransactionFailureCode("velocity-limit-exceeded");
+    public static final CardTransactionFailureCode REVOCATION_OF_AUTHORIZATION = new CardTransactionFailureCode("revocation-of-authorization");
+    public static final CardTransactionFailureCode CARD_NOT_ACTIVATED = new CardTransactionFailureCode("card-not-activated");
+    public static final CardTransactionFailureCode ISSUER_NOT_AVAILABLE = new CardTransactionFailureCode("issuer-not-available");
+    public static final CardTransactionFailureCode COULD_NOT_ROUTE = new CardTransactionFailureCode("could-not-route");
+    public static final CardTransactionFailureCode CARDHOLDER_ACCOUNT_CLOSED = new CardTransactionFailureCode("cardholder-account-closed");
+    public static final CardTransactionFailureCode UNKNOWN_ISSUE = new CardTransactionFailureCode("unknown-issue");
+    public static final CardTransactionFailureCode DUPLICATE_TRANSACTION = new CardTransactionFailureCode("duplicate-transaction");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, CardTransactionFailureCode> values = createValuesMap();
+    private static final Map<String, CardTransactionFailureCodeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    CardTransactionFailureCode(String value) {
+    private CardTransactionFailureCode(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a CardTransactionFailureCode with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as CardTransactionFailureCode
+     */ 
+    @JsonCreator
+    public static CardTransactionFailureCode of(String value) {
+        synchronized (CardTransactionFailureCode.class) {
+            return values.computeIfAbsent(value, v -> new CardTransactionFailureCode(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<CardTransactionFailureCode> fromValue(String value) {
-        for (CardTransactionFailureCode o: CardTransactionFailureCode.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<CardTransactionFailureCodeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CardTransactionFailureCode other = (CardTransactionFailureCode) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "CardTransactionFailureCode [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static CardTransactionFailureCode[] values() {
+        synchronized (CardTransactionFailureCode.class) {
+            return values.values().toArray(new CardTransactionFailureCode[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, CardTransactionFailureCode> createValuesMap() {
+        Map<String, CardTransactionFailureCode> map = new LinkedHashMap<>();
+        map.put("call-issuer", CALL_ISSUER);
+        map.put("do-not-honor", DO_NOT_HONOR);
+        map.put("processing-error", PROCESSING_ERROR);
+        map.put("invalid-transaction", INVALID_TRANSACTION);
+        map.put("invalid-amount", INVALID_AMOUNT);
+        map.put("no-such-issuer", NO_SUCH_ISSUER);
+        map.put("reenter-transaction", REENTER_TRANSACTION);
+        map.put("cvv-mismatch", CVV_MISMATCH);
+        map.put("lost-or-stolen", LOST_OR_STOLEN);
+        map.put("insufficient-funds", INSUFFICIENT_FUNDS);
+        map.put("invalid-card-number", INVALID_CARD_NUMBER);
+        map.put("invalid-merchant", INVALID_MERCHANT);
+        map.put("expired-card", EXPIRED_CARD);
+        map.put("incorrect-pin", INCORRECT_PIN);
+        map.put("transaction-not-allowed", TRANSACTION_NOT_ALLOWED);
+        map.put("suspected-fraud", SUSPECTED_FRAUD);
+        map.put("amount-limit-exceeded", AMOUNT_LIMIT_EXCEEDED);
+        map.put("velocity-limit-exceeded", VELOCITY_LIMIT_EXCEEDED);
+        map.put("revocation-of-authorization", REVOCATION_OF_AUTHORIZATION);
+        map.put("card-not-activated", CARD_NOT_ACTIVATED);
+        map.put("issuer-not-available", ISSUER_NOT_AVAILABLE);
+        map.put("could-not-route", COULD_NOT_ROUTE);
+        map.put("cardholder-account-closed", CARDHOLDER_ACCOUNT_CLOSED);
+        map.put("unknown-issue", UNKNOWN_ISSUE);
+        map.put("duplicate-transaction", DUPLICATE_TRANSACTION);
+        return map;
+    }
+
+    private static final Map<String, CardTransactionFailureCodeEnum> createEnumsMap() {
+        Map<String, CardTransactionFailureCodeEnum> map = new HashMap<>();
+        map.put("call-issuer", CardTransactionFailureCodeEnum.CALL_ISSUER);
+        map.put("do-not-honor", CardTransactionFailureCodeEnum.DO_NOT_HONOR);
+        map.put("processing-error", CardTransactionFailureCodeEnum.PROCESSING_ERROR);
+        map.put("invalid-transaction", CardTransactionFailureCodeEnum.INVALID_TRANSACTION);
+        map.put("invalid-amount", CardTransactionFailureCodeEnum.INVALID_AMOUNT);
+        map.put("no-such-issuer", CardTransactionFailureCodeEnum.NO_SUCH_ISSUER);
+        map.put("reenter-transaction", CardTransactionFailureCodeEnum.REENTER_TRANSACTION);
+        map.put("cvv-mismatch", CardTransactionFailureCodeEnum.CVV_MISMATCH);
+        map.put("lost-or-stolen", CardTransactionFailureCodeEnum.LOST_OR_STOLEN);
+        map.put("insufficient-funds", CardTransactionFailureCodeEnum.INSUFFICIENT_FUNDS);
+        map.put("invalid-card-number", CardTransactionFailureCodeEnum.INVALID_CARD_NUMBER);
+        map.put("invalid-merchant", CardTransactionFailureCodeEnum.INVALID_MERCHANT);
+        map.put("expired-card", CardTransactionFailureCodeEnum.EXPIRED_CARD);
+        map.put("incorrect-pin", CardTransactionFailureCodeEnum.INCORRECT_PIN);
+        map.put("transaction-not-allowed", CardTransactionFailureCodeEnum.TRANSACTION_NOT_ALLOWED);
+        map.put("suspected-fraud", CardTransactionFailureCodeEnum.SUSPECTED_FRAUD);
+        map.put("amount-limit-exceeded", CardTransactionFailureCodeEnum.AMOUNT_LIMIT_EXCEEDED);
+        map.put("velocity-limit-exceeded", CardTransactionFailureCodeEnum.VELOCITY_LIMIT_EXCEEDED);
+        map.put("revocation-of-authorization", CardTransactionFailureCodeEnum.REVOCATION_OF_AUTHORIZATION);
+        map.put("card-not-activated", CardTransactionFailureCodeEnum.CARD_NOT_ACTIVATED);
+        map.put("issuer-not-available", CardTransactionFailureCodeEnum.ISSUER_NOT_AVAILABLE);
+        map.put("could-not-route", CardTransactionFailureCodeEnum.COULD_NOT_ROUTE);
+        map.put("cardholder-account-closed", CardTransactionFailureCodeEnum.CARDHOLDER_ACCOUNT_CLOSED);
+        map.put("unknown-issue", CardTransactionFailureCodeEnum.UNKNOWN_ISSUE);
+        map.put("duplicate-transaction", CardTransactionFailureCodeEnum.DUPLICATE_TRANSACTION);
+        return map;
+    }
+    
+    
+    public enum CardTransactionFailureCodeEnum {
+
+        CALL_ISSUER("call-issuer"),
+        DO_NOT_HONOR("do-not-honor"),
+        PROCESSING_ERROR("processing-error"),
+        INVALID_TRANSACTION("invalid-transaction"),
+        INVALID_AMOUNT("invalid-amount"),
+        NO_SUCH_ISSUER("no-such-issuer"),
+        REENTER_TRANSACTION("reenter-transaction"),
+        CVV_MISMATCH("cvv-mismatch"),
+        LOST_OR_STOLEN("lost-or-stolen"),
+        INSUFFICIENT_FUNDS("insufficient-funds"),
+        INVALID_CARD_NUMBER("invalid-card-number"),
+        INVALID_MERCHANT("invalid-merchant"),
+        EXPIRED_CARD("expired-card"),
+        INCORRECT_PIN("incorrect-pin"),
+        TRANSACTION_NOT_ALLOWED("transaction-not-allowed"),
+        SUSPECTED_FRAUD("suspected-fraud"),
+        AMOUNT_LIMIT_EXCEEDED("amount-limit-exceeded"),
+        VELOCITY_LIMIT_EXCEEDED("velocity-limit-exceeded"),
+        REVOCATION_OF_AUTHORIZATION("revocation-of-authorization"),
+        CARD_NOT_ACTIVATED("card-not-activated"),
+        ISSUER_NOT_AVAILABLE("issuer-not-available"),
+        COULD_NOT_ROUTE("could-not-route"),
+        CARDHOLDER_ACCOUNT_CLOSED("cardholder-account-closed"),
+        UNKNOWN_ISSUE("unknown-issue"),
+        DUPLICATE_TRANSACTION("duplicate-transaction"),;
+
+        private final String value;
+
+        private CardTransactionFailureCodeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

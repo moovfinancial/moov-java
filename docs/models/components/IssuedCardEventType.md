@@ -8,6 +8,9 @@ The type of event that occurred on the card.
 import io.moov.sdk.models.components.IssuedCardEventType;
 
 IssuedCardEventType value = IssuedCardEventType.AUTHORIZATION;
+
+// Open enum: use .of() to create instances from custom string values
+IssuedCardEventType custom = IssuedCardEventType.of("custom_value");
 ```
 
 

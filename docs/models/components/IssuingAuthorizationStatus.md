@@ -8,6 +8,9 @@ Status of a card issuing authorization.
 import io.moov.sdk.models.components.IssuingAuthorizationStatus;
 
 IssuingAuthorizationStatus value = IssuingAuthorizationStatus.PENDING;
+
+// Open enum: use .of() to create instances from custom string values
+IssuingAuthorizationStatus custom = IssuingAuthorizationStatus.of("custom_value");
 ```
 
 

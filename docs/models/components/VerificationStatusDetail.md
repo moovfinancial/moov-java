@@ -10,6 +10,9 @@ Additional detail for a verification status.
 import io.moov.sdk.models.components.VerificationStatusDetail;
 
 VerificationStatusDetail value = VerificationStatusDetail.FAILED_AUTO_VERIFY;
+
+// Open enum: use .of() to create instances from custom string values
+VerificationStatusDetail custom = VerificationStatusDetail.of("custom_value");
 ```
 
 

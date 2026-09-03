@@ -3,40 +3,138 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * InstantBankTransactionStatus
  * 
  * <p>Status of a transaction within the instant-bank lifecycle.
  */
-public enum InstantBankTransactionStatus {
-    INITIATED("initiated"),
-    COMPLETED("completed"),
-    FAILED("failed"),
-    ACCEPTED_WITHOUT_POSTING("accepted-without-posting");
+public class InstantBankTransactionStatus {
 
-    @JsonValue
+    public static final InstantBankTransactionStatus INITIATED = new InstantBankTransactionStatus("initiated");
+    public static final InstantBankTransactionStatus COMPLETED = new InstantBankTransactionStatus("completed");
+    public static final InstantBankTransactionStatus FAILED = new InstantBankTransactionStatus("failed");
+    public static final InstantBankTransactionStatus ACCEPTED_WITHOUT_POSTING = new InstantBankTransactionStatus("accepted-without-posting");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, InstantBankTransactionStatus> values = createValuesMap();
+    private static final Map<String, InstantBankTransactionStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    InstantBankTransactionStatus(String value) {
+    private InstantBankTransactionStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a InstantBankTransactionStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as InstantBankTransactionStatus
+     */ 
+    @JsonCreator
+    public static InstantBankTransactionStatus of(String value) {
+        synchronized (InstantBankTransactionStatus.class) {
+            return values.computeIfAbsent(value, v -> new InstantBankTransactionStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<InstantBankTransactionStatus> fromValue(String value) {
-        for (InstantBankTransactionStatus o: InstantBankTransactionStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<InstantBankTransactionStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        InstantBankTransactionStatus other = (InstantBankTransactionStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "InstantBankTransactionStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static InstantBankTransactionStatus[] values() {
+        synchronized (InstantBankTransactionStatus.class) {
+            return values.values().toArray(new InstantBankTransactionStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, InstantBankTransactionStatus> createValuesMap() {
+        Map<String, InstantBankTransactionStatus> map = new LinkedHashMap<>();
+        map.put("initiated", INITIATED);
+        map.put("completed", COMPLETED);
+        map.put("failed", FAILED);
+        map.put("accepted-without-posting", ACCEPTED_WITHOUT_POSTING);
+        return map;
+    }
+
+    private static final Map<String, InstantBankTransactionStatusEnum> createEnumsMap() {
+        Map<String, InstantBankTransactionStatusEnum> map = new HashMap<>();
+        map.put("initiated", InstantBankTransactionStatusEnum.INITIATED);
+        map.put("completed", InstantBankTransactionStatusEnum.COMPLETED);
+        map.put("failed", InstantBankTransactionStatusEnum.FAILED);
+        map.put("accepted-without-posting", InstantBankTransactionStatusEnum.ACCEPTED_WITHOUT_POSTING);
+        return map;
+    }
+    
+    
+    public enum InstantBankTransactionStatusEnum {
+
+        INITIATED("initiated"),
+        COMPLETED("completed"),
+        FAILED("failed"),
+        ACCEPTED_WITHOUT_POSTING("accepted-without-posting"),;
+
+        private final String value;
+
+        private InstantBankTransactionStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

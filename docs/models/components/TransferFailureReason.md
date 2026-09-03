@@ -8,6 +8,9 @@ Reason for a transfer's failure.
 import io.moov.sdk.models.components.TransferFailureReason;
 
 TransferFailureReason value = TransferFailureReason.SOURCE_PAYMENT_ERROR;
+
+// Open enum: use .of() to create instances from custom string values
+TransferFailureReason custom = TransferFailureReason.of("custom_value");
 ```
 
 

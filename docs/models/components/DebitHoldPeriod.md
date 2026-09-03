@@ -8,6 +8,9 @@ An optional override of your default ACH hold period in banking days. The hold p
 import io.moov.sdk.models.components.DebitHoldPeriod;
 
 DebitHoldPeriod value = DebitHoldPeriod.NO_HOLD;
+
+// Open enum: use .of() to create instances from custom string values
+DebitHoldPeriod custom = DebitHoldPeriod.of("custom_value");
 ```
 
 

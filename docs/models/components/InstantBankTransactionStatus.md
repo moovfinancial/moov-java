@@ -8,6 +8,9 @@ Status of a transaction within the instant-bank lifecycle.
 import io.moov.sdk.models.components.InstantBankTransactionStatus;
 
 InstantBankTransactionStatus value = InstantBankTransactionStatus.INITIATED;
+
+// Open enum: use .of() to create instances from custom string values
+InstantBankTransactionStatus custom = InstantBankTransactionStatus.of("custom_value");
 ```
 
 

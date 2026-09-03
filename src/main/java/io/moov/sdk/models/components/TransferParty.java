@@ -3,34 +3,129 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum TransferParty {
-    SOURCE("source"),
-    DESTINATION("destination"),
-    PARTNER("partner");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class TransferParty {
 
-    @JsonValue
+    public static final TransferParty SOURCE = new TransferParty("source");
+    public static final TransferParty DESTINATION = new TransferParty("destination");
+    public static final TransferParty PARTNER = new TransferParty("partner");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, TransferParty> values = createValuesMap();
+    private static final Map<String, TransferPartyEnum> enums = createEnumsMap();
+
     private final String value;
 
-    TransferParty(String value) {
+    private TransferParty(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a TransferParty with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as TransferParty
+     */ 
+    @JsonCreator
+    public static TransferParty of(String value) {
+        synchronized (TransferParty.class) {
+            return values.computeIfAbsent(value, v -> new TransferParty(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<TransferParty> fromValue(String value) {
-        for (TransferParty o: TransferParty.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<TransferPartyEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        TransferParty other = (TransferParty) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "TransferParty [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static TransferParty[] values() {
+        synchronized (TransferParty.class) {
+            return values.values().toArray(new TransferParty[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, TransferParty> createValuesMap() {
+        Map<String, TransferParty> map = new LinkedHashMap<>();
+        map.put("source", SOURCE);
+        map.put("destination", DESTINATION);
+        map.put("partner", PARTNER);
+        return map;
+    }
+
+    private static final Map<String, TransferPartyEnum> createEnumsMap() {
+        Map<String, TransferPartyEnum> map = new HashMap<>();
+        map.put("source", TransferPartyEnum.SOURCE);
+        map.put("destination", TransferPartyEnum.DESTINATION);
+        map.put("partner", TransferPartyEnum.PARTNER);
+        return map;
+    }
+    
+    
+    public enum TransferPartyEnum {
+
+        SOURCE("source"),
+        DESTINATION("destination"),
+        PARTNER("partner"),;
+
+        private final String value;
+
+        private TransferPartyEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

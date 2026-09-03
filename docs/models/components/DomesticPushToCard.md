@@ -8,6 +8,9 @@ Indicates which level of domestic push-to-card transfer is supported by the card
 import io.moov.sdk.models.components.DomesticPushToCard;
 
 DomesticPushToCard value = DomesticPushToCard.NOT_SUPPORTED;
+
+// Open enum: use .of() to create instances from custom string values
+DomesticPushToCard custom = DomesticPushToCard.of("custom_value");
 ```
 
 

@@ -8,6 +8,9 @@ Status of the completed occurrence.
 import io.moov.sdk.models.components.OccurrenceStatus;
 
 OccurrenceStatus value = OccurrenceStatus.PENDING;
+
+// Open enum: use .of() to create instances from custom string values
+OccurrenceStatus custom = OccurrenceStatus.of("custom_value");
 ```
 
 

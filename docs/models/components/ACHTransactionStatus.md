@@ -8,6 +8,9 @@ Status of a transaction within the ACH lifecycle.
 import io.moov.sdk.models.components.ACHTransactionStatus;
 
 ACHTransactionStatus value = ACHTransactionStatus.UNKNOWN;
+
+// Open enum: use .of() to create instances from custom string values
+ACHTransactionStatus custom = ACHTransactionStatus.of("custom_value");
 ```
 
 

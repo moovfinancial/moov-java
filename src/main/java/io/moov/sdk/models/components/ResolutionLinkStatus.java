@@ -3,41 +3,142 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * ResolutionLinkStatus
  * 
  * <p>The status of a resolution link.
  */
-public enum ResolutionLinkStatus {
-    ACTIVE("active"),
-    SUBMITTED("submitted"),
-    COMPLETED("completed"),
-    DISABLED("disabled"),
-    EXPIRED("expired");
+public class ResolutionLinkStatus {
 
-    @JsonValue
+    public static final ResolutionLinkStatus ACTIVE = new ResolutionLinkStatus("active");
+    public static final ResolutionLinkStatus SUBMITTED = new ResolutionLinkStatus("submitted");
+    public static final ResolutionLinkStatus COMPLETED = new ResolutionLinkStatus("completed");
+    public static final ResolutionLinkStatus DISABLED = new ResolutionLinkStatus("disabled");
+    public static final ResolutionLinkStatus EXPIRED = new ResolutionLinkStatus("expired");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, ResolutionLinkStatus> values = createValuesMap();
+    private static final Map<String, ResolutionLinkStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    ResolutionLinkStatus(String value) {
+    private ResolutionLinkStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a ResolutionLinkStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as ResolutionLinkStatus
+     */ 
+    @JsonCreator
+    public static ResolutionLinkStatus of(String value) {
+        synchronized (ResolutionLinkStatus.class) {
+            return values.computeIfAbsent(value, v -> new ResolutionLinkStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<ResolutionLinkStatus> fromValue(String value) {
-        for (ResolutionLinkStatus o: ResolutionLinkStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<ResolutionLinkStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ResolutionLinkStatus other = (ResolutionLinkStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "ResolutionLinkStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static ResolutionLinkStatus[] values() {
+        synchronized (ResolutionLinkStatus.class) {
+            return values.values().toArray(new ResolutionLinkStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, ResolutionLinkStatus> createValuesMap() {
+        Map<String, ResolutionLinkStatus> map = new LinkedHashMap<>();
+        map.put("active", ACTIVE);
+        map.put("submitted", SUBMITTED);
+        map.put("completed", COMPLETED);
+        map.put("disabled", DISABLED);
+        map.put("expired", EXPIRED);
+        return map;
+    }
+
+    private static final Map<String, ResolutionLinkStatusEnum> createEnumsMap() {
+        Map<String, ResolutionLinkStatusEnum> map = new HashMap<>();
+        map.put("active", ResolutionLinkStatusEnum.ACTIVE);
+        map.put("submitted", ResolutionLinkStatusEnum.SUBMITTED);
+        map.put("completed", ResolutionLinkStatusEnum.COMPLETED);
+        map.put("disabled", ResolutionLinkStatusEnum.DISABLED);
+        map.put("expired", ResolutionLinkStatusEnum.EXPIRED);
+        return map;
+    }
+    
+    
+    public enum ResolutionLinkStatusEnum {
+
+        ACTIVE("active"),
+        SUBMITTED("submitted"),
+        COMPLETED("completed"),
+        DISABLED("disabled"),
+        EXPIRED("expired"),;
+
+        private final String value;
+
+        private ResolutionLinkStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

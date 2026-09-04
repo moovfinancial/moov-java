@@ -6,6 +6,9 @@
 import io.moov.sdk.models.components.FulfillmentMethod;
 
 FulfillmentMethod value = FulfillmentMethod.BILL_OR_DEBT_PAYMENT;
+
+// Open enum: use .of() to create instances from custom string values
+FulfillmentMethod custom = FulfillmentMethod.of("custom_value");
 ```
 
 

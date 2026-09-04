@@ -3,32 +3,121 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum PullFromApplePayTransferPaymentMethodPaymentMethodType {
-    PULL_FROM_APPLE_PAY("pull-from-apple-pay");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class PullFromApplePayTransferPaymentMethodPaymentMethodType {
 
-    @JsonValue
+    public static final PullFromApplePayTransferPaymentMethodPaymentMethodType PULL_FROM_APPLE_PAY = new PullFromApplePayTransferPaymentMethodPaymentMethodType("pull-from-apple-pay");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, PullFromApplePayTransferPaymentMethodPaymentMethodType> values = createValuesMap();
+    private static final Map<String, PullFromApplePayTransferPaymentMethodPaymentMethodTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    PullFromApplePayTransferPaymentMethodPaymentMethodType(String value) {
+    private PullFromApplePayTransferPaymentMethodPaymentMethodType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a PullFromApplePayTransferPaymentMethodPaymentMethodType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as PullFromApplePayTransferPaymentMethodPaymentMethodType
+     */ 
+    @JsonCreator
+    public static PullFromApplePayTransferPaymentMethodPaymentMethodType of(String value) {
+        synchronized (PullFromApplePayTransferPaymentMethodPaymentMethodType.class) {
+            return values.computeIfAbsent(value, v -> new PullFromApplePayTransferPaymentMethodPaymentMethodType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<PullFromApplePayTransferPaymentMethodPaymentMethodType> fromValue(String value) {
-        for (PullFromApplePayTransferPaymentMethodPaymentMethodType o: PullFromApplePayTransferPaymentMethodPaymentMethodType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<PullFromApplePayTransferPaymentMethodPaymentMethodTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PullFromApplePayTransferPaymentMethodPaymentMethodType other = (PullFromApplePayTransferPaymentMethodPaymentMethodType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "PullFromApplePayTransferPaymentMethodPaymentMethodType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static PullFromApplePayTransferPaymentMethodPaymentMethodType[] values() {
+        synchronized (PullFromApplePayTransferPaymentMethodPaymentMethodType.class) {
+            return values.values().toArray(new PullFromApplePayTransferPaymentMethodPaymentMethodType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, PullFromApplePayTransferPaymentMethodPaymentMethodType> createValuesMap() {
+        Map<String, PullFromApplePayTransferPaymentMethodPaymentMethodType> map = new LinkedHashMap<>();
+        map.put("pull-from-apple-pay", PULL_FROM_APPLE_PAY);
+        return map;
+    }
+
+    private static final Map<String, PullFromApplePayTransferPaymentMethodPaymentMethodTypeEnum> createEnumsMap() {
+        Map<String, PullFromApplePayTransferPaymentMethodPaymentMethodTypeEnum> map = new HashMap<>();
+        map.put("pull-from-apple-pay", PullFromApplePayTransferPaymentMethodPaymentMethodTypeEnum.PULL_FROM_APPLE_PAY);
+        return map;
+    }
+    
+    
+    public enum PullFromApplePayTransferPaymentMethodPaymentMethodTypeEnum {
+
+        PULL_FROM_APPLE_PAY("pull-from-apple-pay"),;
+
+        private final String value;
+
+        private PullFromApplePayTransferPaymentMethodPaymentMethodTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

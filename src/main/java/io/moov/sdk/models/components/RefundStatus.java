@@ -3,35 +3,133 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum RefundStatus {
-    CREATED("created"),
-    PENDING("pending"),
-    COMPLETED("completed"),
-    FAILED("failed");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class RefundStatus {
 
-    @JsonValue
+    public static final RefundStatus CREATED = new RefundStatus("created");
+    public static final RefundStatus PENDING = new RefundStatus("pending");
+    public static final RefundStatus COMPLETED = new RefundStatus("completed");
+    public static final RefundStatus FAILED = new RefundStatus("failed");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, RefundStatus> values = createValuesMap();
+    private static final Map<String, RefundStatusEnum> enums = createEnumsMap();
+
     private final String value;
 
-    RefundStatus(String value) {
+    private RefundStatus(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a RefundStatus with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as RefundStatus
+     */ 
+    @JsonCreator
+    public static RefundStatus of(String value) {
+        synchronized (RefundStatus.class) {
+            return values.computeIfAbsent(value, v -> new RefundStatus(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<RefundStatus> fromValue(String value) {
-        for (RefundStatus o: RefundStatus.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<RefundStatusEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        RefundStatus other = (RefundStatus) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "RefundStatus [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static RefundStatus[] values() {
+        synchronized (RefundStatus.class) {
+            return values.values().toArray(new RefundStatus[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, RefundStatus> createValuesMap() {
+        Map<String, RefundStatus> map = new LinkedHashMap<>();
+        map.put("created", CREATED);
+        map.put("pending", PENDING);
+        map.put("completed", COMPLETED);
+        map.put("failed", FAILED);
+        return map;
+    }
+
+    private static final Map<String, RefundStatusEnum> createEnumsMap() {
+        Map<String, RefundStatusEnum> map = new HashMap<>();
+        map.put("created", RefundStatusEnum.CREATED);
+        map.put("pending", RefundStatusEnum.PENDING);
+        map.put("completed", RefundStatusEnum.COMPLETED);
+        map.put("failed", RefundStatusEnum.FAILED);
+        return map;
+    }
+    
+    
+    public enum RefundStatusEnum {
+
+        CREATED("created"),
+        PENDING("pending"),
+        COMPLETED("completed"),
+        FAILED("failed"),;
+
+        private final String value;
+
+        private RefundStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

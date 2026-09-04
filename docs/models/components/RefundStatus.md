@@ -6,6 +6,9 @@
 import io.moov.sdk.models.components.RefundStatus;
 
 RefundStatus value = RefundStatus.CREATED;
+
+// Open enum: use .of() to create instances from custom string values
+RefundStatus custom = RefundStatus.of("custom_value");
 ```
 
 

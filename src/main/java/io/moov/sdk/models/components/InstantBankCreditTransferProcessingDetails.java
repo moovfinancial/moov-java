@@ -17,6 +17,12 @@ import java.util.Optional;
 
 public class InstantBankCreditTransferProcessingDetails {
     /**
+     * Status of a transaction within the instant-bank lifecycle.
+     */
+    @JsonProperty("status")
+    private InstantBankTransactionStatus status;
+
+    /**
      * The network that the transaction was processed on.
      */
     @JsonProperty("network")
@@ -41,14 +47,17 @@ public class InstantBankCreditTransferProcessingDetails {
 
     @JsonCreator
     public InstantBankCreditTransferProcessingDetails(
+            @JsonProperty("status") InstantBankTransactionStatus status,
             @JsonProperty("network") InstantBankNetwork network,
             @JsonProperty("networkResponseCode") Optional<String> networkResponseCode,
             @JsonProperty("failureCode") Optional<? extends InstantBankFailureCode> failureCode,
             @JsonProperty("endToEndID") Optional<String> endToEndID) {
+        Utils.checkNotNull(status, "status");
         Utils.checkNotNull(network, "network");
         Utils.checkNotNull(networkResponseCode, "networkResponseCode");
         Utils.checkNotNull(failureCode, "failureCode");
         Utils.checkNotNull(endToEndID, "endToEndID");
+        this.status = status;
         this.network = network;
         this.networkResponseCode = networkResponseCode;
         this.failureCode = failureCode;
@@ -56,9 +65,18 @@ public class InstantBankCreditTransferProcessingDetails {
     }
     
     public InstantBankCreditTransferProcessingDetails(
+            InstantBankTransactionStatus status,
             InstantBankNetwork network) {
-        this(network, Optional.empty(), Optional.empty(),
-            Optional.empty());
+        this(status, network, Optional.empty(),
+            Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * Status of a transaction within the instant-bank lifecycle.
+     */
+    @JsonIgnore
+    public InstantBankTransactionStatus status() {
+        return status;
     }
 
     /**
@@ -92,6 +110,15 @@ public class InstantBankCreditTransferProcessingDetails {
         return new Builder();
     }
 
+
+    /**
+     * Status of a transaction within the instant-bank lifecycle.
+     */
+    public InstantBankCreditTransferProcessingDetails withStatus(InstantBankTransactionStatus status) {
+        Utils.checkNotNull(status, "status");
+        this.status = status;
+        return this;
+    }
 
     /**
      * The network that the transaction was processed on.
@@ -157,6 +184,7 @@ public class InstantBankCreditTransferProcessingDetails {
         }
         InstantBankCreditTransferProcessingDetails other = (InstantBankCreditTransferProcessingDetails) o;
         return 
+            Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.network, other.network) &&
             Utils.enhancedDeepEquals(this.networkResponseCode, other.networkResponseCode) &&
             Utils.enhancedDeepEquals(this.failureCode, other.failureCode) &&
@@ -166,13 +194,14 @@ public class InstantBankCreditTransferProcessingDetails {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            network, networkResponseCode, failureCode,
-            endToEndID);
+            status, network, networkResponseCode,
+            failureCode, endToEndID);
     }
     
     @Override
     public String toString() {
         return Utils.toString(InstantBankCreditTransferProcessingDetails.class,
+                "status", status,
                 "network", network,
                 "networkResponseCode", networkResponseCode,
                 "failureCode", failureCode,
@@ -181,6 +210,8 @@ public class InstantBankCreditTransferProcessingDetails {
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
+
+        private InstantBankTransactionStatus status;
 
         private InstantBankNetwork network;
 
@@ -192,6 +223,16 @@ public class InstantBankCreditTransferProcessingDetails {
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Status of a transaction within the instant-bank lifecycle.
+         */
+        public Builder status(InstantBankTransactionStatus status) {
+            Utils.checkNotNull(status, "status");
+            this.status = status;
+            return this;
         }
 
 
@@ -252,8 +293,8 @@ public class InstantBankCreditTransferProcessingDetails {
         public InstantBankCreditTransferProcessingDetails build() {
 
             return new InstantBankCreditTransferProcessingDetails(
-                network, networkResponseCode, failureCode,
-                endToEndID);
+                status, network, networkResponseCode,
+                failureCode, endToEndID);
         }
 
     }

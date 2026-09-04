@@ -8,6 +8,9 @@ Predefined merchant category groups.
 import io.moov.sdk.models.components.IssuingMerchantCategory;
 
 IssuingMerchantCategory value = IssuingMerchantCategory.ADVERTISING;
+
+// Open enum: use .of() to create instances from custom string values
+IssuingMerchantCategory custom = IssuingMerchantCategory.of("custom_value");
 ```
 
 

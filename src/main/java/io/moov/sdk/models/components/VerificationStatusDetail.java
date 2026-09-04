@@ -3,12 +3,22 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.Deprecated;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * VerificationStatusDetail
  * 
@@ -17,36 +27,142 @@ import java.util.Optional;
  * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 @Deprecated
-public enum VerificationStatusDetail {
-    FAILED_AUTO_VERIFY("failedAutoVerify"),
-    DOC_DOB_MISMATCH("docDobMismatch"),
-    DOC_NAME_MISMATCH("docNameMismatch"),
-    DOC_ADDRESS_MISMATCH("docAddressMismatch"),
-    DOC_NUMBER_MISMATCH("docNumberMismatch"),
-    DOC_INCOMPLETE("docIncomplete"),
-    DOC_FAILED_RISK("docFailedRisk"),
-    POTENTIAL_ACCOUNT_SANCTIONS_MATCH("potentialAccountSanctionsMatch"),
-    POTENTIAL_REPRESENTATIVE_SANCTIONS_MATCH("potentialRepresentativeSanctionsMatch"),
-    FAILED_OTHER("failedOther");
+public class VerificationStatusDetail {
 
-    @JsonValue
+    public static final VerificationStatusDetail FAILED_AUTO_VERIFY = new VerificationStatusDetail("failedAutoVerify");
+    public static final VerificationStatusDetail DOC_DOB_MISMATCH = new VerificationStatusDetail("docDobMismatch");
+    public static final VerificationStatusDetail DOC_NAME_MISMATCH = new VerificationStatusDetail("docNameMismatch");
+    public static final VerificationStatusDetail DOC_ADDRESS_MISMATCH = new VerificationStatusDetail("docAddressMismatch");
+    public static final VerificationStatusDetail DOC_NUMBER_MISMATCH = new VerificationStatusDetail("docNumberMismatch");
+    public static final VerificationStatusDetail DOC_INCOMPLETE = new VerificationStatusDetail("docIncomplete");
+    public static final VerificationStatusDetail DOC_FAILED_RISK = new VerificationStatusDetail("docFailedRisk");
+    public static final VerificationStatusDetail POTENTIAL_ACCOUNT_SANCTIONS_MATCH = new VerificationStatusDetail("potentialAccountSanctionsMatch");
+    public static final VerificationStatusDetail POTENTIAL_REPRESENTATIVE_SANCTIONS_MATCH = new VerificationStatusDetail("potentialRepresentativeSanctionsMatch");
+    public static final VerificationStatusDetail FAILED_OTHER = new VerificationStatusDetail("failedOther");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, VerificationStatusDetail> values = createValuesMap();
+    private static final Map<String, VerificationStatusDetailEnum> enums = createEnumsMap();
+
     private final String value;
 
-    VerificationStatusDetail(String value) {
+    private VerificationStatusDetail(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a VerificationStatusDetail with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as VerificationStatusDetail
+     */ 
+    @JsonCreator
+    public static VerificationStatusDetail of(String value) {
+        synchronized (VerificationStatusDetail.class) {
+            return values.computeIfAbsent(value, v -> new VerificationStatusDetail(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<VerificationStatusDetail> fromValue(String value) {
-        for (VerificationStatusDetail o: VerificationStatusDetail.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<VerificationStatusDetailEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        VerificationStatusDetail other = (VerificationStatusDetail) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "VerificationStatusDetail [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static VerificationStatusDetail[] values() {
+        synchronized (VerificationStatusDetail.class) {
+            return values.values().toArray(new VerificationStatusDetail[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, VerificationStatusDetail> createValuesMap() {
+        Map<String, VerificationStatusDetail> map = new LinkedHashMap<>();
+        map.put("failedAutoVerify", FAILED_AUTO_VERIFY);
+        map.put("docDobMismatch", DOC_DOB_MISMATCH);
+        map.put("docNameMismatch", DOC_NAME_MISMATCH);
+        map.put("docAddressMismatch", DOC_ADDRESS_MISMATCH);
+        map.put("docNumberMismatch", DOC_NUMBER_MISMATCH);
+        map.put("docIncomplete", DOC_INCOMPLETE);
+        map.put("docFailedRisk", DOC_FAILED_RISK);
+        map.put("potentialAccountSanctionsMatch", POTENTIAL_ACCOUNT_SANCTIONS_MATCH);
+        map.put("potentialRepresentativeSanctionsMatch", POTENTIAL_REPRESENTATIVE_SANCTIONS_MATCH);
+        map.put("failedOther", FAILED_OTHER);
+        return map;
+    }
+
+    private static final Map<String, VerificationStatusDetailEnum> createEnumsMap() {
+        Map<String, VerificationStatusDetailEnum> map = new HashMap<>();
+        map.put("failedAutoVerify", VerificationStatusDetailEnum.FAILED_AUTO_VERIFY);
+        map.put("docDobMismatch", VerificationStatusDetailEnum.DOC_DOB_MISMATCH);
+        map.put("docNameMismatch", VerificationStatusDetailEnum.DOC_NAME_MISMATCH);
+        map.put("docAddressMismatch", VerificationStatusDetailEnum.DOC_ADDRESS_MISMATCH);
+        map.put("docNumberMismatch", VerificationStatusDetailEnum.DOC_NUMBER_MISMATCH);
+        map.put("docIncomplete", VerificationStatusDetailEnum.DOC_INCOMPLETE);
+        map.put("docFailedRisk", VerificationStatusDetailEnum.DOC_FAILED_RISK);
+        map.put("potentialAccountSanctionsMatch", VerificationStatusDetailEnum.POTENTIAL_ACCOUNT_SANCTIONS_MATCH);
+        map.put("potentialRepresentativeSanctionsMatch", VerificationStatusDetailEnum.POTENTIAL_REPRESENTATIVE_SANCTIONS_MATCH);
+        map.put("failedOther", VerificationStatusDetailEnum.FAILED_OTHER);
+        return map;
+    }
+    
+    
+    public enum VerificationStatusDetailEnum {
+
+        FAILED_AUTO_VERIFY("failedAutoVerify"),
+        DOC_DOB_MISMATCH("docDobMismatch"),
+        DOC_NAME_MISMATCH("docNameMismatch"),
+        DOC_ADDRESS_MISMATCH("docAddressMismatch"),
+        DOC_NUMBER_MISMATCH("docNumberMismatch"),
+        DOC_INCOMPLETE("docIncomplete"),
+        DOC_FAILED_RISK("docFailedRisk"),
+        POTENTIAL_ACCOUNT_SANCTIONS_MATCH("potentialAccountSanctionsMatch"),
+        POTENTIAL_REPRESENTATIVE_SANCTIONS_MATCH("potentialRepresentativeSanctionsMatch"),
+        FAILED_OTHER("failedOther"),;
+
+        private final String value;
+
+        private VerificationStatusDetailEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

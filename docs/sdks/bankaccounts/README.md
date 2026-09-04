@@ -29,6 +29,27 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
+* [createAttestation](#createattestation) -   Submit a new authorization attestation for a bank account in an `errored` status due to an R29 ACH return (`Corporate Customer Advises Not Authorized`).
+
+  After obtaining new authorization from the receiver, submit an attestation with the date the authorization was obtained and a brief description of how the authorization was obtained. If the attestation is accepted, the bank account transitions from `errored` to `verified`.
+
+  Constraints
+
+  - The bank account's current errored status must be the result of an R29 return.
+  - `attestedAt` must be on or after the date of the bank account's most recent R29 return and cannot be a future date.
+  - Only one attestation may be submitted for a bank account. Use the [Get attestation eligibility](https://docs.moov.io/api/sources/bank-accounts/attestation-eligibility/) endpoint to confirm eligibility before submitting an attestation.
+
+  This endpoint is available only to allowlisted partners. Contact Moov Support for more information.
+* [listAttestations](#listattestations) - List the attestations submitted for a bank account.
+* [getAttestationEligibility](#getattestationeligibility) - Check whether a bank account is currently eligible for a new authorization attestation without submitting one.
+
+- `enabled` indicates whether the calling account has access to the attestations feature. If `enabled` is `false`, `eligible` is always `false`.
+- When `enabled` is `true`, `eligible` indicates whether the bank account currently meets the eligibility requirements for a new attestation: the bank account must be `errored` due to an R29 return, with no prior attestations.
+
+This endpoint always returns `200`, including when the bank account is not eligible. Check the `eligible` field to determine eligibility.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
 * [initiateMicroDeposits](#initiatemicrodeposits) - Micro-deposits help confirm bank account ownership, helping reduce fraud and the risk of unauthorized activity. 
 Use this method to initiate the micro-deposit verification, sending two small credit transfers to the bank account 
 you want to confirm.
@@ -338,6 +359,203 @@ public class Application {
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/GenericError | 400, 409                   | application/json           |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## createAttestation
+
+  Submit a new authorization attestation for a bank account in an `errored` status due to an R29 ACH return (`Corporate Customer Advises Not Authorized`).
+
+  After obtaining new authorization from the receiver, submit an attestation with the date the authorization was obtained and a brief description of how the authorization was obtained. If the attestation is accepted, the bank account transitions from `errored` to `verified`.
+
+  Constraints
+
+  - The bank account's current errored status must be the result of an R29 return.
+  - `attestedAt` must be on or after the date of the bank account's most recent R29 return and cannot be a future date.
+  - Only one attestation may be submitted for a bank account. Use the [Get attestation eligibility](https://docs.moov.io/api/sources/bank-accounts/attestation-eligibility/) endpoint to confirm eligibility before submitting an attestation.
+
+  This endpoint is available only to allowlisted partners. Contact Moov Support for more information.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="createBankAccountAttestation" method="post" path="/accounts/{accountID}/bank-accounts/{bankAccountID}/attestations" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.CreateBankAccountAttestation;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.errors.BankAccountAttestationValidationError;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.CreateBankAccountAttestationResponse;
+import java.lang.Exception;
+import java.time.LocalDate;
+
+public class Application {
+
+    public static void main(String[] args) throws GenericError, BankAccountAttestationValidationError, Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        CreateBankAccountAttestationResponse res = sdk.bankAccounts().createAttestation()
+                .accountID("<id>")
+                .bankAccountID("<id>")
+                .createBankAccountAttestation(CreateBankAccountAttestation.builder()
+                    .attestedAt(LocalDate.parse("2026-05-15"))
+                    .description("each duh famously athwart")
+                    .build())
+                .call();
+
+        if (res.bankAccountAttestation().isPresent()) {
+            System.out.println(res.bankAccountAttestation().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `accountID`                                                                             | *String*                                                                                | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `bankAccountID`                                                                         | *String*                                                                                | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `createBankAccountAttestation`                                                          | [CreateBankAccountAttestation](../../models/components/CreateBankAccountAttestation.md) | :heavy_check_mark:                                                                      | N/A                                                                                     |
+
+### Response
+
+**[CreateBankAccountAttestationResponse](../../models/operations/CreateBankAccountAttestationResponse.md)**
+
+### Errors
+
+| Error Type                                          | Status Code                                         | Content Type                                        |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| models/errors/GenericError                          | 400, 409                                            | application/json                                    |
+| models/errors/BankAccountAttestationValidationError | 422                                                 | application/json                                    |
+| models/errors/APIException                          | 4XX, 5XX                                            | \*/\*                                               |
+
+## listAttestations
+
+List the attestations submitted for a bank account.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="listBankAccountAttestations" method="get" path="/accounts/{accountID}/bank-accounts/{bankAccountID}/attestations" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListBankAccountAttestationsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        ListBankAccountAttestationsResponse res = sdk.bankAccounts().listAttestations()
+                .accountID("<id>")
+                .bankAccountID("<id>")
+                .call();
+
+        if (res.bankAccountAttestationSummaries().isPresent()) {
+            System.out.println(res.bankAccountAttestationSummaries().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter          | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `accountID`        | *String*           | :heavy_check_mark: | N/A                |
+| `bankAccountID`    | *String*           | :heavy_check_mark: | N/A                |
+
+### Response
+
+**[ListBankAccountAttestationsResponse](../../models/operations/ListBankAccountAttestationsResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## getAttestationEligibility
+
+Check whether a bank account is currently eligible for a new authorization attestation without submitting one.
+
+- `enabled` indicates whether the calling account has access to the attestations feature. If `enabled` is `false`, `eligible` is always `false`.
+- When `enabled` is `true`, `eligible` indicates whether the bank account currently meets the eligibility requirements for a new attestation: the bank account must be `errored` due to an R29 return, with no prior attestations.
+
+This endpoint always returns `200`, including when the bank account is not eligible. Check the `eligible` field to determine eligibility.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="getBankAccountAttestationEligibility" method="get" path="/accounts/{accountID}/bank-accounts/{bankAccountID}/attestations-eligibility" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.GetBankAccountAttestationEligibilityResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws GenericError, Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        GetBankAccountAttestationEligibilityResponse res = sdk.bankAccounts().getAttestationEligibility()
+                .accountID("<id>")
+                .bankAccountID("<id>")
+                .call();
+
+        if (res.bankAccountAttestationEligibility().isPresent()) {
+            System.out.println(res.bankAccountAttestationEligibility().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                   | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `accountID`                                                                                                                 | *String*                                                                                                                    | :heavy_check_mark:                                                                                                          | N/A                                                                                                                         |
+| `bankAccountID`                                                                                                             | *String*                                                                                                                    | :heavy_check_mark:                                                                                                          | N/A                                                                                                                         |
+| `attestedAt`                                                                                                                | [LocalDate](https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html)                                             | :heavy_minus_sign:                                                                                                          | Date to check eligibility against, as if it were the `attestedAt` value of a new attestation. Defaults<br/>to the current date. |
+
+### Response
+
+**[GetBankAccountAttestationEligibilityResponse](../../models/operations/GetBankAccountAttestationEligibilityResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/GenericError | 400                        | application/json           |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
 ## initiateMicroDeposits

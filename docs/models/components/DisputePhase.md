@@ -8,6 +8,9 @@ The phase of a dispute within the dispute lifecycle.
 import io.moov.sdk.models.components.DisputePhase;
 
 DisputePhase value = DisputePhase.PRE_DISPUTE;
+
+// Open enum: use .of() to create instances from custom string values
+DisputePhase custom = DisputePhase.of("custom_value");
 ```
 
 

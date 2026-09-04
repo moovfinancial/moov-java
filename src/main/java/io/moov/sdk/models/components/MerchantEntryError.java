@@ -17,8 +17,8 @@ import java.util.Optional;
 public class MerchantEntryError {
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("mid")
-    private Optional<String> mid;
+    @JsonProperty("networkID")
+    private Optional<String> networkID;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -27,11 +27,11 @@ public class MerchantEntryError {
 
     @JsonCreator
     public MerchantEntryError(
-            @JsonProperty("mid") Optional<String> mid,
+            @JsonProperty("networkID") Optional<String> networkID,
             @JsonProperty("descriptorPattern") Optional<String> descriptorPattern) {
-        Utils.checkNotNull(mid, "mid");
+        Utils.checkNotNull(networkID, "networkID");
         Utils.checkNotNull(descriptorPattern, "descriptorPattern");
-        this.mid = mid;
+        this.networkID = networkID;
         this.descriptorPattern = descriptorPattern;
     }
     
@@ -40,8 +40,8 @@ public class MerchantEntryError {
     }
 
     @JsonIgnore
-    public Optional<String> mid() {
-        return mid;
+    public Optional<String> networkID() {
+        return networkID;
     }
 
     @JsonIgnore
@@ -54,16 +54,16 @@ public class MerchantEntryError {
     }
 
 
-    public MerchantEntryError withMid(String mid) {
-        Utils.checkNotNull(mid, "mid");
-        this.mid = Optional.ofNullable(mid);
+    public MerchantEntryError withNetworkID(String networkID) {
+        Utils.checkNotNull(networkID, "networkID");
+        this.networkID = Optional.ofNullable(networkID);
         return this;
     }
 
 
-    public MerchantEntryError withMid(Optional<String> mid) {
-        Utils.checkNotNull(mid, "mid");
-        this.mid = mid;
+    public MerchantEntryError withNetworkID(Optional<String> networkID) {
+        Utils.checkNotNull(networkID, "networkID");
+        this.networkID = networkID;
         return this;
     }
 
@@ -90,27 +90,27 @@ public class MerchantEntryError {
         }
         MerchantEntryError other = (MerchantEntryError) o;
         return 
-            Utils.enhancedDeepEquals(this.mid, other.mid) &&
+            Utils.enhancedDeepEquals(this.networkID, other.networkID) &&
             Utils.enhancedDeepEquals(this.descriptorPattern, other.descriptorPattern);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            mid, descriptorPattern);
+            networkID, descriptorPattern);
     }
     
     @Override
     public String toString() {
         return Utils.toString(MerchantEntryError.class,
-                "mid", mid,
+                "networkID", networkID,
                 "descriptorPattern", descriptorPattern);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> mid = Optional.empty();
+        private Optional<String> networkID = Optional.empty();
 
         private Optional<String> descriptorPattern = Optional.empty();
 
@@ -119,15 +119,15 @@ public class MerchantEntryError {
         }
 
 
-        public Builder mid(String mid) {
-            Utils.checkNotNull(mid, "mid");
-            this.mid = Optional.ofNullable(mid);
+        public Builder networkID(String networkID) {
+            Utils.checkNotNull(networkID, "networkID");
+            this.networkID = Optional.ofNullable(networkID);
             return this;
         }
 
-        public Builder mid(Optional<String> mid) {
-            Utils.checkNotNull(mid, "mid");
-            this.mid = mid;
+        public Builder networkID(Optional<String> networkID) {
+            Utils.checkNotNull(networkID, "networkID");
+            this.networkID = networkID;
             return this;
         }
 
@@ -147,7 +147,7 @@ public class MerchantEntryError {
         public MerchantEntryError build() {
 
             return new MerchantEntryError(
-                mid, descriptorPattern);
+                networkID, descriptorPattern);
         }
 
     }

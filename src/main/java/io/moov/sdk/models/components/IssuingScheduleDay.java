@@ -3,38 +3,145 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum IssuingScheduleDay {
-    MONDAY("monday"),
-    TUESDAY("tuesday"),
-    WEDNESDAY("wednesday"),
-    THURSDAY("thursday"),
-    FRIDAY("friday"),
-    SATURDAY("saturday"),
-    SUNDAY("sunday");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class IssuingScheduleDay {
 
-    @JsonValue
+    public static final IssuingScheduleDay MONDAY = new IssuingScheduleDay("monday");
+    public static final IssuingScheduleDay TUESDAY = new IssuingScheduleDay("tuesday");
+    public static final IssuingScheduleDay WEDNESDAY = new IssuingScheduleDay("wednesday");
+    public static final IssuingScheduleDay THURSDAY = new IssuingScheduleDay("thursday");
+    public static final IssuingScheduleDay FRIDAY = new IssuingScheduleDay("friday");
+    public static final IssuingScheduleDay SATURDAY = new IssuingScheduleDay("saturday");
+    public static final IssuingScheduleDay SUNDAY = new IssuingScheduleDay("sunday");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, IssuingScheduleDay> values = createValuesMap();
+    private static final Map<String, IssuingScheduleDayEnum> enums = createEnumsMap();
+
     private final String value;
 
-    IssuingScheduleDay(String value) {
+    private IssuingScheduleDay(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a IssuingScheduleDay with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as IssuingScheduleDay
+     */ 
+    @JsonCreator
+    public static IssuingScheduleDay of(String value) {
+        synchronized (IssuingScheduleDay.class) {
+            return values.computeIfAbsent(value, v -> new IssuingScheduleDay(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<IssuingScheduleDay> fromValue(String value) {
-        for (IssuingScheduleDay o: IssuingScheduleDay.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<IssuingScheduleDayEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        IssuingScheduleDay other = (IssuingScheduleDay) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "IssuingScheduleDay [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static IssuingScheduleDay[] values() {
+        synchronized (IssuingScheduleDay.class) {
+            return values.values().toArray(new IssuingScheduleDay[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, IssuingScheduleDay> createValuesMap() {
+        Map<String, IssuingScheduleDay> map = new LinkedHashMap<>();
+        map.put("monday", MONDAY);
+        map.put("tuesday", TUESDAY);
+        map.put("wednesday", WEDNESDAY);
+        map.put("thursday", THURSDAY);
+        map.put("friday", FRIDAY);
+        map.put("saturday", SATURDAY);
+        map.put("sunday", SUNDAY);
+        return map;
+    }
+
+    private static final Map<String, IssuingScheduleDayEnum> createEnumsMap() {
+        Map<String, IssuingScheduleDayEnum> map = new HashMap<>();
+        map.put("monday", IssuingScheduleDayEnum.MONDAY);
+        map.put("tuesday", IssuingScheduleDayEnum.TUESDAY);
+        map.put("wednesday", IssuingScheduleDayEnum.WEDNESDAY);
+        map.put("thursday", IssuingScheduleDayEnum.THURSDAY);
+        map.put("friday", IssuingScheduleDayEnum.FRIDAY);
+        map.put("saturday", IssuingScheduleDayEnum.SATURDAY);
+        map.put("sunday", IssuingScheduleDayEnum.SUNDAY);
+        return map;
+    }
+    
+    
+    public enum IssuingScheduleDayEnum {
+
+        MONDAY("monday"),
+        TUESDAY("tuesday"),
+        WEDNESDAY("wednesday"),
+        THURSDAY("thursday"),
+        FRIDAY("friday"),
+        SATURDAY("saturday"),
+        SUNDAY("sunday"),;
+
+        private final String value;
+
+        private IssuingScheduleDayEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

@@ -3,40 +3,138 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * CardType
  * 
  * <p>The type of the card.
  */
-public enum CardType {
-    DEBIT("debit"),
-    CREDIT("credit"),
-    PREPAID("prepaid"),
-    UNKNOWN("unknown");
+public class CardType {
 
-    @JsonValue
+    public static final CardType DEBIT = new CardType("debit");
+    public static final CardType CREDIT = new CardType("credit");
+    public static final CardType PREPAID = new CardType("prepaid");
+    public static final CardType UNKNOWN = new CardType("unknown");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, CardType> values = createValuesMap();
+    private static final Map<String, CardTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    CardType(String value) {
+    private CardType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a CardType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as CardType
+     */ 
+    @JsonCreator
+    public static CardType of(String value) {
+        synchronized (CardType.class) {
+            return values.computeIfAbsent(value, v -> new CardType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<CardType> fromValue(String value) {
-        for (CardType o: CardType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<CardTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CardType other = (CardType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "CardType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static CardType[] values() {
+        synchronized (CardType.class) {
+            return values.values().toArray(new CardType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, CardType> createValuesMap() {
+        Map<String, CardType> map = new LinkedHashMap<>();
+        map.put("debit", DEBIT);
+        map.put("credit", CREDIT);
+        map.put("prepaid", PREPAID);
+        map.put("unknown", UNKNOWN);
+        return map;
+    }
+
+    private static final Map<String, CardTypeEnum> createEnumsMap() {
+        Map<String, CardTypeEnum> map = new HashMap<>();
+        map.put("debit", CardTypeEnum.DEBIT);
+        map.put("credit", CardTypeEnum.CREDIT);
+        map.put("prepaid", CardTypeEnum.PREPAID);
+        map.put("unknown", CardTypeEnum.UNKNOWN);
+        return map;
+    }
+    
+    
+    public enum CardTypeEnum {
+
+        DEBIT("debit"),
+        CREDIT("credit"),
+        PREPAID("prepaid"),
+        UNKNOWN("unknown"),;
+
+        private final String value;
+
+        private CardTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

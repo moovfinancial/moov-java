@@ -10,6 +10,9 @@ Defines which amount should be used when calculating the final payment total. Th
 import io.moov.sdk.models.components.TipCalculationBasis;
 
 TipCalculationBasis value = TipCalculationBasis.PRE_TAX;
+
+// Open enum: use .of() to create instances from custom string values
+TipCalculationBasis custom = TipCalculationBasis.of("custom_value");
 ```
 
 

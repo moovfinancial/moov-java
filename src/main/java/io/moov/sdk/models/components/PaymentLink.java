@@ -127,15 +127,15 @@ public class PaymentLink {
     @JsonProperty("payment")
     private Optional<? extends PaymentLinkPaymentDetails> payment;
 
-
+    /**
+     * Options for payout links used to send a payout.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payout")
     private Optional<? extends PaymentLinkPayoutDetails> payout;
 
     /**
-     * Options for custom amount payment links.
-     * 
-     * <p>A custom amount payment link shares all the options of a `payment` link, but the payor chooses how
+     * A custom amount payment link shares all the options of a `payment` link, but the payor chooses how
      * much to
      * pay rather than the merchant fixing the amount. The amount may optionally be constrained to a range.
      */
@@ -407,6 +407,9 @@ public class PaymentLink {
         return (Optional<PaymentLinkPaymentDetails>) payment;
     }
 
+    /**
+     * Options for payout links used to send a payout.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<PaymentLinkPayoutDetails> payout() {
@@ -414,9 +417,7 @@ public class PaymentLink {
     }
 
     /**
-     * Options for custom amount payment links.
-     * 
-     * <p>A custom amount payment link shares all the options of a `payment` link, but the payor chooses how
+     * A custom amount payment link shares all the options of a `payment` link, but the payor chooses how
      * much to
      * pay rather than the merchant fixing the amount. The amount may optionally be constrained to a range.
      */
@@ -672,6 +673,9 @@ public class PaymentLink {
         return this;
     }
 
+    /**
+     * Options for payout links used to send a payout.
+     */
     public PaymentLink withPayout(PaymentLinkPayoutDetails payout) {
         Utils.checkNotNull(payout, "payout");
         this.payout = Optional.ofNullable(payout);
@@ -679,6 +683,9 @@ public class PaymentLink {
     }
 
 
+    /**
+     * Options for payout links used to send a payout.
+     */
     public PaymentLink withPayout(Optional<? extends PaymentLinkPayoutDetails> payout) {
         Utils.checkNotNull(payout, "payout");
         this.payout = payout;
@@ -686,9 +693,7 @@ public class PaymentLink {
     }
 
     /**
-     * Options for custom amount payment links.
-     * 
-     * <p>A custom amount payment link shares all the options of a `payment` link, but the payor chooses how
+     * A custom amount payment link shares all the options of a `payment` link, but the payor chooses how
      * much to
      * pay rather than the merchant fixing the amount. The amount may optionally be constrained to a range.
      */
@@ -700,9 +705,7 @@ public class PaymentLink {
 
 
     /**
-     * Options for custom amount payment links.
-     * 
-     * <p>A custom amount payment link shares all the options of a `payment` link, but the payor chooses how
+     * A custom amount payment link shares all the options of a `payment` link, but the payor chooses how
      * much to
      * pay rather than the merchant fixing the amount. The amount may optionally be constrained to a range.
      */
@@ -1127,12 +1130,18 @@ public class PaymentLink {
         }
 
 
+        /**
+         * Options for payout links used to send a payout.
+         */
         public Builder payout(PaymentLinkPayoutDetails payout) {
             Utils.checkNotNull(payout, "payout");
             this.payout = Optional.ofNullable(payout);
             return this;
         }
 
+        /**
+         * Options for payout links used to send a payout.
+         */
         public Builder payout(Optional<? extends PaymentLinkPayoutDetails> payout) {
             Utils.checkNotNull(payout, "payout");
             this.payout = payout;
@@ -1141,9 +1150,7 @@ public class PaymentLink {
 
 
         /**
-         * Options for custom amount payment links.
-         * 
-         * <p>A custom amount payment link shares all the options of a `payment` link, but the payor chooses how
+         * A custom amount payment link shares all the options of a `payment` link, but the payor chooses how
          * much to
          * pay rather than the merchant fixing the amount. The amount may optionally be constrained to a range.
          */
@@ -1154,9 +1161,7 @@ public class PaymentLink {
         }
 
         /**
-         * Options for custom amount payment links.
-         * 
-         * <p>A custom amount payment link shares all the options of a `payment` link, but the payor chooses how
+         * A custom amount payment link shares all the options of a `payment` link, but the payor chooses how
          * much to
          * pay rather than the merchant fixing the amount. The amount may optionally be constrained to a range.
          */

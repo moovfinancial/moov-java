@@ -20,7 +20,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 /**
  * UpdateIssuingControls
  * 
- * <p>Mutable spend controls. Each field replaces the entire corresponding value.
+ * <p>Each field replaces the entire corresponding value.
  */
 public class UpdateIssuingControls {
     /**
@@ -31,28 +31,29 @@ public class UpdateIssuingControls {
     private Optional<? extends List<IssuingVelocityLimit>> velocityLimits;
 
     /**
-     * Replaces the merchant category restrictions. Set to `null` to remove.
+     * Restricts card usage by merchant category. Set to `null` to remove all category restrictions.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("merchantCategoryRestrictions")
     private JsonNullable<? extends UpdateIssuingControlsMerchantCategoryRestrictions> merchantCategoryRestrictions;
 
     /**
-     * Replaces the merchant restrictions. Set to `null` to remove.
+     * Restricts card usage to specific merchants, independent of merchant category. Set to `null` to
+     * remove merchant restrictions.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("merchantRestrictions")
     private JsonNullable<? extends UpdateIssuingControlsMerchantRestrictions> merchantRestrictions;
 
     /**
-     * Replaces the allowed schedule. Set to `null` to remove all schedule restrictions.
+     * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("allowedSchedule")
     private JsonNullable<? extends UpdateIssuingControlsAllowedSchedule> allowedSchedule;
 
     /**
-     * A spend cutoff date and time. Set to `null` to remove the cutoff.
+     * A spend cutoff date and time. Set to `null` to remove the spend cutoff.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("expiresOn")
@@ -92,7 +93,7 @@ public class UpdateIssuingControls {
     }
 
     /**
-     * Replaces the merchant category restrictions. Set to `null` to remove.
+     * Restricts card usage by merchant category. Set to `null` to remove all category restrictions.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -101,7 +102,8 @@ public class UpdateIssuingControls {
     }
 
     /**
-     * Replaces the merchant restrictions. Set to `null` to remove.
+     * Restricts card usage to specific merchants, independent of merchant category. Set to `null` to
+     * remove merchant restrictions.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -110,7 +112,7 @@ public class UpdateIssuingControls {
     }
 
     /**
-     * Replaces the allowed schedule. Set to `null` to remove all schedule restrictions.
+     * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -119,7 +121,7 @@ public class UpdateIssuingControls {
     }
 
     /**
-     * A spend cutoff date and time. Set to `null` to remove the cutoff.
+     * A spend cutoff date and time. Set to `null` to remove the spend cutoff.
      */
     @JsonIgnore
     public JsonNullable<OffsetDateTime> expiresOn() {
@@ -151,7 +153,7 @@ public class UpdateIssuingControls {
     }
 
     /**
-     * Replaces the merchant category restrictions. Set to `null` to remove.
+     * Restricts card usage by merchant category. Set to `null` to remove all category restrictions.
      */
     public UpdateIssuingControls withMerchantCategoryRestrictions(UpdateIssuingControlsMerchantCategoryRestrictions merchantCategoryRestrictions) {
         Utils.checkNotNull(merchantCategoryRestrictions, "merchantCategoryRestrictions");
@@ -160,7 +162,7 @@ public class UpdateIssuingControls {
     }
 
     /**
-     * Replaces the merchant category restrictions. Set to `null` to remove.
+     * Restricts card usage by merchant category. Set to `null` to remove all category restrictions.
      */
     public UpdateIssuingControls withMerchantCategoryRestrictions(JsonNullable<? extends UpdateIssuingControlsMerchantCategoryRestrictions> merchantCategoryRestrictions) {
         Utils.checkNotNull(merchantCategoryRestrictions, "merchantCategoryRestrictions");
@@ -169,7 +171,8 @@ public class UpdateIssuingControls {
     }
 
     /**
-     * Replaces the merchant restrictions. Set to `null` to remove.
+     * Restricts card usage to specific merchants, independent of merchant category. Set to `null` to
+     * remove merchant restrictions.
      */
     public UpdateIssuingControls withMerchantRestrictions(UpdateIssuingControlsMerchantRestrictions merchantRestrictions) {
         Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
@@ -178,7 +181,8 @@ public class UpdateIssuingControls {
     }
 
     /**
-     * Replaces the merchant restrictions. Set to `null` to remove.
+     * Restricts card usage to specific merchants, independent of merchant category. Set to `null` to
+     * remove merchant restrictions.
      */
     public UpdateIssuingControls withMerchantRestrictions(JsonNullable<? extends UpdateIssuingControlsMerchantRestrictions> merchantRestrictions) {
         Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
@@ -187,7 +191,7 @@ public class UpdateIssuingControls {
     }
 
     /**
-     * Replaces the allowed schedule. Set to `null` to remove all schedule restrictions.
+     * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
      */
     public UpdateIssuingControls withAllowedSchedule(UpdateIssuingControlsAllowedSchedule allowedSchedule) {
         Utils.checkNotNull(allowedSchedule, "allowedSchedule");
@@ -196,7 +200,7 @@ public class UpdateIssuingControls {
     }
 
     /**
-     * Replaces the allowed schedule. Set to `null` to remove all schedule restrictions.
+     * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
      */
     public UpdateIssuingControls withAllowedSchedule(JsonNullable<? extends UpdateIssuingControlsAllowedSchedule> allowedSchedule) {
         Utils.checkNotNull(allowedSchedule, "allowedSchedule");
@@ -205,7 +209,7 @@ public class UpdateIssuingControls {
     }
 
     /**
-     * A spend cutoff date and time. Set to `null` to remove the cutoff.
+     * A spend cutoff date and time. Set to `null` to remove the spend cutoff.
      */
     public UpdateIssuingControls withExpiresOn(OffsetDateTime expiresOn) {
         Utils.checkNotNull(expiresOn, "expiresOn");
@@ -214,7 +218,7 @@ public class UpdateIssuingControls {
     }
 
     /**
-     * A spend cutoff date and time. Set to `null` to remove the cutoff.
+     * A spend cutoff date and time. Set to `null` to remove the spend cutoff.
      */
     public UpdateIssuingControls withExpiresOn(JsonNullable<OffsetDateTime> expiresOn) {
         Utils.checkNotNull(expiresOn, "expiresOn");
@@ -294,7 +298,7 @@ public class UpdateIssuingControls {
 
 
         /**
-         * Replaces the merchant category restrictions. Set to `null` to remove.
+         * Restricts card usage by merchant category. Set to `null` to remove all category restrictions.
          */
         public Builder merchantCategoryRestrictions(UpdateIssuingControlsMerchantCategoryRestrictions merchantCategoryRestrictions) {
             Utils.checkNotNull(merchantCategoryRestrictions, "merchantCategoryRestrictions");
@@ -303,7 +307,7 @@ public class UpdateIssuingControls {
         }
 
         /**
-         * Replaces the merchant category restrictions. Set to `null` to remove.
+         * Restricts card usage by merchant category. Set to `null` to remove all category restrictions.
          */
         public Builder merchantCategoryRestrictions(JsonNullable<? extends UpdateIssuingControlsMerchantCategoryRestrictions> merchantCategoryRestrictions) {
             Utils.checkNotNull(merchantCategoryRestrictions, "merchantCategoryRestrictions");
@@ -313,7 +317,8 @@ public class UpdateIssuingControls {
 
 
         /**
-         * Replaces the merchant restrictions. Set to `null` to remove.
+         * Restricts card usage to specific merchants, independent of merchant category. Set to `null` to
+         * remove merchant restrictions.
          */
         public Builder merchantRestrictions(UpdateIssuingControlsMerchantRestrictions merchantRestrictions) {
             Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
@@ -322,7 +327,8 @@ public class UpdateIssuingControls {
         }
 
         /**
-         * Replaces the merchant restrictions. Set to `null` to remove.
+         * Restricts card usage to specific merchants, independent of merchant category. Set to `null` to
+         * remove merchant restrictions.
          */
         public Builder merchantRestrictions(JsonNullable<? extends UpdateIssuingControlsMerchantRestrictions> merchantRestrictions) {
             Utils.checkNotNull(merchantRestrictions, "merchantRestrictions");
@@ -332,7 +338,7 @@ public class UpdateIssuingControls {
 
 
         /**
-         * Replaces the allowed schedule. Set to `null` to remove all schedule restrictions.
+         * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
          */
         public Builder allowedSchedule(UpdateIssuingControlsAllowedSchedule allowedSchedule) {
             Utils.checkNotNull(allowedSchedule, "allowedSchedule");
@@ -341,7 +347,7 @@ public class UpdateIssuingControls {
         }
 
         /**
-         * Replaces the allowed schedule. Set to `null` to remove all schedule restrictions.
+         * Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions.
          */
         public Builder allowedSchedule(JsonNullable<? extends UpdateIssuingControlsAllowedSchedule> allowedSchedule) {
             Utils.checkNotNull(allowedSchedule, "allowedSchedule");
@@ -351,7 +357,7 @@ public class UpdateIssuingControls {
 
 
         /**
-         * A spend cutoff date and time. Set to `null` to remove the cutoff.
+         * A spend cutoff date and time. Set to `null` to remove the spend cutoff.
          */
         public Builder expiresOn(OffsetDateTime expiresOn) {
             Utils.checkNotNull(expiresOn, "expiresOn");
@@ -360,7 +366,7 @@ public class UpdateIssuingControls {
         }
 
         /**
-         * A spend cutoff date and time. Set to `null` to remove the cutoff.
+         * A spend cutoff date and time. Set to `null` to remove the spend cutoff.
          */
         public Builder expiresOn(JsonNullable<OffsetDateTime> expiresOn) {
             Utils.checkNotNull(expiresOn, "expiresOn");

@@ -14,9 +14,17 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-
+/**
+ * CreateCancellation
+ * 
+ * <p>Cancellation request.
+ */
 public class CreateCancellation {
-
+    /**
+     * Amount to void. This field can only be set for an auth-capture `card-payment` transfer.
+     * This cannot exceed `capturableAmount`.
+     * Omit this field to void the entire `capturableAmount`.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
     private Optional<? extends AmountDecimal> amount;
@@ -32,6 +40,11 @@ public class CreateCancellation {
         this(Optional.empty());
     }
 
+    /**
+     * Amount to void. This field can only be set for an auth-capture `card-payment` transfer.
+     * This cannot exceed `capturableAmount`.
+     * Omit this field to void the entire `capturableAmount`.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<AmountDecimal> amount() {
@@ -43,6 +56,11 @@ public class CreateCancellation {
     }
 
 
+    /**
+     * Amount to void. This field can only be set for an auth-capture `card-payment` transfer.
+     * This cannot exceed `capturableAmount`.
+     * Omit this field to void the entire `capturableAmount`.
+     */
     public CreateCancellation withAmount(AmountDecimal amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = Optional.ofNullable(amount);
@@ -50,6 +68,11 @@ public class CreateCancellation {
     }
 
 
+    /**
+     * Amount to void. This field can only be set for an auth-capture `card-payment` transfer.
+     * This cannot exceed `capturableAmount`.
+     * Omit this field to void the entire `capturableAmount`.
+     */
     public CreateCancellation withAmount(Optional<? extends AmountDecimal> amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
@@ -91,12 +114,22 @@ public class CreateCancellation {
         }
 
 
+        /**
+         * Amount to void. This field can only be set for an auth-capture `card-payment` transfer.
+         * This cannot exceed `capturableAmount`.
+         * Omit this field to void the entire `capturableAmount`.
+         */
         public Builder amount(AmountDecimal amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = Optional.ofNullable(amount);
             return this;
         }
 
+        /**
+         * Amount to void. This field can only be set for an auth-capture `card-payment` transfer.
+         * This cannot exceed `capturableAmount`.
+         * Omit this field to void the entire `capturableAmount`.
+         */
         public Builder amount(Optional<? extends AmountDecimal> amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;

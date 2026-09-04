@@ -162,6 +162,9 @@ public class Application {
                 case "pull-from-google-pay":
                     // Handle pull-from-google-pay discriminator variant
                     break;
+                case "wire-credit":
+                    // Handle wire-credit discriminator variant
+                    break;
                 default:
                     // Handle unknown discriminator variant
             }

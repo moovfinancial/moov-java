@@ -11,6 +11,9 @@ If set to "auto" the UI will automatically select between
 import io.moov.sdk.models.components.CallToAction;
 
 CallToAction value = CallToAction.PAY;
+
+// Open enum: use .of() to create instances from custom string values
+CallToAction custom = CallToAction.of("custom_value");
 ```
 
 

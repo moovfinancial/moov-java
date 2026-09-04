@@ -65,6 +65,11 @@ public class WebhookData {
         return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
+    public static WebhookData of(WebhookDataCaptureUpdated value) {
+        Utils.checkNotNull(value, "value");
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
+    }
+
     public static WebhookData of(WebhookDataCancellationCreated value) {
         Utils.checkNotNull(value, "value");
         return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
@@ -230,6 +235,7 @@ public class WebhookData {
      * <li>{@code io.moov.sdk.models.components.WebhookDataBankAccountCreated}</li>
      * <li>{@code io.moov.sdk.models.components.WebhookDataBankAccountUpdated}</li>
      * <li>{@code io.moov.sdk.models.components.WebhookDataBankAccountDeleted}</li>
+     * <li>{@code io.moov.sdk.models.components.WebhookDataCaptureUpdated}</li>
      * <li>{@code io.moov.sdk.models.components.WebhookDataCancellationCreated}</li>
      * <li>{@code io.moov.sdk.models.components.WebhookDataCancellationUpdated}</li>
      * <li>{@code io.moov.sdk.models.components.WebhookDataCardAutoUpdated}</li>
@@ -307,6 +313,7 @@ public class WebhookData {
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataBankAccountCreated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataBankAccountUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataBankAccountDeleted>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<WebhookDataCaptureUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataCancellationCreated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataCancellationUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataCardAutoUpdated>() {}, JsonShape.DEFAULT),

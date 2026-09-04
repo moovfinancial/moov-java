@@ -3,37 +3,141 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum BusinessPresence {
-    COMMERCIAL_OFFICE("commercial-office"),
-    HOME_BASED("home-based"),
-    MIXED_PRESENCE("mixed-presence"),
-    MOBILE_BUSINESS("mobile-business"),
-    ONLINE_ONLY("online-only"),
-    RETAIL_STOREFRONT("retail-storefront");
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
+public class BusinessPresence {
 
-    @JsonValue
+    public static final BusinessPresence COMMERCIAL_OFFICE = new BusinessPresence("commercial-office");
+    public static final BusinessPresence HOME_BASED = new BusinessPresence("home-based");
+    public static final BusinessPresence MIXED_PRESENCE = new BusinessPresence("mixed-presence");
+    public static final BusinessPresence MOBILE_BUSINESS = new BusinessPresence("mobile-business");
+    public static final BusinessPresence ONLINE_ONLY = new BusinessPresence("online-only");
+    public static final BusinessPresence RETAIL_STOREFRONT = new BusinessPresence("retail-storefront");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, BusinessPresence> values = createValuesMap();
+    private static final Map<String, BusinessPresenceEnum> enums = createEnumsMap();
+
     private final String value;
 
-    BusinessPresence(String value) {
+    private BusinessPresence(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a BusinessPresence with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as BusinessPresence
+     */ 
+    @JsonCreator
+    public static BusinessPresence of(String value) {
+        synchronized (BusinessPresence.class) {
+            return values.computeIfAbsent(value, v -> new BusinessPresence(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<BusinessPresence> fromValue(String value) {
-        for (BusinessPresence o: BusinessPresence.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<BusinessPresenceEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        BusinessPresence other = (BusinessPresence) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "BusinessPresence [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static BusinessPresence[] values() {
+        synchronized (BusinessPresence.class) {
+            return values.values().toArray(new BusinessPresence[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, BusinessPresence> createValuesMap() {
+        Map<String, BusinessPresence> map = new LinkedHashMap<>();
+        map.put("commercial-office", COMMERCIAL_OFFICE);
+        map.put("home-based", HOME_BASED);
+        map.put("mixed-presence", MIXED_PRESENCE);
+        map.put("mobile-business", MOBILE_BUSINESS);
+        map.put("online-only", ONLINE_ONLY);
+        map.put("retail-storefront", RETAIL_STOREFRONT);
+        return map;
+    }
+
+    private static final Map<String, BusinessPresenceEnum> createEnumsMap() {
+        Map<String, BusinessPresenceEnum> map = new HashMap<>();
+        map.put("commercial-office", BusinessPresenceEnum.COMMERCIAL_OFFICE);
+        map.put("home-based", BusinessPresenceEnum.HOME_BASED);
+        map.put("mixed-presence", BusinessPresenceEnum.MIXED_PRESENCE);
+        map.put("mobile-business", BusinessPresenceEnum.MOBILE_BUSINESS);
+        map.put("online-only", BusinessPresenceEnum.ONLINE_ONLY);
+        map.put("retail-storefront", BusinessPresenceEnum.RETAIL_STOREFRONT);
+        return map;
+    }
+    
+    
+    public enum BusinessPresenceEnum {
+
+        COMMERCIAL_OFFICE("commercial-office"),
+        HOME_BASED("home-based"),
+        MIXED_PRESENCE("mixed-presence"),
+        MOBILE_BUSINESS("mobile-business"),
+        ONLINE_ONLY("online-only"),
+        RETAIL_STOREFRONT("retail-storefront"),;
+
+        private final String value;
+
+        private BusinessPresenceEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

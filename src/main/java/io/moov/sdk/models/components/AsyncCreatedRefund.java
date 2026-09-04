@@ -34,7 +34,7 @@ public class AsyncCreatedRefund {
     private AmountDecimal amount;
 
     /**
-     * ID of the capture this refund applies to, when applicable.
+     * ID of the capture refunded for an auth-capture `card-payment` transfer.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("captureID")
@@ -88,7 +88,7 @@ public class AsyncCreatedRefund {
     }
 
     /**
-     * ID of the capture this refund applies to, when applicable.
+     * ID of the capture refunded for an auth-capture `card-payment` transfer.
      */
     @JsonIgnore
     public Optional<String> captureID() {
@@ -125,7 +125,7 @@ public class AsyncCreatedRefund {
     }
 
     /**
-     * ID of the capture this refund applies to, when applicable.
+     * ID of the capture refunded for an auth-capture `card-payment` transfer.
      */
     public AsyncCreatedRefund withCaptureID(String captureID) {
         Utils.checkNotNull(captureID, "captureID");
@@ -135,7 +135,7 @@ public class AsyncCreatedRefund {
 
 
     /**
-     * ID of the capture this refund applies to, when applicable.
+     * ID of the capture refunded for an auth-capture `card-payment` transfer.
      */
     public AsyncCreatedRefund withCaptureID(Optional<String> captureID) {
         Utils.checkNotNull(captureID, "captureID");
@@ -230,7 +230,7 @@ public class AsyncCreatedRefund {
 
 
         /**
-         * ID of the capture this refund applies to, when applicable.
+         * ID of the capture refunded for an auth-capture `card-payment` transfer.
          */
         public Builder captureID(String captureID) {
             Utils.checkNotNull(captureID, "captureID");
@@ -239,7 +239,7 @@ public class AsyncCreatedRefund {
         }
 
         /**
-         * ID of the capture this refund applies to, when applicable.
+         * ID of the capture refunded for an auth-capture `card-payment` transfer.
          */
         public Builder captureID(Optional<String> captureID) {
             Utils.checkNotNull(captureID, "captureID");

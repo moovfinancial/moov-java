@@ -3,11 +3,21 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * SourceSystem
  * 
@@ -16,29 +26,114 @@ import java.util.Optional;
  * <p>The expected format of the request body depends on this value, so it must be supplied
  * in the `X-Source-System` header on every request.
  */
-public enum SourceSystem {
-    JH_SILVERLAKE("jh_silverlake"),
-    JH_CIF2020("jh_cif2020"),
-    JH_COREDIRECTOR("jh_coredirector");
+public class SourceSystem {
 
-    @JsonValue
+    public static final SourceSystem JH_SILVERLAKE = new SourceSystem("jh_silverlake");
+    public static final SourceSystem JH_CIF2020 = new SourceSystem("jh_cif2020");
+    public static final SourceSystem JH_COREDIRECTOR = new SourceSystem("jh_coredirector");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, SourceSystem> values = createValuesMap();
+    private static final Map<String, SourceSystemEnum> enums = createEnumsMap();
+
     private final String value;
 
-    SourceSystem(String value) {
+    private SourceSystem(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a SourceSystem with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as SourceSystem
+     */ 
+    @JsonCreator
+    public static SourceSystem of(String value) {
+        synchronized (SourceSystem.class) {
+            return values.computeIfAbsent(value, v -> new SourceSystem(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<SourceSystem> fromValue(String value) {
-        for (SourceSystem o: SourceSystem.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<SourceSystemEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        SourceSystem other = (SourceSystem) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "SourceSystem [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static SourceSystem[] values() {
+        synchronized (SourceSystem.class) {
+            return values.values().toArray(new SourceSystem[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, SourceSystem> createValuesMap() {
+        Map<String, SourceSystem> map = new LinkedHashMap<>();
+        map.put("jh_silverlake", JH_SILVERLAKE);
+        map.put("jh_cif2020", JH_CIF2020);
+        map.put("jh_coredirector", JH_COREDIRECTOR);
+        return map;
+    }
+
+    private static final Map<String, SourceSystemEnum> createEnumsMap() {
+        Map<String, SourceSystemEnum> map = new HashMap<>();
+        map.put("jh_silverlake", SourceSystemEnum.JH_SILVERLAKE);
+        map.put("jh_cif2020", SourceSystemEnum.JH_CIF2020);
+        map.put("jh_coredirector", SourceSystemEnum.JH_COREDIRECTOR);
+        return map;
+    }
+    
+    
+    public enum SourceSystemEnum {
+
+        JH_SILVERLAKE("jh_silverlake"),
+        JH_CIF2020("jh_cif2020"),
+        JH_COREDIRECTOR("jh_coredirector"),;
+
+        private final String value;
+
+        private SourceSystemEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

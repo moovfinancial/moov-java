@@ -21,7 +21,7 @@ import java.util.Optional;
  */
 public class TransferFeePaidBy {
     /**
-     * For payouts, indicates which party bears the fee. Defaults to `source`.
+     * Defaults to `source`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payout")
@@ -39,7 +39,7 @@ public class TransferFeePaidBy {
     }
 
     /**
-     * For payouts, indicates which party bears the fee. Defaults to `source`.
+     * Defaults to `source`.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -53,7 +53,7 @@ public class TransferFeePaidBy {
 
 
     /**
-     * For payouts, indicates which party bears the fee. Defaults to `source`.
+     * Defaults to `source`.
      */
     public TransferFeePaidBy withPayout(FeePaidBy payout) {
         Utils.checkNotNull(payout, "payout");
@@ -63,7 +63,7 @@ public class TransferFeePaidBy {
 
 
     /**
-     * For payouts, indicates which party bears the fee. Defaults to `source`.
+     * Defaults to `source`.
      */
     public TransferFeePaidBy withPayout(Optional<? extends FeePaidBy> payout) {
         Utils.checkNotNull(payout, "payout");
@@ -107,7 +107,7 @@ public class TransferFeePaidBy {
 
 
         /**
-         * For payouts, indicates which party bears the fee. Defaults to `source`.
+         * Defaults to `source`.
          */
         public Builder payout(FeePaidBy payout) {
             Utils.checkNotNull(payout, "payout");
@@ -116,7 +116,7 @@ public class TransferFeePaidBy {
         }
 
         /**
-         * For payouts, indicates which party bears the fee. Defaults to `source`.
+         * Defaults to `source`.
          */
         public Builder payout(Optional<? extends FeePaidBy> payout) {
             Utils.checkNotNull(payout, "payout");

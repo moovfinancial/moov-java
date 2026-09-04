@@ -87,7 +87,7 @@ public class CardAcquiringRefund extends MoovError {
     }
 
     /**
-     * ID of the capture this refund applies to, when applicable.
+     * ID of the capture refunded for an auth-capture `card-payment` transfer.
      */
     @Deprecated
     public Optional<String> captureID() {
@@ -143,7 +143,7 @@ public class CardAcquiringRefund extends MoovError {
         private AmountDecimal amount;
 
         /**
-         * ID of the capture this refund applies to, when applicable.
+         * ID of the capture refunded for an auth-capture `card-payment` transfer.
          */
         @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("captureID")
@@ -227,7 +227,7 @@ public class CardAcquiringRefund extends MoovError {
         }
 
         /**
-         * ID of the capture this refund applies to, when applicable.
+         * ID of the capture refunded for an auth-capture `card-payment` transfer.
          */
         @JsonIgnore
         public Optional<String> captureID() {
@@ -284,7 +284,7 @@ public class CardAcquiringRefund extends MoovError {
         }
 
         /**
-         * ID of the capture this refund applies to, when applicable.
+         * ID of the capture refunded for an auth-capture `card-payment` transfer.
          */
         public Data withCaptureID(String captureID) {
             Utils.checkNotNull(captureID, "captureID");
@@ -294,7 +294,7 @@ public class CardAcquiringRefund extends MoovError {
 
 
         /**
-         * ID of the capture this refund applies to, when applicable.
+         * ID of the capture refunded for an auth-capture `card-payment` transfer.
          */
         public Data withCaptureID(Optional<String> captureID) {
             Utils.checkNotNull(captureID, "captureID");
@@ -425,7 +425,7 @@ public class CardAcquiringRefund extends MoovError {
 
 
             /**
-             * ID of the capture this refund applies to, when applicable.
+             * ID of the capture refunded for an auth-capture `card-payment` transfer.
              */
             public Builder captureID(String captureID) {
                 Utils.checkNotNull(captureID, "captureID");
@@ -434,7 +434,7 @@ public class CardAcquiringRefund extends MoovError {
             }
 
             /**
-             * ID of the capture this refund applies to, when applicable.
+             * ID of the capture refunded for an auth-capture `card-payment` transfer.
              */
             public Builder captureID(Optional<String> captureID) {
                 Utils.checkNotNull(captureID, "captureID");

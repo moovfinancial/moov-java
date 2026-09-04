@@ -51,6 +51,16 @@ public class UpsertUnderwriting {
     @JsonProperty("sendFunds")
     private Optional<? extends SendFunds> sendFunds;
 
+    /**
+     * Underwriting data for the `card-issuing` capability.
+     * 
+     * <p>Issued cards are funded from the account's card-issuing wallet before they can be spent, so
+     * estimated activity is the only data collected.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("cardIssuing")
+    private Optional<? extends CardIssuing> cardIssuing;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("submissionIntent")
@@ -65,6 +75,7 @@ public class UpsertUnderwriting {
             @JsonProperty("collectFunds") Optional<? extends CollectFunds> collectFunds,
             @JsonProperty("moneyTransfer") Optional<? extends MoneyTransfer> moneyTransfer,
             @JsonProperty("sendFunds") Optional<? extends SendFunds> sendFunds,
+            @JsonProperty("cardIssuing") Optional<? extends CardIssuing> cardIssuing,
             @JsonProperty("submissionIntent") Optional<? extends SubmissionIntent> submissionIntent) {
         Utils.checkNotNull(geographicReach, "geographicReach");
         Utils.checkNotNull(businessPresence, "businessPresence");
@@ -73,6 +84,7 @@ public class UpsertUnderwriting {
         Utils.checkNotNull(collectFunds, "collectFunds");
         Utils.checkNotNull(moneyTransfer, "moneyTransfer");
         Utils.checkNotNull(sendFunds, "sendFunds");
+        Utils.checkNotNull(cardIssuing, "cardIssuing");
         Utils.checkNotNull(submissionIntent, "submissionIntent");
         this.geographicReach = geographicReach;
         this.businessPresence = businessPresence;
@@ -81,13 +93,14 @@ public class UpsertUnderwriting {
         this.collectFunds = collectFunds;
         this.moneyTransfer = moneyTransfer;
         this.sendFunds = sendFunds;
+        this.cardIssuing = cardIssuing;
         this.submissionIntent = submissionIntent;
     }
     
     public UpsertUnderwriting() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -130,6 +143,18 @@ public class UpsertUnderwriting {
     @JsonIgnore
     public Optional<SendFunds> sendFunds() {
         return (Optional<SendFunds>) sendFunds;
+    }
+
+    /**
+     * Underwriting data for the `card-issuing` capability.
+     * 
+     * <p>Issued cards are funded from the account's card-issuing wallet before they can be spent, so
+     * estimated activity is the only data collected.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<CardIssuing> cardIssuing() {
+        return (Optional<CardIssuing>) cardIssuing;
     }
 
     @SuppressWarnings("unchecked")
@@ -234,6 +259,31 @@ public class UpsertUnderwriting {
         return this;
     }
 
+    /**
+     * Underwriting data for the `card-issuing` capability.
+     * 
+     * <p>Issued cards are funded from the account's card-issuing wallet before they can be spent, so
+     * estimated activity is the only data collected.
+     */
+    public UpsertUnderwriting withCardIssuing(CardIssuing cardIssuing) {
+        Utils.checkNotNull(cardIssuing, "cardIssuing");
+        this.cardIssuing = Optional.ofNullable(cardIssuing);
+        return this;
+    }
+
+
+    /**
+     * Underwriting data for the `card-issuing` capability.
+     * 
+     * <p>Issued cards are funded from the account's card-issuing wallet before they can be spent, so
+     * estimated activity is the only data collected.
+     */
+    public UpsertUnderwriting withCardIssuing(Optional<? extends CardIssuing> cardIssuing) {
+        Utils.checkNotNull(cardIssuing, "cardIssuing");
+        this.cardIssuing = cardIssuing;
+        return this;
+    }
+
     public UpsertUnderwriting withSubmissionIntent(SubmissionIntent submissionIntent) {
         Utils.checkNotNull(submissionIntent, "submissionIntent");
         this.submissionIntent = Optional.ofNullable(submissionIntent);
@@ -264,6 +314,7 @@ public class UpsertUnderwriting {
             Utils.enhancedDeepEquals(this.collectFunds, other.collectFunds) &&
             Utils.enhancedDeepEquals(this.moneyTransfer, other.moneyTransfer) &&
             Utils.enhancedDeepEquals(this.sendFunds, other.sendFunds) &&
+            Utils.enhancedDeepEquals(this.cardIssuing, other.cardIssuing) &&
             Utils.enhancedDeepEquals(this.submissionIntent, other.submissionIntent);
     }
     
@@ -272,7 +323,7 @@ public class UpsertUnderwriting {
         return Utils.enhancedHash(
             geographicReach, businessPresence, pendingLitigation,
             volumeShareByCustomerType, collectFunds, moneyTransfer,
-            sendFunds, submissionIntent);
+            sendFunds, cardIssuing, submissionIntent);
     }
     
     @Override
@@ -285,6 +336,7 @@ public class UpsertUnderwriting {
                 "collectFunds", collectFunds,
                 "moneyTransfer", moneyTransfer,
                 "sendFunds", sendFunds,
+                "cardIssuing", cardIssuing,
                 "submissionIntent", submissionIntent);
     }
 
@@ -304,6 +356,8 @@ public class UpsertUnderwriting {
         private Optional<? extends MoneyTransfer> moneyTransfer = Optional.empty();
 
         private Optional<? extends SendFunds> sendFunds = Optional.empty();
+
+        private Optional<? extends CardIssuing> cardIssuing = Optional.empty();
 
         private Optional<? extends SubmissionIntent> submissionIntent = Optional.empty();
 
@@ -403,6 +457,31 @@ public class UpsertUnderwriting {
         }
 
 
+        /**
+         * Underwriting data for the `card-issuing` capability.
+         * 
+         * <p>Issued cards are funded from the account's card-issuing wallet before they can be spent, so
+         * estimated activity is the only data collected.
+         */
+        public Builder cardIssuing(CardIssuing cardIssuing) {
+            Utils.checkNotNull(cardIssuing, "cardIssuing");
+            this.cardIssuing = Optional.ofNullable(cardIssuing);
+            return this;
+        }
+
+        /**
+         * Underwriting data for the `card-issuing` capability.
+         * 
+         * <p>Issued cards are funded from the account's card-issuing wallet before they can be spent, so
+         * estimated activity is the only data collected.
+         */
+        public Builder cardIssuing(Optional<? extends CardIssuing> cardIssuing) {
+            Utils.checkNotNull(cardIssuing, "cardIssuing");
+            this.cardIssuing = cardIssuing;
+            return this;
+        }
+
+
         public Builder submissionIntent(SubmissionIntent submissionIntent) {
             Utils.checkNotNull(submissionIntent, "submissionIntent");
             this.submissionIntent = Optional.ofNullable(submissionIntent);
@@ -420,7 +499,7 @@ public class UpsertUnderwriting {
             return new UpsertUnderwriting(
                 geographicReach, businessPresence, pendingLitigation,
                 volumeShareByCustomerType, collectFunds, moneyTransfer,
-                sendFunds, submissionIntent);
+                sendFunds, cardIssuing, submissionIntent);
         }
 
     }

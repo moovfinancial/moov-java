@@ -3,43 +3,150 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * CardUpdateReason
  * 
  * <p>The results of the card update request.
  */
-public enum CardUpdateReason {
-    UNSPECIFIED("unspecified"),
-    ACCOUNT_CLOSED("account-closed"),
-    CONTACT_CARDHOLDER("contact-cardholder"),
-    EXPIRATION_UPDATE("expiration-update"),
-    NO_CHANGE("no-change"),
-    NO_MATCH("no-match"),
-    NUMBER_UPDATE("number-update");
+public class CardUpdateReason {
 
-    @JsonValue
+    public static final CardUpdateReason UNSPECIFIED = new CardUpdateReason("unspecified");
+    public static final CardUpdateReason ACCOUNT_CLOSED = new CardUpdateReason("account-closed");
+    public static final CardUpdateReason CONTACT_CARDHOLDER = new CardUpdateReason("contact-cardholder");
+    public static final CardUpdateReason EXPIRATION_UPDATE = new CardUpdateReason("expiration-update");
+    public static final CardUpdateReason NO_CHANGE = new CardUpdateReason("no-change");
+    public static final CardUpdateReason NO_MATCH = new CardUpdateReason("no-match");
+    public static final CardUpdateReason NUMBER_UPDATE = new CardUpdateReason("number-update");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, CardUpdateReason> values = createValuesMap();
+    private static final Map<String, CardUpdateReasonEnum> enums = createEnumsMap();
+
     private final String value;
 
-    CardUpdateReason(String value) {
+    private CardUpdateReason(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a CardUpdateReason with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as CardUpdateReason
+     */ 
+    @JsonCreator
+    public static CardUpdateReason of(String value) {
+        synchronized (CardUpdateReason.class) {
+            return values.computeIfAbsent(value, v -> new CardUpdateReason(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<CardUpdateReason> fromValue(String value) {
-        for (CardUpdateReason o: CardUpdateReason.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<CardUpdateReasonEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CardUpdateReason other = (CardUpdateReason) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "CardUpdateReason [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static CardUpdateReason[] values() {
+        synchronized (CardUpdateReason.class) {
+            return values.values().toArray(new CardUpdateReason[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, CardUpdateReason> createValuesMap() {
+        Map<String, CardUpdateReason> map = new LinkedHashMap<>();
+        map.put("unspecified", UNSPECIFIED);
+        map.put("account-closed", ACCOUNT_CLOSED);
+        map.put("contact-cardholder", CONTACT_CARDHOLDER);
+        map.put("expiration-update", EXPIRATION_UPDATE);
+        map.put("no-change", NO_CHANGE);
+        map.put("no-match", NO_MATCH);
+        map.put("number-update", NUMBER_UPDATE);
+        return map;
+    }
+
+    private static final Map<String, CardUpdateReasonEnum> createEnumsMap() {
+        Map<String, CardUpdateReasonEnum> map = new HashMap<>();
+        map.put("unspecified", CardUpdateReasonEnum.UNSPECIFIED);
+        map.put("account-closed", CardUpdateReasonEnum.ACCOUNT_CLOSED);
+        map.put("contact-cardholder", CardUpdateReasonEnum.CONTACT_CARDHOLDER);
+        map.put("expiration-update", CardUpdateReasonEnum.EXPIRATION_UPDATE);
+        map.put("no-change", CardUpdateReasonEnum.NO_CHANGE);
+        map.put("no-match", CardUpdateReasonEnum.NO_MATCH);
+        map.put("number-update", CardUpdateReasonEnum.NUMBER_UPDATE);
+        return map;
+    }
+    
+    
+    public enum CardUpdateReasonEnum {
+
+        UNSPECIFIED("unspecified"),
+        ACCOUNT_CLOSED("account-closed"),
+        CONTACT_CARDHOLDER("contact-cardholder"),
+        EXPIRATION_UPDATE("expiration-update"),
+        NO_CHANGE("no-change"),
+        NO_MATCH("no-match"),
+        NUMBER_UPDATE("number-update"),;
+
+        private final String value;
+
+        private CardUpdateReasonEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

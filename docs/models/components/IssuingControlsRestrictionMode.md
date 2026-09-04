@@ -1,6 +1,6 @@
 # IssuingControlsRestrictionMode
 
-Whether the listed items are the only ones allowed (`allow`) or the ones to block (`block`).
+Whether the listed items should be allowed (`allow`) or blocked (`block`).
 
 ## Example Usage
 
@@ -8,6 +8,9 @@ Whether the listed items are the only ones allowed (`allow`) or the ones to bloc
 import io.moov.sdk.models.components.IssuingControlsRestrictionMode;
 
 IssuingControlsRestrictionMode value = IssuingControlsRestrictionMode.ALLOW;
+
+// Open enum: use .of() to create instances from custom string values
+IssuingControlsRestrictionMode custom = IssuingControlsRestrictionMode.of("custom_value");
 ```
 
 

@@ -16,6 +16,12 @@ import java.util.Optional;
 
 
 public class PushToCardTransferProcessingDetails {
+    /**
+     * Status of a push-to-card transaction.
+     */
+    @JsonProperty("status")
+    private PushToCardTransactionStatus status;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("authorizationCode")
@@ -38,23 +44,35 @@ public class PushToCardTransferProcessingDetails {
 
     @JsonCreator
     public PushToCardTransferProcessingDetails(
+            @JsonProperty("status") PushToCardTransactionStatus status,
             @JsonProperty("authorizationCode") Optional<String> authorizationCode,
             @JsonProperty("networkTransactionID") Optional<String> networkTransactionID,
             @JsonProperty("networkResponseCode") Optional<String> networkResponseCode,
             @JsonProperty("failureCode") Optional<? extends CardTransactionFailureCode> failureCode) {
+        Utils.checkNotNull(status, "status");
         Utils.checkNotNull(authorizationCode, "authorizationCode");
         Utils.checkNotNull(networkTransactionID, "networkTransactionID");
         Utils.checkNotNull(networkResponseCode, "networkResponseCode");
         Utils.checkNotNull(failureCode, "failureCode");
+        this.status = status;
         this.authorizationCode = authorizationCode;
         this.networkTransactionID = networkTransactionID;
         this.networkResponseCode = networkResponseCode;
         this.failureCode = failureCode;
     }
     
-    public PushToCardTransferProcessingDetails() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+    public PushToCardTransferProcessingDetails(
+            PushToCardTransactionStatus status) {
+        this(status, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * Status of a push-to-card transaction.
+     */
+    @JsonIgnore
+    public PushToCardTransactionStatus status() {
+        return status;
     }
 
     @JsonIgnore
@@ -82,6 +100,15 @@ public class PushToCardTransferProcessingDetails {
         return new Builder();
     }
 
+
+    /**
+     * Status of a push-to-card transaction.
+     */
+    public PushToCardTransferProcessingDetails withStatus(PushToCardTransactionStatus status) {
+        Utils.checkNotNull(status, "status");
+        this.status = status;
+        return this;
+    }
 
     public PushToCardTransferProcessingDetails withAuthorizationCode(String authorizationCode) {
         Utils.checkNotNull(authorizationCode, "authorizationCode");
@@ -145,6 +172,7 @@ public class PushToCardTransferProcessingDetails {
         }
         PushToCardTransferProcessingDetails other = (PushToCardTransferProcessingDetails) o;
         return 
+            Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.authorizationCode, other.authorizationCode) &&
             Utils.enhancedDeepEquals(this.networkTransactionID, other.networkTransactionID) &&
             Utils.enhancedDeepEquals(this.networkResponseCode, other.networkResponseCode) &&
@@ -154,13 +182,14 @@ public class PushToCardTransferProcessingDetails {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            authorizationCode, networkTransactionID, networkResponseCode,
-            failureCode);
+            status, authorizationCode, networkTransactionID,
+            networkResponseCode, failureCode);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PushToCardTransferProcessingDetails.class,
+                "status", status,
                 "authorizationCode", authorizationCode,
                 "networkTransactionID", networkTransactionID,
                 "networkResponseCode", networkResponseCode,
@@ -169,6 +198,8 @@ public class PushToCardTransferProcessingDetails {
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
+
+        private PushToCardTransactionStatus status;
 
         private Optional<String> authorizationCode = Optional.empty();
 
@@ -180,6 +211,16 @@ public class PushToCardTransferProcessingDetails {
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Status of a push-to-card transaction.
+         */
+        public Builder status(PushToCardTransactionStatus status) {
+            Utils.checkNotNull(status, "status");
+            this.status = status;
+            return this;
         }
 
 
@@ -237,8 +278,8 @@ public class PushToCardTransferProcessingDetails {
         public PushToCardTransferProcessingDetails build() {
 
             return new PushToCardTransferProcessingDetails(
-                authorizationCode, networkTransactionID, networkResponseCode,
-                failureCode);
+                status, authorizationCode, networkTransactionID,
+                networkResponseCode, failureCode);
         }
 
     }

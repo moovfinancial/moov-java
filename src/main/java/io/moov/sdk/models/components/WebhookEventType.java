@@ -3,75 +3,282 @@
  */
 package io.moov.sdk.models.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.lang.Override;
 import java.lang.String;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Wrapper for an "open" enum that can handle unknown values from API responses
+ * without runtime errors. Instances are immutable singletons with reference equality.
+ * Use {@code asEnum()} for switch expressions.
+ */
 /**
  * WebhookEventType
  * 
  * <p>The type of event that occurred.
  */
-public enum WebhookEventType {
-    WILDCARD("*"),
-    ACCOUNT_CREATED("account.created"),
-    ACCOUNT_UPDATED("account.updated"),
-    ACCOUNT_DISCONNECTED("account.disconnected"),
-    BALANCE_UPDATED("balance.updated"),
-    BANK_ACCOUNT_CREATED("bankAccount.created"),
-    BANK_ACCOUNT_UPDATED("bankAccount.updated"),
-    BANK_ACCOUNT_DELETED("bankAccount.deleted"),
-    CANCELLATION_CREATED("cancellation.created"),
-    CANCELLATION_UPDATED("cancellation.updated"),
-    CARD_AUTO_UPDATED("card.autoUpdated"),
-    CAPABILITY_REQUESTED("capability.requested"),
-    CAPABILITY_UPDATED("capability.updated"),
-    DISPUTE_CREATED("dispute.created"),
-    DISPUTE_UPDATED("dispute.updated"),
-    INVOICE_CREATED("invoice.created"),
-    INVOICE_UPDATED("invoice.updated"),
-    NETWORK_ID_UPDATED("networkID.updated"),
-    PAYMENT_METHOD_ENABLED("paymentMethod.enabled"),
-    PAYMENT_METHOD_DISABLED("paymentMethod.disabled"),
-    REFUND_CREATED("refund.created"),
-    REFUND_UPDATED("refund.updated"),
-    REPRESENTATIVE_CREATED("representative.created"),
-    REPRESENTATIVE_UPDATED("representative.updated"),
-    REPRESENTATIVE_DELETED("representative.deleted"),
-    SWEEP_CREATED("sweep.created"),
-    SWEEP_UPDATED("sweep.updated"),
-    TERMINAL_APPLICATION_CREATED("terminalApplication.created"),
-    TERMINAL_APPLICATION_UPDATED("terminalApplication.updated"),
-    TICKET_CREATED("ticket.created"),
-    TICKET_UPDATED("ticket.updated"),
-    TICKET_MESSAGE_ADDED("ticket.messageAdded"),
-    TRANSFER_CREATED("transfer.created"),
-    TRANSFER_UPDATED("transfer.updated"),
-    WALLET_CREATED("wallet.created"),
-    WALLET_UPDATED("wallet.updated"),
-    WALLET_TRANSACTION_UPDATED("walletTransaction.updated"),
-    BILLING_STATEMENT_CREATED("billingStatement.created"),
-    AUTHORIZATION_EXPIRING("authorization.expiring");
+public class WebhookEventType {
 
-    @JsonValue
+    public static final WebhookEventType WILDCARD = new WebhookEventType("*");
+    public static final WebhookEventType ACCOUNT_CREATED = new WebhookEventType("account.created");
+    public static final WebhookEventType ACCOUNT_UPDATED = new WebhookEventType("account.updated");
+    public static final WebhookEventType ACCOUNT_DISCONNECTED = new WebhookEventType("account.disconnected");
+    public static final WebhookEventType BALANCE_UPDATED = new WebhookEventType("balance.updated");
+    public static final WebhookEventType BANK_ACCOUNT_CREATED = new WebhookEventType("bankAccount.created");
+    public static final WebhookEventType BANK_ACCOUNT_UPDATED = new WebhookEventType("bankAccount.updated");
+    public static final WebhookEventType BANK_ACCOUNT_DELETED = new WebhookEventType("bankAccount.deleted");
+    public static final WebhookEventType CAPTURE_UPDATED = new WebhookEventType("capture.updated");
+    public static final WebhookEventType CANCELLATION_CREATED = new WebhookEventType("cancellation.created");
+    public static final WebhookEventType CANCELLATION_UPDATED = new WebhookEventType("cancellation.updated");
+    public static final WebhookEventType CARD_AUTO_UPDATED = new WebhookEventType("card.autoUpdated");
+    public static final WebhookEventType CAPABILITY_REQUESTED = new WebhookEventType("capability.requested");
+    public static final WebhookEventType CAPABILITY_UPDATED = new WebhookEventType("capability.updated");
+    public static final WebhookEventType DISPUTE_CREATED = new WebhookEventType("dispute.created");
+    public static final WebhookEventType DISPUTE_UPDATED = new WebhookEventType("dispute.updated");
+    public static final WebhookEventType INVOICE_CREATED = new WebhookEventType("invoice.created");
+    public static final WebhookEventType INVOICE_UPDATED = new WebhookEventType("invoice.updated");
+    public static final WebhookEventType NETWORK_ID_UPDATED = new WebhookEventType("networkID.updated");
+    public static final WebhookEventType PAYMENT_METHOD_ENABLED = new WebhookEventType("paymentMethod.enabled");
+    public static final WebhookEventType PAYMENT_METHOD_DISABLED = new WebhookEventType("paymentMethod.disabled");
+    public static final WebhookEventType REFUND_CREATED = new WebhookEventType("refund.created");
+    public static final WebhookEventType REFUND_UPDATED = new WebhookEventType("refund.updated");
+    public static final WebhookEventType REPRESENTATIVE_CREATED = new WebhookEventType("representative.created");
+    public static final WebhookEventType REPRESENTATIVE_UPDATED = new WebhookEventType("representative.updated");
+    public static final WebhookEventType REPRESENTATIVE_DELETED = new WebhookEventType("representative.deleted");
+    public static final WebhookEventType SWEEP_CREATED = new WebhookEventType("sweep.created");
+    public static final WebhookEventType SWEEP_UPDATED = new WebhookEventType("sweep.updated");
+    public static final WebhookEventType TERMINAL_APPLICATION_CREATED = new WebhookEventType("terminalApplication.created");
+    public static final WebhookEventType TERMINAL_APPLICATION_UPDATED = new WebhookEventType("terminalApplication.updated");
+    public static final WebhookEventType TICKET_CREATED = new WebhookEventType("ticket.created");
+    public static final WebhookEventType TICKET_UPDATED = new WebhookEventType("ticket.updated");
+    public static final WebhookEventType TICKET_MESSAGE_ADDED = new WebhookEventType("ticket.messageAdded");
+    public static final WebhookEventType TRANSFER_CREATED = new WebhookEventType("transfer.created");
+    public static final WebhookEventType TRANSFER_UPDATED = new WebhookEventType("transfer.updated");
+    public static final WebhookEventType WALLET_CREATED = new WebhookEventType("wallet.created");
+    public static final WebhookEventType WALLET_UPDATED = new WebhookEventType("wallet.updated");
+    public static final WebhookEventType WALLET_TRANSACTION_UPDATED = new WebhookEventType("walletTransaction.updated");
+    public static final WebhookEventType BILLING_STATEMENT_CREATED = new WebhookEventType("billingStatement.created");
+    public static final WebhookEventType AUTHORIZATION_EXPIRING = new WebhookEventType("authorization.expiring");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, WebhookEventType> values = createValuesMap();
+    private static final Map<String, WebhookEventTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
-    WebhookEventType(String value) {
+    private WebhookEventType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a WebhookEventType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as WebhookEventType
+     */ 
+    @JsonCreator
+    public static WebhookEventType of(String value) {
+        synchronized (WebhookEventType.class) {
+            return values.computeIfAbsent(value, v -> new WebhookEventType(v));
+        }
+    }
+
+    @JsonValue
     public String value() {
         return value;
     }
-    
-    public static Optional<WebhookEventType> fromValue(String value) {
-        for (WebhookEventType o: WebhookEventType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<WebhookEventTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        WebhookEventType other = (WebhookEventType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "WebhookEventType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static WebhookEventType[] values() {
+        synchronized (WebhookEventType.class) {
+            return values.values().toArray(new WebhookEventType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, WebhookEventType> createValuesMap() {
+        Map<String, WebhookEventType> map = new LinkedHashMap<>();
+        map.put("*", WILDCARD);
+        map.put("account.created", ACCOUNT_CREATED);
+        map.put("account.updated", ACCOUNT_UPDATED);
+        map.put("account.disconnected", ACCOUNT_DISCONNECTED);
+        map.put("balance.updated", BALANCE_UPDATED);
+        map.put("bankAccount.created", BANK_ACCOUNT_CREATED);
+        map.put("bankAccount.updated", BANK_ACCOUNT_UPDATED);
+        map.put("bankAccount.deleted", BANK_ACCOUNT_DELETED);
+        map.put("capture.updated", CAPTURE_UPDATED);
+        map.put("cancellation.created", CANCELLATION_CREATED);
+        map.put("cancellation.updated", CANCELLATION_UPDATED);
+        map.put("card.autoUpdated", CARD_AUTO_UPDATED);
+        map.put("capability.requested", CAPABILITY_REQUESTED);
+        map.put("capability.updated", CAPABILITY_UPDATED);
+        map.put("dispute.created", DISPUTE_CREATED);
+        map.put("dispute.updated", DISPUTE_UPDATED);
+        map.put("invoice.created", INVOICE_CREATED);
+        map.put("invoice.updated", INVOICE_UPDATED);
+        map.put("networkID.updated", NETWORK_ID_UPDATED);
+        map.put("paymentMethod.enabled", PAYMENT_METHOD_ENABLED);
+        map.put("paymentMethod.disabled", PAYMENT_METHOD_DISABLED);
+        map.put("refund.created", REFUND_CREATED);
+        map.put("refund.updated", REFUND_UPDATED);
+        map.put("representative.created", REPRESENTATIVE_CREATED);
+        map.put("representative.updated", REPRESENTATIVE_UPDATED);
+        map.put("representative.deleted", REPRESENTATIVE_DELETED);
+        map.put("sweep.created", SWEEP_CREATED);
+        map.put("sweep.updated", SWEEP_UPDATED);
+        map.put("terminalApplication.created", TERMINAL_APPLICATION_CREATED);
+        map.put("terminalApplication.updated", TERMINAL_APPLICATION_UPDATED);
+        map.put("ticket.created", TICKET_CREATED);
+        map.put("ticket.updated", TICKET_UPDATED);
+        map.put("ticket.messageAdded", TICKET_MESSAGE_ADDED);
+        map.put("transfer.created", TRANSFER_CREATED);
+        map.put("transfer.updated", TRANSFER_UPDATED);
+        map.put("wallet.created", WALLET_CREATED);
+        map.put("wallet.updated", WALLET_UPDATED);
+        map.put("walletTransaction.updated", WALLET_TRANSACTION_UPDATED);
+        map.put("billingStatement.created", BILLING_STATEMENT_CREATED);
+        map.put("authorization.expiring", AUTHORIZATION_EXPIRING);
+        return map;
+    }
+
+    private static final Map<String, WebhookEventTypeEnum> createEnumsMap() {
+        Map<String, WebhookEventTypeEnum> map = new HashMap<>();
+        map.put("*", WebhookEventTypeEnum.WILDCARD);
+        map.put("account.created", WebhookEventTypeEnum.ACCOUNT_CREATED);
+        map.put("account.updated", WebhookEventTypeEnum.ACCOUNT_UPDATED);
+        map.put("account.disconnected", WebhookEventTypeEnum.ACCOUNT_DISCONNECTED);
+        map.put("balance.updated", WebhookEventTypeEnum.BALANCE_UPDATED);
+        map.put("bankAccount.created", WebhookEventTypeEnum.BANK_ACCOUNT_CREATED);
+        map.put("bankAccount.updated", WebhookEventTypeEnum.BANK_ACCOUNT_UPDATED);
+        map.put("bankAccount.deleted", WebhookEventTypeEnum.BANK_ACCOUNT_DELETED);
+        map.put("capture.updated", WebhookEventTypeEnum.CAPTURE_UPDATED);
+        map.put("cancellation.created", WebhookEventTypeEnum.CANCELLATION_CREATED);
+        map.put("cancellation.updated", WebhookEventTypeEnum.CANCELLATION_UPDATED);
+        map.put("card.autoUpdated", WebhookEventTypeEnum.CARD_AUTO_UPDATED);
+        map.put("capability.requested", WebhookEventTypeEnum.CAPABILITY_REQUESTED);
+        map.put("capability.updated", WebhookEventTypeEnum.CAPABILITY_UPDATED);
+        map.put("dispute.created", WebhookEventTypeEnum.DISPUTE_CREATED);
+        map.put("dispute.updated", WebhookEventTypeEnum.DISPUTE_UPDATED);
+        map.put("invoice.created", WebhookEventTypeEnum.INVOICE_CREATED);
+        map.put("invoice.updated", WebhookEventTypeEnum.INVOICE_UPDATED);
+        map.put("networkID.updated", WebhookEventTypeEnum.NETWORK_ID_UPDATED);
+        map.put("paymentMethod.enabled", WebhookEventTypeEnum.PAYMENT_METHOD_ENABLED);
+        map.put("paymentMethod.disabled", WebhookEventTypeEnum.PAYMENT_METHOD_DISABLED);
+        map.put("refund.created", WebhookEventTypeEnum.REFUND_CREATED);
+        map.put("refund.updated", WebhookEventTypeEnum.REFUND_UPDATED);
+        map.put("representative.created", WebhookEventTypeEnum.REPRESENTATIVE_CREATED);
+        map.put("representative.updated", WebhookEventTypeEnum.REPRESENTATIVE_UPDATED);
+        map.put("representative.deleted", WebhookEventTypeEnum.REPRESENTATIVE_DELETED);
+        map.put("sweep.created", WebhookEventTypeEnum.SWEEP_CREATED);
+        map.put("sweep.updated", WebhookEventTypeEnum.SWEEP_UPDATED);
+        map.put("terminalApplication.created", WebhookEventTypeEnum.TERMINAL_APPLICATION_CREATED);
+        map.put("terminalApplication.updated", WebhookEventTypeEnum.TERMINAL_APPLICATION_UPDATED);
+        map.put("ticket.created", WebhookEventTypeEnum.TICKET_CREATED);
+        map.put("ticket.updated", WebhookEventTypeEnum.TICKET_UPDATED);
+        map.put("ticket.messageAdded", WebhookEventTypeEnum.TICKET_MESSAGE_ADDED);
+        map.put("transfer.created", WebhookEventTypeEnum.TRANSFER_CREATED);
+        map.put("transfer.updated", WebhookEventTypeEnum.TRANSFER_UPDATED);
+        map.put("wallet.created", WebhookEventTypeEnum.WALLET_CREATED);
+        map.put("wallet.updated", WebhookEventTypeEnum.WALLET_UPDATED);
+        map.put("walletTransaction.updated", WebhookEventTypeEnum.WALLET_TRANSACTION_UPDATED);
+        map.put("billingStatement.created", WebhookEventTypeEnum.BILLING_STATEMENT_CREATED);
+        map.put("authorization.expiring", WebhookEventTypeEnum.AUTHORIZATION_EXPIRING);
+        return map;
+    }
+    
+    
+    public enum WebhookEventTypeEnum {
+
+        WILDCARD("*"),
+        ACCOUNT_CREATED("account.created"),
+        ACCOUNT_UPDATED("account.updated"),
+        ACCOUNT_DISCONNECTED("account.disconnected"),
+        BALANCE_UPDATED("balance.updated"),
+        BANK_ACCOUNT_CREATED("bankAccount.created"),
+        BANK_ACCOUNT_UPDATED("bankAccount.updated"),
+        BANK_ACCOUNT_DELETED("bankAccount.deleted"),
+        CAPTURE_UPDATED("capture.updated"),
+        CANCELLATION_CREATED("cancellation.created"),
+        CANCELLATION_UPDATED("cancellation.updated"),
+        CARD_AUTO_UPDATED("card.autoUpdated"),
+        CAPABILITY_REQUESTED("capability.requested"),
+        CAPABILITY_UPDATED("capability.updated"),
+        DISPUTE_CREATED("dispute.created"),
+        DISPUTE_UPDATED("dispute.updated"),
+        INVOICE_CREATED("invoice.created"),
+        INVOICE_UPDATED("invoice.updated"),
+        NETWORK_ID_UPDATED("networkID.updated"),
+        PAYMENT_METHOD_ENABLED("paymentMethod.enabled"),
+        PAYMENT_METHOD_DISABLED("paymentMethod.disabled"),
+        REFUND_CREATED("refund.created"),
+        REFUND_UPDATED("refund.updated"),
+        REPRESENTATIVE_CREATED("representative.created"),
+        REPRESENTATIVE_UPDATED("representative.updated"),
+        REPRESENTATIVE_DELETED("representative.deleted"),
+        SWEEP_CREATED("sweep.created"),
+        SWEEP_UPDATED("sweep.updated"),
+        TERMINAL_APPLICATION_CREATED("terminalApplication.created"),
+        TERMINAL_APPLICATION_UPDATED("terminalApplication.updated"),
+        TICKET_CREATED("ticket.created"),
+        TICKET_UPDATED("ticket.updated"),
+        TICKET_MESSAGE_ADDED("ticket.messageAdded"),
+        TRANSFER_CREATED("transfer.created"),
+        TRANSFER_UPDATED("transfer.updated"),
+        WALLET_CREATED("wallet.created"),
+        WALLET_UPDATED("wallet.updated"),
+        WALLET_TRANSACTION_UPDATED("walletTransaction.updated"),
+        BILLING_STATEMENT_CREATED("billingStatement.created"),
+        AUTHORIZATION_EXPIRING("authorization.expiring"),;
+
+        private final String value;
+
+        private WebhookEventTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

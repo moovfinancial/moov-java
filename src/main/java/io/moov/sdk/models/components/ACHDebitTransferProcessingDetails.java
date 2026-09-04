@@ -16,6 +16,12 @@ import java.util.Optional;
 
 
 public class ACHDebitTransferProcessingDetails {
+    /**
+     * Status of a transaction within the ACH lifecycle.
+     */
+    @JsonProperty("status")
+    private ACHTransactionStatus status;
+
 
     @JsonProperty("traceNumber")
     private String traceNumber;
@@ -32,20 +38,33 @@ public class ACHDebitTransferProcessingDetails {
 
     @JsonCreator
     public ACHDebitTransferProcessingDetails(
+            @JsonProperty("status") ACHTransactionStatus status,
             @JsonProperty("traceNumber") String traceNumber,
             @JsonProperty("return") Optional<? extends ACHException> return_,
             @JsonProperty("correction") Optional<? extends ACHException> correction) {
+        Utils.checkNotNull(status, "status");
         Utils.checkNotNull(traceNumber, "traceNumber");
         Utils.checkNotNull(return_, "return_");
         Utils.checkNotNull(correction, "correction");
+        this.status = status;
         this.traceNumber = traceNumber;
         this.return_ = return_;
         this.correction = correction;
     }
     
     public ACHDebitTransferProcessingDetails(
+            ACHTransactionStatus status,
             String traceNumber) {
-        this(traceNumber, Optional.empty(), Optional.empty());
+        this(status, traceNumber, Optional.empty(),
+            Optional.empty());
+    }
+
+    /**
+     * Status of a transaction within the ACH lifecycle.
+     */
+    @JsonIgnore
+    public ACHTransactionStatus status() {
+        return status;
     }
 
     @JsonIgnore
@@ -69,6 +88,15 @@ public class ACHDebitTransferProcessingDetails {
         return new Builder();
     }
 
+
+    /**
+     * Status of a transaction within the ACH lifecycle.
+     */
+    public ACHDebitTransferProcessingDetails withStatus(ACHTransactionStatus status) {
+        Utils.checkNotNull(status, "status");
+        this.status = status;
+        return this;
+    }
 
     public ACHDebitTransferProcessingDetails withTraceNumber(String traceNumber) {
         Utils.checkNotNull(traceNumber, "traceNumber");
@@ -112,6 +140,7 @@ public class ACHDebitTransferProcessingDetails {
         }
         ACHDebitTransferProcessingDetails other = (ACHDebitTransferProcessingDetails) o;
         return 
+            Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.traceNumber, other.traceNumber) &&
             Utils.enhancedDeepEquals(this.return_, other.return_) &&
             Utils.enhancedDeepEquals(this.correction, other.correction);
@@ -120,12 +149,14 @@ public class ACHDebitTransferProcessingDetails {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            traceNumber, return_, correction);
+            status, traceNumber, return_,
+            correction);
     }
     
     @Override
     public String toString() {
         return Utils.toString(ACHDebitTransferProcessingDetails.class,
+                "status", status,
                 "traceNumber", traceNumber,
                 "return_", return_,
                 "correction", correction);
@@ -133,6 +164,8 @@ public class ACHDebitTransferProcessingDetails {
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
+
+        private ACHTransactionStatus status;
 
         private String traceNumber;
 
@@ -142,6 +175,16 @@ public class ACHDebitTransferProcessingDetails {
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Status of a transaction within the ACH lifecycle.
+         */
+        public Builder status(ACHTransactionStatus status) {
+            Utils.checkNotNull(status, "status");
+            this.status = status;
+            return this;
         }
 
 
@@ -180,7 +223,8 @@ public class ACHDebitTransferProcessingDetails {
         public ACHDebitTransferProcessingDetails build() {
 
             return new ACHDebitTransferProcessingDetails(
-                traceNumber, return_, correction);
+                status, traceNumber, return_,
+                correction);
         }
 
     }

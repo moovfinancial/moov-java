@@ -26,6 +26,13 @@ public class IssuedCardAuthorization {
     @JsonProperty("issuedCardID")
     private String issuedCardID;
 
+    /**
+     * Last four digits of the card number. Omitted for authorizations recorded before this was captured.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("lastFourCardNumber")
+    private Optional<String> lastFourCardNumber;
+
 
     @JsonProperty("fundingWalletID")
     private String fundingWalletID;
@@ -68,6 +75,7 @@ public class IssuedCardAuthorization {
     public IssuedCardAuthorization(
             @JsonProperty("authorizationID") String authorizationID,
             @JsonProperty("issuedCardID") String issuedCardID,
+            @JsonProperty("lastFourCardNumber") Optional<String> lastFourCardNumber,
             @JsonProperty("fundingWalletID") String fundingWalletID,
             @JsonProperty("network") CardIssuingNetwork network,
             @JsonProperty("authorizedAmount") String authorizedAmount,
@@ -77,6 +85,7 @@ public class IssuedCardAuthorization {
             @JsonProperty("cardTransactions") Optional<? extends List<String>> cardTransactions) {
         Utils.checkNotNull(authorizationID, "authorizationID");
         Utils.checkNotNull(issuedCardID, "issuedCardID");
+        Utils.checkNotNull(lastFourCardNumber, "lastFourCardNumber");
         Utils.checkNotNull(fundingWalletID, "fundingWalletID");
         Utils.checkNotNull(network, "network");
         Utils.checkNotNull(authorizedAmount, "authorizedAmount");
@@ -86,6 +95,7 @@ public class IssuedCardAuthorization {
         Utils.checkNotNull(cardTransactions, "cardTransactions");
         this.authorizationID = authorizationID;
         this.issuedCardID = issuedCardID;
+        this.lastFourCardNumber = lastFourCardNumber;
         this.fundingWalletID = fundingWalletID;
         this.network = network;
         this.authorizedAmount = authorizedAmount;
@@ -104,9 +114,10 @@ public class IssuedCardAuthorization {
             IssuingAuthorizationStatus status,
             IssuingMerchantData merchantData,
             OffsetDateTime createdOn) {
-        this(authorizationID, issuedCardID, fundingWalletID,
-            network, authorizedAmount, status,
-            merchantData, createdOn, Optional.empty());
+        this(authorizationID, issuedCardID, Optional.empty(),
+            fundingWalletID, network, authorizedAmount,
+            status, merchantData, createdOn,
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -117,6 +128,14 @@ public class IssuedCardAuthorization {
     @JsonIgnore
     public String issuedCardID() {
         return issuedCardID;
+    }
+
+    /**
+     * Last four digits of the card number. Omitted for authorizations recorded before this was captured.
+     */
+    @JsonIgnore
+    public Optional<String> lastFourCardNumber() {
+        return lastFourCardNumber;
     }
 
     @JsonIgnore
@@ -182,6 +201,25 @@ public class IssuedCardAuthorization {
     public IssuedCardAuthorization withIssuedCardID(String issuedCardID) {
         Utils.checkNotNull(issuedCardID, "issuedCardID");
         this.issuedCardID = issuedCardID;
+        return this;
+    }
+
+    /**
+     * Last four digits of the card number. Omitted for authorizations recorded before this was captured.
+     */
+    public IssuedCardAuthorization withLastFourCardNumber(String lastFourCardNumber) {
+        Utils.checkNotNull(lastFourCardNumber, "lastFourCardNumber");
+        this.lastFourCardNumber = Optional.ofNullable(lastFourCardNumber);
+        return this;
+    }
+
+
+    /**
+     * Last four digits of the card number. Omitted for authorizations recorded before this was captured.
+     */
+    public IssuedCardAuthorization withLastFourCardNumber(Optional<String> lastFourCardNumber) {
+        Utils.checkNotNull(lastFourCardNumber, "lastFourCardNumber");
+        this.lastFourCardNumber = lastFourCardNumber;
         return this;
     }
 
@@ -262,6 +300,7 @@ public class IssuedCardAuthorization {
         return 
             Utils.enhancedDeepEquals(this.authorizationID, other.authorizationID) &&
             Utils.enhancedDeepEquals(this.issuedCardID, other.issuedCardID) &&
+            Utils.enhancedDeepEquals(this.lastFourCardNumber, other.lastFourCardNumber) &&
             Utils.enhancedDeepEquals(this.fundingWalletID, other.fundingWalletID) &&
             Utils.enhancedDeepEquals(this.network, other.network) &&
             Utils.enhancedDeepEquals(this.authorizedAmount, other.authorizedAmount) &&
@@ -274,9 +313,10 @@ public class IssuedCardAuthorization {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            authorizationID, issuedCardID, fundingWalletID,
-            network, authorizedAmount, status,
-            merchantData, createdOn, cardTransactions);
+            authorizationID, issuedCardID, lastFourCardNumber,
+            fundingWalletID, network, authorizedAmount,
+            status, merchantData, createdOn,
+            cardTransactions);
     }
     
     @Override
@@ -284,6 +324,7 @@ public class IssuedCardAuthorization {
         return Utils.toString(IssuedCardAuthorization.class,
                 "authorizationID", authorizationID,
                 "issuedCardID", issuedCardID,
+                "lastFourCardNumber", lastFourCardNumber,
                 "fundingWalletID", fundingWalletID,
                 "network", network,
                 "authorizedAmount", authorizedAmount,
@@ -299,6 +340,8 @@ public class IssuedCardAuthorization {
         private String authorizationID;
 
         private String issuedCardID;
+
+        private Optional<String> lastFourCardNumber = Optional.empty();
 
         private String fundingWalletID;
 
@@ -329,6 +372,25 @@ public class IssuedCardAuthorization {
         public Builder issuedCardID(String issuedCardID) {
             Utils.checkNotNull(issuedCardID, "issuedCardID");
             this.issuedCardID = issuedCardID;
+            return this;
+        }
+
+
+        /**
+         * Last four digits of the card number. Omitted for authorizations recorded before this was captured.
+         */
+        public Builder lastFourCardNumber(String lastFourCardNumber) {
+            Utils.checkNotNull(lastFourCardNumber, "lastFourCardNumber");
+            this.lastFourCardNumber = Optional.ofNullable(lastFourCardNumber);
+            return this;
+        }
+
+        /**
+         * Last four digits of the card number. Omitted for authorizations recorded before this was captured.
+         */
+        public Builder lastFourCardNumber(Optional<String> lastFourCardNumber) {
+            Utils.checkNotNull(lastFourCardNumber, "lastFourCardNumber");
+            this.lastFourCardNumber = lastFourCardNumber;
             return this;
         }
 
@@ -406,9 +468,10 @@ public class IssuedCardAuthorization {
         public IssuedCardAuthorization build() {
 
             return new IssuedCardAuthorization(
-                authorizationID, issuedCardID, fundingWalletID,
-                network, authorizedAmount, status,
-                merchantData, createdOn, cardTransactions);
+                authorizationID, issuedCardID, lastFourCardNumber,
+                fundingWalletID, network, authorizedAmount,
+                status, merchantData, createdOn,
+                cardTransactions);
         }
 
     }

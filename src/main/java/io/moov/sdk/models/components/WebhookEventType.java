@@ -64,6 +64,7 @@ public class WebhookEventType {
     public static final WebhookEventType WALLET_TRANSACTION_UPDATED = new WebhookEventType("walletTransaction.updated");
     public static final WebhookEventType BILLING_STATEMENT_CREATED = new WebhookEventType("billingStatement.created");
     public static final WebhookEventType AUTHORIZATION_EXPIRING = new WebhookEventType("authorization.expiring");
+    public static final WebhookEventType EVENT_TEST = new WebhookEventType("event.test");
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -176,6 +177,7 @@ public class WebhookEventType {
         map.put("walletTransaction.updated", WALLET_TRANSACTION_UPDATED);
         map.put("billingStatement.created", BILLING_STATEMENT_CREATED);
         map.put("authorization.expiring", AUTHORIZATION_EXPIRING);
+        map.put("event.test", EVENT_TEST);
         return map;
     }
 
@@ -220,6 +222,7 @@ public class WebhookEventType {
         map.put("walletTransaction.updated", WebhookEventTypeEnum.WALLET_TRANSACTION_UPDATED);
         map.put("billingStatement.created", WebhookEventTypeEnum.BILLING_STATEMENT_CREATED);
         map.put("authorization.expiring", WebhookEventTypeEnum.AUTHORIZATION_EXPIRING);
+        map.put("event.test", WebhookEventTypeEnum.EVENT_TEST);
         return map;
     }
     
@@ -264,7 +267,8 @@ public class WebhookEventType {
         WALLET_UPDATED("wallet.updated"),
         WALLET_TRANSACTION_UPDATED("walletTransaction.updated"),
         BILLING_STATEMENT_CREATED("billingStatement.created"),
-        AUTHORIZATION_EXPIRING("authorization.expiring"),;
+        AUTHORIZATION_EXPIRING("authorization.expiring"),
+        EVENT_TEST("event.test"),;
 
         private final String value;
 

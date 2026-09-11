@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: f38cb61a6bea573a998e2c1f645728e0
+  docChecksum: fa9f60420d4811553b0d2a305e9e00d2
   docVersion: v2026.01.00
   speakeasyVersion: 1.796.4
   generationVersion: 2.935.1
-  releaseVersion: 26.4.0
-  configChecksum: 9b446a0e75a9c8b3ea1965f40e2326c0
+  releaseVersion: 26.4.1
+  configChecksum: dcce70e6563632a5f5260782a0c151ea
   repoURL: https://github.com/moovfinancial/moov-java.git
   installationURL: https://github.com/moovfinancial/moov-java
   published: true
 persistentEdits:
-  generation_id: 4ad3ba14-c48a-4c55-879a-e9c5335fe168
-  pristine_commit_hash: d6569afb7c17e2b398508520b8b74f63064c67f3
-  pristine_tree_hash: 492b107d1e0001f5107aef771317f2164753995b
+  generation_id: b7dc786e-442a-4d71-8581-98840d032998
+  pristine_commit_hash: 9abee27af7c9b8f267323681206c59ec9f4b83d9
+  pristine_tree_hash: 60d28996bd77f749666cf725bca06fb66ca0425e
 features:
   java:
     acceptHeaders: 2.81.2
@@ -1261,8 +1261,8 @@ trackedFiles:
     pristine_git_object: c1980b2638cb87765feadca82c06798b9ab31979
   docs/models/components/IssuedCardAuthorization.md:
     id: dfdaa9fea5cd
-    last_write_checksum: sha1:576b087d859e76b0a8da5df4b787c54936583355
-    pristine_git_object: d9584017461bcaa94c78dec3697eb22722dc078f
+    last_write_checksum: sha1:91db5221087561205fc5f71b6546d7e590af53a6
+    pristine_git_object: 580c413055cd3beface32f06aca6e8c690a59ccf
   docs/models/components/IssuedCardAuthorizationEvent.md:
     id: 593227efb691
     last_write_checksum: sha1:a74c82b0e6f69c1b39d3b5cc65f5f40306d6d6fa
@@ -1285,8 +1285,8 @@ trackedFiles:
     pristine_git_object: 5048d5dd92f4f634ce99391e60232451f4c4a91e
   docs/models/components/IssuedCardTransaction.md:
     id: de11d2ce7f86
-    last_write_checksum: sha1:337cb23c88062ed18781aab69e3bf58922d06de3
-    pristine_git_object: 9d00a0b31a660b80eaee927d675f01ff8bd6b721
+    last_write_checksum: sha1:aaf59ef67ca5f69a1de1df28851a694fe941a98d
+    pristine_git_object: df902e5407e658ad0613d661c26ac9b1ea336f03
   docs/models/components/IssuingAuthorizationStatus.md:
     id: 660e3e0ca7b8
     last_write_checksum: sha1:bc80c4dff21dbf8053a8b03f5c5d970149172d1d
@@ -2419,6 +2419,10 @@ trackedFiles:
     id: 76d122ff89e3
     last_write_checksum: sha1:bb7c9f783b50d696ab98490d808a45adaa5270e4
     pristine_git_object: 63d2107caa13a620f9b238b414afffaf3e7c8a0e
+  docs/models/components/WebhookDataEventTest.md:
+    id: 1fe28c719164
+    last_write_checksum: sha1:3798b791ce74dd1489d16c799dd87e85f0eb26bd
+    pristine_git_object: 44d9307c8bb96cd555558919b13abcdcafb087e9
   docs/models/components/WebhookDataInvoiceCreated.md:
     id: 35112b86fe98
     last_write_checksum: sha1:53d35c50f610a91dd53e2390e5a95d82c009c3c3
@@ -2517,8 +2521,8 @@ trackedFiles:
     pristine_git_object: f9989ebcf0017393cbbba380f9c1c357bf79e748
   docs/models/components/WebhookEventType.md:
     id: b443ab58ee9b
-    last_write_checksum: sha1:a7df259da80dc2ea20cdd322f59510195b89b49e
-    pristine_git_object: 72329114201482fc49a87958f5ae400abe841168
+    last_write_checksum: sha1:fad7e09d6805ba44278c1a2202f7c63d763db1ec
+    pristine_git_object: 592a5311989d57ecc6d6bcc21eb8099e3baba582
   docs/models/components/WebhookSecret.md:
     id: 8cf8cef32df7
     last_write_checksum: sha1:0dde129b4e644579304961270513a4bd344d5698
@@ -4237,8 +4241,8 @@ trackedFiles:
     pristine_git_object: 9b40f611aaace5afe9cf7cadc73ff2301fe51e80
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:ea2333723904bc0a9f7f8106be8abd75f1df71d1
-    pristine_git_object: 61b0de8dccfaaeb95ecdefb15ae5ad77d4185835
+    last_write_checksum: sha1:d5f3f36155cdf9cfeba2d2b40d6448880b741bd5
+    pristine_git_object: a2b51dff95feca3ec0434d160c9eda053513a257
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4381,8 +4385,8 @@ trackedFiles:
     pristine_git_object: 64047d75ebffa5dbfe6b7461ed4d624f01890a51
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:882d6029e1903838016afe4dcfabbacaf8459d58
-    pristine_git_object: 144f078720ab19084deb9f496a26671b420c227b
+    last_write_checksum: sha1:d8d9f6e5606f60294d119c85ca465473d1e9cb2f
+    pristine_git_object: 097becabe2600ae7eec3b13ba98a0112240194ad
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:2aa78df693ba5a47e50fe360e4802f9f4247c1f1
@@ -5641,8 +5645,8 @@ trackedFiles:
     pristine_git_object: 78e80f332165e4789e5e5055c0723a60aee029c0
   src/main/java/io/moov/sdk/models/components/IssuedCardAuthorization.java:
     id: 3532b7daeec8
-    last_write_checksum: sha1:9fb25fc8899ce3238911ce0af7b8c247ea1644be
-    pristine_git_object: 9f1b4d7cc86793cacc9a9ab6223aaf63a3e9e050
+    last_write_checksum: sha1:d38004b7ab5e280ce77c2a041e7c50cf1145abee
+    pristine_git_object: 65abebc355cc19dc210bcb10bb75aa4bf4e8dca6
   src/main/java/io/moov/sdk/models/components/IssuedCardAuthorizationEvent.java:
     id: 58e842eb929b
     last_write_checksum: sha1:aa9610889fe7f49a0b4f443786e0d58e6686dc44
@@ -5665,8 +5669,8 @@ trackedFiles:
     pristine_git_object: 1b53f27e38d9ac106f36eb4f137bfd7a47167f4d
   src/main/java/io/moov/sdk/models/components/IssuedCardTransaction.java:
     id: 1cdeb6ad026e
-    last_write_checksum: sha1:8fdfc31ed808b9f4102aeb786bf528ee0e4d9237
-    pristine_git_object: 2adbdda79265fcae0ed5bed66f4520edaae54548
+    last_write_checksum: sha1:3fc7b5d27544872bc1732e10b3327a782079674c
+    pristine_git_object: 97467f3d60e0385569bc8bddaa2b93630d944169
   src/main/java/io/moov/sdk/models/components/IssuingAuthorizationStatus.java:
     id: b18ef1b657ef
     last_write_checksum: sha1:6804879e756ccce35bc2194f2ee3db435c84075f
@@ -6753,8 +6757,8 @@ trackedFiles:
     pristine_git_object: f6ee594458231561ef946d6f2f100f18b29d6163
   src/main/java/io/moov/sdk/models/components/WebhookData.java:
     id: a4995f7df2ac
-    last_write_checksum: sha1:4b3334d9591dff21bab2619a70e414b8bce0de17
-    pristine_git_object: b36ed6d3ab9363fbe0cc98b104978d6e19c0c0c0
+    last_write_checksum: sha1:f45c2c0290aea723107ef3ae202bfa872b32bc6b
+    pristine_git_object: 6d1d9faafa5115ccdb28a819e06fec013de7e7f9
   src/main/java/io/moov/sdk/models/components/WebhookDataAccountCreated.java:
     id: 4a69bb956b03
     last_write_checksum: sha1:cdfbefaf3612be4ad89d247a442e0120c8ff1302
@@ -6815,6 +6819,10 @@ trackedFiles:
     id: 8696d93c6d2f
     last_write_checksum: sha1:2ed29712fcdf9f0d481cd837439cdba0340064fc
     pristine_git_object: 612a932d99c6c94fbaf20056c2f5e70e28a7c828
+  src/main/java/io/moov/sdk/models/components/WebhookDataEventTest.java:
+    id: e2cbbbbd86d0
+    last_write_checksum: sha1:15e27508d7b9759ab71cd724af841003c4c57223
+    pristine_git_object: 882434c68ccc2f9a41e1433ea9eddc1c76c519d3
   src/main/java/io/moov/sdk/models/components/WebhookDataInvoiceCreated.java:
     id: 8d78d00e5d23
     last_write_checksum: sha1:57cb86c449a4b216f4cd8fd8c2176ddcbac260bc
@@ -6913,8 +6921,8 @@ trackedFiles:
     pristine_git_object: 0b08d62577a7d7938a81fd1882244613b12fe51f
   src/main/java/io/moov/sdk/models/components/WebhookEventType.java:
     id: 24ca672fc22c
-    last_write_checksum: sha1:50f8e98514da80174f8fc58f050b4bbcf07aa884
-    pristine_git_object: ee61aa94ddbb27739956a3c6db471bc95ede7330
+    last_write_checksum: sha1:612d51cf5dc573bb08e0fe0037c449b27ba56849
+    pristine_git_object: be29d8b6b61ebeed8373623fd84625d00b095832
   src/main/java/io/moov/sdk/models/components/WebhookSecret.java:
     id: 26efdc4ad0f9
     last_write_checksum: sha1:a8be65343b9d321ccc0e7692120470814d1171ea
@@ -12884,7 +12892,7 @@ examples:
           application/json: [{"cancellationID": "89ca7f54-13ba-4714-b9af-17163eae2057", "status": "completed", "createdOn": "2025-01-19T03:02:43.255309588Z"}]
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes:\n* `moov.accounts.connect()`: \n  *  `request.shareScopes.allowScopes[]` **Changed** (Breaking ⚠️)\n* `moov.onboarding.getInvite()`:  `response.scopes[]` **Changed** (Breaking ⚠️)\n* `moov.onboarding.listInvites()`:  `response.[].scopes[]` **Changed** (Breaking ⚠️)\n* `moov.onboarding.createInvite()`: \n  *  `request.scopes[]` **Changed** (Breaking ⚠️)\n  *  `response.scopes[]` **Changed** (Breaking ⚠️)\n* `moov.transfers.listCancellations()`:  `error.status[404]` **Added**\n* `moov.cardIssuing.request()`:  `response.state.enum(frozen)` **Added**\n* `moov.feePlans.listPartnerPricingAgreements()`:  `response.[]` **Changed**\n* `moov.statements.list()`:  `response.[]` **Changed**\n* `moov.statements.get()`:  `response` **Changed**\n* `moov.transfers.createCancellation()`:  `error` **Changed**\n* `moov.feePlans.listFeePlanAgreements()`:  `response.[]` **Changed**\n* `moov.transfers.listRefunds()`:  `error.status[404]` **Added**\n* `moov.issuingTransactions.list()`: \n  *  `request.merchantName` **Added**\n* `moov.feePlans.createFeePlanAgreements()`: \n  *  `request.createFeePlanAgreement.priorAgreementId` **Added**\n  *  `response` **Changed**\n* `moov.cardIssuing.list()`: \n  *  `request.states` **Changed**\n  *  `response.[].state.enum(frozen)` **Added**\n* `moov.cardIssuing.get()`:  `response.state.enum(frozen)` **Added**\n* `moov.cardIssuing.update()`: \n  *  `request.updateIssuedCard.state` **Changed**\n  *  `response.state.enum(frozen)` **Added**\n* `moov.cardIssuing.getFull()`:  `response.state.enum(frozen)` **Added**\n* `moov.capabilities.get()`:  `response.requirements.currentlyDue[]` **Changed**\n* `moov.capabilities.request()`:  `response.[].requirements.currentlyDue[]` **Changed**\n* `moov.capabilities.list()`:  `response.[].requirements.currentlyDue[]` **Changed**\n"
+releaseNotes: "## Java SDK Changes:\n* `moov.webhooks.list()`:  `response.[].eventTypes[].enum(event.test)` **Added**\n* `moov.webhooks.create()`: \n  *  `request.eventTypes[].enum(event.test)` **Added**\n  *  `response.eventTypes[].enum(event.test)` **Added**\n* `moov.webhooks.get()`:  `response.eventTypes[].enum(event.test)` **Added**\n* `moov.webhooks.update()`: \n  *  `request.updateWebhook.eventTypes[].enum(event.test)` **Added**\n  *  `response.eventTypes[].enum(event.test)` **Added**\n* `moov.webhooks.ping()`:  `response.webhook.eventTypes[].enum(event.test)` **Added**\n* `moov.issuingTransactions.listAuthorizations()`:  `response.[].lastFourCardNumber` **Added**\n* `moov.issuingTransactions.getAuthorization()`:  `response.lastFourCardNumber` **Added**\n* `moov.issuingTransactions.list()`:  `response.[].lastFourCardNumber` **Added**\n* `moov.issuingTransactions.get()`:  `response.lastFourCardNumber` **Added**\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

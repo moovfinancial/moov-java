@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 6f5ccdb3520f592cc31c66dfc074850a
+  docChecksum: 9473cf94c9c56a3400f2c3c0e5f280bb
   docVersion: v2026.10.00
   speakeasyVersion: 1.796.4
   generationVersion: 2.935.1
-  releaseVersion: 26.10.0-dev.4
-  configChecksum: 353c242dfd0745552b45c9fdbf8868ff
+  releaseVersion: 26.10.0-dev.5
+  configChecksum: c24c5e6d3a8d269449ee57538620f82d
   repoURL: https://github.com/moovfinancial/moov-java.git
   installationURL: https://github.com/moovfinancial/moov-java
   published: true
 persistentEdits:
-  generation_id: 2385c326-cd0f-4884-93e5-67c7e3799bdb
-  pristine_commit_hash: b567c66a98e841604b3eb2cb6b36deb8dd4d2cf4
-  pristine_tree_hash: 554d91e833192e54a7446c92c68a980154cbaeec
+  generation_id: 52ba5794-e4df-4503-a22b-9f87d2f3bace
+  pristine_commit_hash: 4bc7488cd9c532dfe4f2fc840328bc47cc04291b
+  pristine_tree_hash: fb221f8b8e1125a122ba162b11b7fda64051e627
 features:
   java:
     acceptHeaders: 2.81.2
@@ -674,8 +674,8 @@ trackedFiles:
     pristine_git_object: dc9aaf18c0f87310eb37cd9583840f78e9fcf148
   docs/models/components/CardPaymentTransactionStatus.md:
     id: 7a2889004577
-    last_write_checksum: sha1:b6887e2edb3a179d3740511421e1b274981d0565
-    pristine_git_object: c56e64abe3e41c49ca10d4942b36daaee79c949f
+    last_write_checksum: sha1:faa76aa3b089108836138084f456f4561cf280f4
+    pristine_git_object: 4e39f211fdee4c917896278bfebee53bf832f3ad
   docs/models/components/CardPaymentTransferPaymentMethod.md:
     id: b6eeb0f96226
     last_write_checksum: sha1:9dfdc1385229c968f745152702064a838fd31073
@@ -5178,8 +5178,8 @@ trackedFiles:
     pristine_git_object: 9b40f611aaace5afe9cf7cadc73ff2301fe51e80
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:1008579efb7c6ffb0dd197e091893645267a4e47
-    pristine_git_object: cf3a967f76b2a7d0e9ae6e16a805c1ee752975af
+    last_write_checksum: sha1:c575fd608139a77c097953e56bd3fbfda2c9ee11
+    pristine_git_object: 4246b6df90093d207bd5bbfc68ebf0f3346ae38f
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -5338,8 +5338,8 @@ trackedFiles:
     pristine_git_object: 72495cf1b905a82c978c8ca472b53f9c9cecccbd
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:492c2c5d57451522b19c6c27c23dacaef4a3024a
-    pristine_git_object: c3d7629610d3a5f4bdb31af75340a5f4572b3ef2
+    last_write_checksum: sha1:ab84c59d3bed90afcd5f7f1dcf8dfaa78cde1c77
+    pristine_git_object: c9a43446c689307235ebd5f270596be58e95b76b
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:2aa78df693ba5a47e50fe360e4802f9f4247c1f1
@@ -6018,8 +6018,8 @@ trackedFiles:
     pristine_git_object: 2104eb90606356f40c36c6555acf093128314c91
   src/main/java/io/moov/sdk/models/components/CardPaymentTransactionStatus.java:
     id: 344d5ec69f01
-    last_write_checksum: sha1:a271c4375932b4ad91ae6236ba98501371e7453f
-    pristine_git_object: 3504857082b57e692407f4d5df59a13e3361df9c
+    last_write_checksum: sha1:82b47c19316c540196e65cb05624c5a5035181d6
+    pristine_git_object: 8ce4cf464a7da079200d4f3e491b0bf131c280a5
   src/main/java/io/moov/sdk/models/components/CardPaymentTransferPaymentMethod.java:
     id: 28395465dca6
     last_write_checksum: sha1:820753fc9277f5785397bfcefaacd920d197c958
@@ -15259,7 +15259,7 @@ examples:
           application/json: {"error": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes:\n* `moov.webhooks.list()`:  `response.[].eventTypes[].enum(event.test)` **Added**\n* `moov.webhooks.create()`: \n  *  `request.eventTypes[].enum(event.test)` **Added**\n  *  `response.eventTypes[].enum(event.test)` **Added**\n* `moov.webhooks.get()`:  `response.eventTypes[].enum(event.test)` **Added**\n* `moov.webhooks.update()`: \n  *  `request.updateWebhook.eventTypes[].enum(event.test)` **Added**\n  *  `response.eventTypes[].enum(event.test)` **Added**\n* `moov.webhooks.ping()`:  `response.webhook.eventTypes[].enum(event.test)` **Added**\n* `moov.issuingTransactions.listAuthorizations()`:  `response.[].lastFourCardNumber` **Added**\n* `moov.issuingTransactions.getAuthorization()`:  `response.lastFourCardNumber` **Added**\n* `moov.issuingTransactions.list()`:  `response.[].lastFourCardNumber` **Added**\n* `moov.issuingTransactions.get()`:  `response.lastFourCardNumber` **Added**\n"
+releaseNotes: "## Java SDK Changes:\n* `moov.transfers.create()`: \n  *  `response.processingDetails.cardPayment.status.enum(clearedExternal)` **Added**\n  *  `error.processingDetails.cardPayment.status.enum(clearedExternal)` **Added**\n* `moov.transfers.list()`:  `response.[].processingDetails.cardPayment.status.enum(clearedExternal)` **Added**\n* `moov.transfers.batchGetTransfers()`:  `response.Map<Transfer>.processingDetails.cardPayment.status.enum(clearedExternal)` **Added**\n* `moov.transfers.get()`:  `response.processingDetails.cardPayment.status.enum(clearedExternal)` **Added**\n* `moov.transfers.update()`:  `response.processingDetails.cardPayment.status.enum(clearedExternal)` **Added**\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

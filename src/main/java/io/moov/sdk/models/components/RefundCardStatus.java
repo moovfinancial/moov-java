@@ -25,6 +25,7 @@ public class RefundCardStatus {
     public static final RefundCardStatus SETTLED = new RefundCardStatus("settled");
     public static final RefundCardStatus FAILED = new RefundCardStatus("failed");
     public static final RefundCardStatus COMPLETED = new RefundCardStatus("completed");
+    public static final RefundCardStatus CLEARED_EXTERNAL = new RefundCardStatus("cleared-external");
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -103,6 +104,7 @@ public class RefundCardStatus {
         map.put("settled", SETTLED);
         map.put("failed", FAILED);
         map.put("completed", COMPLETED);
+        map.put("cleared-external", CLEARED_EXTERNAL);
         return map;
     }
 
@@ -113,6 +115,7 @@ public class RefundCardStatus {
         map.put("settled", RefundCardStatusEnum.SETTLED);
         map.put("failed", RefundCardStatusEnum.FAILED);
         map.put("completed", RefundCardStatusEnum.COMPLETED);
+        map.put("cleared-external", RefundCardStatusEnum.CLEARED_EXTERNAL);
         return map;
     }
     
@@ -123,7 +126,8 @@ public class RefundCardStatus {
         CONFIRMED("confirmed"),
         SETTLED("settled"),
         FAILED("failed"),
-        COMPLETED("completed"),;
+        COMPLETED("completed"),
+        CLEARED_EXTERNAL("cleared-external"),;
 
         private final String value;
 

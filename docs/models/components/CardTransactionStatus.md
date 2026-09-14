@@ -16,12 +16,13 @@ CardTransactionStatus custom = CardTransactionStatus.of("custom_value");
 
 ## Values
 
-| Name        | Value       |
-| ----------- | ----------- |
-| `INITIATED` | initiated   |
-| `CONFIRMED` | confirmed   |
-| `CANCELED`  | canceled    |
-| `SETTLED`   | settled     |
-| `FAILED`    | failed      |
-| `COMPLETED` | completed   |
-| `DEFERRED`  | deferred    |
+| Name               | Value              |
+| ------------------ | ------------------ |
+| `INITIATED`        | initiated          |
+| `CONFIRMED`        | confirmed          |
+| `CANCELED`         | canceled           |
+| `SETTLED`          | settled            |
+| `FAILED`           | failed             |
+| `COMPLETED`        | completed          |
+| `CLEARED_EXTERNAL` | cleared-external   |
+| `DEFERRED`         | deferred           |

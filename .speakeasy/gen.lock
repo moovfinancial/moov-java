@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 1dfd2c2546fc94ac71aaa25839a7a3be
+  docChecksum: 49991f95fb64ecfe9256a02a0ef42730
   docVersion: v2025.07.00
   speakeasyVersion: 1.796.4
   generationVersion: 2.935.1
-  releaseVersion: 25.10.1
-  configChecksum: a0eabf6ed0d6625bfdcefa2eea74d7a3
+  releaseVersion: 25.10.2
+  configChecksum: 212b8aa8807bc10451ba6d276e53dbf8
   repoURL: https://github.com/moovfinancial/moov-java.git
   installationURL: https://github.com/moovfinancial/moov-java
   published: true
 persistentEdits:
-  generation_id: 6525f63a-9766-44f9-8c0f-5c5686e6761b
-  pristine_commit_hash: 0a15002ff5feb42a81492f6d6c26a588d75dbf30
-  pristine_tree_hash: 1135a46f93bfe6759c0bd516e66e7022bd02ffc9
+  generation_id: 9942bead-aded-41a6-ade6-d4f6d60df2d8
+  pristine_commit_hash: afd2ff7b900f9d0864c3cca002baefe963384b0b
+  pristine_tree_hash: aacc2d83fef61a26c599227bfc2b1d0dd8d94783
 features:
   java:
     acceptHeaders: 2.81.2
@@ -601,8 +601,8 @@ trackedFiles:
     pristine_git_object: ea4dc51c9a462dc7a3bcc5c151e688bdafb575e6
   docs/models/components/CardTransactionStatus.md:
     id: 12de37967d99
-    last_write_checksum: sha1:5646c37c4e0090702e9a9272792908007e38a088
-    pristine_git_object: 042c913a460609e80a6238f511f4bafeb9f9e414
+    last_write_checksum: sha1:85bb778b4c460eb3801b27930e0bd4693140e4be
+    pristine_git_object: e06895990081090bf79becb89b33bad23b04c66f
   docs/models/components/CardType.md:
     id: 43bef473d066
     last_write_checksum: sha1:dca38adbf43e2921608719d4b4cbb36b34109b5c
@@ -1777,8 +1777,8 @@ trackedFiles:
     pristine_git_object: 355904d4b7d62f8f574e37c3bd288d403f72d277
   docs/models/components/RefundCardStatus.md:
     id: db7bd11a624f
-    last_write_checksum: sha1:34a60d38876e208c1e9acada0cbf7fa09870ea65
-    pristine_git_object: 8f2b7837aa73eccd90fbb1fefe5055172595fe10
+    last_write_checksum: sha1:cde5fef0b3fcf5b96f6ab9701740c031f52f9462
+    pristine_git_object: df742ce6f71b295e3eeb44206f79cdf22c7515b9
   docs/models/components/RefundPolicy.md:
     id: 2bd56585c597
     last_write_checksum: sha1:a9f243a77d3d0b37798d087d3cd6990804042c54
@@ -4225,8 +4225,8 @@ trackedFiles:
     pristine_git_object: 9b40f611aaace5afe9cf7cadc73ff2301fe51e80
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:7886f8b8df5da14c285e2e2b3e0507363e697fa2
-    pristine_git_object: 6bdf4b75935d1353a327d3f7c0215fd9e9e73e8b
+    last_write_checksum: sha1:8ffcbee4507baaca5b14d09b2288e5c5b7ea062c
+    pristine_git_object: 4b210084ce833c7e2ec62a40e0ea4ef960d86093
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4369,8 +4369,8 @@ trackedFiles:
     pristine_git_object: 64047d75ebffa5dbfe6b7461ed4d624f01890a51
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:1afab796fba08b42187c73daa89c5c480a9ec58c
-    pristine_git_object: ca27f8f7072eb2b89c0eb0ee96a4d406c5a56f05
+    last_write_checksum: sha1:d32c7f54b6009a9722ab100379adc889e7ffa81d
+    pristine_git_object: a3e611bd644215352539e0c3b2d7d7cfa2a7a59d
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:2aa78df693ba5a47e50fe360e4802f9f4247c1f1
@@ -4969,8 +4969,8 @@ trackedFiles:
     pristine_git_object: 0a6f7d6b239b43db0d7d55a8c2831013c978d90f
   src/main/java/io/moov/sdk/models/components/CardTransactionStatus.java:
     id: 351a54bca780
-    last_write_checksum: sha1:f58139161312d5a77bf60960e35840bf76493bcf
-    pristine_git_object: 8f194ac2316736ebb76eb36e85826660d7a711ff
+    last_write_checksum: sha1:c222196257d2a5aecd3deb7109d27eb3ebff8a4b
+    pristine_git_object: 0bb5404b338ef51009a40bae1ef195b40aa1e84c
   src/main/java/io/moov/sdk/models/components/CardType.java:
     id: 5a1fc33c557c
     last_write_checksum: sha1:171981ba3e058f1097fee26a6fd97de624fc2287
@@ -6149,8 +6149,8 @@ trackedFiles:
     pristine_git_object: 18c7bea4819d421e07d8fe815f941bcedc719d6b
   src/main/java/io/moov/sdk/models/components/RefundCardStatus.java:
     id: f2f0aa575fdd
-    last_write_checksum: sha1:5c844c3b5c7d727ac6430c5a17c911286e849214
-    pristine_git_object: 8e7fa7fb8dd2d9e31bae3f52f0e8f9311c6cfbf5
+    last_write_checksum: sha1:596684542b2dafa33b914a2e73059f173b4254d8
+    pristine_git_object: d92d7051e9b04c668bbae8f503f53f7c59f7d16f
   src/main/java/io/moov/sdk/models/components/RefundPolicy.java:
     id: c02bfd71917d
     last_write_checksum: sha1:9c4d514fcb4b34c5cca77fdc9cb9e9e25f2b893b
@@ -12860,7 +12860,7 @@ examples:
           application/json: [{"cancellationID": "89ca7f54-13ba-4714-b9af-17163eae2057", "status": "completed", "createdOn": "2025-01-19T03:02:43.255309588Z"}]
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes:\n* `moov.webhooks.list()`:  `response.[].eventTypes[].enum(event.test)` **Added**\n* `moov.webhooks.create()`: \n  *  `request.eventTypes[].enum(event.test)` **Added**\n  *  `response.eventTypes[].enum(event.test)` **Added**\n* `moov.webhooks.get()`:  `response.eventTypes[].enum(event.test)` **Added**\n* `moov.webhooks.update()`: \n  *  `request.updateWebhook.eventTypes[].enum(event.test)` **Added**\n  *  `response.eventTypes[].enum(event.test)` **Added**\n* `moov.webhooks.ping()`:  `response.webhook.eventTypes[].enum(event.test)` **Added**\n* `moov.issuingTransactions.listAuthorizations()`:  `response.[].lastFourCardNumber` **Added**\n* `moov.issuingTransactions.getAuthorization()`:  `response.lastFourCardNumber` **Added**\n* `moov.issuingTransactions.list()`:  `response.[].lastFourCardNumber` **Added**\n* `moov.issuingTransactions.get()`:  `response.lastFourCardNumber` **Added**\n"
+releaseNotes: "## Java SDK Changes:\n* `moov.transfers.create()`: \n  *  `response` **Changed**\n  *  `error` **Changed**\n* `moov.transfers.list()`:  `response.[]` **Changed**\n* `moov.transfers.batchGetTransfers()`:  `response.Map<Transfer>` **Changed**\n* `moov.transfers.get()`:  `response` **Changed**\n* `moov.transfers.update()`:  `response` **Changed**\n* `moov.transfers.initiateRefund()`: \n  *  `response` **Changed**\n  *  `error.cardDetails.status.enum(clearedExternal)` **Added**\n* `moov.transfers.listRefunds()`:  `response.[].cardDetails.status.enum(clearedExternal)` **Added**\n* `moov.transfers.getRefund()`:  `response.cardDetails.status.enum(clearedExternal)` **Added**\n* `moov.transfers.createReversal()`:  `response.union(ReversedWithRefund).refund.cardDetails.status.enum(clearedExternal)` **Added**\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

@@ -16,12 +16,12 @@ CardPaymentTransactionStatus custom = CardPaymentTransactionStatus.of("custom_va
 
 ## Values
 
-| Name               | Value              |
-| ------------------ | ------------------ |
-| `INITIATED`        | initiated          |
-| `CONFIRMED`        | confirmed          |
-| `CANCELED`         | canceled           |
-| `SETTLED`          | settled            |
-| `FAILED`           | failed             |
-| `COMPLETED`        | completed          |
-| `CLEARED_EXTERNAL` | cleared-external   |
+| Name                 | Value                |
+| -------------------- | -------------------- |
+| `INITIATED`          | initiated            |
+| `CONFIRMED`          | confirmed            |
+| `CANCELED`           | canceled             |
+| `SETTLED`            | settled              |
+| `FAILED`             | failed               |
+| `COMPLETED`          | completed            |
+| `CLEARED_EXTERNALLY` | cleared-externally   |

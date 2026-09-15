@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 9473cf94c9c56a3400f2c3c0e5f280bb
+  docChecksum: edd19981cb52f4512eb29763661026cd
   docVersion: v2026.10.00
-  speakeasyVersion: 1.796.4
-  generationVersion: 2.935.1
-  releaseVersion: 26.10.0-dev.5
-  configChecksum: c24c5e6d3a8d269449ee57538620f82d
+  speakeasyVersion: 1.797.0
+  generationVersion: 2.937.18
+  releaseVersion: 26.10.0-dev.6
+  configChecksum: 55ea9e555a66b396b5ee758e8f7a93a4
   repoURL: https://github.com/moovfinancial/moov-java.git
   installationURL: https://github.com/moovfinancial/moov-java
   published: true
 persistentEdits:
-  generation_id: 52ba5794-e4df-4503-a22b-9f87d2f3bace
-  pristine_commit_hash: 4bc7488cd9c532dfe4f2fc840328bc47cc04291b
-  pristine_tree_hash: fb221f8b8e1125a122ba162b11b7fda64051e627
+  generation_id: ed94bc4e-c15e-46fe-895a-6b56298adf86
+  pristine_commit_hash: 19c8c544fb29cba54c8af4567f20a04d1534eaa4
+  pristine_tree_hash: 165ba2417216a1e90939ba8d860ca2876b326c25
 features:
   java:
     acceptHeaders: 2.81.2
@@ -674,8 +674,8 @@ trackedFiles:
     pristine_git_object: dc9aaf18c0f87310eb37cd9583840f78e9fcf148
   docs/models/components/CardPaymentTransactionStatus.md:
     id: 7a2889004577
-    last_write_checksum: sha1:faa76aa3b089108836138084f456f4561cf280f4
-    pristine_git_object: 4e39f211fdee4c917896278bfebee53bf832f3ad
+    last_write_checksum: sha1:264dd5a2c7508d656f13922f9e7ee2859ce4fc5e
+    pristine_git_object: f2afc4660d76ebf9203d410842aa7566e6500804
   docs/models/components/CardPaymentTransferPaymentMethod.md:
     id: b6eeb0f96226
     last_write_checksum: sha1:9dfdc1385229c968f745152702064a838fd31073
@@ -5178,8 +5178,8 @@ trackedFiles:
     pristine_git_object: 9b40f611aaace5afe9cf7cadc73ff2301fe51e80
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:c575fd608139a77c097953e56bd3fbfda2c9ee11
-    pristine_git_object: 4246b6df90093d207bd5bbfc68ebf0f3346ae38f
+    last_write_checksum: sha1:828052123b3d18a3f6a77911a617cbd18beca031
+    pristine_git_object: e3eefa384d5798922024fb1d79055c1665e746e2
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -5338,8 +5338,8 @@ trackedFiles:
     pristine_git_object: 72495cf1b905a82c978c8ca472b53f9c9cecccbd
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:ab84c59d3bed90afcd5f7f1dcf8dfaa78cde1c77
-    pristine_git_object: c9a43446c689307235ebd5f270596be58e95b76b
+    last_write_checksum: sha1:2f015e064704ecd3ecedea7356ab71eab400aae5
+    pristine_git_object: cb0b8c5a6f1b3d01c71ef8629b803f155f4edd16
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:2aa78df693ba5a47e50fe360e4802f9f4247c1f1
@@ -6018,8 +6018,8 @@ trackedFiles:
     pristine_git_object: 2104eb90606356f40c36c6555acf093128314c91
   src/main/java/io/moov/sdk/models/components/CardPaymentTransactionStatus.java:
     id: 344d5ec69f01
-    last_write_checksum: sha1:82b47c19316c540196e65cb05624c5a5035181d6
-    pristine_git_object: 8ce4cf464a7da079200d4f3e491b0bf131c280a5
+    last_write_checksum: sha1:8adbeb54fe0d9f8c77819be718ad24026b0e668a
+    pristine_git_object: eab5323aa382538e27196f0f81559a5eadfaafe4
   src/main/java/io/moov/sdk/models/components/CardPaymentTransferPaymentMethod.java:
     id: 28395465dca6
     last_write_checksum: sha1:820753fc9277f5785397bfcefaacd920d197c958
@@ -8558,16 +8558,16 @@ trackedFiles:
     pristine_git_object: 9b6cf0bfd46ab11218367a2b58b4614514fb8d94
   src/main/java/io/moov/sdk/models/errors/AccountTerminalApplicationError.java:
     id: d26e81856859
-    last_write_checksum: sha1:f513ca12789e33636cfe57368f8adef4a9b2236b
-    pristine_git_object: 22d5bb997037c48a74ba927d87a71f92a03aa10a
+    last_write_checksum: sha1:37104b4b173a82d661e5e348f751853182bfb88c
+    pristine_git_object: c3f5fe088d04d965a8a7b6b5d63cfe4cceff2946
   src/main/java/io/moov/sdk/models/errors/AddCapabilitiesError.java:
     id: 95b03eb2dddc
-    last_write_checksum: sha1:3c682a395d277a2a93f05cd539941052d7188055
-    pristine_git_object: 843c3b7f57c1917adc1ea657f4a4e2ff02a9366f
+    last_write_checksum: sha1:b2774e2327a6874a56cc7667ecc339b721445eb3
+    pristine_git_object: fbf4b7558e03702344cbe5a261a5d0af096d13b4
   src/main/java/io/moov/sdk/models/errors/AssignCountriesError.java:
     id: 411e07ddd2f1
-    last_write_checksum: sha1:b4eb9d156f9a3c4dfbdbd1c90ec80b61d800d3fa
-    pristine_git_object: 4329b7a9c36e0a4a25c91685a76eac42cfb3a681
+    last_write_checksum: sha1:a18d33601cfc419c7cfb1e075d41767029f00375
+    pristine_git_object: 7b6159ca52aa04bad15cf48a77b6b962deca75ea
   src/main/java/io/moov/sdk/models/errors/AsyncAPIException.java:
     id: 60c16ad514ca
     last_write_checksum: sha1:a8acb4a610a67bdf7aef1517667d51a9917088e2
@@ -8578,256 +8578,256 @@ trackedFiles:
     pristine_git_object: ec6599b0a32588a4436f4355b42bf5223bf34c30
   src/main/java/io/moov/sdk/models/errors/AuthTokenRequestError.java:
     id: 72ccac035b07
-    last_write_checksum: sha1:6edd4785a4c575a00000b5d2f769356e40e33cf4
-    pristine_git_object: c8ffd23b496887c180b1eff9cb8e1f9cbb3060e2
+    last_write_checksum: sha1:191b3f01048a46733a5c00ac0b5dff3823209fb6
+    pristine_git_object: 2758852dbcb447c4b3d41e9e74e2dd081d434add
   src/main/java/io/moov/sdk/models/errors/BankAccountAttestationValidationError.java:
     id: df82e8111eda
-    last_write_checksum: sha1:e39416b67623767646dd7f43bb497c8d5659fe77
-    pristine_git_object: 04809722272ab15c83fc4138b5303b4594ef3432
+    last_write_checksum: sha1:feaf83984a1483d6a8a62dc80af10b674b3d0a11
+    pristine_git_object: 107cdccae4dfd05b5dcca938a41009426f432df8
   src/main/java/io/moov/sdk/models/errors/BankAccountValidationError.java:
     id: d60a77b54596
-    last_write_checksum: sha1:e5666680a0a49145a9f32b5b5cfbc3adfc838f01
-    pristine_git_object: 038653f00a38b245cd51254d51ae5e6dcc3e9061
+    last_write_checksum: sha1:c88590a50798f74267bb5422b287749954bd5dfe
+    pristine_git_object: 046ee55f2a02065955871fad53757a326dd4b28a
   src/main/java/io/moov/sdk/models/errors/BrandValidationError.java:
     id: 537994d9a7e3
-    last_write_checksum: sha1:0d9072773d219bdb026b8832db9c7275f9521141
-    pristine_git_object: 405c8a676cc250cb12971c407c817f46cccb3161
+    last_write_checksum: sha1:457c74748f6e236597c3e379d3676dd5352fc935
+    pristine_git_object: 75aa3a1fe3b8f713b828d725a5e3e10f5d87b3a4
   src/main/java/io/moov/sdk/models/errors/CaptureValidationError.java:
     id: 69944c255e4b
-    last_write_checksum: sha1:e97475e61503fc4bac9f71fa280b76b5f1842848
-    pristine_git_object: 1a8072e842f40daf41d273196bcbe55ef14f61b0
+    last_write_checksum: sha1:237b2b59b72556bfb582fa56ee77da95c1bb9dc8
+    pristine_git_object: 49c714ebc2fbb14542380be8dd92f063fb76c523
   src/main/java/io/moov/sdk/models/errors/CardAcquiringRefund.java:
     id: 1bb4c4264a2b
-    last_write_checksum: sha1:c7eb46868baf64c40111e4bc7e43fb82d16155c4
-    pristine_git_object: 202ddae3dbd583bae75839e27d92f7ca2fc3dc76
+    last_write_checksum: sha1:b780c4ad4b6a84950d596e41ae4a979accfcacc4
+    pristine_git_object: 456ffe2d039ce1482de22d61f4c691e45e72f514
   src/main/java/io/moov/sdk/models/errors/CardMetadataRequestError.java:
     id: 097dbd216d44
-    last_write_checksum: sha1:f2f6affe8d922206d66b2ffc7e9f810f1a45646e
-    pristine_git_object: 3a3d10d05fb3710e10ca998f320731cab3708cfd
+    last_write_checksum: sha1:ef15192bffb5127797efeb30eea81e97130ad88b
+    pristine_git_object: a077949a82f48b2efbcbf6d643b1ac56a050846d
   src/main/java/io/moov/sdk/models/errors/ConnectAccountRequestValidationError.java:
     id: 4381c860e422
-    last_write_checksum: sha1:544a12212236273f7d7510e6473557dfd37d0230
-    pristine_git_object: dfb02bf6e9ba51dc2ad9cefcf6b15ef153db2bf9
+    last_write_checksum: sha1:5f4ff01b25580fd5d6a30eff5514657e6c249f41
+    pristine_git_object: d50ef77504d7b946bc8b718b7a9e0ba5950d39d5
   src/main/java/io/moov/sdk/models/errors/CreateAccountError.java:
     id: d7ddf550ca6a
-    last_write_checksum: sha1:13363f3292c1c6d851d5eafdb9f21d8a4c19df7e
-    pristine_git_object: 2878135f7bc229d5f84a75f5d56451662d02d2c5
+    last_write_checksum: sha1:5586200d4d1012f820d5813cd5544e69f74fd1ed
+    pristine_git_object: 72c8290dc4c5f095175da39dca83765183967892
   src/main/java/io/moov/sdk/models/errors/CreateInvoiceError.java:
     id: 1e0cebedd0eb
-    last_write_checksum: sha1:d2aa80e0d7929b3556360fe5e964095946417c2b
-    pristine_git_object: ad720c48b15bcab8f97b961ab2f2588c742d7511
+    last_write_checksum: sha1:dd4e2edac379f4fabdcc463b359ff93aca58c529
+    pristine_git_object: 90aa4485534db2c00dbee93d700620a3633f296e
   src/main/java/io/moov/sdk/models/errors/CreateInvoicePaymentError.java:
     id: 2bb38fe15d80
-    last_write_checksum: sha1:39a21907262ac7b75f135f78cc65cb14f3cec574
-    pristine_git_object: 87a81c098b71f475bcc05b2edbda3dc54b5d11a1
+    last_write_checksum: sha1:ce546fb2fbfad851debb64d5a66d99a4c89ead04
+    pristine_git_object: b3f660b1a36c19f49b07436e16a347d9a258b71f
   src/main/java/io/moov/sdk/models/errors/CreatePaymentLinkError.java:
     id: c3662f8f5fc7
-    last_write_checksum: sha1:04f27beb9747e3baa462fc12aee28f90ff0f37a6
-    pristine_git_object: 27db76826358cf7ad1d8ece162fa64e6b2bcbcaf
+    last_write_checksum: sha1:7ed15b850cf92ece7a388393148156fd83a45073
+    pristine_git_object: 458a8312cae9331973436e90065de687d3ac0619
   src/main/java/io/moov/sdk/models/errors/CreateResolutionLinkError.java:
     id: 71fac162e599
-    last_write_checksum: sha1:e6224b0f6cfa54bd735fc3128d7e94b49ebce329
-    pristine_git_object: c6a9416f46e186070c0a95b8aa2f5a64ff4165f7
+    last_write_checksum: sha1:c428ff689623b7499da8ce6338940ebff6f9b399
+    pristine_git_object: c9bb083c3e565f3bbc8021b36a3d51b84f3a5835
   src/main/java/io/moov/sdk/models/errors/CreateSweepConfigError.java:
     id: 6edc305680d0
-    last_write_checksum: sha1:455d3fd2dd41b32c0f5f33eee80f9717553c97e3
-    pristine_git_object: 31cf376a5766e66a67c5b4af207f854def9e623d
+    last_write_checksum: sha1:c68cb941d4c1f34a88a5acd6de32f784b767265a
+    pristine_git_object: a00f5992fd19dbc2b9a9d0ad77b83e62a3ac9528
   src/main/java/io/moov/sdk/models/errors/CreateTicketError.java:
     id: 4f1761398ca1
-    last_write_checksum: sha1:787f7176d12ca67bc2c0da31d194090d04fee4e3
-    pristine_git_object: 3045520e6f708467d238e5088ec1bc5f853b3ed5
+    last_write_checksum: sha1:7e549544e4fcaf0c9de26bbc381d9bd307fc53b2
+    pristine_git_object: 7cc2e47f3b5ff9438c208d56aab35923f1a626d5
   src/main/java/io/moov/sdk/models/errors/CreateWalletValidationError.java:
     id: e884efc41bf5
-    last_write_checksum: sha1:e6a8ae78aa646fac6ce4d4ab9a874ccb66708afc
-    pristine_git_object: a158217cfe827c6ee19d20f187eedf2aa4b01d56
+    last_write_checksum: sha1:ef1ea1f8c7dd2c30eda9166e414d43e4198e95ac
+    pristine_git_object: 4ebcafdf312508d375dc9442b208512bcf5aa5a7
   src/main/java/io/moov/sdk/models/errors/CreateWebhookValidationError.java:
     id: cd1caec26126
-    last_write_checksum: sha1:9cd8a8d613886a2ba9c7499e94c4d4f9370f016c
-    pristine_git_object: 4240c1cc165c1d4f7e3e32795aea7837c2d7c2a3
+    last_write_checksum: sha1:e8450369a7237efc7ff266807adcafd0814a4c85
+    pristine_git_object: b99c6ec3fd2950de298fab4c14cb9c038b36f80e
   src/main/java/io/moov/sdk/models/errors/DepositAccountValidationError.java:
     id: 2307e0d2e5a5
-    last_write_checksum: sha1:1573fab64776ca3d10e68fec4d1452b166f36e19
-    pristine_git_object: 43a847596625641dbd995e3f40e42fec4c7d4864
+    last_write_checksum: sha1:05242ce606913c5a5bc77fe6a39c8193f213a48d
+    pristine_git_object: eff87889f980ce74b0b5ae5643f241daffdf19ac
   src/main/java/io/moov/sdk/models/errors/DuplicateCardError.java:
     id: 2f4ea42bb1bf
-    last_write_checksum: sha1:b29d28b8cf535732817b01627af92d5dc471ce07
-    pristine_git_object: 92046e90442102794fae12e80d9b18422bdbfce4
+    last_write_checksum: sha1:0d2bd08b579bac826d3bb0947c05c72d9b9a0064
+    pristine_git_object: 0c491da0a56e70b1b9c50af0b94b67eb800608e6
   src/main/java/io/moov/sdk/models/errors/Error.java:
     id: 0856dbe06094
     last_write_checksum: sha1:99b479563f0fd8fdce4a97b8b5aa6e33cc62ac5b
     pristine_git_object: e303cab47dce8af0f36e720c58a5aad3ee465db0
   src/main/java/io/moov/sdk/models/errors/FeePlanAgreementError.java:
     id: 212c45c85bc1
-    last_write_checksum: sha1:863fe282b6997182092d09b276ba6c852c81fec0
-    pristine_git_object: 7e79b75338c540d125402778855b46a14e2b5942
+    last_write_checksum: sha1:eead8367b8b4bd30c4cdcb4e159df52f83592990
+    pristine_git_object: f101a606391d1c1094911cfce70ed35ea15b4667
   src/main/java/io/moov/sdk/models/errors/File.java:
     id: 2f292cf4c268
     last_write_checksum: sha1:435b76a57b4e896a4ec83ae09e04b7fe08f19e68
     pristine_git_object: 9b32e250df23dfe55437d9089fbba7d27dd47a64
   src/main/java/io/moov/sdk/models/errors/FileUploadValidationError.java:
     id: 0352beb493d9
-    last_write_checksum: sha1:fb25e07e20ca1cac6c99b33858cd352d8a53aa3f
-    pristine_git_object: 34c1ea1dac91ec0b262421171ad897eccadbc629
+    last_write_checksum: sha1:86da55db6bca8a6b495a6bcbf9d3d3aa2dc3c3a8
+    pristine_git_object: d8b70a8493b7836c855d9ca1c41b41bd9b6195ff
   src/main/java/io/moov/sdk/models/errors/FileValidationError.java:
     id: be5b1a60d59b
-    last_write_checksum: sha1:72a42d6b46517f42402b257e10492f36e108ef72
-    pristine_git_object: b44528bb8cc89fc2b364a4cec938e3eef95e2610
+    last_write_checksum: sha1:ad20d94692f6774d3a2e3587aad28eda11a1f68e
+    pristine_git_object: 2f4851178764651e19144d6bdc4dda246b9f3ac0
   src/main/java/io/moov/sdk/models/errors/GenericError.java:
     id: 6db469c696f7
-    last_write_checksum: sha1:667bc143d3a0240f20f783cbddf38416dd6f9c02
-    pristine_git_object: de1f404c948afc5e11484da29377c3926e9e0f93
+    last_write_checksum: sha1:fc90b584808a3f5c1c024e1ec76149528457a0db
+    pristine_git_object: 6e9bf177abd3fc275962f294784e01dedbc60021
   src/main/java/io/moov/sdk/models/errors/ImageMetadata.java:
     id: 273eae449b65
-    last_write_checksum: sha1:f8cff73c1ecaa0778c5086b45ae54c2e9939fcfc
-    pristine_git_object: 54e2cd8f673d37f378b40b4a819c890a913dce1e
+    last_write_checksum: sha1:6cf69c65eb51e85aa9c5f153b2ea6ee13fdc24dd
+    pristine_git_object: e927c93bad6c91a145150c7b427ef9fa3e771d10
   src/main/java/io/moov/sdk/models/errors/ImageMetadataValidationError.java:
     id: 987672b07f1d
-    last_write_checksum: sha1:d9e95c1a9e24287d4a6319730c79ecf63e0da21b
-    pristine_git_object: 43435be22112df3ba0d3f7c3b24023339a8bee2d
+    last_write_checksum: sha1:ff610f27398e2c5c5a8ee3e5fbfc95f9e655c4c5
+    pristine_git_object: 7f4a7453cad55fa57916abb1dfff3ae9d60ab33f
   src/main/java/io/moov/sdk/models/errors/ImageRequestValidationError.java:
     id: be1209e5e365
-    last_write_checksum: sha1:0d075ddb355cb335a2357e072c56dbb224dc8e47
-    pristine_git_object: d424d0a16038c7a05eb3717650295a4b52fa6835
+    last_write_checksum: sha1:0a4c5c29ec8c06813f508c247915bf66831fa756
+    pristine_git_object: 1edb6551a0f067c01ecc8aafdd89c91d519c4db9
   src/main/java/io/moov/sdk/models/errors/LinkApplePayError.java:
     id: b10b403e320e
-    last_write_checksum: sha1:1e6a7c88ed6041590afe1a80f3a7f6405c700100
-    pristine_git_object: 635f5c7ca67a39498a8423b5f1ab5c1ecbeeb3e6
+    last_write_checksum: sha1:e7d3bab4584036c52935a64a5993e10e1a032aa6
+    pristine_git_object: 185705a559ebb22b8a875e30bc6baf1335403cac
   src/main/java/io/moov/sdk/models/errors/LinkCardError.java:
     id: 07e62a1c4c5b
-    last_write_checksum: sha1:e57f384806e48a4ffd0a4509c180997633b4f3ed
-    pristine_git_object: 07046f3bfd23dd48f693468de865e6a09d9538c0
+    last_write_checksum: sha1:2a15c8d658beb16f9f0517ed6d9319952e023748
+    pristine_git_object: 81810cbebad131e6cd42c127ca44239a7ac6ba5a
   src/main/java/io/moov/sdk/models/errors/LinkGooglePayError.java:
     id: 03e3d5e9c3a8
-    last_write_checksum: sha1:d6b7024dc0a185aa1bccae66ad6a602ed5c29a6a
-    pristine_git_object: f364d977df169b4dadd2d3e6082b92cc1440a80e
+    last_write_checksum: sha1:b87a310df30b61168fd3544f92728880cc703036
+    pristine_git_object: 2e7982e300daec1779fa9722bbd837ffa88b11e7
   src/main/java/io/moov/sdk/models/errors/ListInvoicesValidationError.java:
     id: 95562e37e3df
-    last_write_checksum: sha1:bb0a73816acdfb1efb486adec6b7ba5851a52edb
-    pristine_git_object: 0bb8e8198fb19475d06a5c6b96d407fd633db144
+    last_write_checksum: sha1:dd429c22f5b4d5c3ca35ed34ec82c85e7c17b1e3
+    pristine_git_object: 7294c4ffed8d46c1e15a8088b8bb86ab2ca1cccd
   src/main/java/io/moov/sdk/models/errors/ListTransfersValidationError.java:
     id: 1d1fad63b754
-    last_write_checksum: sha1:1633b8615a764b096e908dabe5509b2d26d18331
-    pristine_git_object: 1db680dee6c35c7a6462c70727d0e4f6e6aa196e
+    last_write_checksum: sha1:6791edff75261526aef7571f5a451d8141807f54
+    pristine_git_object: b322aaa2ec8bfaa827c2ca23f4fea2e86d1e78d8
   src/main/java/io/moov/sdk/models/errors/ListWalletTransactionsValidationError.java:
     id: d68a9ebf7b7e
-    last_write_checksum: sha1:fe16e48862d8bcc7e7dcc686abf11290ca1d593a
-    pristine_git_object: 5aff08e5fc4fa4661582871ffb2977998fe07076
+    last_write_checksum: sha1:2ee92ac1a7d766c7a39648d0f29ae525b7365f79
+    pristine_git_object: 8798ea138dacc8e9ed3d5c940108bb712889164c
   src/main/java/io/moov/sdk/models/errors/ListWalletsValidationError.java:
     id: df36b0c2d031
-    last_write_checksum: sha1:d37137ba2bdb1222af80eace5cddaa2b0bd0faf5
-    pristine_git_object: a3986a576c85ca21c2e70c7bf28dc43a5d521717
+    last_write_checksum: sha1:107241942158d7f78304fdc0ba40d7dab1826fd4
+    pristine_git_object: 560d64820db476681398dc921a4af0702ffc44f0
   src/main/java/io/moov/sdk/models/errors/MicroDepositValidationError.java:
     id: 3ffa1d27c01c
-    last_write_checksum: sha1:c6e371e693098a6439d991056faeaef95ef2571c
-    pristine_git_object: 526bf8614a8f765b319208328ae12f80df2f3855
+    last_write_checksum: sha1:547569abea243f50aef7f992346bf887d54c7536
+    pristine_git_object: 1ed2a599eaf1e199256519f34158882b45f59dc7
   src/main/java/io/moov/sdk/models/errors/MoovError.java:
     id: e73543cff20e
     last_write_checksum: sha1:7da836f3f88454600bb276f297aa4325312bfdf9
     pristine_git_object: f53dfa559377d5750ccac3665c6b3bfa0cb8cd30
   src/main/java/io/moov/sdk/models/errors/OnboardingInviteError.java:
     id: f39680894e98
-    last_write_checksum: sha1:1992aa84d386490d19791a5f13d24550c45e2ddf
-    pristine_git_object: d91414e74a42a97b98058f6cceb871f9be9719c0
+    last_write_checksum: sha1:17a95e6a51377621064625f930e10e2d7bbac799
+    pristine_git_object: f29204c7c11c3c1fc018b4eca918cd39bfb2c49d
   src/main/java/io/moov/sdk/models/errors/PatchAccountError.java:
     id: f5761558a822
-    last_write_checksum: sha1:261d74acccb34e5875a52fdbd6e63260d36127e6
-    pristine_git_object: e913d24feb8b595844aa5bbc9e39f252d490456b
+    last_write_checksum: sha1:3d2981eb786ba698813e9fcdbd89eb2cb1c9263a
+    pristine_git_object: 841179dbc561f125d099f9badc39060d4168f173
   src/main/java/io/moov/sdk/models/errors/PatchSweepConfigError.java:
     id: 514f24339cad
-    last_write_checksum: sha1:7b9022b7e9533db10d47fa0b526681b590bf1020
-    pristine_git_object: a481061e7cafceb2732a8a971e953c12b978a0cd
+    last_write_checksum: sha1:78d485873a4218ef4d8f527ffd37d19b6ff63b20
+    pristine_git_object: 1ab58109f7fb7c9e2bbbc9cc2d62d48c7289d75c
   src/main/java/io/moov/sdk/models/errors/PatchTransferValidationError.java:
     id: cf9026918d6b
-    last_write_checksum: sha1:ca3ba719ab508134fc2f845e89ba8d5afe78c738
-    pristine_git_object: 49bc59ed90e7d7ff192a75cb3e7a6a8019a21982
+    last_write_checksum: sha1:fe606584665c062ea20c6109e55c33383218af56
+    pristine_git_object: 608ee191767441e79649225e21abfa055b874985
   src/main/java/io/moov/sdk/models/errors/PatchWalletValidationError.java:
     id: d52df4a72cce
-    last_write_checksum: sha1:26706b42faad857ab1f5acedef3df07bc1e80e37
-    pristine_git_object: 485abe5597ea7c7e92bb6db92b6fd7d459684ca4
+    last_write_checksum: sha1:bdd668f9edd57b37d5c7834e3dc1fa91ee3697fc
+    pristine_git_object: f4c8d851cd5093007218604c0fdbb5361ee62e0e
   src/main/java/io/moov/sdk/models/errors/ProductRequestValidationError.java:
     id: 37ed6db07d82
-    last_write_checksum: sha1:6aa3d6bfedfbf68129539e936b52e90f9e888907
-    pristine_git_object: 69bf1f8adae3fdbe7d7aa2f0c0ca6e3073a2d1d0
+    last_write_checksum: sha1:39736cb2bf7557410380622c2b9ba6d0ef934b4a
+    pristine_git_object: 8f1109fc38272c12922a484a4c3ac5a9bf7628fe
   src/main/java/io/moov/sdk/models/errors/RefundValidationError.java:
     id: bc5fcb225de7
-    last_write_checksum: sha1:c8356523425d949c3f2a751b3a5f85c38c97cc04
-    pristine_git_object: 3b69a940c198d23a6d8664a3de272a57f9e59614
+    last_write_checksum: sha1:bce852fc118fc80368bc51e04f508fd3823e362c
+    pristine_git_object: 30cffa138cb51602cad177a1aeeda6b1a8fbf18e
   src/main/java/io/moov/sdk/models/errors/RepresentativeValidationError.java:
     id: ff477d1ba557
-    last_write_checksum: sha1:79bedd6bdb961485c8c4817aa5930cd388bc344d
-    pristine_git_object: e192eacf4a4f64d51efff83012f63382acffaddd
+    last_write_checksum: sha1:d53e083756128e9a1f00669c58af3d38eb9b7c8e
+    pristine_git_object: 394e6698e2e770de1e1473af052020ff5e151802
   src/main/java/io/moov/sdk/models/errors/RequestCardError.java:
     id: ebdccc45a310
-    last_write_checksum: sha1:9e2ab1ff2e05efbdeacebb19a52c60ef3b078f8c
-    pristine_git_object: decbab4d8e02ae6542642737c81683796317b856
+    last_write_checksum: sha1:c20352b76375e6cd8cc30405830eaca792b408a6
+    pristine_git_object: eec18a1ceda2bc4c6294d5cae8ec9f787b0d73fc
   src/main/java/io/moov/sdk/models/errors/ReversalValidationError.java:
     id: 2624e14da896
-    last_write_checksum: sha1:fddcd9411974a6e53f9ab8ae47086b2c48496183
-    pristine_git_object: 3fb4879739f6844deb5369fdf9249eac128cb25c
+    last_write_checksum: sha1:2db83bd0c27dc084bc46c44de72685980a67eef4
+    pristine_git_object: 7b6d3083592fda81fd21cdf1ccdf62a4411ec962
   src/main/java/io/moov/sdk/models/errors/RevokeTokenRequestError.java:
     id: ff0974ac2148
-    last_write_checksum: sha1:6aaf47fa261171c0f9bfb7a696539964cac716fd
-    pristine_git_object: 93ceca621b9c81def2a5141df59c0c80b649e3b7
+    last_write_checksum: sha1:b0d73b04ceb0a9ba7db2003c20938b8d6867767b
+    pristine_git_object: 7cc326ff67b5eea49e73c5390cabe5f1ddb99026
   src/main/java/io/moov/sdk/models/errors/ScheduleValidationError.java:
     id: efd9bd8a9485
-    last_write_checksum: sha1:638cdbea18a0820699c46c59c70cdee0050d893e
-    pristine_git_object: a77b1c868499e2289b7f1dd769145e2973381165
+    last_write_checksum: sha1:dab78f250c696194d92bdedaf7f72d06473613e7
+    pristine_git_object: bfe23aa6c4fdd3b0e1722404abb0a7c3ad96c656
   src/main/java/io/moov/sdk/models/errors/TerminalApplicationError.java:
     id: 8f6b31ce7277
-    last_write_checksum: sha1:9fcb8a7f029af92301f4abafbf4fae9fad286afc
-    pristine_git_object: dd8959a08c9deac3f5bb971b732dad0bb232d48c
+    last_write_checksum: sha1:1a915d58aeffd2571695da45fa1f9e6177f444c0
+    pristine_git_object: 2e4ecf406e76ec2d5730c759054b5bcf8f2f9603
   src/main/java/io/moov/sdk/models/errors/Transfer.java:
     id: 9cbe5cc4020d
-    last_write_checksum: sha1:228b3509df660b1d0b86d9abc66901597e6610df
-    pristine_git_object: 194d6b7fae1fbfd39207254d2eff3dba12b0236a
+    last_write_checksum: sha1:f267fa88589bcc819306784790d43384ee61f64a
+    pristine_git_object: fb15840b25f75ba0f9ae4e66947959a38e3ea78e
   src/main/java/io/moov/sdk/models/errors/TransferConfigValidationError.java:
     id: 1004987ad8ea
-    last_write_checksum: sha1:d484a4c659ccb25d07d18d95f2bb0dad1e33cac0
-    pristine_git_object: febf86282a720c0cb2b3f60c649df9df3d78f44c
+    last_write_checksum: sha1:6ccc4ba619854df9e1ff85c1a3f85293bb66faef
+    pristine_git_object: a37199155c9f61b7ede303768e1a2f804b0fd92c
   src/main/java/io/moov/sdk/models/errors/TransferOptionsValidationError.java:
     id: f897211ed4d3
-    last_write_checksum: sha1:748c04ca59b2bae648c7e60c0e4f06115d50ea60
-    pristine_git_object: 0a8d8512549cd1103c1713acb1f972f17ac350d1
+    last_write_checksum: sha1:ae4a02906c6a2a3dd42e4884c46d1a5c5dd955fd
+    pristine_git_object: adcc8b65b1e08da686be27bfa214b95e9d0ce773
   src/main/java/io/moov/sdk/models/errors/TransferValidationError.java:
     id: a8b5e7413589
-    last_write_checksum: sha1:76a2a1fa1b6e8efbe2b0e258463445596ed8727c
-    pristine_git_object: 1fa16f7c8d260a36dc12910d3d833449941bd4ac
+    last_write_checksum: sha1:88d07d5e6a12b5f7a92a250d45d0858a775e8fd5
+    pristine_git_object: 31d91f4edd75e0788ec29a606e98afdd4adaec46
   src/main/java/io/moov/sdk/models/errors/UpdateCardError.java:
     id: 8729d17ce4f2
-    last_write_checksum: sha1:a877e08332fa0d4b8c9d43b284d2bb61228174c5
-    pristine_git_object: 87f5fe27c1a7cc650dd5fcfed9c89ccfa4f93851
+    last_write_checksum: sha1:8b665698fad2d7b5ee8a7d8de11c77579b2cddbc
+    pristine_git_object: 366572b78b71432531b87209972dfca84418495f
   src/main/java/io/moov/sdk/models/errors/UpdateInvoiceError.java:
     id: cc19f6a9c6af
-    last_write_checksum: sha1:c40ba1e6581c4fbae74c3ff66d382e4b98a6535f
-    pristine_git_object: a81642d4647b5d62e1e45b75930308aecd59ea9f
+    last_write_checksum: sha1:ac7e235e2144e74341845bc34a558363013bf67b
+    pristine_git_object: 4efaa93dfa94b0e4c732afd01654edeb6127a295
   src/main/java/io/moov/sdk/models/errors/UpdateIssuedCardError.java:
     id: e639ccb70f20
-    last_write_checksum: sha1:84de325414a80a611eb7eb7bd2c0d8347c746a5c
-    pristine_git_object: 3e83603747ad488abd9203752fa024af53daf49a
+    last_write_checksum: sha1:5d5c248334df8b5157c09f167472802486dd2b0d
+    pristine_git_object: cbf1dce8b6c68ef9706531aece6a5c82aaf2ee30
   src/main/java/io/moov/sdk/models/errors/UpdatePaymentLinkError.java:
     id: 190209481d4f
-    last_write_checksum: sha1:523cd2bf65937b54cf0f67e0a3b2a6cca44ca0dd
-    pristine_git_object: 3d98e6d378943db6ca33390332f34770b5da11a2
+    last_write_checksum: sha1:f94405e78ec0b6c51da8de8dfec28002a27ff8d2
+    pristine_git_object: da6aedcf26e61dfbf4a9ca788a4cc907c3c566cf
   src/main/java/io/moov/sdk/models/errors/UpdateTicketError.java:
     id: 50e6bdf14d14
-    last_write_checksum: sha1:e1b067ef4e6e32c7498d673968b06639c34f26d7
-    pristine_git_object: 6e218e33e27b97b73c50f78fd1be27fc8565496d
+    last_write_checksum: sha1:f26af95e9c10acfb0cab10b1e4691d1a8e871aca
+    pristine_git_object: a5b2c24db1ed30c828dd3ba3d3229af2b1234c34
   src/main/java/io/moov/sdk/models/errors/UpdateUnderwritingError.java:
     id: 24f50989e554
-    last_write_checksum: sha1:8d2d61a7a0da9ae0d9e2f78a260b630e6d0eb3e1
-    pristine_git_object: 5295f45c4ed5f9706fa0752d12bace57594efee3
+    last_write_checksum: sha1:5b1829a031fb3d4cc0a466572b7bb8e1069593e3
+    pristine_git_object: 83e4de427911be0ab469884fb5fc2166c00fe373
   src/main/java/io/moov/sdk/models/errors/UpdateUnderwritingErrorError.java:
     id: 44c2119c215b
     last_write_checksum: sha1:3b9d1b745ced5e2a1d131c32caafe9e69aea4a22
     pristine_git_object: 3543e93e8ef28921e7d18a67a33e82dbd4170e54
   src/main/java/io/moov/sdk/models/errors/UpdateWebhookValidationError.java:
     id: 98f0acd7f05b
-    last_write_checksum: sha1:2010f8a8b79af29bc657c0b0729599bded0e5389
-    pristine_git_object: 4e613029f5349a62dd84b850935eab56b3d66a6e
+    last_write_checksum: sha1:622674ff57ecda28aafbe95b4bd92dea74fa95c1
+    pristine_git_object: 8b51854b1d5c95432594d65c0cce7707891fa696
   src/main/java/io/moov/sdk/models/errors/UpsertUnderwritingError.java:
     id: c2b9385c1f8e
-    last_write_checksum: sha1:b426bc2c3f79ba87825756ec5ed906df7bf3aa85
-    pristine_git_object: 4f0185fce687b377f6bf668d4e48fadc81fd4827
+    last_write_checksum: sha1:8573f43c79ce2723f0780dc8f1b62ddc7544db7e
+    pristine_git_object: cea7d98388bda4fa148428111d310e85b183b855
   src/main/java/io/moov/sdk/models/operations/AcceptDisputeRequest.java:
     id: f7d1d4fb9ed9
     last_write_checksum: sha1:4653ddf4a2924e47026585e2b3d9cc391c97dcfd
@@ -15259,7 +15259,7 @@ examples:
           application/json: {"error": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes:\n* `moov.transfers.create()`: \n  *  `response.processingDetails.cardPayment.status.enum(clearedExternal)` **Added**\n  *  `error.processingDetails.cardPayment.status.enum(clearedExternal)` **Added**\n* `moov.transfers.list()`:  `response.[].processingDetails.cardPayment.status.enum(clearedExternal)` **Added**\n* `moov.transfers.batchGetTransfers()`:  `response.Map<Transfer>.processingDetails.cardPayment.status.enum(clearedExternal)` **Added**\n* `moov.transfers.get()`:  `response.processingDetails.cardPayment.status.enum(clearedExternal)` **Added**\n* `moov.transfers.update()`:  `response.processingDetails.cardPayment.status.enum(clearedExternal)` **Added**\n"
+releaseNotes: "## Java SDK Changes:\n* `moov.transfers.create()`: \n  *  `response.processingDetails.cardPayment.status` **Changed** (Breaking ⚠️)\n  *  `error.processingDetails.cardPayment.status` **Changed** (Breaking ⚠️)\n* `moov.transfers.list()`:  `response.[].processingDetails.cardPayment.status` **Changed** (Breaking ⚠️)\n* `moov.transfers.batchGetTransfers()`:  `response.Map<Transfer>.processingDetails.cardPayment.status` **Changed** (Breaking ⚠️)\n* `moov.transfers.get()`:  `response.processingDetails.cardPayment.status` **Changed** (Breaking ⚠️)\n* `moov.transfers.update()`:  `response.processingDetails.cardPayment.status` **Changed** (Breaking ⚠️)\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

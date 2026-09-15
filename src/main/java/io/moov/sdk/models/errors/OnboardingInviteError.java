@@ -45,12 +45,17 @@ public class OnboardingInviteError extends MoovError {
     * the resulting OnboardingInviteError instance will have a null data() value and a non-null deserializationException().
     */
     public static OnboardingInviteError from(HttpResponse<InputStream> response) {
+        byte[] bytes;
         try {
-            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            bytes = Utils.extractByteArrayFromBody(response);
+        } catch (Exception e) {
+            return new OnboardingInviteError(response.statusCode(), null, response, null, e);
+        }
+        try {
             Data data = Utils.mapper().readValue(bytes, Data.class);
             return new OnboardingInviteError(response.statusCode(), bytes, response, data, null);
         } catch (Exception e) {
-            return new OnboardingInviteError(response.statusCode(), null, response, null, e);
+            return new OnboardingInviteError(response.statusCode(), bytes, response, null, e);
         }
     }
 

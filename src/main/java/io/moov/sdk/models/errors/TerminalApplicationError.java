@@ -44,12 +44,17 @@ public class TerminalApplicationError extends MoovError {
     * the resulting TerminalApplicationError instance will have a null data() value and a non-null deserializationException().
     */
     public static TerminalApplicationError from(HttpResponse<InputStream> response) {
+        byte[] bytes;
         try {
-            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            bytes = Utils.extractByteArrayFromBody(response);
+        } catch (Exception e) {
+            return new TerminalApplicationError(response.statusCode(), null, response, null, e);
+        }
+        try {
             Data data = Utils.mapper().readValue(bytes, Data.class);
             return new TerminalApplicationError(response.statusCode(), bytes, response, data, null);
         } catch (Exception e) {
-            return new TerminalApplicationError(response.statusCode(), null, response, null, e);
+            return new TerminalApplicationError(response.statusCode(), bytes, response, null, e);
         }
     }
 

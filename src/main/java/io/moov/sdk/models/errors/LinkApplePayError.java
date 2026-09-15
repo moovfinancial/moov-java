@@ -44,12 +44,17 @@ public class LinkApplePayError extends MoovError {
     * the resulting LinkApplePayError instance will have a null data() value and a non-null deserializationException().
     */
     public static LinkApplePayError from(HttpResponse<InputStream> response) {
+        byte[] bytes;
         try {
-            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            bytes = Utils.extractByteArrayFromBody(response);
+        } catch (Exception e) {
+            return new LinkApplePayError(response.statusCode(), null, response, null, e);
+        }
+        try {
             Data data = Utils.mapper().readValue(bytes, Data.class);
             return new LinkApplePayError(response.statusCode(), bytes, response, data, null);
         } catch (Exception e) {
-            return new LinkApplePayError(response.statusCode(), null, response, null, e);
+            return new LinkApplePayError(response.statusCode(), bytes, response, null, e);
         }
     }
 

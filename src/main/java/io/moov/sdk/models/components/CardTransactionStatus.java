@@ -31,7 +31,7 @@ public class CardTransactionStatus {
     public static final CardTransactionStatus SETTLED = new CardTransactionStatus("settled");
     public static final CardTransactionStatus FAILED = new CardTransactionStatus("failed");
     public static final CardTransactionStatus COMPLETED = new CardTransactionStatus("completed");
-    public static final CardTransactionStatus CLEARED_EXTERNAL = new CardTransactionStatus("cleared-external");
+    public static final CardTransactionStatus CLEARED_EXTERNALLY = new CardTransactionStatus("cleared-externally");
     public static final CardTransactionStatus DEFERRED = new CardTransactionStatus("deferred");
 
     // This map will grow whenever a Color gets created with a new
@@ -112,7 +112,7 @@ public class CardTransactionStatus {
         map.put("settled", SETTLED);
         map.put("failed", FAILED);
         map.put("completed", COMPLETED);
-        map.put("cleared-external", CLEARED_EXTERNAL);
+        map.put("cleared-externally", CLEARED_EXTERNALLY);
         map.put("deferred", DEFERRED);
         return map;
     }
@@ -125,7 +125,7 @@ public class CardTransactionStatus {
         map.put("settled", CardTransactionStatusEnum.SETTLED);
         map.put("failed", CardTransactionStatusEnum.FAILED);
         map.put("completed", CardTransactionStatusEnum.COMPLETED);
-        map.put("cleared-external", CardTransactionStatusEnum.CLEARED_EXTERNAL);
+        map.put("cleared-externally", CardTransactionStatusEnum.CLEARED_EXTERNALLY);
         map.put("deferred", CardTransactionStatusEnum.DEFERRED);
         return map;
     }
@@ -139,7 +139,7 @@ public class CardTransactionStatus {
         SETTLED("settled"),
         FAILED("failed"),
         COMPLETED("completed"),
-        CLEARED_EXTERNAL("cleared-external"),
+        CLEARED_EXTERNALLY("cleared-externally"),
         DEFERRED("deferred"),;
 
         private final String value;

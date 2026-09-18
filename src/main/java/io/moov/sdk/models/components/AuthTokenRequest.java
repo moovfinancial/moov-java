@@ -12,6 +12,7 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 
@@ -59,29 +60,44 @@ public class AuthTokenRequest {
     @SpeakeasyMetadata("form:name=refresh_token")
     private Optional<String> refreshToken;
 
+    /**
+     * The client type requesting a token. `device` and `service` clients do not require browser origin
+     * binding. Defaults to `web` when omitted.
+     * 
+     * <p>This field applies to the `client_credentials` grant; refreshed tokens keep the original client
+     * type.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("client_type")
+    @SpeakeasyMetadata("form:name=client_type")
+    private Optional<? extends OAuth2ClientType> clientType;
+
     @JsonCreator
     public AuthTokenRequest(
             @JsonProperty("grant_type") GrantType grantType,
             @JsonProperty("client_id") Optional<String> clientId,
             @JsonProperty("client_secret") Optional<String> clientSecret,
             @JsonProperty("scope") Optional<String> scope,
-            @JsonProperty("refresh_token") Optional<String> refreshToken) {
+            @JsonProperty("refresh_token") Optional<String> refreshToken,
+            @JsonProperty("client_type") Optional<? extends OAuth2ClientType> clientType) {
         Utils.checkNotNull(grantType, "grantType");
         Utils.checkNotNull(clientId, "clientId");
         Utils.checkNotNull(clientSecret, "clientSecret");
         Utils.checkNotNull(scope, "scope");
         Utils.checkNotNull(refreshToken, "refreshToken");
+        Utils.checkNotNull(clientType, "clientType");
         this.grantType = grantType;
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.scope = scope;
         this.refreshToken = refreshToken;
+        this.clientType = clientType;
     }
     
     public AuthTokenRequest(
             GrantType grantType) {
         this(grantType, Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -126,6 +142,19 @@ public class AuthTokenRequest {
     @JsonIgnore
     public Optional<String> refreshToken() {
         return refreshToken;
+    }
+
+    /**
+     * The client type requesting a token. `device` and `service` clients do not require browser origin
+     * binding. Defaults to `web` when omitted.
+     * 
+     * <p>This field applies to the `client_credentials` grant; refreshed tokens keep the original client
+     * type.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<OAuth2ClientType> clientType() {
+        return (Optional<OAuth2ClientType>) clientType;
     }
 
     public static Builder builder() {
@@ -223,6 +252,33 @@ public class AuthTokenRequest {
         return this;
     }
 
+    /**
+     * The client type requesting a token. `device` and `service` clients do not require browser origin
+     * binding. Defaults to `web` when omitted.
+     * 
+     * <p>This field applies to the `client_credentials` grant; refreshed tokens keep the original client
+     * type.
+     */
+    public AuthTokenRequest withClientType(OAuth2ClientType clientType) {
+        Utils.checkNotNull(clientType, "clientType");
+        this.clientType = Optional.ofNullable(clientType);
+        return this;
+    }
+
+
+    /**
+     * The client type requesting a token. `device` and `service` clients do not require browser origin
+     * binding. Defaults to `web` when omitted.
+     * 
+     * <p>This field applies to the `client_credentials` grant; refreshed tokens keep the original client
+     * type.
+     */
+    public AuthTokenRequest withClientType(Optional<? extends OAuth2ClientType> clientType) {
+        Utils.checkNotNull(clientType, "clientType");
+        this.clientType = clientType;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -237,14 +293,15 @@ public class AuthTokenRequest {
             Utils.enhancedDeepEquals(this.clientId, other.clientId) &&
             Utils.enhancedDeepEquals(this.clientSecret, other.clientSecret) &&
             Utils.enhancedDeepEquals(this.scope, other.scope) &&
-            Utils.enhancedDeepEquals(this.refreshToken, other.refreshToken);
+            Utils.enhancedDeepEquals(this.refreshToken, other.refreshToken) &&
+            Utils.enhancedDeepEquals(this.clientType, other.clientType);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             grantType, clientId, clientSecret,
-            scope, refreshToken);
+            scope, refreshToken, clientType);
     }
     
     @Override
@@ -254,7 +311,8 @@ public class AuthTokenRequest {
                 "clientId", clientId,
                 "clientSecret", clientSecret,
                 "scope", scope,
-                "refreshToken", refreshToken);
+                "refreshToken", refreshToken,
+                "clientType", clientType);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -269,6 +327,8 @@ public class AuthTokenRequest {
         private Optional<String> scope = Optional.empty();
 
         private Optional<String> refreshToken = Optional.empty();
+
+        private Optional<? extends OAuth2ClientType> clientType = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -365,11 +425,38 @@ public class AuthTokenRequest {
             return this;
         }
 
+
+        /**
+         * The client type requesting a token. `device` and `service` clients do not require browser origin
+         * binding. Defaults to `web` when omitted.
+         * 
+         * <p>This field applies to the `client_credentials` grant; refreshed tokens keep the original client
+         * type.
+         */
+        public Builder clientType(OAuth2ClientType clientType) {
+            Utils.checkNotNull(clientType, "clientType");
+            this.clientType = Optional.ofNullable(clientType);
+            return this;
+        }
+
+        /**
+         * The client type requesting a token. `device` and `service` clients do not require browser origin
+         * binding. Defaults to `web` when omitted.
+         * 
+         * <p>This field applies to the `client_credentials` grant; refreshed tokens keep the original client
+         * type.
+         */
+        public Builder clientType(Optional<? extends OAuth2ClientType> clientType) {
+            Utils.checkNotNull(clientType, "clientType");
+            this.clientType = clientType;
+            return this;
+        }
+
         public AuthTokenRequest build() {
 
             return new AuthTokenRequest(
                 grantType, clientId, clientSecret,
-                scope, refreshToken);
+                scope, refreshToken, clientType);
         }
 
     }

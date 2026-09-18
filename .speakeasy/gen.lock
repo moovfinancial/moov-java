@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 0f70996cefd0c933afddb883e3e1c0f7
+  docChecksum: cf106197172ae961a521dafaf2378495
   docVersion: v2026.07.00
-  speakeasyVersion: 1.797.0
-  generationVersion: 2.937.18
-  releaseVersion: 26.8.3
-  configChecksum: 1605c8b63d3aafc39e99356b52138f6d
+  speakeasyVersion: 1.798.0
+  generationVersion: 2.938.0
+  releaseVersion: 26.8.4
+  configChecksum: 4cacf85f43650666620d28cd43060d90
   repoURL: https://github.com/moovfinancial/moov-java.git
   installationURL: https://github.com/moovfinancial/moov-java
   published: true
 persistentEdits:
-  generation_id: 5881cb0a-e7e5-4cdb-9030-2a9042d86def
-  pristine_commit_hash: df77cca75df877e320aab903a11b16002f0f9575
-  pristine_tree_hash: cdd13e469f08687775a15fb20514c4ee737961b4
+  generation_id: 211d4d42-9419-478f-9fbb-cba7dc576e13
+  pristine_commit_hash: e6f017efbdeaa0555b2fcb828ba67879b1bafe2c
+  pristine_tree_hash: 8a8a95001ef78c4266cd7eed1b2ecddea176215a
 features:
   java:
     acceptHeaders: 2.81.2
@@ -338,8 +338,8 @@ trackedFiles:
     pristine_git_object: ebb7512ea7f8d6b75f0600f1ecd600c16d7bd1c2
   docs/models/components/AuthTokenRequest.md:
     id: a50e6a855a5b
-    last_write_checksum: sha1:6aa693481cba5cbcbed542d9d15305f9e3b29a35
-    pristine_git_object: ca3de8676071c534ea3266662f0cff329406943c
+    last_write_checksum: sha1:280e196cc61703b933e0d0e4c839ff009dfbfde6
+    pristine_git_object: b53f865647f429adb1bf798f332eacacd4824432
   docs/models/components/AvatarUploadRequest.md:
     id: 1da8d8b91b71
     last_write_checksum: sha1:c6782ebc58dc4f22a9fe442f0997ca322c3f1940
@@ -1494,12 +1494,12 @@ trackedFiles:
     pristine_git_object: 525199b278e07d31bdcc13762eac722b30cd06ad
   docs/models/components/IssuedCardAuthorization.md:
     id: dfdaa9fea5cd
-    last_write_checksum: sha1:91db5221087561205fc5f71b6546d7e590af53a6
-    pristine_git_object: 580c413055cd3beface32f06aca6e8c690a59ccf
+    last_write_checksum: sha1:dad7af5f683e0fb9c22cadf5e10b17db9de63f40
+    pristine_git_object: ff2e0c12f1b95922286bd8ea3a4e5e9510983026
   docs/models/components/IssuedCardAuthorizationEvent.md:
     id: 593227efb691
-    last_write_checksum: sha1:a74c82b0e6f69c1b39d3b5cc65f5f40306d6d6fa
-    pristine_git_object: 87edab3d18e7aa501f88445f596d0bd50aa61e4a
+    last_write_checksum: sha1:ffe4f399857896c21f66b61166c15b3cdd61cb74
+    pristine_git_object: 2239f6b87e40977b06d3e23ea6c8784c0cf6ca27
   docs/models/components/IssuedCardAuthorizationEventResult.md:
     id: 1c7abc62b8c3
     last_write_checksum: sha1:22caba0cd0fd243acc276737ef2583797587510a
@@ -1548,6 +1548,10 @@ trackedFiles:
     id: a94c89185520
     last_write_checksum: sha1:27455558bda64cc24f2c21c8be6d578edce3f780
     pristine_git_object: e6fcb43a62b4417fecd618a1659379c6bd03f98a
+  docs/models/components/IssuingDeclineReason.md:
+    id: fa03c29a7bc1
+    last_write_checksum: sha1:a9ef43d670c482e57f5a3cd3286642786d9590c9
+    pristine_git_object: 7efd8eaa4254655b2a774d45599f8fe90c484339
   docs/models/components/IssuingIntervalLimit.md:
     id: 6b8b3134a89a
     last_write_checksum: sha1:62baf30b43433d3216e45c98453c1cc42c4d92c4
@@ -1760,6 +1764,10 @@ trackedFiles:
     id: 48a121217c12
     last_write_checksum: sha1:fda40997de013986f5d1edfb6795b5946c91a22a
     pristine_git_object: 3b04c6470466682bd343645e2b1f46c5e9729279
+  docs/models/components/OAuth2ClientType.md:
+    id: 745257c99615
+    last_write_checksum: sha1:83c74218a9277bbf896d5ff93f66e8228a69610b
+    pristine_git_object: c475259f8fc8804ec9492fa7ace29b2bfc31f77d
   docs/models/components/Occurrence.md:
     id: 92fff952f272
     last_write_checksum: sha1:865498fe4af98892fce9755de245b90449e1ac5d
@@ -4970,8 +4978,8 @@ trackedFiles:
     pristine_git_object: 9b40f611aaace5afe9cf7cadc73ff2301fe51e80
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:0a6a5d7cfc8fc843d98a05dfffa364e177bf2b04
-    pristine_git_object: 96757641c91fb6eebcf375a2ff836f13c41e057b
+    last_write_checksum: sha1:ddf78bc373dc16ed4759977077c235f7a051e4fe
+    pristine_git_object: 46bb30f2d87d1d02247ca15a87189d4e63d5bab3
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -5130,8 +5138,8 @@ trackedFiles:
     pristine_git_object: 72495cf1b905a82c978c8ca472b53f9c9cecccbd
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:c9b62c4837a2236a74ba4ef2652c4d998f724d6c
-    pristine_git_object: 326f7149a266e8d09ba4dfa47768f7ebaf76f50a
+    last_write_checksum: sha1:4a5c7e4d76be32dc5227187c73ee0529c46cc087
+    pristine_git_object: b8ad6d341bfe551848f6308e7489185c0243489d
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:2aa78df693ba5a47e50fe360e4802f9f4247c1f1
@@ -5474,8 +5482,8 @@ trackedFiles:
     pristine_git_object: 6c965990566fafd7fb47822c1be312499cfbf70a
   src/main/java/io/moov/sdk/models/components/AuthTokenRequest.java:
     id: 1cf722dbd65c
-    last_write_checksum: sha1:30774fb8bae907d241b411c1a7d3f40ca710c800
-    pristine_git_object: 71a94bcd826307a9f9482602675d7625e62c28ac
+    last_write_checksum: sha1:6a0bbf3cdb5675f771ceb5735f160e44f3b6f6a8
+    pristine_git_object: c338a3de19f144afadba9e35f98368cb6ddfe498
   src/main/java/io/moov/sdk/models/components/AvatarUploadRequest.java:
     id: 307f5d1fa2e0
     last_write_checksum: sha1:fb4fcf2429d88f2d3cfe8aaef96d307bd9e30ad4
@@ -6630,12 +6638,12 @@ trackedFiles:
     pristine_git_object: 26b38449f6abd9d96dc7faf20a9fbd2a27332978
   src/main/java/io/moov/sdk/models/components/IssuedCardAuthorization.java:
     id: 3532b7daeec8
-    last_write_checksum: sha1:d38004b7ab5e280ce77c2a041e7c50cf1145abee
-    pristine_git_object: 65abebc355cc19dc210bcb10bb75aa4bf4e8dca6
+    last_write_checksum: sha1:b2fc963ee99c9d7dc8d6dc8c182db00fa3294f8e
+    pristine_git_object: 13aad1c68aa33ea784a30a8b7e284a43dcdec538
   src/main/java/io/moov/sdk/models/components/IssuedCardAuthorizationEvent.java:
     id: 58e842eb929b
-    last_write_checksum: sha1:aa9610889fe7f49a0b4f443786e0d58e6686dc44
-    pristine_git_object: 1d22d8a8fe15d2d7a8dafd5078b1e0d18c3016d2
+    last_write_checksum: sha1:bbf2e1670313bc5c547c2c93c49bda699d941f47
+    pristine_git_object: ab45f9efa3e202f00c553180648e76faa0c227cb
   src/main/java/io/moov/sdk/models/components/IssuedCardAuthorizationEventResult.java:
     id: 057500dedccc
     last_write_checksum: sha1:fd5383ef61a8f906d412e4cee79a4ccac3501157
@@ -6684,6 +6692,10 @@ trackedFiles:
     id: dcc0a0afe4ca
     last_write_checksum: sha1:aae140045b34b6b79430f3a55459ede693c1af26
     pristine_git_object: 777a1c18458ec96354cbcede795d6ce1e7b156fd
+  src/main/java/io/moov/sdk/models/components/IssuingDeclineReason.java:
+    id: cc88382ff787
+    last_write_checksum: sha1:68b777014e046c0772235b7857b62ad3950fb0b0
+    pristine_git_object: 300315c5c6f1c5c4e39af3000d19bf9788d3e760
   src/main/java/io/moov/sdk/models/components/IssuingIntervalLimit.java:
     id: 0e41229a56bb
     last_write_checksum: sha1:f1721517a8b2cfd87890ea809d5259dce72f30d7
@@ -6896,6 +6908,10 @@ trackedFiles:
     id: bd1b85dd344a
     last_write_checksum: sha1:7a5eecb6fd21785d681867bf25a76aa19e010613
     pristine_git_object: a3a9a0afdcd797550a83a946fe54ff8cc2ac5e73
+  src/main/java/io/moov/sdk/models/components/OAuth2ClientType.java:
+    id: b609568824ad
+    last_write_checksum: sha1:9dd98cbf1745a23c66f85ee98cff24eb9dbd66de
+    pristine_git_object: 8a84974769d81b7be0eccfad198a898503f87b44
   src/main/java/io/moov/sdk/models/components/Occurrence.java:
     id: e9eb14130c1c
     last_write_checksum: sha1:6111862b75aacf060ee7b9b7a9da39b10b4b789e
@@ -14692,7 +14708,7 @@ examples:
           application/json: {"merchantCategories": []}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes:\n* `moov.transfers.create()`: \n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error` **Changed** (Breaking ⚠️)\n* `moov.transfers.list()`:  `response.[]` **Changed** (Breaking ⚠️)\n* `moov.transfers.batchGetTransfers()`:  `response.Map<Transfer>` **Changed** (Breaking ⚠️)\n* `moov.transfers.get()`:  `response` **Changed** (Breaking ⚠️)\n* `moov.transfers.update()`:  `response` **Changed** (Breaking ⚠️)\n* `moov.transfers.initiateRefund()`: \n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.cardDetails.status` **Changed** (Breaking ⚠️)\n* `moov.transfers.listRefunds()`:  `response.[].cardDetails.status` **Changed** (Breaking ⚠️)\n* `moov.transfers.getRefund()`:  `response.cardDetails.status` **Changed** (Breaking ⚠️)\n* `moov.transfers.createReversal()`:  `response.union(ReversedWithRefund).refund.cardDetails.status` **Changed** (Breaking ⚠️)\n"
+releaseNotes: "## Java SDK Changes:\n* `moov.issuingTransactions.listAuthorizations()`:  `response.[].declineReason` **Added**\n* `moov.issuingTransactions.getAuthorization()`:  `response.declineReason` **Added**\n* `moov.issuingTransactions.listAuthorizationEvents()`:  `response.[].declineReason` **Added**\n* `moov.authentication.createAccessToken()`: \n  *  `request.clientType` **Added**\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

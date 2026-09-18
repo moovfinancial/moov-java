@@ -71,6 +71,14 @@ public class IssuedCardAuthorization {
     @JsonProperty("cardTransactions")
     private Optional<? extends List<String>> cardTransactions;
 
+    /**
+     * The reason an authorization or authorization event was declined. Only present if the
+     * authorization or event has been declined.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("declineReason")
+    private Optional<? extends IssuingDeclineReason> declineReason;
+
     @JsonCreator
     public IssuedCardAuthorization(
             @JsonProperty("authorizationID") String authorizationID,
@@ -82,7 +90,8 @@ public class IssuedCardAuthorization {
             @JsonProperty("status") IssuingAuthorizationStatus status,
             @JsonProperty("merchantData") IssuingMerchantData merchantData,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
-            @JsonProperty("cardTransactions") Optional<? extends List<String>> cardTransactions) {
+            @JsonProperty("cardTransactions") Optional<? extends List<String>> cardTransactions,
+            @JsonProperty("declineReason") Optional<? extends IssuingDeclineReason> declineReason) {
         Utils.checkNotNull(authorizationID, "authorizationID");
         Utils.checkNotNull(issuedCardID, "issuedCardID");
         Utils.checkNotNull(lastFourCardNumber, "lastFourCardNumber");
@@ -93,6 +102,7 @@ public class IssuedCardAuthorization {
         Utils.checkNotNull(merchantData, "merchantData");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(cardTransactions, "cardTransactions");
+        Utils.checkNotNull(declineReason, "declineReason");
         this.authorizationID = authorizationID;
         this.issuedCardID = issuedCardID;
         this.lastFourCardNumber = lastFourCardNumber;
@@ -103,6 +113,7 @@ public class IssuedCardAuthorization {
         this.merchantData = merchantData;
         this.createdOn = createdOn;
         this.cardTransactions = cardTransactions;
+        this.declineReason = declineReason;
     }
     
     public IssuedCardAuthorization(
@@ -117,7 +128,7 @@ public class IssuedCardAuthorization {
         this(authorizationID, issuedCardID, Optional.empty(),
             fundingWalletID, network, authorizedAmount,
             status, merchantData, createdOn,
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -185,6 +196,16 @@ public class IssuedCardAuthorization {
     @JsonIgnore
     public Optional<List<String>> cardTransactions() {
         return (Optional<List<String>>) cardTransactions;
+    }
+
+    /**
+     * The reason an authorization or authorization event was declined. Only present if the
+     * authorization or event has been declined.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<IssuingDeclineReason> declineReason() {
+        return (Optional<IssuingDeclineReason>) declineReason;
     }
 
     public static Builder builder() {
@@ -288,6 +309,27 @@ public class IssuedCardAuthorization {
         return this;
     }
 
+    /**
+     * The reason an authorization or authorization event was declined. Only present if the
+     * authorization or event has been declined.
+     */
+    public IssuedCardAuthorization withDeclineReason(IssuingDeclineReason declineReason) {
+        Utils.checkNotNull(declineReason, "declineReason");
+        this.declineReason = Optional.ofNullable(declineReason);
+        return this;
+    }
+
+
+    /**
+     * The reason an authorization or authorization event was declined. Only present if the
+     * authorization or event has been declined.
+     */
+    public IssuedCardAuthorization withDeclineReason(Optional<? extends IssuingDeclineReason> declineReason) {
+        Utils.checkNotNull(declineReason, "declineReason");
+        this.declineReason = declineReason;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -307,7 +349,8 @@ public class IssuedCardAuthorization {
             Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.merchantData, other.merchantData) &&
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
-            Utils.enhancedDeepEquals(this.cardTransactions, other.cardTransactions);
+            Utils.enhancedDeepEquals(this.cardTransactions, other.cardTransactions) &&
+            Utils.enhancedDeepEquals(this.declineReason, other.declineReason);
     }
     
     @Override
@@ -316,7 +359,7 @@ public class IssuedCardAuthorization {
             authorizationID, issuedCardID, lastFourCardNumber,
             fundingWalletID, network, authorizedAmount,
             status, merchantData, createdOn,
-            cardTransactions);
+            cardTransactions, declineReason);
     }
     
     @Override
@@ -331,7 +374,8 @@ public class IssuedCardAuthorization {
                 "status", status,
                 "merchantData", merchantData,
                 "createdOn", createdOn,
-                "cardTransactions", cardTransactions);
+                "cardTransactions", cardTransactions,
+                "declineReason", declineReason);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -356,6 +400,8 @@ public class IssuedCardAuthorization {
         private OffsetDateTime createdOn;
 
         private Optional<? extends List<String>> cardTransactions = Optional.empty();
+
+        private Optional<? extends IssuingDeclineReason> declineReason = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -465,13 +511,34 @@ public class IssuedCardAuthorization {
             return this;
         }
 
+
+        /**
+         * The reason an authorization or authorization event was declined. Only present if the
+         * authorization or event has been declined.
+         */
+        public Builder declineReason(IssuingDeclineReason declineReason) {
+            Utils.checkNotNull(declineReason, "declineReason");
+            this.declineReason = Optional.ofNullable(declineReason);
+            return this;
+        }
+
+        /**
+         * The reason an authorization or authorization event was declined. Only present if the
+         * authorization or event has been declined.
+         */
+        public Builder declineReason(Optional<? extends IssuingDeclineReason> declineReason) {
+            Utils.checkNotNull(declineReason, "declineReason");
+            this.declineReason = declineReason;
+            return this;
+        }
+
         public IssuedCardAuthorization build() {
 
             return new IssuedCardAuthorization(
                 authorizationID, issuedCardID, lastFourCardNumber,
                 fundingWalletID, network, authorizedAmount,
                 status, merchantData, createdOn,
-                cardTransactions);
+                cardTransactions, declineReason);
         }
 
     }

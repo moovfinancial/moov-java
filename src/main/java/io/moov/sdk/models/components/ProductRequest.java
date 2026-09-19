@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -43,6 +44,15 @@ public class ProductRequest {
     private AmountDecimal basePrice;
 
     /**
+     * Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged;
+     * false excludes the product from tax calculation. Omitted values default to true on creation and
+     * preserve the existing setting on update.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("isTaxable")
+    private Optional<Boolean> isTaxable;
+
+    /**
      * Assign previously uploaded images to a product or option.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -68,18 +78,21 @@ public class ProductRequest {
             @JsonProperty("title") String title,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("basePrice") AmountDecimal basePrice,
+            @JsonProperty("isTaxable") Optional<Boolean> isTaxable,
             @JsonProperty("images") Optional<? extends List<AssignProductImage>> images,
             @JsonProperty("optionGroups") Optional<? extends List<CreateProductOptionGroup>> optionGroups,
             @JsonProperty("categoryID") Optional<String> categoryID) {
         Utils.checkNotNull(title, "title");
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(basePrice, "basePrice");
+        Utils.checkNotNull(isTaxable, "isTaxable");
         Utils.checkNotNull(images, "images");
         Utils.checkNotNull(optionGroups, "optionGroups");
         Utils.checkNotNull(categoryID, "categoryID");
         this.title = title;
         this.description = description;
         this.basePrice = basePrice;
+        this.isTaxable = isTaxable;
         this.images = images;
         this.optionGroups = optionGroups;
         this.categoryID = categoryID;
@@ -89,7 +102,8 @@ public class ProductRequest {
             String title,
             AmountDecimal basePrice) {
         this(title, Optional.empty(), basePrice,
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -115,6 +129,16 @@ public class ProductRequest {
     @JsonIgnore
     public AmountDecimal basePrice() {
         return basePrice;
+    }
+
+    /**
+     * Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged;
+     * false excludes the product from tax calculation. Omitted values default to true on creation and
+     * preserve the existing setting on update.
+     */
+    @JsonIgnore
+    public Optional<Boolean> isTaxable() {
+        return isTaxable;
     }
 
     /**
@@ -191,6 +215,29 @@ public class ProductRequest {
     }
 
     /**
+     * Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged;
+     * false excludes the product from tax calculation. Omitted values default to true on creation and
+     * preserve the existing setting on update.
+     */
+    public ProductRequest withIsTaxable(boolean isTaxable) {
+        Utils.checkNotNull(isTaxable, "isTaxable");
+        this.isTaxable = Optional.ofNullable(isTaxable);
+        return this;
+    }
+
+
+    /**
+     * Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged;
+     * false excludes the product from tax calculation. Omitted values default to true on creation and
+     * preserve the existing setting on update.
+     */
+    public ProductRequest withIsTaxable(Optional<Boolean> isTaxable) {
+        Utils.checkNotNull(isTaxable, "isTaxable");
+        this.isTaxable = isTaxable;
+        return this;
+    }
+
+    /**
      * Assign previously uploaded images to a product or option.
      */
     public ProductRequest withImages(List<AssignProductImage> images) {
@@ -260,6 +307,7 @@ public class ProductRequest {
             Utils.enhancedDeepEquals(this.title, other.title) &&
             Utils.enhancedDeepEquals(this.description, other.description) &&
             Utils.enhancedDeepEquals(this.basePrice, other.basePrice) &&
+            Utils.enhancedDeepEquals(this.isTaxable, other.isTaxable) &&
             Utils.enhancedDeepEquals(this.images, other.images) &&
             Utils.enhancedDeepEquals(this.optionGroups, other.optionGroups) &&
             Utils.enhancedDeepEquals(this.categoryID, other.categoryID);
@@ -269,7 +317,8 @@ public class ProductRequest {
     public int hashCode() {
         return Utils.enhancedHash(
             title, description, basePrice,
-            images, optionGroups, categoryID);
+            isTaxable, images, optionGroups,
+            categoryID);
     }
     
     @Override
@@ -278,6 +327,7 @@ public class ProductRequest {
                 "title", title,
                 "description", description,
                 "basePrice", basePrice,
+                "isTaxable", isTaxable,
                 "images", images,
                 "optionGroups", optionGroups,
                 "categoryID", categoryID);
@@ -291,6 +341,8 @@ public class ProductRequest {
         private Optional<String> description = Optional.empty();
 
         private AmountDecimal basePrice;
+
+        private Optional<Boolean> isTaxable = Optional.empty();
 
         private Optional<? extends List<AssignProductImage>> images = Optional.empty();
 
@@ -343,6 +395,29 @@ public class ProductRequest {
         public Builder basePrice(AmountDecimal basePrice) {
             Utils.checkNotNull(basePrice, "basePrice");
             this.basePrice = basePrice;
+            return this;
+        }
+
+
+        /**
+         * Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged;
+         * false excludes the product from tax calculation. Omitted values default to true on creation and
+         * preserve the existing setting on update.
+         */
+        public Builder isTaxable(boolean isTaxable) {
+            Utils.checkNotNull(isTaxable, "isTaxable");
+            this.isTaxable = Optional.ofNullable(isTaxable);
+            return this;
+        }
+
+        /**
+         * Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged;
+         * false excludes the product from tax calculation. Omitted values default to true on creation and
+         * preserve the existing setting on update.
+         */
+        public Builder isTaxable(Optional<Boolean> isTaxable) {
+            Utils.checkNotNull(isTaxable, "isTaxable");
+            this.isTaxable = isTaxable;
             return this;
         }
 
@@ -407,7 +482,8 @@ public class ProductRequest {
 
             return new ProductRequest(
                 title, description, basePrice,
-                images, optionGroups, categoryID);
+                isTaxable, images, optionGroups,
+                categoryID);
         }
 
     }

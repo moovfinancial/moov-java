@@ -270,6 +270,10 @@ public class Transfer extends MoovError {
         return data().flatMap(Data::invoiceID);
     }
 
+    /**
+     * The tip, tax, and surcharge portion of the transfer amount.
+     * For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+     */
     @Deprecated
     public Optional<TransferAmountDetails> amountDetails() {
         return data().flatMap(Data::amountDetails);
@@ -473,7 +477,10 @@ public class Transfer extends MoovError {
         @JsonProperty("invoiceID")
         private Optional<String> invoiceID;
 
-
+        /**
+         * The tip, tax, and surcharge portion of the transfer amount.
+         * For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+         */
         @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("amountDetails")
         private Optional<? extends TransferAmountDetails> amountDetails;
@@ -808,6 +815,10 @@ public class Transfer extends MoovError {
             return invoiceID;
         }
 
+        /**
+         * The tip, tax, and surcharge portion of the transfer amount.
+         * For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+         */
         @SuppressWarnings("unchecked")
         @JsonIgnore
         public Optional<TransferAmountDetails> amountDetails() {
@@ -1250,6 +1261,10 @@ public class Transfer extends MoovError {
             return this;
         }
 
+        /**
+         * The tip, tax, and surcharge portion of the transfer amount.
+         * For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+         */
         public Data withAmountDetails(TransferAmountDetails amountDetails) {
             Utils.checkNotNull(amountDetails, "amountDetails");
             this.amountDetails = Optional.ofNullable(amountDetails);
@@ -1257,6 +1272,10 @@ public class Transfer extends MoovError {
         }
 
 
+        /**
+         * The tip, tax, and surcharge portion of the transfer amount.
+         * For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+         */
         public Data withAmountDetails(Optional<? extends TransferAmountDetails> amountDetails) {
             Utils.checkNotNull(amountDetails, "amountDetails");
             this.amountDetails = amountDetails;
@@ -1875,12 +1894,20 @@ public class Transfer extends MoovError {
             }
 
 
+            /**
+             * The tip, tax, and surcharge portion of the transfer amount.
+             * For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+             */
             public Builder amountDetails(TransferAmountDetails amountDetails) {
                 Utils.checkNotNull(amountDetails, "amountDetails");
                 this.amountDetails = Optional.ofNullable(amountDetails);
                 return this;
             }
 
+            /**
+             * The tip, tax, and surcharge portion of the transfer amount.
+             * For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+             */
             public Builder amountDetails(Optional<? extends TransferAmountDetails> amountDetails) {
                 Utils.checkNotNull(amountDetails, "amountDetails");
                 this.amountDetails = amountDetails;

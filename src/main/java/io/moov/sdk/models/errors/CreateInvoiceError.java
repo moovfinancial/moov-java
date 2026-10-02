@@ -66,6 +66,11 @@ public class CreateInvoiceError extends MoovError {
     }
 
     @Deprecated
+    public Optional<String> customerEmail() {
+        return data().flatMap(Data::customerEmail);
+    }
+
+    @Deprecated
     public Optional<String> description() {
         return data().flatMap(Data::description);
     }
@@ -109,6 +114,11 @@ public class CreateInvoiceError extends MoovError {
 
 
         @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("customerEmail")
+        private Optional<String> customerEmail;
+
+
+        @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("description")
         private Optional<String> description;
 
@@ -135,18 +145,21 @@ public class CreateInvoiceError extends MoovError {
         @JsonCreator
         public Data(
                 @JsonProperty("customerAccountID") Optional<String> customerAccountID,
+                @JsonProperty("customerEmail") Optional<String> customerEmail,
                 @JsonProperty("description") Optional<String> description,
                 @JsonProperty("lineItems") Optional<? extends CreateInvoiceLineItemsValidationError> lineItems,
                 @JsonProperty("invoiceDate") Optional<String> invoiceDate,
                 @JsonProperty("dueDate") Optional<String> dueDate,
                 @JsonProperty("taxAmount") Optional<? extends AmountDecimalValidationError> taxAmount) {
             Utils.checkNotNull(customerAccountID, "customerAccountID");
+            Utils.checkNotNull(customerEmail, "customerEmail");
             Utils.checkNotNull(description, "description");
             Utils.checkNotNull(lineItems, "lineItems");
             Utils.checkNotNull(invoiceDate, "invoiceDate");
             Utils.checkNotNull(dueDate, "dueDate");
             Utils.checkNotNull(taxAmount, "taxAmount");
             this.customerAccountID = customerAccountID;
+            this.customerEmail = customerEmail;
             this.description = description;
             this.lineItems = lineItems;
             this.invoiceDate = invoiceDate;
@@ -156,12 +169,18 @@ public class CreateInvoiceError extends MoovError {
         
         public Data() {
             this(Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty(), Optional.empty(), Optional.empty());
+                Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty());
         }
 
         @JsonIgnore
         public Optional<String> customerAccountID() {
             return customerAccountID;
+        }
+
+        @JsonIgnore
+        public Optional<String> customerEmail() {
+            return customerEmail;
         }
 
         @JsonIgnore
@@ -206,6 +225,19 @@ public class CreateInvoiceError extends MoovError {
         public Data withCustomerAccountID(Optional<String> customerAccountID) {
             Utils.checkNotNull(customerAccountID, "customerAccountID");
             this.customerAccountID = customerAccountID;
+            return this;
+        }
+
+        public Data withCustomerEmail(String customerEmail) {
+            Utils.checkNotNull(customerEmail, "customerEmail");
+            this.customerEmail = Optional.ofNullable(customerEmail);
+            return this;
+        }
+
+
+        public Data withCustomerEmail(Optional<String> customerEmail) {
+            Utils.checkNotNull(customerEmail, "customerEmail");
+            this.customerEmail = customerEmail;
             return this;
         }
 
@@ -285,6 +317,7 @@ public class CreateInvoiceError extends MoovError {
             Data other = (Data) o;
             return 
                 Utils.enhancedDeepEquals(this.customerAccountID, other.customerAccountID) &&
+                Utils.enhancedDeepEquals(this.customerEmail, other.customerEmail) &&
                 Utils.enhancedDeepEquals(this.description, other.description) &&
                 Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
                 Utils.enhancedDeepEquals(this.invoiceDate, other.invoiceDate) &&
@@ -295,14 +328,16 @@ public class CreateInvoiceError extends MoovError {
         @Override
         public int hashCode() {
             return Utils.enhancedHash(
-                customerAccountID, description, lineItems,
-                invoiceDate, dueDate, taxAmount);
+                customerAccountID, customerEmail, description,
+                lineItems, invoiceDate, dueDate,
+                taxAmount);
         }
         
         @Override
         public String toString() {
             return Utils.toString(Data.class,
                     "customerAccountID", customerAccountID,
+                    "customerEmail", customerEmail,
                     "description", description,
                     "lineItems", lineItems,
                     "invoiceDate", invoiceDate,
@@ -314,6 +349,8 @@ public class CreateInvoiceError extends MoovError {
         public final static class Builder {
 
             private Optional<String> customerAccountID = Optional.empty();
+
+            private Optional<String> customerEmail = Optional.empty();
 
             private Optional<String> description = Optional.empty();
 
@@ -339,6 +376,19 @@ public class CreateInvoiceError extends MoovError {
             public Builder customerAccountID(Optional<String> customerAccountID) {
                 Utils.checkNotNull(customerAccountID, "customerAccountID");
                 this.customerAccountID = customerAccountID;
+                return this;
+            }
+
+
+            public Builder customerEmail(String customerEmail) {
+                Utils.checkNotNull(customerEmail, "customerEmail");
+                this.customerEmail = Optional.ofNullable(customerEmail);
+                return this;
+            }
+
+            public Builder customerEmail(Optional<String> customerEmail) {
+                Utils.checkNotNull(customerEmail, "customerEmail");
+                this.customerEmail = customerEmail;
                 return this;
             }
 
@@ -410,8 +460,9 @@ public class CreateInvoiceError extends MoovError {
             public Data build() {
 
                 return new Data(
-                    customerAccountID, description, lineItems,
-                    invoiceDate, dueDate, taxAmount);
+                    customerAccountID, customerEmail, description,
+                    lineItems, invoiceDate, dueDate,
+                    taxAmount);
             }
 
         }

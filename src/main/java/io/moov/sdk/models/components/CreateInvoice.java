@@ -24,6 +24,13 @@ public class CreateInvoice {
     @JsonProperty("customerAccountID")
     private String customerAccountID;
 
+    /**
+     * Email address to use for invoice checkout OTP verification instead of the customer account email.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("customerEmail")
+    private Optional<String> customerEmail;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
@@ -53,18 +60,21 @@ public class CreateInvoice {
     @JsonCreator
     public CreateInvoice(
             @JsonProperty("customerAccountID") String customerAccountID,
+            @JsonProperty("customerEmail") Optional<String> customerEmail,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("lineItems") CreateInvoiceLineItems lineItems,
             @JsonProperty("invoiceDate") Optional<OffsetDateTime> invoiceDate,
             @JsonProperty("dueDate") Optional<OffsetDateTime> dueDate,
             @JsonProperty("taxAmount") Optional<? extends AmountDecimal> taxAmount) {
         Utils.checkNotNull(customerAccountID, "customerAccountID");
+        Utils.checkNotNull(customerEmail, "customerEmail");
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(lineItems, "lineItems");
         Utils.checkNotNull(invoiceDate, "invoiceDate");
         Utils.checkNotNull(dueDate, "dueDate");
         Utils.checkNotNull(taxAmount, "taxAmount");
         this.customerAccountID = customerAccountID;
+        this.customerEmail = customerEmail;
         this.description = description;
         this.lineItems = lineItems;
         this.invoiceDate = invoiceDate;
@@ -75,8 +85,9 @@ public class CreateInvoice {
     public CreateInvoice(
             String customerAccountID,
             CreateInvoiceLineItems lineItems) {
-        this(customerAccountID, Optional.empty(), lineItems,
-            Optional.empty(), Optional.empty(), Optional.empty());
+        this(customerAccountID, Optional.empty(), Optional.empty(),
+            lineItems, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -86,6 +97,14 @@ public class CreateInvoice {
     @JsonIgnore
     public String customerAccountID() {
         return customerAccountID;
+    }
+
+    /**
+     * Email address to use for invoice checkout OTP verification instead of the customer account email.
+     */
+    @JsonIgnore
+    public Optional<String> customerEmail() {
+        return customerEmail;
     }
 
     @JsonIgnore
@@ -129,6 +148,25 @@ public class CreateInvoice {
     public CreateInvoice withCustomerAccountID(String customerAccountID) {
         Utils.checkNotNull(customerAccountID, "customerAccountID");
         this.customerAccountID = customerAccountID;
+        return this;
+    }
+
+    /**
+     * Email address to use for invoice checkout OTP verification instead of the customer account email.
+     */
+    public CreateInvoice withCustomerEmail(String customerEmail) {
+        Utils.checkNotNull(customerEmail, "customerEmail");
+        this.customerEmail = Optional.ofNullable(customerEmail);
+        return this;
+    }
+
+
+    /**
+     * Email address to use for invoice checkout OTP verification instead of the customer account email.
+     */
+    public CreateInvoice withCustomerEmail(Optional<String> customerEmail) {
+        Utils.checkNotNull(customerEmail, "customerEmail");
+        this.customerEmail = customerEmail;
         return this;
     }
 
@@ -204,6 +242,7 @@ public class CreateInvoice {
         CreateInvoice other = (CreateInvoice) o;
         return 
             Utils.enhancedDeepEquals(this.customerAccountID, other.customerAccountID) &&
+            Utils.enhancedDeepEquals(this.customerEmail, other.customerEmail) &&
             Utils.enhancedDeepEquals(this.description, other.description) &&
             Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
             Utils.enhancedDeepEquals(this.invoiceDate, other.invoiceDate) &&
@@ -214,14 +253,16 @@ public class CreateInvoice {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            customerAccountID, description, lineItems,
-            invoiceDate, dueDate, taxAmount);
+            customerAccountID, customerEmail, description,
+            lineItems, invoiceDate, dueDate,
+            taxAmount);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CreateInvoice.class,
                 "customerAccountID", customerAccountID,
+                "customerEmail", customerEmail,
                 "description", description,
                 "lineItems", lineItems,
                 "invoiceDate", invoiceDate,
@@ -233,6 +274,8 @@ public class CreateInvoice {
     public final static class Builder {
 
         private String customerAccountID;
+
+        private Optional<String> customerEmail = Optional.empty();
 
         private Optional<String> description = Optional.empty();
 
@@ -256,6 +299,25 @@ public class CreateInvoice {
         public Builder customerAccountID(String customerAccountID) {
             Utils.checkNotNull(customerAccountID, "customerAccountID");
             this.customerAccountID = customerAccountID;
+            return this;
+        }
+
+
+        /**
+         * Email address to use for invoice checkout OTP verification instead of the customer account email.
+         */
+        public Builder customerEmail(String customerEmail) {
+            Utils.checkNotNull(customerEmail, "customerEmail");
+            this.customerEmail = Optional.ofNullable(customerEmail);
+            return this;
+        }
+
+        /**
+         * Email address to use for invoice checkout OTP verification instead of the customer account email.
+         */
+        public Builder customerEmail(Optional<String> customerEmail) {
+            Utils.checkNotNull(customerEmail, "customerEmail");
+            this.customerEmail = customerEmail;
             return this;
         }
 
@@ -324,8 +386,9 @@ public class CreateInvoice {
         public CreateInvoice build() {
 
             return new CreateInvoice(
-                customerAccountID, description, lineItems,
-                invoiceDate, dueDate, taxAmount);
+                customerAccountID, customerEmail, description,
+                lineItems, invoiceDate, dueDate,
+                taxAmount);
         }
 
     }

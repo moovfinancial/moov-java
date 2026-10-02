@@ -87,6 +87,12 @@ public class ListTransfersRequest {
     private Optional<? extends List<String>> authorizationIDs;
 
     /**
+     * Optional comma-separated invoice IDs.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=invoiceIDs")
+    private Optional<? extends List<String>> invoiceIDs;
+
+    /**
      * Optional comma-separated IDs to filter for transfers associated with specific card captures.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=captureIDs")
@@ -119,6 +125,7 @@ public class ListTransfersRequest {
             Optional<Boolean> disputed,
             Optional<String> foreignID,
             Optional<? extends List<String>> authorizationIDs,
+            Optional<? extends List<String>> invoiceIDs,
             Optional<? extends List<String>> captureIDs,
             Optional<Long> skip,
             Optional<Long> count,
@@ -134,6 +141,7 @@ public class ListTransfersRequest {
         Utils.checkNotNull(disputed, "disputed");
         Utils.checkNotNull(foreignID, "foreignID");
         Utils.checkNotNull(authorizationIDs, "authorizationIDs");
+        Utils.checkNotNull(invoiceIDs, "invoiceIDs");
         Utils.checkNotNull(captureIDs, "captureIDs");
         Utils.checkNotNull(skip, "skip");
         Utils.checkNotNull(count, "count");
@@ -149,6 +157,7 @@ public class ListTransfersRequest {
         this.disputed = disputed;
         this.foreignID = foreignID;
         this.authorizationIDs = authorizationIDs;
+        this.invoiceIDs = invoiceIDs;
         this.captureIDs = captureIDs;
         this.skip = skip;
         this.count = count;
@@ -161,7 +170,8 @@ public class ListTransfersRequest {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), accountID);
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            accountID);
     }
 
     /**
@@ -254,6 +264,15 @@ public class ListTransfersRequest {
     @JsonIgnore
     public Optional<List<String>> authorizationIDs() {
         return (Optional<List<String>>) authorizationIDs;
+    }
+
+    /**
+     * Optional comma-separated invoice IDs.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<String>> invoiceIDs() {
+        return (Optional<List<String>>) invoiceIDs;
     }
 
     /**
@@ -500,6 +519,25 @@ public class ListTransfersRequest {
     }
 
     /**
+     * Optional comma-separated invoice IDs.
+     */
+    public ListTransfersRequest withInvoiceIDs(List<String> invoiceIDs) {
+        Utils.checkNotNull(invoiceIDs, "invoiceIDs");
+        this.invoiceIDs = Optional.ofNullable(invoiceIDs);
+        return this;
+    }
+
+
+    /**
+     * Optional comma-separated invoice IDs.
+     */
+    public ListTransfersRequest withInvoiceIDs(Optional<? extends List<String>> invoiceIDs) {
+        Utils.checkNotNull(invoiceIDs, "invoiceIDs");
+        this.invoiceIDs = invoiceIDs;
+        return this;
+    }
+
+    /**
      * Optional comma-separated IDs to filter for transfers associated with specific card captures.
      */
     public ListTransfersRequest withCaptureIDs(List<String> captureIDs) {
@@ -577,6 +615,7 @@ public class ListTransfersRequest {
             Utils.enhancedDeepEquals(this.disputed, other.disputed) &&
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
             Utils.enhancedDeepEquals(this.authorizationIDs, other.authorizationIDs) &&
+            Utils.enhancedDeepEquals(this.invoiceIDs, other.invoiceIDs) &&
             Utils.enhancedDeepEquals(this.captureIDs, other.captureIDs) &&
             Utils.enhancedDeepEquals(this.skip, other.skip) &&
             Utils.enhancedDeepEquals(this.count, other.count) &&
@@ -589,8 +628,9 @@ public class ListTransfersRequest {
             accountIDs, status, startDateTime,
             endDateTime, groupID, scheduleID,
             paymentLinkCode, refunded, disputed,
-            foreignID, authorizationIDs, captureIDs,
-            skip, count, accountID);
+            foreignID, authorizationIDs, invoiceIDs,
+            captureIDs, skip, count,
+            accountID);
     }
     
     @Override
@@ -607,6 +647,7 @@ public class ListTransfersRequest {
                 "disputed", disputed,
                 "foreignID", foreignID,
                 "authorizationIDs", authorizationIDs,
+                "invoiceIDs", invoiceIDs,
                 "captureIDs", captureIDs,
                 "skip", skip,
                 "count", count,
@@ -637,6 +678,8 @@ public class ListTransfersRequest {
         private Optional<String> foreignID = Optional.empty();
 
         private Optional<? extends List<String>> authorizationIDs = Optional.empty();
+
+        private Optional<? extends List<String>> invoiceIDs = Optional.empty();
 
         private Optional<? extends List<String>> captureIDs = Optional.empty();
 
@@ -863,6 +906,25 @@ public class ListTransfersRequest {
 
 
         /**
+         * Optional comma-separated invoice IDs.
+         */
+        public Builder invoiceIDs(List<String> invoiceIDs) {
+            Utils.checkNotNull(invoiceIDs, "invoiceIDs");
+            this.invoiceIDs = Optional.ofNullable(invoiceIDs);
+            return this;
+        }
+
+        /**
+         * Optional comma-separated invoice IDs.
+         */
+        public Builder invoiceIDs(Optional<? extends List<String>> invoiceIDs) {
+            Utils.checkNotNull(invoiceIDs, "invoiceIDs");
+            this.invoiceIDs = invoiceIDs;
+            return this;
+        }
+
+
+        /**
          * Optional comma-separated IDs to filter for transfers associated with specific card captures.
          */
         public Builder captureIDs(List<String> captureIDs) {
@@ -925,8 +987,9 @@ public class ListTransfersRequest {
                 accountIDs, status, startDateTime,
                 endDateTime, groupID, scheduleID,
                 paymentLinkCode, refunded, disputed,
-                foreignID, authorizationIDs, captureIDs,
-                skip, count, accountID);
+                foreignID, authorizationIDs, invoiceIDs,
+                captureIDs, skip, count,
+                accountID);
         }
 
     }

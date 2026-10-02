@@ -48,7 +48,6 @@ public class WalletTransactionType {
     public static final WalletTransactionType FEE_REVENUE = new WalletTransactionType("fee-revenue");
     public static final WalletTransactionType RESIDUAL = new WalletTransactionType("residual");
     public static final WalletTransactionType INSTANT_BANK_FAILURE = new WalletTransactionType("instant-bank-failure");
-    public static final WalletTransactionType WIRE_FAILURE = new WalletTransactionType("wire-failure");
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -150,7 +149,6 @@ public class WalletTransactionType {
         map.put("fee-revenue", FEE_REVENUE);
         map.put("residual", RESIDUAL);
         map.put("instant-bank-failure", INSTANT_BANK_FAILURE);
-        map.put("wire-failure", WIRE_FAILURE);
         return map;
     }
 
@@ -184,7 +182,6 @@ public class WalletTransactionType {
         map.put("fee-revenue", WalletTransactionTypeEnum.FEE_REVENUE);
         map.put("residual", WalletTransactionTypeEnum.RESIDUAL);
         map.put("instant-bank-failure", WalletTransactionTypeEnum.INSTANT_BANK_FAILURE);
-        map.put("wire-failure", WalletTransactionTypeEnum.WIRE_FAILURE);
         return map;
     }
     
@@ -218,8 +215,7 @@ public class WalletTransactionType {
         ADJUSTMENT("adjustment"),
         FEE_REVENUE("fee-revenue"),
         RESIDUAL("residual"),
-        INSTANT_BANK_FAILURE("instant-bank-failure"),
-        WIRE_FAILURE("wire-failure"),;
+        INSTANT_BANK_FAILURE("instant-bank-failure"),;
 
         private final String value;
 

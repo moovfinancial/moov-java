@@ -6,6 +6,9 @@ package io.moov.sdk;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.models.components.FileUploadRequestMultiPart;
+import io.moov.sdk.models.operations.DownloadFileRequest;
+import io.moov.sdk.models.operations.DownloadFileRequestBuilder;
+import io.moov.sdk.models.operations.DownloadFileResponse;
 import io.moov.sdk.models.operations.GetFileDetailsRequest;
 import io.moov.sdk.models.operations.GetFileDetailsRequestBuilder;
 import io.moov.sdk.models.operations.GetFileDetailsResponse;
@@ -15,6 +18,7 @@ import io.moov.sdk.models.operations.ListFilesResponse;
 import io.moov.sdk.models.operations.UploadFileRequest;
 import io.moov.sdk.models.operations.UploadFileRequestBuilder;
 import io.moov.sdk.models.operations.UploadFileResponse;
+import io.moov.sdk.operations.DownloadFile;
 import io.moov.sdk.operations.GetFileDetails;
 import io.moov.sdk.operations.ListFiles;
 import io.moov.sdk.operations.UploadFile;
@@ -144,6 +148,45 @@ public class Files {
                 .build();
         RequestOperation<GetFileDetailsRequest, GetFileDetailsResponse> operation
               = new GetFileDetails.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Download the contents of a file associated with a specific Moov account. Files reserved for
+     * internal Moov use are not available through this endpoint.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/files.download` scope.
+     * 
+     * @return The call builder
+     */
+    public DownloadFileRequestBuilder download() {
+        return new DownloadFileRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Download the contents of a file associated with a specific Moov account. Files reserved for
+     * internal Moov use are not available through this endpoint.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/files.download` scope.
+     * 
+     * @param accountID 
+     * @param fileID 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DownloadFileResponse download(String accountID, String fileID) {
+        DownloadFileRequest request =
+            DownloadFileRequest
+                .builder()
+                .accountID(accountID)
+                .fileID(fileID)
+                .build();
+        RequestOperation<DownloadFileRequest, DownloadFileResponse> operation
+              = new DownloadFile.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

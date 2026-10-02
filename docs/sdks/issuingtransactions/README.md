@@ -4,6 +4,12 @@
 
 ### Available Operations
 
+* [listActivity](#listactivity) - List issued card activity associated with a Moov account.
+
+Activity includes authorizations and settlements in a single list.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 * [listAuthorizations](#listauthorizations) - List issued card authorizations associated with a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
@@ -24,6 +30,71 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+
+## listActivity
+
+List issued card activity associated with a Moov account.
+
+Activity includes authorizations and settlements in a single list.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="listIssuedCardActivity" method="get" path="/issuing/{accountID}/activity" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListIssuedCardActivityRequest;
+import io.moov.sdk.models.operations.ListIssuedCardActivityResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        ListIssuedCardActivityRequest req = ListIssuedCardActivityRequest.builder()
+                .accountID("<id>")
+                .skip(60L)
+                .count(20L)
+                .build();
+
+        ListIssuedCardActivityResponse res = sdk.issuingTransactions().listActivity()
+                .request(req)
+                .call();
+
+        if (res.issuedCardActivities().isPresent()) {
+            System.out.println(res.issuedCardActivities().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `request`                                                                                 | [ListIssuedCardActivityRequest](../../models/operations/ListIssuedCardActivityRequest.md) | :heavy_check_mark:                                                                        | The request object to use for the request.                                                |
+
+### Response
+
+**[ListIssuedCardActivityResponse](../../models/operations/ListIssuedCardActivityResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
 ## listAuthorizations
 

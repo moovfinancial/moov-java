@@ -24,3 +24,4 @@ DisbursementPaymentMethodType custom = DisbursementPaymentMethodType.of("custom_
 | `ACH_CREDIT_STANDARD` | ach-credit-standard   |
 | `PUSH_TO_APPLE_PAY`   | push-to-apple-pay     |
 | `PUSH_TO_GOOGLE_PAY`  | push-to-google-pay    |
+| `INSTANT_BANK_CREDIT` | instant-bank-credit   |

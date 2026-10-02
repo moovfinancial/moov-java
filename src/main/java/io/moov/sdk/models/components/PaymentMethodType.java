@@ -42,7 +42,6 @@ public class PaymentMethodType {
     public static final PaymentMethodType GOOGLE_PAY = new PaymentMethodType("google-pay");
     public static final PaymentMethodType PUSH_TO_GOOGLE_PAY = new PaymentMethodType("push-to-google-pay");
     public static final PaymentMethodType PULL_FROM_GOOGLE_PAY = new PaymentMethodType("pull-from-google-pay");
-    public static final PaymentMethodType WIRE_CREDIT = new PaymentMethodType("wire-credit");
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -133,7 +132,6 @@ public class PaymentMethodType {
         map.put("google-pay", GOOGLE_PAY);
         map.put("push-to-google-pay", PUSH_TO_GOOGLE_PAY);
         map.put("pull-from-google-pay", PULL_FROM_GOOGLE_PAY);
-        map.put("wire-credit", WIRE_CREDIT);
         return map;
     }
 
@@ -156,7 +154,6 @@ public class PaymentMethodType {
         map.put("google-pay", PaymentMethodTypeEnum.GOOGLE_PAY);
         map.put("push-to-google-pay", PaymentMethodTypeEnum.PUSH_TO_GOOGLE_PAY);
         map.put("pull-from-google-pay", PaymentMethodTypeEnum.PULL_FROM_GOOGLE_PAY);
-        map.put("wire-credit", PaymentMethodTypeEnum.WIRE_CREDIT);
         return map;
     }
     
@@ -179,8 +176,7 @@ public class PaymentMethodType {
         PULL_FROM_APPLE_PAY("pull-from-apple-pay"),
         GOOGLE_PAY("google-pay"),
         PUSH_TO_GOOGLE_PAY("push-to-google-pay"),
-        PULL_FROM_GOOGLE_PAY("pull-from-google-pay"),
-        WIRE_CREDIT("wire-credit"),;
+        PULL_FROM_GOOGLE_PAY("pull-from-google-pay"),;
 
         private final String value;
 

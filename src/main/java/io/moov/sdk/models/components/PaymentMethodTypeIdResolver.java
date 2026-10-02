@@ -41,7 +41,6 @@ public class PaymentMethodTypeIdResolver extends GenericTypeIdResolver<PaymentMe
         registerType("google-pay", GooglePayPaymentMethod.class);
         registerType("push-to-google-pay", PushToGooglePayPaymentMethod.class);
         registerType("pull-from-google-pay", PullFromGooglePayPaymentMethod.class);
-        registerType("wire-credit", WireCreditPaymentMethod.class);
     }
 
     @Override

@@ -41,6 +41,7 @@ public class ApplicationScope {
     public static final ApplicationScope DOCUMENTS_READ = new ApplicationScope("documents.read");
     public static final ApplicationScope DOCUMENTS_WRITE = new ApplicationScope("documents.write");
     public static final ApplicationScope FED_READ = new ApplicationScope("fed.read");
+    public static final ApplicationScope FILES_DOWNLOAD = new ApplicationScope("files.download");
     public static final ApplicationScope FILES_READ = new ApplicationScope("files.read");
     public static final ApplicationScope FILES_WRITE = new ApplicationScope("files.write");
     public static final ApplicationScope ISSUED_CARDS_READ = new ApplicationScope("issued-cards.read");
@@ -146,6 +147,7 @@ public class ApplicationScope {
         map.put("documents.read", DOCUMENTS_READ);
         map.put("documents.write", DOCUMENTS_WRITE);
         map.put("fed.read", FED_READ);
+        map.put("files.download", FILES_DOWNLOAD);
         map.put("files.read", FILES_READ);
         map.put("files.write", FILES_WRITE);
         map.put("issued-cards.read", ISSUED_CARDS_READ);
@@ -183,6 +185,7 @@ public class ApplicationScope {
         map.put("documents.read", ApplicationScopeEnum.DOCUMENTS_READ);
         map.put("documents.write", ApplicationScopeEnum.DOCUMENTS_WRITE);
         map.put("fed.read", ApplicationScopeEnum.FED_READ);
+        map.put("files.download", ApplicationScopeEnum.FILES_DOWNLOAD);
         map.put("files.read", ApplicationScopeEnum.FILES_READ);
         map.put("files.write", ApplicationScopeEnum.FILES_WRITE);
         map.put("issued-cards.read", ApplicationScopeEnum.ISSUED_CARDS_READ);
@@ -221,6 +224,7 @@ public class ApplicationScope {
         DOCUMENTS_READ("documents.read"),
         DOCUMENTS_WRITE("documents.write"),
         FED_READ("fed.read"),
+        FILES_DOWNLOAD("files.download"),
         FILES_READ("files.read"),
         FILES_WRITE("files.write"),
         ISSUED_CARDS_READ("issued-cards.read"),

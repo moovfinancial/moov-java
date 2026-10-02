@@ -33,7 +33,6 @@ public class TransferType {
     public static final TransferType ACH_DEBIT_TO_ACH_CREDIT = new TransferType("ach-debit-to-ach-credit");
     public static final TransferType INSTANT_BANK_CREDIT = new TransferType("instant-bank-credit");
     public static final TransferType WALLET = new TransferType("wallet");
-    public static final TransferType WIRE_CREDIT = new TransferType("wire-credit");
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -115,7 +114,6 @@ public class TransferType {
         map.put("ach-debit-to-ach-credit", ACH_DEBIT_TO_ACH_CREDIT);
         map.put("instant-bank-credit", INSTANT_BANK_CREDIT);
         map.put("wallet", WALLET);
-        map.put("wire-credit", WIRE_CREDIT);
         return map;
     }
 
@@ -129,7 +127,6 @@ public class TransferType {
         map.put("ach-debit-to-ach-credit", TransferTypeEnum.ACH_DEBIT_TO_ACH_CREDIT);
         map.put("instant-bank-credit", TransferTypeEnum.INSTANT_BANK_CREDIT);
         map.put("wallet", TransferTypeEnum.WALLET);
-        map.put("wire-credit", TransferTypeEnum.WIRE_CREDIT);
         return map;
     }
     
@@ -143,8 +140,7 @@ public class TransferType {
         ACH_CREDIT("ach-credit"),
         ACH_DEBIT_TO_ACH_CREDIT("ach-debit-to-ach-credit"),
         INSTANT_BANK_CREDIT("instant-bank-credit"),
-        WALLET("wallet"),
-        WIRE_CREDIT("wire-credit"),;
+        WALLET("wallet"),;
 
         private final String value;
 

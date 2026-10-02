@@ -46,13 +46,6 @@ public class TransferProcessingDetails {
     @JsonProperty("instantBankCredit")
     private Optional<? extends InstantBankCreditTransferProcessingDetails> instantBankCredit;
 
-    /**
-     * Wire-specific processing details returned on a transfer.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("wire")
-    private Optional<? extends WireTransferProcessingDetails> wire;
-
     @JsonCreator
     public TransferProcessingDetails(
             @JsonProperty("cardPayment") Optional<? extends CardPaymentTransferProcessingDetails> cardPayment,
@@ -60,28 +53,24 @@ public class TransferProcessingDetails {
             @JsonProperty("pullFromCard") Optional<? extends PullFromCardTransferProcessingDetails> pullFromCard,
             @JsonProperty("achDebit") Optional<? extends ACHDebitTransferProcessingDetails> achDebit,
             @JsonProperty("achCredit") Optional<? extends ACHCreditTransferProcessingDetails> achCredit,
-            @JsonProperty("instantBankCredit") Optional<? extends InstantBankCreditTransferProcessingDetails> instantBankCredit,
-            @JsonProperty("wire") Optional<? extends WireTransferProcessingDetails> wire) {
+            @JsonProperty("instantBankCredit") Optional<? extends InstantBankCreditTransferProcessingDetails> instantBankCredit) {
         Utils.checkNotNull(cardPayment, "cardPayment");
         Utils.checkNotNull(pushToCard, "pushToCard");
         Utils.checkNotNull(pullFromCard, "pullFromCard");
         Utils.checkNotNull(achDebit, "achDebit");
         Utils.checkNotNull(achCredit, "achCredit");
         Utils.checkNotNull(instantBankCredit, "instantBankCredit");
-        Utils.checkNotNull(wire, "wire");
         this.cardPayment = cardPayment;
         this.pushToCard = pushToCard;
         this.pullFromCard = pullFromCard;
         this.achDebit = achDebit;
         this.achCredit = achCredit;
         this.instantBankCredit = instantBankCredit;
-        this.wire = wire;
     }
     
     public TransferProcessingDetails() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -118,15 +107,6 @@ public class TransferProcessingDetails {
     @JsonIgnore
     public Optional<InstantBankCreditTransferProcessingDetails> instantBankCredit() {
         return (Optional<InstantBankCreditTransferProcessingDetails>) instantBankCredit;
-    }
-
-    /**
-     * Wire-specific processing details returned on a transfer.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<WireTransferProcessingDetails> wire() {
-        return (Optional<WireTransferProcessingDetails>) wire;
     }
 
     public static Builder builder() {
@@ -212,25 +192,6 @@ public class TransferProcessingDetails {
         return this;
     }
 
-    /**
-     * Wire-specific processing details returned on a transfer.
-     */
-    public TransferProcessingDetails withWire(WireTransferProcessingDetails wire) {
-        Utils.checkNotNull(wire, "wire");
-        this.wire = Optional.ofNullable(wire);
-        return this;
-    }
-
-
-    /**
-     * Wire-specific processing details returned on a transfer.
-     */
-    public TransferProcessingDetails withWire(Optional<? extends WireTransferProcessingDetails> wire) {
-        Utils.checkNotNull(wire, "wire");
-        this.wire = wire;
-        return this;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -246,16 +207,14 @@ public class TransferProcessingDetails {
             Utils.enhancedDeepEquals(this.pullFromCard, other.pullFromCard) &&
             Utils.enhancedDeepEquals(this.achDebit, other.achDebit) &&
             Utils.enhancedDeepEquals(this.achCredit, other.achCredit) &&
-            Utils.enhancedDeepEquals(this.instantBankCredit, other.instantBankCredit) &&
-            Utils.enhancedDeepEquals(this.wire, other.wire);
+            Utils.enhancedDeepEquals(this.instantBankCredit, other.instantBankCredit);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             cardPayment, pushToCard, pullFromCard,
-            achDebit, achCredit, instantBankCredit,
-            wire);
+            achDebit, achCredit, instantBankCredit);
     }
     
     @Override
@@ -266,8 +225,7 @@ public class TransferProcessingDetails {
                 "pullFromCard", pullFromCard,
                 "achDebit", achDebit,
                 "achCredit", achCredit,
-                "instantBankCredit", instantBankCredit,
-                "wire", wire);
+                "instantBankCredit", instantBankCredit);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -284,8 +242,6 @@ public class TransferProcessingDetails {
         private Optional<? extends ACHCreditTransferProcessingDetails> achCredit = Optional.empty();
 
         private Optional<? extends InstantBankCreditTransferProcessingDetails> instantBankCredit = Optional.empty();
-
-        private Optional<? extends WireTransferProcessingDetails> wire = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -369,31 +325,11 @@ public class TransferProcessingDetails {
             return this;
         }
 
-
-        /**
-         * Wire-specific processing details returned on a transfer.
-         */
-        public Builder wire(WireTransferProcessingDetails wire) {
-            Utils.checkNotNull(wire, "wire");
-            this.wire = Optional.ofNullable(wire);
-            return this;
-        }
-
-        /**
-         * Wire-specific processing details returned on a transfer.
-         */
-        public Builder wire(Optional<? extends WireTransferProcessingDetails> wire) {
-            Utils.checkNotNull(wire, "wire");
-            this.wire = wire;
-            return this;
-        }
-
         public TransferProcessingDetails build() {
 
             return new TransferProcessingDetails(
                 cardPayment, pushToCard, pullFromCard,
-                achDebit, achCredit, instantBankCredit,
-                wire);
+                achDebit, achCredit, instantBankCredit);
         }
 
     }

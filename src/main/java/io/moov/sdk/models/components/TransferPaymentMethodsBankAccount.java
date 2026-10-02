@@ -5,11 +5,15 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
+import java.util.Optional;
 
 /**
  * TransferPaymentMethodsBankAccount
@@ -65,6 +69,14 @@ public class TransferPaymentMethodsBankAccount {
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
 
+    /**
+     * The outcome of a requested risk-verification attempt. `notAttempted` when
+     * `requestRiskVerification` was not set, or the calling account was not allowlisted.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("riskVerificationOutcome")
+    private Optional<? extends RiskVerificationOutcome> riskVerificationOutcome;
+
     @JsonCreator
     public TransferPaymentMethodsBankAccount(
             @JsonProperty("bankAccountID") String bankAccountID,
@@ -76,7 +88,8 @@ public class TransferPaymentMethodsBankAccount {
             @JsonProperty("bankAccountType") BankAccountType bankAccountType,
             @JsonProperty("routingNumber") String routingNumber,
             @JsonProperty("lastFourAccountNumber") String lastFourAccountNumber,
-            @JsonProperty("updatedOn") OffsetDateTime updatedOn) {
+            @JsonProperty("updatedOn") OffsetDateTime updatedOn,
+            @JsonProperty("riskVerificationOutcome") Optional<? extends RiskVerificationOutcome> riskVerificationOutcome) {
         Utils.checkNotNull(bankAccountID, "bankAccountID");
         Utils.checkNotNull(fingerprint, "fingerprint");
         Utils.checkNotNull(status, "status");
@@ -87,6 +100,7 @@ public class TransferPaymentMethodsBankAccount {
         Utils.checkNotNull(routingNumber, "routingNumber");
         Utils.checkNotNull(lastFourAccountNumber, "lastFourAccountNumber");
         Utils.checkNotNull(updatedOn, "updatedOn");
+        Utils.checkNotNull(riskVerificationOutcome, "riskVerificationOutcome");
         this.bankAccountID = bankAccountID;
         this.fingerprint = fingerprint;
         this.status = status;
@@ -97,6 +111,24 @@ public class TransferPaymentMethodsBankAccount {
         this.routingNumber = routingNumber;
         this.lastFourAccountNumber = lastFourAccountNumber;
         this.updatedOn = updatedOn;
+        this.riskVerificationOutcome = riskVerificationOutcome;
+    }
+    
+    public TransferPaymentMethodsBankAccount(
+            String bankAccountID,
+            String fingerprint,
+            BankAccountStatus status,
+            String holderName,
+            BankAccountHolderType holderType,
+            String bankName,
+            BankAccountType bankAccountType,
+            String routingNumber,
+            String lastFourAccountNumber,
+            OffsetDateTime updatedOn) {
+        this(bankAccountID, fingerprint, status,
+            holderName, holderType, bankName,
+            bankAccountType, routingNumber, lastFourAccountNumber,
+            updatedOn, Optional.empty());
     }
 
     @JsonIgnore
@@ -158,6 +190,16 @@ public class TransferPaymentMethodsBankAccount {
     @JsonIgnore
     public OffsetDateTime updatedOn() {
         return updatedOn;
+    }
+
+    /**
+     * The outcome of a requested risk-verification attempt. `notAttempted` when
+     * `requestRiskVerification` was not set, or the calling account was not allowlisted.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<RiskVerificationOutcome> riskVerificationOutcome() {
+        return (Optional<RiskVerificationOutcome>) riskVerificationOutcome;
     }
 
     public static Builder builder() {
@@ -236,6 +278,27 @@ public class TransferPaymentMethodsBankAccount {
         return this;
     }
 
+    /**
+     * The outcome of a requested risk-verification attempt. `notAttempted` when
+     * `requestRiskVerification` was not set, or the calling account was not allowlisted.
+     */
+    public TransferPaymentMethodsBankAccount withRiskVerificationOutcome(RiskVerificationOutcome riskVerificationOutcome) {
+        Utils.checkNotNull(riskVerificationOutcome, "riskVerificationOutcome");
+        this.riskVerificationOutcome = Optional.ofNullable(riskVerificationOutcome);
+        return this;
+    }
+
+
+    /**
+     * The outcome of a requested risk-verification attempt. `notAttempted` when
+     * `requestRiskVerification` was not set, or the calling account was not allowlisted.
+     */
+    public TransferPaymentMethodsBankAccount withRiskVerificationOutcome(Optional<? extends RiskVerificationOutcome> riskVerificationOutcome) {
+        Utils.checkNotNull(riskVerificationOutcome, "riskVerificationOutcome");
+        this.riskVerificationOutcome = riskVerificationOutcome;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -255,7 +318,8 @@ public class TransferPaymentMethodsBankAccount {
             Utils.enhancedDeepEquals(this.bankAccountType, other.bankAccountType) &&
             Utils.enhancedDeepEquals(this.routingNumber, other.routingNumber) &&
             Utils.enhancedDeepEquals(this.lastFourAccountNumber, other.lastFourAccountNumber) &&
-            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn);
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
+            Utils.enhancedDeepEquals(this.riskVerificationOutcome, other.riskVerificationOutcome);
     }
     
     @Override
@@ -264,7 +328,7 @@ public class TransferPaymentMethodsBankAccount {
             bankAccountID, fingerprint, status,
             holderName, holderType, bankName,
             bankAccountType, routingNumber, lastFourAccountNumber,
-            updatedOn);
+            updatedOn, riskVerificationOutcome);
     }
     
     @Override
@@ -279,7 +343,8 @@ public class TransferPaymentMethodsBankAccount {
                 "bankAccountType", bankAccountType,
                 "routingNumber", routingNumber,
                 "lastFourAccountNumber", lastFourAccountNumber,
-                "updatedOn", updatedOn);
+                "updatedOn", updatedOn,
+                "riskVerificationOutcome", riskVerificationOutcome);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -304,6 +369,8 @@ public class TransferPaymentMethodsBankAccount {
         private String lastFourAccountNumber;
 
         private OffsetDateTime updatedOn;
+
+        private Optional<? extends RiskVerificationOutcome> riskVerificationOutcome = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -390,13 +457,34 @@ public class TransferPaymentMethodsBankAccount {
             return this;
         }
 
+
+        /**
+         * The outcome of a requested risk-verification attempt. `notAttempted` when
+         * `requestRiskVerification` was not set, or the calling account was not allowlisted.
+         */
+        public Builder riskVerificationOutcome(RiskVerificationOutcome riskVerificationOutcome) {
+            Utils.checkNotNull(riskVerificationOutcome, "riskVerificationOutcome");
+            this.riskVerificationOutcome = Optional.ofNullable(riskVerificationOutcome);
+            return this;
+        }
+
+        /**
+         * The outcome of a requested risk-verification attempt. `notAttempted` when
+         * `requestRiskVerification` was not set, or the calling account was not allowlisted.
+         */
+        public Builder riskVerificationOutcome(Optional<? extends RiskVerificationOutcome> riskVerificationOutcome) {
+            Utils.checkNotNull(riskVerificationOutcome, "riskVerificationOutcome");
+            this.riskVerificationOutcome = riskVerificationOutcome;
+            return this;
+        }
+
         public TransferPaymentMethodsBankAccount build() {
 
             return new TransferPaymentMethodsBankAccount(
                 bankAccountID, fingerprint, status,
                 holderName, holderType, bankName,
                 bankAccountType, routingNumber, lastFourAccountNumber,
-                updatedOn);
+                updatedOn, riskVerificationOutcome);
         }
 
     }

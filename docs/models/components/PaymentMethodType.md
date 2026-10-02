@@ -35,4 +35,3 @@ PaymentMethodType custom = PaymentMethodType.of("custom_value");
 | `GOOGLE_PAY`           | google-pay             |
 | `PUSH_TO_GOOGLE_PAY`   | push-to-google-pay     |
 | `PULL_FROM_GOOGLE_PAY` | pull-from-google-pay   |
-| `WIRE_CREDIT`          | wire-credit            |

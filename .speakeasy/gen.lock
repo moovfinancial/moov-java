@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 097f8551d567ce6fc59c98b5745d7dc9
+  docChecksum: b24546bfa9fb93197a1d9a6cd6e2e4b6
   docVersion: v2025.01.00
-  speakeasyVersion: 1.798.0
-  generationVersion: 2.938.0
-  releaseVersion: 25.4.4
-  configChecksum: 9875f2b1ac8c749a324488f8471edcdc
+  speakeasyVersion: 1.800.1
+  generationVersion: 2.943.0
+  releaseVersion: 25.4.5
+  configChecksum: d09af06f08ec55b2868b3fb5b707ff5b
   repoURL: https://github.com/moovfinancial/moov-java.git
   installationURL: https://github.com/moovfinancial/moov-java
   published: true
 persistentEdits:
-  generation_id: 6e26a140-b39e-40df-ae68-7261323b4572
-  pristine_commit_hash: b0f425f787a213571a886c78fbda26ad16d7b45e
-  pristine_tree_hash: 1f7ca4c8e0c7ec1d63ebacf4bdead551a88d1577
+  generation_id: dad2d80c-e2f4-4e96-9e8b-385b2dd7dee8
+  pristine_commit_hash: 60ad812d01c5d735e110a03ff98751f4e8bf1018
+  pristine_tree_hash: ceaa2865f0e7bd8b6a2d982ec10cfdb93816e929
 features:
   java:
     acceptHeaders: 2.81.2
@@ -32,7 +32,7 @@ features:
     nameOverrides: 2.81.5
     nullables: 0.1.1
     sdkHooks: 1.2.0
-    unions: 0.3.8
+    unions: 0.3.10
     uploadStreams: 0.1.0
 trackedFiles:
   .gitattributes:
@@ -2261,8 +2261,8 @@ trackedFiles:
     pristine_git_object: 8384f351ef18c873247ca0dd06cd3048c1ff3d76
   docs/models/components/WebhookDataTransferStatus.md:
     id: cc044a2a7710
-    last_write_checksum: sha1:638dce0c42a87f62807e1ddae73523a11dda5193
-    pristine_git_object: e56be0f0cd3315e185049700a2e2ff04391f6f72
+    last_write_checksum: sha1:5a8a0c3bd4dec5929a44db9e920899376895a50d
+    pristine_git_object: 903e4be00bd2a1ad395b7ba4291a7bc0e9b82e33
   docs/models/components/WebhookDataTransferUpdated.md:
     id: 9c0d6596ed46
     last_write_checksum: sha1:9cf22ea3ce45167b5bea7765cbfce0398b38efb5
@@ -3517,8 +3517,8 @@ trackedFiles:
     pristine_git_object: b5fb9999549645517626d4b727074c62473d8fa7
   docs/models/operations/ListTransfersRequest.md:
     id: c469d4a1ec32
-    last_write_checksum: sha1:431a56f319ef5721c969bec23d0a77e51d0d4761
-    pristine_git_object: bbb52fcfc993be7f6f59c933b4523387c3c74bdc
+    last_write_checksum: sha1:a63701b49e373035d9e4d5a562d3317700a13c3b
+    pristine_git_object: 48fb3cc1fa899a16caf2f5a5d5afbb763a48bb44
   docs/models/operations/ListTransfersResponse.md:
     id: 6b5a58e768f0
     last_write_checksum: sha1:f4a83db24bbb4b780dcf93e67985e92b5fb317e7
@@ -3937,8 +3937,8 @@ trackedFiles:
     pristine_git_object: 9b40f611aaace5afe9cf7cadc73ff2301fe51e80
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:fbbf583a26c8e0ba1f3e88091d9761ba00b16de9
-    pristine_git_object: e2e85d0de2b49689a2afc50b156acea172417c26
+    last_write_checksum: sha1:3d5ecff1ad5501c7d3ec69c134f8f14021c33949
+    pristine_git_object: d813b391cb6484d0fa9344f18aeeb097574a7e5e
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4081,8 +4081,8 @@ trackedFiles:
     pristine_git_object: 64047d75ebffa5dbfe6b7461ed4d624f01890a51
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:c1ebded7f5bce81c2a8aed181d174647f190a192
-    pristine_git_object: f83e1e5f2c8c4fd510e879cb09ebbb66f059cfa8
+    last_write_checksum: sha1:004d39729a29fa6e27e87106b642e4fa94773568
+    pristine_git_object: dc992af819166768f3ae535efcc9cb297330d036
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:2aa78df693ba5a47e50fe360e4802f9f4247c1f1
@@ -6353,8 +6353,8 @@ trackedFiles:
     pristine_git_object: cb9087f7bed6166111831a6ca98d7b20d5e8a8c8
   src/main/java/io/moov/sdk/models/components/WebhookDataTransferStatus.java:
     id: 02bbe8641cf0
-    last_write_checksum: sha1:d6c54ea7ad2c6ba09d48e7070d0a76b5c8487fb0
-    pristine_git_object: 3957a7ad567c54bf20ff74d0bd977177424db7df
+    last_write_checksum: sha1:edb5eecde000a39bc7fae8207980fc8372594ebf
+    pristine_git_object: c5801d3ea7f1f7e9fcb80935b35e2cd9d2dd154e
   src/main/java/io/moov/sdk/models/components/WebhookDataTransferUpdated.java:
     id: 520020e786e1
     last_write_checksum: sha1:4aaab37194b1c65ff74dcefe5b6f7ced3b03ee0e
@@ -8149,8 +8149,8 @@ trackedFiles:
     pristine_git_object: 356418ffa08b9168dbd34eac7fa709f69a7a65ac
   src/main/java/io/moov/sdk/models/operations/ListTransfersRequest.java:
     id: 7acd965da845
-    last_write_checksum: sha1:24b3ce137106817539321ecfc4c97169cf892ff4
-    pristine_git_object: 42590c0ada64fd7ce65359b198b3f9fb93b3c691
+    last_write_checksum: sha1:8a78eada45f687a23b20780e36ed8308e8606f64
+    pristine_git_object: 3cea39556a61a720088f94d1744b8c913fda0f53
   src/main/java/io/moov/sdk/models/operations/ListTransfersRequestBuilder.java:
     id: 9c3941dac6bc
     last_write_checksum: sha1:84e0ff66e8f70bd0823791ab034881545bce41ec
@@ -12237,7 +12237,7 @@ examples:
           application/json: [{"cancellationID": "89ca7f54-13ba-4714-b9af-17163eae2057", "status": "completed", "createdOn": "2025-01-19T03:02:43.255309588Z"}]
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes:\n* `moov.issuingTransactions.listAuthorizations()`:  `response.[].declineReason` **Added**\n* `moov.issuingTransactions.getAuthorization()`:  `response.declineReason` **Added**\n* `moov.issuingTransactions.listAuthorizationEvents()`:  `response.[].declineReason` **Added**\n* `moov.authentication.createAccessToken()`: \n  *  `request.clientType` **Added**\n"
+releaseNotes: "## Java SDK Changes:\n* `moov.transfers.list()`: \n  *  `request.invoiceIDs` **Added**\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

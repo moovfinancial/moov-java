@@ -6,9 +6,20 @@ package io.moov.sdk;
 import static io.moov.sdk.operations.Operations.RequestlessOperation;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
+import io.moov.sdk.models.components.CreateAuthorizationSimulation;
+import io.moov.sdk.models.components.CreateClearingSimulation;
 import io.moov.sdk.models.components.IssuedCardState;
 import io.moov.sdk.models.components.RequestCard;
 import io.moov.sdk.models.components.UpdateIssuedCard;
+import io.moov.sdk.models.operations.CreateAuthorizationSimulationRequest;
+import io.moov.sdk.models.operations.CreateAuthorizationSimulationRequestBuilder;
+import io.moov.sdk.models.operations.CreateAuthorizationSimulationResponse;
+import io.moov.sdk.models.operations.CreateClearingSimulationRequest;
+import io.moov.sdk.models.operations.CreateClearingSimulationRequestBuilder;
+import io.moov.sdk.models.operations.CreateClearingSimulationResponse;
+import io.moov.sdk.models.operations.CreateReversalSimulationRequest;
+import io.moov.sdk.models.operations.CreateReversalSimulationRequestBuilder;
+import io.moov.sdk.models.operations.CreateReversalSimulationResponse;
 import io.moov.sdk.models.operations.GetFullIssuedCardRequest;
 import io.moov.sdk.models.operations.GetFullIssuedCardRequestBuilder;
 import io.moov.sdk.models.operations.GetFullIssuedCardResponse;
@@ -26,6 +37,7 @@ import io.moov.sdk.models.operations.RequestCardResponse;
 import io.moov.sdk.models.operations.UpdateIssuedCardRequest;
 import io.moov.sdk.models.operations.UpdateIssuedCardRequestBuilder;
 import io.moov.sdk.models.operations.UpdateIssuedCardResponse;
+import io.moov.sdk.operations.CreateReversalSimulation;
 import io.moov.sdk.operations.GetFullIssuedCard;
 import io.moov.sdk.operations.GetIssuedCard;
 import io.moov.sdk.operations.ListIssuedCards;
@@ -76,6 +88,133 @@ public class CardIssuing {
         RequestlessOperation<ListIssuingMerchantCategoriesResponse> operation
             = new ListIssuingMerchantCategories.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest());
+    }
+
+    /**
+     * Create a simulated authorization for an issued card in test mode. See our [test
+     * mode](https://docs.moov.io/guides/get-started/test-mode)
+     * guide for more information.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
+     * 
+     * @return The call builder
+     */
+    public CreateAuthorizationSimulationRequestBuilder createAuthorization() {
+        return new CreateAuthorizationSimulationRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create a simulated authorization for an issued card in test mode. See our [test
+     * mode](https://docs.moov.io/guides/get-started/test-mode)
+     * guide for more information.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
+     * 
+     * @param accountID The Moov business account for which the card was issued.
+     * @param createAuthorizationSimulation 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateAuthorizationSimulationResponse createAuthorization(String accountID, CreateAuthorizationSimulation createAuthorizationSimulation) {
+        CreateAuthorizationSimulationRequest request =
+            CreateAuthorizationSimulationRequest
+                .builder()
+                .accountID(accountID)
+                .createAuthorizationSimulation(createAuthorizationSimulation)
+                .build();
+        RequestOperation<CreateAuthorizationSimulationRequest, CreateAuthorizationSimulationResponse> operation
+              = new io.moov.sdk.operations.CreateAuthorizationSimulation.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Create a simulated clearing for an authorization on an issued card in test mode. See our [test
+     * mode](https://docs.moov.io/guides/get-started/test-mode)
+     * guide for more information.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
+     * 
+     * @return The call builder
+     */
+    public CreateClearingSimulationRequestBuilder createClearing() {
+        return new CreateClearingSimulationRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create a simulated clearing for an authorization on an issued card in test mode. See our [test
+     * mode](https://docs.moov.io/guides/get-started/test-mode)
+     * guide for more information.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
+     * 
+     * @param accountID The Moov business account for which the card was issued.
+     * @param authorizationID The ID of the authorization to clear.
+     * @param createClearingSimulation 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateClearingSimulationResponse createClearing(
+            String accountID, String authorizationID,
+            CreateClearingSimulation createClearingSimulation) {
+        CreateClearingSimulationRequest request =
+            CreateClearingSimulationRequest
+                .builder()
+                .accountID(accountID)
+                .authorizationID(authorizationID)
+                .createClearingSimulation(createClearingSimulation)
+                .build();
+        RequestOperation<CreateClearingSimulationRequest, CreateClearingSimulationResponse> operation
+              = new io.moov.sdk.operations.CreateClearingSimulation.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Create a simulated reversal for an authorization on an issued card in test mode. See our [test
+     * mode](https://docs.moov.io/guides/get-started/test-mode)
+     * guide for more information.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
+     * 
+     * @return The call builder
+     */
+    public CreateReversalSimulationRequestBuilder createReversal() {
+        return new CreateReversalSimulationRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create a simulated reversal for an authorization on an issued card in test mode. See our [test
+     * mode](https://docs.moov.io/guides/get-started/test-mode)
+     * guide for more information.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
+     * 
+     * @param accountID The Moov business account for which the card was issued.
+     * @param authorizationID The ID of the authorization to reverse.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateReversalSimulationResponse createReversal(String accountID, String authorizationID) {
+        CreateReversalSimulationRequest request =
+            CreateReversalSimulationRequest
+                .builder()
+                .accountID(accountID)
+                .authorizationID(authorizationID)
+                .build();
+        RequestOperation<CreateReversalSimulationRequest, CreateReversalSimulationResponse> operation
+              = new CreateReversalSimulation.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
     /**

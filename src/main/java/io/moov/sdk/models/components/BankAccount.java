@@ -95,6 +95,14 @@ public class BankAccount {
     @JsonProperty("paymentMethods")
     private Optional<? extends List<BasicPaymentMethod>> paymentMethods;
 
+    /**
+     * The outcome of a requested risk-verification attempt. `notAttempted` when
+     * `requestRiskVerification` was not set, or the calling account was not allowlisted.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("riskVerificationOutcome")
+    private Optional<? extends RiskVerificationOutcome> riskVerificationOutcome;
+
     @JsonCreator
     public BankAccount(
             @JsonProperty("bankAccountID") String bankAccountID,
@@ -109,7 +117,8 @@ public class BankAccount {
             @JsonProperty("updatedOn") OffsetDateTime updatedOn,
             @JsonProperty("statusReason") Optional<? extends BankAccountStatusReason> statusReason,
             @JsonProperty("exceptionDetails") Optional<? extends BankAccountException> exceptionDetails,
-            @JsonProperty("paymentMethods") Optional<? extends List<BasicPaymentMethod>> paymentMethods) {
+            @JsonProperty("paymentMethods") Optional<? extends List<BasicPaymentMethod>> paymentMethods,
+            @JsonProperty("riskVerificationOutcome") Optional<? extends RiskVerificationOutcome> riskVerificationOutcome) {
         Utils.checkNotNull(bankAccountID, "bankAccountID");
         Utils.checkNotNull(fingerprint, "fingerprint");
         Utils.checkNotNull(status, "status");
@@ -123,6 +132,7 @@ public class BankAccount {
         Utils.checkNotNull(statusReason, "statusReason");
         Utils.checkNotNull(exceptionDetails, "exceptionDetails");
         Utils.checkNotNull(paymentMethods, "paymentMethods");
+        Utils.checkNotNull(riskVerificationOutcome, "riskVerificationOutcome");
         this.bankAccountID = bankAccountID;
         this.fingerprint = fingerprint;
         this.status = status;
@@ -136,6 +146,7 @@ public class BankAccount {
         this.statusReason = statusReason;
         this.exceptionDetails = exceptionDetails;
         this.paymentMethods = paymentMethods;
+        this.riskVerificationOutcome = riskVerificationOutcome;
     }
     
     public BankAccount(
@@ -153,7 +164,7 @@ public class BankAccount {
             holderName, holderType, bankName,
             bankAccountType, routingNumber, lastFourAccountNumber,
             updatedOn, Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -246,6 +257,16 @@ public class BankAccount {
     @JsonIgnore
     public Optional<List<BasicPaymentMethod>> paymentMethods() {
         return (Optional<List<BasicPaymentMethod>>) paymentMethods;
+    }
+
+    /**
+     * The outcome of a requested risk-verification attempt. `notAttempted` when
+     * `requestRiskVerification` was not set, or the calling account was not allowlisted.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<RiskVerificationOutcome> riskVerificationOutcome() {
+        return (Optional<RiskVerificationOutcome>) riskVerificationOutcome;
     }
 
     public static Builder builder() {
@@ -389,6 +410,27 @@ public class BankAccount {
         return this;
     }
 
+    /**
+     * The outcome of a requested risk-verification attempt. `notAttempted` when
+     * `requestRiskVerification` was not set, or the calling account was not allowlisted.
+     */
+    public BankAccount withRiskVerificationOutcome(RiskVerificationOutcome riskVerificationOutcome) {
+        Utils.checkNotNull(riskVerificationOutcome, "riskVerificationOutcome");
+        this.riskVerificationOutcome = Optional.ofNullable(riskVerificationOutcome);
+        return this;
+    }
+
+
+    /**
+     * The outcome of a requested risk-verification attempt. `notAttempted` when
+     * `requestRiskVerification` was not set, or the calling account was not allowlisted.
+     */
+    public BankAccount withRiskVerificationOutcome(Optional<? extends RiskVerificationOutcome> riskVerificationOutcome) {
+        Utils.checkNotNull(riskVerificationOutcome, "riskVerificationOutcome");
+        this.riskVerificationOutcome = riskVerificationOutcome;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -411,7 +453,8 @@ public class BankAccount {
             Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
             Utils.enhancedDeepEquals(this.statusReason, other.statusReason) &&
             Utils.enhancedDeepEquals(this.exceptionDetails, other.exceptionDetails) &&
-            Utils.enhancedDeepEquals(this.paymentMethods, other.paymentMethods);
+            Utils.enhancedDeepEquals(this.paymentMethods, other.paymentMethods) &&
+            Utils.enhancedDeepEquals(this.riskVerificationOutcome, other.riskVerificationOutcome);
     }
     
     @Override
@@ -421,7 +464,7 @@ public class BankAccount {
             holderName, holderType, bankName,
             bankAccountType, routingNumber, lastFourAccountNumber,
             updatedOn, statusReason, exceptionDetails,
-            paymentMethods);
+            paymentMethods, riskVerificationOutcome);
     }
     
     @Override
@@ -439,7 +482,8 @@ public class BankAccount {
                 "updatedOn", updatedOn,
                 "statusReason", statusReason,
                 "exceptionDetails", exceptionDetails,
-                "paymentMethods", paymentMethods);
+                "paymentMethods", paymentMethods,
+                "riskVerificationOutcome", riskVerificationOutcome);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -470,6 +514,8 @@ public class BankAccount {
         private Optional<? extends BankAccountException> exceptionDetails = Optional.empty();
 
         private Optional<? extends List<BasicPaymentMethod>> paymentMethods = Optional.empty();
+
+        private Optional<? extends RiskVerificationOutcome> riskVerificationOutcome = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -621,6 +667,27 @@ public class BankAccount {
             return this;
         }
 
+
+        /**
+         * The outcome of a requested risk-verification attempt. `notAttempted` when
+         * `requestRiskVerification` was not set, or the calling account was not allowlisted.
+         */
+        public Builder riskVerificationOutcome(RiskVerificationOutcome riskVerificationOutcome) {
+            Utils.checkNotNull(riskVerificationOutcome, "riskVerificationOutcome");
+            this.riskVerificationOutcome = Optional.ofNullable(riskVerificationOutcome);
+            return this;
+        }
+
+        /**
+         * The outcome of a requested risk-verification attempt. `notAttempted` when
+         * `requestRiskVerification` was not set, or the calling account was not allowlisted.
+         */
+        public Builder riskVerificationOutcome(Optional<? extends RiskVerificationOutcome> riskVerificationOutcome) {
+            Utils.checkNotNull(riskVerificationOutcome, "riskVerificationOutcome");
+            this.riskVerificationOutcome = riskVerificationOutcome;
+            return this;
+        }
+
         public BankAccount build() {
 
             return new BankAccount(
@@ -628,7 +695,7 @@ public class BankAccount {
                 holderName, holderType, bankName,
                 bankAccountType, routingNumber, lastFourAccountNumber,
                 updatedOn, statusReason, exceptionDetails,
-                paymentMethods);
+                paymentMethods, riskVerificationOutcome);
         }
 
     }

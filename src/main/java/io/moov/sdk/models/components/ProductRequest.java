@@ -44,9 +44,12 @@ public class ProductRequest {
     private AmountDecimal basePrice;
 
     /**
-     * Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged;
-     * false excludes the product from tax calculation. Omitted values default to true on creation and
-     * preserve the existing setting on update.
+     * Whether applicable tax rules may be applied to this product. The value can be used to determine how
+     * to populate the tax amount on a transfer (Moov does not compute or assess tax). true means a tax
+     * amount can be included; false means it should not.
+     * 
+     * <p>Omitted values default to true on creation and preserve the existing setting on update. This setting
+     * does not determine jurisdiction-specific taxability.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("isTaxable")
@@ -132,9 +135,12 @@ public class ProductRequest {
     }
 
     /**
-     * Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged;
-     * false excludes the product from tax calculation. Omitted values default to true on creation and
-     * preserve the existing setting on update.
+     * Whether applicable tax rules may be applied to this product. The value can be used to determine how
+     * to populate the tax amount on a transfer (Moov does not compute or assess tax). true means a tax
+     * amount can be included; false means it should not.
+     * 
+     * <p>Omitted values default to true on creation and preserve the existing setting on update. This setting
+     * does not determine jurisdiction-specific taxability.
      */
     @JsonIgnore
     public Optional<Boolean> isTaxable() {
@@ -215,9 +221,12 @@ public class ProductRequest {
     }
 
     /**
-     * Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged;
-     * false excludes the product from tax calculation. Omitted values default to true on creation and
-     * preserve the existing setting on update.
+     * Whether applicable tax rules may be applied to this product. The value can be used to determine how
+     * to populate the tax amount on a transfer (Moov does not compute or assess tax). true means a tax
+     * amount can be included; false means it should not.
+     * 
+     * <p>Omitted values default to true on creation and preserve the existing setting on update. This setting
+     * does not determine jurisdiction-specific taxability.
      */
     public ProductRequest withIsTaxable(boolean isTaxable) {
         Utils.checkNotNull(isTaxable, "isTaxable");
@@ -227,9 +236,12 @@ public class ProductRequest {
 
 
     /**
-     * Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged;
-     * false excludes the product from tax calculation. Omitted values default to true on creation and
-     * preserve the existing setting on update.
+     * Whether applicable tax rules may be applied to this product. The value can be used to determine how
+     * to populate the tax amount on a transfer (Moov does not compute or assess tax). true means a tax
+     * amount can be included; false means it should not.
+     * 
+     * <p>Omitted values default to true on creation and preserve the existing setting on update. This setting
+     * does not determine jurisdiction-specific taxability.
      */
     public ProductRequest withIsTaxable(Optional<Boolean> isTaxable) {
         Utils.checkNotNull(isTaxable, "isTaxable");
@@ -400,9 +412,12 @@ public class ProductRequest {
 
 
         /**
-         * Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged;
-         * false excludes the product from tax calculation. Omitted values default to true on creation and
-         * preserve the existing setting on update.
+         * Whether applicable tax rules may be applied to this product. The value can be used to determine how
+         * to populate the tax amount on a transfer (Moov does not compute or assess tax). true means a tax
+         * amount can be included; false means it should not.
+         * 
+         * <p>Omitted values default to true on creation and preserve the existing setting on update. This setting
+         * does not determine jurisdiction-specific taxability.
          */
         public Builder isTaxable(boolean isTaxable) {
             Utils.checkNotNull(isTaxable, "isTaxable");
@@ -411,9 +426,12 @@ public class ProductRequest {
         }
 
         /**
-         * Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged;
-         * false excludes the product from tax calculation. Omitted values default to true on creation and
-         * preserve the existing setting on update.
+         * Whether applicable tax rules may be applied to this product. The value can be used to determine how
+         * to populate the tax amount on a transfer (Moov does not compute or assess tax). true means a tax
+         * amount can be included; false means it should not.
+         * 
+         * <p>Omitted values default to true on creation and preserve the existing setting on update. This setting
+         * does not determine jurisdiction-specific taxability.
          */
         public Builder isTaxable(Optional<Boolean> isTaxable) {
             Utils.checkNotNull(isTaxable, "isTaxable");

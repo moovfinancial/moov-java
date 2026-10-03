@@ -11,6 +11,9 @@ import io.moov.sdk.models.operations.GetIssuedCardAuthorizationResponse;
 import io.moov.sdk.models.operations.GetIssuedCardTransactionRequest;
 import io.moov.sdk.models.operations.GetIssuedCardTransactionRequestBuilder;
 import io.moov.sdk.models.operations.GetIssuedCardTransactionResponse;
+import io.moov.sdk.models.operations.ListIssuedCardActivityRequest;
+import io.moov.sdk.models.operations.ListIssuedCardActivityRequestBuilder;
+import io.moov.sdk.models.operations.ListIssuedCardActivityResponse;
 import io.moov.sdk.models.operations.ListIssuedCardAuthorizationEventsRequest;
 import io.moov.sdk.models.operations.ListIssuedCardAuthorizationEventsRequestBuilder;
 import io.moov.sdk.models.operations.ListIssuedCardAuthorizationEventsResponse;
@@ -22,6 +25,7 @@ import io.moov.sdk.models.operations.ListIssuedCardTransactionsRequestBuilder;
 import io.moov.sdk.models.operations.ListIssuedCardTransactionsResponse;
 import io.moov.sdk.operations.GetIssuedCardAuthorization;
 import io.moov.sdk.operations.GetIssuedCardTransaction;
+import io.moov.sdk.operations.ListIssuedCardActivity;
 import io.moov.sdk.operations.ListIssuedCardAuthorizationEvents;
 import io.moov.sdk.operations.ListIssuedCardAuthorizations;
 import io.moov.sdk.operations.ListIssuedCardTransactions;
@@ -37,6 +41,40 @@ public class IssuingTransactions {
 
     IssuingTransactions(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+
+    /**
+     * List issued card activity associated with a Moov account.
+     * 
+     * <p>Activity includes authorizations and settlements in a single list.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
+     * @return The call builder
+     */
+    public ListIssuedCardActivityRequestBuilder listActivity() {
+        return new ListIssuedCardActivityRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * List issued card activity associated with a Moov account.
+     * 
+     * <p>Activity includes authorizations and settlements in a single list.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListIssuedCardActivityResponse listActivity(ListIssuedCardActivityRequest request) {
+        RequestOperation<ListIssuedCardActivityRequest, ListIssuedCardActivityResponse> operation
+              = new ListIssuedCardActivity.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
     /**

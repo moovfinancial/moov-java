@@ -19,6 +19,11 @@ you'll need to specify the `/accounts/{accountID}/files.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/files.read` scope.
+* [download](#download) - Download the contents of a file associated with a specific Moov account. Files reserved for
+internal Moov use are not available through this endpoint.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/files.download` scope.
 
 ## upload
 
@@ -197,6 +202,65 @@ public class Application {
 ### Response
 
 **[GetFileDetailsResponse](../../models/operations/GetFileDetailsResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## download
+
+Download the contents of a file associated with a specific Moov account. Files reserved for
+internal Moov use are not available through this endpoint.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/files.download` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="downloadFile" method="get" path="/accounts/{accountID}/files/{fileID}/contents" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.DownloadFileResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        DownloadFileResponse res = sdk.files().download()
+                .accountID("<id>")
+                .fileID("<id>")
+                .call();
+
+        if (res.twoHundredApplicationPdfResponseStream().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter          | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `accountID`        | *String*           | :heavy_check_mark: | N/A                |
+| `fileID`           | *String*           | :heavy_check_mark: | N/A                |
+
+### Response
+
+**[DownloadFileResponse](../../models/operations/DownloadFileResponse.md)**
 
 ### Errors
 

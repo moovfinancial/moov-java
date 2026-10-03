@@ -175,7 +175,10 @@ public class Transfer {
     @JsonProperty("invoiceID")
     private Optional<String> invoiceID;
 
-
+    /**
+     * The tip, tax, and surcharge portion of the transfer amount.
+     * For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amountDetails")
     private Optional<? extends TransferAmountDetails> amountDetails;
@@ -491,6 +494,10 @@ public class Transfer {
         return invoiceID;
     }
 
+    /**
+     * The tip, tax, and surcharge portion of the transfer amount.
+     * For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<TransferAmountDetails> amountDetails() {
@@ -880,6 +887,10 @@ public class Transfer {
         return this;
     }
 
+    /**
+     * The tip, tax, and surcharge portion of the transfer amount.
+     * For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+     */
     public Transfer withAmountDetails(TransferAmountDetails amountDetails) {
         Utils.checkNotNull(amountDetails, "amountDetails");
         this.amountDetails = Optional.ofNullable(amountDetails);
@@ -887,6 +898,10 @@ public class Transfer {
     }
 
 
+    /**
+     * The tip, tax, and surcharge portion of the transfer amount.
+     * For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+     */
     public Transfer withAmountDetails(Optional<? extends TransferAmountDetails> amountDetails) {
         Utils.checkNotNull(amountDetails, "amountDetails");
         this.amountDetails = amountDetails;
@@ -1447,12 +1462,20 @@ public class Transfer {
         }
 
 
+        /**
+         * The tip, tax, and surcharge portion of the transfer amount.
+         * For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+         */
         public Builder amountDetails(TransferAmountDetails amountDetails) {
             Utils.checkNotNull(amountDetails, "amountDetails");
             this.amountDetails = Optional.ofNullable(amountDetails);
             return this;
         }
 
+        /**
+         * The tip, tax, and surcharge portion of the transfer amount.
+         * For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+         */
         public Builder amountDetails(Optional<? extends TransferAmountDetails> amountDetails) {
             Utils.checkNotNull(amountDetails, "amountDetails");
             this.amountDetails = amountDetails;

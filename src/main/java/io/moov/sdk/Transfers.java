@@ -57,6 +57,9 @@ import io.moov.sdk.models.operations.ListCapturesResponse;
 import io.moov.sdk.models.operations.ListRefundsRequest;
 import io.moov.sdk.models.operations.ListRefundsRequestBuilder;
 import io.moov.sdk.models.operations.ListRefundsResponse;
+import io.moov.sdk.models.operations.ListTransferEventsRequest;
+import io.moov.sdk.models.operations.ListTransferEventsRequestBuilder;
+import io.moov.sdk.models.operations.ListTransferEventsResponse;
 import io.moov.sdk.models.operations.ListTransfersRequest;
 import io.moov.sdk.models.operations.ListTransfersRequestBuilder;
 import io.moov.sdk.models.operations.ListTransfersResponse;
@@ -73,6 +76,7 @@ import io.moov.sdk.operations.InitiateRefund;
 import io.moov.sdk.operations.ListCancellations;
 import io.moov.sdk.operations.ListCaptures;
 import io.moov.sdk.operations.ListRefunds;
+import io.moov.sdk.operations.ListTransferEvents;
 import io.moov.sdk.operations.ListTransfers;
 import io.moov.sdk.operations.UpdateTransfer;
 import io.moov.sdk.utils.Headers;
@@ -657,6 +661,51 @@ public class Transfers {
                 .build();
         RequestOperation<GetCaptureRequest, GetCaptureResponse> operation
               = new GetCapture.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Retrieve the complete ordered event timeline for a Transfer.
+     * 
+     * <p>Events are returned oldest to newest by occurrence time, with deterministic ordering when multiple
+     * events have the same occurrence time. An existing Transfer with no stored events returns an empty
+     * list.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @return The call builder
+     */
+    public ListTransferEventsRequestBuilder listTransferEvents() {
+        return new ListTransferEventsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Retrieve the complete ordered event timeline for a Transfer.
+     * 
+     * <p>Events are returned oldest to newest by occurrence time, with deterministic ordering when multiple
+     * events have the same occurrence time. An existing Transfer with no stored events returns an empty
+     * list.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID Moov account ID of the partner or the Transfer's source or destination.
+     * @param transferID Identifier for the Transfer.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListTransferEventsResponse listTransferEvents(String accountID, String transferID) {
+        ListTransferEventsRequest request =
+            ListTransferEventsRequest
+                .builder()
+                .accountID(accountID)
+                .transferID(transferID)
+                .build();
+        RequestOperation<ListTransferEventsRequest, ListTransferEventsResponse> operation
+              = new ListTransferEvents.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

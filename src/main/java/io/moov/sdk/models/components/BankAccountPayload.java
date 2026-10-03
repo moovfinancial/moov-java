@@ -5,10 +5,14 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Optional;
 
 /**
  * BankAccountPayload
@@ -20,16 +24,41 @@ public class BankAccountPayload {
     @JsonProperty("account")
     private BankAccountIntegration account;
 
+    /**
+     * Requests a synchronous risk-verification attempt on create or re-link. Only honored for
+     * allowlisted calling accounts; ignored otherwise.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("requestRiskVerification")
+    private Optional<Boolean> requestRiskVerification;
+
     @JsonCreator
     public BankAccountPayload(
-            @JsonProperty("account") BankAccountIntegration account) {
+            @JsonProperty("account") BankAccountIntegration account,
+            @JsonProperty("requestRiskVerification") Optional<Boolean> requestRiskVerification) {
         Utils.checkNotNull(account, "account");
+        Utils.checkNotNull(requestRiskVerification, "requestRiskVerification");
         this.account = account;
+        this.requestRiskVerification = requestRiskVerification;
+    }
+    
+    public BankAccountPayload(
+            BankAccountIntegration account) {
+        this(account, Optional.empty());
     }
 
     @JsonIgnore
     public BankAccountIntegration account() {
         return account;
+    }
+
+    /**
+     * Requests a synchronous risk-verification attempt on create or re-link. Only honored for
+     * allowlisted calling accounts; ignored otherwise.
+     */
+    @JsonIgnore
+    public Optional<Boolean> requestRiskVerification() {
+        return requestRiskVerification;
     }
 
     public static Builder builder() {
@@ -43,6 +72,27 @@ public class BankAccountPayload {
         return this;
     }
 
+    /**
+     * Requests a synchronous risk-verification attempt on create or re-link. Only honored for
+     * allowlisted calling accounts; ignored otherwise.
+     */
+    public BankAccountPayload withRequestRiskVerification(boolean requestRiskVerification) {
+        Utils.checkNotNull(requestRiskVerification, "requestRiskVerification");
+        this.requestRiskVerification = Optional.ofNullable(requestRiskVerification);
+        return this;
+    }
+
+
+    /**
+     * Requests a synchronous risk-verification attempt on create or re-link. Only honored for
+     * allowlisted calling accounts; ignored otherwise.
+     */
+    public BankAccountPayload withRequestRiskVerification(Optional<Boolean> requestRiskVerification) {
+        Utils.checkNotNull(requestRiskVerification, "requestRiskVerification");
+        this.requestRiskVerification = requestRiskVerification;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -53,25 +103,29 @@ public class BankAccountPayload {
         }
         BankAccountPayload other = (BankAccountPayload) o;
         return 
-            Utils.enhancedDeepEquals(this.account, other.account);
+            Utils.enhancedDeepEquals(this.account, other.account) &&
+            Utils.enhancedDeepEquals(this.requestRiskVerification, other.requestRiskVerification);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            account);
+            account, requestRiskVerification);
     }
     
     @Override
     public String toString() {
         return Utils.toString(BankAccountPayload.class,
-                "account", account);
+                "account", account,
+                "requestRiskVerification", requestRiskVerification);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
         private BankAccountIntegration account;
+
+        private Optional<Boolean> requestRiskVerification = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -84,10 +138,31 @@ public class BankAccountPayload {
             return this;
         }
 
+
+        /**
+         * Requests a synchronous risk-verification attempt on create or re-link. Only honored for
+         * allowlisted calling accounts; ignored otherwise.
+         */
+        public Builder requestRiskVerification(boolean requestRiskVerification) {
+            Utils.checkNotNull(requestRiskVerification, "requestRiskVerification");
+            this.requestRiskVerification = Optional.ofNullable(requestRiskVerification);
+            return this;
+        }
+
+        /**
+         * Requests a synchronous risk-verification attempt on create or re-link. Only honored for
+         * allowlisted calling accounts; ignored otherwise.
+         */
+        public Builder requestRiskVerification(Optional<Boolean> requestRiskVerification) {
+            Utils.checkNotNull(requestRiskVerification, "requestRiskVerification");
+            this.requestRiskVerification = requestRiskVerification;
+            return this;
+        }
+
         public BankAccountPayload build() {
 
             return new BankAccountPayload(
-                account);
+                account, requestRiskVerification);
         }
 
     }

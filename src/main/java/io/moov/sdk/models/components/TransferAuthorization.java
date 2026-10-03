@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 
@@ -51,6 +52,17 @@ public class TransferAuthorization {
     private AmountDecimal capturableAmount;
 
     /**
+     * The tip, tax, and surcharge authorized by the card network.
+     * 
+     * <p>These describe the authorized amount and are fixed.
+     * They can differ from the transfer's `amountDetails`, which is the aggregate of all captures'
+     * `amountDetails`.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("amountDetails")
+    private Optional<? extends TransferAmountDetails> amountDetails;
+
+    /**
      * Expiration time for the approved authorization, when available.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -64,18 +76,21 @@ public class TransferAuthorization {
             @JsonProperty("authorizedAmount") AmountDecimal authorizedAmount,
             @JsonProperty("capturedAmount") AmountDecimal capturedAmount,
             @JsonProperty("capturableAmount") AmountDecimal capturableAmount,
+            @JsonProperty("amountDetails") Optional<? extends TransferAmountDetails> amountDetails,
             @JsonProperty("expiresOn") Optional<OffsetDateTime> expiresOn) {
         Utils.checkNotNull(authorizationID, "authorizationID");
         Utils.checkNotNull(requestedAmount, "requestedAmount");
         Utils.checkNotNull(authorizedAmount, "authorizedAmount");
         Utils.checkNotNull(capturedAmount, "capturedAmount");
         Utils.checkNotNull(capturableAmount, "capturableAmount");
+        Utils.checkNotNull(amountDetails, "amountDetails");
         Utils.checkNotNull(expiresOn, "expiresOn");
         this.authorizationID = authorizationID;
         this.requestedAmount = requestedAmount;
         this.authorizedAmount = authorizedAmount;
         this.capturedAmount = capturedAmount;
         this.capturableAmount = capturableAmount;
+        this.amountDetails = amountDetails;
         this.expiresOn = expiresOn;
     }
     
@@ -86,7 +101,8 @@ public class TransferAuthorization {
             AmountDecimal capturedAmount,
             AmountDecimal capturableAmount) {
         this(authorizationID, requestedAmount, authorizedAmount,
-            capturedAmount, capturableAmount, Optional.empty());
+            capturedAmount, capturableAmount, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -127,6 +143,19 @@ public class TransferAuthorization {
     @JsonIgnore
     public AmountDecimal capturableAmount() {
         return capturableAmount;
+    }
+
+    /**
+     * The tip, tax, and surcharge authorized by the card network.
+     * 
+     * <p>These describe the authorized amount and are fixed.
+     * They can differ from the transfer's `amountDetails`, which is the aggregate of all captures'
+     * `amountDetails`.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<TransferAmountDetails> amountDetails() {
+        return (Optional<TransferAmountDetails>) amountDetails;
     }
 
     /**
@@ -188,6 +217,33 @@ public class TransferAuthorization {
     }
 
     /**
+     * The tip, tax, and surcharge authorized by the card network.
+     * 
+     * <p>These describe the authorized amount and are fixed.
+     * They can differ from the transfer's `amountDetails`, which is the aggregate of all captures'
+     * `amountDetails`.
+     */
+    public TransferAuthorization withAmountDetails(TransferAmountDetails amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = Optional.ofNullable(amountDetails);
+        return this;
+    }
+
+
+    /**
+     * The tip, tax, and surcharge authorized by the card network.
+     * 
+     * <p>These describe the authorized amount and are fixed.
+     * They can differ from the transfer's `amountDetails`, which is the aggregate of all captures'
+     * `amountDetails`.
+     */
+    public TransferAuthorization withAmountDetails(Optional<? extends TransferAmountDetails> amountDetails) {
+        Utils.checkNotNull(amountDetails, "amountDetails");
+        this.amountDetails = amountDetails;
+        return this;
+    }
+
+    /**
      * Expiration time for the approved authorization, when available.
      */
     public TransferAuthorization withExpiresOn(OffsetDateTime expiresOn) {
@@ -221,6 +277,7 @@ public class TransferAuthorization {
             Utils.enhancedDeepEquals(this.authorizedAmount, other.authorizedAmount) &&
             Utils.enhancedDeepEquals(this.capturedAmount, other.capturedAmount) &&
             Utils.enhancedDeepEquals(this.capturableAmount, other.capturableAmount) &&
+            Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails) &&
             Utils.enhancedDeepEquals(this.expiresOn, other.expiresOn);
     }
     
@@ -228,7 +285,8 @@ public class TransferAuthorization {
     public int hashCode() {
         return Utils.enhancedHash(
             authorizationID, requestedAmount, authorizedAmount,
-            capturedAmount, capturableAmount, expiresOn);
+            capturedAmount, capturableAmount, amountDetails,
+            expiresOn);
     }
     
     @Override
@@ -239,6 +297,7 @@ public class TransferAuthorization {
                 "authorizedAmount", authorizedAmount,
                 "capturedAmount", capturedAmount,
                 "capturableAmount", capturableAmount,
+                "amountDetails", amountDetails,
                 "expiresOn", expiresOn);
     }
 
@@ -254,6 +313,8 @@ public class TransferAuthorization {
         private AmountDecimal capturedAmount;
 
         private AmountDecimal capturableAmount;
+
+        private Optional<? extends TransferAmountDetails> amountDetails = Optional.empty();
 
         private Optional<OffsetDateTime> expiresOn = Optional.empty();
 
@@ -313,6 +374,33 @@ public class TransferAuthorization {
 
 
         /**
+         * The tip, tax, and surcharge authorized by the card network.
+         * 
+         * <p>These describe the authorized amount and are fixed.
+         * They can differ from the transfer's `amountDetails`, which is the aggregate of all captures'
+         * `amountDetails`.
+         */
+        public Builder amountDetails(TransferAmountDetails amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = Optional.ofNullable(amountDetails);
+            return this;
+        }
+
+        /**
+         * The tip, tax, and surcharge authorized by the card network.
+         * 
+         * <p>These describe the authorized amount and are fixed.
+         * They can differ from the transfer's `amountDetails`, which is the aggregate of all captures'
+         * `amountDetails`.
+         */
+        public Builder amountDetails(Optional<? extends TransferAmountDetails> amountDetails) {
+            Utils.checkNotNull(amountDetails, "amountDetails");
+            this.amountDetails = amountDetails;
+            return this;
+        }
+
+
+        /**
          * Expiration time for the approved authorization, when available.
          */
         public Builder expiresOn(OffsetDateTime expiresOn) {
@@ -334,7 +422,8 @@ public class TransferAuthorization {
 
             return new TransferAuthorization(
                 authorizationID, requestedAmount, authorizedAmount,
-                capturedAmount, capturableAmount, expiresOn);
+                capturedAmount, capturableAmount, amountDetails,
+                expiresOn);
         }
 
     }

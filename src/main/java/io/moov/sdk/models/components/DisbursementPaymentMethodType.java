@@ -31,6 +31,7 @@ public class DisbursementPaymentMethodType {
     public static final DisbursementPaymentMethodType ACH_CREDIT_STANDARD = new DisbursementPaymentMethodType("ach-credit-standard");
     public static final DisbursementPaymentMethodType PUSH_TO_APPLE_PAY = new DisbursementPaymentMethodType("push-to-apple-pay");
     public static final DisbursementPaymentMethodType PUSH_TO_GOOGLE_PAY = new DisbursementPaymentMethodType("push-to-google-pay");
+    public static final DisbursementPaymentMethodType INSTANT_BANK_CREDIT = new DisbursementPaymentMethodType("instant-bank-credit");
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -110,6 +111,7 @@ public class DisbursementPaymentMethodType {
         map.put("ach-credit-standard", ACH_CREDIT_STANDARD);
         map.put("push-to-apple-pay", PUSH_TO_APPLE_PAY);
         map.put("push-to-google-pay", PUSH_TO_GOOGLE_PAY);
+        map.put("instant-bank-credit", INSTANT_BANK_CREDIT);
         return map;
     }
 
@@ -121,6 +123,7 @@ public class DisbursementPaymentMethodType {
         map.put("ach-credit-standard", DisbursementPaymentMethodTypeEnum.ACH_CREDIT_STANDARD);
         map.put("push-to-apple-pay", DisbursementPaymentMethodTypeEnum.PUSH_TO_APPLE_PAY);
         map.put("push-to-google-pay", DisbursementPaymentMethodTypeEnum.PUSH_TO_GOOGLE_PAY);
+        map.put("instant-bank-credit", DisbursementPaymentMethodTypeEnum.INSTANT_BANK_CREDIT);
         return map;
     }
     
@@ -132,7 +135,8 @@ public class DisbursementPaymentMethodType {
         ACH_CREDIT_SAME_DAY("ach-credit-same-day"),
         ACH_CREDIT_STANDARD("ach-credit-standard"),
         PUSH_TO_APPLE_PAY("push-to-apple-pay"),
-        PUSH_TO_GOOGLE_PAY("push-to-google-pay"),;
+        PUSH_TO_GOOGLE_PAY("push-to-google-pay"),
+        INSTANT_BANK_CREDIT("instant-bank-credit"),;
 
         private final String value;
 

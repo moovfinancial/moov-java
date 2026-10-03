@@ -18,18 +18,31 @@ import java.util.Optional;
 public class CardPaymentRefundProcessingDetails {
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("networkTransactionID")
+    private Optional<String> networkTransactionID;
+
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("failureCode")
     private Optional<? extends CardTransactionFailureCode> failureCode;
 
     @JsonCreator
     public CardPaymentRefundProcessingDetails(
+            @JsonProperty("networkTransactionID") Optional<String> networkTransactionID,
             @JsonProperty("failureCode") Optional<? extends CardTransactionFailureCode> failureCode) {
+        Utils.checkNotNull(networkTransactionID, "networkTransactionID");
         Utils.checkNotNull(failureCode, "failureCode");
+        this.networkTransactionID = networkTransactionID;
         this.failureCode = failureCode;
     }
     
     public CardPaymentRefundProcessingDetails() {
-        this(Optional.empty());
+        this(Optional.empty(), Optional.empty());
+    }
+
+    @JsonIgnore
+    public Optional<String> networkTransactionID() {
+        return networkTransactionID;
     }
 
     @SuppressWarnings("unchecked")
@@ -42,6 +55,19 @@ public class CardPaymentRefundProcessingDetails {
         return new Builder();
     }
 
+
+    public CardPaymentRefundProcessingDetails withNetworkTransactionID(String networkTransactionID) {
+        Utils.checkNotNull(networkTransactionID, "networkTransactionID");
+        this.networkTransactionID = Optional.ofNullable(networkTransactionID);
+        return this;
+    }
+
+
+    public CardPaymentRefundProcessingDetails withNetworkTransactionID(Optional<String> networkTransactionID) {
+        Utils.checkNotNull(networkTransactionID, "networkTransactionID");
+        this.networkTransactionID = networkTransactionID;
+        return this;
+    }
 
     public CardPaymentRefundProcessingDetails withFailureCode(CardTransactionFailureCode failureCode) {
         Utils.checkNotNull(failureCode, "failureCode");
@@ -66,28 +92,45 @@ public class CardPaymentRefundProcessingDetails {
         }
         CardPaymentRefundProcessingDetails other = (CardPaymentRefundProcessingDetails) o;
         return 
+            Utils.enhancedDeepEquals(this.networkTransactionID, other.networkTransactionID) &&
             Utils.enhancedDeepEquals(this.failureCode, other.failureCode);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            failureCode);
+            networkTransactionID, failureCode);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CardPaymentRefundProcessingDetails.class,
+                "networkTransactionID", networkTransactionID,
                 "failureCode", failureCode);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<String> networkTransactionID = Optional.empty();
+
         private Optional<? extends CardTransactionFailureCode> failureCode = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        public Builder networkTransactionID(String networkTransactionID) {
+            Utils.checkNotNull(networkTransactionID, "networkTransactionID");
+            this.networkTransactionID = Optional.ofNullable(networkTransactionID);
+            return this;
+        }
+
+        public Builder networkTransactionID(Optional<String> networkTransactionID) {
+            Utils.checkNotNull(networkTransactionID, "networkTransactionID");
+            this.networkTransactionID = networkTransactionID;
+            return this;
         }
 
 
@@ -106,7 +149,7 @@ public class CardPaymentRefundProcessingDetails {
         public CardPaymentRefundProcessingDetails build() {
 
             return new CardPaymentRefundProcessingDetails(
-                failureCode);
+                networkTransactionID, failureCode);
         }
 
     }

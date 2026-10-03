@@ -81,6 +81,14 @@ public class IncurredFee {
     private Optional<String> feeGroup;
 
     /**
+     * The program assigned by the card network that determines the interchange rate for the fee. Present
+     * only for interchange or discount fees.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("feeProgram")
+    private Optional<String> feeProgram;
+
+    /**
      * Unique identifier for this residual payment calculation.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -104,6 +112,7 @@ public class IncurredFee {
             @JsonProperty("amount") Optional<? extends AmountDecimal> amount,
             @JsonProperty("generatedBy") Optional<? extends GeneratedBy> generatedBy,
             @JsonProperty("feeGroup") Optional<String> feeGroup,
+            @JsonProperty("feeProgram") Optional<String> feeProgram,
             @JsonProperty("residualID") Optional<String> residualID,
             @JsonProperty("feePaidBy") Optional<? extends FeePaidBy> feePaidBy) {
         Utils.checkNotNull(feeID, "feeID");
@@ -114,6 +123,7 @@ public class IncurredFee {
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(generatedBy, "generatedBy");
         Utils.checkNotNull(feeGroup, "feeGroup");
+        Utils.checkNotNull(feeProgram, "feeProgram");
         Utils.checkNotNull(residualID, "residualID");
         Utils.checkNotNull(feePaidBy, "feePaidBy");
         this.feeID = feeID;
@@ -124,6 +134,7 @@ public class IncurredFee {
         this.amount = amount;
         this.generatedBy = generatedBy;
         this.feeGroup = feeGroup;
+        this.feeProgram = feeProgram;
         this.residualID = residualID;
         this.feePaidBy = feePaidBy;
     }
@@ -132,7 +143,7 @@ public class IncurredFee {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -202,6 +213,15 @@ public class IncurredFee {
     @JsonIgnore
     public Optional<String> feeGroup() {
         return feeGroup;
+    }
+
+    /**
+     * The program assigned by the card network that determines the interchange rate for the fee. Present
+     * only for interchange or discount fees.
+     */
+    @JsonIgnore
+    public Optional<String> feeProgram() {
+        return feeProgram;
     }
 
     /**
@@ -385,6 +405,27 @@ public class IncurredFee {
     }
 
     /**
+     * The program assigned by the card network that determines the interchange rate for the fee. Present
+     * only for interchange or discount fees.
+     */
+    public IncurredFee withFeeProgram(String feeProgram) {
+        Utils.checkNotNull(feeProgram, "feeProgram");
+        this.feeProgram = Optional.ofNullable(feeProgram);
+        return this;
+    }
+
+
+    /**
+     * The program assigned by the card network that determines the interchange rate for the fee. Present
+     * only for interchange or discount fees.
+     */
+    public IncurredFee withFeeProgram(Optional<String> feeProgram) {
+        Utils.checkNotNull(feeProgram, "feeProgram");
+        this.feeProgram = feeProgram;
+        return this;
+    }
+
+    /**
      * Unique identifier for this residual payment calculation.
      */
     public IncurredFee withResidualID(String residualID) {
@@ -440,6 +481,7 @@ public class IncurredFee {
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
             Utils.enhancedDeepEquals(this.generatedBy, other.generatedBy) &&
             Utils.enhancedDeepEquals(this.feeGroup, other.feeGroup) &&
+            Utils.enhancedDeepEquals(this.feeProgram, other.feeProgram) &&
             Utils.enhancedDeepEquals(this.residualID, other.residualID) &&
             Utils.enhancedDeepEquals(this.feePaidBy, other.feePaidBy);
     }
@@ -449,8 +491,8 @@ public class IncurredFee {
         return Utils.enhancedHash(
             feeID, accountID, walletID,
             createdOn, feeName, amount,
-            generatedBy, feeGroup, residualID,
-            feePaidBy);
+            generatedBy, feeGroup, feeProgram,
+            residualID, feePaidBy);
     }
     
     @Override
@@ -464,6 +506,7 @@ public class IncurredFee {
                 "amount", amount,
                 "generatedBy", generatedBy,
                 "feeGroup", feeGroup,
+                "feeProgram", feeProgram,
                 "residualID", residualID,
                 "feePaidBy", feePaidBy);
     }
@@ -486,6 +529,8 @@ public class IncurredFee {
         private Optional<? extends GeneratedBy> generatedBy = Optional.empty();
 
         private Optional<String> feeGroup = Optional.empty();
+
+        private Optional<String> feeProgram = Optional.empty();
 
         private Optional<String> residualID = Optional.empty();
 
@@ -655,6 +700,27 @@ public class IncurredFee {
 
 
         /**
+         * The program assigned by the card network that determines the interchange rate for the fee. Present
+         * only for interchange or discount fees.
+         */
+        public Builder feeProgram(String feeProgram) {
+            Utils.checkNotNull(feeProgram, "feeProgram");
+            this.feeProgram = Optional.ofNullable(feeProgram);
+            return this;
+        }
+
+        /**
+         * The program assigned by the card network that determines the interchange rate for the fee. Present
+         * only for interchange or discount fees.
+         */
+        public Builder feeProgram(Optional<String> feeProgram) {
+            Utils.checkNotNull(feeProgram, "feeProgram");
+            this.feeProgram = feeProgram;
+            return this;
+        }
+
+
+        /**
          * Unique identifier for this residual payment calculation.
          */
         public Builder residualID(String residualID) {
@@ -696,8 +762,8 @@ public class IncurredFee {
             return new IncurredFee(
                 feeID, accountID, walletID,
                 createdOn, feeName, amount,
-                generatedBy, feeGroup, residualID,
-                feePaidBy);
+                generatedBy, feeGroup, feeProgram,
+                residualID, feePaidBy);
         }
 
     }

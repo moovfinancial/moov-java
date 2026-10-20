@@ -50,7 +50,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:24.4.5'
+implementation 'io.moov:sdk:24.4.6'
 ```
 
 Maven:
@@ -58,7 +58,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>24.4.5</version>
+    <version>24.4.6</version>
 </dependency>
 ```
 
@@ -1054,6 +1054,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
   to specify the `/accounts/{accountID}/transfers.read` scope.
 * [initiateRefund](docs/sdks/transfers/README.md#initiaterefund) - Initiate a refund for a card transfer.
+The `accountID` must identify the partner account for the transfer.
 
 **Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**    
 See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) guide for more information. 

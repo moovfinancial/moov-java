@@ -9,9 +9,18 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class CreateCancellationRequest {
+    /**
+     * Prevents duplicate cancellations from being created.
+     * In v2026.10 and later, this header is required, and reusing a key returns a `409` response with the
+     * original cancellation.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=x-idempotency-key")
+    private Optional<String> xIdempotencyKey;
+
     /**
      * The partner's Moov account ID.
      */
@@ -26,12 +35,31 @@ public class CreateCancellationRequest {
 
     @JsonCreator
     public CreateCancellationRequest(
+            Optional<String> xIdempotencyKey,
             String accountID,
             String transferID) {
+        Utils.checkNotNull(xIdempotencyKey, "xIdempotencyKey");
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(transferID, "transferID");
+        this.xIdempotencyKey = xIdempotencyKey;
         this.accountID = accountID;
         this.transferID = transferID;
+    }
+    
+    public CreateCancellationRequest(
+            String accountID,
+            String transferID) {
+        this(Optional.empty(), accountID, transferID);
+    }
+
+    /**
+     * Prevents duplicate cancellations from being created.
+     * In v2026.10 and later, this header is required, and reusing a key returns a `409` response with the
+     * original cancellation.
+     */
+    @JsonIgnore
+    public Optional<String> xIdempotencyKey() {
+        return xIdempotencyKey;
     }
 
     /**
@@ -54,6 +82,29 @@ public class CreateCancellationRequest {
         return new Builder();
     }
 
+
+    /**
+     * Prevents duplicate cancellations from being created.
+     * In v2026.10 and later, this header is required, and reusing a key returns a `409` response with the
+     * original cancellation.
+     */
+    public CreateCancellationRequest withXIdempotencyKey(String xIdempotencyKey) {
+        Utils.checkNotNull(xIdempotencyKey, "xIdempotencyKey");
+        this.xIdempotencyKey = Optional.ofNullable(xIdempotencyKey);
+        return this;
+    }
+
+
+    /**
+     * Prevents duplicate cancellations from being created.
+     * In v2026.10 and later, this header is required, and reusing a key returns a `409` response with the
+     * original cancellation.
+     */
+    public CreateCancellationRequest withXIdempotencyKey(Optional<String> xIdempotencyKey) {
+        Utils.checkNotNull(xIdempotencyKey, "xIdempotencyKey");
+        this.xIdempotencyKey = xIdempotencyKey;
+        return this;
+    }
 
     /**
      * The partner's Moov account ID.
@@ -83,6 +134,7 @@ public class CreateCancellationRequest {
         }
         CreateCancellationRequest other = (CreateCancellationRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.xIdempotencyKey, other.xIdempotencyKey) &&
             Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
             Utils.enhancedDeepEquals(this.transferID, other.transferID);
     }
@@ -90,12 +142,13 @@ public class CreateCancellationRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID, transferID);
+            xIdempotencyKey, accountID, transferID);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CreateCancellationRequest.class,
+                "xIdempotencyKey", xIdempotencyKey,
                 "accountID", accountID,
                 "transferID", transferID);
     }
@@ -103,12 +156,37 @@ public class CreateCancellationRequest {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<String> xIdempotencyKey = Optional.empty();
+
         private String accountID;
 
         private String transferID;
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Prevents duplicate cancellations from being created.
+         * In v2026.10 and later, this header is required, and reusing a key returns a `409` response with the
+         * original cancellation.
+         */
+        public Builder xIdempotencyKey(String xIdempotencyKey) {
+            Utils.checkNotNull(xIdempotencyKey, "xIdempotencyKey");
+            this.xIdempotencyKey = Optional.ofNullable(xIdempotencyKey);
+            return this;
+        }
+
+        /**
+         * Prevents duplicate cancellations from being created.
+         * In v2026.10 and later, this header is required, and reusing a key returns a `409` response with the
+         * original cancellation.
+         */
+        public Builder xIdempotencyKey(Optional<String> xIdempotencyKey) {
+            Utils.checkNotNull(xIdempotencyKey, "xIdempotencyKey");
+            this.xIdempotencyKey = xIdempotencyKey;
+            return this;
         }
 
 
@@ -134,7 +212,7 @@ public class CreateCancellationRequest {
         public CreateCancellationRequest build() {
 
             return new CreateCancellationRequest(
-                accountID, transferID);
+                xIdempotencyKey, accountID, transferID);
         }
 
     }

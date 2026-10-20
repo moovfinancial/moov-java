@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.models.components.AmountDecimalValidationError;
 import io.moov.sdk.models.components.InvoiceLineItemsValidationError;
+import io.moov.sdk.models.components.InvoicePaymentOptionsError;
 import io.moov.sdk.utils.Utils;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
@@ -86,6 +87,11 @@ public class UpdateInvoiceError extends MoovError {
     }
 
     @Deprecated
+    public Optional<InvoicePaymentOptionsError> payment() {
+        return data().flatMap(Data::payment);
+    }
+
+    @Deprecated
     public Optional<AmountDecimalValidationError> taxAmount() {
         return data().flatMap(Data::taxAmount);
     }
@@ -129,6 +135,11 @@ public class UpdateInvoiceError extends MoovError {
 
 
         @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("payment")
+        private Optional<? extends InvoicePaymentOptionsError> payment;
+
+
+        @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("taxAmount")
         private Optional<? extends AmountDecimalValidationError> taxAmount;
 
@@ -139,24 +150,28 @@ public class UpdateInvoiceError extends MoovError {
                 @JsonProperty("invoiceDate") Optional<String> invoiceDate,
                 @JsonProperty("dueDate") Optional<String> dueDate,
                 @JsonProperty("status") Optional<String> status,
+                @JsonProperty("payment") Optional<? extends InvoicePaymentOptionsError> payment,
                 @JsonProperty("taxAmount") Optional<? extends AmountDecimalValidationError> taxAmount) {
             Utils.checkNotNull(description, "description");
             Utils.checkNotNull(lineItems, "lineItems");
             Utils.checkNotNull(invoiceDate, "invoiceDate");
             Utils.checkNotNull(dueDate, "dueDate");
             Utils.checkNotNull(status, "status");
+            Utils.checkNotNull(payment, "payment");
             Utils.checkNotNull(taxAmount, "taxAmount");
             this.description = description;
             this.lineItems = lineItems;
             this.invoiceDate = invoiceDate;
             this.dueDate = dueDate;
             this.status = status;
+            this.payment = payment;
             this.taxAmount = taxAmount;
         }
         
         public Data() {
             this(Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty(), Optional.empty(), Optional.empty());
+                Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty());
         }
 
         @JsonIgnore
@@ -183,6 +198,12 @@ public class UpdateInvoiceError extends MoovError {
         @JsonIgnore
         public Optional<String> status() {
             return status;
+        }
+
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<InvoicePaymentOptionsError> payment() {
+            return (Optional<InvoicePaymentOptionsError>) payment;
         }
 
         @SuppressWarnings("unchecked")
@@ -261,6 +282,19 @@ public class UpdateInvoiceError extends MoovError {
             return this;
         }
 
+        public Data withPayment(InvoicePaymentOptionsError payment) {
+            Utils.checkNotNull(payment, "payment");
+            this.payment = Optional.ofNullable(payment);
+            return this;
+        }
+
+
+        public Data withPayment(Optional<? extends InvoicePaymentOptionsError> payment) {
+            Utils.checkNotNull(payment, "payment");
+            this.payment = payment;
+            return this;
+        }
+
         public Data withTaxAmount(AmountDecimalValidationError taxAmount) {
             Utils.checkNotNull(taxAmount, "taxAmount");
             this.taxAmount = Optional.ofNullable(taxAmount);
@@ -289,6 +323,7 @@ public class UpdateInvoiceError extends MoovError {
                 Utils.enhancedDeepEquals(this.invoiceDate, other.invoiceDate) &&
                 Utils.enhancedDeepEquals(this.dueDate, other.dueDate) &&
                 Utils.enhancedDeepEquals(this.status, other.status) &&
+                Utils.enhancedDeepEquals(this.payment, other.payment) &&
                 Utils.enhancedDeepEquals(this.taxAmount, other.taxAmount);
         }
         
@@ -296,7 +331,8 @@ public class UpdateInvoiceError extends MoovError {
         public int hashCode() {
             return Utils.enhancedHash(
                 description, lineItems, invoiceDate,
-                dueDate, status, taxAmount);
+                dueDate, status, payment,
+                taxAmount);
         }
         
         @Override
@@ -307,6 +343,7 @@ public class UpdateInvoiceError extends MoovError {
                     "invoiceDate", invoiceDate,
                     "dueDate", dueDate,
                     "status", status,
+                    "payment", payment,
                     "taxAmount", taxAmount);
         }
 
@@ -322,6 +359,8 @@ public class UpdateInvoiceError extends MoovError {
             private Optional<String> dueDate = Optional.empty();
 
             private Optional<String> status = Optional.empty();
+
+            private Optional<? extends InvoicePaymentOptionsError> payment = Optional.empty();
 
             private Optional<? extends AmountDecimalValidationError> taxAmount = Optional.empty();
 
@@ -395,6 +434,19 @@ public class UpdateInvoiceError extends MoovError {
             }
 
 
+            public Builder payment(InvoicePaymentOptionsError payment) {
+                Utils.checkNotNull(payment, "payment");
+                this.payment = Optional.ofNullable(payment);
+                return this;
+            }
+
+            public Builder payment(Optional<? extends InvoicePaymentOptionsError> payment) {
+                Utils.checkNotNull(payment, "payment");
+                this.payment = payment;
+                return this;
+            }
+
+
             public Builder taxAmount(AmountDecimalValidationError taxAmount) {
                 Utils.checkNotNull(taxAmount, "taxAmount");
                 this.taxAmount = Optional.ofNullable(taxAmount);
@@ -411,7 +463,8 @@ public class UpdateInvoiceError extends MoovError {
 
                 return new Data(
                     description, lineItems, invoiceDate,
-                    dueDate, status, taxAmount);
+                    dueDate, status, payment,
+                    taxAmount);
             }
 
         }

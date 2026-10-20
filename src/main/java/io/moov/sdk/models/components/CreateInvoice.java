@@ -31,6 +31,15 @@ public class CreateInvoice {
     @JsonProperty("customerEmail")
     private Optional<String> customerEmail;
 
+    /**
+     * Optional merchant-defined invoice number, up to 64 characters. Must be unique for the account. If
+     * omitted, empty, or whitespace-only, the next number in the INV-&lt;n&gt; sequence is assigned
+     * automatically.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("invoiceNumber")
+    private Optional<String> invoiceNumber;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
@@ -52,6 +61,13 @@ public class CreateInvoice {
     @JsonProperty("dueDate")
     private Optional<OffsetDateTime> dueDate;
 
+    /**
+     * Payment options for the invoice.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("payment")
+    private Optional<? extends InvoicePaymentOptions> payment;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("taxAmount")
@@ -61,24 +77,30 @@ public class CreateInvoice {
     public CreateInvoice(
             @JsonProperty("customerAccountID") String customerAccountID,
             @JsonProperty("customerEmail") Optional<String> customerEmail,
+            @JsonProperty("invoiceNumber") Optional<String> invoiceNumber,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("lineItems") CreateInvoiceLineItems lineItems,
             @JsonProperty("invoiceDate") Optional<OffsetDateTime> invoiceDate,
             @JsonProperty("dueDate") Optional<OffsetDateTime> dueDate,
+            @JsonProperty("payment") Optional<? extends InvoicePaymentOptions> payment,
             @JsonProperty("taxAmount") Optional<? extends AmountDecimal> taxAmount) {
         Utils.checkNotNull(customerAccountID, "customerAccountID");
         Utils.checkNotNull(customerEmail, "customerEmail");
+        Utils.checkNotNull(invoiceNumber, "invoiceNumber");
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(lineItems, "lineItems");
         Utils.checkNotNull(invoiceDate, "invoiceDate");
         Utils.checkNotNull(dueDate, "dueDate");
+        Utils.checkNotNull(payment, "payment");
         Utils.checkNotNull(taxAmount, "taxAmount");
         this.customerAccountID = customerAccountID;
         this.customerEmail = customerEmail;
+        this.invoiceNumber = invoiceNumber;
         this.description = description;
         this.lineItems = lineItems;
         this.invoiceDate = invoiceDate;
         this.dueDate = dueDate;
+        this.payment = payment;
         this.taxAmount = taxAmount;
     }
     
@@ -86,8 +108,8 @@ public class CreateInvoice {
             String customerAccountID,
             CreateInvoiceLineItems lineItems) {
         this(customerAccountID, Optional.empty(), Optional.empty(),
-            lineItems, Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), lineItems, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -105,6 +127,16 @@ public class CreateInvoice {
     @JsonIgnore
     public Optional<String> customerEmail() {
         return customerEmail;
+    }
+
+    /**
+     * Optional merchant-defined invoice number, up to 64 characters. Must be unique for the account. If
+     * omitted, empty, or whitespace-only, the next number in the INV-&lt;n&gt; sequence is assigned
+     * automatically.
+     */
+    @JsonIgnore
+    public Optional<String> invoiceNumber() {
+        return invoiceNumber;
     }
 
     @JsonIgnore
@@ -128,6 +160,15 @@ public class CreateInvoice {
     @JsonIgnore
     public Optional<OffsetDateTime> dueDate() {
         return dueDate;
+    }
+
+    /**
+     * Payment options for the invoice.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<InvoicePaymentOptions> payment() {
+        return (Optional<InvoicePaymentOptions>) payment;
     }
 
     @SuppressWarnings("unchecked")
@@ -167,6 +208,29 @@ public class CreateInvoice {
     public CreateInvoice withCustomerEmail(Optional<String> customerEmail) {
         Utils.checkNotNull(customerEmail, "customerEmail");
         this.customerEmail = customerEmail;
+        return this;
+    }
+
+    /**
+     * Optional merchant-defined invoice number, up to 64 characters. Must be unique for the account. If
+     * omitted, empty, or whitespace-only, the next number in the INV-&lt;n&gt; sequence is assigned
+     * automatically.
+     */
+    public CreateInvoice withInvoiceNumber(String invoiceNumber) {
+        Utils.checkNotNull(invoiceNumber, "invoiceNumber");
+        this.invoiceNumber = Optional.ofNullable(invoiceNumber);
+        return this;
+    }
+
+
+    /**
+     * Optional merchant-defined invoice number, up to 64 characters. Must be unique for the account. If
+     * omitted, empty, or whitespace-only, the next number in the INV-&lt;n&gt; sequence is assigned
+     * automatically.
+     */
+    public CreateInvoice withInvoiceNumber(Optional<String> invoiceNumber) {
+        Utils.checkNotNull(invoiceNumber, "invoiceNumber");
+        this.invoiceNumber = invoiceNumber;
         return this;
     }
 
@@ -218,6 +282,25 @@ public class CreateInvoice {
         return this;
     }
 
+    /**
+     * Payment options for the invoice.
+     */
+    public CreateInvoice withPayment(InvoicePaymentOptions payment) {
+        Utils.checkNotNull(payment, "payment");
+        this.payment = Optional.ofNullable(payment);
+        return this;
+    }
+
+
+    /**
+     * Payment options for the invoice.
+     */
+    public CreateInvoice withPayment(Optional<? extends InvoicePaymentOptions> payment) {
+        Utils.checkNotNull(payment, "payment");
+        this.payment = payment;
+        return this;
+    }
+
     public CreateInvoice withTaxAmount(AmountDecimal taxAmount) {
         Utils.checkNotNull(taxAmount, "taxAmount");
         this.taxAmount = Optional.ofNullable(taxAmount);
@@ -243,19 +326,21 @@ public class CreateInvoice {
         return 
             Utils.enhancedDeepEquals(this.customerAccountID, other.customerAccountID) &&
             Utils.enhancedDeepEquals(this.customerEmail, other.customerEmail) &&
+            Utils.enhancedDeepEquals(this.invoiceNumber, other.invoiceNumber) &&
             Utils.enhancedDeepEquals(this.description, other.description) &&
             Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
             Utils.enhancedDeepEquals(this.invoiceDate, other.invoiceDate) &&
             Utils.enhancedDeepEquals(this.dueDate, other.dueDate) &&
+            Utils.enhancedDeepEquals(this.payment, other.payment) &&
             Utils.enhancedDeepEquals(this.taxAmount, other.taxAmount);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            customerAccountID, customerEmail, description,
-            lineItems, invoiceDate, dueDate,
-            taxAmount);
+            customerAccountID, customerEmail, invoiceNumber,
+            description, lineItems, invoiceDate,
+            dueDate, payment, taxAmount);
     }
     
     @Override
@@ -263,10 +348,12 @@ public class CreateInvoice {
         return Utils.toString(CreateInvoice.class,
                 "customerAccountID", customerAccountID,
                 "customerEmail", customerEmail,
+                "invoiceNumber", invoiceNumber,
                 "description", description,
                 "lineItems", lineItems,
                 "invoiceDate", invoiceDate,
                 "dueDate", dueDate,
+                "payment", payment,
                 "taxAmount", taxAmount);
     }
 
@@ -277,6 +364,8 @@ public class CreateInvoice {
 
         private Optional<String> customerEmail = Optional.empty();
 
+        private Optional<String> invoiceNumber = Optional.empty();
+
         private Optional<String> description = Optional.empty();
 
         private CreateInvoiceLineItems lineItems;
@@ -284,6 +373,8 @@ public class CreateInvoice {
         private Optional<OffsetDateTime> invoiceDate = Optional.empty();
 
         private Optional<OffsetDateTime> dueDate = Optional.empty();
+
+        private Optional<? extends InvoicePaymentOptions> payment = Optional.empty();
 
         private Optional<? extends AmountDecimal> taxAmount = Optional.empty();
 
@@ -318,6 +409,29 @@ public class CreateInvoice {
         public Builder customerEmail(Optional<String> customerEmail) {
             Utils.checkNotNull(customerEmail, "customerEmail");
             this.customerEmail = customerEmail;
+            return this;
+        }
+
+
+        /**
+         * Optional merchant-defined invoice number, up to 64 characters. Must be unique for the account. If
+         * omitted, empty, or whitespace-only, the next number in the INV-&lt;n&gt; sequence is assigned
+         * automatically.
+         */
+        public Builder invoiceNumber(String invoiceNumber) {
+            Utils.checkNotNull(invoiceNumber, "invoiceNumber");
+            this.invoiceNumber = Optional.ofNullable(invoiceNumber);
+            return this;
+        }
+
+        /**
+         * Optional merchant-defined invoice number, up to 64 characters. Must be unique for the account. If
+         * omitted, empty, or whitespace-only, the next number in the INV-&lt;n&gt; sequence is assigned
+         * automatically.
+         */
+        public Builder invoiceNumber(Optional<String> invoiceNumber) {
+            Utils.checkNotNull(invoiceNumber, "invoiceNumber");
+            this.invoiceNumber = invoiceNumber;
             return this;
         }
 
@@ -371,6 +485,25 @@ public class CreateInvoice {
         }
 
 
+        /**
+         * Payment options for the invoice.
+         */
+        public Builder payment(InvoicePaymentOptions payment) {
+            Utils.checkNotNull(payment, "payment");
+            this.payment = Optional.ofNullable(payment);
+            return this;
+        }
+
+        /**
+         * Payment options for the invoice.
+         */
+        public Builder payment(Optional<? extends InvoicePaymentOptions> payment) {
+            Utils.checkNotNull(payment, "payment");
+            this.payment = payment;
+            return this;
+        }
+
+
         public Builder taxAmount(AmountDecimal taxAmount) {
             Utils.checkNotNull(taxAmount, "taxAmount");
             this.taxAmount = Optional.ofNullable(taxAmount);
@@ -386,9 +519,9 @@ public class CreateInvoice {
         public CreateInvoice build() {
 
             return new CreateInvoice(
-                customerAccountID, customerEmail, description,
-                lineItems, invoiceDate, dueDate,
-                taxAmount);
+                customerAccountID, customerEmail, invoiceNumber,
+                description, lineItems, invoiceDate,
+                dueDate, payment, taxAmount);
         }
 
     }

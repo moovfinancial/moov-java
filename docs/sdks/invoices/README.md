@@ -30,6 +30,18 @@ its status to `canceled`.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+* [createInvoiceNotification](#createinvoicenotification) - Create a notification for an invoice, which resends the invoice email to the customer. The required
+`channels` body lists the channels to notify on; today only `email` is supported. Returns a 409
+if the invoice is not in `unpaid` or `overdue` status, or if the merchant or customer account has no
+email set.
+
+The request is all-or-nothing: if any requested channel is rate limited, nothing is sent. Each channel
+can be sent at most once every 24 hours, and not within 24 hours of the invoice being sent. A 429
+response lists the limited channels with `availableOn` and lists the `availableChannels` that can be
+sent in a new request.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 * [createInvoicePayment](#createinvoicepayment) - Creates a payment resource to represent that an invoice was paid outside of the Moov platform.
 If a payment link was created for the invoice, the corresponding payment link is canceled, but a receipt is still sent.
 
@@ -391,6 +403,80 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/GenericError | 400, 409                   | application/json           |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## createInvoiceNotification
+
+Create a notification for an invoice, which resends the invoice email to the customer. The required
+`channels` body lists the channels to notify on; today only `email` is supported. Returns a 409
+if the invoice is not in `unpaid` or `overdue` status, or if the merchant or customer account has no
+email set.
+
+The request is all-or-nothing: if any requested channel is rate limited, nothing is sent. Each channel
+can be sent at most once every 24 hours, and not within 24 hours of the invoice being sent. A 429
+response lists the limited channels with `availableOn` and lists the `availableChannels` that can be
+sent in a new request.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="createInvoiceNotification" method="post" path="/accounts/{accountID}/invoices/{invoiceID}/notifications" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.*;
+import io.moov.sdk.models.errors.*;
+import io.moov.sdk.models.operations.CreateInvoiceNotificationResponse;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws GenericError, InvoiceNotificationError, InvoiceNotificationRateLimitedError, Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        CreateInvoiceNotificationResponse res = sdk.invoices().createInvoiceNotification()
+                .accountID("<id>")
+                .invoiceID("<id>")
+                .createInvoiceNotification(CreateInvoiceNotification.builder()
+                    .channels(List.of(
+                        NotificationChannel.EMAIL))
+                    .build())
+                .call();
+
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `accountID`                                                                       | *String*                                                                          | :heavy_check_mark:                                                                | N/A                                                                               |
+| `invoiceID`                                                                       | *String*                                                                          | :heavy_check_mark:                                                                | N/A                                                                               |
+| `createInvoiceNotification`                                                       | [CreateInvoiceNotification](../../models/components/CreateInvoiceNotification.md) | :heavy_check_mark:                                                                | N/A                                                                               |
+
+### Response
+
+**[CreateInvoiceNotificationResponse](../../models/operations/CreateInvoiceNotificationResponse.md)**
+
+### Errors
+
+| Error Type                                        | Status Code                                       | Content Type                                      |
+| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| models/errors/GenericError                        | 400, 409                                          | application/json                                  |
+| models/errors/InvoiceNotificationError            | 422                                               | application/json                                  |
+| models/errors/InvoiceNotificationRateLimitedError | 429                                               | application/json                                  |
+| models/errors/APIException                        | 4XX, 5XX                                          | \*/\*                                             |
 
 ## createInvoicePayment
 

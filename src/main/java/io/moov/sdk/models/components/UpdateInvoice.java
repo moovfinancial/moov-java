@@ -55,6 +55,13 @@ public class UpdateInvoice {
     @JsonProperty("status")
     private Optional<? extends InvoiceStatus> status;
 
+    /**
+     * Payment options to update on the invoice.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("payment")
+    private Optional<? extends InvoicePaymentOptionsUpdate> payment;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("taxAmount")
@@ -67,24 +74,28 @@ public class UpdateInvoice {
             @JsonProperty("invoiceDate") JsonNullable<OffsetDateTime> invoiceDate,
             @JsonProperty("dueDate") JsonNullable<OffsetDateTime> dueDate,
             @JsonProperty("status") Optional<? extends InvoiceStatus> status,
+            @JsonProperty("payment") Optional<? extends InvoicePaymentOptionsUpdate> payment,
             @JsonProperty("taxAmount") Optional<? extends AmountDecimalUpdate> taxAmount) {
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(lineItems, "lineItems");
         Utils.checkNotNull(invoiceDate, "invoiceDate");
         Utils.checkNotNull(dueDate, "dueDate");
         Utils.checkNotNull(status, "status");
+        Utils.checkNotNull(payment, "payment");
         Utils.checkNotNull(taxAmount, "taxAmount");
         this.description = description;
         this.lineItems = lineItems;
         this.invoiceDate = invoiceDate;
         this.dueDate = dueDate;
         this.status = status;
+        this.payment = payment;
         this.taxAmount = taxAmount;
     }
     
     public UpdateInvoice() {
         this(Optional.empty(), Optional.empty(), JsonNullable.undefined(),
-            JsonNullable.undefined(), Optional.empty(), Optional.empty());
+            JsonNullable.undefined(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -126,6 +137,15 @@ public class UpdateInvoice {
     @JsonIgnore
     public Optional<InvoiceStatus> status() {
         return (Optional<InvoiceStatus>) status;
+    }
+
+    /**
+     * Payment options to update on the invoice.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<InvoicePaymentOptionsUpdate> payment() {
+        return (Optional<InvoicePaymentOptionsUpdate>) payment;
     }
 
     @SuppressWarnings("unchecked")
@@ -230,6 +250,25 @@ public class UpdateInvoice {
         return this;
     }
 
+    /**
+     * Payment options to update on the invoice.
+     */
+    public UpdateInvoice withPayment(InvoicePaymentOptionsUpdate payment) {
+        Utils.checkNotNull(payment, "payment");
+        this.payment = Optional.ofNullable(payment);
+        return this;
+    }
+
+
+    /**
+     * Payment options to update on the invoice.
+     */
+    public UpdateInvoice withPayment(Optional<? extends InvoicePaymentOptionsUpdate> payment) {
+        Utils.checkNotNull(payment, "payment");
+        this.payment = payment;
+        return this;
+    }
+
     public UpdateInvoice withTaxAmount(AmountDecimalUpdate taxAmount) {
         Utils.checkNotNull(taxAmount, "taxAmount");
         this.taxAmount = Optional.ofNullable(taxAmount);
@@ -258,6 +297,7 @@ public class UpdateInvoice {
             Utils.enhancedDeepEquals(this.invoiceDate, other.invoiceDate) &&
             Utils.enhancedDeepEquals(this.dueDate, other.dueDate) &&
             Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.payment, other.payment) &&
             Utils.enhancedDeepEquals(this.taxAmount, other.taxAmount);
     }
     
@@ -265,7 +305,8 @@ public class UpdateInvoice {
     public int hashCode() {
         return Utils.enhancedHash(
             description, lineItems, invoiceDate,
-            dueDate, status, taxAmount);
+            dueDate, status, payment,
+            taxAmount);
     }
     
     @Override
@@ -276,6 +317,7 @@ public class UpdateInvoice {
                 "invoiceDate", invoiceDate,
                 "dueDate", dueDate,
                 "status", status,
+                "payment", payment,
                 "taxAmount", taxAmount);
     }
 
@@ -291,6 +333,8 @@ public class UpdateInvoice {
         private JsonNullable<OffsetDateTime> dueDate = JsonNullable.undefined();
 
         private Optional<? extends InvoiceStatus> status = Optional.empty();
+
+        private Optional<? extends InvoicePaymentOptionsUpdate> payment = Optional.empty();
 
         private Optional<? extends AmountDecimalUpdate> taxAmount = Optional.empty();
 
@@ -392,6 +436,25 @@ public class UpdateInvoice {
         }
 
 
+        /**
+         * Payment options to update on the invoice.
+         */
+        public Builder payment(InvoicePaymentOptionsUpdate payment) {
+            Utils.checkNotNull(payment, "payment");
+            this.payment = Optional.ofNullable(payment);
+            return this;
+        }
+
+        /**
+         * Payment options to update on the invoice.
+         */
+        public Builder payment(Optional<? extends InvoicePaymentOptionsUpdate> payment) {
+            Utils.checkNotNull(payment, "payment");
+            this.payment = payment;
+            return this;
+        }
+
+
         public Builder taxAmount(AmountDecimalUpdate taxAmount) {
             Utils.checkNotNull(taxAmount, "taxAmount");
             this.taxAmount = Optional.ofNullable(taxAmount);
@@ -408,7 +471,8 @@ public class UpdateInvoice {
 
             return new UpdateInvoice(
                 description, lineItems, invoiceDate,
-                dueDate, status, taxAmount);
+                dueDate, status, payment,
+                taxAmount);
         }
 
     }

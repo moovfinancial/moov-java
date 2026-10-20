@@ -32,7 +32,7 @@ public class InitiateRefundRequest {
     private Optional<? extends TransferWaitFor> xWaitFor;
 
     /**
-     * The merchant's Moov account ID.
+     * Moov account ID of the partner for the transfer.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
@@ -95,7 +95,7 @@ public class InitiateRefundRequest {
     }
 
     /**
-     * The merchant's Moov account ID.
+     * Moov account ID of the partner for the transfer.
      */
     @JsonIgnore
     public String accountID() {
@@ -156,7 +156,7 @@ public class InitiateRefundRequest {
     }
 
     /**
-     * The merchant's Moov account ID.
+     * Moov account ID of the partner for the transfer.
      */
     public InitiateRefundRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -274,7 +274,7 @@ public class InitiateRefundRequest {
 
 
         /**
-         * The merchant's Moov account ID.
+         * Moov account ID of the partner for the transfer.
          */
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");

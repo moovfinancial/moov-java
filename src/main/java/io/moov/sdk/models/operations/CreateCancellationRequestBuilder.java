@@ -10,9 +10,11 @@ import io.moov.sdk.operations.CreateCancellation;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.util.Optional;
 
 public class CreateCancellationRequestBuilder {
 
+    private Optional<String> xIdempotencyKey = Optional.empty();
     private String accountID;
     private String transferID;
     private final SDKConfiguration sdkConfiguration;
@@ -20,6 +22,18 @@ public class CreateCancellationRequestBuilder {
 
     public CreateCancellationRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+                
+    public CreateCancellationRequestBuilder xIdempotencyKey(String xIdempotencyKey) {
+        Utils.checkNotNull(xIdempotencyKey, "xIdempotencyKey");
+        this.xIdempotencyKey = Optional.of(xIdempotencyKey);
+        return this;
+    }
+
+    public CreateCancellationRequestBuilder xIdempotencyKey(Optional<String> xIdempotencyKey) {
+        Utils.checkNotNull(xIdempotencyKey, "xIdempotencyKey");
+        this.xIdempotencyKey = xIdempotencyKey;
+        return this;
     }
 
     public CreateCancellationRequestBuilder accountID(String accountID) {
@@ -37,7 +51,8 @@ public class CreateCancellationRequestBuilder {
 
     private CreateCancellationRequest buildRequest() {
 
-        CreateCancellationRequest request = new CreateCancellationRequest(accountID,
+        CreateCancellationRequest request = new CreateCancellationRequest(xIdempotencyKey,
+            accountID,
             transferID);
 
         return request;

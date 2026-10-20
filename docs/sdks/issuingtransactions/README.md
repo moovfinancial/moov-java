@@ -10,6 +10,10 @@ Activity includes authorizations and settlements in a single list.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+* [getActivity](#getactivity) - Retrieve a single issued card activity associated with a Moov account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 * [listAuthorizations](#listauthorizations) - List issued card authorizations associated with a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
@@ -89,6 +93,64 @@ public class Application {
 ### Response
 
 **[ListIssuedCardActivityResponse](../../models/operations/ListIssuedCardActivityResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## getActivity
+
+Retrieve a single issued card activity associated with a Moov account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="getIssuedCardActivity" method="get" path="/issuing/{accountID}/activity/{id}" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.GetIssuedCardActivityResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        GetIssuedCardActivityResponse res = sdk.issuingTransactions().getActivity()
+                .accountID("<id>")
+                .id("<id>")
+                .call();
+
+        if (res.issuedCardActivity().isPresent()) {
+            System.out.println(res.issuedCardActivity().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `accountID`                                                                        | *String*                                                                           | :heavy_check_mark:                                                                 | The Moov business account for which cards have been issued.                        |
+| `id`                                                                               | *String*                                                                           | :heavy_check_mark:                                                                 | The identifier for the activity item, either authorizationID or cardTransactionID. |
+
+### Response
+
+**[GetIssuedCardActivityResponse](../../models/operations/GetIssuedCardActivityResponse.md)**
 
 ### Errors
 

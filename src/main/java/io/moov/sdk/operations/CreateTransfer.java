@@ -10,7 +10,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.SecuritySource;
 import io.moov.sdk.models.components.AsyncTransfer;
-import io.moov.sdk.models.components.CreatedTransfer;
 import io.moov.sdk.models.components.Transfer;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.GenericError;
@@ -172,7 +171,7 @@ public class CreateTransfer {
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return res.withCreatedTransfer(Utils.unmarshal(response, new TypeReference<CreatedTransfer>() {}));
+                    return res.withCreateTransferResponse(Utils.unmarshal(response, new TypeReference<io.moov.sdk.models.components.CreateTransferResponse>() {}));
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }

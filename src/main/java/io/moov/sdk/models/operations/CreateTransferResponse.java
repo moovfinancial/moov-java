@@ -6,7 +6,6 @@ package io.moov.sdk.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.moov.sdk.models.components.AsyncTransfer;
-import io.moov.sdk.models.components.CreatedTransfer;
 import io.moov.sdk.models.components.Transfer;
 import io.moov.sdk.utils.Response;
 import io.moov.sdk.utils.Utils;
@@ -40,7 +39,7 @@ public class CreateTransferResponse implements Response {
     /**
      * The request completed successfully.
      */
-    private Optional<? extends CreatedTransfer> createdTransfer;
+    private Optional<? extends io.moov.sdk.models.components.CreateTransferResponse> createTransferResponse;
 
     /**
      * A transfer was successfully created but an error occurred while generating the synchronous response.
@@ -62,14 +61,14 @@ public class CreateTransferResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends CreatedTransfer> createdTransfer,
+            Optional<? extends io.moov.sdk.models.components.CreateTransferResponse> createTransferResponse,
             Optional<? extends AsyncTransfer> asyncTransfer,
             Optional<? extends Transfer> transfer,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(createdTransfer, "createdTransfer");
+        Utils.checkNotNull(createTransferResponse, "createTransferResponse");
         Utils.checkNotNull(asyncTransfer, "asyncTransfer");
         Utils.checkNotNull(transfer, "transfer");
         headers = Utils.emptyMapIfNull(headers);
@@ -77,7 +76,7 @@ public class CreateTransferResponse implements Response {
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.createdTransfer = createdTransfer;
+        this.createTransferResponse = createTransferResponse;
         this.asyncTransfer = asyncTransfer;
         this.transfer = transfer;
         this.headers = headers;
@@ -122,8 +121,8 @@ public class CreateTransferResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<CreatedTransfer> createdTransfer() {
-        return (Optional<CreatedTransfer>) createdTransfer;
+    public Optional<io.moov.sdk.models.components.CreateTransferResponse> createTransferResponse() {
+        return (Optional<io.moov.sdk.models.components.CreateTransferResponse>) createTransferResponse;
     }
 
     /**
@@ -186,9 +185,9 @@ public class CreateTransferResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public CreateTransferResponse withCreatedTransfer(CreatedTransfer createdTransfer) {
-        Utils.checkNotNull(createdTransfer, "createdTransfer");
-        this.createdTransfer = Optional.ofNullable(createdTransfer);
+    public CreateTransferResponse withCreateTransferResponse(io.moov.sdk.models.components.CreateTransferResponse createTransferResponse) {
+        Utils.checkNotNull(createTransferResponse, "createTransferResponse");
+        this.createTransferResponse = Optional.ofNullable(createTransferResponse);
         return this;
     }
 
@@ -196,9 +195,9 @@ public class CreateTransferResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public CreateTransferResponse withCreatedTransfer(Optional<? extends CreatedTransfer> createdTransfer) {
-        Utils.checkNotNull(createdTransfer, "createdTransfer");
-        this.createdTransfer = createdTransfer;
+    public CreateTransferResponse withCreateTransferResponse(Optional<? extends io.moov.sdk.models.components.CreateTransferResponse> createTransferResponse) {
+        Utils.checkNotNull(createTransferResponse, "createTransferResponse");
+        this.createTransferResponse = createTransferResponse;
         return this;
     }
 
@@ -263,7 +262,7 @@ public class CreateTransferResponse implements Response {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.createdTransfer, other.createdTransfer) &&
+            Utils.enhancedDeepEquals(this.createTransferResponse, other.createTransferResponse) &&
             Utils.enhancedDeepEquals(this.asyncTransfer, other.asyncTransfer) &&
             Utils.enhancedDeepEquals(this.transfer, other.transfer) &&
             Utils.enhancedDeepEquals(this.headers, other.headers);
@@ -273,7 +272,7 @@ public class CreateTransferResponse implements Response {
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            createdTransfer, asyncTransfer, transfer,
+            createTransferResponse, asyncTransfer, transfer,
             headers);
     }
     
@@ -283,7 +282,7 @@ public class CreateTransferResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "createdTransfer", createdTransfer,
+                "createTransferResponse", createTransferResponse,
                 "asyncTransfer", asyncTransfer,
                 "transfer", transfer,
                 "headers", headers);
@@ -298,7 +297,7 @@ public class CreateTransferResponse implements Response {
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends CreatedTransfer> createdTransfer = Optional.empty();
+        private Optional<? extends io.moov.sdk.models.components.CreateTransferResponse> createTransferResponse = Optional.empty();
 
         private Optional<? extends AsyncTransfer> asyncTransfer = Optional.empty();
 
@@ -344,18 +343,18 @@ public class CreateTransferResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder createdTransfer(CreatedTransfer createdTransfer) {
-            Utils.checkNotNull(createdTransfer, "createdTransfer");
-            this.createdTransfer = Optional.ofNullable(createdTransfer);
+        public Builder createTransferResponse(io.moov.sdk.models.components.CreateTransferResponse createTransferResponse) {
+            Utils.checkNotNull(createTransferResponse, "createTransferResponse");
+            this.createTransferResponse = Optional.ofNullable(createTransferResponse);
             return this;
         }
 
         /**
          * The request completed successfully.
          */
-        public Builder createdTransfer(Optional<? extends CreatedTransfer> createdTransfer) {
-            Utils.checkNotNull(createdTransfer, "createdTransfer");
-            this.createdTransfer = createdTransfer;
+        public Builder createTransferResponse(Optional<? extends io.moov.sdk.models.components.CreateTransferResponse> createTransferResponse) {
+            Utils.checkNotNull(createTransferResponse, "createTransferResponse");
+            this.createTransferResponse = createTransferResponse;
             return this;
         }
 
@@ -412,7 +411,7 @@ public class CreateTransferResponse implements Response {
 
             return new CreateTransferResponse(
                 contentType, statusCode, rawResponse,
-                createdTransfer, asyncTransfer, transfer,
+                createTransferResponse, asyncTransfer, transfer,
                 headers);
         }
 

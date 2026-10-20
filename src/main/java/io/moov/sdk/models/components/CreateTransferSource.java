@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 /**
@@ -40,38 +39,21 @@ public class CreateTransferSource {
     @JsonProperty("paymentToken")
     private Optional<String> paymentToken;
 
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("cardDetails")
-    private Optional<? extends CreateTransferSourceCard> cardDetails;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("achDetails")
-    private Optional<? extends CreateTransferSourceACH> achDetails;
-
     @JsonCreator
     public CreateTransferSource(
             @JsonProperty("transferID") Optional<String> transferID,
             @JsonProperty("paymentMethodID") Optional<String> paymentMethodID,
-            @JsonProperty("paymentToken") Optional<String> paymentToken,
-            @JsonProperty("cardDetails") Optional<? extends CreateTransferSourceCard> cardDetails,
-            @JsonProperty("achDetails") Optional<? extends CreateTransferSourceACH> achDetails) {
+            @JsonProperty("paymentToken") Optional<String> paymentToken) {
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
         Utils.checkNotNull(paymentToken, "paymentToken");
-        Utils.checkNotNull(cardDetails, "cardDetails");
-        Utils.checkNotNull(achDetails, "achDetails");
         this.transferID = transferID;
         this.paymentMethodID = paymentMethodID;
         this.paymentToken = paymentToken;
-        this.cardDetails = cardDetails;
-        this.achDetails = achDetails;
     }
     
     public CreateTransferSource() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -92,18 +74,6 @@ public class CreateTransferSource {
     @JsonIgnore
     public Optional<String> paymentToken() {
         return paymentToken;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<CreateTransferSourceCard> cardDetails() {
-        return (Optional<CreateTransferSourceCard>) cardDetails;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<CreateTransferSourceACH> achDetails() {
-        return (Optional<CreateTransferSourceACH>) achDetails;
     }
 
     public static Builder builder() {
@@ -160,32 +130,6 @@ public class CreateTransferSource {
         return this;
     }
 
-    public CreateTransferSource withCardDetails(CreateTransferSourceCard cardDetails) {
-        Utils.checkNotNull(cardDetails, "cardDetails");
-        this.cardDetails = Optional.ofNullable(cardDetails);
-        return this;
-    }
-
-
-    public CreateTransferSource withCardDetails(Optional<? extends CreateTransferSourceCard> cardDetails) {
-        Utils.checkNotNull(cardDetails, "cardDetails");
-        this.cardDetails = cardDetails;
-        return this;
-    }
-
-    public CreateTransferSource withAchDetails(CreateTransferSourceACH achDetails) {
-        Utils.checkNotNull(achDetails, "achDetails");
-        this.achDetails = Optional.ofNullable(achDetails);
-        return this;
-    }
-
-
-    public CreateTransferSource withAchDetails(Optional<? extends CreateTransferSourceACH> achDetails) {
-        Utils.checkNotNull(achDetails, "achDetails");
-        this.achDetails = achDetails;
-        return this;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -198,16 +142,13 @@ public class CreateTransferSource {
         return 
             Utils.enhancedDeepEquals(this.transferID, other.transferID) &&
             Utils.enhancedDeepEquals(this.paymentMethodID, other.paymentMethodID) &&
-            Utils.enhancedDeepEquals(this.paymentToken, other.paymentToken) &&
-            Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails) &&
-            Utils.enhancedDeepEquals(this.achDetails, other.achDetails);
+            Utils.enhancedDeepEquals(this.paymentToken, other.paymentToken);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            transferID, paymentMethodID, paymentToken,
-            cardDetails, achDetails);
+            transferID, paymentMethodID, paymentToken);
     }
     
     @Override
@@ -215,9 +156,7 @@ public class CreateTransferSource {
         return Utils.toString(CreateTransferSource.class,
                 "transferID", transferID,
                 "paymentMethodID", paymentMethodID,
-                "paymentToken", paymentToken,
-                "cardDetails", cardDetails,
-                "achDetails", achDetails);
+                "paymentToken", paymentToken);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -228,10 +167,6 @@ public class CreateTransferSource {
         private Optional<String> paymentMethodID = Optional.empty();
 
         private Optional<String> paymentToken = Optional.empty();
-
-        private Optional<? extends CreateTransferSourceCard> cardDetails = Optional.empty();
-
-        private Optional<? extends CreateTransferSourceACH> achDetails = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -286,37 +221,10 @@ public class CreateTransferSource {
             return this;
         }
 
-
-        public Builder cardDetails(CreateTransferSourceCard cardDetails) {
-            Utils.checkNotNull(cardDetails, "cardDetails");
-            this.cardDetails = Optional.ofNullable(cardDetails);
-            return this;
-        }
-
-        public Builder cardDetails(Optional<? extends CreateTransferSourceCard> cardDetails) {
-            Utils.checkNotNull(cardDetails, "cardDetails");
-            this.cardDetails = cardDetails;
-            return this;
-        }
-
-
-        public Builder achDetails(CreateTransferSourceACH achDetails) {
-            Utils.checkNotNull(achDetails, "achDetails");
-            this.achDetails = Optional.ofNullable(achDetails);
-            return this;
-        }
-
-        public Builder achDetails(Optional<? extends CreateTransferSourceACH> achDetails) {
-            Utils.checkNotNull(achDetails, "achDetails");
-            this.achDetails = achDetails;
-            return this;
-        }
-
         public CreateTransferSource build() {
 
             return new CreateTransferSource(
-                transferID, paymentMethodID, paymentToken,
-                cardDetails, achDetails);
+                transferID, paymentMethodID, paymentToken);
         }
 
     }

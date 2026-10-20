@@ -122,6 +122,13 @@ public class Invoice {
     private Optional<String> paymentLinkURL;
 
     /**
+     * Payment options for the invoice.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("payment")
+    private Optional<? extends InvoicePaymentOptions> payment;
+
+    /**
      * Payment made towards an invoice, will be either a transfer or an external payment.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -182,6 +189,7 @@ public class Invoice {
             @JsonProperty("disputedAmount") AmountDecimal disputedAmount,
             @JsonProperty("paymentLinkCode") Optional<String> paymentLinkCode,
             @JsonProperty("paymentLinkURL") Optional<String> paymentLinkURL,
+            @JsonProperty("payment") Optional<? extends InvoicePaymentOptions> payment,
             @JsonProperty("invoicePayments") Optional<? extends List<InvoicePayment>> invoicePayments,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
             @JsonProperty("invoiceDate") Optional<OffsetDateTime> invoiceDate,
@@ -208,6 +216,7 @@ public class Invoice {
         Utils.checkNotNull(disputedAmount, "disputedAmount");
         Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
         Utils.checkNotNull(paymentLinkURL, "paymentLinkURL");
+        Utils.checkNotNull(payment, "payment");
         Utils.checkNotNull(invoicePayments, "invoicePayments");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(invoiceDate, "invoiceDate");
@@ -234,6 +243,7 @@ public class Invoice {
         this.disputedAmount = disputedAmount;
         this.paymentLinkCode = paymentLinkCode;
         this.paymentLinkURL = paymentLinkURL;
+        this.payment = payment;
         this.invoicePayments = invoicePayments;
         this.createdOn = createdOn;
         this.invoiceDate = invoiceDate;
@@ -266,9 +276,9 @@ public class Invoice {
             subtotalAmount, Optional.empty(), totalAmount,
             pendingAmount, paidAmount, refundedAmount,
             disputedAmount, Optional.empty(), Optional.empty(),
-            Optional.empty(), createdOn, Optional.empty(),
+            Optional.empty(), Optional.empty(), createdOn,
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -399,6 +409,15 @@ public class Invoice {
     @JsonIgnore
     public Optional<String> paymentLinkURL() {
         return paymentLinkURL;
+    }
+
+    /**
+     * Payment options for the invoice.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<InvoicePaymentOptions> payment() {
+        return (Optional<InvoicePaymentOptions>) payment;
     }
 
     /**
@@ -629,6 +648,25 @@ public class Invoice {
     }
 
     /**
+     * Payment options for the invoice.
+     */
+    public Invoice withPayment(InvoicePaymentOptions payment) {
+        Utils.checkNotNull(payment, "payment");
+        this.payment = Optional.ofNullable(payment);
+        return this;
+    }
+
+
+    /**
+     * Payment options for the invoice.
+     */
+    public Invoice withPayment(Optional<? extends InvoicePaymentOptions> payment) {
+        Utils.checkNotNull(payment, "payment");
+        this.payment = payment;
+        return this;
+    }
+
+    /**
      * Payment made towards an invoice, will be either a transfer or an external payment.
      */
     public Invoice withInvoicePayments(List<InvoicePayment> invoicePayments) {
@@ -759,6 +797,7 @@ public class Invoice {
             Utils.enhancedDeepEquals(this.disputedAmount, other.disputedAmount) &&
             Utils.enhancedDeepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
             Utils.enhancedDeepEquals(this.paymentLinkURL, other.paymentLinkURL) &&
+            Utils.enhancedDeepEquals(this.payment, other.payment) &&
             Utils.enhancedDeepEquals(this.invoicePayments, other.invoicePayments) &&
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
             Utils.enhancedDeepEquals(this.invoiceDate, other.invoiceDate) &&
@@ -778,9 +817,9 @@ public class Invoice {
             subtotalAmount, amountDetails, totalAmount,
             pendingAmount, paidAmount, refundedAmount,
             disputedAmount, paymentLinkCode, paymentLinkURL,
-            invoicePayments, createdOn, invoiceDate,
-            dueDate, sentOn, paidOn,
-            canceledOn, disabledOn);
+            payment, invoicePayments, createdOn,
+            invoiceDate, dueDate, sentOn,
+            paidOn, canceledOn, disabledOn);
     }
     
     @Override
@@ -804,6 +843,7 @@ public class Invoice {
                 "disputedAmount", disputedAmount,
                 "paymentLinkCode", paymentLinkCode,
                 "paymentLinkURL", paymentLinkURL,
+                "payment", payment,
                 "invoicePayments", invoicePayments,
                 "createdOn", createdOn,
                 "invoiceDate", invoiceDate,
@@ -852,6 +892,8 @@ public class Invoice {
         private Optional<String> paymentLinkCode = Optional.empty();
 
         private Optional<String> paymentLinkURL = Optional.empty();
+
+        private Optional<? extends InvoicePaymentOptions> payment = Optional.empty();
 
         private Optional<? extends List<InvoicePayment>> invoicePayments = Optional.empty();
 
@@ -1067,6 +1109,25 @@ public class Invoice {
 
 
         /**
+         * Payment options for the invoice.
+         */
+        public Builder payment(InvoicePaymentOptions payment) {
+            Utils.checkNotNull(payment, "payment");
+            this.payment = Optional.ofNullable(payment);
+            return this;
+        }
+
+        /**
+         * Payment options for the invoice.
+         */
+        public Builder payment(Optional<? extends InvoicePaymentOptions> payment) {
+            Utils.checkNotNull(payment, "payment");
+            this.payment = payment;
+            return this;
+        }
+
+
+        /**
          * Payment made towards an invoice, will be either a transfer or an external payment.
          */
         public Builder invoicePayments(List<InvoicePayment> invoicePayments) {
@@ -1178,9 +1239,9 @@ public class Invoice {
                 subtotalAmount, amountDetails, totalAmount,
                 pendingAmount, paidAmount, refundedAmount,
                 disputedAmount, paymentLinkCode, paymentLinkURL,
-                invoicePayments, createdOn, invoiceDate,
-                dueDate, sentOn, paidOn,
-                canceledOn, disabledOn);
+                payment, invoicePayments, createdOn,
+                invoiceDate, dueDate, sentOn,
+                paidOn, canceledOn, disabledOn);
         }
 
     }

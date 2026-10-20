@@ -6,8 +6,12 @@ package io.moov.sdk;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.models.components.CreateInvoice;
+import io.moov.sdk.models.components.CreateInvoiceNotification;
 import io.moov.sdk.models.components.CreateInvoicePayment;
 import io.moov.sdk.models.components.UpdateInvoice;
+import io.moov.sdk.models.operations.CreateInvoiceNotificationRequest;
+import io.moov.sdk.models.operations.CreateInvoiceNotificationRequestBuilder;
+import io.moov.sdk.models.operations.CreateInvoiceNotificationResponse;
 import io.moov.sdk.models.operations.CreateInvoicePaymentRequest;
 import io.moov.sdk.models.operations.CreateInvoicePaymentRequestBuilder;
 import io.moov.sdk.models.operations.CreateInvoicePaymentResponse;
@@ -236,6 +240,65 @@ public class Invoices {
                 .build();
         RequestOperation<DeleteInvoiceRequest, DeleteInvoiceResponse> operation
               = new DeleteInvoice.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Create a notification for an invoice, which resends the invoice email to the customer. The required
+     * `channels` body lists the channels to notify on; today only `email` is supported. Returns a 409
+     * if the invoice is not in `unpaid` or `overdue` status, or if the merchant or customer account has no
+     * email set.
+     * 
+     * <p>The request is all-or-nothing: if any requested channel is rate limited, nothing is sent. Each
+     * channel
+     * can be sent at most once every 24 hours, and not within 24 hours of the invoice being sent. A 429
+     * response lists the limited channels with `availableOn` and lists the `availableChannels` that can be
+     * sent in a new request.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+     * 
+     * @return The call builder
+     */
+    public CreateInvoiceNotificationRequestBuilder createInvoiceNotification() {
+        return new CreateInvoiceNotificationRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create a notification for an invoice, which resends the invoice email to the customer. The required
+     * `channels` body lists the channels to notify on; today only `email` is supported. Returns a 409
+     * if the invoice is not in `unpaid` or `overdue` status, or if the merchant or customer account has no
+     * email set.
+     * 
+     * <p>The request is all-or-nothing: if any requested channel is rate limited, nothing is sent. Each
+     * channel
+     * can be sent at most once every 24 hours, and not within 24 hours of the invoice being sent. A 429
+     * response lists the limited channels with `availableOn` and lists the `availableChannels` that can be
+     * sent in a new request.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+     * 
+     * @param accountID 
+     * @param invoiceID 
+     * @param createInvoiceNotification 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateInvoiceNotificationResponse createInvoiceNotification(
+            String accountID, String invoiceID,
+            CreateInvoiceNotification createInvoiceNotification) {
+        CreateInvoiceNotificationRequest request =
+            CreateInvoiceNotificationRequest
+                .builder()
+                .accountID(accountID)
+                .invoiceID(invoiceID)
+                .createInvoiceNotification(createInvoiceNotification)
+                .build();
+        RequestOperation<CreateInvoiceNotificationRequest, CreateInvoiceNotificationResponse> operation
+              = new io.moov.sdk.operations.CreateInvoiceNotification.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

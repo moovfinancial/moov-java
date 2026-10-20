@@ -9,11 +9,13 @@ import static io.moov.sdk.utils.Exceptions.unchecked;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.SecuritySource;
-import io.moov.sdk.models.components.Cancellation;
+import io.moov.sdk.models.components.AuthorizationSimulationAsyncResponse;
+import io.moov.sdk.models.components.IssuedCardAuthorization;
 import io.moov.sdk.models.errors.APIException;
+import io.moov.sdk.models.errors.ClearingSimulationValidationError;
 import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.operations.CreateCancellationRequest;
-import io.moov.sdk.models.operations.CreateCancellationResponse;
+import io.moov.sdk.models.operations.CreateClearingSimulationRequest;
+import io.moov.sdk.models.operations.CreateClearingSimulationResponse;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Headers;
@@ -33,7 +35,7 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-public class CreateCancellation {
+public class CreateClearingSimulation {
 
     static abstract class Base {
         final SDKConfiguration sdkConfiguration;
@@ -58,7 +60,7 @@ public class CreateCancellation {
             return new BeforeRequestContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "createCancellation",
+                    "createClearingSimulation",
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -67,7 +69,7 @@ public class CreateCancellation {
             return new AfterSuccessContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "createCancellation",
+                    "createClearingSimulation",
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -76,7 +78,7 @@ public class CreateCancellation {
             return new AfterErrorContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "createCancellation",
+                    "createClearingSimulation",
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -84,7 +86,7 @@ public class CreateCancellation {
             String url = Utils.generateURL(
                     klass,
                     this.baseUrl,
-                    "/accounts/{accountID}/transfers/{transferID}/cancellations",
+                    "/issuing/simulations/{accountID}/authorizations/{authorizationID}/clearings",
                     request, null);
             HTTPRequest req = new HTTPRequest(url, "POST");
             Object convertedRequest = Utils.convertToShape(
@@ -93,7 +95,7 @@ public class CreateCancellation {
                     typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
-                    "createCancellation",
+                    "createClearingSimulation",
                     "json",
                     false);
             if (serializedRequestBody == null) {
@@ -110,13 +112,13 @@ public class CreateCancellation {
     }
 
     public static class Sync extends Base
-            implements RequestOperation<CreateCancellationRequest, CreateCancellationResponse> {
+            implements RequestOperation<CreateClearingSimulationRequest, CreateClearingSimulationResponse> {
         public Sync(SDKConfiguration sdkConfiguration, Headers _headers) {
             super(sdkConfiguration, _headers);
         }
 
-        private HttpRequest onBuildRequest(CreateCancellationRequest request) throws Exception {
-            HttpRequest req = buildRequest(request, CreateCancellationRequest.class, new TypeReference<CreateCancellationRequest>() {});
+        private HttpRequest onBuildRequest(CreateClearingSimulationRequest request) throws Exception {
+            HttpRequest req = buildRequest(request, CreateClearingSimulationRequest.class, new TypeReference<CreateClearingSimulationRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 
@@ -132,7 +134,7 @@ public class CreateCancellation {
         }
 
         @Override
-        public HttpResponse<InputStream> doRequest(CreateCancellationRequest request) {
+        public HttpResponse<InputStream> doRequest(CreateClearingSimulationRequest request) {
             HttpRequest r = unchecked(() -> onBuildRequest(request)).get();
             HttpResponse<InputStream> httpRes;
             try {
@@ -151,32 +153,48 @@ public class CreateCancellation {
 
 
         @Override
-        public CreateCancellationResponse handleResponse(HttpResponse<InputStream> response) {
+        public CreateClearingSimulationResponse handleResponse(HttpResponse<InputStream> response) {
             String contentType = response
                     .headers()
                     .firstValue("Content-Type")
                     .orElse("application/octet-stream");
-            CreateCancellationResponse.Builder resBuilder =
-                    CreateCancellationResponse
+            CreateClearingSimulationResponse.Builder resBuilder =
+                    CreateClearingSimulationResponse
                             .builder()
                             .contentType(contentType)
                             .statusCode(response.statusCode())
                             .rawResponse(response);
 
-            CreateCancellationResponse res = resBuilder.build();
+            CreateClearingSimulationResponse res = resBuilder.build();
             
-            if (Utils.statusCodeMatches(response.statusCode(), "200", "202")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return res.withCancellation(Utils.unmarshal(response, new TypeReference<Cancellation>() {}));
+                    return res.withIssuedCardAuthorization(Utils.unmarshal(response, new TypeReference<IssuedCardAuthorization>() {}));
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "400", "409", "422")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "202")) {
+                res.withHeaders(response.headers().map());
+                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                    return res.withAuthorizationSimulationAsyncResponse(Utils.unmarshal(response, new TypeReference<AuthorizationSimulationAsyncResponse>() {}));
+                } else {
+                    throw APIException.from("Unexpected content-type received: " + contentType, response);
+                }
+            }
+            if (Utils.statusCodeMatches(response.statusCode(), "400", "409")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     throw GenericError.from(response);
+                } else {
+                    throw APIException.from("Unexpected content-type received: " + contentType, response);
+                }
+            }
+            if (Utils.statusCodeMatches(response.statusCode(), "422")) {
+                res.withHeaders(response.headers().map());
+                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                    throw ClearingSimulationValidationError.from(response);
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }

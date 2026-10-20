@@ -428,9 +428,36 @@ public class Transfers {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateCancellationResponse createCancellation(String accountID, String transferID) {
+        return createCancellation(Optional.empty(), accountID, transferID);
+    }
+
+    /**
+     * Initiate a cancellation for a card, ACH, or queued transfer.
+     * 
+     * <p>In v2026.10 and later, an auth-capture `card-payment` transfer can be canceled before any captures
+     * exist.
+     * For these transfers, a successful cancellation reduces `capturableAmount` without changing
+     * `authorizedAmount`.
+     * For these transfers, a partial cancellation leaves the remaining `capturableAmount` available for
+     * capture.
+     * To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need
+     * to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param xIdempotencyKey Prevents duplicate cancellations from being created.
+     *         In v2026.10 and later, this header is required, and reusing a key returns a `409` response with the original cancellation.
+     * @param accountID The partner's Moov account ID.
+     * @param transferID The transfer ID to cancel.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateCancellationResponse createCancellation(
+            Optional<String> xIdempotencyKey, String accountID,
+            String transferID) {
         CreateCancellationRequest request =
             CreateCancellationRequest
                 .builder()
+                .xIdempotencyKey(xIdempotencyKey)
                 .accountID(accountID)
                 .transferID(transferID)
                 .build();
@@ -519,6 +546,7 @@ public class Transfers {
 
     /**
      * Initiate a refund for a card transfer.
+     * The `accountID` must identify the partner account for the transfer.
      * 
      * <p>**Use the [Cancel or refund a card
      * transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive
@@ -539,6 +567,7 @@ public class Transfers {
 
     /**
      * Initiate a refund for a card transfer.
+     * The `accountID` must identify the partner account for the transfer.
      * 
      * <p>**Use the [Cancel or refund a card
      * transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive

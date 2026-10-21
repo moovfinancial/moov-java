@@ -5,21 +5,18 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.Cancellation;
 import io.moov.sdk.utils.Response;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 
-public class CreateCancellationResponse implements Response {
+public class CreateInvoiceNotificationResponse implements Response {
     /**
      * HTTP response content type for this operation
      */
@@ -35,41 +32,24 @@ public class CreateCancellationResponse implements Response {
      */
     private HttpResponse<InputStream> rawResponse;
 
-    /**
-     * The request completed successfully.
-     */
-    private Optional<? extends Cancellation> cancellation;
-
 
     private Map<String, List<String>> headers;
 
     @JsonCreator
-    public CreateCancellationResponse(
+    public CreateInvoiceNotificationResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends Cancellation> cancellation,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(cancellation, "cancellation");
         headers = Utils.emptyMapIfNull(headers);
         Utils.checkNotNull(headers, "headers");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.cancellation = cancellation;
         this.headers = headers;
-    }
-    
-    public CreateCancellationResponse(
-            String contentType,
-            int statusCode,
-            HttpResponse<InputStream> rawResponse,
-            Map<String, List<String>> headers) {
-        this(contentType, statusCode, rawResponse,
-            Optional.empty(), headers);
     }
 
     /**
@@ -96,15 +76,6 @@ public class CreateCancellationResponse implements Response {
         return rawResponse;
     }
 
-    /**
-     * The request completed successfully.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Cancellation> cancellation() {
-        return (Optional<Cancellation>) cancellation;
-    }
-
     @JsonIgnore
     public Map<String, List<String>> headers() {
         return headers;
@@ -118,7 +89,7 @@ public class CreateCancellationResponse implements Response {
     /**
      * HTTP response content type for this operation
      */
-    public CreateCancellationResponse withContentType(String contentType) {
+    public CreateInvoiceNotificationResponse withContentType(String contentType) {
         Utils.checkNotNull(contentType, "contentType");
         this.contentType = contentType;
         return this;
@@ -127,7 +98,7 @@ public class CreateCancellationResponse implements Response {
     /**
      * HTTP response status code for this operation
      */
-    public CreateCancellationResponse withStatusCode(int statusCode) {
+    public CreateInvoiceNotificationResponse withStatusCode(int statusCode) {
         Utils.checkNotNull(statusCode, "statusCode");
         this.statusCode = statusCode;
         return this;
@@ -136,32 +107,13 @@ public class CreateCancellationResponse implements Response {
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
-    public CreateCancellationResponse withRawResponse(HttpResponse<InputStream> rawResponse) {
+    public CreateInvoiceNotificationResponse withRawResponse(HttpResponse<InputStream> rawResponse) {
         Utils.checkNotNull(rawResponse, "rawResponse");
         this.rawResponse = rawResponse;
         return this;
     }
 
-    /**
-     * The request completed successfully.
-     */
-    public CreateCancellationResponse withCancellation(Cancellation cancellation) {
-        Utils.checkNotNull(cancellation, "cancellation");
-        this.cancellation = Optional.ofNullable(cancellation);
-        return this;
-    }
-
-
-    /**
-     * The request completed successfully.
-     */
-    public CreateCancellationResponse withCancellation(Optional<? extends Cancellation> cancellation) {
-        Utils.checkNotNull(cancellation, "cancellation");
-        this.cancellation = cancellation;
-        return this;
-    }
-
-    public CreateCancellationResponse withHeaders(Map<String, List<String>> headers) {
+    public CreateInvoiceNotificationResponse withHeaders(Map<String, List<String>> headers) {
         Utils.checkNotNull(headers, "headers");
         this.headers = headers;
         return this;
@@ -175,12 +127,11 @@ public class CreateCancellationResponse implements Response {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CreateCancellationResponse other = (CreateCancellationResponse) o;
+        CreateInvoiceNotificationResponse other = (CreateInvoiceNotificationResponse) o;
         return 
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.cancellation, other.cancellation) &&
             Utils.enhancedDeepEquals(this.headers, other.headers);
     }
     
@@ -188,16 +139,15 @@ public class CreateCancellationResponse implements Response {
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            cancellation, headers);
+            headers);
     }
     
     @Override
     public String toString() {
-        return Utils.toString(CreateCancellationResponse.class,
+        return Utils.toString(CreateInvoiceNotificationResponse.class,
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "cancellation", cancellation,
                 "headers", headers);
     }
 
@@ -209,8 +159,6 @@ public class CreateCancellationResponse implements Response {
         private Integer statusCode;
 
         private HttpResponse<InputStream> rawResponse;
-
-        private Optional<? extends Cancellation> cancellation = Optional.empty();
 
         private Map<String, List<String>> headers;
 
@@ -249,36 +197,17 @@ public class CreateCancellationResponse implements Response {
         }
 
 
-        /**
-         * The request completed successfully.
-         */
-        public Builder cancellation(Cancellation cancellation) {
-            Utils.checkNotNull(cancellation, "cancellation");
-            this.cancellation = Optional.ofNullable(cancellation);
-            return this;
-        }
-
-        /**
-         * The request completed successfully.
-         */
-        public Builder cancellation(Optional<? extends Cancellation> cancellation) {
-            Utils.checkNotNull(cancellation, "cancellation");
-            this.cancellation = cancellation;
-            return this;
-        }
-
-
         public Builder headers(Map<String, List<String>> headers) {
             Utils.checkNotNull(headers, "headers");
             this.headers = headers;
             return this;
         }
 
-        public CreateCancellationResponse build() {
+        public CreateInvoiceNotificationResponse build() {
 
-            return new CreateCancellationResponse(
+            return new CreateInvoiceNotificationResponse(
                 contentType, statusCode, rawResponse,
-                cancellation, headers);
+                headers);
         }
 
     }

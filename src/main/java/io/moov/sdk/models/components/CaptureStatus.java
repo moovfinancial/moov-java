@@ -20,6 +20,7 @@ import java.util.Optional;
  */
 public class CaptureStatus {
 
+    public static final CaptureStatus CREATED = new CaptureStatus("created");
     public static final CaptureStatus PENDING = new CaptureStatus("pending");
     public static final CaptureStatus COMPLETED = new CaptureStatus("completed");
     public static final CaptureStatus FAILED = new CaptureStatus("failed");
@@ -97,6 +98,7 @@ public class CaptureStatus {
 
     private static final Map<String, CaptureStatus> createValuesMap() {
         Map<String, CaptureStatus> map = new LinkedHashMap<>();
+        map.put("created", CREATED);
         map.put("pending", PENDING);
         map.put("completed", COMPLETED);
         map.put("failed", FAILED);
@@ -106,6 +108,7 @@ public class CaptureStatus {
 
     private static final Map<String, CaptureStatusEnum> createEnumsMap() {
         Map<String, CaptureStatusEnum> map = new HashMap<>();
+        map.put("created", CaptureStatusEnum.CREATED);
         map.put("pending", CaptureStatusEnum.PENDING);
         map.put("completed", CaptureStatusEnum.COMPLETED);
         map.put("failed", CaptureStatusEnum.FAILED);
@@ -116,6 +119,7 @@ public class CaptureStatus {
     
     public enum CaptureStatusEnum {
 
+        CREATED("created"),
         PENDING("pending"),
         COMPLETED("completed"),
         FAILED("failed"),

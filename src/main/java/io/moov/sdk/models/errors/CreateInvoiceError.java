@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.models.components.AmountDetailsValidationError;
 import io.moov.sdk.models.components.CreateInvoiceLineItemsValidationError;
+import io.moov.sdk.models.components.InvoicePaymentOptionsError;
 import io.moov.sdk.utils.Utils;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
@@ -71,6 +72,11 @@ public class CreateInvoiceError extends MoovError {
     }
 
     @Deprecated
+    public Optional<String> invoiceNumber() {
+        return data().flatMap(Data::invoiceNumber);
+    }
+
+    @Deprecated
     public Optional<String> description() {
         return data().flatMap(Data::description);
     }
@@ -88,6 +94,11 @@ public class CreateInvoiceError extends MoovError {
     @Deprecated
     public Optional<String> dueDate() {
         return data().flatMap(Data::dueDate);
+    }
+
+    @Deprecated
+    public Optional<InvoicePaymentOptionsError> payment() {
+        return data().flatMap(Data::payment);
     }
 
     @Deprecated
@@ -119,6 +130,11 @@ public class CreateInvoiceError extends MoovError {
 
 
         @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("invoiceNumber")
+        private Optional<String> invoiceNumber;
+
+
+        @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("description")
         private Optional<String> description;
 
@@ -139,6 +155,11 @@ public class CreateInvoiceError extends MoovError {
 
 
         @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("payment")
+        private Optional<? extends InvoicePaymentOptionsError> payment;
+
+
+        @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("amountDetails")
         private Optional<? extends AmountDetailsValidationError> amountDetails;
 
@@ -146,31 +167,37 @@ public class CreateInvoiceError extends MoovError {
         public Data(
                 @JsonProperty("customerAccountID") Optional<String> customerAccountID,
                 @JsonProperty("customerEmail") Optional<String> customerEmail,
+                @JsonProperty("invoiceNumber") Optional<String> invoiceNumber,
                 @JsonProperty("description") Optional<String> description,
                 @JsonProperty("lineItems") Optional<? extends CreateInvoiceLineItemsValidationError> lineItems,
                 @JsonProperty("invoiceDate") Optional<String> invoiceDate,
                 @JsonProperty("dueDate") Optional<String> dueDate,
+                @JsonProperty("payment") Optional<? extends InvoicePaymentOptionsError> payment,
                 @JsonProperty("amountDetails") Optional<? extends AmountDetailsValidationError> amountDetails) {
             Utils.checkNotNull(customerAccountID, "customerAccountID");
             Utils.checkNotNull(customerEmail, "customerEmail");
+            Utils.checkNotNull(invoiceNumber, "invoiceNumber");
             Utils.checkNotNull(description, "description");
             Utils.checkNotNull(lineItems, "lineItems");
             Utils.checkNotNull(invoiceDate, "invoiceDate");
             Utils.checkNotNull(dueDate, "dueDate");
+            Utils.checkNotNull(payment, "payment");
             Utils.checkNotNull(amountDetails, "amountDetails");
             this.customerAccountID = customerAccountID;
             this.customerEmail = customerEmail;
+            this.invoiceNumber = invoiceNumber;
             this.description = description;
             this.lineItems = lineItems;
             this.invoiceDate = invoiceDate;
             this.dueDate = dueDate;
+            this.payment = payment;
             this.amountDetails = amountDetails;
         }
         
         public Data() {
             this(Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty());
+                Optional.empty(), Optional.empty(), Optional.empty());
         }
 
         @JsonIgnore
@@ -181,6 +208,11 @@ public class CreateInvoiceError extends MoovError {
         @JsonIgnore
         public Optional<String> customerEmail() {
             return customerEmail;
+        }
+
+        @JsonIgnore
+        public Optional<String> invoiceNumber() {
+            return invoiceNumber;
         }
 
         @JsonIgnore
@@ -202,6 +234,12 @@ public class CreateInvoiceError extends MoovError {
         @JsonIgnore
         public Optional<String> dueDate() {
             return dueDate;
+        }
+
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<InvoicePaymentOptionsError> payment() {
+            return (Optional<InvoicePaymentOptionsError>) payment;
         }
 
         @SuppressWarnings("unchecked")
@@ -238,6 +276,19 @@ public class CreateInvoiceError extends MoovError {
         public Data withCustomerEmail(Optional<String> customerEmail) {
             Utils.checkNotNull(customerEmail, "customerEmail");
             this.customerEmail = customerEmail;
+            return this;
+        }
+
+        public Data withInvoiceNumber(String invoiceNumber) {
+            Utils.checkNotNull(invoiceNumber, "invoiceNumber");
+            this.invoiceNumber = Optional.ofNullable(invoiceNumber);
+            return this;
+        }
+
+
+        public Data withInvoiceNumber(Optional<String> invoiceNumber) {
+            Utils.checkNotNull(invoiceNumber, "invoiceNumber");
+            this.invoiceNumber = invoiceNumber;
             return this;
         }
 
@@ -293,6 +344,19 @@ public class CreateInvoiceError extends MoovError {
             return this;
         }
 
+        public Data withPayment(InvoicePaymentOptionsError payment) {
+            Utils.checkNotNull(payment, "payment");
+            this.payment = Optional.ofNullable(payment);
+            return this;
+        }
+
+
+        public Data withPayment(Optional<? extends InvoicePaymentOptionsError> payment) {
+            Utils.checkNotNull(payment, "payment");
+            this.payment = payment;
+            return this;
+        }
+
         public Data withAmountDetails(AmountDetailsValidationError amountDetails) {
             Utils.checkNotNull(amountDetails, "amountDetails");
             this.amountDetails = Optional.ofNullable(amountDetails);
@@ -318,19 +382,21 @@ public class CreateInvoiceError extends MoovError {
             return 
                 Utils.enhancedDeepEquals(this.customerAccountID, other.customerAccountID) &&
                 Utils.enhancedDeepEquals(this.customerEmail, other.customerEmail) &&
+                Utils.enhancedDeepEquals(this.invoiceNumber, other.invoiceNumber) &&
                 Utils.enhancedDeepEquals(this.description, other.description) &&
                 Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
                 Utils.enhancedDeepEquals(this.invoiceDate, other.invoiceDate) &&
                 Utils.enhancedDeepEquals(this.dueDate, other.dueDate) &&
+                Utils.enhancedDeepEquals(this.payment, other.payment) &&
                 Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails);
         }
         
         @Override
         public int hashCode() {
             return Utils.enhancedHash(
-                customerAccountID, customerEmail, description,
-                lineItems, invoiceDate, dueDate,
-                amountDetails);
+                customerAccountID, customerEmail, invoiceNumber,
+                description, lineItems, invoiceDate,
+                dueDate, payment, amountDetails);
         }
         
         @Override
@@ -338,10 +404,12 @@ public class CreateInvoiceError extends MoovError {
             return Utils.toString(Data.class,
                     "customerAccountID", customerAccountID,
                     "customerEmail", customerEmail,
+                    "invoiceNumber", invoiceNumber,
                     "description", description,
                     "lineItems", lineItems,
                     "invoiceDate", invoiceDate,
                     "dueDate", dueDate,
+                    "payment", payment,
                     "amountDetails", amountDetails);
         }
 
@@ -352,6 +420,8 @@ public class CreateInvoiceError extends MoovError {
 
             private Optional<String> customerEmail = Optional.empty();
 
+            private Optional<String> invoiceNumber = Optional.empty();
+
             private Optional<String> description = Optional.empty();
 
             private Optional<? extends CreateInvoiceLineItemsValidationError> lineItems = Optional.empty();
@@ -359,6 +429,8 @@ public class CreateInvoiceError extends MoovError {
             private Optional<String> invoiceDate = Optional.empty();
 
             private Optional<String> dueDate = Optional.empty();
+
+            private Optional<? extends InvoicePaymentOptionsError> payment = Optional.empty();
 
             private Optional<? extends AmountDetailsValidationError> amountDetails = Optional.empty();
 
@@ -389,6 +461,19 @@ public class CreateInvoiceError extends MoovError {
             public Builder customerEmail(Optional<String> customerEmail) {
                 Utils.checkNotNull(customerEmail, "customerEmail");
                 this.customerEmail = customerEmail;
+                return this;
+            }
+
+
+            public Builder invoiceNumber(String invoiceNumber) {
+                Utils.checkNotNull(invoiceNumber, "invoiceNumber");
+                this.invoiceNumber = Optional.ofNullable(invoiceNumber);
+                return this;
+            }
+
+            public Builder invoiceNumber(Optional<String> invoiceNumber) {
+                Utils.checkNotNull(invoiceNumber, "invoiceNumber");
+                this.invoiceNumber = invoiceNumber;
                 return this;
             }
 
@@ -445,6 +530,19 @@ public class CreateInvoiceError extends MoovError {
             }
 
 
+            public Builder payment(InvoicePaymentOptionsError payment) {
+                Utils.checkNotNull(payment, "payment");
+                this.payment = Optional.ofNullable(payment);
+                return this;
+            }
+
+            public Builder payment(Optional<? extends InvoicePaymentOptionsError> payment) {
+                Utils.checkNotNull(payment, "payment");
+                this.payment = payment;
+                return this;
+            }
+
+
             public Builder amountDetails(AmountDetailsValidationError amountDetails) {
                 Utils.checkNotNull(amountDetails, "amountDetails");
                 this.amountDetails = Optional.ofNullable(amountDetails);
@@ -460,9 +558,9 @@ public class CreateInvoiceError extends MoovError {
             public Data build() {
 
                 return new Data(
-                    customerAccountID, customerEmail, description,
-                    lineItems, invoiceDate, dueDate,
-                    amountDetails);
+                    customerAccountID, customerEmail, invoiceNumber,
+                    description, lineItems, invoiceDate,
+                    dueDate, payment, amountDetails);
             }
 
         }

@@ -30,6 +30,13 @@ public class CreateTransfer {
     @JsonProperty("destination")
     private CreateTransferDestination destination;
 
+    /**
+     * Rail-specific options for a new transfer. Set only the key that matches the transfer's rail.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("options")
+    private Optional<? extends CreateTransferRailOptions> options;
+
 
     @JsonProperty("amount")
     private AmountDecimal amount;
@@ -86,6 +93,7 @@ public class CreateTransfer {
     public CreateTransfer(
             @JsonProperty("source") CreateTransferSource source,
             @JsonProperty("destination") CreateTransferDestination destination,
+            @JsonProperty("options") Optional<? extends CreateTransferRailOptions> options,
             @JsonProperty("amount") AmountDecimal amount,
             @JsonProperty("facilitatorFee") Optional<? extends CreateTransferFacilitatorFee> facilitatorFee,
             @JsonProperty("description") Optional<String> description,
@@ -96,6 +104,7 @@ public class CreateTransfer {
             @JsonProperty("feePaidBy") Optional<? extends TransferFeePaidBy> feePaidBy) {
         Utils.checkNotNull(source, "source");
         Utils.checkNotNull(destination, "destination");
+        Utils.checkNotNull(options, "options");
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(facilitatorFee, "facilitatorFee");
         Utils.checkNotNull(description, "description");
@@ -106,6 +115,7 @@ public class CreateTransfer {
         Utils.checkNotNull(feePaidBy, "feePaidBy");
         this.source = source;
         this.destination = destination;
+        this.options = options;
         this.amount = amount;
         this.facilitatorFee = facilitatorFee;
         this.description = description;
@@ -120,10 +130,10 @@ public class CreateTransfer {
             CreateTransferSource source,
             CreateTransferDestination destination,
             AmountDecimal amount) {
-        this(source, destination, amount,
+        this(source, destination, Optional.empty(),
+            amount, Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -141,6 +151,15 @@ public class CreateTransfer {
     @JsonIgnore
     public CreateTransferDestination destination() {
         return destination;
+    }
+
+    /**
+     * Rail-specific options for a new transfer. Set only the key that matches the transfer's rail.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<CreateTransferRailOptions> options() {
+        return (Optional<CreateTransferRailOptions>) options;
     }
 
     @JsonIgnore
@@ -228,6 +247,25 @@ public class CreateTransfer {
     public CreateTransfer withDestination(CreateTransferDestination destination) {
         Utils.checkNotNull(destination, "destination");
         this.destination = destination;
+        return this;
+    }
+
+    /**
+     * Rail-specific options for a new transfer. Set only the key that matches the transfer's rail.
+     */
+    public CreateTransfer withOptions(CreateTransferRailOptions options) {
+        Utils.checkNotNull(options, "options");
+        this.options = Optional.ofNullable(options);
+        return this;
+    }
+
+
+    /**
+     * Rail-specific options for a new transfer. Set only the key that matches the transfer's rail.
+     */
+    public CreateTransfer withOptions(Optional<? extends CreateTransferRailOptions> options) {
+        Utils.checkNotNull(options, "options");
+        this.options = options;
         return this;
     }
 
@@ -378,6 +416,7 @@ public class CreateTransfer {
         return 
             Utils.enhancedDeepEquals(this.source, other.source) &&
             Utils.enhancedDeepEquals(this.destination, other.destination) &&
+            Utils.enhancedDeepEquals(this.options, other.options) &&
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
             Utils.enhancedDeepEquals(this.facilitatorFee, other.facilitatorFee) &&
             Utils.enhancedDeepEquals(this.description, other.description) &&
@@ -391,10 +430,10 @@ public class CreateTransfer {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            source, destination, amount,
-            facilitatorFee, description, metadata,
-            foreignID, lineItems, amountDetails,
-            feePaidBy);
+            source, destination, options,
+            amount, facilitatorFee, description,
+            metadata, foreignID, lineItems,
+            amountDetails, feePaidBy);
     }
     
     @Override
@@ -402,6 +441,7 @@ public class CreateTransfer {
         return Utils.toString(CreateTransfer.class,
                 "source", source,
                 "destination", destination,
+                "options", options,
                 "amount", amount,
                 "facilitatorFee", facilitatorFee,
                 "description", description,
@@ -418,6 +458,8 @@ public class CreateTransfer {
         private CreateTransferSource source;
 
         private CreateTransferDestination destination;
+
+        private Optional<? extends CreateTransferRailOptions> options = Optional.empty();
 
         private AmountDecimal amount;
 
@@ -457,6 +499,25 @@ public class CreateTransfer {
         public Builder destination(CreateTransferDestination destination) {
             Utils.checkNotNull(destination, "destination");
             this.destination = destination;
+            return this;
+        }
+
+
+        /**
+         * Rail-specific options for a new transfer. Set only the key that matches the transfer's rail.
+         */
+        public Builder options(CreateTransferRailOptions options) {
+            Utils.checkNotNull(options, "options");
+            this.options = Optional.ofNullable(options);
+            return this;
+        }
+
+        /**
+         * Rail-specific options for a new transfer. Set only the key that matches the transfer's rail.
+         */
+        public Builder options(Optional<? extends CreateTransferRailOptions> options) {
+            Utils.checkNotNull(options, "options");
+            this.options = options;
             return this;
         }
 
@@ -599,10 +660,10 @@ public class CreateTransfer {
         public CreateTransfer build() {
 
             return new CreateTransfer(
-                source, destination, amount,
-                facilitatorFee, description, metadata,
-                foreignID, lineItems, amountDetails,
-                feePaidBy);
+                source, destination, options,
+                amount, facilitatorFee, description,
+                metadata, foreignID, lineItems,
+                amountDetails, feePaidBy);
         }
 
     }

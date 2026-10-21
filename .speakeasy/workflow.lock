@@ -1,9 +1,9 @@
-speakeasyVersion: 1.800.1
+speakeasyVersion: 1.803.0
 sources:
     dev:
         sourceNamespace: api-dev
-        sourceRevisionDigest: sha256:ce884ab308828df0f79b402e8274304e02c57a6742afba6d1ba4b143e1328748
-        sourceBlobDigest: sha256:2e10f7f6943b9afff5bf626de96af3f64f6f75fb71a3088bbff78c684fae99dc
+        sourceRevisionDigest: sha256:f70b0f31003e109a1ea9e555b7257501f31a4a6d0f19c3cbdd4dad24d8540f5b
+        sourceBlobDigest: sha256:751ac97eb567afd276fab7759324ac1280c2652e0465981b2564799096225d2c
         tags:
             - latest
     latest:
@@ -17,10 +17,10 @@ targets:
     latest:
         source: dev
         sourceNamespace: api-dev
-        sourceRevisionDigest: sha256:ce884ab308828df0f79b402e8274304e02c57a6742afba6d1ba4b143e1328748
-        sourceBlobDigest: sha256:2e10f7f6943b9afff5bf626de96af3f64f6f75fb71a3088bbff78c684fae99dc
+        sourceRevisionDigest: sha256:f70b0f31003e109a1ea9e555b7257501f31a4a6d0f19c3cbdd4dad24d8540f5b
+        sourceBlobDigest: sha256:751ac97eb567afd276fab7759324ac1280c2652e0465981b2564799096225d2c
         codeSamplesNamespace: dev-java-code-samples
-        codeSamplesRevisionDigest: sha256:70ef058a6cbac12409414362ada588f90d06651d1e641750d7474f46a66095f6
+        codeSamplesRevisionDigest: sha256:3825bc6f80efc23ddeb3468649c7b9696574afeb8a71530827be209073a5db06
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

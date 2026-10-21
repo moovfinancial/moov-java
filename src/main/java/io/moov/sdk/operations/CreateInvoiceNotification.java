@@ -9,11 +9,12 @@ import static io.moov.sdk.utils.Exceptions.unchecked;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.SecuritySource;
-import io.moov.sdk.models.components.Cancellation;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.operations.CreateCancellationRequest;
-import io.moov.sdk.models.operations.CreateCancellationResponse;
+import io.moov.sdk.models.errors.InvoiceNotificationError;
+import io.moov.sdk.models.errors.InvoiceNotificationRateLimitedError;
+import io.moov.sdk.models.operations.CreateInvoiceNotificationRequest;
+import io.moov.sdk.models.operations.CreateInvoiceNotificationResponse;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Headers;
@@ -33,7 +34,7 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-public class CreateCancellation {
+public class CreateInvoiceNotification {
 
     static abstract class Base {
         final SDKConfiguration sdkConfiguration;
@@ -58,7 +59,7 @@ public class CreateCancellation {
             return new BeforeRequestContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "createCancellation",
+                    "createInvoiceNotification",
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -67,7 +68,7 @@ public class CreateCancellation {
             return new AfterSuccessContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "createCancellation",
+                    "createInvoiceNotification",
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -76,7 +77,7 @@ public class CreateCancellation {
             return new AfterErrorContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "createCancellation",
+                    "createInvoiceNotification",
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -84,7 +85,7 @@ public class CreateCancellation {
             String url = Utils.generateURL(
                     klass,
                     this.baseUrl,
-                    "/accounts/{accountID}/transfers/{transferID}/cancellations",
+                    "/accounts/{accountID}/invoices/{invoiceID}/notifications",
                     request, null);
             HTTPRequest req = new HTTPRequest(url, "POST");
             Object convertedRequest = Utils.convertToShape(
@@ -93,7 +94,7 @@ public class CreateCancellation {
                     typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
-                    "createCancellation",
+                    "createInvoiceNotification",
                     "json",
                     false);
             if (serializedRequestBody == null) {
@@ -110,13 +111,13 @@ public class CreateCancellation {
     }
 
     public static class Sync extends Base
-            implements RequestOperation<CreateCancellationRequest, CreateCancellationResponse> {
+            implements RequestOperation<CreateInvoiceNotificationRequest, CreateInvoiceNotificationResponse> {
         public Sync(SDKConfiguration sdkConfiguration, Headers _headers) {
             super(sdkConfiguration, _headers);
         }
 
-        private HttpRequest onBuildRequest(CreateCancellationRequest request) throws Exception {
-            HttpRequest req = buildRequest(request, CreateCancellationRequest.class, new TypeReference<CreateCancellationRequest>() {});
+        private HttpRequest onBuildRequest(CreateInvoiceNotificationRequest request) throws Exception {
+            HttpRequest req = buildRequest(request, CreateInvoiceNotificationRequest.class, new TypeReference<CreateInvoiceNotificationRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 
@@ -132,7 +133,7 @@ public class CreateCancellation {
         }
 
         @Override
-        public HttpResponse<InputStream> doRequest(CreateCancellationRequest request) {
+        public HttpResponse<InputStream> doRequest(CreateInvoiceNotificationRequest request) {
             HttpRequest r = unchecked(() -> onBuildRequest(request)).get();
             HttpResponse<InputStream> httpRes;
             try {
@@ -151,29 +152,31 @@ public class CreateCancellation {
 
 
         @Override
-        public CreateCancellationResponse handleResponse(HttpResponse<InputStream> response) {
+        public CreateInvoiceNotificationResponse handleResponse(HttpResponse<InputStream> response) {
             String contentType = response
                     .headers()
                     .firstValue("Content-Type")
                     .orElse("application/octet-stream");
-            CreateCancellationResponse.Builder resBuilder =
-                    CreateCancellationResponse
+            CreateInvoiceNotificationResponse.Builder resBuilder =
+                    CreateInvoiceNotificationResponse
                             .builder()
                             .contentType(contentType)
                             .statusCode(response.statusCode())
                             .rawResponse(response);
 
-            CreateCancellationResponse res = resBuilder.build();
+            CreateInvoiceNotificationResponse res = resBuilder.build();
             
-            if (Utils.statusCodeMatches(response.statusCode(), "200", "202")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "204")) {
                 res.withHeaders(response.headers().map());
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return res.withCancellation(Utils.unmarshal(response, new TypeReference<Cancellation>() {}));
-                } else {
-                    throw APIException.from("Unexpected content-type received: " + contentType, response);
-                }
+                // no content
+                return res;
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "400", "409", "422")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "401", "403", "404")) {
+                res.withHeaders(response.headers().map());
+                // no content
+                throw APIException.from("API error occurred", response);
+            }
+            if (Utils.statusCodeMatches(response.statusCode(), "400", "409")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     throw GenericError.from(response);
@@ -181,10 +184,21 @@ public class CreateCancellation {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "401", "403", "404", "429")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "422")) {
                 res.withHeaders(response.headers().map());
-                // no content
-                throw APIException.from("API error occurred", response);
+                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                    throw InvoiceNotificationError.from(response);
+                } else {
+                    throw APIException.from("Unexpected content-type received: " + contentType, response);
+                }
+            }
+            if (Utils.statusCodeMatches(response.statusCode(), "429")) {
+                res.withHeaders(response.headers().map());
+                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                    throw InvoiceNotificationRateLimitedError.from(response);
+                } else {
+                    throw APIException.from("Unexpected content-type received: " + contentType, response);
+                }
             }
             if (Utils.statusCodeMatches(response.statusCode(), "500", "504")) {
                 res.withHeaders(response.headers().map());

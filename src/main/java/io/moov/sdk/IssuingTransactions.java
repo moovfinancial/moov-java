@@ -5,6 +5,9 @@ package io.moov.sdk;
 
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
+import io.moov.sdk.models.operations.GetIssuedCardActivityRequest;
+import io.moov.sdk.models.operations.GetIssuedCardActivityRequestBuilder;
+import io.moov.sdk.models.operations.GetIssuedCardActivityResponse;
 import io.moov.sdk.models.operations.GetIssuedCardAuthorizationRequest;
 import io.moov.sdk.models.operations.GetIssuedCardAuthorizationRequestBuilder;
 import io.moov.sdk.models.operations.GetIssuedCardAuthorizationResponse;
@@ -23,6 +26,7 @@ import io.moov.sdk.models.operations.ListIssuedCardAuthorizationsResponse;
 import io.moov.sdk.models.operations.ListIssuedCardTransactionsRequest;
 import io.moov.sdk.models.operations.ListIssuedCardTransactionsRequestBuilder;
 import io.moov.sdk.models.operations.ListIssuedCardTransactionsResponse;
+import io.moov.sdk.operations.GetIssuedCardActivity;
 import io.moov.sdk.operations.GetIssuedCardAuthorization;
 import io.moov.sdk.operations.GetIssuedCardTransaction;
 import io.moov.sdk.operations.ListIssuedCardActivity;
@@ -74,6 +78,43 @@ public class IssuingTransactions {
     public ListIssuedCardActivityResponse listActivity(ListIssuedCardActivityRequest request) {
         RequestOperation<ListIssuedCardActivityRequest, ListIssuedCardActivityResponse> operation
               = new ListIssuedCardActivity.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Retrieve a single issued card activity associated with a Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
+     * @return The call builder
+     */
+    public GetIssuedCardActivityRequestBuilder getActivity() {
+        return new GetIssuedCardActivityRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Retrieve a single issued card activity associated with a Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
+     * @param accountID The Moov business account for which cards have been issued.
+     * @param id The identifier for the activity item, either authorizationID or cardTransactionID.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetIssuedCardActivityResponse getActivity(String accountID, String id) {
+        GetIssuedCardActivityRequest request =
+            GetIssuedCardActivityRequest
+                .builder()
+                .accountID(accountID)
+                .id(id)
+                .build();
+        RequestOperation<GetIssuedCardActivityRequest, GetIssuedCardActivityResponse> operation
+              = new GetIssuedCardActivity.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

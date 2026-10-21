@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 
 
@@ -23,15 +24,26 @@ public class PushToCardOptions {
     @JsonProperty("dynamicDescriptor")
     private Optional<String> dynamicDescriptor;
 
+    /**
+     * The scheduled date and time for the push-to-card transfer to be delivered, as set when the transfer
+     * was created.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("scheduledDeliveryOn")
+    private Optional<OffsetDateTime> scheduledDeliveryOn;
+
     @JsonCreator
     public PushToCardOptions(
-            @JsonProperty("dynamicDescriptor") Optional<String> dynamicDescriptor) {
+            @JsonProperty("dynamicDescriptor") Optional<String> dynamicDescriptor,
+            @JsonProperty("scheduledDeliveryOn") Optional<OffsetDateTime> scheduledDeliveryOn) {
         Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");
+        Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
         this.dynamicDescriptor = dynamicDescriptor;
+        this.scheduledDeliveryOn = scheduledDeliveryOn;
     }
     
     public PushToCardOptions() {
-        this(Optional.empty());
+        this(Optional.empty(), Optional.empty());
     }
 
     /**
@@ -41,6 +53,15 @@ public class PushToCardOptions {
     @JsonIgnore
     public Optional<String> dynamicDescriptor() {
         return dynamicDescriptor;
+    }
+
+    /**
+     * The scheduled date and time for the push-to-card transfer to be delivered, as set when the transfer
+     * was created.
+     */
+    @JsonIgnore
+    public Optional<OffsetDateTime> scheduledDeliveryOn() {
+        return scheduledDeliveryOn;
     }
 
     public static Builder builder() {
@@ -69,6 +90,27 @@ public class PushToCardOptions {
         return this;
     }
 
+    /**
+     * The scheduled date and time for the push-to-card transfer to be delivered, as set when the transfer
+     * was created.
+     */
+    public PushToCardOptions withScheduledDeliveryOn(OffsetDateTime scheduledDeliveryOn) {
+        Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
+        this.scheduledDeliveryOn = Optional.ofNullable(scheduledDeliveryOn);
+        return this;
+    }
+
+
+    /**
+     * The scheduled date and time for the push-to-card transfer to be delivered, as set when the transfer
+     * was created.
+     */
+    public PushToCardOptions withScheduledDeliveryOn(Optional<OffsetDateTime> scheduledDeliveryOn) {
+        Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
+        this.scheduledDeliveryOn = scheduledDeliveryOn;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -79,25 +121,29 @@ public class PushToCardOptions {
         }
         PushToCardOptions other = (PushToCardOptions) o;
         return 
-            Utils.enhancedDeepEquals(this.dynamicDescriptor, other.dynamicDescriptor);
+            Utils.enhancedDeepEquals(this.dynamicDescriptor, other.dynamicDescriptor) &&
+            Utils.enhancedDeepEquals(this.scheduledDeliveryOn, other.scheduledDeliveryOn);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            dynamicDescriptor);
+            dynamicDescriptor, scheduledDeliveryOn);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PushToCardOptions.class,
-                "dynamicDescriptor", dynamicDescriptor);
+                "dynamicDescriptor", dynamicDescriptor,
+                "scheduledDeliveryOn", scheduledDeliveryOn);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
         private Optional<String> dynamicDescriptor = Optional.empty();
+
+        private Optional<OffsetDateTime> scheduledDeliveryOn = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -124,10 +170,31 @@ public class PushToCardOptions {
             return this;
         }
 
+
+        /**
+         * The scheduled date and time for the push-to-card transfer to be delivered, as set when the transfer
+         * was created.
+         */
+        public Builder scheduledDeliveryOn(OffsetDateTime scheduledDeliveryOn) {
+            Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
+            this.scheduledDeliveryOn = Optional.ofNullable(scheduledDeliveryOn);
+            return this;
+        }
+
+        /**
+         * The scheduled date and time for the push-to-card transfer to be delivered, as set when the transfer
+         * was created.
+         */
+        public Builder scheduledDeliveryOn(Optional<OffsetDateTime> scheduledDeliveryOn) {
+            Utils.checkNotNull(scheduledDeliveryOn, "scheduledDeliveryOn");
+            this.scheduledDeliveryOn = scheduledDeliveryOn;
+            return this;
+        }
+
         public PushToCardOptions build() {
 
             return new PushToCardOptions(
-                dynamicDescriptor);
+                dynamicDescriptor, scheduledDeliveryOn);
         }
 
     }

@@ -58,10 +58,6 @@ public class ClearingSimulationValidationError extends MoovError {
         }
     }
 
-    /**
-     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
-     * example, 12.34 is $12.34 and 0.99 is $0.99.
-     */
     @Deprecated
     public Optional<String> amount() {
         return data().flatMap(Data::amount);
@@ -79,10 +75,7 @@ public class ClearingSimulationValidationError extends MoovError {
     }
 
     public static class Data {
-        /**
-         * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
-         * example, 12.34 is $12.34 and 0.99 is $0.99.
-         */
+
         @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("amount")
         private Optional<String> amount;
@@ -98,10 +91,6 @@ public class ClearingSimulationValidationError extends MoovError {
             this(Optional.empty());
         }
 
-        /**
-         * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
-         * example, 12.34 is $12.34 and 0.99 is $0.99.
-         */
         @JsonIgnore
         public Optional<String> amount() {
             return amount;
@@ -112,10 +101,6 @@ public class ClearingSimulationValidationError extends MoovError {
         }
 
 
-        /**
-         * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
-         * example, 12.34 is $12.34 and 0.99 is $0.99.
-         */
         public Data withAmount(String amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = Optional.ofNullable(amount);
@@ -123,10 +108,6 @@ public class ClearingSimulationValidationError extends MoovError {
         }
 
 
-        /**
-         * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
-         * example, 12.34 is $12.34 and 0.99 is $0.99.
-         */
         public Data withAmount(Optional<String> amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
@@ -168,20 +149,12 @@ public class ClearingSimulationValidationError extends MoovError {
             }
 
 
-            /**
-             * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
-             * example, 12.34 is $12.34 and 0.99 is $0.99.
-             */
             public Builder amount(String amount) {
                 Utils.checkNotNull(amount, "amount");
                 this.amount = Optional.ofNullable(amount);
                 return this;
             }
 
-            /**
-             * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
-             * example, 12.34 is $12.34 and 0.99 is $0.99.
-             */
             public Builder amount(Optional<String> amount) {
                 Utils.checkNotNull(amount, "amount");
                 this.amount = amount;

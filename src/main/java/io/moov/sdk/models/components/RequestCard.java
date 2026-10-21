@@ -40,13 +40,6 @@ public class RequestCard {
     private Optional<? extends Address> billingAddress;
 
     /**
-     * The expiration date of the card or token.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("expiration")
-    private Optional<? extends CardExpiration> expiration;
-
-    /**
      * Mutable spend controls for the card.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -59,25 +52,22 @@ public class RequestCard {
             @JsonProperty("nickname") Optional<String> nickname,
             @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata,
             @JsonProperty("billingAddress") Optional<? extends Address> billingAddress,
-            @JsonProperty("expiration") Optional<? extends CardExpiration> expiration,
             @JsonProperty("controls") Optional<? extends IssuingControls> controls) {
         Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
         Utils.checkNotNull(nickname, "nickname");
         Utils.checkNotNull(metadata, "metadata");
         Utils.checkNotNull(billingAddress, "billingAddress");
-        Utils.checkNotNull(expiration, "expiration");
         Utils.checkNotNull(controls, "controls");
         this.authorizedUserAccountID = authorizedUserAccountID;
         this.nickname = nickname;
         this.metadata = metadata;
         this.billingAddress = billingAddress;
-        this.expiration = expiration;
         this.controls = controls;
     }
     
     public RequestCard() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -103,15 +93,6 @@ public class RequestCard {
     @JsonIgnore
     public Optional<Address> billingAddress() {
         return (Optional<Address>) billingAddress;
-    }
-
-    /**
-     * The expiration date of the card or token.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<CardExpiration> expiration() {
-        return (Optional<CardExpiration>) expiration;
     }
 
     /**
@@ -187,25 +168,6 @@ public class RequestCard {
     }
 
     /**
-     * The expiration date of the card or token.
-     */
-    public RequestCard withExpiration(CardExpiration expiration) {
-        Utils.checkNotNull(expiration, "expiration");
-        this.expiration = Optional.ofNullable(expiration);
-        return this;
-    }
-
-
-    /**
-     * The expiration date of the card or token.
-     */
-    public RequestCard withExpiration(Optional<? extends CardExpiration> expiration) {
-        Utils.checkNotNull(expiration, "expiration");
-        this.expiration = expiration;
-        return this;
-    }
-
-    /**
      * Mutable spend controls for the card.
      */
     public RequestCard withControls(IssuingControls controls) {
@@ -238,7 +200,6 @@ public class RequestCard {
             Utils.enhancedDeepEquals(this.nickname, other.nickname) &&
             Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
             Utils.enhancedDeepEquals(this.billingAddress, other.billingAddress) &&
-            Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
             Utils.enhancedDeepEquals(this.controls, other.controls);
     }
     
@@ -246,7 +207,7 @@ public class RequestCard {
     public int hashCode() {
         return Utils.enhancedHash(
             authorizedUserAccountID, nickname, metadata,
-            billingAddress, expiration, controls);
+            billingAddress, controls);
     }
     
     @Override
@@ -256,7 +217,6 @@ public class RequestCard {
                 "nickname", nickname,
                 "metadata", metadata,
                 "billingAddress", billingAddress,
-                "expiration", expiration,
                 "controls", controls);
     }
 
@@ -270,8 +230,6 @@ public class RequestCard {
         private Optional<? extends Map<String, String>> metadata = Optional.empty();
 
         private Optional<? extends Address> billingAddress = Optional.empty();
-
-        private Optional<? extends CardExpiration> expiration = Optional.empty();
 
         private Optional<? extends IssuingControls> controls = Optional.empty();
 
@@ -339,25 +297,6 @@ public class RequestCard {
 
 
         /**
-         * The expiration date of the card or token.
-         */
-        public Builder expiration(CardExpiration expiration) {
-            Utils.checkNotNull(expiration, "expiration");
-            this.expiration = Optional.ofNullable(expiration);
-            return this;
-        }
-
-        /**
-         * The expiration date of the card or token.
-         */
-        public Builder expiration(Optional<? extends CardExpiration> expiration) {
-            Utils.checkNotNull(expiration, "expiration");
-            this.expiration = expiration;
-            return this;
-        }
-
-
-        /**
          * Mutable spend controls for the card.
          */
         public Builder controls(IssuingControls controls) {
@@ -379,7 +318,7 @@ public class RequestCard {
 
             return new RequestCard(
                 authorizedUserAccountID, nickname, metadata,
-                billingAddress, expiration, controls);
+                billingAddress, controls);
         }
 
     }

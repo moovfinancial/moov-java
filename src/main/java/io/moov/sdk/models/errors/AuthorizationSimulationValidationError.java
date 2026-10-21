@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.moov.sdk.models.components.IssuingMerchantDataValidationError;
+import io.moov.sdk.models.components.SimulationIssuingMerchantDataValidationError;
 import io.moov.sdk.utils.Utils;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
@@ -64,17 +64,13 @@ public class AuthorizationSimulationValidationError extends MoovError {
         return data().flatMap(Data::issuedCardID);
     }
 
-    /**
-     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
-     * example, 12.34 is $12.34 and 0.99 is $0.99.
-     */
     @Deprecated
     public Optional<String> amount() {
         return data().flatMap(Data::amount);
     }
 
     @Deprecated
-    public Optional<IssuingMerchantDataValidationError> merchantData() {
+    public Optional<SimulationIssuingMerchantDataValidationError> merchantData() {
         return data().flatMap(Data::merchantData);
     }
 
@@ -95,10 +91,7 @@ public class AuthorizationSimulationValidationError extends MoovError {
         @JsonProperty("issuedCardID")
         private Optional<String> issuedCardID;
 
-        /**
-         * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
-         * example, 12.34 is $12.34 and 0.99 is $0.99.
-         */
+
         @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("amount")
         private Optional<String> amount;
@@ -106,13 +99,13 @@ public class AuthorizationSimulationValidationError extends MoovError {
 
         @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("merchantData")
-        private Optional<? extends IssuingMerchantDataValidationError> merchantData;
+        private Optional<? extends SimulationIssuingMerchantDataValidationError> merchantData;
 
         @JsonCreator
         public Data(
                 @JsonProperty("issuedCardID") Optional<String> issuedCardID,
                 @JsonProperty("amount") Optional<String> amount,
-                @JsonProperty("merchantData") Optional<? extends IssuingMerchantDataValidationError> merchantData) {
+                @JsonProperty("merchantData") Optional<? extends SimulationIssuingMerchantDataValidationError> merchantData) {
             Utils.checkNotNull(issuedCardID, "issuedCardID");
             Utils.checkNotNull(amount, "amount");
             Utils.checkNotNull(merchantData, "merchantData");
@@ -130,10 +123,6 @@ public class AuthorizationSimulationValidationError extends MoovError {
             return issuedCardID;
         }
 
-        /**
-         * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
-         * example, 12.34 is $12.34 and 0.99 is $0.99.
-         */
         @JsonIgnore
         public Optional<String> amount() {
             return amount;
@@ -141,8 +130,8 @@ public class AuthorizationSimulationValidationError extends MoovError {
 
         @SuppressWarnings("unchecked")
         @JsonIgnore
-        public Optional<IssuingMerchantDataValidationError> merchantData() {
-            return (Optional<IssuingMerchantDataValidationError>) merchantData;
+        public Optional<SimulationIssuingMerchantDataValidationError> merchantData() {
+            return (Optional<SimulationIssuingMerchantDataValidationError>) merchantData;
         }
 
         public static Builder builder() {
@@ -163,10 +152,6 @@ public class AuthorizationSimulationValidationError extends MoovError {
             return this;
         }
 
-        /**
-         * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
-         * example, 12.34 is $12.34 and 0.99 is $0.99.
-         */
         public Data withAmount(String amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = Optional.ofNullable(amount);
@@ -174,24 +159,20 @@ public class AuthorizationSimulationValidationError extends MoovError {
         }
 
 
-        /**
-         * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
-         * example, 12.34 is $12.34 and 0.99 is $0.99.
-         */
         public Data withAmount(Optional<String> amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
         }
 
-        public Data withMerchantData(IssuingMerchantDataValidationError merchantData) {
+        public Data withMerchantData(SimulationIssuingMerchantDataValidationError merchantData) {
             Utils.checkNotNull(merchantData, "merchantData");
             this.merchantData = Optional.ofNullable(merchantData);
             return this;
         }
 
 
-        public Data withMerchantData(Optional<? extends IssuingMerchantDataValidationError> merchantData) {
+        public Data withMerchantData(Optional<? extends SimulationIssuingMerchantDataValidationError> merchantData) {
             Utils.checkNotNull(merchantData, "merchantData");
             this.merchantData = merchantData;
             return this;
@@ -233,7 +214,7 @@ public class AuthorizationSimulationValidationError extends MoovError {
 
             private Optional<String> amount = Optional.empty();
 
-            private Optional<? extends IssuingMerchantDataValidationError> merchantData = Optional.empty();
+            private Optional<? extends SimulationIssuingMerchantDataValidationError> merchantData = Optional.empty();
 
             private Builder() {
               // force use of static builder() method
@@ -253,20 +234,12 @@ public class AuthorizationSimulationValidationError extends MoovError {
             }
 
 
-            /**
-             * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
-             * example, 12.34 is $12.34 and 0.99 is $0.99.
-             */
             public Builder amount(String amount) {
                 Utils.checkNotNull(amount, "amount");
                 this.amount = Optional.ofNullable(amount);
                 return this;
             }
 
-            /**
-             * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
-             * example, 12.34 is $12.34 and 0.99 is $0.99.
-             */
             public Builder amount(Optional<String> amount) {
                 Utils.checkNotNull(amount, "amount");
                 this.amount = amount;
@@ -274,13 +247,13 @@ public class AuthorizationSimulationValidationError extends MoovError {
             }
 
 
-            public Builder merchantData(IssuingMerchantDataValidationError merchantData) {
+            public Builder merchantData(SimulationIssuingMerchantDataValidationError merchantData) {
                 Utils.checkNotNull(merchantData, "merchantData");
                 this.merchantData = Optional.ofNullable(merchantData);
                 return this;
             }
 
-            public Builder merchantData(Optional<? extends IssuingMerchantDataValidationError> merchantData) {
+            public Builder merchantData(Optional<? extends SimulationIssuingMerchantDataValidationError> merchantData) {
                 Utils.checkNotNull(merchantData, "merchantData");
                 this.merchantData = merchantData;
                 return this;

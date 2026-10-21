@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.models.components.AddressError;
-import io.moov.sdk.models.components.CardExpirationError;
 import io.moov.sdk.models.components.IssuingControlsError;
 import io.moov.sdk.utils.Utils;
 import jakarta.annotation.Nullable;
@@ -82,11 +81,6 @@ public class RequestCardError extends MoovError {
     }
 
     @Deprecated
-    public Optional<CardExpirationError> expiration() {
-        return data().flatMap(Data::expiration);
-    }
-
-    @Deprecated
     public Optional<IssuingControlsError> controls() {
         return data().flatMap(Data::controls);
     }
@@ -125,11 +119,6 @@ public class RequestCardError extends MoovError {
 
 
         @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("expiration")
-        private Optional<? extends CardExpirationError> expiration;
-
-
-        @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("controls")
         private Optional<? extends IssuingControlsError> controls;
 
@@ -139,25 +128,22 @@ public class RequestCardError extends MoovError {
                 @JsonProperty("nickname") Optional<String> nickname,
                 @JsonProperty("metadata") Optional<String> metadata,
                 @JsonProperty("billingAddress") Optional<? extends AddressError> billingAddress,
-                @JsonProperty("expiration") Optional<? extends CardExpirationError> expiration,
                 @JsonProperty("controls") Optional<? extends IssuingControlsError> controls) {
             Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
             Utils.checkNotNull(nickname, "nickname");
             Utils.checkNotNull(metadata, "metadata");
             Utils.checkNotNull(billingAddress, "billingAddress");
-            Utils.checkNotNull(expiration, "expiration");
             Utils.checkNotNull(controls, "controls");
             this.authorizedUserAccountID = authorizedUserAccountID;
             this.nickname = nickname;
             this.metadata = metadata;
             this.billingAddress = billingAddress;
-            this.expiration = expiration;
             this.controls = controls;
         }
         
         public Data() {
             this(Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty(), Optional.empty(), Optional.empty());
+                Optional.empty(), Optional.empty());
         }
 
         @JsonIgnore
@@ -179,12 +165,6 @@ public class RequestCardError extends MoovError {
         @JsonIgnore
         public Optional<AddressError> billingAddress() {
             return (Optional<AddressError>) billingAddress;
-        }
-
-        @SuppressWarnings("unchecked")
-        @JsonIgnore
-        public Optional<CardExpirationError> expiration() {
-            return (Optional<CardExpirationError>) expiration;
         }
 
         @SuppressWarnings("unchecked")
@@ -250,19 +230,6 @@ public class RequestCardError extends MoovError {
             return this;
         }
 
-        public Data withExpiration(CardExpirationError expiration) {
-            Utils.checkNotNull(expiration, "expiration");
-            this.expiration = Optional.ofNullable(expiration);
-            return this;
-        }
-
-
-        public Data withExpiration(Optional<? extends CardExpirationError> expiration) {
-            Utils.checkNotNull(expiration, "expiration");
-            this.expiration = expiration;
-            return this;
-        }
-
         public Data withControls(IssuingControlsError controls) {
             Utils.checkNotNull(controls, "controls");
             this.controls = Optional.ofNullable(controls);
@@ -290,7 +257,6 @@ public class RequestCardError extends MoovError {
                 Utils.enhancedDeepEquals(this.nickname, other.nickname) &&
                 Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
                 Utils.enhancedDeepEquals(this.billingAddress, other.billingAddress) &&
-                Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
                 Utils.enhancedDeepEquals(this.controls, other.controls);
         }
         
@@ -298,7 +264,7 @@ public class RequestCardError extends MoovError {
         public int hashCode() {
             return Utils.enhancedHash(
                 authorizedUserAccountID, nickname, metadata,
-                billingAddress, expiration, controls);
+                billingAddress, controls);
         }
         
         @Override
@@ -308,7 +274,6 @@ public class RequestCardError extends MoovError {
                     "nickname", nickname,
                     "metadata", metadata,
                     "billingAddress", billingAddress,
-                    "expiration", expiration,
                     "controls", controls);
         }
 
@@ -322,8 +287,6 @@ public class RequestCardError extends MoovError {
             private Optional<String> metadata = Optional.empty();
 
             private Optional<? extends AddressError> billingAddress = Optional.empty();
-
-            private Optional<? extends CardExpirationError> expiration = Optional.empty();
 
             private Optional<? extends IssuingControlsError> controls = Optional.empty();
 
@@ -384,19 +347,6 @@ public class RequestCardError extends MoovError {
             }
 
 
-            public Builder expiration(CardExpirationError expiration) {
-                Utils.checkNotNull(expiration, "expiration");
-                this.expiration = Optional.ofNullable(expiration);
-                return this;
-            }
-
-            public Builder expiration(Optional<? extends CardExpirationError> expiration) {
-                Utils.checkNotNull(expiration, "expiration");
-                this.expiration = expiration;
-                return this;
-            }
-
-
             public Builder controls(IssuingControlsError controls) {
                 Utils.checkNotNull(controls, "controls");
                 this.controls = Optional.ofNullable(controls);
@@ -413,7 +363,7 @@ public class RequestCardError extends MoovError {
 
                 return new Data(
                     authorizedUserAccountID, nickname, metadata,
-                    billingAddress, expiration, controls);
+                    billingAddress, controls);
             }
 
         }

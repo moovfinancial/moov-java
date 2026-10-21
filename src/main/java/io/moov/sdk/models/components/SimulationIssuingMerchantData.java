@@ -14,44 +14,58 @@ import java.lang.String;
 import java.util.Optional;
 
 
-public class IssuingMerchantDataValidationError {
-
+public class SimulationIssuingMerchantData {
+    /**
+     * External identifier used to identify the merchant with the card brand.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("networkID")
     private Optional<String> networkID;
 
-
+    /**
+     * Name of the merchant.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
     private Optional<String> name;
 
-
+    /**
+     * The merchant's location.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("city")
     private Optional<String> city;
 
-
+    /**
+     * Two-letter country code.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("country")
     private Optional<String> country;
 
-
+    /**
+     * The merchant's five-digit postal code.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("postalCode")
     private Optional<String> postalCode;
 
-
+    /**
+     * The merchant's two-letter state abbreviation.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("state")
     private Optional<String> state;
 
-
+    /**
+     * The Merchant Category Code.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mcc")
     private Optional<String> mcc;
 
     @JsonCreator
-    public IssuingMerchantDataValidationError(
+    public SimulationIssuingMerchantData(
             @JsonProperty("networkID") Optional<String> networkID,
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("city") Optional<String> city,
@@ -75,42 +89,63 @@ public class IssuingMerchantDataValidationError {
         this.mcc = mcc;
     }
     
-    public IssuingMerchantDataValidationError() {
+    public SimulationIssuingMerchantData() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty());
     }
 
+    /**
+     * External identifier used to identify the merchant with the card brand.
+     */
     @JsonIgnore
     public Optional<String> networkID() {
         return networkID;
     }
 
+    /**
+     * Name of the merchant.
+     */
     @JsonIgnore
     public Optional<String> name() {
         return name;
     }
 
+    /**
+     * The merchant's location.
+     */
     @JsonIgnore
     public Optional<String> city() {
         return city;
     }
 
+    /**
+     * Two-letter country code.
+     */
     @JsonIgnore
     public Optional<String> country() {
         return country;
     }
 
+    /**
+     * The merchant's five-digit postal code.
+     */
     @JsonIgnore
     public Optional<String> postalCode() {
         return postalCode;
     }
 
+    /**
+     * The merchant's two-letter state abbreviation.
+     */
     @JsonIgnore
     public Optional<String> state() {
         return state;
     }
 
+    /**
+     * The Merchant Category Code.
+     */
     @JsonIgnore
     public Optional<String> mcc() {
         return mcc;
@@ -121,92 +156,134 @@ public class IssuingMerchantDataValidationError {
     }
 
 
-    public IssuingMerchantDataValidationError withNetworkID(String networkID) {
+    /**
+     * External identifier used to identify the merchant with the card brand.
+     */
+    public SimulationIssuingMerchantData withNetworkID(String networkID) {
         Utils.checkNotNull(networkID, "networkID");
         this.networkID = Optional.ofNullable(networkID);
         return this;
     }
 
 
-    public IssuingMerchantDataValidationError withNetworkID(Optional<String> networkID) {
+    /**
+     * External identifier used to identify the merchant with the card brand.
+     */
+    public SimulationIssuingMerchantData withNetworkID(Optional<String> networkID) {
         Utils.checkNotNull(networkID, "networkID");
         this.networkID = networkID;
         return this;
     }
 
-    public IssuingMerchantDataValidationError withName(String name) {
+    /**
+     * Name of the merchant.
+     */
+    public SimulationIssuingMerchantData withName(String name) {
         Utils.checkNotNull(name, "name");
         this.name = Optional.ofNullable(name);
         return this;
     }
 
 
-    public IssuingMerchantDataValidationError withName(Optional<String> name) {
+    /**
+     * Name of the merchant.
+     */
+    public SimulationIssuingMerchantData withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
         this.name = name;
         return this;
     }
 
-    public IssuingMerchantDataValidationError withCity(String city) {
+    /**
+     * The merchant's location.
+     */
+    public SimulationIssuingMerchantData withCity(String city) {
         Utils.checkNotNull(city, "city");
         this.city = Optional.ofNullable(city);
         return this;
     }
 
 
-    public IssuingMerchantDataValidationError withCity(Optional<String> city) {
+    /**
+     * The merchant's location.
+     */
+    public SimulationIssuingMerchantData withCity(Optional<String> city) {
         Utils.checkNotNull(city, "city");
         this.city = city;
         return this;
     }
 
-    public IssuingMerchantDataValidationError withCountry(String country) {
+    /**
+     * Two-letter country code.
+     */
+    public SimulationIssuingMerchantData withCountry(String country) {
         Utils.checkNotNull(country, "country");
         this.country = Optional.ofNullable(country);
         return this;
     }
 
 
-    public IssuingMerchantDataValidationError withCountry(Optional<String> country) {
+    /**
+     * Two-letter country code.
+     */
+    public SimulationIssuingMerchantData withCountry(Optional<String> country) {
         Utils.checkNotNull(country, "country");
         this.country = country;
         return this;
     }
 
-    public IssuingMerchantDataValidationError withPostalCode(String postalCode) {
+    /**
+     * The merchant's five-digit postal code.
+     */
+    public SimulationIssuingMerchantData withPostalCode(String postalCode) {
         Utils.checkNotNull(postalCode, "postalCode");
         this.postalCode = Optional.ofNullable(postalCode);
         return this;
     }
 
 
-    public IssuingMerchantDataValidationError withPostalCode(Optional<String> postalCode) {
+    /**
+     * The merchant's five-digit postal code.
+     */
+    public SimulationIssuingMerchantData withPostalCode(Optional<String> postalCode) {
         Utils.checkNotNull(postalCode, "postalCode");
         this.postalCode = postalCode;
         return this;
     }
 
-    public IssuingMerchantDataValidationError withState(String state) {
+    /**
+     * The merchant's two-letter state abbreviation.
+     */
+    public SimulationIssuingMerchantData withState(String state) {
         Utils.checkNotNull(state, "state");
         this.state = Optional.ofNullable(state);
         return this;
     }
 
 
-    public IssuingMerchantDataValidationError withState(Optional<String> state) {
+    /**
+     * The merchant's two-letter state abbreviation.
+     */
+    public SimulationIssuingMerchantData withState(Optional<String> state) {
         Utils.checkNotNull(state, "state");
         this.state = state;
         return this;
     }
 
-    public IssuingMerchantDataValidationError withMcc(String mcc) {
+    /**
+     * The Merchant Category Code.
+     */
+    public SimulationIssuingMerchantData withMcc(String mcc) {
         Utils.checkNotNull(mcc, "mcc");
         this.mcc = Optional.ofNullable(mcc);
         return this;
     }
 
 
-    public IssuingMerchantDataValidationError withMcc(Optional<String> mcc) {
+    /**
+     * The Merchant Category Code.
+     */
+    public SimulationIssuingMerchantData withMcc(Optional<String> mcc) {
         Utils.checkNotNull(mcc, "mcc");
         this.mcc = mcc;
         return this;
@@ -220,7 +297,7 @@ public class IssuingMerchantDataValidationError {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        IssuingMerchantDataValidationError other = (IssuingMerchantDataValidationError) o;
+        SimulationIssuingMerchantData other = (SimulationIssuingMerchantData) o;
         return 
             Utils.enhancedDeepEquals(this.networkID, other.networkID) &&
             Utils.enhancedDeepEquals(this.name, other.name) &&
@@ -241,7 +318,7 @@ public class IssuingMerchantDataValidationError {
     
     @Override
     public String toString() {
-        return Utils.toString(IssuingMerchantDataValidationError.class,
+        return Utils.toString(SimulationIssuingMerchantData.class,
                 "networkID", networkID,
                 "name", name,
                 "city", city,
@@ -273,12 +350,18 @@ public class IssuingMerchantDataValidationError {
         }
 
 
+        /**
+         * External identifier used to identify the merchant with the card brand.
+         */
         public Builder networkID(String networkID) {
             Utils.checkNotNull(networkID, "networkID");
             this.networkID = Optional.ofNullable(networkID);
             return this;
         }
 
+        /**
+         * External identifier used to identify the merchant with the card brand.
+         */
         public Builder networkID(Optional<String> networkID) {
             Utils.checkNotNull(networkID, "networkID");
             this.networkID = networkID;
@@ -286,12 +369,18 @@ public class IssuingMerchantDataValidationError {
         }
 
 
+        /**
+         * Name of the merchant.
+         */
         public Builder name(String name) {
             Utils.checkNotNull(name, "name");
             this.name = Optional.ofNullable(name);
             return this;
         }
 
+        /**
+         * Name of the merchant.
+         */
         public Builder name(Optional<String> name) {
             Utils.checkNotNull(name, "name");
             this.name = name;
@@ -299,12 +388,18 @@ public class IssuingMerchantDataValidationError {
         }
 
 
+        /**
+         * The merchant's location.
+         */
         public Builder city(String city) {
             Utils.checkNotNull(city, "city");
             this.city = Optional.ofNullable(city);
             return this;
         }
 
+        /**
+         * The merchant's location.
+         */
         public Builder city(Optional<String> city) {
             Utils.checkNotNull(city, "city");
             this.city = city;
@@ -312,12 +407,18 @@ public class IssuingMerchantDataValidationError {
         }
 
 
+        /**
+         * Two-letter country code.
+         */
         public Builder country(String country) {
             Utils.checkNotNull(country, "country");
             this.country = Optional.ofNullable(country);
             return this;
         }
 
+        /**
+         * Two-letter country code.
+         */
         public Builder country(Optional<String> country) {
             Utils.checkNotNull(country, "country");
             this.country = country;
@@ -325,12 +426,18 @@ public class IssuingMerchantDataValidationError {
         }
 
 
+        /**
+         * The merchant's five-digit postal code.
+         */
         public Builder postalCode(String postalCode) {
             Utils.checkNotNull(postalCode, "postalCode");
             this.postalCode = Optional.ofNullable(postalCode);
             return this;
         }
 
+        /**
+         * The merchant's five-digit postal code.
+         */
         public Builder postalCode(Optional<String> postalCode) {
             Utils.checkNotNull(postalCode, "postalCode");
             this.postalCode = postalCode;
@@ -338,12 +445,18 @@ public class IssuingMerchantDataValidationError {
         }
 
 
+        /**
+         * The merchant's two-letter state abbreviation.
+         */
         public Builder state(String state) {
             Utils.checkNotNull(state, "state");
             this.state = Optional.ofNullable(state);
             return this;
         }
 
+        /**
+         * The merchant's two-letter state abbreviation.
+         */
         public Builder state(Optional<String> state) {
             Utils.checkNotNull(state, "state");
             this.state = state;
@@ -351,21 +464,27 @@ public class IssuingMerchantDataValidationError {
         }
 
 
+        /**
+         * The Merchant Category Code.
+         */
         public Builder mcc(String mcc) {
             Utils.checkNotNull(mcc, "mcc");
             this.mcc = Optional.ofNullable(mcc);
             return this;
         }
 
+        /**
+         * The Merchant Category Code.
+         */
         public Builder mcc(Optional<String> mcc) {
             Utils.checkNotNull(mcc, "mcc");
             this.mcc = mcc;
             return this;
         }
 
-        public IssuingMerchantDataValidationError build() {
+        public SimulationIssuingMerchantData build() {
 
-            return new IssuingMerchantDataValidationError(
+            return new SimulationIssuingMerchantData(
                 networkID, name, city,
                 country, postalCode, state,
                 mcc);

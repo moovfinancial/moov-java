@@ -30,13 +30,13 @@ public class CreateAuthorizationSimulation {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("merchantData")
-    private Optional<? extends IssuingMerchantData> merchantData;
+    private Optional<? extends SimulationIssuingMerchantData> merchantData;
 
     @JsonCreator
     public CreateAuthorizationSimulation(
             @JsonProperty("issuedCardID") String issuedCardID,
             @JsonProperty("amount") String amount,
-            @JsonProperty("merchantData") Optional<? extends IssuingMerchantData> merchantData) {
+            @JsonProperty("merchantData") Optional<? extends SimulationIssuingMerchantData> merchantData) {
         Utils.checkNotNull(issuedCardID, "issuedCardID");
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(merchantData, "merchantData");
@@ -67,8 +67,8 @@ public class CreateAuthorizationSimulation {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<IssuingMerchantData> merchantData() {
-        return (Optional<IssuingMerchantData>) merchantData;
+    public Optional<SimulationIssuingMerchantData> merchantData() {
+        return (Optional<SimulationIssuingMerchantData>) merchantData;
     }
 
     public static Builder builder() {
@@ -92,14 +92,14 @@ public class CreateAuthorizationSimulation {
         return this;
     }
 
-    public CreateAuthorizationSimulation withMerchantData(IssuingMerchantData merchantData) {
+    public CreateAuthorizationSimulation withMerchantData(SimulationIssuingMerchantData merchantData) {
         Utils.checkNotNull(merchantData, "merchantData");
         this.merchantData = Optional.ofNullable(merchantData);
         return this;
     }
 
 
-    public CreateAuthorizationSimulation withMerchantData(Optional<? extends IssuingMerchantData> merchantData) {
+    public CreateAuthorizationSimulation withMerchantData(Optional<? extends SimulationIssuingMerchantData> merchantData) {
         Utils.checkNotNull(merchantData, "merchantData");
         this.merchantData = merchantData;
         return this;
@@ -141,7 +141,7 @@ public class CreateAuthorizationSimulation {
 
         private String amount;
 
-        private Optional<? extends IssuingMerchantData> merchantData = Optional.empty();
+        private Optional<? extends SimulationIssuingMerchantData> merchantData = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -166,13 +166,13 @@ public class CreateAuthorizationSimulation {
         }
 
 
-        public Builder merchantData(IssuingMerchantData merchantData) {
+        public Builder merchantData(SimulationIssuingMerchantData merchantData) {
             Utils.checkNotNull(merchantData, "merchantData");
             this.merchantData = Optional.ofNullable(merchantData);
             return this;
         }
 
-        public Builder merchantData(Optional<? extends IssuingMerchantData> merchantData) {
+        public Builder merchantData(Optional<? extends SimulationIssuingMerchantData> merchantData) {
             Utils.checkNotNull(merchantData, "merchantData");
             this.merchantData = merchantData;
             return this;

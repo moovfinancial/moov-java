@@ -5,7 +5,6 @@ package io.moov.sdk;
 
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
-import io.moov.sdk.models.components.IssuedCardState;
 import io.moov.sdk.models.components.RequestCard;
 import io.moov.sdk.models.components.UpdateIssuedCard;
 import io.moov.sdk.models.operations.GetFullIssuedCardRequest;
@@ -27,10 +26,7 @@ import io.moov.sdk.operations.GetFullIssuedCard;
 import io.moov.sdk.operations.GetIssuedCard;
 import io.moov.sdk.operations.ListIssuedCards;
 import io.moov.sdk.utils.Headers;
-import java.lang.Long;
 import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 
 public class CardIssuing {
@@ -98,40 +94,11 @@ public class CardIssuing {
      * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * 
-     * @param accountID The Moov business account for which the cards have been issued.
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public ListIssuedCardsResponse list(String accountID) {
-        return list(accountID, Optional.empty(), Optional.empty(),
-            Optional.empty());
-    }
-
-    /**
-     * List Moov issued cards existing for the account.
-     * 
-     * <p>To access this endpoint using an [access
-     * token](https://docs.moov.io/api/authentication/access-tokens/)
-     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
-     * 
-     * @param accountID The Moov business account for which the cards have been issued.
-     * @param skip 
-     * @param count Page size. When omitted, the server defaults to `200`.
-     * @param states Optional, comma-separated states to filter the Moov list issued cards response. For example `active,closed`
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public ListIssuedCardsResponse list(
-            String accountID, Optional<Long> skip,
-            Optional<Long> count, Optional<? extends List<IssuedCardState>> states) {
-        ListIssuedCardsRequest request =
-            ListIssuedCardsRequest
-                .builder()
-                .accountID(accountID)
-                .skip(skip)
-                .count(count)
-                .states(states)
-                .build();
+    public ListIssuedCardsResponse list(ListIssuedCardsRequest request) {
         RequestOperation<ListIssuedCardsRequest, ListIssuedCardsResponse> operation
               = new ListIssuedCards.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));

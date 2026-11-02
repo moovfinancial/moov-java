@@ -32,6 +32,10 @@ public class Capability {
      * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities
      * might appear in the list for your Partner account. These are read-only capabilities that Moov
      * requests. These capabilities remain active with your account and require no additional action.
+     * 
+     * <p>Starting in v2026.10.00, the `platform.moov-money` capability might appear in the list for accounts
+     * enrolled in Moov Money. This is a read-only capability that Moov requests. It requires no additional
+     * action.
      */
     @JsonProperty("capability")
     private CapabilityID capability;
@@ -126,6 +130,10 @@ public class Capability {
      * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities
      * might appear in the list for your Partner account. These are read-only capabilities that Moov
      * requests. These capabilities remain active with your account and require no additional action.
+     * 
+     * <p>Starting in v2026.10.00, the `platform.moov-money` capability might appear in the list for accounts
+     * enrolled in Moov Money. This is a read-only capability that Moov requests. It requires no additional
+     * action.
      */
     @JsonIgnore
     public CapabilityID capability() {
@@ -195,6 +203,10 @@ public class Capability {
      * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities
      * might appear in the list for your Partner account. These are read-only capabilities that Moov
      * requests. These capabilities remain active with your account and require no additional action.
+     * 
+     * <p>Starting in v2026.10.00, the `platform.moov-money` capability might appear in the list for accounts
+     * enrolled in Moov Money. This is a read-only capability that Moov requests. It requires no additional
+     * action.
      */
     public Capability withCapability(CapabilityID capability) {
         Utils.checkNotNull(capability, "capability");
@@ -356,6 +368,10 @@ public class Capability {
          * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities
          * might appear in the list for your Partner account. These are read-only capabilities that Moov
          * requests. These capabilities remain active with your account and require no additional action.
+         * 
+         * <p>Starting in v2026.10.00, the `platform.moov-money` capability might appear in the list for accounts
+         * enrolled in Moov Money. This is a read-only capability that Moov requests. It requires no additional
+         * action.
          */
         public Builder capability(CapabilityID capability) {
             Utils.checkNotNull(capability, "capability");

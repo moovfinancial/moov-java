@@ -31,6 +31,13 @@ public class IssuedCardTransaction {
     @JsonProperty("lastFourCardNumber")
     private Optional<String> lastFourCardNumber;
 
+    /**
+     * Identifier for the account of the card's authorized user.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("authorizedUserAccountID")
+    private Optional<String> authorizedUserAccountID;
+
 
     @JsonProperty("fundingWalletID")
     private String fundingWalletID;
@@ -64,6 +71,7 @@ public class IssuedCardTransaction {
             @JsonProperty("cardTransactionID") String cardTransactionID,
             @JsonProperty("issuedCardID") String issuedCardID,
             @JsonProperty("lastFourCardNumber") Optional<String> lastFourCardNumber,
+            @JsonProperty("authorizedUserAccountID") Optional<String> authorizedUserAccountID,
             @JsonProperty("fundingWalletID") String fundingWalletID,
             @JsonProperty("amount") String amount,
             @JsonProperty("authorizationID") Optional<String> authorizationID,
@@ -73,6 +81,7 @@ public class IssuedCardTransaction {
         Utils.checkNotNull(cardTransactionID, "cardTransactionID");
         Utils.checkNotNull(issuedCardID, "issuedCardID");
         Utils.checkNotNull(lastFourCardNumber, "lastFourCardNumber");
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
         Utils.checkNotNull(fundingWalletID, "fundingWalletID");
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(authorizationID, "authorizationID");
@@ -82,6 +91,7 @@ public class IssuedCardTransaction {
         this.cardTransactionID = cardTransactionID;
         this.issuedCardID = issuedCardID;
         this.lastFourCardNumber = lastFourCardNumber;
+        this.authorizedUserAccountID = authorizedUserAccountID;
         this.fundingWalletID = fundingWalletID;
         this.amount = amount;
         this.authorizationID = authorizationID;
@@ -99,8 +109,9 @@ public class IssuedCardTransaction {
             IssuingMerchantData merchantData,
             OffsetDateTime createdOn) {
         this(cardTransactionID, issuedCardID, Optional.empty(),
-            fundingWalletID, amount, Optional.empty(),
-            authorizedOn, merchantData, createdOn);
+            Optional.empty(), fundingWalletID, amount,
+            Optional.empty(), authorizedOn, merchantData,
+            createdOn);
     }
 
     @JsonIgnore
@@ -119,6 +130,14 @@ public class IssuedCardTransaction {
     @JsonIgnore
     public Optional<String> lastFourCardNumber() {
         return lastFourCardNumber;
+    }
+
+    /**
+     * Identifier for the account of the card's authorized user.
+     */
+    @JsonIgnore
+    public Optional<String> authorizedUserAccountID() {
+        return authorizedUserAccountID;
     }
 
     @JsonIgnore
@@ -191,6 +210,25 @@ public class IssuedCardTransaction {
         return this;
     }
 
+    /**
+     * Identifier for the account of the card's authorized user.
+     */
+    public IssuedCardTransaction withAuthorizedUserAccountID(String authorizedUserAccountID) {
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+        this.authorizedUserAccountID = Optional.ofNullable(authorizedUserAccountID);
+        return this;
+    }
+
+
+    /**
+     * Identifier for the account of the card's authorized user.
+     */
+    public IssuedCardTransaction withAuthorizedUserAccountID(Optional<String> authorizedUserAccountID) {
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+        this.authorizedUserAccountID = authorizedUserAccountID;
+        return this;
+    }
+
     public IssuedCardTransaction withFundingWalletID(String fundingWalletID) {
         Utils.checkNotNull(fundingWalletID, "fundingWalletID");
         this.fundingWalletID = fundingWalletID;
@@ -251,6 +289,7 @@ public class IssuedCardTransaction {
             Utils.enhancedDeepEquals(this.cardTransactionID, other.cardTransactionID) &&
             Utils.enhancedDeepEquals(this.issuedCardID, other.issuedCardID) &&
             Utils.enhancedDeepEquals(this.lastFourCardNumber, other.lastFourCardNumber) &&
+            Utils.enhancedDeepEquals(this.authorizedUserAccountID, other.authorizedUserAccountID) &&
             Utils.enhancedDeepEquals(this.fundingWalletID, other.fundingWalletID) &&
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
             Utils.enhancedDeepEquals(this.authorizationID, other.authorizationID) &&
@@ -263,8 +302,9 @@ public class IssuedCardTransaction {
     public int hashCode() {
         return Utils.enhancedHash(
             cardTransactionID, issuedCardID, lastFourCardNumber,
-            fundingWalletID, amount, authorizationID,
-            authorizedOn, merchantData, createdOn);
+            authorizedUserAccountID, fundingWalletID, amount,
+            authorizationID, authorizedOn, merchantData,
+            createdOn);
     }
     
     @Override
@@ -273,6 +313,7 @@ public class IssuedCardTransaction {
                 "cardTransactionID", cardTransactionID,
                 "issuedCardID", issuedCardID,
                 "lastFourCardNumber", lastFourCardNumber,
+                "authorizedUserAccountID", authorizedUserAccountID,
                 "fundingWalletID", fundingWalletID,
                 "amount", amount,
                 "authorizationID", authorizationID,
@@ -289,6 +330,8 @@ public class IssuedCardTransaction {
         private String issuedCardID;
 
         private Optional<String> lastFourCardNumber = Optional.empty();
+
+        private Optional<String> authorizedUserAccountID = Optional.empty();
 
         private String fundingWalletID;
 
@@ -336,6 +379,25 @@ public class IssuedCardTransaction {
         public Builder lastFourCardNumber(Optional<String> lastFourCardNumber) {
             Utils.checkNotNull(lastFourCardNumber, "lastFourCardNumber");
             this.lastFourCardNumber = lastFourCardNumber;
+            return this;
+        }
+
+
+        /**
+         * Identifier for the account of the card's authorized user.
+         */
+        public Builder authorizedUserAccountID(String authorizedUserAccountID) {
+            Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+            this.authorizedUserAccountID = Optional.ofNullable(authorizedUserAccountID);
+            return this;
+        }
+
+        /**
+         * Identifier for the account of the card's authorized user.
+         */
+        public Builder authorizedUserAccountID(Optional<String> authorizedUserAccountID) {
+            Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+            this.authorizedUserAccountID = authorizedUserAccountID;
             return this;
         }
 
@@ -395,8 +457,9 @@ public class IssuedCardTransaction {
 
             return new IssuedCardTransaction(
                 cardTransactionID, issuedCardID, lastFourCardNumber,
-                fundingWalletID, amount, authorizationID,
-                authorizedOn, merchantData, createdOn);
+                authorizedUserAccountID, fundingWalletID, amount,
+                authorizationID, authorizedOn, merchantData,
+                createdOn);
         }
 
     }

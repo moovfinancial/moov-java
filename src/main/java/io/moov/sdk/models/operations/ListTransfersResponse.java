@@ -36,7 +36,7 @@ public class ListTransfersResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * The request completed successfully.
+     * Transfers were successfully listed matching the provided filter parameters and returned
      */
     private Optional<? extends List<Transfer>> transfers;
 
@@ -97,7 +97,7 @@ public class ListTransfersResponse implements Response {
     }
 
     /**
-     * The request completed successfully.
+     * Transfers were successfully listed matching the provided filter parameters and returned
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -143,7 +143,7 @@ public class ListTransfersResponse implements Response {
     }
 
     /**
-     * The request completed successfully.
+     * Transfers were successfully listed matching the provided filter parameters and returned
      */
     public ListTransfersResponse withTransfers(List<Transfer> transfers) {
         Utils.checkNotNull(transfers, "transfers");
@@ -153,7 +153,7 @@ public class ListTransfersResponse implements Response {
 
 
     /**
-     * The request completed successfully.
+     * Transfers were successfully listed matching the provided filter parameters and returned
      */
     public ListTransfersResponse withTransfers(Optional<? extends List<Transfer>> transfers) {
         Utils.checkNotNull(transfers, "transfers");
@@ -250,7 +250,7 @@ public class ListTransfersResponse implements Response {
 
 
         /**
-         * The request completed successfully.
+         * Transfers were successfully listed matching the provided filter parameters and returned
          */
         public Builder transfers(List<Transfer> transfers) {
             Utils.checkNotNull(transfers, "transfers");
@@ -259,7 +259,7 @@ public class ListTransfersResponse implements Response {
         }
 
         /**
-         * The request completed successfully.
+         * Transfers were successfully listed matching the provided filter parameters and returned
          */
         public Builder transfers(Optional<? extends List<Transfer>> transfers) {
             Utils.checkNotNull(transfers, "transfers");

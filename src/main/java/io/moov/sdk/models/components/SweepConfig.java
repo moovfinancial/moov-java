@@ -66,6 +66,13 @@ public class SweepConfig {
     private Optional<String> statementDescriptor;
 
     /**
+     * A configured wallet-level override of the time of day the sweep runs.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("schedule")
+    private Optional<? extends SweepConfigSchedule> schedule;
+
+    /**
      * An array of fields that are locked. To request updates, please contact Moov support.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -89,6 +96,7 @@ public class SweepConfig {
             @JsonProperty("pullPaymentMethod") SweepConfigPaymentMethod pullPaymentMethod,
             @JsonProperty("minimumBalance") Optional<String> minimumBalance,
             @JsonProperty("statementDescriptor") Optional<String> statementDescriptor,
+            @JsonProperty("schedule") Optional<? extends SweepConfigSchedule> schedule,
             @JsonProperty("lockedFields") Optional<? extends List<String>> lockedFields,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
             @JsonProperty("updatedOn") OffsetDateTime updatedOn) {
@@ -99,6 +107,7 @@ public class SweepConfig {
         Utils.checkNotNull(pullPaymentMethod, "pullPaymentMethod");
         Utils.checkNotNull(minimumBalance, "minimumBalance");
         Utils.checkNotNull(statementDescriptor, "statementDescriptor");
+        Utils.checkNotNull(schedule, "schedule");
         Utils.checkNotNull(lockedFields, "lockedFields");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(updatedOn, "updatedOn");
@@ -109,6 +118,7 @@ public class SweepConfig {
         this.pullPaymentMethod = pullPaymentMethod;
         this.minimumBalance = minimumBalance;
         this.statementDescriptor = statementDescriptor;
+        this.schedule = schedule;
         this.lockedFields = lockedFields;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
@@ -124,8 +134,8 @@ public class SweepConfig {
             OffsetDateTime updatedOn) {
         this(sweepConfigID, walletID, status,
             pushPaymentMethod, pullPaymentMethod, Optional.empty(),
-            Optional.empty(), Optional.empty(), createdOn,
-            updatedOn);
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            createdOn, updatedOn);
     }
 
     @JsonIgnore
@@ -182,6 +192,15 @@ public class SweepConfig {
     @JsonIgnore
     public Optional<String> statementDescriptor() {
         return statementDescriptor;
+    }
+
+    /**
+     * A configured wallet-level override of the time of day the sweep runs.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<SweepConfigSchedule> schedule() {
+        return (Optional<SweepConfigSchedule>) schedule;
     }
 
     /**
@@ -297,6 +316,25 @@ public class SweepConfig {
     }
 
     /**
+     * A configured wallet-level override of the time of day the sweep runs.
+     */
+    public SweepConfig withSchedule(SweepConfigSchedule schedule) {
+        Utils.checkNotNull(schedule, "schedule");
+        this.schedule = Optional.ofNullable(schedule);
+        return this;
+    }
+
+
+    /**
+     * A configured wallet-level override of the time of day the sweep runs.
+     */
+    public SweepConfig withSchedule(Optional<? extends SweepConfigSchedule> schedule) {
+        Utils.checkNotNull(schedule, "schedule");
+        this.schedule = schedule;
+        return this;
+    }
+
+    /**
      * An array of fields that are locked. To request updates, please contact Moov support.
      */
     public SweepConfig withLockedFields(List<String> lockedFields) {
@@ -344,6 +382,7 @@ public class SweepConfig {
             Utils.enhancedDeepEquals(this.pullPaymentMethod, other.pullPaymentMethod) &&
             Utils.enhancedDeepEquals(this.minimumBalance, other.minimumBalance) &&
             Utils.enhancedDeepEquals(this.statementDescriptor, other.statementDescriptor) &&
+            Utils.enhancedDeepEquals(this.schedule, other.schedule) &&
             Utils.enhancedDeepEquals(this.lockedFields, other.lockedFields) &&
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
             Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn);
@@ -354,8 +393,8 @@ public class SweepConfig {
         return Utils.enhancedHash(
             sweepConfigID, walletID, status,
             pushPaymentMethod, pullPaymentMethod, minimumBalance,
-            statementDescriptor, lockedFields, createdOn,
-            updatedOn);
+            statementDescriptor, schedule, lockedFields,
+            createdOn, updatedOn);
     }
     
     @Override
@@ -368,6 +407,7 @@ public class SweepConfig {
                 "pullPaymentMethod", pullPaymentMethod,
                 "minimumBalance", minimumBalance,
                 "statementDescriptor", statementDescriptor,
+                "schedule", schedule,
                 "lockedFields", lockedFields,
                 "createdOn", createdOn,
                 "updatedOn", updatedOn);
@@ -389,6 +429,8 @@ public class SweepConfig {
         private Optional<String> minimumBalance = Optional.empty();
 
         private Optional<String> statementDescriptor = Optional.empty();
+
+        private Optional<? extends SweepConfigSchedule> schedule = Optional.empty();
 
         private Optional<? extends List<String>> lockedFields = Optional.empty();
 
@@ -495,6 +537,25 @@ public class SweepConfig {
 
 
         /**
+         * A configured wallet-level override of the time of day the sweep runs.
+         */
+        public Builder schedule(SweepConfigSchedule schedule) {
+            Utils.checkNotNull(schedule, "schedule");
+            this.schedule = Optional.ofNullable(schedule);
+            return this;
+        }
+
+        /**
+         * A configured wallet-level override of the time of day the sweep runs.
+         */
+        public Builder schedule(Optional<? extends SweepConfigSchedule> schedule) {
+            Utils.checkNotNull(schedule, "schedule");
+            this.schedule = schedule;
+            return this;
+        }
+
+
+        /**
          * An array of fields that are locked. To request updates, please contact Moov support.
          */
         public Builder lockedFields(List<String> lockedFields) {
@@ -531,8 +592,8 @@ public class SweepConfig {
             return new SweepConfig(
                 sweepConfigID, walletID, status,
                 pushPaymentMethod, pullPaymentMethod, minimumBalance,
-                statementDescriptor, lockedFields, createdOn,
-                updatedOn);
+                statementDescriptor, schedule, lockedFields,
+                createdOn, updatedOn);
         }
 
     }

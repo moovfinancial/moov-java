@@ -40,26 +40,35 @@ public class ListIssuedCardsRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=states")
     private Optional<? extends List<IssuedCardState>> states;
 
+    /**
+     * Optional identifier for the account of the card's authorized user.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=authorizedUserAccountID")
+    private Optional<String> authorizedUserAccountID;
+
     @JsonCreator
     public ListIssuedCardsRequest(
             String accountID,
             Optional<Long> skip,
             Optional<Long> count,
-            Optional<? extends List<IssuedCardState>> states) {
+            Optional<? extends List<IssuedCardState>> states,
+            Optional<String> authorizedUserAccountID) {
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(skip, "skip");
         Utils.checkNotNull(count, "count");
         Utils.checkNotNull(states, "states");
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
         this.accountID = accountID;
         this.skip = skip;
         this.count = count;
         this.states = states;
+        this.authorizedUserAccountID = authorizedUserAccountID;
     }
     
     public ListIssuedCardsRequest(
             String accountID) {
         this(accountID, Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -91,6 +100,14 @@ public class ListIssuedCardsRequest {
     @JsonIgnore
     public Optional<List<IssuedCardState>> states() {
         return (Optional<List<IssuedCardState>>) states;
+    }
+
+    /**
+     * Optional identifier for the account of the card's authorized user.
+     */
+    @JsonIgnore
+    public Optional<String> authorizedUserAccountID() {
+        return authorizedUserAccountID;
     }
 
     public static Builder builder() {
@@ -160,6 +177,25 @@ public class ListIssuedCardsRequest {
         return this;
     }
 
+    /**
+     * Optional identifier for the account of the card's authorized user.
+     */
+    public ListIssuedCardsRequest withAuthorizedUserAccountID(String authorizedUserAccountID) {
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+        this.authorizedUserAccountID = Optional.ofNullable(authorizedUserAccountID);
+        return this;
+    }
+
+
+    /**
+     * Optional identifier for the account of the card's authorized user.
+     */
+    public ListIssuedCardsRequest withAuthorizedUserAccountID(Optional<String> authorizedUserAccountID) {
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+        this.authorizedUserAccountID = authorizedUserAccountID;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -173,14 +209,15 @@ public class ListIssuedCardsRequest {
             Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
             Utils.enhancedDeepEquals(this.skip, other.skip) &&
             Utils.enhancedDeepEquals(this.count, other.count) &&
-            Utils.enhancedDeepEquals(this.states, other.states);
+            Utils.enhancedDeepEquals(this.states, other.states) &&
+            Utils.enhancedDeepEquals(this.authorizedUserAccountID, other.authorizedUserAccountID);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             accountID, skip, count,
-            states);
+            states, authorizedUserAccountID);
     }
     
     @Override
@@ -189,7 +226,8 @@ public class ListIssuedCardsRequest {
                 "accountID", accountID,
                 "skip", skip,
                 "count", count,
-                "states", states);
+                "states", states,
+                "authorizedUserAccountID", authorizedUserAccountID);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -202,6 +240,8 @@ public class ListIssuedCardsRequest {
         private Optional<Long> count = Optional.empty();
 
         private Optional<? extends List<IssuedCardState>> states = Optional.empty();
+
+        private Optional<String> authorizedUserAccountID = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -270,11 +310,30 @@ public class ListIssuedCardsRequest {
             return this;
         }
 
+
+        /**
+         * Optional identifier for the account of the card's authorized user.
+         */
+        public Builder authorizedUserAccountID(String authorizedUserAccountID) {
+            Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+            this.authorizedUserAccountID = Optional.ofNullable(authorizedUserAccountID);
+            return this;
+        }
+
+        /**
+         * Optional identifier for the account of the card's authorized user.
+         */
+        public Builder authorizedUserAccountID(Optional<String> authorizedUserAccountID) {
+            Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+            this.authorizedUserAccountID = authorizedUserAccountID;
+            return this;
+        }
+
         public ListIssuedCardsRequest build() {
 
             return new ListIssuedCardsRequest(
                 accountID, skip, count,
-                states);
+                states, authorizedUserAccountID);
         }
 
     }

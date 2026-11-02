@@ -24,7 +24,8 @@ public class AllowedSchedule {
     private String timezone;
 
     /**
-     * Time windows during which the card may authorize. Any matching window allows the transaction.
+     * Time windows during which authorizations on the card can be approved. Any matching window allows the
+     * transaction.
      */
     @JsonProperty("windows")
     private List<ScheduleWindow> windows;
@@ -48,7 +49,8 @@ public class AllowedSchedule {
     }
 
     /**
-     * Time windows during which the card may authorize. Any matching window allows the transaction.
+     * Time windows during which authorizations on the card can be approved. Any matching window allows the
+     * transaction.
      */
     @JsonIgnore
     public List<ScheduleWindow> windows() {
@@ -70,7 +72,8 @@ public class AllowedSchedule {
     }
 
     /**
-     * Time windows during which the card may authorize. Any matching window allows the transaction.
+     * Time windows during which authorizations on the card can be approved. Any matching window allows the
+     * transaction.
      */
     public AllowedSchedule withWindows(List<ScheduleWindow> windows) {
         Utils.checkNotNull(windows, "windows");
@@ -128,7 +131,8 @@ public class AllowedSchedule {
 
 
         /**
-         * Time windows during which the card may authorize. Any matching window allows the transaction.
+         * Time windows during which authorizations on the card can be approved. Any matching window allows the
+         * transaction.
          */
         public Builder windows(List<ScheduleWindow> windows) {
             Utils.checkNotNull(windows, "windows");

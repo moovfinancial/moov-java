@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.moov.sdk.models.components.SweepConfigScheduleError;
 import io.moov.sdk.utils.Utils;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
@@ -88,6 +89,11 @@ public class CreateSweepConfigError extends MoovError {
         return data().flatMap(Data::minimumBalance);
     }
 
+    @Deprecated
+    public Optional<SweepConfigScheduleError> schedule() {
+        return data().flatMap(Data::schedule);
+    }
+
     public Optional<Data> data() {
         return Optional.ofNullable(data);
     }
@@ -130,6 +136,11 @@ public class CreateSweepConfigError extends MoovError {
         @JsonProperty("minimumBalance")
         private Optional<String> minimumBalance;
 
+
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("schedule")
+        private Optional<? extends SweepConfigScheduleError> schedule;
+
         @JsonCreator
         public Data(
                 @JsonProperty("walletID") Optional<String> walletID,
@@ -137,24 +148,28 @@ public class CreateSweepConfigError extends MoovError {
                 @JsonProperty("pushPaymentMethodID") Optional<String> pushPaymentMethodID,
                 @JsonProperty("pullPaymentMethodID") Optional<String> pullPaymentMethodID,
                 @JsonProperty("statementDescriptor") Optional<String> statementDescriptor,
-                @JsonProperty("minimumBalance") Optional<String> minimumBalance) {
+                @JsonProperty("minimumBalance") Optional<String> minimumBalance,
+                @JsonProperty("schedule") Optional<? extends SweepConfigScheduleError> schedule) {
             Utils.checkNotNull(walletID, "walletID");
             Utils.checkNotNull(status, "status");
             Utils.checkNotNull(pushPaymentMethodID, "pushPaymentMethodID");
             Utils.checkNotNull(pullPaymentMethodID, "pullPaymentMethodID");
             Utils.checkNotNull(statementDescriptor, "statementDescriptor");
             Utils.checkNotNull(minimumBalance, "minimumBalance");
+            Utils.checkNotNull(schedule, "schedule");
             this.walletID = walletID;
             this.status = status;
             this.pushPaymentMethodID = pushPaymentMethodID;
             this.pullPaymentMethodID = pullPaymentMethodID;
             this.statementDescriptor = statementDescriptor;
             this.minimumBalance = minimumBalance;
+            this.schedule = schedule;
         }
         
         public Data() {
             this(Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty(), Optional.empty(), Optional.empty());
+                Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty());
         }
 
         @JsonIgnore
@@ -185,6 +200,12 @@ public class CreateSweepConfigError extends MoovError {
         @JsonIgnore
         public Optional<String> minimumBalance() {
             return minimumBalance;
+        }
+
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<SweepConfigScheduleError> schedule() {
+            return (Optional<SweepConfigScheduleError>) schedule;
         }
 
         public static Builder builder() {
@@ -270,6 +291,19 @@ public class CreateSweepConfigError extends MoovError {
             return this;
         }
 
+        public Data withSchedule(SweepConfigScheduleError schedule) {
+            Utils.checkNotNull(schedule, "schedule");
+            this.schedule = Optional.ofNullable(schedule);
+            return this;
+        }
+
+
+        public Data withSchedule(Optional<? extends SweepConfigScheduleError> schedule) {
+            Utils.checkNotNull(schedule, "schedule");
+            this.schedule = schedule;
+            return this;
+        }
+
         @Override
         public boolean equals(java.lang.Object o) {
             if (this == o) {
@@ -285,14 +319,16 @@ public class CreateSweepConfigError extends MoovError {
                 Utils.enhancedDeepEquals(this.pushPaymentMethodID, other.pushPaymentMethodID) &&
                 Utils.enhancedDeepEquals(this.pullPaymentMethodID, other.pullPaymentMethodID) &&
                 Utils.enhancedDeepEquals(this.statementDescriptor, other.statementDescriptor) &&
-                Utils.enhancedDeepEquals(this.minimumBalance, other.minimumBalance);
+                Utils.enhancedDeepEquals(this.minimumBalance, other.minimumBalance) &&
+                Utils.enhancedDeepEquals(this.schedule, other.schedule);
         }
         
         @Override
         public int hashCode() {
             return Utils.enhancedHash(
                 walletID, status, pushPaymentMethodID,
-                pullPaymentMethodID, statementDescriptor, minimumBalance);
+                pullPaymentMethodID, statementDescriptor, minimumBalance,
+                schedule);
         }
         
         @Override
@@ -303,7 +339,8 @@ public class CreateSweepConfigError extends MoovError {
                     "pushPaymentMethodID", pushPaymentMethodID,
                     "pullPaymentMethodID", pullPaymentMethodID,
                     "statementDescriptor", statementDescriptor,
-                    "minimumBalance", minimumBalance);
+                    "minimumBalance", minimumBalance,
+                    "schedule", schedule);
         }
 
         @SuppressWarnings("UnusedReturnValue")
@@ -320,6 +357,8 @@ public class CreateSweepConfigError extends MoovError {
             private Optional<String> statementDescriptor = Optional.empty();
 
             private Optional<String> minimumBalance = Optional.empty();
+
+            private Optional<? extends SweepConfigScheduleError> schedule = Optional.empty();
 
             private Builder() {
               // force use of static builder() method
@@ -403,11 +442,25 @@ public class CreateSweepConfigError extends MoovError {
                 return this;
             }
 
+
+            public Builder schedule(SweepConfigScheduleError schedule) {
+                Utils.checkNotNull(schedule, "schedule");
+                this.schedule = Optional.ofNullable(schedule);
+                return this;
+            }
+
+            public Builder schedule(Optional<? extends SweepConfigScheduleError> schedule) {
+                Utils.checkNotNull(schedule, "schedule");
+                this.schedule = schedule;
+                return this;
+            }
+
             public Data build() {
 
                 return new Data(
                     walletID, status, pushPaymentMethodID,
-                    pullPaymentMethodID, statementDescriptor, minimumBalance);
+                    pullPaymentMethodID, statementDescriptor, minimumBalance,
+                    schedule);
             }
 
         }

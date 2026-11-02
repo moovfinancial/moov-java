@@ -35,6 +35,10 @@ import java.util.Optional;
  * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities
  * might appear in the list for your Partner account. These are read-only capabilities that Moov
  * requests. These capabilities remain active with your account and require no additional action.
+ * 
+ * <p>Starting in v2026.10.00, the `platform.moov-money` capability might appear in the list for accounts
+ * enrolled in Moov Money. This is a read-only capability that Moov requests. It requires no additional
+ * action.
  */
 public class CapabilityID {
 
@@ -57,6 +61,7 @@ public class CapabilityID {
     public static final CapabilityID PRODUCTION_APP = new CapabilityID("production-app");
     public static final CapabilityID PLATFORM_PRODUCTION_APP = new CapabilityID("platform.production-app");
     public static final CapabilityID PLATFORM_WALLET_TRANSFERS = new CapabilityID("platform.wallet-transfers");
+    public static final CapabilityID PLATFORM_MOOV_MONEY = new CapabilityID("platform.moov-money");
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -149,6 +154,7 @@ public class CapabilityID {
         map.put("production-app", PRODUCTION_APP);
         map.put("platform.production-app", PLATFORM_PRODUCTION_APP);
         map.put("platform.wallet-transfers", PLATFORM_WALLET_TRANSFERS);
+        map.put("platform.moov-money", PLATFORM_MOOV_MONEY);
         return map;
     }
 
@@ -173,6 +179,7 @@ public class CapabilityID {
         map.put("production-app", CapabilityIDEnum.PRODUCTION_APP);
         map.put("platform.production-app", CapabilityIDEnum.PLATFORM_PRODUCTION_APP);
         map.put("platform.wallet-transfers", CapabilityIDEnum.PLATFORM_WALLET_TRANSFERS);
+        map.put("platform.moov-money", CapabilityIDEnum.PLATFORM_MOOV_MONEY);
         return map;
     }
     
@@ -197,7 +204,8 @@ public class CapabilityID {
         ISSUING_CARDHOLDER("issuing.cardholder"),
         PRODUCTION_APP("production-app"),
         PLATFORM_PRODUCTION_APP("platform.production-app"),
-        PLATFORM_WALLET_TRANSFERS("platform.wallet-transfers"),;
+        PLATFORM_WALLET_TRANSFERS("platform.wallet-transfers"),
+        PLATFORM_MOOV_MONEY("platform.moov-money"),;
 
         private final String value;
 

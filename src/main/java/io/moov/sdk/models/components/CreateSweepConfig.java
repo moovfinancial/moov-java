@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 
@@ -48,6 +49,13 @@ public class CreateSweepConfig {
     @JsonProperty("minimumBalance")
     private Optional<String> minimumBalance;
 
+    /**
+     * Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("schedule")
+    private Optional<? extends SweepConfigSchedule> schedule;
+
     @JsonCreator
     public CreateSweepConfig(
             @JsonProperty("walletID") String walletID,
@@ -55,19 +63,22 @@ public class CreateSweepConfig {
             @JsonProperty("pushPaymentMethodID") String pushPaymentMethodID,
             @JsonProperty("pullPaymentMethodID") String pullPaymentMethodID,
             @JsonProperty("statementDescriptor") Optional<String> statementDescriptor,
-            @JsonProperty("minimumBalance") Optional<String> minimumBalance) {
+            @JsonProperty("minimumBalance") Optional<String> minimumBalance,
+            @JsonProperty("schedule") Optional<? extends SweepConfigSchedule> schedule) {
         Utils.checkNotNull(walletID, "walletID");
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(pushPaymentMethodID, "pushPaymentMethodID");
         Utils.checkNotNull(pullPaymentMethodID, "pullPaymentMethodID");
         Utils.checkNotNull(statementDescriptor, "statementDescriptor");
         Utils.checkNotNull(minimumBalance, "minimumBalance");
+        Utils.checkNotNull(schedule, "schedule");
         this.walletID = walletID;
         this.status = status;
         this.pushPaymentMethodID = pushPaymentMethodID;
         this.pullPaymentMethodID = pullPaymentMethodID;
         this.statementDescriptor = statementDescriptor;
         this.minimumBalance = minimumBalance;
+        this.schedule = schedule;
     }
     
     public CreateSweepConfig(
@@ -76,7 +87,8 @@ public class CreateSweepConfig {
             String pushPaymentMethodID,
             String pullPaymentMethodID) {
         this(walletID, status, pushPaymentMethodID,
-            pullPaymentMethodID, Optional.empty(), Optional.empty());
+            pullPaymentMethodID, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -117,6 +129,15 @@ public class CreateSweepConfig {
     @JsonIgnore
     public Optional<String> minimumBalance() {
         return minimumBalance;
+    }
+
+    /**
+     * Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<SweepConfigSchedule> schedule() {
+        return (Optional<SweepConfigSchedule>) schedule;
     }
 
     public static Builder builder() {
@@ -188,6 +209,25 @@ public class CreateSweepConfig {
         return this;
     }
 
+    /**
+     * Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days.
+     */
+    public CreateSweepConfig withSchedule(SweepConfigSchedule schedule) {
+        Utils.checkNotNull(schedule, "schedule");
+        this.schedule = Optional.ofNullable(schedule);
+        return this;
+    }
+
+
+    /**
+     * Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days.
+     */
+    public CreateSweepConfig withSchedule(Optional<? extends SweepConfigSchedule> schedule) {
+        Utils.checkNotNull(schedule, "schedule");
+        this.schedule = schedule;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -203,14 +243,16 @@ public class CreateSweepConfig {
             Utils.enhancedDeepEquals(this.pushPaymentMethodID, other.pushPaymentMethodID) &&
             Utils.enhancedDeepEquals(this.pullPaymentMethodID, other.pullPaymentMethodID) &&
             Utils.enhancedDeepEquals(this.statementDescriptor, other.statementDescriptor) &&
-            Utils.enhancedDeepEquals(this.minimumBalance, other.minimumBalance);
+            Utils.enhancedDeepEquals(this.minimumBalance, other.minimumBalance) &&
+            Utils.enhancedDeepEquals(this.schedule, other.schedule);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             walletID, status, pushPaymentMethodID,
-            pullPaymentMethodID, statementDescriptor, minimumBalance);
+            pullPaymentMethodID, statementDescriptor, minimumBalance,
+            schedule);
     }
     
     @Override
@@ -221,7 +263,8 @@ public class CreateSweepConfig {
                 "pushPaymentMethodID", pushPaymentMethodID,
                 "pullPaymentMethodID", pullPaymentMethodID,
                 "statementDescriptor", statementDescriptor,
-                "minimumBalance", minimumBalance);
+                "minimumBalance", minimumBalance,
+                "schedule", schedule);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -238,6 +281,8 @@ public class CreateSweepConfig {
         private Optional<String> statementDescriptor = Optional.empty();
 
         private Optional<String> minimumBalance = Optional.empty();
+
+        private Optional<? extends SweepConfigSchedule> schedule = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -311,11 +356,31 @@ public class CreateSweepConfig {
             return this;
         }
 
+
+        /**
+         * Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days.
+         */
+        public Builder schedule(SweepConfigSchedule schedule) {
+            Utils.checkNotNull(schedule, "schedule");
+            this.schedule = Optional.ofNullable(schedule);
+            return this;
+        }
+
+        /**
+         * Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days.
+         */
+        public Builder schedule(Optional<? extends SweepConfigSchedule> schedule) {
+            Utils.checkNotNull(schedule, "schedule");
+            this.schedule = schedule;
+            return this;
+        }
+
         public CreateSweepConfig build() {
 
             return new CreateSweepConfig(
                 walletID, status, pushPaymentMethodID,
-                pullPaymentMethodID, statementDescriptor, minimumBalance);
+                pullPaymentMethodID, statementDescriptor, minimumBalance,
+                schedule);
         }
 
     }

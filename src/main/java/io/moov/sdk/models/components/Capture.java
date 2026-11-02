@@ -48,13 +48,6 @@ public class Capture {
     private OffsetDateTime createdOn;
 
     /**
-     * Payment method of the merchant account the funds were captured into. For card-acquiring transfers,
-     * this must be a moov-wallet payment method.
-     */
-    @JsonProperty("destinationPaymentMethodID")
-    private String destinationPaymentMethodID;
-
-    /**
      * An optional description of the capture that is used on receipts and for your own internal use.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -108,7 +101,6 @@ public class Capture {
             @JsonProperty("isFinal") boolean isFinal,
             @JsonProperty("status") CaptureStatus status,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
-            @JsonProperty("destinationPaymentMethodID") String destinationPaymentMethodID,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata,
             @JsonProperty("foreignID") Optional<String> foreignID,
@@ -121,7 +113,6 @@ public class Capture {
         Utils.checkNotNull(isFinal, "isFinal");
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(createdOn, "createdOn");
-        Utils.checkNotNull(destinationPaymentMethodID, "destinationPaymentMethodID");
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(metadata, "metadata");
         Utils.checkNotNull(foreignID, "foreignID");
@@ -134,7 +125,6 @@ public class Capture {
         this.isFinal = isFinal;
         this.status = status;
         this.createdOn = createdOn;
-        this.destinationPaymentMethodID = destinationPaymentMethodID;
         this.description = description;
         this.metadata = metadata;
         this.foreignID = foreignID;
@@ -149,13 +139,11 @@ public class Capture {
             AmountDecimal amount,
             boolean isFinal,
             CaptureStatus status,
-            OffsetDateTime createdOn,
-            String destinationPaymentMethodID) {
+            OffsetDateTime createdOn) {
         this(captureID, amount, isFinal,
-            status, createdOn, destinationPaymentMethodID,
+            status, createdOn, Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -187,15 +175,6 @@ public class Capture {
     @JsonIgnore
     public OffsetDateTime createdOn() {
         return createdOn;
-    }
-
-    /**
-     * Payment method of the merchant account the funds were captured into. For card-acquiring transfers,
-     * this must be a moov-wallet payment method.
-     */
-    @JsonIgnore
-    public String destinationPaymentMethodID() {
-        return destinationPaymentMethodID;
     }
 
     /**
@@ -293,16 +272,6 @@ public class Capture {
     public Capture withCreatedOn(OffsetDateTime createdOn) {
         Utils.checkNotNull(createdOn, "createdOn");
         this.createdOn = createdOn;
-        return this;
-    }
-
-    /**
-     * Payment method of the merchant account the funds were captured into. For card-acquiring transfers,
-     * this must be a moov-wallet payment method.
-     */
-    public Capture withDestinationPaymentMethodID(String destinationPaymentMethodID) {
-        Utils.checkNotNull(destinationPaymentMethodID, "destinationPaymentMethodID");
-        this.destinationPaymentMethodID = destinationPaymentMethodID;
         return this;
     }
 
@@ -446,7 +415,6 @@ public class Capture {
             Utils.enhancedDeepEquals(this.isFinal, other.isFinal) &&
             Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
-            Utils.enhancedDeepEquals(this.destinationPaymentMethodID, other.destinationPaymentMethodID) &&
             Utils.enhancedDeepEquals(this.description, other.description) &&
             Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
@@ -460,10 +428,9 @@ public class Capture {
     public int hashCode() {
         return Utils.enhancedHash(
             captureID, amount, isFinal,
-            status, createdOn, destinationPaymentMethodID,
-            description, metadata, foreignID,
-            lineItems, amountDetails, facilitatorFeeAmount,
-            failureCode);
+            status, createdOn, description,
+            metadata, foreignID, lineItems,
+            amountDetails, facilitatorFeeAmount, failureCode);
     }
     
     @Override
@@ -474,7 +441,6 @@ public class Capture {
                 "isFinal", isFinal,
                 "status", status,
                 "createdOn", createdOn,
-                "destinationPaymentMethodID", destinationPaymentMethodID,
                 "description", description,
                 "metadata", metadata,
                 "foreignID", foreignID,
@@ -496,8 +462,6 @@ public class Capture {
         private CaptureStatus status;
 
         private OffsetDateTime createdOn;
-
-        private String destinationPaymentMethodID;
 
         private Optional<String> description = Optional.empty();
 
@@ -555,17 +519,6 @@ public class Capture {
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
-            return this;
-        }
-
-
-        /**
-         * Payment method of the merchant account the funds were captured into. For card-acquiring transfers,
-         * this must be a moov-wallet payment method.
-         */
-        public Builder destinationPaymentMethodID(String destinationPaymentMethodID) {
-            Utils.checkNotNull(destinationPaymentMethodID, "destinationPaymentMethodID");
-            this.destinationPaymentMethodID = destinationPaymentMethodID;
             return this;
         }
 
@@ -698,10 +651,9 @@ public class Capture {
 
             return new Capture(
                 captureID, amount, isFinal,
-                status, createdOn, destinationPaymentMethodID,
-                description, metadata, foreignID,
-                lineItems, amountDetails, facilitatorFeeAmount,
-                failureCode);
+                status, createdOn, description,
+                metadata, foreignID, lineItems,
+                amountDetails, facilitatorFeeAmount, failureCode);
         }
 
     }

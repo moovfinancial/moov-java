@@ -23,13 +23,6 @@ import java.util.Optional;
  */
 public class CreateCapture {
     /**
-     * Payment method of the merchant account to capture funds into. For card-acquiring transfers, this
-     * must be a moov-wallet payment method.
-     */
-    @JsonProperty("destinationPaymentMethodID")
-    private String destinationPaymentMethodID;
-
-    /**
      * Amount to capture.
      * If omitted, the remaining capturable amount is captured.
      */
@@ -89,7 +82,6 @@ public class CreateCapture {
 
     @JsonCreator
     public CreateCapture(
-            @JsonProperty("destinationPaymentMethodID") String destinationPaymentMethodID,
             @JsonProperty("amount") Optional<? extends AmountDecimal> amount,
             @JsonProperty("isFinal") Optional<Boolean> isFinal,
             @JsonProperty("description") Optional<String> description,
@@ -98,7 +90,6 @@ public class CreateCapture {
             @JsonProperty("lineItems") Optional<? extends CreateTransferLineItems> lineItems,
             @JsonProperty("amountDetails") Optional<? extends CreateTransferAmountDetails> amountDetails,
             @JsonProperty("facilitatorFeeAmount") Optional<? extends AmountDecimal> facilitatorFeeAmount) {
-        Utils.checkNotNull(destinationPaymentMethodID, "destinationPaymentMethodID");
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(isFinal, "isFinal");
         Utils.checkNotNull(description, "description");
@@ -107,7 +98,6 @@ public class CreateCapture {
         Utils.checkNotNull(lineItems, "lineItems");
         Utils.checkNotNull(amountDetails, "amountDetails");
         Utils.checkNotNull(facilitatorFeeAmount, "facilitatorFeeAmount");
-        this.destinationPaymentMethodID = destinationPaymentMethodID;
         this.amount = amount;
         this.isFinal = isFinal;
         this.description = description;
@@ -118,20 +108,10 @@ public class CreateCapture {
         this.facilitatorFeeAmount = facilitatorFeeAmount;
     }
     
-    public CreateCapture(
-            String destinationPaymentMethodID) {
-        this(destinationPaymentMethodID, Optional.empty(), Optional.empty(),
+    public CreateCapture() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * Payment method of the merchant account to capture funds into. For card-acquiring transfers, this
-     * must be a moov-wallet payment method.
-     */
-    @JsonIgnore
-    public String destinationPaymentMethodID() {
-        return destinationPaymentMethodID;
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -208,16 +188,6 @@ public class CreateCapture {
         return new Builder();
     }
 
-
-    /**
-     * Payment method of the merchant account to capture funds into. For card-acquiring transfers, this
-     * must be a moov-wallet payment method.
-     */
-    public CreateCapture withDestinationPaymentMethodID(String destinationPaymentMethodID) {
-        Utils.checkNotNull(destinationPaymentMethodID, "destinationPaymentMethodID");
-        this.destinationPaymentMethodID = destinationPaymentMethodID;
-        return this;
-    }
 
     /**
      * Amount to capture.
@@ -383,7 +353,6 @@ public class CreateCapture {
         }
         CreateCapture other = (CreateCapture) o;
         return 
-            Utils.enhancedDeepEquals(this.destinationPaymentMethodID, other.destinationPaymentMethodID) &&
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
             Utils.enhancedDeepEquals(this.isFinal, other.isFinal) &&
             Utils.enhancedDeepEquals(this.description, other.description) &&
@@ -397,15 +366,14 @@ public class CreateCapture {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            destinationPaymentMethodID, amount, isFinal,
-            description, metadata, foreignID,
-            lineItems, amountDetails, facilitatorFeeAmount);
+            amount, isFinal, description,
+            metadata, foreignID, lineItems,
+            amountDetails, facilitatorFeeAmount);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CreateCapture.class,
-                "destinationPaymentMethodID", destinationPaymentMethodID,
                 "amount", amount,
                 "isFinal", isFinal,
                 "description", description,
@@ -418,8 +386,6 @@ public class CreateCapture {
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
-
-        private String destinationPaymentMethodID;
 
         private Optional<? extends AmountDecimal> amount = Optional.empty();
 
@@ -439,17 +405,6 @@ public class CreateCapture {
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * Payment method of the merchant account to capture funds into. For card-acquiring transfers, this
-         * must be a moov-wallet payment method.
-         */
-        public Builder destinationPaymentMethodID(String destinationPaymentMethodID) {
-            Utils.checkNotNull(destinationPaymentMethodID, "destinationPaymentMethodID");
-            this.destinationPaymentMethodID = destinationPaymentMethodID;
-            return this;
         }
 
 
@@ -609,9 +564,9 @@ public class CreateCapture {
         public CreateCapture build() {
 
             return new CreateCapture(
-                destinationPaymentMethodID, amount, isFinal,
-                description, metadata, foreignID,
-                lineItems, amountDetails, facilitatorFeeAmount);
+                amount, isFinal, description,
+                metadata, foreignID, lineItems,
+                amountDetails, facilitatorFeeAmount);
         }
 
     }

@@ -29,7 +29,8 @@ public class UpdateIssuingControlsAllowedSchedule {
     private Optional<String> timezone;
 
     /**
-     * Time windows during which the card may authorize. Any matching window allows the transaction.
+     * Time windows during which authorizations on the card can be approved. Any matching window allows the
+     * transaction.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("windows")
@@ -58,7 +59,8 @@ public class UpdateIssuingControlsAllowedSchedule {
     }
 
     /**
-     * Time windows during which the card may authorize. Any matching window allows the transaction.
+     * Time windows during which authorizations on the card can be approved. Any matching window allows the
+     * transaction.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -91,7 +93,8 @@ public class UpdateIssuingControlsAllowedSchedule {
     }
 
     /**
-     * Time windows during which the card may authorize. Any matching window allows the transaction.
+     * Time windows during which authorizations on the card can be approved. Any matching window allows the
+     * transaction.
      */
     public UpdateIssuingControlsAllowedSchedule withWindows(List<ScheduleWindow> windows) {
         Utils.checkNotNull(windows, "windows");
@@ -101,7 +104,8 @@ public class UpdateIssuingControlsAllowedSchedule {
 
 
     /**
-     * Time windows during which the card may authorize. Any matching window allows the transaction.
+     * Time windows during which authorizations on the card can be approved. Any matching window allows the
+     * transaction.
      */
     public UpdateIssuingControlsAllowedSchedule withWindows(Optional<? extends List<ScheduleWindow>> windows) {
         Utils.checkNotNull(windows, "windows");
@@ -168,7 +172,8 @@ public class UpdateIssuingControlsAllowedSchedule {
 
 
         /**
-         * Time windows during which the card may authorize. Any matching window allows the transaction.
+         * Time windows during which authorizations on the card can be approved. Any matching window allows the
+         * transaction.
          */
         public Builder windows(List<ScheduleWindow> windows) {
             Utils.checkNotNull(windows, "windows");
@@ -177,7 +182,8 @@ public class UpdateIssuingControlsAllowedSchedule {
         }
 
         /**
-         * Time windows during which the card may authorize. Any matching window allows the transaction.
+         * Time windows during which authorizations on the card can be approved. Any matching window allows the
+         * transaction.
          */
         public Builder windows(Optional<? extends List<ScheduleWindow>> windows) {
             Utils.checkNotNull(windows, "windows");

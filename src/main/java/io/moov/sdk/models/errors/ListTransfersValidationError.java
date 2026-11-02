@@ -89,6 +89,11 @@ public class ListTransfersValidationError extends MoovError {
     }
 
     @Deprecated
+    public Optional<String> cursor() {
+        return data().flatMap(Data::cursor);
+    }
+
+    @Deprecated
     public Optional<String> groupID() {
         return data().flatMap(Data::groupID);
     }
@@ -162,6 +167,11 @@ public class ListTransfersValidationError extends MoovError {
 
 
         @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("cursor")
+        private Optional<String> cursor;
+
+
+        @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("groupID")
         private Optional<String> groupID;
 
@@ -198,6 +208,7 @@ public class ListTransfersValidationError extends MoovError {
                 @JsonProperty("endDateTime") Optional<String> endDateTime,
                 @JsonProperty("skip") Optional<String> skip,
                 @JsonProperty("count") Optional<String> count,
+                @JsonProperty("cursor") Optional<String> cursor,
                 @JsonProperty("groupID") Optional<String> groupID,
                 @JsonProperty("foreignID") Optional<String> foreignID,
                 @JsonProperty("scheduleID") Optional<String> scheduleID,
@@ -210,6 +221,7 @@ public class ListTransfersValidationError extends MoovError {
             Utils.checkNotNull(endDateTime, "endDateTime");
             Utils.checkNotNull(skip, "skip");
             Utils.checkNotNull(count, "count");
+            Utils.checkNotNull(cursor, "cursor");
             Utils.checkNotNull(groupID, "groupID");
             Utils.checkNotNull(foreignID, "foreignID");
             Utils.checkNotNull(scheduleID, "scheduleID");
@@ -222,6 +234,7 @@ public class ListTransfersValidationError extends MoovError {
             this.endDateTime = endDateTime;
             this.skip = skip;
             this.count = count;
+            this.cursor = cursor;
             this.groupID = groupID;
             this.foreignID = foreignID;
             this.scheduleID = scheduleID;
@@ -234,7 +247,8 @@ public class ListTransfersValidationError extends MoovError {
             this(Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty(), Optional.empty(), Optional.empty());
+                Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty());
         }
 
         @JsonIgnore
@@ -265,6 +279,11 @@ public class ListTransfersValidationError extends MoovError {
         @JsonIgnore
         public Optional<String> count() {
             return count;
+        }
+
+        @JsonIgnore
+        public Optional<String> cursor() {
+            return cursor;
         }
 
         @JsonIgnore
@@ -380,6 +399,19 @@ public class ListTransfersValidationError extends MoovError {
             return this;
         }
 
+        public Data withCursor(String cursor) {
+            Utils.checkNotNull(cursor, "cursor");
+            this.cursor = Optional.ofNullable(cursor);
+            return this;
+        }
+
+
+        public Data withCursor(Optional<String> cursor) {
+            Utils.checkNotNull(cursor, "cursor");
+            this.cursor = cursor;
+            return this;
+        }
+
         public Data withGroupID(String groupID) {
             Utils.checkNotNull(groupID, "groupID");
             this.groupID = Optional.ofNullable(groupID);
@@ -474,6 +506,7 @@ public class ListTransfersValidationError extends MoovError {
                 Utils.enhancedDeepEquals(this.endDateTime, other.endDateTime) &&
                 Utils.enhancedDeepEquals(this.skip, other.skip) &&
                 Utils.enhancedDeepEquals(this.count, other.count) &&
+                Utils.enhancedDeepEquals(this.cursor, other.cursor) &&
                 Utils.enhancedDeepEquals(this.groupID, other.groupID) &&
                 Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
                 Utils.enhancedDeepEquals(this.scheduleID, other.scheduleID) &&
@@ -487,8 +520,9 @@ public class ListTransfersValidationError extends MoovError {
             return Utils.enhancedHash(
                 accountIDs, status, startDateTime,
                 endDateTime, skip, count,
-                groupID, foreignID, scheduleID,
-                paymentLinkCode, refunded, disputed);
+                cursor, groupID, foreignID,
+                scheduleID, paymentLinkCode, refunded,
+                disputed);
         }
         
         @Override
@@ -500,6 +534,7 @@ public class ListTransfersValidationError extends MoovError {
                     "endDateTime", endDateTime,
                     "skip", skip,
                     "count", count,
+                    "cursor", cursor,
                     "groupID", groupID,
                     "foreignID", foreignID,
                     "scheduleID", scheduleID,
@@ -522,6 +557,8 @@ public class ListTransfersValidationError extends MoovError {
             private Optional<String> skip = Optional.empty();
 
             private Optional<String> count = Optional.empty();
+
+            private Optional<String> cursor = Optional.empty();
 
             private Optional<String> groupID = Optional.empty();
 
@@ -618,6 +655,19 @@ public class ListTransfersValidationError extends MoovError {
             }
 
 
+            public Builder cursor(String cursor) {
+                Utils.checkNotNull(cursor, "cursor");
+                this.cursor = Optional.ofNullable(cursor);
+                return this;
+            }
+
+            public Builder cursor(Optional<String> cursor) {
+                Utils.checkNotNull(cursor, "cursor");
+                this.cursor = cursor;
+                return this;
+            }
+
+
             public Builder groupID(String groupID) {
                 Utils.checkNotNull(groupID, "groupID");
                 this.groupID = Optional.ofNullable(groupID);
@@ -700,8 +750,9 @@ public class ListTransfersValidationError extends MoovError {
                 return new Data(
                     accountIDs, status, startDateTime,
                     endDateTime, skip, count,
-                    groupID, foreignID, scheduleID,
-                    paymentLinkCode, refunded, disputed);
+                    cursor, groupID, foreignID,
+                    scheduleID, paymentLinkCode, refunded,
+                    disputed);
             }
 
         }

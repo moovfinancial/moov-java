@@ -185,6 +185,7 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListIssuedCardsRequest;
 import io.moov.sdk.models.operations.ListIssuedCardsResponse;
 import java.lang.Exception;
 
@@ -199,10 +200,14 @@ public class Application {
                     .build())
             .build();
 
-        ListIssuedCardsResponse res = sdk.cardIssuing().list()
+        ListIssuedCardsRequest req = ListIssuedCardsRequest.builder()
                 .accountID("17c958e0-3abe-46e5-8afb-98742f1fb8ac")
                 .skip(60L)
                 .count(20L)
+                .build();
+
+        ListIssuedCardsResponse res = sdk.cardIssuing().list()
+                .request(req)
                 .call();
 
         if (res.issuedCards().isPresent()) {
@@ -214,12 +219,9 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 | Example                                                                                                     |
-| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `accountID`                                                                                                 | *String*                                                                                                    | :heavy_check_mark:                                                                                          | The Moov business account for which the cards have been issued.                                             |                                                                                                             |
-| `skip`                                                                                                      | *Optional\<Long>*                                                                                           | :heavy_minus_sign:                                                                                          | N/A                                                                                                         | 60                                                                                                          |
-| `count`                                                                                                     | *Optional\<Long>*                                                                                           | :heavy_minus_sign:                                                                                          | Page size. When omitted, the server defaults to `200`.                                                      | 20                                                                                                          |
-| `states`                                                                                                    | List\<[IssuedCardState](../../models/components/IssuedCardState.md)>                                        | :heavy_minus_sign:                                                                                          | Optional, comma-separated states to filter the Moov list issued cards response. For example `active,closed` |                                                                                                             |
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `request`                                                                   | [ListIssuedCardsRequest](../../models/operations/ListIssuedCardsRequest.md) | :heavy_check_mark:                                                          | The request object to use for the request.                                  |
 
 ### Response
 

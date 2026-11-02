@@ -41,28 +41,38 @@ public class PatchSweepConfig {
     @JsonProperty("minimumBalance")
     private JsonNullable<String> minimumBalance;
 
+    /**
+     * Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("schedule")
+    private JsonNullable<? extends Schedule> schedule;
+
     @JsonCreator
     public PatchSweepConfig(
             @JsonProperty("status") JsonNullable<? extends Status> status,
             @JsonProperty("pushPaymentMethodID") JsonNullable<String> pushPaymentMethodID,
             @JsonProperty("pullPaymentMethodID") JsonNullable<String> pullPaymentMethodID,
             @JsonProperty("statementDescriptor") JsonNullable<String> statementDescriptor,
-            @JsonProperty("minimumBalance") JsonNullable<String> minimumBalance) {
+            @JsonProperty("minimumBalance") JsonNullable<String> minimumBalance,
+            @JsonProperty("schedule") JsonNullable<? extends Schedule> schedule) {
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(pushPaymentMethodID, "pushPaymentMethodID");
         Utils.checkNotNull(pullPaymentMethodID, "pullPaymentMethodID");
         Utils.checkNotNull(statementDescriptor, "statementDescriptor");
         Utils.checkNotNull(minimumBalance, "minimumBalance");
+        Utils.checkNotNull(schedule, "schedule");
         this.status = status;
         this.pushPaymentMethodID = pushPaymentMethodID;
         this.pullPaymentMethodID = pullPaymentMethodID;
         this.statementDescriptor = statementDescriptor;
         this.minimumBalance = minimumBalance;
+        this.schedule = schedule;
     }
     
     public PatchSweepConfig() {
         this(JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
-            JsonNullable.undefined(), JsonNullable.undefined());
+            JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     @SuppressWarnings("unchecked")
@@ -89,6 +99,15 @@ public class PatchSweepConfig {
     @JsonIgnore
     public JsonNullable<String> minimumBalance() {
         return minimumBalance;
+    }
+
+    /**
+     * Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public JsonNullable<Schedule> schedule() {
+        return (JsonNullable<Schedule>) schedule;
     }
 
     public static Builder builder() {
@@ -156,6 +175,24 @@ public class PatchSweepConfig {
         return this;
     }
 
+    /**
+     * Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days.
+     */
+    public PatchSweepConfig withSchedule(Schedule schedule) {
+        Utils.checkNotNull(schedule, "schedule");
+        this.schedule = JsonNullable.of(schedule);
+        return this;
+    }
+
+    /**
+     * Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days.
+     */
+    public PatchSweepConfig withSchedule(JsonNullable<? extends Schedule> schedule) {
+        Utils.checkNotNull(schedule, "schedule");
+        this.schedule = schedule;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -170,14 +207,15 @@ public class PatchSweepConfig {
             Utils.enhancedDeepEquals(this.pushPaymentMethodID, other.pushPaymentMethodID) &&
             Utils.enhancedDeepEquals(this.pullPaymentMethodID, other.pullPaymentMethodID) &&
             Utils.enhancedDeepEquals(this.statementDescriptor, other.statementDescriptor) &&
-            Utils.enhancedDeepEquals(this.minimumBalance, other.minimumBalance);
+            Utils.enhancedDeepEquals(this.minimumBalance, other.minimumBalance) &&
+            Utils.enhancedDeepEquals(this.schedule, other.schedule);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             status, pushPaymentMethodID, pullPaymentMethodID,
-            statementDescriptor, minimumBalance);
+            statementDescriptor, minimumBalance, schedule);
     }
     
     @Override
@@ -187,7 +225,8 @@ public class PatchSweepConfig {
                 "pushPaymentMethodID", pushPaymentMethodID,
                 "pullPaymentMethodID", pullPaymentMethodID,
                 "statementDescriptor", statementDescriptor,
-                "minimumBalance", minimumBalance);
+                "minimumBalance", minimumBalance,
+                "schedule", schedule);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -202,6 +241,8 @@ public class PatchSweepConfig {
         private JsonNullable<String> statementDescriptor = JsonNullable.undefined();
 
         private JsonNullable<String> minimumBalance = JsonNullable.undefined();
+
+        private JsonNullable<? extends Schedule> schedule = JsonNullable.undefined();
 
         private Builder() {
           // force use of static builder() method
@@ -272,11 +313,30 @@ public class PatchSweepConfig {
             return this;
         }
 
+
+        /**
+         * Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days.
+         */
+        public Builder schedule(Schedule schedule) {
+            Utils.checkNotNull(schedule, "schedule");
+            this.schedule = JsonNullable.of(schedule);
+            return this;
+        }
+
+        /**
+         * Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days.
+         */
+        public Builder schedule(JsonNullable<? extends Schedule> schedule) {
+            Utils.checkNotNull(schedule, "schedule");
+            this.schedule = schedule;
+            return this;
+        }
+
         public PatchSweepConfig build() {
 
             return new PatchSweepConfig(
                 status, pushPaymentMethodID, pullPaymentMethodID,
-                statementDescriptor, minimumBalance);
+                statementDescriptor, minimumBalance, schedule);
         }
 
     }

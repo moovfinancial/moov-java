@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * ScheduleWindow
  * 
- * <p>A window of time during which the card may authorize.
+ * <p>A window of time during which authorizations on the card can be approved.
  */
 public class ScheduleWindow {
     /**

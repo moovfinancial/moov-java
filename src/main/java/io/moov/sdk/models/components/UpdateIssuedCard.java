@@ -20,11 +20,11 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public class UpdateIssuedCard {
     /**
      * Updates the state of a Moov issued card.
-     * - `active`: Reactivates a frozen card so it can approve authorizations again.
-     * - `frozen`: Temporarily suspends the card so it cannot approve authorizations. A card can be moved
-     * between `frozen` and `active` at will until it is `closed`, which is a terminal state.
-     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
-     * closed by request or when it expires.
+     * - `active`: The card is operational and authorizations can be approved.
+     * - `frozen`: The card is temporarily suspended and authorizations cannot be approved. Set the state
+     * back to `active` to reactivate it. A card can move between `frozen` and `active` as often as needed.
+     * - `closed`: The card is permanently deactivated. A card is closed by request or when it expires, and
+     * cannot be reopened.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("state")
@@ -68,11 +68,11 @@ public class UpdateIssuedCard {
 
     /**
      * Updates the state of a Moov issued card.
-     * - `active`: Reactivates a frozen card so it can approve authorizations again.
-     * - `frozen`: Temporarily suspends the card so it cannot approve authorizations. A card can be moved
-     * between `frozen` and `active` at will until it is `closed`, which is a terminal state.
-     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
-     * closed by request or when it expires.
+     * - `active`: The card is operational and authorizations can be approved.
+     * - `frozen`: The card is temporarily suspended and authorizations cannot be approved. Set the state
+     * back to `active` to reactivate it. A card can move between `frozen` and `active` as often as needed.
+     * - `closed`: The card is permanently deactivated. A card is closed by request or when it expires, and
+     * cannot be reopened.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -104,11 +104,11 @@ public class UpdateIssuedCard {
 
     /**
      * Updates the state of a Moov issued card.
-     * - `active`: Reactivates a frozen card so it can approve authorizations again.
-     * - `frozen`: Temporarily suspends the card so it cannot approve authorizations. A card can be moved
-     * between `frozen` and `active` at will until it is `closed`, which is a terminal state.
-     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
-     * closed by request or when it expires.
+     * - `active`: The card is operational and authorizations can be approved.
+     * - `frozen`: The card is temporarily suspended and authorizations cannot be approved. Set the state
+     * back to `active` to reactivate it. A card can move between `frozen` and `active` as often as needed.
+     * - `closed`: The card is permanently deactivated. A card is closed by request or when it expires, and
+     * cannot be reopened.
      */
     public UpdateIssuedCard withState(UpdateIssuedCardState state) {
         Utils.checkNotNull(state, "state");
@@ -119,11 +119,11 @@ public class UpdateIssuedCard {
 
     /**
      * Updates the state of a Moov issued card.
-     * - `active`: Reactivates a frozen card so it can approve authorizations again.
-     * - `frozen`: Temporarily suspends the card so it cannot approve authorizations. A card can be moved
-     * between `frozen` and `active` at will until it is `closed`, which is a terminal state.
-     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
-     * closed by request or when it expires.
+     * - `active`: The card is operational and authorizations can be approved.
+     * - `frozen`: The card is temporarily suspended and authorizations cannot be approved. Set the state
+     * back to `active` to reactivate it. A card can move between `frozen` and `active` as often as needed.
+     * - `closed`: The card is permanently deactivated. A card is closed by request or when it expires, and
+     * cannot be reopened.
      */
     public UpdateIssuedCard withState(Optional<? extends UpdateIssuedCardState> state) {
         Utils.checkNotNull(state, "state");
@@ -217,11 +217,11 @@ public class UpdateIssuedCard {
 
         /**
          * Updates the state of a Moov issued card.
-         * - `active`: Reactivates a frozen card so it can approve authorizations again.
-         * - `frozen`: Temporarily suspends the card so it cannot approve authorizations. A card can be moved
-         * between `frozen` and `active` at will until it is `closed`, which is a terminal state.
-         * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
-         * closed by request or when it expires.
+         * - `active`: The card is operational and authorizations can be approved.
+         * - `frozen`: The card is temporarily suspended and authorizations cannot be approved. Set the state
+         * back to `active` to reactivate it. A card can move between `frozen` and `active` as often as needed.
+         * - `closed`: The card is permanently deactivated. A card is closed by request or when it expires, and
+         * cannot be reopened.
          */
         public Builder state(UpdateIssuedCardState state) {
             Utils.checkNotNull(state, "state");
@@ -231,11 +231,11 @@ public class UpdateIssuedCard {
 
         /**
          * Updates the state of a Moov issued card.
-         * - `active`: Reactivates a frozen card so it can approve authorizations again.
-         * - `frozen`: Temporarily suspends the card so it cannot approve authorizations. A card can be moved
-         * between `frozen` and `active` at will until it is `closed`, which is a terminal state.
-         * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
-         * closed by request or when it expires.
+         * - `active`: The card is operational and authorizations can be approved.
+         * - `frozen`: The card is temporarily suspended and authorizations cannot be approved. Set the state
+         * back to `active` to reactivate it. A card can move between `frozen` and `active` as often as needed.
+         * - `closed`: The card is permanently deactivated. A card is closed by request or when it expires, and
+         * cannot be reopened.
          */
         public Builder state(Optional<? extends UpdateIssuedCardState> state) {
             Utils.checkNotNull(state, "state");

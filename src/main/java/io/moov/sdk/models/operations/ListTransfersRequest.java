@@ -108,6 +108,14 @@ public class ListTransfersRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
 
+    /**
+     * Opaque cursor from a previous response's `X-Next-Cursor` header. Reuse the same filters and `count`
+     * between pages.
+     * Cannot be combined with a nonzero `skip`.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=cursor")
+    private Optional<String> cursor;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
@@ -129,6 +137,7 @@ public class ListTransfersRequest {
             Optional<? extends List<String>> captureIDs,
             Optional<Long> skip,
             Optional<Long> count,
+            Optional<String> cursor,
             String accountID) {
         Utils.checkNotNull(accountIDs, "accountIDs");
         Utils.checkNotNull(status, "status");
@@ -145,6 +154,7 @@ public class ListTransfersRequest {
         Utils.checkNotNull(captureIDs, "captureIDs");
         Utils.checkNotNull(skip, "skip");
         Utils.checkNotNull(count, "count");
+        Utils.checkNotNull(cursor, "cursor");
         Utils.checkNotNull(accountID, "accountID");
         this.accountIDs = accountIDs;
         this.status = status;
@@ -161,6 +171,7 @@ public class ListTransfersRequest {
         this.captureIDs = captureIDs;
         this.skip = skip;
         this.count = count;
+        this.cursor = cursor;
         this.accountID = accountID;
     }
     
@@ -171,7 +182,7 @@ public class ListTransfersRequest {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            accountID);
+            Optional.empty(), accountID);
     }
 
     /**
@@ -295,6 +306,16 @@ public class ListTransfersRequest {
     @JsonIgnore
     public Optional<Long> count() {
         return count;
+    }
+
+    /**
+     * Opaque cursor from a previous response's `X-Next-Cursor` header. Reuse the same filters and `count`
+     * between pages.
+     * Cannot be combined with a nonzero `skip`.
+     */
+    @JsonIgnore
+    public Optional<String> cursor() {
+        return cursor;
     }
 
     @JsonIgnore
@@ -588,6 +609,29 @@ public class ListTransfersRequest {
         return this;
     }
 
+    /**
+     * Opaque cursor from a previous response's `X-Next-Cursor` header. Reuse the same filters and `count`
+     * between pages.
+     * Cannot be combined with a nonzero `skip`.
+     */
+    public ListTransfersRequest withCursor(String cursor) {
+        Utils.checkNotNull(cursor, "cursor");
+        this.cursor = Optional.ofNullable(cursor);
+        return this;
+    }
+
+
+    /**
+     * Opaque cursor from a previous response's `X-Next-Cursor` header. Reuse the same filters and `count`
+     * between pages.
+     * Cannot be combined with a nonzero `skip`.
+     */
+    public ListTransfersRequest withCursor(Optional<String> cursor) {
+        Utils.checkNotNull(cursor, "cursor");
+        this.cursor = cursor;
+        return this;
+    }
+
     public ListTransfersRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
@@ -619,6 +663,7 @@ public class ListTransfersRequest {
             Utils.enhancedDeepEquals(this.captureIDs, other.captureIDs) &&
             Utils.enhancedDeepEquals(this.skip, other.skip) &&
             Utils.enhancedDeepEquals(this.count, other.count) &&
+            Utils.enhancedDeepEquals(this.cursor, other.cursor) &&
             Utils.enhancedDeepEquals(this.accountID, other.accountID);
     }
     
@@ -630,7 +675,7 @@ public class ListTransfersRequest {
             paymentLinkCode, refunded, disputed,
             foreignID, authorizationIDs, invoiceIDs,
             captureIDs, skip, count,
-            accountID);
+            cursor, accountID);
     }
     
     @Override
@@ -651,6 +696,7 @@ public class ListTransfersRequest {
                 "captureIDs", captureIDs,
                 "skip", skip,
                 "count", count,
+                "cursor", cursor,
                 "accountID", accountID);
     }
 
@@ -686,6 +732,8 @@ public class ListTransfersRequest {
         private Optional<Long> skip = Optional.empty();
 
         private Optional<Long> count = Optional.empty();
+
+        private Optional<String> cursor = Optional.empty();
 
         private String accountID;
 
@@ -975,6 +1023,29 @@ public class ListTransfersRequest {
         }
 
 
+        /**
+         * Opaque cursor from a previous response's `X-Next-Cursor` header. Reuse the same filters and `count`
+         * between pages.
+         * Cannot be combined with a nonzero `skip`.
+         */
+        public Builder cursor(String cursor) {
+            Utils.checkNotNull(cursor, "cursor");
+            this.cursor = Optional.ofNullable(cursor);
+            return this;
+        }
+
+        /**
+         * Opaque cursor from a previous response's `X-Next-Cursor` header. Reuse the same filters and `count`
+         * between pages.
+         * Cannot be combined with a nonzero `skip`.
+         */
+        public Builder cursor(Optional<String> cursor) {
+            Utils.checkNotNull(cursor, "cursor");
+            this.cursor = cursor;
+            return this;
+        }
+
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
@@ -989,7 +1060,7 @@ public class ListTransfersRequest {
                 paymentLinkCode, refunded, disputed,
                 foreignID, authorizationIDs, invoiceIDs,
                 captureIDs, skip, count,
-                accountID);
+                cursor, accountID);
         }
 
     }

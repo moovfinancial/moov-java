@@ -41,6 +41,12 @@ public class ListIssuedCardAuthorizationsRequest {
     private Optional<String> issuedCardID;
 
     /**
+     * Optional identifier for the account of the card's authorized user.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=authorizedUserAccountID")
+    private Optional<String> authorizedUserAccountID;
+
+    /**
      * Optional date-time which inclusively filters all authorizations created after this date-time.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=startDateTime")
@@ -64,6 +70,7 @@ public class ListIssuedCardAuthorizationsRequest {
             Optional<Long> skip,
             Optional<Long> count,
             Optional<String> issuedCardID,
+            Optional<String> authorizedUserAccountID,
             Optional<OffsetDateTime> startDateTime,
             Optional<OffsetDateTime> endDateTime,
             Optional<? extends List<IssuingAuthorizationStatus>> statuses) {
@@ -71,6 +78,7 @@ public class ListIssuedCardAuthorizationsRequest {
         Utils.checkNotNull(skip, "skip");
         Utils.checkNotNull(count, "count");
         Utils.checkNotNull(issuedCardID, "issuedCardID");
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
         Utils.checkNotNull(startDateTime, "startDateTime");
         Utils.checkNotNull(endDateTime, "endDateTime");
         Utils.checkNotNull(statuses, "statuses");
@@ -78,6 +86,7 @@ public class ListIssuedCardAuthorizationsRequest {
         this.skip = skip;
         this.count = count;
         this.issuedCardID = issuedCardID;
+        this.authorizedUserAccountID = authorizedUserAccountID;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.statuses = statuses;
@@ -87,7 +96,7 @@ public class ListIssuedCardAuthorizationsRequest {
             String accountID) {
         this(accountID, Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -117,6 +126,14 @@ public class ListIssuedCardAuthorizationsRequest {
     @JsonIgnore
     public Optional<String> issuedCardID() {
         return issuedCardID;
+    }
+
+    /**
+     * Optional identifier for the account of the card's authorized user.
+     */
+    @JsonIgnore
+    public Optional<String> authorizedUserAccountID() {
+        return authorizedUserAccountID;
     }
 
     /**
@@ -210,6 +227,25 @@ public class ListIssuedCardAuthorizationsRequest {
     }
 
     /**
+     * Optional identifier for the account of the card's authorized user.
+     */
+    public ListIssuedCardAuthorizationsRequest withAuthorizedUserAccountID(String authorizedUserAccountID) {
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+        this.authorizedUserAccountID = Optional.ofNullable(authorizedUserAccountID);
+        return this;
+    }
+
+
+    /**
+     * Optional identifier for the account of the card's authorized user.
+     */
+    public ListIssuedCardAuthorizationsRequest withAuthorizedUserAccountID(Optional<String> authorizedUserAccountID) {
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+        this.authorizedUserAccountID = authorizedUserAccountID;
+        return this;
+    }
+
+    /**
      * Optional date-time which inclusively filters all authorizations created after this date-time.
      */
     public ListIssuedCardAuthorizationsRequest withStartDateTime(OffsetDateTime startDateTime) {
@@ -280,6 +316,7 @@ public class ListIssuedCardAuthorizationsRequest {
             Utils.enhancedDeepEquals(this.skip, other.skip) &&
             Utils.enhancedDeepEquals(this.count, other.count) &&
             Utils.enhancedDeepEquals(this.issuedCardID, other.issuedCardID) &&
+            Utils.enhancedDeepEquals(this.authorizedUserAccountID, other.authorizedUserAccountID) &&
             Utils.enhancedDeepEquals(this.startDateTime, other.startDateTime) &&
             Utils.enhancedDeepEquals(this.endDateTime, other.endDateTime) &&
             Utils.enhancedDeepEquals(this.statuses, other.statuses);
@@ -289,8 +326,8 @@ public class ListIssuedCardAuthorizationsRequest {
     public int hashCode() {
         return Utils.enhancedHash(
             accountID, skip, count,
-            issuedCardID, startDateTime, endDateTime,
-            statuses);
+            issuedCardID, authorizedUserAccountID, startDateTime,
+            endDateTime, statuses);
     }
     
     @Override
@@ -300,6 +337,7 @@ public class ListIssuedCardAuthorizationsRequest {
                 "skip", skip,
                 "count", count,
                 "issuedCardID", issuedCardID,
+                "authorizedUserAccountID", authorizedUserAccountID,
                 "startDateTime", startDateTime,
                 "endDateTime", endDateTime,
                 "statuses", statuses);
@@ -315,6 +353,8 @@ public class ListIssuedCardAuthorizationsRequest {
         private Optional<Long> count = Optional.empty();
 
         private Optional<String> issuedCardID = Optional.empty();
+
+        private Optional<String> authorizedUserAccountID = Optional.empty();
 
         private Optional<OffsetDateTime> startDateTime = Optional.empty();
 
@@ -389,6 +429,25 @@ public class ListIssuedCardAuthorizationsRequest {
 
 
         /**
+         * Optional identifier for the account of the card's authorized user.
+         */
+        public Builder authorizedUserAccountID(String authorizedUserAccountID) {
+            Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+            this.authorizedUserAccountID = Optional.ofNullable(authorizedUserAccountID);
+            return this;
+        }
+
+        /**
+         * Optional identifier for the account of the card's authorized user.
+         */
+        public Builder authorizedUserAccountID(Optional<String> authorizedUserAccountID) {
+            Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+            this.authorizedUserAccountID = authorizedUserAccountID;
+            return this;
+        }
+
+
+        /**
          * Optional date-time which inclusively filters all authorizations created after this date-time.
          */
         public Builder startDateTime(OffsetDateTime startDateTime) {
@@ -448,8 +507,8 @@ public class ListIssuedCardAuthorizationsRequest {
 
             return new ListIssuedCardAuthorizationsRequest(
                 accountID, skip, count,
-                issuedCardID, startDateTime, endDateTime,
-                statuses);
+                issuedCardID, authorizedUserAccountID, startDateTime,
+                endDateTime, statuses);
         }
 
     }

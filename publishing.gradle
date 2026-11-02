@@ -47,7 +47,7 @@ afterEvaluate {
                     description = config.description
                     url = 'https://github.com/moovfinancial/moov-java'
                     scm {
-                        url = 'github.com/moovfinancial/moov-java'
+                        url = 'https://github.com/moovfinancial/moov-java'
                         connection = 'scm:git:ssh://git@github.com/moovfinancial/moov-java.git'
                     }
                     licenses {

@@ -62,11 +62,6 @@ public class CaptureValidationError extends MoovError {
     }
 
     @Deprecated
-    public Optional<String> destinationPaymentMethodID() {
-        return data().flatMap(Data::destinationPaymentMethodID);
-    }
-
-    @Deprecated
     public Optional<AmountDecimalValidationError> amount() {
         return data().flatMap(Data::amount);
     }
@@ -124,11 +119,6 @@ public class CaptureValidationError extends MoovError {
     public static class Data {
 
         @JsonInclude(Include.NON_ABSENT)
-        @JsonProperty("destinationPaymentMethodID")
-        private Optional<String> destinationPaymentMethodID;
-
-
-        @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("amount")
         private Optional<? extends AmountDecimalValidationError> amount;
 
@@ -169,7 +159,6 @@ public class CaptureValidationError extends MoovError {
 
         @JsonCreator
         public Data(
-                @JsonProperty("destinationPaymentMethodID") Optional<String> destinationPaymentMethodID,
                 @JsonProperty("amount") Optional<? extends AmountDecimalValidationError> amount,
                 @JsonProperty("isFinal") Optional<String> isFinal,
                 @JsonProperty("description") Optional<String> description,
@@ -178,7 +167,6 @@ public class CaptureValidationError extends MoovError {
                 @JsonProperty("foreignID") Optional<String> foreignID,
                 @JsonProperty("lineItems") Optional<? extends CreateTransferLineItemsValidationError> lineItems,
                 @JsonProperty("amountDetails") Optional<? extends CreateTransferAmountDetailsValidationError> amountDetails) {
-            Utils.checkNotNull(destinationPaymentMethodID, "destinationPaymentMethodID");
             Utils.checkNotNull(amount, "amount");
             Utils.checkNotNull(isFinal, "isFinal");
             Utils.checkNotNull(description, "description");
@@ -187,7 +175,6 @@ public class CaptureValidationError extends MoovError {
             Utils.checkNotNull(foreignID, "foreignID");
             Utils.checkNotNull(lineItems, "lineItems");
             Utils.checkNotNull(amountDetails, "amountDetails");
-            this.destinationPaymentMethodID = destinationPaymentMethodID;
             this.amount = amount;
             this.isFinal = isFinal;
             this.description = description;
@@ -201,12 +188,7 @@ public class CaptureValidationError extends MoovError {
         public Data() {
             this(Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty(), Optional.empty(), Optional.empty());
-        }
-
-        @JsonIgnore
-        public Optional<String> destinationPaymentMethodID() {
-            return destinationPaymentMethodID;
+                Optional.empty(), Optional.empty());
         }
 
         @SuppressWarnings("unchecked")
@@ -257,19 +239,6 @@ public class CaptureValidationError extends MoovError {
             return new Builder();
         }
 
-
-        public Data withDestinationPaymentMethodID(String destinationPaymentMethodID) {
-            Utils.checkNotNull(destinationPaymentMethodID, "destinationPaymentMethodID");
-            this.destinationPaymentMethodID = Optional.ofNullable(destinationPaymentMethodID);
-            return this;
-        }
-
-
-        public Data withDestinationPaymentMethodID(Optional<String> destinationPaymentMethodID) {
-            Utils.checkNotNull(destinationPaymentMethodID, "destinationPaymentMethodID");
-            this.destinationPaymentMethodID = destinationPaymentMethodID;
-            return this;
-        }
 
         public Data withAmount(AmountDecimalValidationError amount) {
             Utils.checkNotNull(amount, "amount");
@@ -385,7 +354,6 @@ public class CaptureValidationError extends MoovError {
             }
             Data other = (Data) o;
             return 
-                Utils.enhancedDeepEquals(this.destinationPaymentMethodID, other.destinationPaymentMethodID) &&
                 Utils.enhancedDeepEquals(this.amount, other.amount) &&
                 Utils.enhancedDeepEquals(this.isFinal, other.isFinal) &&
                 Utils.enhancedDeepEquals(this.description, other.description) &&
@@ -399,15 +367,14 @@ public class CaptureValidationError extends MoovError {
         @Override
         public int hashCode() {
             return Utils.enhancedHash(
-                destinationPaymentMethodID, amount, isFinal,
-                description, facilitatorFeeAmount, metadata,
-                foreignID, lineItems, amountDetails);
+                amount, isFinal, description,
+                facilitatorFeeAmount, metadata, foreignID,
+                lineItems, amountDetails);
         }
         
         @Override
         public String toString() {
             return Utils.toString(Data.class,
-                    "destinationPaymentMethodID", destinationPaymentMethodID,
                     "amount", amount,
                     "isFinal", isFinal,
                     "description", description,
@@ -420,8 +387,6 @@ public class CaptureValidationError extends MoovError {
 
         @SuppressWarnings("UnusedReturnValue")
         public final static class Builder {
-
-            private Optional<String> destinationPaymentMethodID = Optional.empty();
 
             private Optional<? extends AmountDecimalValidationError> amount = Optional.empty();
 
@@ -441,19 +406,6 @@ public class CaptureValidationError extends MoovError {
 
             private Builder() {
               // force use of static builder() method
-            }
-
-
-            public Builder destinationPaymentMethodID(String destinationPaymentMethodID) {
-                Utils.checkNotNull(destinationPaymentMethodID, "destinationPaymentMethodID");
-                this.destinationPaymentMethodID = Optional.ofNullable(destinationPaymentMethodID);
-                return this;
-            }
-
-            public Builder destinationPaymentMethodID(Optional<String> destinationPaymentMethodID) {
-                Utils.checkNotNull(destinationPaymentMethodID, "destinationPaymentMethodID");
-                this.destinationPaymentMethodID = destinationPaymentMethodID;
-                return this;
             }
 
 
@@ -563,9 +515,9 @@ public class CaptureValidationError extends MoovError {
             public Data build() {
 
                 return new Data(
-                    destinationPaymentMethodID, amount, isFinal,
-                    description, facilitatorFeeAmount, metadata,
-                    foreignID, lineItems, amountDetails);
+                    amount, isFinal, description,
+                    facilitatorFeeAmount, metadata, foreignID,
+                    lineItems, amountDetails);
             }
 
         }

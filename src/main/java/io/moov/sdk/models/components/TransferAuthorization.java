@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -69,6 +70,14 @@ public class TransferAuthorization {
     @JsonProperty("expiresOn")
     private Optional<OffsetDateTime> expiresOn;
 
+    /**
+     * Whether the card network granted the extended authorization hold. Returned only when
+     * `options.cardPayment.isExtendedAuthorizationRequested` is `true`.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("isExtendedAuthorizationGranted")
+    private Optional<Boolean> isExtendedAuthorizationGranted;
+
     @JsonCreator
     public TransferAuthorization(
             @JsonProperty("authorizationID") String authorizationID,
@@ -77,7 +86,8 @@ public class TransferAuthorization {
             @JsonProperty("capturedAmount") AmountDecimal capturedAmount,
             @JsonProperty("capturableAmount") AmountDecimal capturableAmount,
             @JsonProperty("amountDetails") Optional<? extends TransferAmountDetails> amountDetails,
-            @JsonProperty("expiresOn") Optional<OffsetDateTime> expiresOn) {
+            @JsonProperty("expiresOn") Optional<OffsetDateTime> expiresOn,
+            @JsonProperty("isExtendedAuthorizationGranted") Optional<Boolean> isExtendedAuthorizationGranted) {
         Utils.checkNotNull(authorizationID, "authorizationID");
         Utils.checkNotNull(requestedAmount, "requestedAmount");
         Utils.checkNotNull(authorizedAmount, "authorizedAmount");
@@ -85,6 +95,7 @@ public class TransferAuthorization {
         Utils.checkNotNull(capturableAmount, "capturableAmount");
         Utils.checkNotNull(amountDetails, "amountDetails");
         Utils.checkNotNull(expiresOn, "expiresOn");
+        Utils.checkNotNull(isExtendedAuthorizationGranted, "isExtendedAuthorizationGranted");
         this.authorizationID = authorizationID;
         this.requestedAmount = requestedAmount;
         this.authorizedAmount = authorizedAmount;
@@ -92,6 +103,7 @@ public class TransferAuthorization {
         this.capturableAmount = capturableAmount;
         this.amountDetails = amountDetails;
         this.expiresOn = expiresOn;
+        this.isExtendedAuthorizationGranted = isExtendedAuthorizationGranted;
     }
     
     public TransferAuthorization(
@@ -102,7 +114,7 @@ public class TransferAuthorization {
             AmountDecimal capturableAmount) {
         this(authorizationID, requestedAmount, authorizedAmount,
             capturedAmount, capturableAmount, Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -164,6 +176,15 @@ public class TransferAuthorization {
     @JsonIgnore
     public Optional<OffsetDateTime> expiresOn() {
         return expiresOn;
+    }
+
+    /**
+     * Whether the card network granted the extended authorization hold. Returned only when
+     * `options.cardPayment.isExtendedAuthorizationRequested` is `true`.
+     */
+    @JsonIgnore
+    public Optional<Boolean> isExtendedAuthorizationGranted() {
+        return isExtendedAuthorizationGranted;
     }
 
     public static Builder builder() {
@@ -262,6 +283,27 @@ public class TransferAuthorization {
         return this;
     }
 
+    /**
+     * Whether the card network granted the extended authorization hold. Returned only when
+     * `options.cardPayment.isExtendedAuthorizationRequested` is `true`.
+     */
+    public TransferAuthorization withIsExtendedAuthorizationGranted(boolean isExtendedAuthorizationGranted) {
+        Utils.checkNotNull(isExtendedAuthorizationGranted, "isExtendedAuthorizationGranted");
+        this.isExtendedAuthorizationGranted = Optional.ofNullable(isExtendedAuthorizationGranted);
+        return this;
+    }
+
+
+    /**
+     * Whether the card network granted the extended authorization hold. Returned only when
+     * `options.cardPayment.isExtendedAuthorizationRequested` is `true`.
+     */
+    public TransferAuthorization withIsExtendedAuthorizationGranted(Optional<Boolean> isExtendedAuthorizationGranted) {
+        Utils.checkNotNull(isExtendedAuthorizationGranted, "isExtendedAuthorizationGranted");
+        this.isExtendedAuthorizationGranted = isExtendedAuthorizationGranted;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -278,7 +320,8 @@ public class TransferAuthorization {
             Utils.enhancedDeepEquals(this.capturedAmount, other.capturedAmount) &&
             Utils.enhancedDeepEquals(this.capturableAmount, other.capturableAmount) &&
             Utils.enhancedDeepEquals(this.amountDetails, other.amountDetails) &&
-            Utils.enhancedDeepEquals(this.expiresOn, other.expiresOn);
+            Utils.enhancedDeepEquals(this.expiresOn, other.expiresOn) &&
+            Utils.enhancedDeepEquals(this.isExtendedAuthorizationGranted, other.isExtendedAuthorizationGranted);
     }
     
     @Override
@@ -286,7 +329,7 @@ public class TransferAuthorization {
         return Utils.enhancedHash(
             authorizationID, requestedAmount, authorizedAmount,
             capturedAmount, capturableAmount, amountDetails,
-            expiresOn);
+            expiresOn, isExtendedAuthorizationGranted);
     }
     
     @Override
@@ -298,7 +341,8 @@ public class TransferAuthorization {
                 "capturedAmount", capturedAmount,
                 "capturableAmount", capturableAmount,
                 "amountDetails", amountDetails,
-                "expiresOn", expiresOn);
+                "expiresOn", expiresOn,
+                "isExtendedAuthorizationGranted", isExtendedAuthorizationGranted);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -317,6 +361,8 @@ public class TransferAuthorization {
         private Optional<? extends TransferAmountDetails> amountDetails = Optional.empty();
 
         private Optional<OffsetDateTime> expiresOn = Optional.empty();
+
+        private Optional<Boolean> isExtendedAuthorizationGranted = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -418,12 +464,33 @@ public class TransferAuthorization {
             return this;
         }
 
+
+        /**
+         * Whether the card network granted the extended authorization hold. Returned only when
+         * `options.cardPayment.isExtendedAuthorizationRequested` is `true`.
+         */
+        public Builder isExtendedAuthorizationGranted(boolean isExtendedAuthorizationGranted) {
+            Utils.checkNotNull(isExtendedAuthorizationGranted, "isExtendedAuthorizationGranted");
+            this.isExtendedAuthorizationGranted = Optional.ofNullable(isExtendedAuthorizationGranted);
+            return this;
+        }
+
+        /**
+         * Whether the card network granted the extended authorization hold. Returned only when
+         * `options.cardPayment.isExtendedAuthorizationRequested` is `true`.
+         */
+        public Builder isExtendedAuthorizationGranted(Optional<Boolean> isExtendedAuthorizationGranted) {
+            Utils.checkNotNull(isExtendedAuthorizationGranted, "isExtendedAuthorizationGranted");
+            this.isExtendedAuthorizationGranted = isExtendedAuthorizationGranted;
+            return this;
+        }
+
         public TransferAuthorization build() {
 
             return new TransferAuthorization(
                 authorizationID, requestedAmount, authorizedAmount,
                 capturedAmount, capturableAmount, amountDetails,
-                expiresOn);
+                expiresOn, isExtendedAuthorizationGranted);
         }
 
     }

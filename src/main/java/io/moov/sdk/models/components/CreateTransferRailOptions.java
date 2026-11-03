@@ -20,10 +20,12 @@ import java.util.Optional;
  * <p>Rail-specific options for a new transfer. Set only the key that matches the transfer's rail.
  */
 public class CreateTransferRailOptions {
-
+    /**
+     * Options for a new `card-payment` transfer.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardPayment")
-    private Optional<? extends CreateTransferSourceCard> cardPayment;
+    private Optional<? extends CreateCardPaymentOptions> cardPayment;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -54,7 +56,7 @@ public class CreateTransferRailOptions {
 
     @JsonCreator
     public CreateTransferRailOptions(
-            @JsonProperty("cardPayment") Optional<? extends CreateTransferSourceCard> cardPayment,
+            @JsonProperty("cardPayment") Optional<? extends CreateCardPaymentOptions> cardPayment,
             @JsonProperty("pushToCard") Optional<? extends CreateTransferDestinationCard> pushToCard,
             @JsonProperty("pullFromCard") Optional<? extends CreateTransferSourceCard> pullFromCard,
             @JsonProperty("achDebit") Optional<? extends CreateTransferSourceACH> achDebit,
@@ -79,10 +81,13 @@ public class CreateTransferRailOptions {
             Optional.empty(), Optional.empty(), Optional.empty());
     }
 
+    /**
+     * Options for a new `card-payment` transfer.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<CreateTransferSourceCard> cardPayment() {
-        return (Optional<CreateTransferSourceCard>) cardPayment;
+    public Optional<CreateCardPaymentOptions> cardPayment() {
+        return (Optional<CreateCardPaymentOptions>) cardPayment;
     }
 
     @SuppressWarnings("unchecked")
@@ -123,14 +128,20 @@ public class CreateTransferRailOptions {
     }
 
 
-    public CreateTransferRailOptions withCardPayment(CreateTransferSourceCard cardPayment) {
+    /**
+     * Options for a new `card-payment` transfer.
+     */
+    public CreateTransferRailOptions withCardPayment(CreateCardPaymentOptions cardPayment) {
         Utils.checkNotNull(cardPayment, "cardPayment");
         this.cardPayment = Optional.ofNullable(cardPayment);
         return this;
     }
 
 
-    public CreateTransferRailOptions withCardPayment(Optional<? extends CreateTransferSourceCard> cardPayment) {
+    /**
+     * Options for a new `card-payment` transfer.
+     */
+    public CreateTransferRailOptions withCardPayment(Optional<? extends CreateCardPaymentOptions> cardPayment) {
         Utils.checkNotNull(cardPayment, "cardPayment");
         this.cardPayment = cardPayment;
         return this;
@@ -246,7 +257,7 @@ public class CreateTransferRailOptions {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends CreateTransferSourceCard> cardPayment = Optional.empty();
+        private Optional<? extends CreateCardPaymentOptions> cardPayment = Optional.empty();
 
         private Optional<? extends CreateTransferDestinationCard> pushToCard = Optional.empty();
 
@@ -263,13 +274,19 @@ public class CreateTransferRailOptions {
         }
 
 
-        public Builder cardPayment(CreateTransferSourceCard cardPayment) {
+        /**
+         * Options for a new `card-payment` transfer.
+         */
+        public Builder cardPayment(CreateCardPaymentOptions cardPayment) {
             Utils.checkNotNull(cardPayment, "cardPayment");
             this.cardPayment = Optional.ofNullable(cardPayment);
             return this;
         }
 
-        public Builder cardPayment(Optional<? extends CreateTransferSourceCard> cardPayment) {
+        /**
+         * Options for a new `card-payment` transfer.
+         */
+        public Builder cardPayment(Optional<? extends CreateCardPaymentOptions> cardPayment) {
             Utils.checkNotNull(cardPayment, "cardPayment");
             this.cardPayment = cardPayment;
             return this;

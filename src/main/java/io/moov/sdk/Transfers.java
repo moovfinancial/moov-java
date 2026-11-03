@@ -226,7 +226,14 @@ public class Transfers {
      * process very slowly. To achieve faster performance, restrict the data as much as you can by using
      * the `StartDateTime` and `EndDateTime` parameters for a limited
      * period of time. You can run multiple requests in smaller time window increments until you've
-     * retrieved all the transfers you need.
+     * retrieved all the transfers you need. The maximum allowed value for
+     * `skip` is `200 000`.
+     * 
+     * <p>For large result sets, use cursor pagination instead of `skip`. When more transfers are available,
+     * the response includes an
+     * `X-Next-Cursor` header. Pass its value as the `cursor` query parameter, with the same filters and
+     * `count`, to retrieve the next page.
+     * `cursor` cannot be combined with a nonzero `skip`.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
@@ -251,7 +258,14 @@ public class Transfers {
      * process very slowly. To achieve faster performance, restrict the data as much as you can by using
      * the `StartDateTime` and `EndDateTime` parameters for a limited
      * period of time. You can run multiple requests in smaller time window increments until you've
-     * retrieved all the transfers you need.
+     * retrieved all the transfers you need. The maximum allowed value for
+     * `skip` is `200 000`.
+     * 
+     * <p>For large result sets, use cursor pagination instead of `skip`. When more transfers are available,
+     * the response includes an
+     * `X-Next-Cursor` header. Pass its value as the `cursor` query parameter, with the same filters and
+     * `count`, to retrieve the next page.
+     * `cursor` cannot be combined with a nonzero `skip`.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)

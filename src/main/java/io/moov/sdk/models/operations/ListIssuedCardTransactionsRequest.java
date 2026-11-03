@@ -38,6 +38,12 @@ public class ListIssuedCardTransactionsRequest {
     private Optional<String> issuedCardID;
 
     /**
+     * Optional identifier for the account of the card's authorized user.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=authorizedUserAccountID")
+    private Optional<String> authorizedUserAccountID;
+
+    /**
      * Optional case-insensitive substring match on the merchant name to filter results.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=merchantName")
@@ -61,6 +67,7 @@ public class ListIssuedCardTransactionsRequest {
             Optional<Long> skip,
             Optional<Long> count,
             Optional<String> issuedCardID,
+            Optional<String> authorizedUserAccountID,
             Optional<String> merchantName,
             Optional<OffsetDateTime> startDateTime,
             Optional<OffsetDateTime> endDateTime) {
@@ -68,6 +75,7 @@ public class ListIssuedCardTransactionsRequest {
         Utils.checkNotNull(skip, "skip");
         Utils.checkNotNull(count, "count");
         Utils.checkNotNull(issuedCardID, "issuedCardID");
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
         Utils.checkNotNull(merchantName, "merchantName");
         Utils.checkNotNull(startDateTime, "startDateTime");
         Utils.checkNotNull(endDateTime, "endDateTime");
@@ -75,6 +83,7 @@ public class ListIssuedCardTransactionsRequest {
         this.skip = skip;
         this.count = count;
         this.issuedCardID = issuedCardID;
+        this.authorizedUserAccountID = authorizedUserAccountID;
         this.merchantName = merchantName;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
@@ -84,7 +93,7 @@ public class ListIssuedCardTransactionsRequest {
             String accountID) {
         this(accountID, Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -114,6 +123,14 @@ public class ListIssuedCardTransactionsRequest {
     @JsonIgnore
     public Optional<String> issuedCardID() {
         return issuedCardID;
+    }
+
+    /**
+     * Optional identifier for the account of the card's authorized user.
+     */
+    @JsonIgnore
+    public Optional<String> authorizedUserAccountID() {
+        return authorizedUserAccountID;
     }
 
     /**
@@ -206,6 +223,25 @@ public class ListIssuedCardTransactionsRequest {
     }
 
     /**
+     * Optional identifier for the account of the card's authorized user.
+     */
+    public ListIssuedCardTransactionsRequest withAuthorizedUserAccountID(String authorizedUserAccountID) {
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+        this.authorizedUserAccountID = Optional.ofNullable(authorizedUserAccountID);
+        return this;
+    }
+
+
+    /**
+     * Optional identifier for the account of the card's authorized user.
+     */
+    public ListIssuedCardTransactionsRequest withAuthorizedUserAccountID(Optional<String> authorizedUserAccountID) {
+        Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+        this.authorizedUserAccountID = authorizedUserAccountID;
+        return this;
+    }
+
+    /**
      * Optional case-insensitive substring match on the merchant name to filter results.
      */
     public ListIssuedCardTransactionsRequest withMerchantName(String merchantName) {
@@ -276,6 +312,7 @@ public class ListIssuedCardTransactionsRequest {
             Utils.enhancedDeepEquals(this.skip, other.skip) &&
             Utils.enhancedDeepEquals(this.count, other.count) &&
             Utils.enhancedDeepEquals(this.issuedCardID, other.issuedCardID) &&
+            Utils.enhancedDeepEquals(this.authorizedUserAccountID, other.authorizedUserAccountID) &&
             Utils.enhancedDeepEquals(this.merchantName, other.merchantName) &&
             Utils.enhancedDeepEquals(this.startDateTime, other.startDateTime) &&
             Utils.enhancedDeepEquals(this.endDateTime, other.endDateTime);
@@ -285,8 +322,8 @@ public class ListIssuedCardTransactionsRequest {
     public int hashCode() {
         return Utils.enhancedHash(
             accountID, skip, count,
-            issuedCardID, merchantName, startDateTime,
-            endDateTime);
+            issuedCardID, authorizedUserAccountID, merchantName,
+            startDateTime, endDateTime);
     }
     
     @Override
@@ -296,6 +333,7 @@ public class ListIssuedCardTransactionsRequest {
                 "skip", skip,
                 "count", count,
                 "issuedCardID", issuedCardID,
+                "authorizedUserAccountID", authorizedUserAccountID,
                 "merchantName", merchantName,
                 "startDateTime", startDateTime,
                 "endDateTime", endDateTime);
@@ -311,6 +349,8 @@ public class ListIssuedCardTransactionsRequest {
         private Optional<Long> count = Optional.empty();
 
         private Optional<String> issuedCardID = Optional.empty();
+
+        private Optional<String> authorizedUserAccountID = Optional.empty();
 
         private Optional<String> merchantName = Optional.empty();
 
@@ -385,6 +425,25 @@ public class ListIssuedCardTransactionsRequest {
 
 
         /**
+         * Optional identifier for the account of the card's authorized user.
+         */
+        public Builder authorizedUserAccountID(String authorizedUserAccountID) {
+            Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+            this.authorizedUserAccountID = Optional.ofNullable(authorizedUserAccountID);
+            return this;
+        }
+
+        /**
+         * Optional identifier for the account of the card's authorized user.
+         */
+        public Builder authorizedUserAccountID(Optional<String> authorizedUserAccountID) {
+            Utils.checkNotNull(authorizedUserAccountID, "authorizedUserAccountID");
+            this.authorizedUserAccountID = authorizedUserAccountID;
+            return this;
+        }
+
+
+        /**
          * Optional case-insensitive substring match on the merchant name to filter results.
          */
         public Builder merchantName(String merchantName) {
@@ -444,8 +503,8 @@ public class ListIssuedCardTransactionsRequest {
 
             return new ListIssuedCardTransactionsRequest(
                 accountID, skip, count,
-                issuedCardID, merchantName, startDateTime,
-                endDateTime);
+                issuedCardID, authorizedUserAccountID, merchantName,
+                startDateTime, endDateTime);
         }
 
     }

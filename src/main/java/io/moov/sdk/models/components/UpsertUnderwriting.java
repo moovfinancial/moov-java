@@ -61,7 +61,11 @@ public class UpsertUnderwriting {
     @JsonProperty("cardIssuing")
     private Optional<? extends CardIssuing> cardIssuing;
 
-
+    /**
+     * For most use cases, you can omit `submissionIntent`. Set it to `wait` to pause the account's
+     * underwriting approval process until you send a subsequent request with `submissionIntent` set to
+     * `submit`.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("submissionIntent")
     private Optional<? extends SubmissionIntent> submissionIntent;
@@ -157,6 +161,11 @@ public class UpsertUnderwriting {
         return (Optional<CardIssuing>) cardIssuing;
     }
 
+    /**
+     * For most use cases, you can omit `submissionIntent`. Set it to `wait` to pause the account's
+     * underwriting approval process until you send a subsequent request with `submissionIntent` set to
+     * `submit`.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<SubmissionIntent> submissionIntent() {
@@ -284,6 +293,11 @@ public class UpsertUnderwriting {
         return this;
     }
 
+    /**
+     * For most use cases, you can omit `submissionIntent`. Set it to `wait` to pause the account's
+     * underwriting approval process until you send a subsequent request with `submissionIntent` set to
+     * `submit`.
+     */
     public UpsertUnderwriting withSubmissionIntent(SubmissionIntent submissionIntent) {
         Utils.checkNotNull(submissionIntent, "submissionIntent");
         this.submissionIntent = Optional.ofNullable(submissionIntent);
@@ -291,6 +305,11 @@ public class UpsertUnderwriting {
     }
 
 
+    /**
+     * For most use cases, you can omit `submissionIntent`. Set it to `wait` to pause the account's
+     * underwriting approval process until you send a subsequent request with `submissionIntent` set to
+     * `submit`.
+     */
     public UpsertUnderwriting withSubmissionIntent(Optional<? extends SubmissionIntent> submissionIntent) {
         Utils.checkNotNull(submissionIntent, "submissionIntent");
         this.submissionIntent = submissionIntent;
@@ -482,12 +501,22 @@ public class UpsertUnderwriting {
         }
 
 
+        /**
+         * For most use cases, you can omit `submissionIntent`. Set it to `wait` to pause the account's
+         * underwriting approval process until you send a subsequent request with `submissionIntent` set to
+         * `submit`.
+         */
         public Builder submissionIntent(SubmissionIntent submissionIntent) {
             Utils.checkNotNull(submissionIntent, "submissionIntent");
             this.submissionIntent = Optional.ofNullable(submissionIntent);
             return this;
         }
 
+        /**
+         * For most use cases, you can omit `submissionIntent`. Set it to `wait` to pause the account's
+         * underwriting approval process until you send a subsequent request with `submissionIntent` set to
+         * `submit`.
+         */
         public Builder submissionIntent(Optional<? extends SubmissionIntent> submissionIntent) {
             Utils.checkNotNull(submissionIntent, "submissionIntent");
             this.submissionIntent = submissionIntent;

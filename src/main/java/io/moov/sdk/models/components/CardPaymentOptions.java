@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -34,18 +35,49 @@ public class CardPaymentOptions {
     @JsonProperty("transactionSource")
     private Optional<? extends TransactionSource> transactionSource;
 
+    /**
+     * When funds for a `card-payment` transfer are captured.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("captureMethod")
+    private Optional<? extends CaptureMethod> captureMethod;
+
+    /**
+     * Whether an extended authorization hold was requested.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("isExtendedAuthorizationRequested")
+    private Optional<Boolean> isExtendedAuthorizationRequested;
+
+    /**
+     * Whether the authorization was flagged as an estimate.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("isEstimatedAuthorization")
+    private Optional<Boolean> isEstimatedAuthorization;
+
     @JsonCreator
     public CardPaymentOptions(
             @JsonProperty("dynamicDescriptor") Optional<String> dynamicDescriptor,
-            @JsonProperty("transactionSource") Optional<? extends TransactionSource> transactionSource) {
+            @JsonProperty("transactionSource") Optional<? extends TransactionSource> transactionSource,
+            @JsonProperty("captureMethod") Optional<? extends CaptureMethod> captureMethod,
+            @JsonProperty("isExtendedAuthorizationRequested") Optional<Boolean> isExtendedAuthorizationRequested,
+            @JsonProperty("isEstimatedAuthorization") Optional<Boolean> isEstimatedAuthorization) {
         Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");
         Utils.checkNotNull(transactionSource, "transactionSource");
+        Utils.checkNotNull(captureMethod, "captureMethod");
+        Utils.checkNotNull(isExtendedAuthorizationRequested, "isExtendedAuthorizationRequested");
+        Utils.checkNotNull(isEstimatedAuthorization, "isEstimatedAuthorization");
         this.dynamicDescriptor = dynamicDescriptor;
         this.transactionSource = transactionSource;
+        this.captureMethod = captureMethod;
+        this.isExtendedAuthorizationRequested = isExtendedAuthorizationRequested;
+        this.isEstimatedAuthorization = isEstimatedAuthorization;
     }
     
     public CardPaymentOptions() {
-        this(Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -67,6 +99,31 @@ public class CardPaymentOptions {
     @JsonIgnore
     public Optional<TransactionSource> transactionSource() {
         return (Optional<TransactionSource>) transactionSource;
+    }
+
+    /**
+     * When funds for a `card-payment` transfer are captured.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<CaptureMethod> captureMethod() {
+        return (Optional<CaptureMethod>) captureMethod;
+    }
+
+    /**
+     * Whether an extended authorization hold was requested.
+     */
+    @JsonIgnore
+    public Optional<Boolean> isExtendedAuthorizationRequested() {
+        return isExtendedAuthorizationRequested;
+    }
+
+    /**
+     * Whether the authorization was flagged as an estimate.
+     */
+    @JsonIgnore
+    public Optional<Boolean> isEstimatedAuthorization() {
+        return isEstimatedAuthorization;
     }
 
     public static Builder builder() {
@@ -120,6 +177,63 @@ public class CardPaymentOptions {
         return this;
     }
 
+    /**
+     * When funds for a `card-payment` transfer are captured.
+     */
+    public CardPaymentOptions withCaptureMethod(CaptureMethod captureMethod) {
+        Utils.checkNotNull(captureMethod, "captureMethod");
+        this.captureMethod = Optional.ofNullable(captureMethod);
+        return this;
+    }
+
+
+    /**
+     * When funds for a `card-payment` transfer are captured.
+     */
+    public CardPaymentOptions withCaptureMethod(Optional<? extends CaptureMethod> captureMethod) {
+        Utils.checkNotNull(captureMethod, "captureMethod");
+        this.captureMethod = captureMethod;
+        return this;
+    }
+
+    /**
+     * Whether an extended authorization hold was requested.
+     */
+    public CardPaymentOptions withIsExtendedAuthorizationRequested(boolean isExtendedAuthorizationRequested) {
+        Utils.checkNotNull(isExtendedAuthorizationRequested, "isExtendedAuthorizationRequested");
+        this.isExtendedAuthorizationRequested = Optional.ofNullable(isExtendedAuthorizationRequested);
+        return this;
+    }
+
+
+    /**
+     * Whether an extended authorization hold was requested.
+     */
+    public CardPaymentOptions withIsExtendedAuthorizationRequested(Optional<Boolean> isExtendedAuthorizationRequested) {
+        Utils.checkNotNull(isExtendedAuthorizationRequested, "isExtendedAuthorizationRequested");
+        this.isExtendedAuthorizationRequested = isExtendedAuthorizationRequested;
+        return this;
+    }
+
+    /**
+     * Whether the authorization was flagged as an estimate.
+     */
+    public CardPaymentOptions withIsEstimatedAuthorization(boolean isEstimatedAuthorization) {
+        Utils.checkNotNull(isEstimatedAuthorization, "isEstimatedAuthorization");
+        this.isEstimatedAuthorization = Optional.ofNullable(isEstimatedAuthorization);
+        return this;
+    }
+
+
+    /**
+     * Whether the authorization was flagged as an estimate.
+     */
+    public CardPaymentOptions withIsEstimatedAuthorization(Optional<Boolean> isEstimatedAuthorization) {
+        Utils.checkNotNull(isEstimatedAuthorization, "isEstimatedAuthorization");
+        this.isEstimatedAuthorization = isEstimatedAuthorization;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -131,20 +245,27 @@ public class CardPaymentOptions {
         CardPaymentOptions other = (CardPaymentOptions) o;
         return 
             Utils.enhancedDeepEquals(this.dynamicDescriptor, other.dynamicDescriptor) &&
-            Utils.enhancedDeepEquals(this.transactionSource, other.transactionSource);
+            Utils.enhancedDeepEquals(this.transactionSource, other.transactionSource) &&
+            Utils.enhancedDeepEquals(this.captureMethod, other.captureMethod) &&
+            Utils.enhancedDeepEquals(this.isExtendedAuthorizationRequested, other.isExtendedAuthorizationRequested) &&
+            Utils.enhancedDeepEquals(this.isEstimatedAuthorization, other.isEstimatedAuthorization);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            dynamicDescriptor, transactionSource);
+            dynamicDescriptor, transactionSource, captureMethod,
+            isExtendedAuthorizationRequested, isEstimatedAuthorization);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CardPaymentOptions.class,
                 "dynamicDescriptor", dynamicDescriptor,
-                "transactionSource", transactionSource);
+                "transactionSource", transactionSource,
+                "captureMethod", captureMethod,
+                "isExtendedAuthorizationRequested", isExtendedAuthorizationRequested,
+                "isEstimatedAuthorization", isEstimatedAuthorization);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -153,6 +274,12 @@ public class CardPaymentOptions {
         private Optional<String> dynamicDescriptor = Optional.empty();
 
         private Optional<? extends TransactionSource> transactionSource = Optional.empty();
+
+        private Optional<? extends CaptureMethod> captureMethod = Optional.empty();
+
+        private Optional<Boolean> isExtendedAuthorizationRequested = Optional.empty();
+
+        private Optional<Boolean> isEstimatedAuthorization = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -204,10 +331,68 @@ public class CardPaymentOptions {
             return this;
         }
 
+
+        /**
+         * When funds for a `card-payment` transfer are captured.
+         */
+        public Builder captureMethod(CaptureMethod captureMethod) {
+            Utils.checkNotNull(captureMethod, "captureMethod");
+            this.captureMethod = Optional.ofNullable(captureMethod);
+            return this;
+        }
+
+        /**
+         * When funds for a `card-payment` transfer are captured.
+         */
+        public Builder captureMethod(Optional<? extends CaptureMethod> captureMethod) {
+            Utils.checkNotNull(captureMethod, "captureMethod");
+            this.captureMethod = captureMethod;
+            return this;
+        }
+
+
+        /**
+         * Whether an extended authorization hold was requested.
+         */
+        public Builder isExtendedAuthorizationRequested(boolean isExtendedAuthorizationRequested) {
+            Utils.checkNotNull(isExtendedAuthorizationRequested, "isExtendedAuthorizationRequested");
+            this.isExtendedAuthorizationRequested = Optional.ofNullable(isExtendedAuthorizationRequested);
+            return this;
+        }
+
+        /**
+         * Whether an extended authorization hold was requested.
+         */
+        public Builder isExtendedAuthorizationRequested(Optional<Boolean> isExtendedAuthorizationRequested) {
+            Utils.checkNotNull(isExtendedAuthorizationRequested, "isExtendedAuthorizationRequested");
+            this.isExtendedAuthorizationRequested = isExtendedAuthorizationRequested;
+            return this;
+        }
+
+
+        /**
+         * Whether the authorization was flagged as an estimate.
+         */
+        public Builder isEstimatedAuthorization(boolean isEstimatedAuthorization) {
+            Utils.checkNotNull(isEstimatedAuthorization, "isEstimatedAuthorization");
+            this.isEstimatedAuthorization = Optional.ofNullable(isEstimatedAuthorization);
+            return this;
+        }
+
+        /**
+         * Whether the authorization was flagged as an estimate.
+         */
+        public Builder isEstimatedAuthorization(Optional<Boolean> isEstimatedAuthorization) {
+            Utils.checkNotNull(isEstimatedAuthorization, "isEstimatedAuthorization");
+            this.isEstimatedAuthorization = isEstimatedAuthorization;
+            return this;
+        }
+
         public CardPaymentOptions build() {
 
             return new CardPaymentOptions(
-                dynamicDescriptor, transactionSource);
+                dynamicDescriptor, transactionSource, captureMethod,
+                isExtendedAuthorizationRequested, isEstimatedAuthorization);
         }
 
     }

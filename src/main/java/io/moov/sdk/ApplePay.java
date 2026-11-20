@@ -27,7 +27,9 @@ import io.moov.sdk.models.operations.UpdateApplePayMerchantDomainsResponse;
 import io.moov.sdk.operations.GetApplePayMerchantDomains;
 import io.moov.sdk.operations.LinkApplePayToken;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class ApplePay {
@@ -72,6 +74,29 @@ public class ApplePay {
      * @throws RuntimeException subclass if the API call fails
      */
     public RegisterApplePayMerchantDomainsResponse registerMerchantDomains(String accountID, RegisterApplePayMerchantDomains registerApplePayMerchantDomains) {
+        return registerMerchantDomains(accountID, registerApplePayMerchantDomains, Optional.empty());
+    }
+
+    /**
+     * Add domains to be registered with Apple Pay.
+     * 
+     * <p>Any domains that will be used to accept payments must first be
+     * [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)
+     * with Apple.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * 
+     * @param accountID ID of the Moov account representing the merchant.
+     * @param registerApplePayMerchantDomains 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public RegisterApplePayMerchantDomainsResponse registerMerchantDomains(
+            String accountID, RegisterApplePayMerchantDomains registerApplePayMerchantDomains,
+            Optional<Options> options) {
         RegisterApplePayMerchantDomainsRequest request =
             RegisterApplePayMerchantDomainsRequest
                 .builder()
@@ -79,7 +104,7 @@ public class ApplePay {
                 .registerApplePayMerchantDomains(registerApplePayMerchantDomains)
                 .build();
         RequestOperation<RegisterApplePayMerchantDomainsRequest, RegisterApplePayMerchantDomainsResponse> operation
-              = new io.moov.sdk.operations.RegisterApplePayMerchantDomains.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.RegisterApplePayMerchantDomains.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -117,6 +142,29 @@ public class ApplePay {
      * @throws RuntimeException subclass if the API call fails
      */
     public UpdateApplePayMerchantDomainsResponse updateMerchantDomains(String accountID, UpdateApplePayMerchantDomains updateApplePayMerchantDomains) {
+        return updateMerchantDomains(accountID, updateApplePayMerchantDomains, Optional.empty());
+    }
+
+    /**
+     * Add or remove domains to be registered with Apple Pay.
+     * 
+     * <p>Any domains that will be used to accept payments must first be
+     * [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)
+     * with Apple.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * 
+     * @param accountID ID of the Moov account representing the merchant.
+     * @param updateApplePayMerchantDomains 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateApplePayMerchantDomainsResponse updateMerchantDomains(
+            String accountID, UpdateApplePayMerchantDomains updateApplePayMerchantDomains,
+            Optional<Options> options) {
         UpdateApplePayMerchantDomainsRequest request =
             UpdateApplePayMerchantDomainsRequest
                 .builder()
@@ -124,7 +172,7 @@ public class ApplePay {
                 .updateApplePayMerchantDomains(updateApplePayMerchantDomains)
                 .build();
         RequestOperation<UpdateApplePayMerchantDomainsRequest, UpdateApplePayMerchantDomainsResponse> operation
-              = new io.moov.sdk.operations.UpdateApplePayMerchantDomains.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.UpdateApplePayMerchantDomains.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -159,13 +207,32 @@ public class ApplePay {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetApplePayMerchantDomainsResponse getMerchantDomains(String accountID) {
+        return getMerchantDomains(accountID, Optional.empty());
+    }
+
+    /**
+     * Get domains registered with Apple Pay.
+     * 
+     * <p>Read our [Apple Pay
+     * tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope.
+     * 
+     * @param accountID ID of the Moov account representing the merchant.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetApplePayMerchantDomainsResponse getMerchantDomains(String accountID, Optional<Options> options) {
         GetApplePayMerchantDomainsRequest request =
             GetApplePayMerchantDomainsRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<GetApplePayMerchantDomainsRequest, GetApplePayMerchantDomainsResponse> operation
-              = new GetApplePayMerchantDomains.Sync(sdkConfiguration, _headers);
+              = new GetApplePayMerchantDomains.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -203,6 +270,29 @@ public class ApplePay {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateApplePaySessionResponse createSession(String accountID, CreateApplePaySession createApplePaySession) {
+        return createSession(accountID, createApplePaySession, Optional.empty());
+    }
+
+    /**
+     * Create a session with Apple Pay to facilitate a payment.
+     * 
+     * <p>Read our [Apple Pay
+     * tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.
+     * A successful response from this endpoint should be passed through to Apple Pay unchanged.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * 
+     * @param accountID ID of the Moov account representing the merchant.
+     * @param createApplePaySession 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateApplePaySessionResponse createSession(
+            String accountID, CreateApplePaySession createApplePaySession,
+            Optional<Options> options) {
         CreateApplePaySessionRequest request =
             CreateApplePaySessionRequest
                 .builder()
@@ -210,7 +300,7 @@ public class ApplePay {
                 .createApplePaySession(createApplePaySession)
                 .build();
         RequestOperation<CreateApplePaySessionRequest, CreateApplePaySessionResponse> operation
-              = new io.moov.sdk.operations.CreateApplePaySession.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateApplePaySession.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -253,6 +343,33 @@ public class ApplePay {
      * @throws RuntimeException subclass if the API call fails
      */
     public LinkApplePayTokenResponse linkToken(String accountID, LinkApplePay linkApplePay) {
+        return linkToken(accountID, linkApplePay, Optional.empty());
+    }
+
+    /**
+     * Connect an Apple Pay token to the specified account.
+     * 
+     * <p>Read our [Apple Pay
+     * tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.
+     * The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response
+     * unmodified.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * 
+     * @param accountID ID of the Moov account representing the cardholder.
+     * @param linkApplePay   The JSON structure returned from Apple Pay when authorizing a payment session.
+     *         
+     *           Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypayment) 
+     *           for more information.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public LinkApplePayTokenResponse linkToken(
+            String accountID, LinkApplePay linkApplePay,
+            Optional<Options> options) {
         LinkApplePayTokenRequest request =
             LinkApplePayTokenRequest
                 .builder()
@@ -260,7 +377,7 @@ public class ApplePay {
                 .linkApplePay(linkApplePay)
                 .build();
         RequestOperation<LinkApplePayTokenRequest, LinkApplePayTokenResponse> operation
-              = new LinkApplePayToken.Sync(sdkConfiguration, _headers);
+              = new LinkApplePayToken.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

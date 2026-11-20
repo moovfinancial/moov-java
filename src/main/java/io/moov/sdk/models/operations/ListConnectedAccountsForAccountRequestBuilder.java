@@ -8,11 +8,15 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListConnectedAccountsForAccount;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
+import java.time.Duration;
+import java.util.Optional;
 
 public class ListConnectedAccountsForAccountRequestBuilder {
 
     private ListConnectedAccountsForAccountRequest request;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -25,11 +29,26 @@ public class ListConnectedAccountsForAccountRequestBuilder {
         this.request = request;
         return this;
     }
+                
+    public ListConnectedAccountsForAccountRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public ListConnectedAccountsForAccountRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
     public ListConnectedAccountsForAccountResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<ListConnectedAccountsForAccountRequest, ListConnectedAccountsForAccountResponse> operation
-              = new ListConnectedAccountsForAccount.Sync(sdkConfiguration, _headers);
+              = new ListConnectedAccountsForAccount.Sync(sdkConfiguration, options, _headers);
 
         return operation.handleResponse(operation.doRequest(request));
     }

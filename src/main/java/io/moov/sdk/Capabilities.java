@@ -24,7 +24,9 @@ import io.moov.sdk.operations.GetCapability;
 import io.moov.sdk.operations.ListCapabilities;
 import io.moov.sdk.operations.RequestCapabilities;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class Capabilities {
@@ -66,13 +68,32 @@ public class Capabilities {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListCapabilitiesResponse list(String accountID) {
+        return list(accountID, Optional.empty());
+    }
+
+    /**
+     * Retrieve all the capabilities an account has requested.
+     * 
+     * <p>Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to
+     * learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
+     * 
+     * @param accountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListCapabilitiesResponse list(String accountID, Optional<Options> options) {
         ListCapabilitiesRequest request =
             ListCapabilitiesRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<ListCapabilitiesRequest, ListCapabilitiesResponse> operation
-              = new ListCapabilities.Sync(sdkConfiguration, _headers);
+              = new ListCapabilities.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -104,6 +125,26 @@ public class Capabilities {
      * @throws RuntimeException subclass if the API call fails
      */
     public RequestCapabilitiesResponse request(String accountID, AddCapabilities addCapabilities) {
+        return request(accountID, addCapabilities, Optional.empty());
+    }
+
+    /**
+     * Request capabilities for a specific account. Read our [capabilities
+     * reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
+     * 
+     * @param accountID 
+     * @param addCapabilities 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public RequestCapabilitiesResponse request(
+            String accountID, AddCapabilities addCapabilities,
+            Optional<Options> options) {
         RequestCapabilitiesRequest request =
             RequestCapabilitiesRequest
                 .builder()
@@ -111,7 +152,7 @@ public class Capabilities {
                 .addCapabilities(addCapabilities)
                 .build();
         RequestOperation<RequestCapabilitiesRequest, RequestCapabilitiesResponse> operation
-              = new RequestCapabilities.Sync(sdkConfiguration, _headers);
+              = new RequestCapabilities.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -153,6 +194,36 @@ public class Capabilities {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetCapabilityResponse get(String accountID, CapabilityID capabilityID) {
+        return get(accountID, capabilityID, Optional.empty());
+    }
+
+    /**
+     * Retrieve a specific capability that an account has requested. Read our [capabilities
+     * reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
+     * 
+     * @param accountID 
+     * @param capabilityID Moov account capabilities.
+     *         
+     *         **Deprecated capabilities**
+     *         
+     *         The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Request granular capabilities instead (for example, `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance`). Deprecated values will be removed in a future API version.
+     *         
+     *         Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to choose the right capabilities for your integration.
+     *         
+     *         The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in the list for your Partner account. These are read-only capabilities that Moov requests. These capabilities remain active with your account and require no additional action.
+     *         
+     *         Starting in v2026.10.00, the `platform.moov-money` capability might appear in the list for accounts enrolled in Moov Money. This is a read-only capability that Moov requests. It requires no additional action.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetCapabilityResponse get(
+            String accountID, CapabilityID capabilityID,
+            Optional<Options> options) {
         GetCapabilityRequest request =
             GetCapabilityRequest
                 .builder()
@@ -160,7 +231,7 @@ public class Capabilities {
                 .capabilityID(capabilityID)
                 .build();
         RequestOperation<GetCapabilityRequest, GetCapabilityResponse> operation
-              = new GetCapability.Sync(sdkConfiguration, _headers);
+              = new GetCapability.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -202,6 +273,36 @@ public class Capabilities {
      * @throws RuntimeException subclass if the API call fails
      */
     public DisableCapabilityResponse disable(String accountID, CapabilityID capabilityID) {
+        return disable(accountID, capabilityID, Optional.empty());
+    }
+
+    /**
+     * Disable a specific capability that an account has requested. Read our [capabilities
+     * reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
+     * 
+     * @param accountID 
+     * @param capabilityID Moov account capabilities.
+     *         
+     *         **Deprecated capabilities**
+     *         
+     *         The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Request granular capabilities instead (for example, `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance`). Deprecated values will be removed in a future API version.
+     *         
+     *         Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to choose the right capabilities for your integration.
+     *         
+     *         The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in the list for your Partner account. These are read-only capabilities that Moov requests. These capabilities remain active with your account and require no additional action.
+     *         
+     *         Starting in v2026.10.00, the `platform.moov-money` capability might appear in the list for accounts enrolled in Moov Money. This is a read-only capability that Moov requests. It requires no additional action.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DisableCapabilityResponse disable(
+            String accountID, CapabilityID capabilityID,
+            Optional<Options> options) {
         DisableCapabilityRequest request =
             DisableCapabilityRequest
                 .builder()
@@ -209,7 +310,7 @@ public class Capabilities {
                 .capabilityID(capabilityID)
                 .build();
         RequestOperation<DisableCapabilityRequest, DisableCapabilityResponse> operation
-              = new DisableCapability.Sync(sdkConfiguration, _headers);
+              = new DisableCapability.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

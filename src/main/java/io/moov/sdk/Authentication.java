@@ -14,6 +14,8 @@ import io.moov.sdk.models.operations.RevokeAccessTokenResponse;
 import io.moov.sdk.operations.CreateAccessToken;
 import io.moov.sdk.operations.RevokeAccessToken;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
+import java.util.Optional;
 
 
 public class Authentication {
@@ -47,8 +49,23 @@ public class Authentication {
      * @throws RuntimeException subclass if the API call fails
      */
     public RevokeAccessTokenResponse revokeAccessToken(RevokeTokenRequest request) {
+        return revokeAccessToken(request, Optional.empty());
+    }
+
+    /**
+     * Revoke an auth token.
+     * 
+     * <p>Allows clients to notify the authorization server that a previously obtained refresh or access token
+     * is no longer needed.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public RevokeAccessTokenResponse revokeAccessToken(RevokeTokenRequest request, Optional<Options> options) {
         RequestOperation<RevokeTokenRequest, RevokeAccessTokenResponse> operation
-              = new RevokeAccessToken.Sync(sdkConfiguration, _headers);
+              = new RevokeAccessToken.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -69,8 +86,20 @@ public class Authentication {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateAccessTokenResponse createAccessToken(AuthTokenRequest request) {
+        return createAccessToken(request, Optional.empty());
+    }
+
+    /**
+     * Create or refresh an access token.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateAccessTokenResponse createAccessToken(AuthTokenRequest request, Optional<Options> options) {
         RequestOperation<AuthTokenRequest, CreateAccessTokenResponse> operation
-              = new CreateAccessToken.Sync(sdkConfiguration, _headers);
+              = new CreateAccessToken.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -9,13 +9,17 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.AddCapabilities;
 import io.moov.sdk.operations.RequestCapabilities;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class RequestCapabilitiesRequestBuilder {
 
     private String accountID;
     private AddCapabilities addCapabilities;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -34,6 +38,18 @@ public class RequestCapabilitiesRequestBuilder {
         this.addCapabilities = addCapabilities;
         return this;
     }
+                
+    public RequestCapabilitiesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public RequestCapabilitiesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private RequestCapabilitiesRequest buildRequest() {
@@ -45,9 +61,12 @@ public class RequestCapabilitiesRequestBuilder {
     }
 
     public RequestCapabilitiesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<RequestCapabilitiesRequest, RequestCapabilitiesResponse> operation
-              = new RequestCapabilities.Sync(sdkConfiguration, _headers);
+              = new RequestCapabilities.Sync(sdkConfiguration, options, _headers);
         RequestCapabilitiesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

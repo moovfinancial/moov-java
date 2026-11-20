@@ -9,11 +9,15 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.RevokeTokenRequest;
 import io.moov.sdk.operations.RevokeAccessToken;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
+import java.time.Duration;
+import java.util.Optional;
 
 public class RevokeAccessTokenRequestBuilder {
 
     private RevokeTokenRequest request;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -26,11 +30,26 @@ public class RevokeAccessTokenRequestBuilder {
         this.request = request;
         return this;
     }
+                
+    public RevokeAccessTokenRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public RevokeAccessTokenRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
     public RevokeAccessTokenResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<RevokeTokenRequest, RevokeAccessTokenResponse> operation
-              = new RevokeAccessToken.Sync(sdkConfiguration, _headers);
+              = new RevokeAccessToken.Sync(sdkConfiguration, options, _headers);
 
         return operation.handleResponse(operation.doRequest(request));
     }

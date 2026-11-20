@@ -14,6 +14,8 @@ To access this endpoint using an [access token](https://docs.moov.io/api/authent
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 * [getInvoice](#getinvoice) - Retrieve an invoice by ID.
 
+Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `application/pdf`. The PDF does not include the payment link or QR code.
+
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 * [updateInvoice](#updateinvoice) - Updates an invoice.
@@ -205,6 +207,8 @@ public class Application {
 
 Retrieve an invoice by ID.
 
+Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `application/pdf`. The PDF does not include the payment link or QR code.
+
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
@@ -236,7 +240,7 @@ public class Application {
                 .call();
 
         if (res.invoice().isPresent()) {
-            System.out.println(res.invoice().get());
+            // handle response
         }
     }
 }

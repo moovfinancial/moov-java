@@ -26,6 +26,7 @@ import io.moov.sdk.operations.ListIssuedCardAuthorizationEvents;
 import io.moov.sdk.operations.ListIssuedCardAuthorizations;
 import io.moov.sdk.operations.ListIssuedCardTransactions;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -64,8 +65,24 @@ public class IssuingTransactions {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListIssuedCardAuthorizationsResponse listAuthorizations(ListIssuedCardAuthorizationsRequest request) {
+        return listAuthorizations(request, Optional.empty());
+    }
+
+    /**
+     * List issued card authorizations associated with a Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListIssuedCardAuthorizationsResponse listAuthorizations(ListIssuedCardAuthorizationsRequest request, Optional<Options> options) {
         RequestOperation<ListIssuedCardAuthorizationsRequest, ListIssuedCardAuthorizationsResponse> operation
-              = new ListIssuedCardAuthorizations.Sync(sdkConfiguration, _headers);
+              = new ListIssuedCardAuthorizations.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -95,6 +112,25 @@ public class IssuingTransactions {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetIssuedCardAuthorizationResponse getAuthorization(String accountID, String authorizationID) {
+        return getAuthorization(accountID, authorizationID, Optional.empty());
+    }
+
+    /**
+     * Retrieves details of an authorization associated with a specific Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
+     * @param accountID The Moov business account for which cards have been issued.
+     * @param authorizationID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetIssuedCardAuthorizationResponse getAuthorization(
+            String accountID, String authorizationID,
+            Optional<Options> options) {
         GetIssuedCardAuthorizationRequest request =
             GetIssuedCardAuthorizationRequest
                 .builder()
@@ -102,7 +138,7 @@ public class IssuingTransactions {
                 .authorizationID(authorizationID)
                 .build();
         RequestOperation<GetIssuedCardAuthorizationRequest, GetIssuedCardAuthorizationResponse> operation
-              = new GetIssuedCardAuthorization.Sync(sdkConfiguration, _headers);
+              = new GetIssuedCardAuthorization.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -135,7 +171,7 @@ public class IssuingTransactions {
      */
     public ListIssuedCardAuthorizationEventsResponse listAuthorizationEvents(String accountID, String authorizationID) {
         return listAuthorizationEvents(accountID, authorizationID, Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -156,6 +192,30 @@ public class IssuingTransactions {
     public ListIssuedCardAuthorizationEventsResponse listAuthorizationEvents(
             String accountID, String authorizationID,
             Optional<Long> skip, Optional<Long> count) {
+        return listAuthorizationEvents(accountID, authorizationID, skip,
+            count, Optional.empty());
+    }
+
+    /**
+     * List card network and Moov platform events that affect the authorization and its hold on a wallet
+     * balance.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
+     * @param accountID The Moov business account for which cards have been issued.
+     * @param authorizationID 
+     * @param skip 
+     * @param count Page size. When omitted, the server defaults to `200`.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListIssuedCardAuthorizationEventsResponse listAuthorizationEvents(
+            String accountID, String authorizationID,
+            Optional<Long> skip, Optional<Long> count,
+            Optional<Options> options) {
         ListIssuedCardAuthorizationEventsRequest request =
             ListIssuedCardAuthorizationEventsRequest
                 .builder()
@@ -165,7 +225,7 @@ public class IssuingTransactions {
                 .count(count)
                 .build();
         RequestOperation<ListIssuedCardAuthorizationEventsRequest, ListIssuedCardAuthorizationEventsResponse> operation
-              = new ListIssuedCardAuthorizationEvents.Sync(sdkConfiguration, _headers);
+              = new ListIssuedCardAuthorizationEvents.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -194,8 +254,24 @@ public class IssuingTransactions {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListIssuedCardTransactionsResponse list(ListIssuedCardTransactionsRequest request) {
+        return list(request, Optional.empty());
+    }
+
+    /**
+     * List issued card transactions associated with a Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListIssuedCardTransactionsResponse list(ListIssuedCardTransactionsRequest request, Optional<Options> options) {
         RequestOperation<ListIssuedCardTransactionsRequest, ListIssuedCardTransactionsResponse> operation
-              = new ListIssuedCardTransactions.Sync(sdkConfiguration, _headers);
+              = new ListIssuedCardTransactions.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -225,6 +301,25 @@ public class IssuingTransactions {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetIssuedCardTransactionResponse get(String accountID, String cardTransactionID) {
+        return get(accountID, cardTransactionID, Optional.empty());
+    }
+
+    /**
+     * Retrieves details of an issued card transaction associated with a specific Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
+     * @param accountID The Moov business account for which cards have been issued.
+     * @param cardTransactionID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetIssuedCardTransactionResponse get(
+            String accountID, String cardTransactionID,
+            Optional<Options> options) {
         GetIssuedCardTransactionRequest request =
             GetIssuedCardTransactionRequest
                 .builder()
@@ -232,7 +327,7 @@ public class IssuingTransactions {
                 .cardTransactionID(cardTransactionID)
                 .build();
         RequestOperation<GetIssuedCardTransactionRequest, GetIssuedCardTransactionResponse> operation
-              = new GetIssuedCardTransaction.Sync(sdkConfiguration, _headers);
+              = new GetIssuedCardTransaction.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

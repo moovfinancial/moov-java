@@ -8,12 +8,16 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetAvatar;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetAvatarRequestBuilder {
 
     private String uniqueID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -26,6 +30,18 @@ public class GetAvatarRequestBuilder {
         this.uniqueID = uniqueID;
         return this;
     }
+                
+    public GetAvatarRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetAvatarRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetAvatarRequest buildRequest() {
@@ -36,9 +52,12 @@ public class GetAvatarRequestBuilder {
     }
 
     public GetAvatarResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetAvatarRequest, GetAvatarResponse> operation
-              = new GetAvatar.Sync(sdkConfiguration, _headers);
+              = new GetAvatar.Sync(sdkConfiguration, options, _headers);
         GetAvatarRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -18,8 +18,8 @@ import java.util.Optional;
 
 public class CreateTransfer {
     /**
-     * Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or
-     * a `transferID`.
+     * Where funds for a transfer originate. For the source, you must include exactly one of
+     * `paymentMethodID`, `paymentToken`, or `transferID`.
      */
     @JsonProperty("source")
     private CreateTransferSource source;
@@ -125,8 +125,8 @@ public class CreateTransfer {
     }
 
     /**
-     * Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or
-     * a `transferID`.
+     * Where funds for a transfer originate. For the source, you must include exactly one of
+     * `paymentMethodID`, `paymentToken`, or `transferID`.
      */
     @JsonIgnore
     public CreateTransferSource source() {
@@ -208,8 +208,8 @@ public class CreateTransfer {
 
 
     /**
-     * Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or
-     * a `transferID`.
+     * Where funds for a transfer originate. For the source, you must include exactly one of
+     * `paymentMethodID`, `paymentToken`, or `transferID`.
      */
     public CreateTransfer withSource(CreateTransferSource source) {
         Utils.checkNotNull(source, "source");
@@ -430,8 +430,8 @@ public class CreateTransfer {
 
 
         /**
-         * Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or
-         * a `transferID`.
+         * Where funds for a transfer originate. For the source, you must include exactly one of
+         * `paymentMethodID`, `paymentToken`, or `transferID`.
          */
         public Builder source(CreateTransferSource source) {
             Utils.checkNotNull(source, "source");

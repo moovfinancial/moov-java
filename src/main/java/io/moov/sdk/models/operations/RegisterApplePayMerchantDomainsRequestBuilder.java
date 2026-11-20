@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.RegisterApplePayMerchantDomains;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class RegisterApplePayMerchantDomainsRequestBuilder {
 
     private String accountID;
     private RegisterApplePayMerchantDomains registerApplePayMerchantDomains;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class RegisterApplePayMerchantDomainsRequestBuilder {
         this.registerApplePayMerchantDomains = registerApplePayMerchantDomains;
         return this;
     }
+                
+    public RegisterApplePayMerchantDomainsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public RegisterApplePayMerchantDomainsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private RegisterApplePayMerchantDomainsRequest buildRequest() {
@@ -44,9 +60,12 @@ public class RegisterApplePayMerchantDomainsRequestBuilder {
     }
 
     public RegisterApplePayMerchantDomainsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<RegisterApplePayMerchantDomainsRequest, RegisterApplePayMerchantDomainsResponse> operation
-              = new io.moov.sdk.operations.RegisterApplePayMerchantDomains.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.RegisterApplePayMerchantDomains.Sync(sdkConfiguration, options, _headers);
         RegisterApplePayMerchantDomainsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

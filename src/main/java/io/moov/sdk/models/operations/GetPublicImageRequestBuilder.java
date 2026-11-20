@@ -10,8 +10,10 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetPublicImage;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetPublicImageRequestBuilder {
@@ -22,6 +24,7 @@ public class GetPublicImageRequestBuilder {
                             "size",
                             "\"400x400\"",
                             new TypeReference<Optional<String>>() {});
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -58,6 +61,18 @@ public class GetPublicImageRequestBuilder {
         this.size = size;
         return this;
     }
+                
+    public GetPublicImageRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetPublicImageRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetPublicImageRequest buildRequest() {
@@ -73,9 +88,12 @@ public class GetPublicImageRequestBuilder {
     }
 
     public GetPublicImageResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetPublicImageRequest, GetPublicImageResponse> operation
-              = new GetPublicImage.Sync(sdkConfiguration, _headers);
+              = new GetPublicImage.Sync(sdkConfiguration, options, _headers);
         GetPublicImageRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

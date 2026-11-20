@@ -36,7 +36,9 @@ import io.moov.sdk.operations.ListEventTypes;
 import io.moov.sdk.operations.ListWebhooks;
 import io.moov.sdk.operations.PingWebhook;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class Webhooks {
@@ -63,8 +65,19 @@ public class Webhooks {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListEventTypesResponse listEventTypesDirect() {
+        return listEventTypes(Optional.empty());
+    }
+
+    /**
+     * List all available event types that can be subscribed to.
+     * 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListEventTypesResponse listEventTypes(Optional<Options> options) {
         RequestlessOperation<ListEventTypesResponse> operation
-            = new ListEventTypes.Sync(sdkConfiguration, _headers);
+            = new ListEventTypes.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest());
     }
 
@@ -84,8 +97,19 @@ public class Webhooks {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListWebhooksResponse listDirect() {
+        return list(Optional.empty());
+    }
+
+    /**
+     * List all webhooks configured for the account.
+     * 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListWebhooksResponse list(Optional<Options> options) {
         RequestlessOperation<ListWebhooksResponse> operation
-            = new ListWebhooks.Sync(sdkConfiguration, _headers);
+            = new ListWebhooks.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest());
     }
 
@@ -106,8 +130,20 @@ public class Webhooks {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateWebhookResponse create(CreateWebhook request) {
+        return create(request, Optional.empty());
+    }
+
+    /**
+     * Create a new webhook for the account.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateWebhookResponse create(CreateWebhook request, Optional<Options> options) {
         RequestOperation<CreateWebhook, CreateWebhookResponse> operation
-              = new io.moov.sdk.operations.CreateWebhook.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateWebhook.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -128,13 +164,25 @@ public class Webhooks {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetWebhookResponse get(String webhookID) {
+        return get(webhookID, Optional.empty());
+    }
+
+    /**
+     * Get details of a specific webhook.
+     * 
+     * @param webhookID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetWebhookResponse get(String webhookID, Optional<Options> options) {
         GetWebhookRequest request =
             GetWebhookRequest
                 .builder()
                 .webhookID(webhookID)
                 .build();
         RequestOperation<GetWebhookRequest, GetWebhookResponse> operation
-              = new GetWebhook.Sync(sdkConfiguration, _headers);
+              = new GetWebhook.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -156,6 +204,21 @@ public class Webhooks {
      * @throws RuntimeException subclass if the API call fails
      */
     public UpdateWebhookResponse update(String webhookID, UpdateWebhook updateWebhook) {
+        return update(webhookID, updateWebhook, Optional.empty());
+    }
+
+    /**
+     * Update an existing webhook.
+     * 
+     * @param webhookID 
+     * @param updateWebhook Request body for updating an existing webhook.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateWebhookResponse update(
+            String webhookID, UpdateWebhook updateWebhook,
+            Optional<Options> options) {
         UpdateWebhookRequest request =
             UpdateWebhookRequest
                 .builder()
@@ -163,7 +226,7 @@ public class Webhooks {
                 .updateWebhook(updateWebhook)
                 .build();
         RequestOperation<UpdateWebhookRequest, UpdateWebhookResponse> operation
-              = new io.moov.sdk.operations.UpdateWebhook.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.UpdateWebhook.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -184,13 +247,25 @@ public class Webhooks {
      * @throws RuntimeException subclass if the API call fails
      */
     public DisableWebhookResponse disable(String webhookID) {
+        return disable(webhookID, Optional.empty());
+    }
+
+    /**
+     * Disable a webhook. Disabled webhooks will no longer receive events.
+     * 
+     * @param webhookID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DisableWebhookResponse disable(String webhookID, Optional<Options> options) {
         DisableWebhookRequest request =
             DisableWebhookRequest
                 .builder()
                 .webhookID(webhookID)
                 .build();
         RequestOperation<DisableWebhookRequest, DisableWebhookResponse> operation
-              = new DisableWebhook.Sync(sdkConfiguration, _headers);
+              = new DisableWebhook.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -211,13 +286,25 @@ public class Webhooks {
      * @throws RuntimeException subclass if the API call fails
      */
     public PingWebhookResponse ping(String webhookID) {
+        return ping(webhookID, Optional.empty());
+    }
+
+    /**
+     * Send a test ping to a webhook to verify it is configured correctly.
+     * 
+     * @param webhookID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PingWebhookResponse ping(String webhookID, Optional<Options> options) {
         PingWebhookRequest request =
             PingWebhookRequest
                 .builder()
                 .webhookID(webhookID)
                 .build();
         RequestOperation<PingWebhookRequest, PingWebhookResponse> operation
-              = new PingWebhook.Sync(sdkConfiguration, _headers);
+              = new PingWebhook.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -238,13 +325,25 @@ public class Webhooks {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetWebhookSecretResponse getSecret(String webhookID) {
+        return getSecret(webhookID, Optional.empty());
+    }
+
+    /**
+     * Get the secret key for verifying webhook payloads.
+     * 
+     * @param webhookID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetWebhookSecretResponse getSecret(String webhookID, Optional<Options> options) {
         GetWebhookSecretRequest request =
             GetWebhookSecretRequest
                 .builder()
                 .webhookID(webhookID)
                 .build();
         RequestOperation<GetWebhookSecretRequest, GetWebhookSecretResponse> operation
-              = new GetWebhookSecret.Sync(sdkConfiguration, _headers);
+              = new GetWebhookSecret.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

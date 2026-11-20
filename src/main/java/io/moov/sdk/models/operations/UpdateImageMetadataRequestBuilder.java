@@ -9,14 +9,18 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.ImageMetadataRequest;
 import io.moov.sdk.operations.UpdateImageMetadata;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class UpdateImageMetadataRequestBuilder {
 
     private String accountID;
     private String imageID;
     private ImageMetadataRequest imageMetadataRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -41,6 +45,18 @@ public class UpdateImageMetadataRequestBuilder {
         this.imageMetadataRequest = imageMetadataRequest;
         return this;
     }
+                
+    public UpdateImageMetadataRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public UpdateImageMetadataRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private UpdateImageMetadataRequest buildRequest() {
@@ -53,9 +69,12 @@ public class UpdateImageMetadataRequestBuilder {
     }
 
     public UpdateImageMetadataResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<UpdateImageMetadataRequest, UpdateImageMetadataResponse> operation
-              = new UpdateImageMetadata.Sync(sdkConfiguration, _headers);
+              = new UpdateImageMetadata.Sync(sdkConfiguration, options, _headers);
         UpdateImageMetadataRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -9,14 +9,18 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.ImageUploadRequestMultiPart;
 import io.moov.sdk.operations.UpdateImage;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class UpdateImageRequestBuilder {
 
     private String accountID;
     private String imageID;
     private ImageUploadRequestMultiPart imageUploadRequestMultiPart;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -41,6 +45,18 @@ public class UpdateImageRequestBuilder {
         this.imageUploadRequestMultiPart = imageUploadRequestMultiPart;
         return this;
     }
+                
+    public UpdateImageRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public UpdateImageRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private UpdateImageRequest buildRequest() {
@@ -53,9 +69,12 @@ public class UpdateImageRequestBuilder {
     }
 
     public UpdateImageResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<UpdateImageRequest, UpdateImageResponse> operation
-              = new UpdateImage.Sync(sdkConfiguration, _headers);
+              = new UpdateImage.Sync(sdkConfiguration, options, _headers);
         UpdateImageRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

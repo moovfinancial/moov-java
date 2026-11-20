@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateApplePaySession;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class CreateApplePaySessionRequestBuilder {
 
     private String accountID;
     private CreateApplePaySession createApplePaySession;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class CreateApplePaySessionRequestBuilder {
         this.createApplePaySession = createApplePaySession;
         return this;
     }
+                
+    public CreateApplePaySessionRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public CreateApplePaySessionRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private CreateApplePaySessionRequest buildRequest() {
@@ -44,9 +60,12 @@ public class CreateApplePaySessionRequestBuilder {
     }
 
     public CreateApplePaySessionResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<CreateApplePaySessionRequest, CreateApplePaySessionResponse> operation
-              = new io.moov.sdk.operations.CreateApplePaySession.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateApplePaySession.Sync(sdkConfiguration, options, _headers);
         CreateApplePaySessionRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

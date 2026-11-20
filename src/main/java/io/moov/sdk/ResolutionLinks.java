@@ -22,7 +22,9 @@ import io.moov.sdk.operations.DisableResolutionLink;
 import io.moov.sdk.operations.GetResolutionLink;
 import io.moov.sdk.operations.ListResolutionLinks;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class ResolutionLinks {
@@ -67,6 +69,29 @@ public class ResolutionLinks {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateResolutionLinkResponse create(String accountID, CreateResolutionLink createResolutionLink) {
+        return create(accountID, createResolutionLink, Optional.empty());
+    }
+
+    /**
+     * Create a resolution link for the specified account. Resolution links are temporary, secure links
+     * sent to merchants to resolve account requirements such as KYC verification or document uploads. Only
+     * one active resolution link
+     * is allowed per connected account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.write`,
+     * `/accounts/{accountID}/representatives.write` and `/accounts/{accountID}/files.write` scopes.
+     * 
+     * @param accountID 
+     * @param createResolutionLink Request body for creating a resolution link.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateResolutionLinkResponse create(
+            String accountID, CreateResolutionLink createResolutionLink,
+            Optional<Options> options) {
         CreateResolutionLinkRequest request =
             CreateResolutionLinkRequest
                 .builder()
@@ -74,7 +99,7 @@ public class ResolutionLinks {
                 .createResolutionLink(createResolutionLink)
                 .build();
         RequestOperation<CreateResolutionLinkRequest, CreateResolutionLinkResponse> operation
-              = new io.moov.sdk.operations.CreateResolutionLink.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateResolutionLink.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -103,13 +128,29 @@ public class ResolutionLinks {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListResolutionLinksResponse list(String accountID) {
+        return list(accountID, Optional.empty());
+    }
+
+    /**
+     * List resolution links for the specified account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param accountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListResolutionLinksResponse list(String accountID, Optional<Options> options) {
         ListResolutionLinksRequest request =
             ListResolutionLinksRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<ListResolutionLinksRequest, ListResolutionLinksResponse> operation
-              = new ListResolutionLinks.Sync(sdkConfiguration, _headers);
+              = new ListResolutionLinks.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -139,6 +180,25 @@ public class ResolutionLinks {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetResolutionLinkResponse get(String accountID, String resolutionLinkCode) {
+        return get(accountID, resolutionLinkCode, Optional.empty());
+    }
+
+    /**
+     * Get a resolution link by code.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param accountID 
+     * @param resolutionLinkCode 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetResolutionLinkResponse get(
+            String accountID, String resolutionLinkCode,
+            Optional<Options> options) {
         GetResolutionLinkRequest request =
             GetResolutionLinkRequest
                 .builder()
@@ -146,7 +206,7 @@ public class ResolutionLinks {
                 .resolutionLinkCode(resolutionLinkCode)
                 .build();
         RequestOperation<GetResolutionLinkRequest, GetResolutionLinkResponse> operation
-              = new GetResolutionLink.Sync(sdkConfiguration, _headers);
+              = new GetResolutionLink.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -176,6 +236,25 @@ public class ResolutionLinks {
      * @throws RuntimeException subclass if the API call fails
      */
     public DisableResolutionLinkResponse disable(String accountID, String resolutionLinkCode) {
+        return disable(accountID, resolutionLinkCode, Optional.empty());
+    }
+
+    /**
+     * Disable a resolution link. Disabled resolution links can no longer be used by merchants.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.write` scope.
+     * 
+     * @param accountID 
+     * @param resolutionLinkCode 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DisableResolutionLinkResponse disable(
+            String accountID, String resolutionLinkCode,
+            Optional<Options> options) {
         DisableResolutionLinkRequest request =
             DisableResolutionLinkRequest
                 .builder()
@@ -183,7 +262,7 @@ public class ResolutionLinks {
                 .resolutionLinkCode(resolutionLinkCode)
                 .build();
         RequestOperation<DisableResolutionLinkRequest, DisableResolutionLinkResponse> operation
-              = new DisableResolutionLink.Sync(sdkConfiguration, _headers);
+              = new DisableResolutionLink.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

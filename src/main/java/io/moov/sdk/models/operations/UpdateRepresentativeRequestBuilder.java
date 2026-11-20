@@ -8,14 +8,18 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpdateRepresentative;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class UpdateRepresentativeRequestBuilder {
 
     private String accountID;
     private String representativeID;
     private UpdateRepresentative updateRepresentative;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -40,6 +44,18 @@ public class UpdateRepresentativeRequestBuilder {
         this.updateRepresentative = updateRepresentative;
         return this;
     }
+                
+    public UpdateRepresentativeRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public UpdateRepresentativeRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private UpdateRepresentativeRequest buildRequest() {
@@ -52,9 +68,12 @@ public class UpdateRepresentativeRequestBuilder {
     }
 
     public UpdateRepresentativeResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<UpdateRepresentativeRequest, UpdateRepresentativeResponse> operation
-              = new io.moov.sdk.operations.UpdateRepresentative.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.UpdateRepresentative.Sync(sdkConfiguration, options, _headers);
         UpdateRepresentativeRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

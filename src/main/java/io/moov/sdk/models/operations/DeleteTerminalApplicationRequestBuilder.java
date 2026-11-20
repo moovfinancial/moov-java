@@ -8,12 +8,16 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.DeleteTerminalApplication;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class DeleteTerminalApplicationRequestBuilder {
 
     private String terminalApplicationID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -26,6 +30,18 @@ public class DeleteTerminalApplicationRequestBuilder {
         this.terminalApplicationID = terminalApplicationID;
         return this;
     }
+                
+    public DeleteTerminalApplicationRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteTerminalApplicationRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DeleteTerminalApplicationRequest buildRequest() {
@@ -36,9 +52,12 @@ public class DeleteTerminalApplicationRequestBuilder {
     }
 
     public DeleteTerminalApplicationResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DeleteTerminalApplicationRequest, DeleteTerminalApplicationResponse> operation
-              = new DeleteTerminalApplication.Sync(sdkConfiguration, _headers);
+              = new DeleteTerminalApplication.Sync(sdkConfiguration, options, _headers);
         DeleteTerminalApplicationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -8,14 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListAdjustments;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class ListAdjustmentsRequestBuilder {
 
     private String accountID;
     private Optional<String> walletID = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -40,6 +43,18 @@ public class ListAdjustmentsRequestBuilder {
         this.walletID = walletID;
         return this;
     }
+                
+    public ListAdjustmentsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public ListAdjustmentsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private ListAdjustmentsRequest buildRequest() {
@@ -51,9 +66,12 @@ public class ListAdjustmentsRequestBuilder {
     }
 
     public ListAdjustmentsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<ListAdjustmentsRequest, ListAdjustmentsResponse> operation
-              = new ListAdjustments.Sync(sdkConfiguration, _headers);
+              = new ListAdjustments.Sync(sdkConfiguration, options, _headers);
         ListAdjustmentsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

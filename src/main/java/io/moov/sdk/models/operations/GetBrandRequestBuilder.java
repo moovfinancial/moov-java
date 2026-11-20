@@ -8,12 +8,16 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetBrand;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetBrandRequestBuilder {
 
     private String accountID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -26,6 +30,18 @@ public class GetBrandRequestBuilder {
         this.accountID = accountID;
         return this;
     }
+                
+    public GetBrandRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetBrandRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetBrandRequest buildRequest() {
@@ -36,9 +52,12 @@ public class GetBrandRequestBuilder {
     }
 
     public GetBrandResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetBrandRequest, GetBrandResponse> operation
-              = new GetBrand.Sync(sdkConfiguration, _headers);
+              = new GetBrand.Sync(sdkConfiguration, options, _headers);
         GetBrandRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -22,7 +22,9 @@ import io.moov.sdk.operations.GetOnboardingInvite;
 import io.moov.sdk.operations.ListOnboardingInvites;
 import io.moov.sdk.operations.RevokeOnboardingInvite;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class Onboarding {
@@ -60,8 +62,25 @@ public class Onboarding {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateOnboardingInviteResponse createInvite(OnboardingInviteRequest request) {
+        return createInvite(request, Optional.empty());
+    }
+
+    /**
+     * Create an invitation containing a unique link that allows the recipient to onboard their
+     * organization with Moov.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts.write` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateOnboardingInviteResponse createInvite(OnboardingInviteRequest request, Optional<Options> options) {
         RequestOperation<OnboardingInviteRequest, CreateOnboardingInviteResponse> operation
-              = new CreateOnboardingInvite.Sync(sdkConfiguration, _headers);
+              = new CreateOnboardingInvite.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -89,8 +108,23 @@ public class Onboarding {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListOnboardingInvitesResponse listInvitesDirect() {
+        return listInvites(Optional.empty());
+    }
+
+    /**
+     * List all the onboarding invites created by the caller's account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts.read` scope.
+     * 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListOnboardingInvitesResponse listInvites(Optional<Options> options) {
         RequestlessOperation<ListOnboardingInvitesResponse> operation
-            = new ListOnboardingInvites.Sync(sdkConfiguration, _headers);
+            = new ListOnboardingInvites.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest());
     }
 
@@ -119,13 +153,29 @@ public class Onboarding {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetOnboardingInviteResponse getInvite(String code) {
+        return getInvite(code, Optional.empty());
+    }
+
+    /**
+     * Retrieve details about an onboarding invite.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts.read` scope.
+     * 
+     * @param code 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetOnboardingInviteResponse getInvite(String code, Optional<Options> options) {
         GetOnboardingInviteRequest request =
             GetOnboardingInviteRequest
                 .builder()
                 .code(code)
                 .build();
         RequestOperation<GetOnboardingInviteRequest, GetOnboardingInviteResponse> operation
-              = new GetOnboardingInvite.Sync(sdkConfiguration, _headers);
+              = new GetOnboardingInvite.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -154,13 +204,29 @@ public class Onboarding {
      * @throws RuntimeException subclass if the API call fails
      */
     public RevokeOnboardingInviteResponse revokeInvite(String code) {
+        return revokeInvite(code, Optional.empty());
+    }
+
+    /**
+     * Revoke an onboarding invite, rendering the invitation link unusable.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts.write` scope.
+     * 
+     * @param code 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public RevokeOnboardingInviteResponse revokeInvite(String code, Optional<Options> options) {
         RevokeOnboardingInviteRequest request =
             RevokeOnboardingInviteRequest
                 .builder()
                 .code(code)
                 .build();
         RequestOperation<RevokeOnboardingInviteRequest, RevokeOnboardingInviteResponse> operation
-              = new RevokeOnboardingInvite.Sync(sdkConfiguration, _headers);
+              = new RevokeOnboardingInvite.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

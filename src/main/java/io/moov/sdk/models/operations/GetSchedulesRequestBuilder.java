@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetSchedules;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetSchedulesRequestBuilder {
 
     private String accountID;
     private String scheduleID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class GetSchedulesRequestBuilder {
         this.scheduleID = scheduleID;
         return this;
     }
+                
+    public GetSchedulesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetSchedulesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetSchedulesRequest buildRequest() {
@@ -44,9 +60,12 @@ public class GetSchedulesRequestBuilder {
     }
 
     public GetSchedulesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetSchedulesRequest, GetSchedulesResponse> operation
-              = new GetSchedules.Sync(sdkConfiguration, _headers);
+              = new GetSchedules.Sync(sdkConfiguration, options, _headers);
         GetSchedulesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

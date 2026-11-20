@@ -15,6 +15,7 @@ import io.moov.sdk.models.operations.ListPaymentMethodsResponse;
 import io.moov.sdk.operations.GetPaymentMethod;
 import io.moov.sdk.operations.ListPaymentMethods;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 
@@ -54,7 +55,8 @@ public class PaymentMethods {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListPaymentMethodsResponse list(String accountID) {
-        return list(accountID, Optional.empty(), Optional.empty());
+        return list(accountID, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -77,6 +79,31 @@ public class PaymentMethods {
     public ListPaymentMethodsResponse list(
             String accountID, Optional<String> sourceID,
             Optional<? extends PaymentMethodType> paymentMethodType) {
+        return list(accountID, sourceID, paymentMethodType,
+            Optional.empty());
+    }
+
+    /**
+     * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods
+     * guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
+     * 
+     * @param accountID 
+     * @param sourceID Optional parameter to filter the account's payment methods by source ID. 
+     *         
+     *         A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), 
+     *         or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
+     * @param paymentMethodType The payment method type that represents a payment rail and directionality
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListPaymentMethodsResponse list(
+            String accountID, Optional<String> sourceID,
+            Optional<? extends PaymentMethodType> paymentMethodType, Optional<Options> options) {
         ListPaymentMethodsRequest request =
             ListPaymentMethodsRequest
                 .builder()
@@ -85,7 +112,7 @@ public class PaymentMethods {
                 .paymentMethodType(paymentMethodType)
                 .build();
         RequestOperation<ListPaymentMethodsRequest, ListPaymentMethodsResponse> operation
-              = new ListPaymentMethods.Sync(sdkConfiguration, _headers);
+              = new ListPaymentMethods.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -117,6 +144,26 @@ public class PaymentMethods {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetPaymentMethodResponse get(String accountID, String paymentMethodID) {
+        return get(accountID, paymentMethodID, Optional.empty());
+    }
+
+    /**
+     * Get the specified payment method associated with a Moov account. Read our [payment methods
+     * guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
+     * 
+     * @param accountID 
+     * @param paymentMethodID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetPaymentMethodResponse get(
+            String accountID, String paymentMethodID,
+            Optional<Options> options) {
         GetPaymentMethodRequest request =
             GetPaymentMethodRequest
                 .builder()
@@ -124,7 +171,7 @@ public class PaymentMethods {
                 .paymentMethodID(paymentMethodID)
                 .build();
         RequestOperation<GetPaymentMethodRequest, GetPaymentMethodResponse> operation
-              = new GetPaymentMethod.Sync(sdkConfiguration, _headers);
+              = new GetPaymentMethod.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

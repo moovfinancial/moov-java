@@ -9,11 +9,15 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.E2EEToken;
 import io.moov.sdk.operations.TestEndToEndToken;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
+import java.time.Duration;
+import java.util.Optional;
 
 public class TestEndToEndTokenRequestBuilder {
 
     private E2EEToken request;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -26,11 +30,26 @@ public class TestEndToEndTokenRequestBuilder {
         this.request = request;
         return this;
     }
+                
+    public TestEndToEndTokenRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public TestEndToEndTokenRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
     public TestEndToEndTokenResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<E2EEToken, TestEndToEndTokenResponse> operation
-              = new TestEndToEndToken.Sync(sdkConfiguration, _headers);
+              = new TestEndToEndToken.Sync(sdkConfiguration, options, _headers);
 
         return operation.handleResponse(operation.doRequest(request));
     }

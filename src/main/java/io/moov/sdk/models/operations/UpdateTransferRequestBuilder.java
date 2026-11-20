@@ -9,14 +9,18 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.PatchTransfer;
 import io.moov.sdk.operations.UpdateTransfer;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class UpdateTransferRequestBuilder {
 
     private String transferID;
     private String accountID;
     private PatchTransfer patchTransfer;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -41,6 +45,18 @@ public class UpdateTransferRequestBuilder {
         this.patchTransfer = patchTransfer;
         return this;
     }
+                
+    public UpdateTransferRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public UpdateTransferRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private UpdateTransferRequest buildRequest() {
@@ -53,9 +69,12 @@ public class UpdateTransferRequestBuilder {
     }
 
     public UpdateTransferResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<UpdateTransferRequest, UpdateTransferResponse> operation
-              = new UpdateTransfer.Sync(sdkConfiguration, _headers);
+              = new UpdateTransfer.Sync(sdkConfiguration, options, _headers);
         UpdateTransferRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

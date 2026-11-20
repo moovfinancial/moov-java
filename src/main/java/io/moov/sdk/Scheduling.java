@@ -32,6 +32,7 @@ import io.moov.sdk.operations.GetSchedules;
 import io.moov.sdk.operations.ListSchedules;
 import io.moov.sdk.operations.UpdateSchedule;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -71,6 +72,25 @@ public class Scheduling {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateScheduleResponse create(String accountID, UpsertSchedule upsertSchedule) {
+        return create(accountID, upsertSchedule, Optional.empty());
+    }
+
+    /**
+     * Describes the schedule to create or modify.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param accountID Account ID of the account that will run the transfer.
+     * @param upsertSchedule 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateScheduleResponse create(
+            String accountID, UpsertSchedule upsertSchedule,
+            Optional<Options> options) {
         CreateScheduleRequest request =
             CreateScheduleRequest
                 .builder()
@@ -78,7 +98,7 @@ public class Scheduling {
                 .upsertSchedule(upsertSchedule)
                 .build();
         RequestOperation<CreateScheduleRequest, CreateScheduleResponse> operation
-              = new CreateSchedule.Sync(sdkConfiguration, _headers);
+              = new CreateSchedule.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -110,7 +130,7 @@ public class Scheduling {
      */
     public ListSchedulesResponse list(String accountID) {
         return list(Optional.empty(), Optional.empty(), Optional.empty(),
-            accountID);
+            accountID, Optional.empty());
     }
 
     /**
@@ -131,6 +151,30 @@ public class Scheduling {
     public ListSchedulesResponse list(
             Optional<Long> skip, Optional<Long> count,
             Optional<? extends Hydrate> hydrate, String accountID) {
+        return list(skip, count, hydrate,
+            accountID, Optional.empty());
+    }
+
+    /**
+     * Describes a list of schedules associated with an account. Append the `hydrate=accounts` query
+     * parameter to include partial account details in the response.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param skip 
+     * @param count Page size. When omitted, the server defaults to `200`.
+     * @param hydrate 
+     * @param accountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListSchedulesResponse list(
+            Optional<Long> skip, Optional<Long> count,
+            Optional<? extends Hydrate> hydrate, String accountID,
+            Optional<Options> options) {
         ListSchedulesRequest request =
             ListSchedulesRequest
                 .builder()
@@ -140,7 +184,7 @@ public class Scheduling {
                 .accountID(accountID)
                 .build();
         RequestOperation<ListSchedulesRequest, ListSchedulesResponse> operation
-              = new ListSchedules.Sync(sdkConfiguration, _headers);
+              = new ListSchedules.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -173,6 +217,27 @@ public class Scheduling {
     public UpdateScheduleResponse update(
             String accountID, String scheduleID,
             UpsertSchedule upsertSchedule) {
+        return update(accountID, scheduleID, upsertSchedule,
+            Optional.empty());
+    }
+
+    /**
+     * Describes the schedule to modify.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param accountID Account ID of the account that will run the transfer.
+     * @param scheduleID 
+     * @param upsertSchedule 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateScheduleResponse update(
+            String accountID, String scheduleID,
+            UpsertSchedule upsertSchedule, Optional<Options> options) {
         UpdateScheduleRequest request =
             UpdateScheduleRequest
                 .builder()
@@ -181,7 +246,7 @@ public class Scheduling {
                 .upsertSchedule(upsertSchedule)
                 .build();
         RequestOperation<UpdateScheduleRequest, UpdateScheduleResponse> operation
-              = new UpdateSchedule.Sync(sdkConfiguration, _headers);
+              = new UpdateSchedule.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -213,6 +278,26 @@ public class Scheduling {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetSchedulesResponse get(String accountID, String scheduleID) {
+        return get(accountID, scheduleID, Optional.empty());
+    }
+
+    /**
+     * Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to
+     * be specified.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID 
+     * @param scheduleID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetSchedulesResponse get(
+            String accountID, String scheduleID,
+            Optional<Options> options) {
         GetSchedulesRequest request =
             GetSchedulesRequest
                 .builder()
@@ -220,7 +305,7 @@ public class Scheduling {
                 .scheduleID(scheduleID)
                 .build();
         RequestOperation<GetSchedulesRequest, GetSchedulesResponse> operation
-              = new GetSchedules.Sync(sdkConfiguration, _headers);
+              = new GetSchedules.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -250,6 +335,25 @@ public class Scheduling {
      * @throws RuntimeException subclass if the API call fails
      */
     public CancelScheduleResponse cancel(String accountID, String scheduleID) {
+        return cancel(accountID, scheduleID, Optional.empty());
+    }
+
+    /**
+     * Describes the schedule to cancel.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param accountID Your Moov account ID as the partner running the transfers.
+     * @param scheduleID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CancelScheduleResponse cancel(
+            String accountID, String scheduleID,
+            Optional<Options> options) {
         CancelScheduleRequest request =
             CancelScheduleRequest
                 .builder()
@@ -257,7 +361,7 @@ public class Scheduling {
                 .scheduleID(scheduleID)
                 .build();
         RequestOperation<CancelScheduleRequest, CancelScheduleResponse> operation
-              = new CancelSchedule.Sync(sdkConfiguration, _headers);
+              = new CancelSchedule.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -294,6 +398,31 @@ public class Scheduling {
     public GetScheduledOccurrenceResponse getOccurrance(
             String accountID, String scheduleID,
             String occurrenceFilter) {
+        return getOccurrance(accountID, scheduleID, occurrenceFilter,
+            Optional.empty());
+    }
+
+    /**
+     * Gets a specific occurrence.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID 
+     * @param scheduleID 
+     * @param occurrenceFilter   Allows the specification of additional filters beyond the string.
+     *         
+     *           Specifying a string returns the exact occurrence.
+     *           Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
+     *           Specifying `latest` returns the latest occurrence at or before now.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetScheduledOccurrenceResponse getOccurrance(
+            String accountID, String scheduleID,
+            String occurrenceFilter, Optional<Options> options) {
         GetScheduledOccurrenceRequest request =
             GetScheduledOccurrenceRequest
                 .builder()
@@ -302,7 +431,7 @@ public class Scheduling {
                 .occurrenceFilter(occurrenceFilter)
                 .build();
         RequestOperation<GetScheduledOccurrenceRequest, GetScheduledOccurrenceResponse> operation
-              = new GetScheduledOccurrence.Sync(sdkConfiguration, _headers);
+              = new GetScheduledOccurrence.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

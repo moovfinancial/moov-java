@@ -10,6 +10,8 @@ import io.moov.sdk.models.operations.GetEnrichmentAddressRequestBuilder;
 import io.moov.sdk.models.operations.GetEnrichmentAddressResponse;
 import io.moov.sdk.operations.GetEnrichmentAddress;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
+import java.util.Optional;
 
 
 public class EnrichedAddress {
@@ -45,8 +47,24 @@ public class EnrichedAddress {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetEnrichmentAddressResponse get(GetEnrichmentAddressRequest request) {
+        return get(request, Optional.empty());
+    }
+
+    /**
+     * Fetch enriched address suggestions. Requires a partial address.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/profile-enrichment.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetEnrichmentAddressResponse get(GetEnrichmentAddressRequest request, Optional<Options> options) {
         RequestOperation<GetEnrichmentAddressRequest, GetEnrichmentAddressResponse> operation
-              = new GetEnrichmentAddress.Sync(sdkConfiguration, _headers);
+              = new GetEnrichmentAddress.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

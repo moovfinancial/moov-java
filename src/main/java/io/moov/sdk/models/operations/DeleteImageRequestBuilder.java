@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.DeleteImage;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class DeleteImageRequestBuilder {
 
     private String accountID;
     private String imageID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class DeleteImageRequestBuilder {
         this.imageID = imageID;
         return this;
     }
+                
+    public DeleteImageRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteImageRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DeleteImageRequest buildRequest() {
@@ -44,9 +60,12 @@ public class DeleteImageRequestBuilder {
     }
 
     public DeleteImageResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DeleteImageRequest, DeleteImageResponse> operation
-              = new DeleteImage.Sync(sdkConfiguration, _headers);
+              = new DeleteImage.Sync(sdkConfiguration, options, _headers);
         DeleteImageRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

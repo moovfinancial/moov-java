@@ -9,13 +9,17 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpsertUnderwriting;
 import io.moov.sdk.operations.SaveUnderwriting;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class SaveUnderwritingRequestBuilder {
 
     private String accountID;
     private UpsertUnderwriting upsertUnderwriting;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -34,6 +38,18 @@ public class SaveUnderwritingRequestBuilder {
         this.upsertUnderwriting = upsertUnderwriting;
         return this;
     }
+                
+    public SaveUnderwritingRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public SaveUnderwritingRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private SaveUnderwritingRequest buildRequest() {
@@ -45,9 +61,12 @@ public class SaveUnderwritingRequestBuilder {
     }
 
     public SaveUnderwritingResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<SaveUnderwritingRequest, SaveUnderwritingResponse> operation
-              = new SaveUnderwriting.Sync(sdkConfiguration, _headers);
+              = new SaveUnderwriting.Sync(sdkConfiguration, options, _headers);
         SaveUnderwritingRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

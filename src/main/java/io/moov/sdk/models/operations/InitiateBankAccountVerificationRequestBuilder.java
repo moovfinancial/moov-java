@@ -9,8 +9,10 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.BankAccountWaitFor;
 import io.moov.sdk.operations.InitiateBankAccountVerification;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class InitiateBankAccountVerificationRequestBuilder {
@@ -18,6 +20,7 @@ public class InitiateBankAccountVerificationRequestBuilder {
     private Optional<? extends BankAccountWaitFor> xWaitFor = Optional.empty();
     private String accountID;
     private String bankAccountID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -48,6 +51,18 @@ public class InitiateBankAccountVerificationRequestBuilder {
         this.bankAccountID = bankAccountID;
         return this;
     }
+                
+    public InitiateBankAccountVerificationRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public InitiateBankAccountVerificationRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private InitiateBankAccountVerificationRequest buildRequest() {
@@ -60,9 +75,12 @@ public class InitiateBankAccountVerificationRequestBuilder {
     }
 
     public InitiateBankAccountVerificationResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<InitiateBankAccountVerificationRequest, InitiateBankAccountVerificationResponse> operation
-              = new InitiateBankAccountVerification.Sync(sdkConfiguration, _headers);
+              = new InitiateBankAccountVerification.Sync(sdkConfiguration, options, _headers);
         InitiateBankAccountVerificationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

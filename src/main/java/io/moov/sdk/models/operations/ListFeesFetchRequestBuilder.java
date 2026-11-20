@@ -9,14 +9,17 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.ListFeesFetchRequest;
 import io.moov.sdk.operations.ListFeesFetch;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class ListFeesFetchRequestBuilder {
 
     private String accountID;
     private Optional<? extends ListFeesFetchRequest> listFeesFetchRequest = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -41,6 +44,18 @@ public class ListFeesFetchRequestBuilder {
         this.listFeesFetchRequest = listFeesFetchRequest;
         return this;
     }
+                
+    public ListFeesFetchRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public ListFeesFetchRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private io.moov.sdk.models.operations.ListFeesFetchRequest buildRequest() {
@@ -52,9 +67,12 @@ public class ListFeesFetchRequestBuilder {
     }
 
     public ListFeesFetchResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<io.moov.sdk.models.operations.ListFeesFetchRequest, ListFeesFetchResponse> operation
-              = new ListFeesFetch.Sync(sdkConfiguration, _headers);
+              = new ListFeesFetch.Sync(sdkConfiguration, options, _headers);
         io.moov.sdk.models.operations.ListFeesFetchRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

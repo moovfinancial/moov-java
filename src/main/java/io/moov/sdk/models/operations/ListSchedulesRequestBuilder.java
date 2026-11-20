@@ -8,9 +8,11 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListSchedules;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class ListSchedulesRequestBuilder {
@@ -19,6 +21,7 @@ public class ListSchedulesRequestBuilder {
     private Optional<Long> count = Optional.empty();
     private Optional<? extends Hydrate> hydrate = Optional.empty();
     private String accountID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -67,6 +70,18 @@ public class ListSchedulesRequestBuilder {
         this.accountID = accountID;
         return this;
     }
+                
+    public ListSchedulesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public ListSchedulesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private ListSchedulesRequest buildRequest() {
@@ -80,9 +95,12 @@ public class ListSchedulesRequestBuilder {
     }
 
     public ListSchedulesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<ListSchedulesRequest, ListSchedulesResponse> operation
-              = new ListSchedules.Sync(sdkConfiguration, _headers);
+              = new ListSchedules.Sync(sdkConfiguration, options, _headers);
         ListSchedulesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -9,9 +9,11 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.PaymentLinkType;
 import io.moov.sdk.operations.ListPaymentLinks;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.String;
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +23,7 @@ public class ListPaymentLinksRequestBuilder {
     private Optional<Long> count = Optional.empty();
     private Optional<? extends List<PaymentLinkType>> types = Optional.empty();
     private String accountID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -69,6 +72,18 @@ public class ListPaymentLinksRequestBuilder {
         this.accountID = accountID;
         return this;
     }
+                
+    public ListPaymentLinksRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public ListPaymentLinksRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private ListPaymentLinksRequest buildRequest() {
@@ -82,9 +97,12 @@ public class ListPaymentLinksRequestBuilder {
     }
 
     public ListPaymentLinksResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<ListPaymentLinksRequest, ListPaymentLinksResponse> operation
-              = new ListPaymentLinks.Sync(sdkConfiguration, _headers);
+              = new ListPaymentLinks.Sync(sdkConfiguration, options, _headers);
         ListPaymentLinksRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

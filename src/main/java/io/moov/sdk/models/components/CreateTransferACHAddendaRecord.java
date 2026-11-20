@@ -17,7 +17,9 @@ import java.lang.String;
  */
 public class CreateTransferACHAddendaRecord {
     /**
-     * The raw ACH addenda record. Must only contain valid NACHA characters
+     * The raw ACH addenda record. Must only contain valid NACHA characters. JSON is UTF-8.
+     * 
+     * <p>Moov originates each character as one byte in the Nacha file.
      */
     @JsonProperty("record")
     private String record;
@@ -30,7 +32,9 @@ public class CreateTransferACHAddendaRecord {
     }
 
     /**
-     * The raw ACH addenda record. Must only contain valid NACHA characters
+     * The raw ACH addenda record. Must only contain valid NACHA characters. JSON is UTF-8.
+     * 
+     * <p>Moov originates each character as one byte in the Nacha file.
      */
     @JsonIgnore
     public String record() {
@@ -43,7 +47,9 @@ public class CreateTransferACHAddendaRecord {
 
 
     /**
-     * The raw ACH addenda record. Must only contain valid NACHA characters
+     * The raw ACH addenda record. Must only contain valid NACHA characters. JSON is UTF-8.
+     * 
+     * <p>Moov originates each character as one byte in the Nacha file.
      */
     public CreateTransferACHAddendaRecord withRecord(String record) {
         Utils.checkNotNull(record, "record");
@@ -87,7 +93,9 @@ public class CreateTransferACHAddendaRecord {
 
 
         /**
-         * The raw ACH addenda record. Must only contain valid NACHA characters
+         * The raw ACH addenda record. Must only contain valid NACHA characters. JSON is UTF-8.
+         * 
+         * <p>Moov originates each character as one byte in the Nacha file.
          */
         public Builder record(String record) {
             Utils.checkNotNull(record, "record");

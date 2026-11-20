@@ -27,6 +27,7 @@ import io.moov.sdk.operations.GetProduct;
 import io.moov.sdk.operations.ListProducts;
 import io.moov.sdk.operations.UpdateProduct;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -58,7 +59,7 @@ public class Products {
      */
     public ListProductsResponse list(String accountID) {
         return list(accountID, Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -74,6 +75,25 @@ public class Products {
     public ListProductsResponse list(
             String accountID, Optional<String> title,
             Optional<Long> skip, Optional<Long> count) {
+        return list(accountID, title, skip,
+            count, Optional.empty());
+    }
+
+    /**
+     * List active (non-disabled) products for an account.
+     * 
+     * @param accountID 
+     * @param title Allows filtering products by title. This supports partial matches and is case-insensitive
+     * @param skip 
+     * @param count Page size. When omitted, the server defaults to `200`.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListProductsResponse list(
+            String accountID, Optional<String> title,
+            Optional<Long> skip, Optional<Long> count,
+            Optional<Options> options) {
         ListProductsRequest request =
             ListProductsRequest
                 .builder()
@@ -83,7 +103,7 @@ public class Products {
                 .count(count)
                 .build();
         RequestOperation<ListProductsRequest, ListProductsResponse> operation
-              = new ListProducts.Sync(sdkConfiguration, _headers);
+              = new ListProducts.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -105,6 +125,21 @@ public class Products {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateProductResponse create(String accountID, ProductRequest productRequest) {
+        return create(accountID, productRequest, Optional.empty());
+    }
+
+    /**
+     * Creates a new product for the specified account.
+     * 
+     * @param accountID 
+     * @param productRequest Request to create or update a product.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateProductResponse create(
+            String accountID, ProductRequest productRequest,
+            Optional<Options> options) {
         CreateProductRequest request =
             CreateProductRequest
                 .builder()
@@ -112,7 +147,7 @@ public class Products {
                 .productRequest(productRequest)
                 .build();
         RequestOperation<CreateProductRequest, CreateProductResponse> operation
-              = new CreateProduct.Sync(sdkConfiguration, _headers);
+              = new CreateProduct.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -134,6 +169,21 @@ public class Products {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetProductResponse get(String accountID, String productID) {
+        return get(accountID, productID, Optional.empty());
+    }
+
+    /**
+     * Retrieve a product by ID.
+     * 
+     * @param accountID 
+     * @param productID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetProductResponse get(
+            String accountID, String productID,
+            Optional<Options> options) {
         GetProductRequest request =
             GetProductRequest
                 .builder()
@@ -141,7 +191,7 @@ public class Products {
                 .productID(productID)
                 .build();
         RequestOperation<GetProductRequest, GetProductResponse> operation
-              = new GetProduct.Sync(sdkConfiguration, _headers);
+              = new GetProduct.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -166,6 +216,23 @@ public class Products {
     public UpdateProductResponse update(
             String accountID, String productID,
             ProductRequest productRequest) {
+        return update(accountID, productID, productRequest,
+            Optional.empty());
+    }
+
+    /**
+     * Update a product and its options.
+     * 
+     * @param accountID 
+     * @param productID 
+     * @param productRequest Request to create or update a product.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateProductResponse update(
+            String accountID, String productID,
+            ProductRequest productRequest, Optional<Options> options) {
         UpdateProductRequest request =
             UpdateProductRequest
                 .builder()
@@ -174,7 +241,7 @@ public class Products {
                 .productRequest(productRequest)
                 .build();
         RequestOperation<UpdateProductRequest, UpdateProductResponse> operation
-              = new UpdateProduct.Sync(sdkConfiguration, _headers);
+              = new UpdateProduct.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -202,6 +269,24 @@ public class Products {
      * @throws RuntimeException subclass if the API call fails
      */
     public DisableProductResponse disable(String accountID, String productID) {
+        return disable(accountID, productID, Optional.empty());
+    }
+
+    /**
+     * Disable a product by ID.
+     * 
+     * <p>The product will no longer be available, but will remain in the system for historical and reporting
+     * purposes.
+     * 
+     * @param accountID 
+     * @param productID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DisableProductResponse disable(
+            String accountID, String productID,
+            Optional<Options> options) {
         DisableProductRequest request =
             DisableProductRequest
                 .builder()
@@ -209,7 +294,7 @@ public class Products {
                 .productID(productID)
                 .build();
         RequestOperation<DisableProductRequest, DisableProductResponse> operation
-              = new DisableProduct.Sync(sdkConfiguration, _headers);
+              = new DisableProduct.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

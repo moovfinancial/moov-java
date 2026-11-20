@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListTicketMessages;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class ListTicketMessagesRequestBuilder {
 
     private String accountID;
     private String ticketID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class ListTicketMessagesRequestBuilder {
         this.ticketID = ticketID;
         return this;
     }
+                
+    public ListTicketMessagesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public ListTicketMessagesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private ListTicketMessagesRequest buildRequest() {
@@ -44,9 +60,12 @@ public class ListTicketMessagesRequestBuilder {
     }
 
     public ListTicketMessagesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<ListTicketMessagesRequest, ListTicketMessagesResponse> operation
-              = new ListTicketMessages.Sync(sdkConfiguration, _headers);
+              = new ListTicketMessages.Sync(sdkConfiguration, options, _headers);
         ListTicketMessagesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

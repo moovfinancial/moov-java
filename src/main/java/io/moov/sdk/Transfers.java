@@ -60,6 +60,7 @@ import io.moov.sdk.operations.ListRefunds;
 import io.moov.sdk.operations.ListTransfers;
 import io.moov.sdk.operations.UpdateTransfer;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 
@@ -112,6 +113,32 @@ public class Transfers {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateTransferOptionsResponse generateOptions(String accountID, CreateTransferOptions createTransferOptions) {
+        return generateOptions(accountID, createTransferOptions, Optional.empty());
+    }
+
+    /**
+     * Generate available payment method options for one or multiple transfer participants depending on the
+     * accountID or paymentMethodID you
+     * supply in the request body.
+     * 
+     * <p>The accountID in the route should the partner's accountID.
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn
+     * more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param accountID The partner's Moov account ID.
+     * @param createTransferOptions 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateTransferOptionsResponse generateOptions(
+            String accountID, CreateTransferOptions createTransferOptions,
+            Optional<Options> options) {
         CreateTransferOptionsRequest request =
             CreateTransferOptionsRequest
                 .builder()
@@ -119,7 +146,7 @@ public class Transfers {
                 .createTransferOptions(createTransferOptions)
                 .build();
         RequestOperation<CreateTransferOptionsRequest, CreateTransferOptionsResponse> operation
-              = new io.moov.sdk.operations.CreateTransferOptions.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateTransferOptions.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -160,7 +187,7 @@ public class Transfers {
             String xIdempotencyKey, String accountID,
             CreateTransfer createTransfer) {
         return create(xIdempotencyKey, Optional.empty(), accountID,
-            createTransfer);
+            createTransfer, Optional.empty());
     }
 
     /**
@@ -184,6 +211,33 @@ public class Transfers {
     public CreateTransferResponse create(
             String xIdempotencyKey, Optional<? extends TransferWaitFor> xWaitFor,
             String accountID, CreateTransfer createTransfer) {
+        return create(xIdempotencyKey, xWaitFor, accountID,
+            createTransfer, Optional.empty());
+    }
+
+    /**
+     * Move money by providing the source, destination, and amount in the request body.
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn
+     * more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param xIdempotencyKey   Identifies a unique request to create a transfer.
+     *           In order to avoid creating duplicate transfers, the same idempotency key should be reused when retrying a request.
+     * @param xWaitFor 
+     * @param accountID Your Moov account ID.
+     * @param createTransfer 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateTransferResponse create(
+            String xIdempotencyKey, Optional<? extends TransferWaitFor> xWaitFor,
+            String accountID, CreateTransfer createTransfer,
+            Optional<Options> options) {
         CreateTransferRequest request =
             CreateTransferRequest
                 .builder()
@@ -193,7 +247,7 @@ public class Transfers {
                 .createTransfer(createTransfer)
                 .build();
         RequestOperation<CreateTransferRequest, CreateTransferResponse> operation
-              = new io.moov.sdk.operations.CreateTransfer.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateTransfer.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -260,8 +314,43 @@ public class Transfers {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListTransfersResponse list(ListTransfersRequest request) {
+        return list(request, Optional.empty());
+    }
+
+    /**
+     * List all the transfers associated with a particular Moov account.
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn
+     * more.
+     * 
+     * <p>When you run this request, you retrieve 200 transfers at a time. You can advance past a results set
+     * of 200 transfers by using the `skip` parameter (for example,
+     * if you set `skip`= 10, you will see a results set of 200 transfers after the first 10). If you are
+     * searching a high volume of transfers, the request will likely
+     * process very slowly. To achieve faster performance, restrict the data as much as you can by using
+     * the `StartDateTime` and `EndDateTime` parameters for a limited
+     * period of time. You can run multiple requests in smaller time window increments until you've
+     * retrieved all the transfers you need. The maximum allowed value for
+     * `skip` is `200 000`.
+     * 
+     * <p>For large result sets, use cursor pagination instead of `skip`. When more transfers are available,
+     * the response includes an
+     * `X-Next-Cursor` header. Pass its value as the `cursor` query parameter, with the same filters and
+     * `count`, to retrieve the next page.
+     * `cursor` cannot be combined with a nonzero `skip`.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListTransfersResponse list(ListTransfersRequest request, Optional<Options> options) {
         RequestOperation<ListTransfersRequest, ListTransfersResponse> operation
-              = new ListTransfers.Sync(sdkConfiguration, _headers);
+              = new ListTransfers.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -301,6 +390,30 @@ public class Transfers {
      * @throws RuntimeException subclass if the API call fails
      */
     public BatchGetTransfersResponse batchGetTransfers(String accountID, BatchGetTransfersRequest batchGetTransfersRequest) {
+        return batchGetTransfers(accountID, batchGetTransfersRequest, Optional.empty());
+    }
+
+    /**
+     * Retrieve transfer details for multiple transfers in one request. The response is a map from each
+     * requested transfer ID to its full transfer details when available; IDs that are not found or not
+     * accessible under this account are omitted from the map.
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn
+     * more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID 
+     * @param batchGetTransfersRequest Array of transfer IDs to fetch.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public BatchGetTransfersResponse batchGetTransfers(
+            String accountID, BatchGetTransfersRequest batchGetTransfersRequest,
+            Optional<Options> options) {
         io.moov.sdk.models.operations.BatchGetTransfersRequest request =
             io.moov.sdk.models.operations.BatchGetTransfersRequest
                 .builder()
@@ -308,7 +421,7 @@ public class Transfers {
                 .batchGetTransfersRequest(batchGetTransfersRequest)
                 .build();
         RequestOperation<io.moov.sdk.models.operations.BatchGetTransfersRequest, BatchGetTransfersResponse> operation
-              = new BatchGetTransfers.Sync(sdkConfiguration, _headers);
+              = new BatchGetTransfers.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -346,6 +459,29 @@ public class Transfers {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetTransferResponse get(String transferID, String accountID) {
+        return get(transferID, accountID, Optional.empty());
+    }
+
+    /**
+     * Retrieve full transfer details for an individual transfer of a particular Moov account.
+     * 
+     * <p>Payment rail-specific details are included in the source and destination. Read our [transfers
+     * overview guide](https://docs.moov.io/guides/money-movement/overview/)
+     * to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param transferID Identifier for the transfer.
+     * @param accountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetTransferResponse get(
+            String transferID, String accountID,
+            Optional<Options> options) {
         GetTransferRequest request =
             GetTransferRequest
                 .builder()
@@ -353,7 +489,7 @@ public class Transfers {
                 .accountID(accountID)
                 .build();
         RequestOperation<GetTransferRequest, GetTransferResponse> operation
-              = new GetTransfer.Sync(sdkConfiguration, _headers);
+              = new GetTransfer.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -392,6 +528,30 @@ public class Transfers {
     public UpdateTransferResponse update(
             String transferID, String accountID,
             PatchTransfer patchTransfer) {
+        return update(transferID, accountID, patchTransfer,
+            Optional.empty());
+    }
+
+    /**
+     * Update the metadata contained on a transfer.
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn
+     * more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param transferID Identifier for the transfer.
+     * @param accountID 
+     * @param patchTransfer 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateTransferResponse update(
+            String transferID, String accountID,
+            PatchTransfer patchTransfer, Optional<Options> options) {
         UpdateTransferRequest request =
             UpdateTransferRequest
                 .builder()
@@ -400,7 +560,7 @@ public class Transfers {
                 .patchTransfer(patchTransfer)
                 .build();
         RequestOperation<UpdateTransferRequest, UpdateTransferResponse> operation
-              = new UpdateTransfer.Sync(sdkConfiguration, _headers);
+              = new UpdateTransfer.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -442,7 +602,8 @@ public class Transfers {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateCancellationResponse createCancellation(String accountID, String transferID) {
-        return createCancellation(Optional.empty(), accountID, transferID);
+        return createCancellation(Optional.empty(), accountID, transferID,
+            Optional.empty());
     }
 
     /**
@@ -468,6 +629,34 @@ public class Transfers {
     public CreateCancellationResponse createCancellation(
             Optional<String> xIdempotencyKey, String accountID,
             String transferID) {
+        return createCancellation(xIdempotencyKey, accountID, transferID,
+            Optional.empty());
+    }
+
+    /**
+     * Initiate a cancellation for a card, ACH, or queued transfer.
+     * 
+     * <p>In v2026.10 and later, an auth-capture `card-payment` transfer can be canceled before any captures
+     * exist.
+     * For these transfers, a successful cancellation reduces `capturableAmount` without changing
+     * `authorizedAmount`.
+     * For these transfers, a partial cancellation leaves the remaining `capturableAmount` available for
+     * capture.
+     * To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need
+     * to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param xIdempotencyKey Prevents duplicate cancellations from being created.
+     *         In v2026.10 and later, this header is required, and reusing a key returns a `409` response with the original cancellation.
+     * @param accountID The partner's Moov account ID.
+     * @param transferID The transfer ID to cancel.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateCancellationResponse createCancellation(
+            Optional<String> xIdempotencyKey, String accountID,
+            String transferID, Optional<Options> options) {
         CreateCancellationRequest request =
             CreateCancellationRequest
                 .builder()
@@ -476,7 +665,7 @@ public class Transfers {
                 .transferID(transferID)
                 .build();
         RequestOperation<CreateCancellationRequest, CreateCancellationResponse> operation
-              = new CreateCancellation.Sync(sdkConfiguration, _headers);
+              = new CreateCancellation.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -506,6 +695,25 @@ public class Transfers {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListCancellationsResponse listCancellations(String accountID, String transferID) {
+        return listCancellations(accountID, transferID, Optional.empty());
+    }
+
+    /**
+     * Get a list of cancellations for a transfer.
+     * 
+     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need
+     * to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID Moov account ID of the partner or transfer's source or destination.
+     * @param transferID Identifier for the transfer.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListCancellationsResponse listCancellations(
+            String accountID, String transferID,
+            Optional<Options> options) {
         ListCancellationsRequest request =
             ListCancellationsRequest
                 .builder()
@@ -513,7 +721,7 @@ public class Transfers {
                 .transferID(transferID)
                 .build();
         RequestOperation<ListCancellationsRequest, ListCancellationsResponse> operation
-              = new ListCancellations.Sync(sdkConfiguration, _headers);
+              = new ListCancellations.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -546,6 +754,27 @@ public class Transfers {
     public GetCancellationResponse getCancellation(
             String accountID, String transferID,
             String cancellationID) {
+        return getCancellation(accountID, transferID, cancellationID,
+            Optional.empty());
+    }
+
+    /**
+     * Get details of a cancellation for a transfer.
+     * 
+     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need
+     * to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID Moov account ID of the partner or transfer's source or destination.
+     * @param transferID Identifier for the transfer.
+     * @param cancellationID Identifier for the cancellation.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetCancellationResponse getCancellation(
+            String accountID, String transferID,
+            String cancellationID, Optional<Options> options) {
         GetCancellationRequest request =
             GetCancellationRequest
                 .builder()
@@ -554,7 +783,7 @@ public class Transfers {
                 .cancellationID(cancellationID)
                 .build();
         RequestOperation<GetCancellationRequest, GetCancellationResponse> operation
-              = new GetCancellation.Sync(sdkConfiguration, _headers);
+              = new GetCancellation.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -599,8 +828,32 @@ public class Transfers {
      * @throws RuntimeException subclass if the API call fails
      */
     public InitiateRefundResponse initiateRefund(InitiateRefundRequest request) {
+        return initiateRefund(request, Optional.empty());
+    }
+
+    /**
+     * Initiate a refund for a card transfer.
+     * The `accountID` must identify the partner account for the transfer.
+     * 
+     * <p>**Use the [Cancel or refund a card
+     * transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive
+     * cancel and refund options.**
+     * See the
+     * [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)
+     * guide for more information.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public InitiateRefundResponse initiateRefund(InitiateRefundRequest request, Optional<Options> options) {
         RequestOperation<InitiateRefundRequest, InitiateRefundResponse> operation
-              = new InitiateRefund.Sync(sdkConfiguration, _headers);
+              = new InitiateRefund.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -630,6 +883,25 @@ public class Transfers {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListRefundsResponse listRefunds(String accountID, String transferID) {
+        return listRefunds(accountID, transferID, Optional.empty());
+    }
+
+    /**
+     * Get a list of refunds for a card transfer.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID 
+     * @param transferID Identifier for the transfer.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListRefundsResponse listRefunds(
+            String accountID, String transferID,
+            Optional<Options> options) {
         ListRefundsRequest request =
             ListRefundsRequest
                 .builder()
@@ -637,7 +909,7 @@ public class Transfers {
                 .transferID(transferID)
                 .build();
         RequestOperation<ListRefundsRequest, ListRefundsResponse> operation
-              = new ListRefunds.Sync(sdkConfiguration, _headers);
+              = new ListRefunds.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -670,6 +942,27 @@ public class Transfers {
     public GetRefundResponse getRefund(
             String transferID, String accountID,
             String refundID) {
+        return getRefund(transferID, accountID, refundID,
+            Optional.empty());
+    }
+
+    /**
+     * Get details of a refund for a card transfer.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param transferID Identifier for the transfer.
+     * @param accountID 
+     * @param refundID Identifier for the refund.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetRefundResponse getRefund(
+            String transferID, String accountID,
+            String refundID, Optional<Options> options) {
         GetRefundRequest request =
             GetRefundRequest
                 .builder()
@@ -678,7 +971,7 @@ public class Transfers {
                 .refundID(refundID)
                 .build();
         RequestOperation<GetRefundRequest, GetRefundResponse> operation
-              = new GetRefund.Sync(sdkConfiguration, _headers);
+              = new GetRefund.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -730,7 +1023,7 @@ public class Transfers {
             String xIdempotencyKey, String accountID,
             String transferID) {
         return createReversal(xIdempotencyKey, accountID, transferID,
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -759,6 +1052,38 @@ public class Transfers {
     public CreateReversalResponse createReversal(
             String xIdempotencyKey, String accountID,
             String transferID, Optional<? extends CreateReversal> createReversal) {
+        return createReversal(xIdempotencyKey, accountID, transferID,
+            createReversal, Optional.empty());
+    }
+
+    /**
+     * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status.
+     * In v2026.10 and later, reversing an auth-capture `card-payment` transfer with no captures cancels
+     * the entire `capturableAmount`.
+     * In those API versions, an auth-capture `card-payment` transfer with one final capture is canceled or
+     * refunded depending on its processing state.
+     * Auth-capture `card-payment` transfers with a non-final capture or multiple captures are not
+     * supported in those API versions.
+     * Read our [reversals
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)
+     * to learn more.
+     * 
+     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need
+     * to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param xIdempotencyKey Prevents duplicate reversals from being created.
+     * @param accountID The Moov account ID.
+     * @param transferID The transfer ID to reverse.
+     * @param createReversal 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateReversalResponse createReversal(
+            String xIdempotencyKey, String accountID,
+            String transferID, Optional<? extends CreateReversal> createReversal,
+            Optional<Options> options) {
         CreateReversalRequest request =
             CreateReversalRequest
                 .builder()
@@ -768,7 +1093,7 @@ public class Transfers {
                 .createReversal(createReversal)
                 .build();
         RequestOperation<CreateReversalRequest, CreateReversalResponse> operation
-              = new io.moov.sdk.operations.CreateReversal.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateReversal.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

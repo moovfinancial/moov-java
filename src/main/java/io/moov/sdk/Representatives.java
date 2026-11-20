@@ -26,7 +26,9 @@ import io.moov.sdk.operations.DeleteRepresentative;
 import io.moov.sdk.operations.GetRepresentative;
 import io.moov.sdk.operations.ListRepresentatives;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class Representatives {
@@ -73,6 +75,30 @@ public class Representatives {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateRepresentativeResponse create(String accountID, CreateRepresentative createRepresentative) {
+        return create(accountID, createRepresentative, Optional.empty());
+    }
+
+    /**
+     * Moov accounts associated with businesses require information regarding individuals who represent the
+     * business.
+     * You can provide this information by creating a representative. Each account is allowed a maximum of
+     * 7 representatives.
+     * Read our [business representatives
+     * guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * 
+     * @param accountID ID of the account.
+     * @param createRepresentative Describes a business representative to create.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateRepresentativeResponse create(
+            String accountID, CreateRepresentative createRepresentative,
+            Optional<Options> options) {
         CreateRepresentativeRequest request =
             CreateRepresentativeRequest
                 .builder()
@@ -80,7 +106,7 @@ public class Representatives {
                 .createRepresentative(createRepresentative)
                 .build();
         RequestOperation<CreateRepresentativeRequest, CreateRepresentativeResponse> operation
-              = new io.moov.sdk.operations.CreateRepresentative.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateRepresentative.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -119,13 +145,34 @@ public class Representatives {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListRepresentativesResponse list(String accountID) {
+        return list(accountID, Optional.empty());
+    }
+
+    /**
+     * A Moov account may have multiple representatives depending on the associated business's ownership
+     * and management structure.
+     * You can use this method to list all the representatives for a given Moov account.
+     * Note that Moov accounts associated with an individual do not have representatives.
+     * Read our [business representatives
+     * guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+     * 
+     * @param accountID ID of the account.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListRepresentativesResponse list(String accountID, Optional<Options> options) {
         ListRepresentativesRequest request =
             ListRepresentativesRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<ListRepresentativesRequest, ListRepresentativesResponse> operation
-              = new ListRepresentatives.Sync(sdkConfiguration, _headers);
+              = new ListRepresentatives.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -157,6 +204,26 @@ public class Representatives {
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteRepresentativeResponse delete(String accountID, String representativeID) {
+        return delete(accountID, representativeID, Optional.empty());
+    }
+
+    /**
+     * Deletes a business representative associated with a Moov account. Read our [business representatives
+     * guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * 
+     * @param accountID ID of the account.
+     * @param representativeID ID of the representative.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DeleteRepresentativeResponse delete(
+            String accountID, String representativeID,
+            Optional<Options> options) {
         DeleteRepresentativeRequest request =
             DeleteRepresentativeRequest
                 .builder()
@@ -164,7 +231,7 @@ public class Representatives {
                 .representativeID(representativeID)
                 .build();
         RequestOperation<DeleteRepresentativeRequest, DeleteRepresentativeResponse> operation
-              = new DeleteRepresentative.Sync(sdkConfiguration, _headers);
+              = new DeleteRepresentative.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -198,6 +265,27 @@ public class Representatives {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetRepresentativeResponse get(String accountID, String representativeID) {
+        return get(accountID, representativeID, Optional.empty());
+    }
+
+    /**
+     * Retrieve a specific representative associated with a given Moov account. Read our [business
+     * representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/)
+     * to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+     * 
+     * @param accountID ID of the account.
+     * @param representativeID ID of the representative.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetRepresentativeResponse get(
+            String accountID, String representativeID,
+            Optional<Options> options) {
         GetRepresentativeRequest request =
             GetRepresentativeRequest
                 .builder()
@@ -205,7 +293,7 @@ public class Representatives {
                 .representativeID(representativeID)
                 .build();
         RequestOperation<GetRepresentativeRequest, GetRepresentativeResponse> operation
-              = new GetRepresentative.Sync(sdkConfiguration, _headers);
+              = new GetRepresentative.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -268,6 +356,42 @@ public class Representatives {
     public UpdateRepresentativeResponse update(
             String accountID, String representativeID,
             UpdateRepresentative updateRepresentative) {
+        return update(accountID, representativeID, updateRepresentative,
+            Optional.empty());
+    }
+
+    /**
+     * If a representative's information has changed you can patch the information associated with a
+     * specific representative ID.
+     * Read our [business representatives
+     * guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>When **can** profile data be updated:
+     * 
+     * <p>- For unverified representatives, all profile data can be edited.
+     * - During the verification process, missing or incomplete profile data can be edited.
+     * - Verified representatives can only add missing profile data.
+     * 
+     * <p>When **can't** profile data be updated:
+     * 
+     * <p>- Verified representatives cannot change any existing profile data.
+     * 
+     * <p>If you need to update information in a locked state, please contact Moov support.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * 
+     * @param accountID ID of the account.
+     * @param representativeID ID of the representative.
+     * @param updateRepresentative 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateRepresentativeResponse update(
+            String accountID, String representativeID,
+            UpdateRepresentative updateRepresentative, Optional<Options> options) {
         UpdateRepresentativeRequest request =
             UpdateRepresentativeRequest
                 .builder()
@@ -276,7 +400,7 @@ public class Representatives {
                 .updateRepresentative(updateRepresentative)
                 .build();
         RequestOperation<UpdateRepresentativeRequest, UpdateRepresentativeResponse> operation
-              = new io.moov.sdk.operations.UpdateRepresentative.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.UpdateRepresentative.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -14,6 +14,7 @@ import io.moov.sdk.models.operations.ListAdjustmentsResponse;
 import io.moov.sdk.operations.GetAdjustment;
 import io.moov.sdk.operations.ListAdjustments;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 
@@ -51,7 +52,7 @@ public class Adjustments {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListAdjustmentsResponse list(String accountID) {
-        return list(accountID, Optional.empty());
+        return list(accountID, Optional.empty(), Optional.empty());
     }
 
     /**
@@ -67,6 +68,25 @@ public class Adjustments {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListAdjustmentsResponse list(String accountID, Optional<String> walletID) {
+        return list(accountID, walletID, Optional.empty());
+    }
+
+    /**
+     * List adjustments associated with a Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
+     * @param accountID 
+     * @param walletID A wallet ID to filter adjustments by.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListAdjustmentsResponse list(
+            String accountID, Optional<String> walletID,
+            Optional<Options> options) {
         ListAdjustmentsRequest request =
             ListAdjustmentsRequest
                 .builder()
@@ -74,7 +94,7 @@ public class Adjustments {
                 .walletID(walletID)
                 .build();
         RequestOperation<ListAdjustmentsRequest, ListAdjustmentsResponse> operation
-              = new ListAdjustments.Sync(sdkConfiguration, _headers);
+              = new ListAdjustments.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -104,6 +124,25 @@ public class Adjustments {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetAdjustmentResponse get(String accountID, String adjustmentID) {
+        return get(accountID, adjustmentID, Optional.empty());
+    }
+
+    /**
+     * Retrieve a specific adjustment associated with a Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
+     * @param accountID 
+     * @param adjustmentID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetAdjustmentResponse get(
+            String accountID, String adjustmentID,
+            Optional<Options> options) {
         GetAdjustmentRequest request =
             GetAdjustmentRequest
                 .builder()
@@ -111,7 +150,7 @@ public class Adjustments {
                 .adjustmentID(adjustmentID)
                 .build();
         RequestOperation<GetAdjustmentRequest, GetAdjustmentResponse> operation
-              = new GetAdjustment.Sync(sdkConfiguration, _headers);
+              = new GetAdjustment.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

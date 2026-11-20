@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.DisableBankAccount;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class DisableBankAccountRequestBuilder {
 
     private String accountID;
     private String bankAccountID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class DisableBankAccountRequestBuilder {
         this.bankAccountID = bankAccountID;
         return this;
     }
+                
+    public DisableBankAccountRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DisableBankAccountRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DisableBankAccountRequest buildRequest() {
@@ -44,9 +60,12 @@ public class DisableBankAccountRequestBuilder {
     }
 
     public DisableBankAccountResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DisableBankAccountRequest, DisableBankAccountResponse> operation
-              = new DisableBankAccount.Sync(sdkConfiguration, _headers);
+              = new DisableBankAccount.Sync(sdkConfiguration, options, _headers);
         DisableBankAccountRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

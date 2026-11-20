@@ -26,7 +26,9 @@ import io.moov.sdk.operations.GetTicket;
 import io.moov.sdk.operations.ListTicketMessages;
 import io.moov.sdk.operations.ListTickets;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class Support {
@@ -71,6 +73,29 @@ public class Support {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateTicketResponse createTicket(String accountID, CreateTicket createTicket) {
+        return createTicket(accountID, createTicket, Optional.empty());
+    }
+
+    /**
+     * Create a support ticket for a Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
+     * 
+     * <p>If you're creating the ticket on behalf of another account, then you'll need to
+     * specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read`
+     * scopes.
+     * 
+     * @param accountID 
+     * @param createTicket Request to create a new support ticket.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateTicketResponse createTicket(
+            String accountID, CreateTicket createTicket,
+            Optional<Options> options) {
         CreateTicketRequest request =
             CreateTicketRequest
                 .builder()
@@ -78,7 +103,7 @@ public class Support {
                 .createTicket(createTicket)
                 .build();
         RequestOperation<CreateTicketRequest, CreateTicketResponse> operation
-              = new io.moov.sdk.operations.CreateTicket.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateTicket.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -115,8 +140,28 @@ public class Support {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListTicketsResponse listTickets(ListTicketsRequest request) {
+        return listTickets(request, Optional.empty());
+    }
+
+    /**
+     * List all the support tickets created under a Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
+     * 
+     * <p>If you're listing another account's tickets, then you'll need to
+     * specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read`
+     * scopes.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListTicketsResponse listTickets(ListTicketsRequest request, Optional<Options> options) {
         RequestOperation<ListTicketsRequest, ListTicketsResponse> operation
-              = new ListTickets.Sync(sdkConfiguration, _headers);
+              = new ListTickets.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -154,6 +199,29 @@ public class Support {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetTicketResponse getTicket(String accountID, String ticketID) {
+        return getTicket(accountID, ticketID, Optional.empty());
+    }
+
+    /**
+     * Retrieve a support ticket by ID.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
+     * 
+     * <p>If you're retrieving another account's ticket, then you'll need to
+     * specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read`
+     * scopes.
+     * 
+     * @param accountID 
+     * @param ticketID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetTicketResponse getTicket(
+            String accountID, String ticketID,
+            Optional<Options> options) {
         GetTicketRequest request =
             GetTicketRequest
                 .builder()
@@ -161,7 +229,7 @@ public class Support {
                 .ticketID(ticketID)
                 .build();
         RequestOperation<GetTicketRequest, GetTicketResponse> operation
-              = new GetTicket.Sync(sdkConfiguration, _headers);
+              = new GetTicket.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -202,6 +270,31 @@ public class Support {
     public UpdateTicketResponse updateTicket(
             String accountID, String ticketID,
             UpdateTicket updateTicket) {
+        return updateTicket(accountID, ticketID, updateTicket,
+            Optional.empty());
+    }
+
+    /**
+     * Updates a support ticket.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
+     * 
+     * <p>If you're updating the ticket on behalf of another account, then you'll need to
+     * specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read`
+     * scopes.
+     * 
+     * @param accountID 
+     * @param ticketID 
+     * @param updateTicket Request to update a support ticket.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateTicketResponse updateTicket(
+            String accountID, String ticketID,
+            UpdateTicket updateTicket, Optional<Options> options) {
         UpdateTicketRequest request =
             UpdateTicketRequest
                 .builder()
@@ -210,7 +303,7 @@ public class Support {
                 .updateTicket(updateTicket)
                 .build();
         RequestOperation<UpdateTicketRequest, UpdateTicketResponse> operation
-              = new io.moov.sdk.operations.UpdateTicket.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.UpdateTicket.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -248,6 +341,29 @@ public class Support {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListTicketMessagesResponse listTicketMessages(String accountID, String ticketID) {
+        return listTicketMessages(accountID, ticketID, Optional.empty());
+    }
+
+    /**
+     * List all the messages for a support ticket.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
+     * 
+     * <p>If you're listing another account's messages, then you'll need to
+     * specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read`
+     * scopes.
+     * 
+     * @param accountID 
+     * @param ticketID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListTicketMessagesResponse listTicketMessages(
+            String accountID, String ticketID,
+            Optional<Options> options) {
         ListTicketMessagesRequest request =
             ListTicketMessagesRequest
                 .builder()
@@ -255,7 +371,7 @@ public class Support {
                 .ticketID(ticketID)
                 .build();
         RequestOperation<ListTicketMessagesRequest, ListTicketMessagesResponse> operation
-              = new ListTicketMessages.Sync(sdkConfiguration, _headers);
+              = new ListTicketMessages.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateWallet;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class CreateWalletRequestBuilder {
 
     private String accountID;
     private CreateWallet createWallet;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class CreateWalletRequestBuilder {
         this.createWallet = createWallet;
         return this;
     }
+                
+    public CreateWalletRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public CreateWalletRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private CreateWalletRequest buildRequest() {
@@ -44,9 +60,12 @@ public class CreateWalletRequestBuilder {
     }
 
     public CreateWalletResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<CreateWalletRequest, CreateWalletResponse> operation
-              = new io.moov.sdk.operations.CreateWallet.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateWallet.Sync(sdkConfiguration, options, _headers);
         CreateWalletRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

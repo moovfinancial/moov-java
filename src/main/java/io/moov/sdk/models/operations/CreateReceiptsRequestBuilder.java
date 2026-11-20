@@ -9,12 +9,16 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.ReceiptRequest;
 import io.moov.sdk.operations.CreateReceipts;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
+import java.time.Duration;
 import java.util.List;
+import java.util.Optional;
 
 public class CreateReceiptsRequestBuilder {
 
     private List<ReceiptRequest> request;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -27,11 +31,26 @@ public class CreateReceiptsRequestBuilder {
         this.request = request;
         return this;
     }
+                
+    public CreateReceiptsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public CreateReceiptsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
     public CreateReceiptsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<List<ReceiptRequest>, CreateReceiptsResponse> operation
-              = new CreateReceipts.Sync(sdkConfiguration, _headers);
+              = new CreateReceipts.Sync(sdkConfiguration, options, _headers);
 
         return operation.handleResponse(operation.doRequest(request));
     }

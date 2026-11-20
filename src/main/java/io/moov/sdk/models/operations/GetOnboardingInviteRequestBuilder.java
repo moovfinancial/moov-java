@@ -8,12 +8,16 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetOnboardingInvite;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetOnboardingInviteRequestBuilder {
 
     private String code;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -26,6 +30,18 @@ public class GetOnboardingInviteRequestBuilder {
         this.code = code;
         return this;
     }
+                
+    public GetOnboardingInviteRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetOnboardingInviteRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetOnboardingInviteRequest buildRequest() {
@@ -36,9 +52,12 @@ public class GetOnboardingInviteRequestBuilder {
     }
 
     public GetOnboardingInviteResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetOnboardingInviteRequest, GetOnboardingInviteResponse> operation
-              = new GetOnboardingInvite.Sync(sdkConfiguration, _headers);
+              = new GetOnboardingInvite.Sync(sdkConfiguration, options, _headers);
         GetOnboardingInviteRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -8,8 +8,10 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListFeePlans;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +19,7 @@ public class ListFeePlansRequestBuilder {
 
     private String accountID;
     private Optional<? extends List<String>> planIDs = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -41,6 +44,18 @@ public class ListFeePlansRequestBuilder {
         this.planIDs = planIDs;
         return this;
     }
+                
+    public ListFeePlansRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public ListFeePlansRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private ListFeePlansRequest buildRequest() {
@@ -52,9 +67,12 @@ public class ListFeePlansRequestBuilder {
     }
 
     public ListFeePlansResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<ListFeePlansRequest, ListFeePlansResponse> operation
-              = new ListFeePlans.Sync(sdkConfiguration, _headers);
+              = new ListFeePlans.Sync(sdkConfiguration, options, _headers);
         ListFeePlansRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

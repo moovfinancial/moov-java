@@ -19,7 +19,9 @@ import io.moov.sdk.operations.GetFileDetails;
 import io.moov.sdk.operations.ListFiles;
 import io.moov.sdk.operations.UploadFile;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class Files {
@@ -64,6 +66,29 @@ public class Files {
      * @throws RuntimeException subclass if the API call fails
      */
     public UploadFileResponse upload(String accountID, FileUploadRequestMultiPart fileUploadRequestMultiPart) {
+        return upload(accountID, fileUploadRequestMultiPart, Optional.empty());
+    }
+
+    /**
+     * Upload a file and link it to the specified Moov account.
+     * 
+     * <p>The maximum file size is 20MB. Each account is allowed a maximum of 50 files. Acceptable file types
+     * include csv, jpg, pdf,
+     * and png.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/files.write` scope.
+     * 
+     * @param accountID 
+     * @param fileUploadRequestMultiPart 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UploadFileResponse upload(
+            String accountID, FileUploadRequestMultiPart fileUploadRequestMultiPart,
+            Optional<Options> options) {
         UploadFileRequest request =
             UploadFileRequest
                 .builder()
@@ -71,7 +96,7 @@ public class Files {
                 .fileUploadRequestMultiPart(fileUploadRequestMultiPart)
                 .build();
         RequestOperation<UploadFileRequest, UploadFileResponse> operation
-              = new UploadFile.Sync(sdkConfiguration, _headers);
+              = new UploadFile.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -100,13 +125,29 @@ public class Files {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListFilesResponse list(String accountID) {
+        return list(accountID, Optional.empty());
+    }
+
+    /**
+     * List all the files associated with a particular Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/files.read` scope.
+     * 
+     * @param accountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListFilesResponse list(String accountID, Optional<Options> options) {
         ListFilesRequest request =
             ListFilesRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<ListFilesRequest, ListFilesResponse> operation
-              = new ListFiles.Sync(sdkConfiguration, _headers);
+              = new ListFiles.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -136,6 +177,25 @@ public class Files {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetFileDetailsResponse get(String accountID, String fileID) {
+        return get(accountID, fileID, Optional.empty());
+    }
+
+    /**
+     * Retrieve file details associated with a specific Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/files.read` scope.
+     * 
+     * @param accountID 
+     * @param fileID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetFileDetailsResponse get(
+            String accountID, String fileID,
+            Optional<Options> options) {
         GetFileDetailsRequest request =
             GetFileDetailsRequest
                 .builder()
@@ -143,7 +203,7 @@ public class Files {
                 .fileID(fileID)
                 .build();
         RequestOperation<GetFileDetailsRequest, GetFileDetailsResponse> operation
-              = new GetFileDetails.Sync(sdkConfiguration, _headers);
+              = new GetFileDetails.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -8,9 +8,11 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListProducts;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class ListProductsRequestBuilder {
@@ -19,6 +21,7 @@ public class ListProductsRequestBuilder {
     private Optional<String> title = Optional.empty();
     private Optional<Long> skip = Optional.empty();
     private Optional<Long> count = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -67,6 +70,18 @@ public class ListProductsRequestBuilder {
         this.count = count;
         return this;
     }
+                
+    public ListProductsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public ListProductsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private ListProductsRequest buildRequest() {
@@ -80,9 +95,12 @@ public class ListProductsRequestBuilder {
     }
 
     public ListProductsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<ListProductsRequest, ListProductsResponse> operation
-              = new ListProducts.Sync(sdkConfiguration, _headers);
+              = new ListProducts.Sync(sdkConfiguration, options, _headers);
         ListProductsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

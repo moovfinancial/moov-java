@@ -8,12 +8,16 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.DisableWebhook;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class DisableWebhookRequestBuilder {
 
     private String webhookID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -26,6 +30,18 @@ public class DisableWebhookRequestBuilder {
         this.webhookID = webhookID;
         return this;
     }
+                
+    public DisableWebhookRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DisableWebhookRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DisableWebhookRequest buildRequest() {
@@ -36,9 +52,12 @@ public class DisableWebhookRequestBuilder {
     }
 
     public DisableWebhookResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DisableWebhookRequest, DisableWebhookResponse> operation
-              = new DisableWebhook.Sync(sdkConfiguration, _headers);
+              = new DisableWebhook.Sync(sdkConfiguration, options, _headers);
         DisableWebhookRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

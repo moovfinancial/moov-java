@@ -50,7 +50,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:26.8.7'
+implementation 'io.moov:sdk:26.8.8'
 ```
 
 Maven:
@@ -58,7 +58,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>26.8.7</version>
+    <version>26.8.8</version>
 </dependency>
 ```
 
@@ -850,6 +850,8 @@ you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 * [getInvoice](docs/sdks/invoices/README.md#getinvoice) - Retrieve an invoice by ID.
+
+Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `application/pdf`. The PDF does not include the payment link or QR code.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.

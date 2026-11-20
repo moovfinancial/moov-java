@@ -8,6 +8,8 @@ import static io.moov.sdk.operations.Operations.RequestlessOperation;
 import io.moov.sdk.models.operations.PingRequestBuilder;
 import io.moov.sdk.models.operations.PingResponse;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
+import java.util.Optional;
 
 
 public class Ping {
@@ -42,8 +44,23 @@ public class Ping {
      * @throws RuntimeException subclass if the API call fails
      */
     public PingResponse pingDirect() {
+        return ping(Optional.empty());
+    }
+
+    /**
+     * A simple endpoint to check auth.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/ping.read` scope.
+     * 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public PingResponse ping(Optional<Options> options) {
         RequestlessOperation<PingResponse> operation
-            = new io.moov.sdk.operations.Ping.Sync(sdkConfiguration, _headers);
+            = new io.moov.sdk.operations.Ping.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest());
     }
 

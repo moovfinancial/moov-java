@@ -38,7 +38,9 @@ import io.moov.sdk.operations.GetInvoice;
 import io.moov.sdk.operations.ListInvoicePayments;
 import io.moov.sdk.operations.ListInvoices;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class Invoices {
@@ -75,6 +77,25 @@ public class Invoices {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateInvoiceResponse createInvoice(String accountID, CreateInvoice createInvoice) {
+        return createInvoice(accountID, createInvoice, Optional.empty());
+    }
+
+    /**
+     * Create an invoice for a Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+     * 
+     * @param accountID 
+     * @param createInvoice 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateInvoiceResponse createInvoice(
+            String accountID, CreateInvoice createInvoice,
+            Optional<Options> options) {
         CreateInvoiceRequest request =
             CreateInvoiceRequest
                 .builder()
@@ -82,7 +103,7 @@ public class Invoices {
                 .createInvoice(createInvoice)
                 .build();
         RequestOperation<CreateInvoiceRequest, CreateInvoiceResponse> operation
-              = new io.moov.sdk.operations.CreateInvoice.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateInvoice.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -111,13 +132,32 @@ public class Invoices {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListInvoicesResponse listInvoices(ListInvoicesRequest request) {
+        return listInvoices(request, Optional.empty());
+    }
+
+    /**
+     * List all the invoices created under a Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListInvoicesResponse listInvoices(ListInvoicesRequest request, Optional<Options> options) {
         RequestOperation<ListInvoicesRequest, ListInvoicesResponse> operation
-              = new ListInvoices.Sync(sdkConfiguration, _headers);
+              = new ListInvoices.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
      * Retrieve an invoice by ID.
+     * 
+     * <p>Use the `Accept` header to specify the format of the response. Supported formats are
+     * `application/json` and `application/pdf`. The PDF does not include the payment link or QR code.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
@@ -132,6 +172,9 @@ public class Invoices {
     /**
      * Retrieve an invoice by ID.
      * 
+     * <p>Use the `Accept` header to specify the format of the response. Supported formats are
+     * `application/json` and `application/pdf`. The PDF does not include the payment link or QR code.
+     * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
@@ -142,6 +185,28 @@ public class Invoices {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetInvoiceResponse getInvoice(String accountID, String invoiceID) {
+        return getInvoice(accountID, invoiceID, Optional.empty());
+    }
+
+    /**
+     * Retrieve an invoice by ID.
+     * 
+     * <p>Use the `Accept` header to specify the format of the response. Supported formats are
+     * `application/json` and `application/pdf`. The PDF does not include the payment link or QR code.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
+     * 
+     * @param accountID 
+     * @param invoiceID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetInvoiceResponse getInvoice(
+            String accountID, String invoiceID,
+            Optional<Options> options) {
         GetInvoiceRequest request =
             GetInvoiceRequest
                 .builder()
@@ -149,7 +214,7 @@ public class Invoices {
                 .invoiceID(invoiceID)
                 .build();
         RequestOperation<GetInvoiceRequest, GetInvoiceResponse> operation
-              = new GetInvoice.Sync(sdkConfiguration, _headers);
+              = new GetInvoice.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -182,6 +247,27 @@ public class Invoices {
     public UpdateInvoiceResponse updateInvoice(
             String accountID, String invoiceID,
             UpdateInvoice updateInvoice) {
+        return updateInvoice(accountID, invoiceID, updateInvoice,
+            Optional.empty());
+    }
+
+    /**
+     * Updates an invoice.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+     * 
+     * @param accountID 
+     * @param invoiceID 
+     * @param updateInvoice 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateInvoiceResponse updateInvoice(
+            String accountID, String invoiceID,
+            UpdateInvoice updateInvoice, Optional<Options> options) {
         UpdateInvoiceRequest request =
             UpdateInvoiceRequest
                 .builder()
@@ -190,7 +276,7 @@ public class Invoices {
                 .updateInvoice(updateInvoice)
                 .build();
         RequestOperation<UpdateInvoiceRequest, UpdateInvoiceResponse> operation
-              = new io.moov.sdk.operations.UpdateInvoice.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.UpdateInvoice.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -232,6 +318,31 @@ public class Invoices {
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteInvoiceResponse delete(String accountID, String invoiceID) {
+        return delete(accountID, invoiceID, Optional.empty());
+    }
+
+    /**
+     * Delete an invoice. Only invoices in `draft` status can be deleted.
+     * 
+     * <p>Deleting an invoice indicates it was created by mistake and should be completely disregarded.
+     * Deleted invoices are hidden from list results by default, but can still be retrieved
+     * individually through the get invoice endpoint. If you need to void an invoice that was
+     * already sent or is otherwise part of the invoice history, cancel it instead by updating
+     * its status to `canceled`.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+     * 
+     * @param accountID 
+     * @param invoiceID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DeleteInvoiceResponse delete(
+            String accountID, String invoiceID,
+            Optional<Options> options) {
         DeleteInvoiceRequest request =
             DeleteInvoiceRequest
                 .builder()
@@ -239,7 +350,7 @@ public class Invoices {
                 .invoiceID(invoiceID)
                 .build();
         RequestOperation<DeleteInvoiceRequest, DeleteInvoiceResponse> operation
-              = new DeleteInvoice.Sync(sdkConfiguration, _headers);
+              = new DeleteInvoice.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -290,6 +401,36 @@ public class Invoices {
     public CreateInvoiceNotificationResponse createInvoiceNotification(
             String accountID, String invoiceID,
             CreateInvoiceNotification createInvoiceNotification) {
+        return createInvoiceNotification(accountID, invoiceID, createInvoiceNotification,
+            Optional.empty());
+    }
+
+    /**
+     * Create a notification for an invoice, which resends the invoice email to the customer. The required
+     * `channels` body lists the channels to notify on; today only `email` is supported. Returns a 409
+     * if the invoice is not in `unpaid` or `overdue` status, or if the merchant or customer account has no
+     * email set.
+     * 
+     * <p>The request is all-or-nothing: if any requested channel is rate limited, nothing is sent. Each
+     * channel
+     * can be sent at most once every 24 hours, and not within 24 hours of the invoice being sent. A 429
+     * response lists the limited channels with `availableOn` and lists the `availableChannels` that can be
+     * sent in a new request.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+     * 
+     * @param accountID 
+     * @param invoiceID 
+     * @param createInvoiceNotification 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateInvoiceNotificationResponse createInvoiceNotification(
+            String accountID, String invoiceID,
+            CreateInvoiceNotification createInvoiceNotification, Optional<Options> options) {
         CreateInvoiceNotificationRequest request =
             CreateInvoiceNotificationRequest
                 .builder()
@@ -298,7 +439,7 @@ public class Invoices {
                 .createInvoiceNotification(createInvoiceNotification)
                 .build();
         RequestOperation<CreateInvoiceNotificationRequest, CreateInvoiceNotificationResponse> operation
-              = new io.moov.sdk.operations.CreateInvoiceNotification.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateInvoiceNotification.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -335,6 +476,29 @@ public class Invoices {
     public CreateInvoicePaymentResponse createInvoicePayment(
             String accountID, String invoiceID,
             CreateInvoicePayment createInvoicePayment) {
+        return createInvoicePayment(accountID, invoiceID, createInvoicePayment,
+            Optional.empty());
+    }
+
+    /**
+     * Creates a payment resource to represent that an invoice was paid outside of the Moov platform.
+     * If a payment link was created for the invoice, the corresponding payment link is canceled, but a
+     * receipt is still sent.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+     * 
+     * @param accountID 
+     * @param invoiceID 
+     * @param createInvoicePayment 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateInvoicePaymentResponse createInvoicePayment(
+            String accountID, String invoiceID,
+            CreateInvoicePayment createInvoicePayment, Optional<Options> options) {
         CreateInvoicePaymentRequest request =
             CreateInvoicePaymentRequest
                 .builder()
@@ -343,7 +507,7 @@ public class Invoices {
                 .createInvoicePayment(createInvoicePayment)
                 .build();
         RequestOperation<CreateInvoicePaymentRequest, CreateInvoicePaymentResponse> operation
-              = new io.moov.sdk.operations.CreateInvoicePayment.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateInvoicePayment.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -373,6 +537,25 @@ public class Invoices {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListInvoicePaymentsResponse listInvoicePayments(String accountID, String invoiceID) {
+        return listInvoicePayments(accountID, invoiceID, Optional.empty());
+    }
+
+    /**
+     * List all the payments made towards an invoice.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
+     * 
+     * @param accountID 
+     * @param invoiceID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListInvoicePaymentsResponse listInvoicePayments(
+            String accountID, String invoiceID,
+            Optional<Options> options) {
         ListInvoicePaymentsRequest request =
             ListInvoicePaymentsRequest
                 .builder()
@@ -380,7 +563,7 @@ public class Invoices {
                 .invoiceID(invoiceID)
                 .build();
         RequestOperation<ListInvoicePaymentsRequest, ListInvoicePaymentsResponse> operation
-              = new ListInvoicePayments.Sync(sdkConfiguration, _headers);
+              = new ListInvoicePayments.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

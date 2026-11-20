@@ -8,12 +8,16 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListFiles;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class ListFilesRequestBuilder {
 
     private String accountID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -26,6 +30,18 @@ public class ListFilesRequestBuilder {
         this.accountID = accountID;
         return this;
     }
+                
+    public ListFilesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public ListFilesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private ListFilesRequest buildRequest() {
@@ -36,9 +52,12 @@ public class ListFilesRequestBuilder {
     }
 
     public ListFilesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<ListFilesRequest, ListFilesResponse> operation
-              = new ListFiles.Sync(sdkConfiguration, _headers);
+              = new ListFiles.Sync(sdkConfiguration, options, _headers);
         ListFilesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

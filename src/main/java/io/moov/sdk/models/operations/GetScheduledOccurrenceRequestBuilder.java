@@ -8,14 +8,18 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetScheduledOccurrence;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetScheduledOccurrenceRequestBuilder {
 
     private String accountID;
     private String scheduleID;
     private String occurrenceFilter;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -40,6 +44,18 @@ public class GetScheduledOccurrenceRequestBuilder {
         this.occurrenceFilter = occurrenceFilter;
         return this;
     }
+                
+    public GetScheduledOccurrenceRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetScheduledOccurrenceRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetScheduledOccurrenceRequest buildRequest() {
@@ -52,9 +68,12 @@ public class GetScheduledOccurrenceRequestBuilder {
     }
 
     public GetScheduledOccurrenceResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetScheduledOccurrenceRequest, GetScheduledOccurrenceResponse> operation
-              = new GetScheduledOccurrence.Sync(sdkConfiguration, _headers);
+              = new GetScheduledOccurrence.Sync(sdkConfiguration, options, _headers);
         GetScheduledOccurrenceRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

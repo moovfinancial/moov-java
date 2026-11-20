@@ -11,7 +11,9 @@ import io.moov.sdk.models.operations.LinkGooglePayTokenRequestBuilder;
 import io.moov.sdk.models.operations.LinkGooglePayTokenResponse;
 import io.moov.sdk.operations.LinkGooglePayToken;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class GooglePay {
@@ -62,6 +64,34 @@ public class GooglePay {
      * @throws RuntimeException subclass if the API call fails
      */
     public LinkGooglePayTokenResponse linkToken(String accountID, LinkGooglePay linkGooglePay) {
+        return linkToken(accountID, linkGooglePay, Optional.empty());
+    }
+
+    /**
+     * Connect a Google Pay token to the specified account.
+     * 
+     * <p>The `paymentMethodData` field should contain the `paymentMethodData` property from Google Pay's
+     * [PaymentData](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData)
+     * response,
+     * passed through unmodified.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * 
+     * @param accountID ID of the Moov account representing the cardholder.
+     * @param linkGooglePay   Links a Google Pay token to a Moov account.
+     *         
+     *           The `paymentMethodData` field should contain the `paymentMethodData` property from the
+     *           [PaymentData](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData) response
+     *           returned by Google Pay's client SDK. Pass it through unmodified.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public LinkGooglePayTokenResponse linkToken(
+            String accountID, LinkGooglePay linkGooglePay,
+            Optional<Options> options) {
         LinkGooglePayTokenRequest request =
             LinkGooglePayTokenRequest
                 .builder()
@@ -69,7 +99,7 @@ public class GooglePay {
                 .linkGooglePay(linkGooglePay)
                 .build();
         RequestOperation<LinkGooglePayTokenRequest, LinkGooglePayTokenResponse> operation
-              = new LinkGooglePayToken.Sync(sdkConfiguration, _headers);
+              = new LinkGooglePayToken.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

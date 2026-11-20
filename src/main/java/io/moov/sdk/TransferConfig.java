@@ -19,7 +19,9 @@ import io.moov.sdk.models.operations.UpdateTransferConfigResponse;
 import io.moov.sdk.operations.GetTransferConfig;
 import io.moov.sdk.operations.UpdateTransferConfig;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class TransferConfig {
@@ -48,6 +50,21 @@ public class TransferConfig {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateTransferConfigResponse create(String accountID, CreateTransferConfig createTransferConfig) {
+        return create(accountID, createTransferConfig, Optional.empty());
+    }
+
+    /**
+     * Create a transfer config for an account.
+     * 
+     * @param accountID Your Moov account ID.
+     * @param createTransferConfig 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateTransferConfigResponse create(
+            String accountID, CreateTransferConfig createTransferConfig,
+            Optional<Options> options) {
         CreateTransferConfigRequest request =
             CreateTransferConfigRequest
                 .builder()
@@ -55,7 +72,7 @@ public class TransferConfig {
                 .createTransferConfig(createTransferConfig)
                 .build();
         RequestOperation<CreateTransferConfigRequest, CreateTransferConfigResponse> operation
-              = new io.moov.sdk.operations.CreateTransferConfig.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateTransferConfig.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -76,13 +93,25 @@ public class TransferConfig {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetTransferConfigResponse get(String accountID) {
+        return get(accountID, Optional.empty());
+    }
+
+    /**
+     * Get the transfer config for an account.
+     * 
+     * @param accountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetTransferConfigResponse get(String accountID, Optional<Options> options) {
         GetTransferConfigRequest request =
             GetTransferConfigRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<GetTransferConfigRequest, GetTransferConfigResponse> operation
-              = new GetTransferConfig.Sync(sdkConfiguration, _headers);
+              = new GetTransferConfig.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -104,6 +133,21 @@ public class TransferConfig {
      * @throws RuntimeException subclass if the API call fails
      */
     public UpdateTransferConfigResponse update(String accountID, PutTransferConfig putTransferConfig) {
+        return update(accountID, putTransferConfig, Optional.empty());
+    }
+
+    /**
+     * Update the transfer config for an account.
+     * 
+     * @param accountID 
+     * @param putTransferConfig 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateTransferConfigResponse update(
+            String accountID, PutTransferConfig putTransferConfig,
+            Optional<Options> options) {
         UpdateTransferConfigRequest request =
             UpdateTransferConfigRequest
                 .builder()
@@ -111,7 +155,7 @@ public class TransferConfig {
                 .putTransferConfig(putTransferConfig)
                 .build();
         RequestOperation<UpdateTransferConfigRequest, UpdateTransferConfigResponse> operation
-              = new UpdateTransferConfig.Sync(sdkConfiguration, _headers);
+              = new UpdateTransferConfig.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

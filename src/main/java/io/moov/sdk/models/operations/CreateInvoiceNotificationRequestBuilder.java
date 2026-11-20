@@ -8,14 +8,18 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateInvoiceNotification;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class CreateInvoiceNotificationRequestBuilder {
 
     private String accountID;
     private String invoiceID;
     private CreateInvoiceNotification createInvoiceNotification;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -40,6 +44,18 @@ public class CreateInvoiceNotificationRequestBuilder {
         this.createInvoiceNotification = createInvoiceNotification;
         return this;
     }
+                
+    public CreateInvoiceNotificationRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public CreateInvoiceNotificationRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private CreateInvoiceNotificationRequest buildRequest() {
@@ -52,9 +68,12 @@ public class CreateInvoiceNotificationRequestBuilder {
     }
 
     public CreateInvoiceNotificationResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<CreateInvoiceNotificationRequest, CreateInvoiceNotificationResponse> operation
-              = new io.moov.sdk.operations.CreateInvoiceNotification.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateInvoiceNotification.Sync(sdkConfiguration, options, _headers);
         CreateInvoiceNotificationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

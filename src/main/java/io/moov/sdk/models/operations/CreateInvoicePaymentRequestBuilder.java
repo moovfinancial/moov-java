@@ -8,14 +8,18 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateInvoicePayment;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class CreateInvoicePaymentRequestBuilder {
 
     private String accountID;
     private String invoiceID;
     private CreateInvoicePayment createInvoicePayment;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -40,6 +44,18 @@ public class CreateInvoicePaymentRequestBuilder {
         this.createInvoicePayment = createInvoicePayment;
         return this;
     }
+                
+    public CreateInvoicePaymentRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public CreateInvoicePaymentRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private CreateInvoicePaymentRequest buildRequest() {
@@ -52,9 +68,12 @@ public class CreateInvoicePaymentRequestBuilder {
     }
 
     public CreateInvoicePaymentResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<CreateInvoicePaymentRequest, CreateInvoicePaymentResponse> operation
-              = new io.moov.sdk.operations.CreateInvoicePayment.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateInvoicePayment.Sync(sdkConfiguration, options, _headers);
         CreateInvoicePaymentRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

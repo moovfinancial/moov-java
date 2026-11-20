@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.DisableResolutionLink;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class DisableResolutionLinkRequestBuilder {
 
     private String accountID;
     private String resolutionLinkCode;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class DisableResolutionLinkRequestBuilder {
         this.resolutionLinkCode = resolutionLinkCode;
         return this;
     }
+                
+    public DisableResolutionLinkRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DisableResolutionLinkRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DisableResolutionLinkRequest buildRequest() {
@@ -44,9 +60,12 @@ public class DisableResolutionLinkRequestBuilder {
     }
 
     public DisableResolutionLinkResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DisableResolutionLinkRequest, DisableResolutionLinkResponse> operation
-              = new DisableResolutionLink.Sync(sdkConfiguration, _headers);
+              = new DisableResolutionLink.Sync(sdkConfiguration, options, _headers);
         DisableResolutionLinkRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

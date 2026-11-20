@@ -31,6 +31,7 @@ import io.moov.sdk.operations.GetPaymentLink;
 import io.moov.sdk.operations.GetPaymentLinkQRCode;
 import io.moov.sdk.operations.ListPaymentLinks;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.Long;
 import java.lang.String;
 import java.util.List;
@@ -76,6 +77,30 @@ public class PaymentLinks {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreatePaymentLinkResponse create(String accountID, CreatePaymentLink createPaymentLink) {
+        return create(accountID, createPaymentLink, Optional.empty());
+    }
+
+    /**
+     * Create a payment link that allows an end user to make a payment on Moov's hosted payment link page.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param accountID The merchant account ID.
+     * @param createPaymentLink Request to create a new payment link.
+     *         
+     *         A payment link must include exactly one of `payment`, `payout`, or `customAmountPayment` details. For payout payment links,
+     *         `maxUses` will automatically be set to 1, as these are intended for a one-time disbursement
+     *         to a specific recipient.
+     *         
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreatePaymentLinkResponse create(
+            String accountID, CreatePaymentLink createPaymentLink,
+            Optional<Options> options) {
         CreatePaymentLinkRequest request =
             CreatePaymentLinkRequest
                 .builder()
@@ -83,7 +108,7 @@ public class PaymentLinks {
                 .createPaymentLink(createPaymentLink)
                 .build();
         RequestOperation<CreatePaymentLinkRequest, CreatePaymentLinkResponse> operation
-              = new io.moov.sdk.operations.CreatePaymentLink.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreatePaymentLink.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -113,7 +138,7 @@ public class PaymentLinks {
      */
     public ListPaymentLinksResponse list(String accountID) {
         return list(Optional.empty(), Optional.empty(), Optional.empty(),
-            accountID);
+            accountID, Optional.empty());
     }
 
     /**
@@ -133,6 +158,29 @@ public class PaymentLinks {
     public ListPaymentLinksResponse list(
             Optional<Long> skip, Optional<Long> count,
             Optional<? extends List<PaymentLinkType>> types, String accountID) {
+        return list(skip, count, types,
+            accountID, Optional.empty());
+    }
+
+    /**
+     * List all the payment links created under a Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param skip 
+     * @param count Page size. When omitted, the server defaults to `200`.
+     * @param types A comma-separated list of payment link types to filter results.
+     * @param accountID The merchant account ID.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListPaymentLinksResponse list(
+            Optional<Long> skip, Optional<Long> count,
+            Optional<? extends List<PaymentLinkType>> types, String accountID,
+            Optional<Options> options) {
         ListPaymentLinksRequest request =
             ListPaymentLinksRequest
                 .builder()
@@ -142,7 +190,7 @@ public class PaymentLinks {
                 .accountID(accountID)
                 .build();
         RequestOperation<ListPaymentLinksRequest, ListPaymentLinksResponse> operation
-              = new ListPaymentLinks.Sync(sdkConfiguration, _headers);
+              = new ListPaymentLinks.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -172,6 +220,25 @@ public class PaymentLinks {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetPaymentLinkResponse get(String accountID, String paymentLinkCode) {
+        return get(accountID, paymentLinkCode, Optional.empty());
+    }
+
+    /**
+     * Retrieve a payment link by code.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID The merchant account ID.
+     * @param paymentLinkCode 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetPaymentLinkResponse get(
+            String accountID, String paymentLinkCode,
+            Optional<Options> options) {
         GetPaymentLinkRequest request =
             GetPaymentLinkRequest
                 .builder()
@@ -179,7 +246,7 @@ public class PaymentLinks {
                 .paymentLinkCode(paymentLinkCode)
                 .build();
         RequestOperation<GetPaymentLinkRequest, GetPaymentLinkResponse> operation
-              = new GetPaymentLink.Sync(sdkConfiguration, _headers);
+              = new GetPaymentLink.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -212,6 +279,27 @@ public class PaymentLinks {
     public UpdatePaymentLinkResponse update(
             String accountID, String paymentLinkCode,
             UpdatePaymentLink updatePaymentLink) {
+        return update(accountID, paymentLinkCode, updatePaymentLink,
+            Optional.empty());
+    }
+
+    /**
+     * Update a payment link.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param accountID The merchant account ID.
+     * @param paymentLinkCode 
+     * @param updatePaymentLink 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdatePaymentLinkResponse update(
+            String accountID, String paymentLinkCode,
+            UpdatePaymentLink updatePaymentLink, Optional<Options> options) {
         UpdatePaymentLinkRequest request =
             UpdatePaymentLinkRequest
                 .builder()
@@ -220,7 +308,7 @@ public class PaymentLinks {
                 .updatePaymentLink(updatePaymentLink)
                 .build();
         RequestOperation<UpdatePaymentLinkRequest, UpdatePaymentLinkResponse> operation
-              = new io.moov.sdk.operations.UpdatePaymentLink.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.UpdatePaymentLink.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -250,6 +338,25 @@ public class PaymentLinks {
      * @throws RuntimeException subclass if the API call fails
      */
     public DisablePaymentLinkResponse disable(String accountID, String paymentLinkCode) {
+        return disable(accountID, paymentLinkCode, Optional.empty());
+    }
+
+    /**
+     * Disable a payment link.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param accountID The merchant account ID.
+     * @param paymentLinkCode 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DisablePaymentLinkResponse disable(
+            String accountID, String paymentLinkCode,
+            Optional<Options> options) {
         DisablePaymentLinkRequest request =
             DisablePaymentLinkRequest
                 .builder()
@@ -257,7 +364,7 @@ public class PaymentLinks {
                 .paymentLinkCode(paymentLinkCode)
                 .build();
         RequestOperation<DisablePaymentLinkRequest, DisablePaymentLinkResponse> operation
-              = new DisablePaymentLink.Sync(sdkConfiguration, _headers);
+              = new DisablePaymentLink.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -293,6 +400,28 @@ public class PaymentLinks {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetPaymentLinkQRCodeResponse getQRCode(String accountID, String paymentLinkCode) {
+        return getQRCode(accountID, paymentLinkCode, Optional.empty());
+    }
+
+    /**
+     * Retrieve the payment link encoded in a QR code.
+     * 
+     * <p>Use the `Accept` header to specify the format of the response. Supported formats are
+     * `application/json` and `image/png`.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param accountID The merchant account ID.
+     * @param paymentLinkCode 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetPaymentLinkQRCodeResponse getQRCode(
+            String accountID, String paymentLinkCode,
+            Optional<Options> options) {
         GetPaymentLinkQRCodeRequest request =
             GetPaymentLinkQRCodeRequest
                 .builder()
@@ -300,7 +429,7 @@ public class PaymentLinks {
                 .paymentLinkCode(paymentLinkCode)
                 .build();
         RequestOperation<GetPaymentLinkQRCodeRequest, GetPaymentLinkQRCodeResponse> operation
-              = new GetPaymentLinkQRCode.Sync(sdkConfiguration, _headers);
+              = new GetPaymentLinkQRCode.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -8,14 +8,18 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpdateTicket;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class UpdateTicketRequestBuilder {
 
     private String accountID;
     private String ticketID;
     private UpdateTicket updateTicket;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -40,6 +44,18 @@ public class UpdateTicketRequestBuilder {
         this.updateTicket = updateTicket;
         return this;
     }
+                
+    public UpdateTicketRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public UpdateTicketRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private UpdateTicketRequest buildRequest() {
@@ -52,9 +68,12 @@ public class UpdateTicketRequestBuilder {
     }
 
     public UpdateTicketResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<UpdateTicketRequest, UpdateTicketResponse> operation
-              = new io.moov.sdk.operations.UpdateTicket.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.UpdateTicket.Sync(sdkConfiguration, options, _headers);
         UpdateTicketRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

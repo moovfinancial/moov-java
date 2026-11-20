@@ -10,7 +10,9 @@ import io.moov.sdk.models.operations.GetEnrichmentProfileRequestBuilder;
 import io.moov.sdk.models.operations.GetEnrichmentProfileResponse;
 import io.moov.sdk.operations.GetEnrichmentProfile;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class EnrichedProfile {
@@ -48,13 +50,30 @@ public class EnrichedProfile {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetEnrichmentProfileResponse get(String email) {
+        return get(email, Optional.empty());
+    }
+
+    /**
+     * Fetch enriched profile data. Requires a valid email address. This service is offered in
+     * collaboration with Clearbit.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/profile-enrichment.read` scope.
+     * 
+     * @param email 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetEnrichmentProfileResponse get(String email, Optional<Options> options) {
         GetEnrichmentProfileRequest request =
             GetEnrichmentProfileRequest
                 .builder()
                 .email(email)
                 .build();
         RequestOperation<GetEnrichmentProfileRequest, GetEnrichmentProfileResponse> operation
-              = new GetEnrichmentProfile.Sync(sdkConfiguration, _headers);
+              = new GetEnrichmentProfile.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

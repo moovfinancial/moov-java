@@ -9,13 +9,17 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.LinkApplePay;
 import io.moov.sdk.operations.LinkApplePayToken;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class LinkApplePayTokenRequestBuilder {
 
     private String accountID;
     private LinkApplePay linkApplePay;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -34,6 +38,18 @@ public class LinkApplePayTokenRequestBuilder {
         this.linkApplePay = linkApplePay;
         return this;
     }
+                
+    public LinkApplePayTokenRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public LinkApplePayTokenRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private LinkApplePayTokenRequest buildRequest() {
@@ -45,9 +61,12 @@ public class LinkApplePayTokenRequestBuilder {
     }
 
     public LinkApplePayTokenResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<LinkApplePayTokenRequest, LinkApplePayTokenResponse> operation
-              = new LinkApplePayToken.Sync(sdkConfiguration, _headers);
+              = new LinkApplePayToken.Sync(sdkConfiguration, options, _headers);
         LinkApplePayTokenRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

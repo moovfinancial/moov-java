@@ -9,6 +9,8 @@ import io.moov.sdk.models.operations.ListIndustriesRequestBuilder;
 import io.moov.sdk.models.operations.ListIndustriesResponse;
 import io.moov.sdk.operations.ListIndustries;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
+import java.util.Optional;
 
 
 public class Industries {
@@ -45,8 +47,24 @@ public class Industries {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListIndustriesResponse listDirect() {
+        return list(Optional.empty());
+    }
+
+    /**
+     * Returns a list of industries relevant to merchant profile enrichment. Results are ordered by
+     * industry name.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/),
+     * you'll need to specify the `/profile-enrichment.read` scope.
+     * 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListIndustriesResponse list(Optional<Options> options) {
         RequestlessOperation<ListIndustriesResponse> operation
-            = new ListIndustries.Sync(sdkConfiguration, _headers);
+            = new ListIndustries.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest());
     }
 

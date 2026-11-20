@@ -8,20 +8,40 @@ import static io.moov.sdk.operations.Operations.RequestlessOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListWebhooks;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
+import io.moov.sdk.utils.Utils;
+import java.time.Duration;
+import java.util.Optional;
 
 public class ListWebhooksRequestBuilder {
 
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public ListWebhooksRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+                
+    public ListWebhooksRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public ListWebhooksRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
     public ListWebhooksResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestlessOperation<ListWebhooksResponse> operation
-            = new ListWebhooks.Sync(sdkConfiguration, _headers);
+            = new ListWebhooks.Sync(sdkConfiguration, options, _headers);
 
         return operation.handleResponse(operation.doRequest());
     }

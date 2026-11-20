@@ -20,6 +20,7 @@ import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
 import io.moov.sdk.utils.Hook.AfterSuccessContextImpl;
 import io.moov.sdk.utils.Hook.BeforeRequestContextImpl;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.SerializedBody;
 import io.moov.sdk.utils.Utils.JsonShape;
 import io.moov.sdk.utils.Utils;
@@ -30,6 +31,8 @@ import java.lang.Object;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -40,18 +43,22 @@ public class UploadAvatar {
         final String baseUrl;
         final UploadAvatarSecurity security;
         final SecuritySource securitySource;
+        final Optional<Duration> timeout;
         final HTTPClient client;
         final Headers _headers;
 
         public Base(
                 SDKConfiguration sdkConfiguration, UploadAvatarSecurity security,
-                Headers _headers) {
+                Optional<Options> options, Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
             this._headers =_headers;
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.security = security;
             // hooks will be passed method level security only
             this.securitySource = SecuritySource.of(security);
+            options
+                    .ifPresent(o -> o.validate(List.of(Options.Option.TIMEOUT)));
+            this.timeout = options.flatMap(Options::timeout).or(sdkConfiguration::timeout);
             this.client = this.sdkConfiguration.client();
         }
 
@@ -91,7 +98,8 @@ public class UploadAvatar {
                     this.baseUrl,
                     "/avatars/{uniqueID}",
                     request, null);
-            HTTPRequest req = new HTTPRequest(url, "PUT");
+            HTTPRequest req = new HTTPRequest(url, "PUT")
+                    .timeout(this.timeout);
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
@@ -119,9 +127,16 @@ public class UploadAvatar {
         public Sync(
                 SDKConfiguration sdkConfiguration, UploadAvatarSecurity security,
                 Headers _headers) {
+            this(sdkConfiguration, security,
+                    Optional.empty(), _headers);
+        }
+
+        public Sync(
+                SDKConfiguration sdkConfiguration, UploadAvatarSecurity security,
+                Optional<Options> options, Headers _headers) {
             super(
                   sdkConfiguration, security,
-                  _headers);
+                  options, _headers);
         }
 
         private HttpRequest onBuildRequest(UploadAvatarRequest request) throws Exception {

@@ -8,14 +8,18 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CompleteBankAccountVerification;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class CompleteBankAccountVerificationRequestBuilder {
 
     private String accountID;
     private String bankAccountID;
     private CompleteBankAccountVerification completeBankAccountVerification;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -40,6 +44,18 @@ public class CompleteBankAccountVerificationRequestBuilder {
         this.completeBankAccountVerification = completeBankAccountVerification;
         return this;
     }
+                
+    public CompleteBankAccountVerificationRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public CompleteBankAccountVerificationRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private CompleteBankAccountVerificationRequest buildRequest() {
@@ -52,9 +68,12 @@ public class CompleteBankAccountVerificationRequestBuilder {
     }
 
     public CompleteBankAccountVerificationResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<CompleteBankAccountVerificationRequest, CompleteBankAccountVerificationResponse> operation
-              = new io.moov.sdk.operations.CompleteBankAccountVerification.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CompleteBankAccountVerification.Sync(sdkConfiguration, options, _headers);
         CompleteBankAccountVerificationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

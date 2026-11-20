@@ -19,12 +19,15 @@ import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
 import io.moov.sdk.utils.Hook.AfterSuccessContextImpl;
 import io.moov.sdk.utils.Hook.BeforeRequestContextImpl;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Exception;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -34,14 +37,20 @@ public class GetInvoice {
         final SDKConfiguration sdkConfiguration;
         final String baseUrl;
         final SecuritySource securitySource;
+        final Optional<Duration> timeout;
         final HTTPClient client;
         final Headers _headers;
 
-        public Base(SDKConfiguration sdkConfiguration, Headers _headers) {
+        public Base(
+                SDKConfiguration sdkConfiguration, Optional<Options> options,
+                Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
             this._headers =_headers;
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.securitySource = this.sdkConfiguration.securitySource();
+            options
+                    .ifPresent(o -> o.validate(List.of(Options.Option.TIMEOUT)));
+            this.timeout = options.flatMap(Options::timeout).or(sdkConfiguration::timeout);
             this.client = this.sdkConfiguration.client();
         }
 
@@ -81,8 +90,9 @@ public class GetInvoice {
                     this.baseUrl,
                     "/accounts/{accountID}/invoices/{invoiceID}",
                     request, null);
-            HTTPRequest req = new HTTPRequest(url, "GET");
-            req.addHeader("Accept", "application/json")
+            HTTPRequest req = new HTTPRequest(url, "GET")
+                    .timeout(this.timeout);
+            req.addHeader("Accept", "application/json;q=1, application/pdf;q=0")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
             _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
@@ -94,7 +104,16 @@ public class GetInvoice {
     public static class Sync extends Base
             implements RequestOperation<GetInvoiceRequest, GetInvoiceResponse> {
         public Sync(SDKConfiguration sdkConfiguration, Headers _headers) {
-            super(sdkConfiguration, _headers);
+            this(sdkConfiguration, Optional.empty(),
+                    _headers);
+        }
+
+        public Sync(
+                SDKConfiguration sdkConfiguration, Optional<Options> options,
+                Headers _headers) {
+            super(
+                  sdkConfiguration, options,
+                  _headers);
         }
 
         private HttpRequest onBuildRequest(GetInvoiceRequest request) throws Exception {
@@ -144,6 +163,9 @@ public class GetInvoice {
                             .contentType(contentType)
                             .statusCode(response.statusCode())
                             .rawResponse(response);
+            if (Utils.statusCodeMatches(response.statusCode(), "200") && Utils.contentTypeMatches(contentType, "application/pdf")) {
+                resBuilder.responseStream(response.body());
+            }
 
             GetInvoiceResponse res = resBuilder.build();
             
@@ -151,6 +173,8 @@ public class GetInvoice {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     return res.withInvoice(Utils.unmarshal(response, new TypeReference<Invoice>() {}));
+                } else if (Utils.contentTypeMatches(contentType, "application/pdf")) {
+                    return res;
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }

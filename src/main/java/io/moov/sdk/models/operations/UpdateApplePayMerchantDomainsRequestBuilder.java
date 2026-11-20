@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpdateApplePayMerchantDomains;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class UpdateApplePayMerchantDomainsRequestBuilder {
 
     private String accountID;
     private UpdateApplePayMerchantDomains updateApplePayMerchantDomains;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class UpdateApplePayMerchantDomainsRequestBuilder {
         this.updateApplePayMerchantDomains = updateApplePayMerchantDomains;
         return this;
     }
+                
+    public UpdateApplePayMerchantDomainsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public UpdateApplePayMerchantDomainsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private UpdateApplePayMerchantDomainsRequest buildRequest() {
@@ -44,9 +60,12 @@ public class UpdateApplePayMerchantDomainsRequestBuilder {
     }
 
     public UpdateApplePayMerchantDomainsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<UpdateApplePayMerchantDomainsRequest, UpdateApplePayMerchantDomainsResponse> operation
-              = new io.moov.sdk.operations.UpdateApplePayMerchantDomains.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.UpdateApplePayMerchantDomains.Sync(sdkConfiguration, options, _headers);
         UpdateApplePayMerchantDomainsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

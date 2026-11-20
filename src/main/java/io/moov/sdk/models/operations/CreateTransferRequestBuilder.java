@@ -9,8 +9,10 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateTransfer;
 import io.moov.sdk.models.components.TransferWaitFor;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class CreateTransferRequestBuilder {
@@ -19,6 +21,7 @@ public class CreateTransferRequestBuilder {
     private Optional<? extends TransferWaitFor> xWaitFor = Optional.empty();
     private String accountID;
     private CreateTransfer createTransfer;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -55,6 +58,18 @@ public class CreateTransferRequestBuilder {
         this.createTransfer = createTransfer;
         return this;
     }
+                
+    public CreateTransferRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public CreateTransferRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private CreateTransferRequest buildRequest() {
@@ -68,9 +83,12 @@ public class CreateTransferRequestBuilder {
     }
 
     public CreateTransferResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<CreateTransferRequest, CreateTransferResponse> operation
-              = new io.moov.sdk.operations.CreateTransfer.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateTransfer.Sync(sdkConfiguration, options, _headers);
         CreateTransferRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

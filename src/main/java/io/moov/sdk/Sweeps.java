@@ -31,7 +31,9 @@ import io.moov.sdk.operations.ListSweepConfigs;
 import io.moov.sdk.operations.ListSweeps;
 import io.moov.sdk.operations.UpdateSweepConfig;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class Sweeps {
@@ -68,6 +70,25 @@ public class Sweeps {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateSweepConfigResponse createConfig(String accountID, CreateSweepConfig createSweepConfig) {
+        return createConfig(accountID, createSweepConfig, Optional.empty());
+    }
+
+    /**
+     * Create a sweep config for a wallet.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+     * 
+     * @param accountID 
+     * @param createSweepConfig 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateSweepConfigResponse createConfig(
+            String accountID, CreateSweepConfig createSweepConfig,
+            Optional<Options> options) {
         CreateSweepConfigRequest request =
             CreateSweepConfigRequest
                 .builder()
@@ -75,7 +96,7 @@ public class Sweeps {
                 .createSweepConfig(createSweepConfig)
                 .build();
         RequestOperation<CreateSweepConfigRequest, CreateSweepConfigResponse> operation
-              = new io.moov.sdk.operations.CreateSweepConfig.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateSweepConfig.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -104,13 +125,29 @@ public class Sweeps {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListSweepConfigsResponse listConfigs(String accountID) {
+        return listConfigs(accountID, Optional.empty());
+    }
+
+    /**
+     * List sweep configs associated with an account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
+     * @param accountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListSweepConfigsResponse listConfigs(String accountID, Optional<Options> options) {
         ListSweepConfigsRequest request =
             ListSweepConfigsRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<ListSweepConfigsRequest, ListSweepConfigsResponse> operation
-              = new ListSweepConfigs.Sync(sdkConfiguration, _headers);
+              = new ListSweepConfigs.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -140,6 +177,25 @@ public class Sweeps {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetSweepConfigResponse getConfig(String accountID, String sweepConfigID) {
+        return getConfig(accountID, sweepConfigID, Optional.empty());
+    }
+
+    /**
+     * Get a sweep config associated with a wallet.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
+     * @param accountID 
+     * @param sweepConfigID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetSweepConfigResponse getConfig(
+            String accountID, String sweepConfigID,
+            Optional<Options> options) {
         GetSweepConfigRequest request =
             GetSweepConfigRequest
                 .builder()
@@ -147,7 +203,7 @@ public class Sweeps {
                 .sweepConfigID(sweepConfigID)
                 .build();
         RequestOperation<GetSweepConfigRequest, GetSweepConfigResponse> operation
-              = new GetSweepConfig.Sync(sdkConfiguration, _headers);
+              = new GetSweepConfig.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -180,6 +236,27 @@ public class Sweeps {
     public UpdateSweepConfigResponse updateConfig(
             String accountID, String sweepConfigID,
             PatchSweepConfig patchSweepConfig) {
+        return updateConfig(accountID, sweepConfigID, patchSweepConfig,
+            Optional.empty());
+    }
+
+    /**
+     * Update settings on a sweep config.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+     * 
+     * @param accountID 
+     * @param sweepConfigID 
+     * @param patchSweepConfig 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateSweepConfigResponse updateConfig(
+            String accountID, String sweepConfigID,
+            PatchSweepConfig patchSweepConfig, Optional<Options> options) {
         UpdateSweepConfigRequest request =
             UpdateSweepConfigRequest
                 .builder()
@@ -188,7 +265,7 @@ public class Sweeps {
                 .patchSweepConfig(patchSweepConfig)
                 .build();
         RequestOperation<UpdateSweepConfigRequest, UpdateSweepConfigResponse> operation
-              = new UpdateSweepConfig.Sync(sdkConfiguration, _headers);
+              = new UpdateSweepConfig.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -217,8 +294,24 @@ public class Sweeps {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListSweepsResponse list(ListSweepsRequest request) {
+        return list(request, Optional.empty());
+    }
+
+    /**
+     * List sweeps associated with a wallet.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListSweepsResponse list(ListSweepsRequest request, Optional<Options> options) {
         RequestOperation<ListSweepsRequest, ListSweepsResponse> operation
-              = new ListSweeps.Sync(sdkConfiguration, _headers);
+              = new ListSweeps.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -251,6 +344,27 @@ public class Sweeps {
     public GetSweepResponse get(
             String accountID, String walletID,
             String sweepID) {
+        return get(accountID, walletID, sweepID,
+            Optional.empty());
+    }
+
+    /**
+     * Get details on a specific sweep.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
+     * @param accountID 
+     * @param walletID 
+     * @param sweepID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetSweepResponse get(
+            String accountID, String walletID,
+            String sweepID, Optional<Options> options) {
         GetSweepRequest request =
             GetSweepRequest
                 .builder()
@@ -259,7 +373,7 @@ public class Sweeps {
                 .sweepID(sweepID)
                 .build();
         RequestOperation<GetSweepRequest, GetSweepResponse> operation
-              = new GetSweep.Sync(sdkConfiguration, _headers);
+              = new GetSweep.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

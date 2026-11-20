@@ -31,7 +31,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 java:
-  version: 25.7.7
+  version: 25.7.8
   additionalDependencies: []
   additionalPlugins: []
   artifactID: sdk
@@ -45,6 +45,7 @@ java:
   enableFormatting: false
   enableSlf4jLogging: false
   enableStreamingUploads: false
+  enforceOperationTimeout: false
   explicitDocImports: false
   flattenGlobalSecurity: true
   forwardCompatibleEnumsByDefault: true

@@ -52,6 +52,7 @@ import io.moov.sdk.operations.ListAccounts;
 import io.moov.sdk.operations.ListConnectedAccountsForAccount;
 import io.moov.sdk.operations.UpdateAccount;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 
@@ -143,8 +144,51 @@ public class Accounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateAccountResponse create(CreateAccount request) {
+        return create(request, Optional.empty());
+    }
+
+    /**
+     * You can create business or individual accounts for your users (i.e., customers, merchants) by
+     * passing the required information to Moov. Requirements differ per account type and requested
+     * [capabilities](https://docs.moov.io/guides/accounts/capabilities/reference/).
+     * 
+     * <p>The `transfers` capability is automatically requested for every account. If you request any
+     * capability beyond `transfers` (for example, `send-funds.ach`, `collect-funds.card-payments`), you'll
+     * need to:
+     * + Send Moov the user's [platform terms of service
+     * agreement](https://docs.moov.io/guides/accounts/requirements/platform-agreement/) acceptance. This
+     * can be done at account creation, or by
+     * [patching](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account using the
+     * `termsOfService` field.
+     * + Fulfill the [verification and underwriting
+     * requirements](https://docs.moov.io/guides/accounts/requirements/) for each requested capability. A
+     * capability isn't enabled until its requirements pass — check the capability's status to see what's
+     * still outstanding.
+     * 
+     * <p>If you're creating a business account, depending on the business type, you'll also need to:
+     * + Provide [business representatives](https://docs.moov.io/api/moov-accounts/representatives/) after
+     * creating the account.
+     * + [Patch](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account to indicate that
+     * business representative ownership information is complete.
+     * 
+     * <p>Visit our documentation to read more about [creating
+     * accounts](https://docs.moov.io/guides/accounts/create-accounts/) and [verification
+     * requirements](https://docs.moov.io/guides/accounts/requirements/identity-verification/). Note that
+     * the `mode` field (for production or sandbox) is only required when creating a Partner account. All
+     * other account requests will ignore the mode field and be set to the calling Partner account's mode.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the
+     * `/accounts.write` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateAccountResponse create(CreateAccount request, Optional<Options> options) {
         RequestOperation<CreateAccount, CreateAccountResponse> operation
-              = new io.moov.sdk.operations.CreateAccount.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateAccount.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -187,8 +231,31 @@ public class Accounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListAccountsResponse list(ListAccountsRequest request) {
+        return list(request, Optional.empty());
+    }
+
+    /**
+     * List or search accounts to which the caller is connected.
+     * 
+     * <p>All supported query parameters are optional. If none are provided the response will include all
+     * connected accounts.
+     * Pagination is supported via the `skip` and `count` query parameters. Searching by name and email
+     * will overlap and
+     * return results based on relevance. Accounts with AccountType `guest` will not be included in the
+     * response.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
+     * to specify the `/accounts.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListAccountsResponse list(ListAccountsRequest request, Optional<Options> options) {
         RequestOperation<ListAccountsRequest, ListAccountsResponse> operation
-              = new ListAccounts.Sync(sdkConfiguration, _headers);
+              = new ListAccounts.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -217,13 +284,29 @@ public class Accounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetAccountResponse get(String accountID) {
+        return get(accountID, Optional.empty());
+    }
+
+    /**
+     * Retrieves details for the account with the specified ID.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
+     * to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param accountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetAccountResponse get(String accountID, Optional<Options> options) {
         GetAccountRequest request =
             GetAccountRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<GetAccountRequest, GetAccountResponse> operation
-              = new GetAccount.Sync(sdkConfiguration, _headers);
+              = new GetAccount.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -269,6 +352,33 @@ public class Accounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public UpdateAccountResponse update(String accountID, PatchAccount patchAccount) {
+        return update(accountID, patchAccount, Optional.empty());
+    }
+
+    /**
+     * When **can** profile data be updated:
+     * + For unverified accounts, all profile data can be edited.
+     * + During the verification process, missing or incomplete profile data can be edited.
+     * + Verified accounts can only add missing profile data.
+     * 
+     * <p>When **can't** profile data be updated:
+     * + Verified accounts cannot change any existing profile data.
+     * 
+     * <p>If you need to update information in a locked state, please contact Moov support.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
+     * to specify the `/accounts/{accountID}/profile.write` scope.
+     * 
+     * @param accountID 
+     * @param patchAccount Describes the fields available when patching a Moov account.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateAccountResponse update(
+            String accountID, PatchAccount patchAccount,
+            Optional<Options> options) {
         UpdateAccountRequest request =
             UpdateAccountRequest
                 .builder()
@@ -276,7 +386,7 @@ public class Accounts {
                 .patchAccount(patchAccount)
                 .build();
         RequestOperation<UpdateAccountRequest, UpdateAccountResponse> operation
-              = new UpdateAccount.Sync(sdkConfiguration, _headers);
+              = new UpdateAccount.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -313,13 +423,33 @@ public class Accounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public DisconnectAccountResponse disconnect(String accountID) {
+        return disconnect(accountID, Optional.empty());
+    }
+
+    /**
+     * This will sever the connection between you and the account specified and it will no longer be listed
+     * as
+     * active in the list of accounts. This also means you'll only have read-only access to the account
+     * going
+     * forward for reporting purposes.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.disconnect` scope.
+     * 
+     * @param accountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DisconnectAccountResponse disconnect(String accountID, Optional<Options> options) {
         DisconnectAccountRequest request =
             DisconnectAccountRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<DisconnectAccountRequest, DisconnectAccountResponse> operation
-              = new DisconnectAccount.Sync(sdkConfiguration, _headers);
+              = new DisconnectAccount.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -362,8 +492,31 @@ public class Accounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListConnectedAccountsForAccountResponse listConnected(ListConnectedAccountsForAccountRequest request) {
+        return listConnected(request, Optional.empty());
+    }
+
+    /**
+     * List or search accounts to which the caller is connected.
+     * 
+     * <p>All supported query parameters are optional. If none are provided the response will include all
+     * connected accounts.
+     * Pagination is supported via the `skip` and `count` query parameters. Searching by name and email
+     * will overlap and
+     * return results based on relevance. Accounts with AccountType `guest` will not be included in the
+     * response.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
+     * to specify the `/accounts.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListConnectedAccountsForAccountResponse listConnected(ListConnectedAccountsForAccountRequest request, Optional<Options> options) {
         RequestOperation<ListConnectedAccountsForAccountRequest, ListConnectedAccountsForAccountResponse> operation
-              = new ListConnectedAccountsForAccount.Sync(sdkConfiguration, _headers);
+              = new ListConnectedAccountsForAccount.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -387,6 +540,22 @@ public class Accounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public ConnectAccountResponse connect(String accountID, ShareScopes shareScopes) {
+        return connect(accountID, shareScopes, Optional.empty());
+    }
+
+    /**
+     * Shares access scopes from the account specified to the caller, establishing a connection
+     * between the two accounts with the specified permissions.
+     * 
+     * @param accountID 
+     * @param shareScopes Describes the scopes being shared from a subject account to a principal account.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ConnectAccountResponse connect(
+            String accountID, ShareScopes shareScopes,
+            Optional<Options> options) {
         ConnectAccountRequest request =
             ConnectAccountRequest
                 .builder()
@@ -394,7 +563,7 @@ public class Accounts {
                 .shareScopes(shareScopes)
                 .build();
         RequestOperation<ConnectAccountRequest, ConnectAccountResponse> operation
-              = new ConnectAccount.Sync(sdkConfiguration, _headers);
+              = new ConnectAccount.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -423,13 +592,29 @@ public class Accounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetAccountCountriesResponse getCountries(String accountID) {
+        return getCountries(accountID, Optional.empty());
+    }
+
+    /**
+     * Retrieve the specified countries of operation for an account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param accountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetAccountCountriesResponse getCountries(String accountID, Optional<Options> options) {
         GetAccountCountriesRequest request =
             GetAccountCountriesRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<GetAccountCountriesRequest, GetAccountCountriesResponse> operation
-              = new GetAccountCountries.Sync(sdkConfiguration, _headers);
+              = new GetAccountCountries.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -463,6 +648,27 @@ public class Accounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public AssignAccountCountriesResponse assignCountries(String accountID, AccountCountries accountCountries) {
+        return assignCountries(accountID, accountCountries, Optional.empty());
+    }
+
+    /**
+     * Assign the countries of operation for an account.
+     * 
+     * <p>This endpoint will always overwrite the previously assigned values.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.write` scope.
+     * 
+     * @param accountID 
+     * @param accountCountries The countries in which an account operates.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public AssignAccountCountriesResponse assignCountries(
+            String accountID, AccountCountries accountCountries,
+            Optional<Options> options) {
         AssignAccountCountriesRequest request =
             AssignAccountCountriesRequest
                 .builder()
@@ -470,7 +676,7 @@ public class Accounts {
                 .accountCountries(accountCountries)
                 .build();
         RequestOperation<AssignAccountCountriesRequest, AssignAccountCountriesResponse> operation
-              = new AssignAccountCountries.Sync(sdkConfiguration, _headers);
+              = new AssignAccountCountries.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -499,13 +705,29 @@ public class Accounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetMerchantProcessingAgreementResponse getMerchantProcessingAgreement(String accountID) {
+        return getMerchantProcessingAgreement(accountID, Optional.empty());
+    }
+
+    /**
+     * Retrieve a merchant account's processing agreement.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param accountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetMerchantProcessingAgreementResponse getMerchantProcessingAgreement(String accountID, Optional<Options> options) {
         GetMerchantProcessingAgreementRequest request =
             GetMerchantProcessingAgreementRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<GetMerchantProcessingAgreementRequest, GetMerchantProcessingAgreementResponse> operation
-              = new GetMerchantProcessingAgreement.Sync(sdkConfiguration, _headers);
+              = new GetMerchantProcessingAgreement.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -539,7 +761,7 @@ public class Accounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetTermsOfServiceTokenResponse getTermsOfServiceTokenDirect() {
-        return getTermsOfServiceToken(Optional.empty(), Optional.empty());
+        return getTermsOfServiceToken(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -558,6 +780,28 @@ public class Accounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetTermsOfServiceTokenResponse getTermsOfServiceToken(Optional<String> origin, Optional<String> referer) {
+        return getTermsOfServiceToken(origin, referer, Optional.empty());
+    }
+
+    /**
+     * Generates a non-expiring token that can then be used to accept Moov's terms of service.
+     * 
+     * <p>This token can only be generated via API. Any Moov account requesting the collect funds, send funds,
+     * wallet,
+     * or card issuing capabilities must accept Moov's terms of service, then have the generated terms of
+     * service
+     * token patched to the account. Read more in our
+     * [documentation](https://docs.moov.io/guides/accounts/requirements/platform-agreement/).
+     * 
+     * @param origin Indicates the domain from which the request originated. Required if referer header is not present.
+     * @param referer Specifies the URL of the resource from which the request originated. Required if origin header is not present.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetTermsOfServiceTokenResponse getTermsOfServiceToken(
+            Optional<String> origin, Optional<String> referer,
+            Optional<Options> options) {
         GetTermsOfServiceTokenRequest request =
             GetTermsOfServiceTokenRequest
                 .builder()
@@ -565,7 +809,7 @@ public class Accounts {
                 .referer(referer)
                 .build();
         RequestOperation<GetTermsOfServiceTokenRequest, GetTermsOfServiceTokenResponse> operation
-              = new GetTermsOfServiceToken.Sync(sdkConfiguration, _headers);
+              = new GetTermsOfServiceToken.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

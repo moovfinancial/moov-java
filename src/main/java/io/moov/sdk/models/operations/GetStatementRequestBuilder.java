@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetStatement;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetStatementRequestBuilder {
 
     private String accountID;
     private String statementID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class GetStatementRequestBuilder {
         this.statementID = statementID;
         return this;
     }
+                
+    public GetStatementRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetStatementRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetStatementRequest buildRequest() {
@@ -44,9 +60,12 @@ public class GetStatementRequestBuilder {
     }
 
     public GetStatementResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetStatementRequest, GetStatementResponse> operation
-              = new GetStatement.Sync(sdkConfiguration, _headers);
+              = new GetStatement.Sync(sdkConfiguration, options, _headers);
         GetStatementRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -1,0 +1,9 @@
+# TransferEventPullFromCardDetails
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `status`                                                                                       | [PullFromCardTransactionStatus](../../models/components/PullFromCardTransactionStatus.md)      | :heavy_check_mark:                                                                             | Status of a pull-from-card transaction.                                                        |
+| `failureCode`                                                                                  | [Optional\<CardTransactionFailureCode>](../../models/components/CardTransactionFailureCode.md) | :heavy_minus_sign:                                                                             | N/A                                                                                            |

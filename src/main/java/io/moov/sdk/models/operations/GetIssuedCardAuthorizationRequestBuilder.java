@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetIssuedCardAuthorization;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetIssuedCardAuthorizationRequestBuilder {
 
     private String accountID;
     private String authorizationID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class GetIssuedCardAuthorizationRequestBuilder {
         this.authorizationID = authorizationID;
         return this;
     }
+                
+    public GetIssuedCardAuthorizationRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetIssuedCardAuthorizationRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetIssuedCardAuthorizationRequest buildRequest() {
@@ -44,9 +60,12 @@ public class GetIssuedCardAuthorizationRequestBuilder {
     }
 
     public GetIssuedCardAuthorizationResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetIssuedCardAuthorizationRequest, GetIssuedCardAuthorizationResponse> operation
-              = new GetIssuedCardAuthorization.Sync(sdkConfiguration, _headers);
+              = new GetIssuedCardAuthorization.Sync(sdkConfiguration, options, _headers);
         GetIssuedCardAuthorizationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

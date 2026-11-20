@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.DisableProduct;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class DisableProductRequestBuilder {
 
     private String accountID;
     private String productID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class DisableProductRequestBuilder {
         this.productID = productID;
         return this;
     }
+                
+    public DisableProductRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DisableProductRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DisableProductRequest buildRequest() {
@@ -44,9 +60,12 @@ public class DisableProductRequestBuilder {
     }
 
     public DisableProductResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DisableProductRequest, DisableProductResponse> operation
-              = new DisableProduct.Sync(sdkConfiguration, _headers);
+              = new DisableProduct.Sync(sdkConfiguration, options, _headers);
         DisableProductRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

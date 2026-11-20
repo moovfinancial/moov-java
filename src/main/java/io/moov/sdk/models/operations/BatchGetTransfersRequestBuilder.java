@@ -9,13 +9,17 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.BatchGetTransfersRequest;
 import io.moov.sdk.operations.BatchGetTransfers;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class BatchGetTransfersRequestBuilder {
 
     private String accountID;
     private BatchGetTransfersRequest batchGetTransfersRequest;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -34,6 +38,18 @@ public class BatchGetTransfersRequestBuilder {
         this.batchGetTransfersRequest = batchGetTransfersRequest;
         return this;
     }
+                
+    public BatchGetTransfersRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public BatchGetTransfersRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private io.moov.sdk.models.operations.BatchGetTransfersRequest buildRequest() {
@@ -45,9 +61,12 @@ public class BatchGetTransfersRequestBuilder {
     }
 
     public BatchGetTransfersResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<io.moov.sdk.models.operations.BatchGetTransfersRequest, BatchGetTransfersResponse> operation
-              = new BatchGetTransfers.Sync(sdkConfiguration, _headers);
+              = new BatchGetTransfers.Sync(sdkConfiguration, options, _headers);
         io.moov.sdk.models.operations.BatchGetTransfersRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -1,0 +1,10 @@
+# TransferEventACHDetails
+
+
+## Fields
+
+| Field                                                                   | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `status`                                                                | [ACHTransactionStatus](../../models/components/ACHTransactionStatus.md) | :heavy_check_mark:                                                      | Status of a transaction within the ACH lifecycle.                       |
+| `return_`                                                               | [Optional\<ACHException>](../../models/components/ACHException.md)      | :heavy_minus_sign:                                                      | N/A                                                                     |
+| `correction`                                                            | [Optional\<ACHException>](../../models/components/ACHException.md)      | :heavy_minus_sign:                                                      | N/A                                                                     |

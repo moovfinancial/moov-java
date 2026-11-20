@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetInvoice;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetInvoiceRequestBuilder {
 
     private String accountID;
     private String invoiceID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class GetInvoiceRequestBuilder {
         this.invoiceID = invoiceID;
         return this;
     }
+                
+    public GetInvoiceRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetInvoiceRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetInvoiceRequest buildRequest() {
@@ -44,9 +60,12 @@ public class GetInvoiceRequestBuilder {
     }
 
     public GetInvoiceResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetInvoiceRequest, GetInvoiceResponse> operation
-              = new GetInvoice.Sync(sdkConfiguration, _headers);
+              = new GetInvoice.Sync(sdkConfiguration, options, _headers);
         GetInvoiceRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

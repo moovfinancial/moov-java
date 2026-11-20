@@ -36,9 +36,14 @@ public class GetInvoiceResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * The request completed successfully.
+     * The request has succeeded.
      */
     private Optional<? extends Invoice> invoice;
+
+    /**
+     * The request has succeeded.
+     */
+    private Optional<? extends InputStream> responseStream;
 
 
     private Map<String, List<String>> headers;
@@ -49,17 +54,20 @@ public class GetInvoiceResponse implements Response {
             int statusCode,
             HttpResponse<InputStream> rawResponse,
             Optional<? extends Invoice> invoice,
+            Optional<? extends InputStream> responseStream,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(invoice, "invoice");
+        Utils.checkNotNull(responseStream, "responseStream");
         headers = Utils.emptyMapIfNull(headers);
         Utils.checkNotNull(headers, "headers");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.invoice = invoice;
+        this.responseStream = responseStream;
         this.headers = headers;
     }
     
@@ -69,7 +77,7 @@ public class GetInvoiceResponse implements Response {
             HttpResponse<InputStream> rawResponse,
             Map<String, List<String>> headers) {
         this(contentType, statusCode, rawResponse,
-            Optional.empty(), headers);
+            Optional.empty(), Optional.empty(), headers);
     }
 
     /**
@@ -97,12 +105,21 @@ public class GetInvoiceResponse implements Response {
     }
 
     /**
-     * The request completed successfully.
+     * The request has succeeded.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<Invoice> invoice() {
         return (Optional<Invoice>) invoice;
+    }
+
+    /**
+     * The request has succeeded.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<InputStream> responseStream() {
+        return (Optional<InputStream>) responseStream;
     }
 
     @JsonIgnore
@@ -143,7 +160,7 @@ public class GetInvoiceResponse implements Response {
     }
 
     /**
-     * The request completed successfully.
+     * The request has succeeded.
      */
     public GetInvoiceResponse withInvoice(Invoice invoice) {
         Utils.checkNotNull(invoice, "invoice");
@@ -153,11 +170,30 @@ public class GetInvoiceResponse implements Response {
 
 
     /**
-     * The request completed successfully.
+     * The request has succeeded.
      */
     public GetInvoiceResponse withInvoice(Optional<? extends Invoice> invoice) {
         Utils.checkNotNull(invoice, "invoice");
         this.invoice = invoice;
+        return this;
+    }
+
+    /**
+     * The request has succeeded.
+     */
+    public GetInvoiceResponse withResponseStream(InputStream responseStream) {
+        Utils.checkNotNull(responseStream, "responseStream");
+        this.responseStream = Optional.ofNullable(responseStream);
+        return this;
+    }
+
+
+    /**
+     * The request has succeeded.
+     */
+    public GetInvoiceResponse withResponseStream(Optional<? extends InputStream> responseStream) {
+        Utils.checkNotNull(responseStream, "responseStream");
+        this.responseStream = responseStream;
         return this;
     }
 
@@ -181,6 +217,7 @@ public class GetInvoiceResponse implements Response {
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
             Utils.enhancedDeepEquals(this.invoice, other.invoice) &&
+            Utils.enhancedDeepEquals(this.responseStream, other.responseStream) &&
             Utils.enhancedDeepEquals(this.headers, other.headers);
     }
     
@@ -188,7 +225,7 @@ public class GetInvoiceResponse implements Response {
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            invoice, headers);
+            invoice, responseStream, headers);
     }
     
     @Override
@@ -198,6 +235,7 @@ public class GetInvoiceResponse implements Response {
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
                 "invoice", invoice,
+                "responseStream", responseStream,
                 "headers", headers);
     }
 
@@ -211,6 +249,8 @@ public class GetInvoiceResponse implements Response {
         private HttpResponse<InputStream> rawResponse;
 
         private Optional<? extends Invoice> invoice = Optional.empty();
+
+        private Optional<? extends InputStream> responseStream = Optional.empty();
 
         private Map<String, List<String>> headers;
 
@@ -250,7 +290,7 @@ public class GetInvoiceResponse implements Response {
 
 
         /**
-         * The request completed successfully.
+         * The request has succeeded.
          */
         public Builder invoice(Invoice invoice) {
             Utils.checkNotNull(invoice, "invoice");
@@ -259,11 +299,30 @@ public class GetInvoiceResponse implements Response {
         }
 
         /**
-         * The request completed successfully.
+         * The request has succeeded.
          */
         public Builder invoice(Optional<? extends Invoice> invoice) {
             Utils.checkNotNull(invoice, "invoice");
             this.invoice = invoice;
+            return this;
+        }
+
+
+        /**
+         * The request has succeeded.
+         */
+        public Builder responseStream(InputStream responseStream) {
+            Utils.checkNotNull(responseStream, "responseStream");
+            this.responseStream = Optional.ofNullable(responseStream);
+            return this;
+        }
+
+        /**
+         * The request has succeeded.
+         */
+        public Builder responseStream(Optional<? extends InputStream> responseStream) {
+            Utils.checkNotNull(responseStream, "responseStream");
+            this.responseStream = responseStream;
             return this;
         }
 
@@ -278,7 +337,7 @@ public class GetInvoiceResponse implements Response {
 
             return new GetInvoiceResponse(
                 contentType, statusCode, rawResponse,
-                invoice, headers);
+                invoice, responseStream, headers);
         }
 
     }

@@ -21,7 +21,9 @@ import io.moov.sdk.operations.DeleteAvatar;
 import io.moov.sdk.operations.GetAvatar;
 import io.moov.sdk.operations.UploadAvatar;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class Avatars {
@@ -57,13 +59,29 @@ public class Avatars {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetAvatarResponse get(String uniqueID) {
+        return get(uniqueID, Optional.empty());
+    }
+
+    /**
+     * Get avatar image for an account using a unique ID.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/profile-enrichment.read` scope.
+     * 
+     * @param uniqueID Any unique ID associated with an account such as accountID, representativeID, routing number, or userID.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetAvatarResponse get(String uniqueID, Optional<Options> options) {
         GetAvatarRequest request =
             GetAvatarRequest
                 .builder()
                 .uniqueID(uniqueID)
                 .build();
         RequestOperation<GetAvatarRequest, GetAvatarResponse> operation
-              = new GetAvatar.Sync(sdkConfiguration, _headers);
+              = new GetAvatar.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -108,6 +126,33 @@ public class Avatars {
     public UploadAvatarResponse upload(
             UploadAvatarSecurity security, String uniqueID,
             AvatarUploadRequest avatarUploadRequest) {
+        return upload(security, uniqueID, avatarUploadRequest,
+            Optional.empty());
+    }
+
+    /**
+     * Upload a user avatar image for an account.
+     * 
+     * <p>The image will be normalized to 512x512 PNG format and stored separately from
+     * automatically discovered logos. User-uploaded avatars take precedence over enriched avatars at read
+     * time.
+     * 
+     * <p>This endpoint only accepts accountID values for the uniqueID parameter.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts.write` scope.
+     * 
+     * @param security The security details to use for authentication.
+     * @param uniqueID The accountID to upload the avatar for. Only accountID values are accepted for writes.
+     * @param avatarUploadRequest 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UploadAvatarResponse upload(
+            UploadAvatarSecurity security, String uniqueID,
+            AvatarUploadRequest avatarUploadRequest, Optional<Options> options) {
         UploadAvatarRequest request =
             UploadAvatarRequest
                 .builder()
@@ -115,7 +160,9 @@ public class Avatars {
                 .avatarUploadRequest(avatarUploadRequest)
                 .build();
         RequestOperation<UploadAvatarRequest, UploadAvatarResponse> operation
-              = new UploadAvatar.Sync(sdkConfiguration, security, _headers);
+              = new UploadAvatar.Sync(
+                                    sdkConfiguration, security, options,
+                                    _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -155,13 +202,39 @@ public class Avatars {
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteAvatarResponse delete(DeleteAvatarSecurity security, String uniqueID) {
+        return delete(security, uniqueID, Optional.empty());
+    }
+
+    /**
+     * Delete a user-uploaded avatar for an account.
+     * 
+     * <p>After deletion, the avatar endpoint will fall back to the enriched avatar
+     * or an account-type-aware fallback icon.
+     * 
+     * <p>This endpoint only accepts accountID values for the uniqueID parameter.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts.write` scope.
+     * 
+     * @param security The security details to use for authentication.
+     * @param uniqueID The accountID to delete the avatar for. Only accountID values are accepted for writes.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DeleteAvatarResponse delete(
+            DeleteAvatarSecurity security, String uniqueID,
+            Optional<Options> options) {
         DeleteAvatarRequest request =
             DeleteAvatarRequest
                 .builder()
                 .uniqueID(uniqueID)
                 .build();
         RequestOperation<DeleteAvatarRequest, DeleteAvatarResponse> operation
-              = new DeleteAvatar.Sync(sdkConfiguration, security, _headers);
+              = new DeleteAvatar.Sync(
+                                    sdkConfiguration, security, options,
+                                    _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

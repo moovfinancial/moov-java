@@ -8,12 +8,16 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetWebhook;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetWebhookRequestBuilder {
 
     private String webhookID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -26,6 +30,18 @@ public class GetWebhookRequestBuilder {
         this.webhookID = webhookID;
         return this;
     }
+                
+    public GetWebhookRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetWebhookRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetWebhookRequest buildRequest() {
@@ -36,9 +52,12 @@ public class GetWebhookRequestBuilder {
     }
 
     public GetWebhookResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetWebhookRequest, GetWebhookResponse> operation
-              = new GetWebhook.Sync(sdkConfiguration, _headers);
+              = new GetWebhook.Sync(sdkConfiguration, options, _headers);
         GetWebhookRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

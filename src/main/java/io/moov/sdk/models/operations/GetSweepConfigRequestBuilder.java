@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetSweepConfig;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetSweepConfigRequestBuilder {
 
     private String accountID;
     private String sweepConfigID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class GetSweepConfigRequestBuilder {
         this.sweepConfigID = sweepConfigID;
         return this;
     }
+                
+    public GetSweepConfigRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetSweepConfigRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetSweepConfigRequest buildRequest() {
@@ -44,9 +60,12 @@ public class GetSweepConfigRequestBuilder {
     }
 
     public GetSweepConfigResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetSweepConfigRequest, GetSweepConfigResponse> operation
-              = new GetSweepConfig.Sync(sdkConfiguration, _headers);
+              = new GetSweepConfig.Sync(sdkConfiguration, options, _headers);
         GetSweepConfigRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

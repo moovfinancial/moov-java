@@ -8,20 +8,40 @@ import static io.moov.sdk.operations.Operations.RequestlessOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListIssuingMerchantCategories;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
+import io.moov.sdk.utils.Utils;
+import java.time.Duration;
+import java.util.Optional;
 
 public class ListIssuingMerchantCategoriesRequestBuilder {
 
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public ListIssuingMerchantCategoriesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+                
+    public ListIssuingMerchantCategoriesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public ListIssuingMerchantCategoriesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
     public ListIssuingMerchantCategoriesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestlessOperation<ListIssuingMerchantCategoriesResponse> operation
-            = new ListIssuingMerchantCategories.Sync(sdkConfiguration, _headers);
+            = new ListIssuingMerchantCategories.Sync(sdkConfiguration, options, _headers);
 
         return operation.handleResponse(operation.doRequest());
     }

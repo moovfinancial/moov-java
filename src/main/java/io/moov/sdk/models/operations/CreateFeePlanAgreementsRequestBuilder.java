@@ -9,13 +9,17 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateFeePlanAgreement;
 import io.moov.sdk.operations.CreateFeePlanAgreements;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class CreateFeePlanAgreementsRequestBuilder {
 
     private String accountID;
     private CreateFeePlanAgreement createFeePlanAgreement;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -34,6 +38,18 @@ public class CreateFeePlanAgreementsRequestBuilder {
         this.createFeePlanAgreement = createFeePlanAgreement;
         return this;
     }
+                
+    public CreateFeePlanAgreementsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public CreateFeePlanAgreementsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private CreateFeePlanAgreementsRequest buildRequest() {
@@ -45,9 +61,12 @@ public class CreateFeePlanAgreementsRequestBuilder {
     }
 
     public CreateFeePlanAgreementsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<CreateFeePlanAgreementsRequest, CreateFeePlanAgreementsResponse> operation
-              = new CreateFeePlanAgreements.Sync(sdkConfiguration, _headers);
+              = new CreateFeePlanAgreements.Sync(sdkConfiguration, options, _headers);
         CreateFeePlanAgreementsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

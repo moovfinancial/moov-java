@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListBankAccountAttestations;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class ListBankAccountAttestationsRequestBuilder {
 
     private String accountID;
     private String bankAccountID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class ListBankAccountAttestationsRequestBuilder {
         this.bankAccountID = bankAccountID;
         return this;
     }
+                
+    public ListBankAccountAttestationsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public ListBankAccountAttestationsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private ListBankAccountAttestationsRequest buildRequest() {
@@ -44,9 +60,12 @@ public class ListBankAccountAttestationsRequestBuilder {
     }
 
     public ListBankAccountAttestationsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<ListBankAccountAttestationsRequest, ListBankAccountAttestationsResponse> operation
-              = new ListBankAccountAttestations.Sync(sdkConfiguration, _headers);
+              = new ListBankAccountAttestations.Sync(sdkConfiguration, options, _headers);
         ListBankAccountAttestationsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

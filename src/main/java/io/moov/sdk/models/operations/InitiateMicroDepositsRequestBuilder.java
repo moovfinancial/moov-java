@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.InitiateMicroDeposits;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class InitiateMicroDepositsRequestBuilder {
 
     private String accountID;
     private String bankAccountID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class InitiateMicroDepositsRequestBuilder {
         this.bankAccountID = bankAccountID;
         return this;
     }
+                
+    public InitiateMicroDepositsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public InitiateMicroDepositsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private InitiateMicroDepositsRequest buildRequest() {
@@ -44,9 +60,12 @@ public class InitiateMicroDepositsRequestBuilder {
     }
 
     public InitiateMicroDepositsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<InitiateMicroDepositsRequest, InitiateMicroDepositsResponse> operation
-              = new InitiateMicroDeposits.Sync(sdkConfiguration, _headers);
+              = new InitiateMicroDeposits.Sync(sdkConfiguration, options, _headers);
         InitiateMicroDepositsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

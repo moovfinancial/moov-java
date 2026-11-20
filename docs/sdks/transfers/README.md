@@ -77,6 +77,12 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+* [listTransferEvents](#listtransferevents) - Retrieve the complete ordered event timeline for a Transfer.
+
+Events are returned oldest to newest by occurrence time, with deterministic ordering when multiple events have the same occurrence time. An existing Transfer with no stored events returns an empty list.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 * [initiateRefund](#initiaterefund) - Initiate a refund for a card transfer.
 The `accountID` must identify the partner account for the transfer.
 
@@ -234,7 +240,7 @@ public class Application {
                         .valueDecimal("329.45")
                         .build())
                     .options(CreateTransferRailOptions.builder()
-                        .cardPayment(CreateTransferSourceCard.builder()
+                        .cardPayment(CreateCardPaymentOptions.builder()
                             .dynamicDescriptor("WhlBdy *Yoga 11-12")
                             .build())
                         .build())
@@ -310,7 +316,7 @@ public class Application {
                         .valueDecimal("329.45")
                         .build())
                     .options(CreateTransferRailOptions.builder()
-                        .cardPayment(CreateTransferSourceCard.builder()
+                        .cardPayment(CreateCardPaymentOptions.builder()
                             .dynamicDescriptor("WhlBdy *Yoga 11-12")
                             .build())
                         .build())
@@ -349,12 +355,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Required                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xIdempotencyKey`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | *String*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |   Identifies a unique request to create a transfer.<br/>  In order to avoid creating duplicate transfers, the same idempotency key should be reused when retrying a request.                                                                                                                                                                                                                                                                                                                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `xWaitFor`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | [Optional\<TransferWaitFor>](../../models/components/TransferWaitFor.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an <br/>asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.                                                                                                                                                                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `accountID`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | *String*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Your Moov account ID.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `createTransfer`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | [CreateTransfer](../../models/components/CreateTransfer.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | {<br/>"source": {<br/>"paymentMethodID": "9506dbf6-4208-44c3-ad8a-e4431660e1f2"<br/>},<br/>"destination": {<br/>"paymentMethodID": "3f9969cf-a1f3-4d83-8ddc-229a506651cf"<br/>},<br/>"options": {<br/>"cardPayment": {<br/>"dynamicDescriptor": "WhlBdy *Yoga 11-12"<br/>}<br/>},<br/>"amount": {<br/>"currency": "USD",<br/>"valueDecimal": "329.45"<br/>},<br/>"amountDetails": {<br/>"tip": {<br/>"currency": "USD",<br/>"valueDecimal": "3.50"<br/>},<br/>"tax": {<br/>"currency": "USD",<br/>"valueDecimal": "8.25"<br/>}<br/>},<br/>"description": "Transfer from card to wallet",<br/>"metadata": {<br/>"optional": "metadata"<br/>}<br/>} |
+| Parameter                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Required                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xIdempotencyKey`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | *String*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |   Identifies a unique request to create a transfer.<br/>  In order to avoid creating duplicate transfers, the same idempotency key should be reused when retrying a request.                                                                                                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `xWaitFor`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | [Optional\<TransferWaitFor>](../../models/components/TransferWaitFor.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an <br/>asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `accountID`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | *String*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Your Moov account ID.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `createTransfer`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | [CreateTransfer](../../models/components/CreateTransfer.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | {<br/>"source": {<br/>"paymentMethodID": "9506dbf6-4208-44c3-ad8a-e4431660e1f2"<br/>},<br/>"destination": {<br/>"paymentMethodID": "3f9969cf-a1f3-4d83-8ddc-229a506651cf"<br/>},<br/>"options": {<br/>"cardPayment": {<br/>"dynamicDescriptor": "WhlBdy *Yoga 11-12",<br/>"captureMethod": "automatic"<br/>}<br/>},<br/>"amount": {<br/>"currency": "USD",<br/>"valueDecimal": "329.45"<br/>},<br/>"amountDetails": {<br/>"tip": {<br/>"currency": "USD",<br/>"valueDecimal": "3.50"<br/>},<br/>"tax": {<br/>"currency": "USD",<br/>"valueDecimal": "8.25"<br/>}<br/>},<br/>"description": "Transfer from card to wallet",<br/>"metadata": {<br/>"optional": "metadata"<br/>}<br/>} |
 
 ### Response
 
@@ -1038,6 +1044,165 @@ public class Application {
 ### Response
 
 **[GetCaptureResponse](../../models/operations/GetCaptureResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## listTransferEvents
+
+Retrieve the complete ordered event timeline for a Transfer.
+
+Events are returned oldest to newest by occurrence time, with deterministic ordering when multiple events have the same occurrence time. An existing Transfer with no stored events returns an empty list.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+### Example Usage: Auth-capture card payment
+
+<!-- UsageSnippet language="java" operationID="listTransferEvents" method="get" path="/accounts/{accountID}/transfers/{transferID}/events" example="Auth-capture card payment" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListTransferEventsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        ListTransferEventsResponse res = sdk.transfers().listTransferEvents()
+                .accountID("<id>")
+                .transferID("<id>")
+                .call();
+
+        if (res.transferEvents().isPresent()) {
+            System.out.println(res.transferEvents().get());
+        }
+    }
+}
+```
+### Example Usage: Bank-to-bank transfer with source-wallet reversal
+
+<!-- UsageSnippet language="java" operationID="listTransferEvents" method="get" path="/accounts/{accountID}/transfers/{transferID}/events" example="Bank-to-bank transfer with source-wallet reversal" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListTransferEventsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        ListTransferEventsResponse res = sdk.transfers().listTransferEvents()
+                .accountID("<id>")
+                .transferID("<id>")
+                .call();
+
+        if (res.transferEvents().isPresent()) {
+            System.out.println(res.transferEvents().get());
+        }
+    }
+}
+```
+### Example Usage: Card-to-wallet transfer with refund
+
+<!-- UsageSnippet language="java" operationID="listTransferEvents" method="get" path="/accounts/{accountID}/transfers/{transferID}/events" example="Card-to-wallet transfer with refund" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListTransferEventsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        ListTransferEventsResponse res = sdk.transfers().listTransferEvents()
+                .accountID("<id>")
+                .transferID("<id>")
+                .call();
+
+        if (res.transferEvents().isPresent()) {
+            System.out.println(res.transferEvents().get());
+        }
+    }
+}
+```
+### Example Usage: Wallet-to-bank RTP transfer
+
+<!-- UsageSnippet language="java" operationID="listTransferEvents" method="get" path="/accounts/{accountID}/transfers/{transferID}/events" example="Wallet-to-bank RTP transfer" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListTransferEventsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        ListTransferEventsResponse res = sdk.transfers().listTransferEvents()
+                .accountID("<id>")
+                .transferID("<id>")
+                .call();
+
+        if (res.transferEvents().isPresent()) {
+            System.out.println(res.transferEvents().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `accountID`                                                             | *String*                                                                | :heavy_check_mark:                                                      | Moov account ID of the partner or the Transfer's source or destination. |
+| `transferID`                                                            | *String*                                                                | :heavy_check_mark:                                                      | Identifier for the Transfer.                                            |
+
+### Response
+
+**[ListTransferEventsResponse](../../models/operations/ListTransferEventsResponse.md)**
 
 ### Errors
 

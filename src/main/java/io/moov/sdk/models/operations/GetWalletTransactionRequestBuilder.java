@@ -8,14 +8,18 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetWalletTransaction;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetWalletTransactionRequestBuilder {
 
     private String accountID;
     private String walletID;
     private String transactionID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -40,6 +44,18 @@ public class GetWalletTransactionRequestBuilder {
         this.transactionID = transactionID;
         return this;
     }
+                
+    public GetWalletTransactionRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetWalletTransactionRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetWalletTransactionRequest buildRequest() {
@@ -52,9 +68,12 @@ public class GetWalletTransactionRequestBuilder {
     }
 
     public GetWalletTransactionResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetWalletTransactionRequest, GetWalletTransactionResponse> operation
-              = new GetWalletTransaction.Sync(sdkConfiguration, _headers);
+              = new GetWalletTransaction.Sync(sdkConfiguration, options, _headers);
         GetWalletTransactionRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

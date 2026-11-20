@@ -9,13 +9,17 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CapabilityID;
 import io.moov.sdk.operations.DisableCapability;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class DisableCapabilityRequestBuilder {
 
     private String accountID;
     private CapabilityID capabilityID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -34,6 +38,18 @@ public class DisableCapabilityRequestBuilder {
         this.capabilityID = capabilityID;
         return this;
     }
+                
+    public DisableCapabilityRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DisableCapabilityRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DisableCapabilityRequest buildRequest() {
@@ -45,9 +61,12 @@ public class DisableCapabilityRequestBuilder {
     }
 
     public DisableCapabilityResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DisableCapabilityRequest, DisableCapabilityResponse> operation
-              = new DisableCapability.Sync(sdkConfiguration, _headers);
+              = new DisableCapability.Sync(sdkConfiguration, options, _headers);
         DisableCapabilityRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

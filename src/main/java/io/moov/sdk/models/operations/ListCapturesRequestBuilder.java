@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListCaptures;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class ListCapturesRequestBuilder {
 
     private String accountID;
     private String transferID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class ListCapturesRequestBuilder {
         this.transferID = transferID;
         return this;
     }
+                
+    public ListCapturesRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public ListCapturesRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private ListCapturesRequest buildRequest() {
@@ -44,9 +60,12 @@ public class ListCapturesRequestBuilder {
     }
 
     public ListCapturesResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<ListCapturesRequest, ListCapturesResponse> operation
-              = new ListCaptures.Sync(sdkConfiguration, _headers);
+              = new ListCaptures.Sync(sdkConfiguration, options, _headers);
         ListCapturesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

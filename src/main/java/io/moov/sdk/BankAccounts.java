@@ -55,6 +55,7 @@ import io.moov.sdk.operations.InitiateMicroDeposits;
 import io.moov.sdk.operations.ListBankAccountAttestations;
 import io.moov.sdk.operations.ListBankAccounts;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
 import java.time.LocalDate;
 import java.util.Optional;
@@ -110,7 +111,8 @@ public class BankAccounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public LinkBankAccountResponse link(String accountID, LinkBankAccount linkBankAccount) {
-        return link(Optional.empty(), accountID, linkBankAccount);
+        return link(Optional.empty(), accountID, linkBankAccount,
+            Optional.empty());
     }
 
     /**
@@ -137,6 +139,35 @@ public class BankAccounts {
     public LinkBankAccountResponse link(
             Optional<? extends BankAccountWaitFor> xWaitFor, String accountID,
             LinkBankAccount linkBankAccount) {
+        return link(xWaitFor, accountID, linkBankAccount,
+            Optional.empty());
+    }
+
+    /**
+     * Link a bank account to an existing Moov account. Read our [bank accounts
+     * guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.
+     * 
+     * <p>It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if
+     * the newly linked
+     * bank account is intended to be used right away. If this header is not included, the caller will need
+     * to poll the [List Payment
+     * Methods](https://docs.moov.io/api/sources/payment-methods/list/)
+     * endpoint to wait for the new payment methods to be available for use.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
+     * 
+     * @param xWaitFor 
+     * @param accountID 
+     * @param linkBankAccount 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public LinkBankAccountResponse link(
+            Optional<? extends BankAccountWaitFor> xWaitFor, String accountID,
+            LinkBankAccount linkBankAccount, Optional<Options> options) {
         LinkBankAccountRequest request =
             LinkBankAccountRequest
                 .builder()
@@ -145,7 +176,7 @@ public class BankAccounts {
                 .linkBankAccount(linkBankAccount)
                 .build();
         RequestOperation<LinkBankAccountRequest, LinkBankAccountResponse> operation
-              = new io.moov.sdk.operations.LinkBankAccount.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.LinkBankAccount.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -178,13 +209,31 @@ public class BankAccounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListBankAccountsResponse list(String accountID) {
+        return list(accountID, Optional.empty());
+    }
+
+    /**
+     * List all the bank accounts associated with a particular Moov account.
+     * 
+     * <p>Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
+     * 
+     * @param accountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListBankAccountsResponse list(String accountID, Optional<Options> options) {
         ListBankAccountsRequest request =
             ListBankAccountsRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<ListBankAccountsRequest, ListBankAccountsResponse> operation
-              = new ListBankAccounts.Sync(sdkConfiguration, _headers);
+              = new ListBankAccounts.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -220,6 +269,28 @@ public class BankAccounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetBankAccountResponse get(String accountID, String bankAccountID) {
+        return get(accountID, bankAccountID, Optional.empty());
+    }
+
+    /**
+     * Retrieve bank account details (i.e. routing number or account type) associated with a specific Moov
+     * account.
+     * 
+     * <p>Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
+     * 
+     * @param accountID 
+     * @param bankAccountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetBankAccountResponse get(
+            String accountID, String bankAccountID,
+            Optional<Options> options) {
         GetBankAccountRequest request =
             GetBankAccountRequest
                 .builder()
@@ -227,7 +298,7 @@ public class BankAccounts {
                 .bankAccountID(bankAccountID)
                 .build();
         RequestOperation<GetBankAccountRequest, GetBankAccountResponse> operation
-              = new GetBankAccount.Sync(sdkConfiguration, _headers);
+              = new GetBankAccount.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -257,6 +328,25 @@ public class BankAccounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public DisableBankAccountResponse disable(String accountID, String bankAccountID) {
+        return disable(accountID, bankAccountID, Optional.empty());
+    }
+
+    /**
+     * Discontinue using a specified bank account linked to a Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
+     * 
+     * @param accountID 
+     * @param bankAccountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DisableBankAccountResponse disable(
+            String accountID, String bankAccountID,
+            Optional<Options> options) {
         DisableBankAccountRequest request =
             DisableBankAccountRequest
                 .builder()
@@ -264,7 +354,7 @@ public class BankAccounts {
                 .bankAccountID(bankAccountID)
                 .build();
         RequestOperation<DisableBankAccountRequest, DisableBankAccountResponse> operation
-              = new DisableBankAccount.Sync(sdkConfiguration, _headers);
+              = new DisableBankAccount.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -321,6 +411,39 @@ public class BankAccounts {
     public CreateBankAccountAttestationResponse createAttestation(
             String accountID, String bankAccountID,
             CreateBankAccountAttestation createBankAccountAttestation) {
+        return createAttestation(accountID, bankAccountID, createBankAccountAttestation,
+            Optional.empty());
+    }
+
+    /**
+     * Submit a new authorization attestation for a bank account in an `errored` status due to an R29 ACH
+     * return (`Corporate Customer Advises Not Authorized`).
+     * 
+     * <p>After obtaining new authorization from the receiver, submit an attestation with the date the
+     * authorization was obtained and a brief description of how the authorization was obtained. If the
+     * attestation is accepted, the bank account transitions from `errored` to `verified`.
+     * 
+     * <p>Constraints
+     * 
+     * <p>- The bank account's current errored status must be the result of an R29 return.
+     * - `attestedAt` must be on or after the date of the bank account's most recent R29 return and cannot
+     * be a future date.
+     * - Only one attestation may be submitted for a bank account. Use the [Get attestation
+     * eligibility](https://docs.moov.io/api/sources/bank-accounts/attestation-eligibility/) endpoint to
+     * confirm eligibility before submitting an attestation.
+     * 
+     * <p>This endpoint is available only to allowlisted partners. Contact Moov Support for more information.
+     * 
+     * @param accountID 
+     * @param bankAccountID 
+     * @param createBankAccountAttestation Request body for creating a R29 re-authorization attestation for an errored bank account.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateBankAccountAttestationResponse createAttestation(
+            String accountID, String bankAccountID,
+            CreateBankAccountAttestation createBankAccountAttestation, Optional<Options> options) {
         CreateBankAccountAttestationRequest request =
             CreateBankAccountAttestationRequest
                 .builder()
@@ -329,7 +452,7 @@ public class BankAccounts {
                 .createBankAccountAttestation(createBankAccountAttestation)
                 .build();
         RequestOperation<CreateBankAccountAttestationRequest, CreateBankAccountAttestationResponse> operation
-              = new io.moov.sdk.operations.CreateBankAccountAttestation.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateBankAccountAttestation.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -351,6 +474,21 @@ public class BankAccounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListBankAccountAttestationsResponse listAttestations(String accountID, String bankAccountID) {
+        return listAttestations(accountID, bankAccountID, Optional.empty());
+    }
+
+    /**
+     * List the attestations submitted for a bank account.
+     * 
+     * @param accountID 
+     * @param bankAccountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListBankAccountAttestationsResponse listAttestations(
+            String accountID, String bankAccountID,
+            Optional<Options> options) {
         ListBankAccountAttestationsRequest request =
             ListBankAccountAttestationsRequest
                 .builder()
@@ -358,7 +496,7 @@ public class BankAccounts {
                 .bankAccountID(bankAccountID)
                 .build();
         RequestOperation<ListBankAccountAttestationsRequest, ListBankAccountAttestationsResponse> operation
-              = new ListBankAccountAttestations.Sync(sdkConfiguration, _headers);
+              = new ListBankAccountAttestations.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -408,7 +546,8 @@ public class BankAccounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetBankAccountAttestationEligibilityResponse getAttestationEligibility(String accountID, String bankAccountID) {
-        return getAttestationEligibility(accountID, bankAccountID, Optional.empty());
+        return getAttestationEligibility(accountID, bankAccountID, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -438,6 +577,38 @@ public class BankAccounts {
     public GetBankAccountAttestationEligibilityResponse getAttestationEligibility(
             String accountID, String bankAccountID,
             Optional<LocalDate> attestedAt) {
+        return getAttestationEligibility(accountID, bankAccountID, attestedAt,
+            Optional.empty());
+    }
+
+    /**
+     * Check whether a bank account is currently eligible for a new authorization attestation without
+     * submitting one.
+     * 
+     * <p>- `enabled` indicates whether the calling account has access to the attestations feature. If
+     * `enabled` is `false`, `eligible` is always `false`.
+     * - When `enabled` is `true`, `eligible` indicates whether the bank account currently meets the
+     * eligibility requirements for a new attestation: the bank account must be `errored` due to an R29
+     * return, with no prior attestations.
+     * 
+     * <p>This endpoint always returns `200`, including when the bank account is not eligible. Check the
+     * `eligible` field to determine eligibility.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
+     * 
+     * @param accountID 
+     * @param bankAccountID 
+     * @param attestedAt Date to check eligibility against, as if it were the `attestedAt` value of a new attestation. Defaults
+     *         to the current date.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetBankAccountAttestationEligibilityResponse getAttestationEligibility(
+            String accountID, String bankAccountID,
+            Optional<LocalDate> attestedAt, Optional<Options> options) {
         GetBankAccountAttestationEligibilityRequest request =
             GetBankAccountAttestationEligibilityRequest
                 .builder()
@@ -446,7 +617,7 @@ public class BankAccounts {
                 .attestedAt(attestedAt)
                 .build();
         RequestOperation<GetBankAccountAttestationEligibilityRequest, GetBankAccountAttestationEligibilityResponse> operation
-              = new GetBankAccountAttestationEligibility.Sync(sdkConfiguration, _headers);
+              = new GetBankAccountAttestationEligibility.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -510,6 +681,42 @@ public class BankAccounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public InitiateMicroDepositsResponse initiateMicroDeposits(String accountID, String bankAccountID) {
+        return initiateMicroDeposits(accountID, bankAccountID, Optional.empty());
+    }
+
+    /**
+     * Micro-deposits help confirm bank account ownership, helping reduce fraud and the risk of
+     * unauthorized activity.
+     * Use this method to initiate the micro-deposit verification, sending two small credit transfers to
+     * the bank account
+     * you want to confirm.
+     * 
+     * <p>If you request micro-deposits before 4:15PM ET, they will appear that same day. If you request
+     * micro-deposits any
+     * time after 4:15PM ET, they will appear the next banking day. When the two credits are initiated,
+     * Moov simultaneously
+     * initiates a debit to recoup the micro-deposits.
+     * 
+     * <p>Micro-deposits initiated for a `sandbox` bank account will always be `$0.00` / `$0.00` and instantly
+     * verifiable once initiated.
+     * 
+     * <p>You can simulate micro-deposit verification in test mode. See our [test
+     * mode](https://docs.moov.io/guides/get-started/test-mode/#micro-deposits)
+     * guide for more information.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
+     * 
+     * @param accountID 
+     * @param bankAccountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public InitiateMicroDepositsResponse initiateMicroDeposits(
+            String accountID, String bankAccountID,
+            Optional<Options> options) {
         InitiateMicroDepositsRequest request =
             InitiateMicroDepositsRequest
                 .builder()
@@ -517,7 +724,7 @@ public class BankAccounts {
                 .bankAccountID(bankAccountID)
                 .build();
         RequestOperation<InitiateMicroDepositsRequest, InitiateMicroDepositsResponse> operation
-              = new InitiateMicroDeposits.Sync(sdkConfiguration, _headers);
+              = new InitiateMicroDeposits.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -552,6 +759,28 @@ public class BankAccounts {
     public CompleteMicroDepositsResponse completeMicroDeposits(
             String accountID, String bankAccountID,
             CompleteMicroDeposits completeMicroDeposits) {
+        return completeMicroDeposits(accountID, bankAccountID, completeMicroDeposits,
+            Optional.empty());
+    }
+
+    /**
+     * Complete the micro-deposit validation process by passing the amounts of the two transfers within
+     * three tries.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
+     * 
+     * @param accountID 
+     * @param bankAccountID 
+     * @param completeMicroDeposits Request to complete the micro-deposit verification workflow.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CompleteMicroDepositsResponse completeMicroDeposits(
+            String accountID, String bankAccountID,
+            CompleteMicroDeposits completeMicroDeposits, Optional<Options> options) {
         CompleteMicroDepositsRequest request =
             CompleteMicroDepositsRequest
                 .builder()
@@ -560,7 +789,7 @@ public class BankAccounts {
                 .completeMicroDeposits(completeMicroDeposits)
                 .build();
         RequestOperation<CompleteMicroDepositsRequest, CompleteMicroDepositsResponse> operation
-              = new io.moov.sdk.operations.CompleteMicroDeposits.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CompleteMicroDeposits.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -612,6 +841,36 @@ public class BankAccounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetBankAccountVerificationResponse getVerification(String accountID, String bankAccountID) {
+        return getVerification(accountID, bankAccountID, Optional.empty());
+    }
+
+    /**
+     * Retrieve the current status and details of an instant verification, including whether the
+     * verification method was instant (RTP or FedNow) or same-day
+     * ACH. This helps track the verification process in real-time and provides details in case of
+     * exceptions.
+     * 
+     * <p>The status will indicate the following:
+     * 
+     * <p>- `new`: Verification initiated, credit pending to the payment network
+     * - `sent-credit`: Credit sent, available for verification
+     * - `failed`: Verification failed, description provided, user needs to add a new bank account
+     * - `expired`: Verification expired after 14 days, initiate another verification
+     * - `max-attempts-exceeded`: Five incorrect code attempts exhausted, initiate another verification
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
+     * 
+     * @param accountID 
+     * @param bankAccountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetBankAccountVerificationResponse getVerification(
+            String accountID, String bankAccountID,
+            Optional<Options> options) {
         GetBankAccountVerificationRequest request =
             GetBankAccountVerificationRequest
                 .builder()
@@ -619,7 +878,7 @@ public class BankAccounts {
                 .bankAccountID(bankAccountID)
                 .build();
         RequestOperation<GetBankAccountVerificationRequest, GetBankAccountVerificationResponse> operation
-              = new GetBankAccountVerification.Sync(sdkConfiguration, _headers);
+              = new GetBankAccountVerification.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -687,7 +946,8 @@ public class BankAccounts {
      * @throws RuntimeException subclass if the API call fails
      */
     public InitiateBankAccountVerificationResponse initiateVerification(String accountID, String bankAccountID) {
-        return initiateVerification(Optional.empty(), accountID, bankAccountID);
+        return initiateVerification(Optional.empty(), accountID, bankAccountID,
+            Optional.empty());
     }
 
     /**
@@ -725,6 +985,46 @@ public class BankAccounts {
     public InitiateBankAccountVerificationResponse initiateVerification(
             Optional<? extends BankAccountWaitFor> xWaitFor, String accountID,
             String bankAccountID) {
+        return initiateVerification(xWaitFor, accountID, bankAccountID,
+            Optional.empty());
+    }
+
+    /**
+     * Instant micro-deposit verification offers a quick and efficient way to verify bank account
+     * ownership.
+     * 
+     * <p>Send a $0.01 credit with a unique verification code via RTP, FedNow, or same-day ACH, depending on
+     * the receiving bank's capabilities. This
+     * feature provides a faster alternative to traditional methods, allowing verification in a single
+     * session.
+     * 
+     * <p>It is recommended to use the `X-Wait-For: rail-response` header to synchronously receive the outcome
+     * of the instant credit in the
+     * response payload.
+     * 
+     * <p>Possible verification methods:
+     * - `instant`: Real-time verification credit sent via RTP or FedNow
+     * - `ach`: Verification credit sent via same-day ACH
+     * 
+     * <p>Possible statuses:
+     * - `new`: Verification initiated, credit pending
+     * - `sent-credit`: Credit sent, available for verification in the external bank account
+     * - `failed`: Verification failed due to credit rejection/return, details in `exceptionDetails`
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
+     * 
+     * @param xWaitFor 
+     * @param accountID 
+     * @param bankAccountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public InitiateBankAccountVerificationResponse initiateVerification(
+            Optional<? extends BankAccountWaitFor> xWaitFor, String accountID,
+            String bankAccountID, Optional<Options> options) {
         InitiateBankAccountVerificationRequest request =
             InitiateBankAccountVerificationRequest
                 .builder()
@@ -733,7 +1033,7 @@ public class BankAccounts {
                 .bankAccountID(bankAccountID)
                 .build();
         RequestOperation<InitiateBankAccountVerificationRequest, InitiateBankAccountVerificationResponse> operation
-              = new InitiateBankAccountVerification.Sync(sdkConfiguration, _headers);
+              = new InitiateBankAccountVerification.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -784,6 +1084,36 @@ public class BankAccounts {
     public CompleteBankAccountVerificationResponse completeVerification(
             String accountID, String bankAccountID,
             CompleteBankAccountVerification completeBankAccountVerification) {
+        return completeVerification(accountID, bankAccountID, completeBankAccountVerification,
+            Optional.empty());
+    }
+
+    /**
+     * Finalize the instant micro-deposit verification by submitting the verification code displayed in the
+     * user's bank account.
+     * 
+     * <p>Upon successful verification, the bank account status will be updated to `verified` and eligible for
+     * ACH debit transactions.
+     * 
+     * <p>The following formats are accepted:
+     * - `MV0000`
+     * - `mv0000`
+     * - `0000`
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
+     * 
+     * @param accountID 
+     * @param bankAccountID 
+     * @param completeBankAccountVerification 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CompleteBankAccountVerificationResponse completeVerification(
+            String accountID, String bankAccountID,
+            CompleteBankAccountVerification completeBankAccountVerification, Optional<Options> options) {
         CompleteBankAccountVerificationRequest request =
             CompleteBankAccountVerificationRequest
                 .builder()
@@ -792,7 +1122,7 @@ public class BankAccounts {
                 .completeBankAccountVerification(completeBankAccountVerification)
                 .build();
         RequestOperation<CompleteBankAccountVerificationRequest, CompleteBankAccountVerificationResponse> operation
-              = new io.moov.sdk.operations.CompleteBankAccountVerification.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CompleteBankAccountVerification.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateAuthorizationSimulation;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class CreateAuthorizationSimulationRequestBuilder {
 
     private String accountID;
     private CreateAuthorizationSimulation createAuthorizationSimulation;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class CreateAuthorizationSimulationRequestBuilder {
         this.createAuthorizationSimulation = createAuthorizationSimulation;
         return this;
     }
+                
+    public CreateAuthorizationSimulationRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public CreateAuthorizationSimulationRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private CreateAuthorizationSimulationRequest buildRequest() {
@@ -44,9 +60,12 @@ public class CreateAuthorizationSimulationRequestBuilder {
     }
 
     public CreateAuthorizationSimulationResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<CreateAuthorizationSimulationRequest, CreateAuthorizationSimulationResponse> operation
-              = new io.moov.sdk.operations.CreateAuthorizationSimulation.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateAuthorizationSimulation.Sync(sdkConfiguration, options, _headers);
         CreateAuthorizationSimulationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

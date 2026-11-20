@@ -23,7 +23,9 @@ import io.moov.sdk.operations.GetWallet;
 import io.moov.sdk.operations.ListWallets;
 import io.moov.sdk.operations.UpdateWallet;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class Wallets {
@@ -68,6 +70,29 @@ public class Wallets {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateWalletResponse create(String accountID, CreateWallet createWallet) {
+        return create(accountID, createWallet, Optional.empty());
+    }
+
+    /**
+     * Create a new wallet for an account. You can specify optional attributes such as a display name and
+     * description to specify the intended use of the wallet. This will generate a new moov-wallet payment
+     * method.
+     * 
+     * <p>Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+     * 
+     * @param accountID The Moov account ID the wallet belongs to.
+     * @param createWallet 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateWalletResponse create(
+            String accountID, CreateWallet createWallet,
+            Optional<Options> options) {
         CreateWalletRequest request =
             CreateWalletRequest
                 .builder()
@@ -75,7 +100,7 @@ public class Wallets {
                 .createWallet(createWallet)
                 .build();
         RequestOperation<CreateWalletRequest, CreateWalletResponse> operation
-              = new io.moov.sdk.operations.CreateWallet.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateWallet.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -108,8 +133,26 @@ public class Wallets {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListWalletsResponse list(ListWalletsRequest request) {
+        return list(request, Optional.empty());
+    }
+
+    /**
+     * List the wallets associated with a Moov account.
+     * 
+     * <p>Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListWalletsResponse list(ListWalletsRequest request, Optional<Options> options) {
         RequestOperation<ListWalletsRequest, ListWalletsResponse> operation
-              = new ListWallets.Sync(sdkConfiguration, _headers);
+              = new ListWallets.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -143,6 +186,27 @@ public class Wallets {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetWalletResponse get(String accountID, String walletID) {
+        return get(accountID, walletID, Optional.empty());
+    }
+
+    /**
+     * Get information on a specific wallet (e.g., the available balance).
+     * 
+     * <p>Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
+     * @param accountID 
+     * @param walletID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetWalletResponse get(
+            String accountID, String walletID,
+            Optional<Options> options) {
         GetWalletRequest request =
             GetWalletRequest
                 .builder()
@@ -150,7 +214,7 @@ public class Wallets {
                 .walletID(walletID)
                 .build();
         RequestOperation<GetWalletRequest, GetWalletResponse> operation
-              = new GetWallet.Sync(sdkConfiguration, _headers);
+              = new GetWallet.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -187,6 +251,29 @@ public class Wallets {
     public UpdateWalletResponse update(
             String walletID, String accountID,
             PatchWallet patchWallet) {
+        return update(walletID, accountID, patchWallet,
+            Optional.empty());
+    }
+
+    /**
+     * Update properties of an existing wallet such as name, description, status, or metadata.
+     * 
+     * <p>Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+     * 
+     * @param walletID Identifier for the wallet.
+     * @param accountID The Moov account ID the wallet belongs to.
+     * @param patchWallet 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateWalletResponse update(
+            String walletID, String accountID,
+            PatchWallet patchWallet, Optional<Options> options) {
         UpdateWalletRequest request =
             UpdateWalletRequest
                 .builder()
@@ -195,7 +282,7 @@ public class Wallets {
                 .patchWallet(patchWallet)
                 .build();
         RequestOperation<UpdateWalletRequest, UpdateWalletResponse> operation
-              = new UpdateWallet.Sync(sdkConfiguration, _headers);
+              = new UpdateWallet.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

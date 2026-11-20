@@ -14,7 +14,9 @@ import io.moov.sdk.models.operations.ListStatementsResponse;
 import io.moov.sdk.operations.GetStatement;
 import io.moov.sdk.operations.ListStatements;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class Statements {
@@ -50,8 +52,24 @@ public class Statements {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListStatementsResponse list(ListStatementsRequest request) {
+        return list(request, Optional.empty());
+    }
+
+    /**
+     * Retrieve all statements associated with an account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListStatementsResponse list(ListStatementsRequest request, Optional<Options> options) {
         RequestOperation<ListStatementsRequest, ListStatementsResponse> operation
-              = new ListStatements.Sync(sdkConfiguration, _headers);
+              = new ListStatements.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -87,6 +105,28 @@ public class Statements {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetStatementResponse get(String accountID, String statementID) {
+        return get(accountID, statementID, Optional.empty());
+    }
+
+    /**
+     * Retrieve a statement by its ID.
+     * 
+     * <p>Use the `Accept` header to specify the format of the response. Supported formats are
+     * `application/json` and `application/pdf`.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param accountID 
+     * @param statementID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetStatementResponse get(
+            String accountID, String statementID,
+            Optional<Options> options) {
         GetStatementRequest request =
             GetStatementRequest
                 .builder()
@@ -94,7 +134,7 @@ public class Statements {
                 .statementID(statementID)
                 .build();
         RequestOperation<GetStatementRequest, GetStatementResponse> operation
-              = new GetStatement.Sync(sdkConfiguration, _headers);
+              = new GetStatement.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

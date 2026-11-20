@@ -8,11 +8,15 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListWalletTransactions;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
+import java.time.Duration;
+import java.util.Optional;
 
 public class ListWalletTransactionsRequestBuilder {
 
     private ListWalletTransactionsRequest request;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -25,11 +29,26 @@ public class ListWalletTransactionsRequestBuilder {
         this.request = request;
         return this;
     }
+                
+    public ListWalletTransactionsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public ListWalletTransactionsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
     public ListWalletTransactionsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<ListWalletTransactionsRequest, ListWalletTransactionsResponse> operation
-              = new ListWalletTransactions.Sync(sdkConfiguration, _headers);
+              = new ListWalletTransactions.Sync(sdkConfiguration, options, _headers);
 
         return operation.handleResponse(operation.doRequest(request));
     }

@@ -10,14 +10,15 @@ import io.moov.sdk.utils.RetryConfig;
 import io.moov.sdk.utils.SpeakeasyHTTPClient;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class SDKConfiguration {
 
     private static final String LANGUAGE = "java";
     public static final String OPENAPI_DOC_VERSION = "v2025.01.00";
-    public static final String SDK_VERSION = "25.4.7";
-    public static final String GEN_VERSION = "2.954.8";
+    public static final String SDK_VERSION = "25.4.8";
+    public static final String GEN_VERSION = "2.968.1";
     private static final String BASE_PACKAGE = "io.moov.sdk";
     public static final String USER_AGENT = 
             String.format("speakeasy-sdk/%s %s %s %s %s",
@@ -114,5 +115,16 @@ public class SDKConfiguration {
     public void setRetryConfig(Optional<RetryConfig> retryConfig) {
         Utils.checkNotNull(retryConfig, "retryConfig");
         this.retryConfig = retryConfig;
+    }
+
+    private Optional<Duration> timeout = Optional.empty();
+
+    public Optional<Duration> timeout() {
+        return timeout;
+    }
+
+    public void setTimeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
     }
 }

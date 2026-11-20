@@ -8,9 +8,11 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.SearchInstitutions;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class SearchInstitutionsRequestBuilder {
@@ -18,6 +20,7 @@ public class SearchInstitutionsRequestBuilder {
     private Optional<String> name = Optional.empty();
     private Optional<String> routingNumber = Optional.empty();
     private Optional<Long> limit = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -60,6 +63,18 @@ public class SearchInstitutionsRequestBuilder {
         this.limit = limit;
         return this;
     }
+                
+    public SearchInstitutionsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public SearchInstitutionsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private SearchInstitutionsRequest buildRequest() {
@@ -72,9 +87,12 @@ public class SearchInstitutionsRequestBuilder {
     }
 
     public SearchInstitutionsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<SearchInstitutionsRequest, SearchInstitutionsResponse> operation
-              = new SearchInstitutions.Sync(sdkConfiguration, _headers);
+              = new SearchInstitutions.Sync(sdkConfiguration, options, _headers);
         SearchInstitutionsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

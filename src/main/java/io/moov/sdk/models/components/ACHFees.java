@@ -5,10 +5,14 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.Optional;
 
 /**
  * ACHFees
@@ -59,6 +63,13 @@ public class ACHFees {
     private BillingCountAndAmount bankAccountVerification;
 
     /**
+     * Fees for bank account risk verifications.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("bankAccountRiskVerification")
+    private Optional<? extends BillingCountAndAmount> bankAccountRiskVerification;
+
+    /**
      * Total ACH fees.
      */
     @JsonProperty("total")
@@ -73,6 +84,7 @@ public class ACHFees {
             @JsonProperty("unauthorizedReturn") BillingCountAndAmount unauthorizedReturn,
             @JsonProperty("noticeOfChange") BillingCountAndAmount noticeOfChange,
             @JsonProperty("bankAccountVerification") BillingCountAndAmount bankAccountVerification,
+            @JsonProperty("bankAccountRiskVerification") Optional<? extends BillingCountAndAmount> bankAccountRiskVerification,
             @JsonProperty("total") BillingCountAndAmount total) {
         Utils.checkNotNull(standardCredit, "standardCredit");
         Utils.checkNotNull(sameDayCredit, "sameDayCredit");
@@ -81,6 +93,7 @@ public class ACHFees {
         Utils.checkNotNull(unauthorizedReturn, "unauthorizedReturn");
         Utils.checkNotNull(noticeOfChange, "noticeOfChange");
         Utils.checkNotNull(bankAccountVerification, "bankAccountVerification");
+        Utils.checkNotNull(bankAccountRiskVerification, "bankAccountRiskVerification");
         Utils.checkNotNull(total, "total");
         this.standardCredit = standardCredit;
         this.sameDayCredit = sameDayCredit;
@@ -89,7 +102,22 @@ public class ACHFees {
         this.unauthorizedReturn = unauthorizedReturn;
         this.noticeOfChange = noticeOfChange;
         this.bankAccountVerification = bankAccountVerification;
+        this.bankAccountRiskVerification = bankAccountRiskVerification;
         this.total = total;
+    }
+    
+    public ACHFees(
+            BillingCountAndAmount standardCredit,
+            BillingCountAndAmount sameDayCredit,
+            BillingCountAndAmount debits,
+            BillingCountAndAmount return_,
+            BillingCountAndAmount unauthorizedReturn,
+            BillingCountAndAmount noticeOfChange,
+            BillingCountAndAmount bankAccountVerification,
+            BillingCountAndAmount total) {
+        this(standardCredit, sameDayCredit, debits,
+            return_, unauthorizedReturn, noticeOfChange,
+            bankAccountVerification, Optional.empty(), total);
     }
 
     /**
@@ -146,6 +174,15 @@ public class ACHFees {
     @JsonIgnore
     public BillingCountAndAmount bankAccountVerification() {
         return bankAccountVerification;
+    }
+
+    /**
+     * Fees for bank account risk verifications.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<BillingCountAndAmount> bankAccountRiskVerification() {
+        return (Optional<BillingCountAndAmount>) bankAccountRiskVerification;
     }
 
     /**
@@ -225,6 +262,25 @@ public class ACHFees {
     }
 
     /**
+     * Fees for bank account risk verifications.
+     */
+    public ACHFees withBankAccountRiskVerification(BillingCountAndAmount bankAccountRiskVerification) {
+        Utils.checkNotNull(bankAccountRiskVerification, "bankAccountRiskVerification");
+        this.bankAccountRiskVerification = Optional.ofNullable(bankAccountRiskVerification);
+        return this;
+    }
+
+
+    /**
+     * Fees for bank account risk verifications.
+     */
+    public ACHFees withBankAccountRiskVerification(Optional<? extends BillingCountAndAmount> bankAccountRiskVerification) {
+        Utils.checkNotNull(bankAccountRiskVerification, "bankAccountRiskVerification");
+        this.bankAccountRiskVerification = bankAccountRiskVerification;
+        return this;
+    }
+
+    /**
      * Total ACH fees.
      */
     public ACHFees withTotal(BillingCountAndAmount total) {
@@ -250,6 +306,7 @@ public class ACHFees {
             Utils.enhancedDeepEquals(this.unauthorizedReturn, other.unauthorizedReturn) &&
             Utils.enhancedDeepEquals(this.noticeOfChange, other.noticeOfChange) &&
             Utils.enhancedDeepEquals(this.bankAccountVerification, other.bankAccountVerification) &&
+            Utils.enhancedDeepEquals(this.bankAccountRiskVerification, other.bankAccountRiskVerification) &&
             Utils.enhancedDeepEquals(this.total, other.total);
     }
     
@@ -258,7 +315,7 @@ public class ACHFees {
         return Utils.enhancedHash(
             standardCredit, sameDayCredit, debits,
             return_, unauthorizedReturn, noticeOfChange,
-            bankAccountVerification, total);
+            bankAccountVerification, bankAccountRiskVerification, total);
     }
     
     @Override
@@ -271,6 +328,7 @@ public class ACHFees {
                 "unauthorizedReturn", unauthorizedReturn,
                 "noticeOfChange", noticeOfChange,
                 "bankAccountVerification", bankAccountVerification,
+                "bankAccountRiskVerification", bankAccountRiskVerification,
                 "total", total);
     }
 
@@ -290,6 +348,8 @@ public class ACHFees {
         private BillingCountAndAmount noticeOfChange;
 
         private BillingCountAndAmount bankAccountVerification;
+
+        private Optional<? extends BillingCountAndAmount> bankAccountRiskVerification = Optional.empty();
 
         private BillingCountAndAmount total;
 
@@ -369,6 +429,25 @@ public class ACHFees {
 
 
         /**
+         * Fees for bank account risk verifications.
+         */
+        public Builder bankAccountRiskVerification(BillingCountAndAmount bankAccountRiskVerification) {
+            Utils.checkNotNull(bankAccountRiskVerification, "bankAccountRiskVerification");
+            this.bankAccountRiskVerification = Optional.ofNullable(bankAccountRiskVerification);
+            return this;
+        }
+
+        /**
+         * Fees for bank account risk verifications.
+         */
+        public Builder bankAccountRiskVerification(Optional<? extends BillingCountAndAmount> bankAccountRiskVerification) {
+            Utils.checkNotNull(bankAccountRiskVerification, "bankAccountRiskVerification");
+            this.bankAccountRiskVerification = bankAccountRiskVerification;
+            return this;
+        }
+
+
+        /**
          * Total ACH fees.
          */
         public Builder total(BillingCountAndAmount total) {
@@ -382,7 +461,7 @@ public class ACHFees {
             return new ACHFees(
                 standardCredit, sameDayCredit, debits,
                 return_, unauthorizedReturn, noticeOfChange,
-                bankAccountVerification, total);
+                bankAccountVerification, bankAccountRiskVerification, total);
         }
 
     }

@@ -21,6 +21,7 @@ import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
 import io.moov.sdk.utils.Hook.AfterSuccessContextImpl;
 import io.moov.sdk.utils.Hook.BeforeRequestContextImpl;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.SerializedBody;
 import io.moov.sdk.utils.Utils.JsonShape;
 import io.moov.sdk.utils.Utils;
@@ -31,6 +32,8 @@ import java.lang.Object;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -40,14 +43,20 @@ public class UpdateSweepConfig {
         final SDKConfiguration sdkConfiguration;
         final String baseUrl;
         final SecuritySource securitySource;
+        final Optional<Duration> timeout;
         final HTTPClient client;
         final Headers _headers;
 
-        public Base(SDKConfiguration sdkConfiguration, Headers _headers) {
+        public Base(
+                SDKConfiguration sdkConfiguration, Optional<Options> options,
+                Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
             this._headers =_headers;
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.securitySource = this.sdkConfiguration.securitySource();
+            options
+                    .ifPresent(o -> o.validate(List.of(Options.Option.TIMEOUT)));
+            this.timeout = options.flatMap(Options::timeout).or(sdkConfiguration::timeout);
             this.client = this.sdkConfiguration.client();
         }
 
@@ -87,7 +96,8 @@ public class UpdateSweepConfig {
                     this.baseUrl,
                     "/accounts/{accountID}/sweep-configs/{sweepConfigID}",
                     request, null);
-            HTTPRequest req = new HTTPRequest(url, "PATCH");
+            HTTPRequest req = new HTTPRequest(url, "PATCH")
+                    .timeout(this.timeout);
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
@@ -113,7 +123,16 @@ public class UpdateSweepConfig {
     public static class Sync extends Base
             implements RequestOperation<UpdateSweepConfigRequest, UpdateSweepConfigResponse> {
         public Sync(SDKConfiguration sdkConfiguration, Headers _headers) {
-            super(sdkConfiguration, _headers);
+            this(sdkConfiguration, Optional.empty(),
+                    _headers);
+        }
+
+        public Sync(
+                SDKConfiguration sdkConfiguration, Optional<Options> options,
+                Headers _headers) {
+            super(
+                  sdkConfiguration, options,
+                  _headers);
         }
 
         private HttpRequest onBuildRequest(UpdateSweepConfigRequest request) throws Exception {

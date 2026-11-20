@@ -8,9 +8,11 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListImageMetadata;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class ListImageMetadataRequestBuilder {
@@ -18,6 +20,7 @@ public class ListImageMetadataRequestBuilder {
     private String accountID;
     private Optional<Long> skip = Optional.empty();
     private Optional<Long> count = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -54,6 +57,18 @@ public class ListImageMetadataRequestBuilder {
         this.count = count;
         return this;
     }
+                
+    public ListImageMetadataRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public ListImageMetadataRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private ListImageMetadataRequest buildRequest() {
@@ -66,9 +81,12 @@ public class ListImageMetadataRequestBuilder {
     }
 
     public ListImageMetadataResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<ListImageMetadataRequest, ListImageMetadataResponse> operation
-              = new ListImageMetadata.Sync(sdkConfiguration, _headers);
+              = new ListImageMetadata.Sync(sdkConfiguration, options, _headers);
         ListImageMetadataRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

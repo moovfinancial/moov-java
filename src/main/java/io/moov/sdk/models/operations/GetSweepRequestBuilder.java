@@ -8,14 +8,18 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetSweep;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetSweepRequestBuilder {
 
     private String accountID;
     private String walletID;
     private String sweepID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -40,6 +44,18 @@ public class GetSweepRequestBuilder {
         this.sweepID = sweepID;
         return this;
     }
+                
+    public GetSweepRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetSweepRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetSweepRequest buildRequest() {
@@ -52,9 +68,12 @@ public class GetSweepRequestBuilder {
     }
 
     public GetSweepResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetSweepRequest, GetSweepResponse> operation
-              = new GetSweep.Sync(sdkConfiguration, _headers);
+              = new GetSweep.Sync(sdkConfiguration, options, _headers);
         GetSweepRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

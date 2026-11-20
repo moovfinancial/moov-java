@@ -22,7 +22,9 @@ import io.moov.sdk.operations.GetAccountTerminalApplication;
 import io.moov.sdk.operations.GetTerminalConfiguration;
 import io.moov.sdk.operations.ListAccountTerminalApplications;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class AccountTerminalApplications {
@@ -59,6 +61,25 @@ public class AccountTerminalApplications {
      * @throws RuntimeException subclass if the API call fails
      */
     public LinkAccountTerminalApplicationResponse link(String accountID, LinkAccountTerminalApplication linkAccountTerminalApplication) {
+        return link(accountID, linkAccountTerminalApplication, Optional.empty());
+    }
+
+    /**
+     * Link an account with a terminal application.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/terminal-applications.write` scope.
+     * 
+     * @param accountID 
+     * @param linkAccountTerminalApplication Describes a request to link an account with a terminal application.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public LinkAccountTerminalApplicationResponse link(
+            String accountID, LinkAccountTerminalApplication linkAccountTerminalApplication,
+            Optional<Options> options) {
         LinkAccountTerminalApplicationRequest request =
             LinkAccountTerminalApplicationRequest
                 .builder()
@@ -66,7 +87,7 @@ public class AccountTerminalApplications {
                 .linkAccountTerminalApplication(linkAccountTerminalApplication)
                 .build();
         RequestOperation<LinkAccountTerminalApplicationRequest, LinkAccountTerminalApplicationResponse> operation
-              = new io.moov.sdk.operations.LinkAccountTerminalApplication.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.LinkAccountTerminalApplication.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -95,13 +116,29 @@ public class AccountTerminalApplications {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListAccountTerminalApplicationsResponse list(String accountID) {
+        return list(accountID, Optional.empty());
+    }
+
+    /**
+     * Retrieve all terminal applications linked to a specific account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
+     * 
+     * @param accountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListAccountTerminalApplicationsResponse list(String accountID, Optional<Options> options) {
         ListAccountTerminalApplicationsRequest request =
             ListAccountTerminalApplicationsRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<ListAccountTerminalApplicationsRequest, ListAccountTerminalApplicationsResponse> operation
-              = new ListAccountTerminalApplications.Sync(sdkConfiguration, _headers);
+              = new ListAccountTerminalApplications.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -133,6 +170,26 @@ public class AccountTerminalApplications {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetAccountTerminalApplicationResponse get(String accountID, String terminalApplicationID) {
+        return get(accountID, terminalApplicationID, Optional.empty());
+    }
+
+    /**
+     * Verifies if a specific Terminal Application is linked to an Account. This endpoint acts as a
+     * validation check for the link's existence.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
+     * 
+     * @param accountID 
+     * @param terminalApplicationID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetAccountTerminalApplicationResponse get(
+            String accountID, String terminalApplicationID,
+            Optional<Options> options) {
         GetAccountTerminalApplicationRequest request =
             GetAccountTerminalApplicationRequest
                 .builder()
@@ -140,7 +197,7 @@ public class AccountTerminalApplications {
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         RequestOperation<GetAccountTerminalApplicationRequest, GetAccountTerminalApplicationResponse> operation
-              = new GetAccountTerminalApplication.Sync(sdkConfiguration, _headers);
+              = new GetAccountTerminalApplication.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -170,6 +227,25 @@ public class AccountTerminalApplications {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetTerminalConfigurationResponse getConfiguration(String accountID, String terminalApplicationID) {
+        return getConfiguration(accountID, terminalApplicationID, Optional.empty());
+    }
+
+    /**
+     * Fetch the configuration for a given Terminal Application linked to a specific Account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
+     * 
+     * @param accountID 
+     * @param terminalApplicationID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetTerminalConfigurationResponse getConfiguration(
+            String accountID, String terminalApplicationID,
+            Optional<Options> options) {
         GetTerminalConfigurationRequest request =
             GetTerminalConfigurationRequest
                 .builder()
@@ -177,7 +253,7 @@ public class AccountTerminalApplications {
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         RequestOperation<GetTerminalConfigurationRequest, GetTerminalConfigurationResponse> operation
-              = new GetTerminalConfiguration.Sync(sdkConfiguration, _headers);
+              = new GetTerminalConfiguration.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetPaymentMethod;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetPaymentMethodRequestBuilder {
 
     private String accountID;
     private String paymentMethodID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class GetPaymentMethodRequestBuilder {
         this.paymentMethodID = paymentMethodID;
         return this;
     }
+                
+    public GetPaymentMethodRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetPaymentMethodRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetPaymentMethodRequest buildRequest() {
@@ -44,9 +60,12 @@ public class GetPaymentMethodRequestBuilder {
     }
 
     public GetPaymentMethodResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetPaymentMethodRequest, GetPaymentMethodResponse> operation
-              = new GetPaymentMethod.Sync(sdkConfiguration, _headers);
+              = new GetPaymentMethod.Sync(sdkConfiguration, options, _headers);
         GetPaymentMethodRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

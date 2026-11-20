@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetDispute;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetDisputeRequestBuilder {
 
     private String accountID;
     private String disputeID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class GetDisputeRequestBuilder {
         this.disputeID = disputeID;
         return this;
     }
+                
+    public GetDisputeRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetDisputeRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetDisputeRequest buildRequest() {
@@ -44,9 +60,12 @@ public class GetDisputeRequestBuilder {
     }
 
     public GetDisputeResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetDisputeRequest, GetDisputeResponse> operation
-              = new GetDispute.Sync(sdkConfiguration, _headers);
+              = new GetDispute.Sync(sdkConfiguration, options, _headers);
         GetDisputeRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

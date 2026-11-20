@@ -8,20 +8,40 @@ import static io.moov.sdk.operations.Operations.RequestlessOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GenerateEndToEndKey;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
+import io.moov.sdk.utils.Utils;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GenerateEndToEndKeyRequestBuilder {
 
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
     public GenerateEndToEndKeyRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+                
+    public GenerateEndToEndKeyRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GenerateEndToEndKeyRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
     public GenerateEndToEndKeyResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestlessOperation<GenerateEndToEndKeyResponse> operation
-            = new GenerateEndToEndKey.Sync(sdkConfiguration, _headers);
+            = new GenerateEndToEndKey.Sync(sdkConfiguration, options, _headers);
 
         return operation.handleResponse(operation.doRequest());
     }

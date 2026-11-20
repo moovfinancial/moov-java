@@ -8,12 +8,16 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.DisconnectAccount;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class DisconnectAccountRequestBuilder {
 
     private String accountID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -26,6 +30,18 @@ public class DisconnectAccountRequestBuilder {
         this.accountID = accountID;
         return this;
     }
+                
+    public DisconnectAccountRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DisconnectAccountRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DisconnectAccountRequest buildRequest() {
@@ -36,9 +52,12 @@ public class DisconnectAccountRequestBuilder {
     }
 
     public DisconnectAccountResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DisconnectAccountRequest, DisconnectAccountResponse> operation
-              = new DisconnectAccount.Sync(sdkConfiguration, _headers);
+              = new DisconnectAccount.Sync(sdkConfiguration, options, _headers);
         DisconnectAccountRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

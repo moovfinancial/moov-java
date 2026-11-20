@@ -8,14 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetTermsOfServiceToken;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class GetTermsOfServiceTokenRequestBuilder {
 
     private Optional<String> origin = Optional.empty();
     private Optional<String> referer = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -46,6 +49,18 @@ public class GetTermsOfServiceTokenRequestBuilder {
         this.referer = referer;
         return this;
     }
+                
+    public GetTermsOfServiceTokenRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetTermsOfServiceTokenRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetTermsOfServiceTokenRequest buildRequest() {
@@ -57,9 +72,12 @@ public class GetTermsOfServiceTokenRequestBuilder {
     }
 
     public GetTermsOfServiceTokenResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetTermsOfServiceTokenRequest, GetTermsOfServiceTokenResponse> operation
-              = new GetTermsOfServiceToken.Sync(sdkConfiguration, _headers);
+              = new GetTermsOfServiceToken.Sync(sdkConfiguration, options, _headers);
         GetTermsOfServiceTokenRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

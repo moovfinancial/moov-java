@@ -9,14 +9,18 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.PatchWallet;
 import io.moov.sdk.operations.UpdateWallet;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class UpdateWalletRequestBuilder {
 
     private String walletID;
     private String accountID;
     private PatchWallet patchWallet;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -41,6 +45,18 @@ public class UpdateWalletRequestBuilder {
         this.patchWallet = patchWallet;
         return this;
     }
+                
+    public UpdateWalletRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public UpdateWalletRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private UpdateWalletRequest buildRequest() {
@@ -53,9 +69,12 @@ public class UpdateWalletRequestBuilder {
     }
 
     public UpdateWalletResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<UpdateWalletRequest, UpdateWalletResponse> operation
-              = new UpdateWallet.Sync(sdkConfiguration, _headers);
+              = new UpdateWallet.Sync(sdkConfiguration, options, _headers);
         UpdateWalletRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetFileDetails;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetFileDetailsRequestBuilder {
 
     private String accountID;
     private String fileID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class GetFileDetailsRequestBuilder {
         this.fileID = fileID;
         return this;
     }
+                
+    public GetFileDetailsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetFileDetailsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetFileDetailsRequest buildRequest() {
@@ -44,9 +60,12 @@ public class GetFileDetailsRequestBuilder {
     }
 
     public GetFileDetailsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetFileDetailsRequest, GetFileDetailsResponse> operation
-              = new GetFileDetails.Sync(sdkConfiguration, _headers);
+              = new GetFileDetails.Sync(sdkConfiguration, options, _headers);
         GetFileDetailsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

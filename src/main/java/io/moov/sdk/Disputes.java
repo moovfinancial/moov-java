@@ -53,7 +53,9 @@ import io.moov.sdk.operations.UpdateDisputeEvidence;
 import io.moov.sdk.operations.UploadDisputeEvidenceFile;
 import io.moov.sdk.operations.UploadDisputeEvidenceText;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class Disputes {
@@ -97,8 +99,28 @@ public class Disputes {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListDisputesResponse list(ListDisputesRequest request) {
+        return list(request, Optional.empty());
+    }
+
+    /**
+     * Returns the list of disputes.
+     * 
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListDisputesResponse list(ListDisputesRequest request, Optional<Options> options) {
         RequestOperation<ListDisputesRequest, ListDisputesResponse> operation
-              = new ListDisputes.Sync(sdkConfiguration, _headers);
+              = new ListDisputes.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -136,6 +158,29 @@ public class Disputes {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetDisputeResponse get(String accountID, String disputeID) {
+        return get(accountID, disputeID, Optional.empty());
+    }
+
+    /**
+     * Get a dispute by ID.
+     * 
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID 
+     * @param disputeID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetDisputeResponse get(
+            String accountID, String disputeID,
+            Optional<Options> options) {
         GetDisputeRequest request =
             GetDisputeRequest
                 .builder()
@@ -143,7 +188,7 @@ public class Disputes {
                 .disputeID(disputeID)
                 .build();
         RequestOperation<GetDisputeRequest, GetDisputeResponse> operation
-              = new GetDispute.Sync(sdkConfiguration, _headers);
+              = new GetDispute.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -181,6 +226,29 @@ public class Disputes {
      * @throws RuntimeException subclass if the API call fails
      */
     public AcceptDisputeResponse accept(String accountID, String disputeID) {
+        return accept(accountID, disputeID, Optional.empty());
+    }
+
+    /**
+     * Accepts liability for a dispute.
+     * 
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID 
+     * @param disputeID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public AcceptDisputeResponse accept(
+            String accountID, String disputeID,
+            Optional<Options> options) {
         AcceptDisputeRequest request =
             AcceptDisputeRequest
                 .builder()
@@ -188,7 +256,7 @@ public class Disputes {
                 .disputeID(disputeID)
                 .build();
         RequestOperation<AcceptDisputeRequest, AcceptDisputeResponse> operation
-              = new AcceptDispute.Sync(sdkConfiguration, _headers);
+              = new AcceptDispute.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -226,6 +294,29 @@ public class Disputes {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListDisputeEvidenceResponse listEvidence(String accountID, String disputeID) {
+        return listEvidence(accountID, disputeID, Optional.empty());
+    }
+
+    /**
+     * Returns a dispute's public evidence by its ID.
+     * 
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID 
+     * @param disputeID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListDisputeEvidenceResponse listEvidence(
+            String accountID, String disputeID,
+            Optional<Options> options) {
         ListDisputeEvidenceRequest request =
             ListDisputeEvidenceRequest
                 .builder()
@@ -233,7 +324,7 @@ public class Disputes {
                 .disputeID(disputeID)
                 .build();
         RequestOperation<ListDisputeEvidenceRequest, ListDisputeEvidenceResponse> operation
-              = new ListDisputeEvidence.Sync(sdkConfiguration, _headers);
+              = new ListDisputeEvidence.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -274,6 +365,31 @@ public class Disputes {
     public UploadDisputeEvidenceFileResponse uploadEvidenceFile(
             String accountID, String disputeID,
             CreateEvidenceFileMultiPart createEvidenceFileMultiPart) {
+        return uploadEvidenceFile(accountID, disputeID, createEvidenceFileMultiPart,
+            Optional.empty());
+    }
+
+    /**
+     * Uploads a file as evidence for a dispute.
+     * 
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param accountID 
+     * @param disputeID 
+     * @param createEvidenceFileMultiPart 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UploadDisputeEvidenceFileResponse uploadEvidenceFile(
+            String accountID, String disputeID,
+            CreateEvidenceFileMultiPart createEvidenceFileMultiPart, Optional<Options> options) {
         UploadDisputeEvidenceFileRequest request =
             UploadDisputeEvidenceFileRequest
                 .builder()
@@ -282,7 +398,7 @@ public class Disputes {
                 .createEvidenceFileMultiPart(createEvidenceFileMultiPart)
                 .build();
         RequestOperation<UploadDisputeEvidenceFileRequest, UploadDisputeEvidenceFileResponse> operation
-              = new UploadDisputeEvidenceFile.Sync(sdkConfiguration, _headers);
+              = new UploadDisputeEvidenceFile.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -323,6 +439,31 @@ public class Disputes {
     public UploadDisputeEvidenceTextResponse uploadEvidenceText(
             String accountID, String disputeID,
             CreateEvidenceText createEvidenceText) {
+        return uploadEvidenceText(accountID, disputeID, createEvidenceText,
+            Optional.empty());
+    }
+
+    /**
+     * Uploads text as evidence for a dispute.
+     * 
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param accountID 
+     * @param disputeID 
+     * @param createEvidenceText 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UploadDisputeEvidenceTextResponse uploadEvidenceText(
+            String accountID, String disputeID,
+            CreateEvidenceText createEvidenceText, Optional<Options> options) {
         UploadDisputeEvidenceTextRequest request =
             UploadDisputeEvidenceTextRequest
                 .builder()
@@ -331,7 +472,7 @@ public class Disputes {
                 .createEvidenceText(createEvidenceText)
                 .build();
         RequestOperation<UploadDisputeEvidenceTextRequest, UploadDisputeEvidenceTextResponse> operation
-              = new UploadDisputeEvidenceText.Sync(sdkConfiguration, _headers);
+              = new UploadDisputeEvidenceText.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -377,6 +518,33 @@ public class Disputes {
      * @throws RuntimeException subclass if the API call fails
      */
     public SubmitDisputeEvidenceResponse submitEvidence(String accountID, String disputeID) {
+        return submitEvidence(accountID, disputeID, Optional.empty());
+    }
+
+    /**
+     * Submit the evidence associated with a dispute.
+     * 
+     * <p>Evidence items must be uploaded using the appropriate endpoint(s) prior to calling this endpoint to
+     * submit it. **Evidence can only
+     * be submitted once per dispute.**
+     * 
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param accountID 
+     * @param disputeID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public SubmitDisputeEvidenceResponse submitEvidence(
+            String accountID, String disputeID,
+            Optional<Options> options) {
         SubmitDisputeEvidenceRequest request =
             SubmitDisputeEvidenceRequest
                 .builder()
@@ -384,7 +552,7 @@ public class Disputes {
                 .disputeID(disputeID)
                 .build();
         RequestOperation<SubmitDisputeEvidenceRequest, SubmitDisputeEvidenceResponse> operation
-              = new SubmitDisputeEvidence.Sync(sdkConfiguration, _headers);
+              = new SubmitDisputeEvidence.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -425,6 +593,31 @@ public class Disputes {
     public GetDisputeEvidenceResponse getEvidence(
             String accountID, String disputeID,
             String evidenceID) {
+        return getEvidence(accountID, disputeID, evidenceID,
+            Optional.empty());
+    }
+
+    /**
+     * Get dispute evidence by ID.
+     * 
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID 
+     * @param disputeID 
+     * @param evidenceID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetDisputeEvidenceResponse getEvidence(
+            String accountID, String disputeID,
+            String evidenceID, Optional<Options> options) {
         GetDisputeEvidenceRequest request =
             GetDisputeEvidenceRequest
                 .builder()
@@ -433,7 +626,7 @@ public class Disputes {
                 .evidenceID(evidenceID)
                 .build();
         RequestOperation<GetDisputeEvidenceRequest, GetDisputeEvidenceResponse> operation
-              = new GetDisputeEvidence.Sync(sdkConfiguration, _headers);
+              = new GetDisputeEvidence.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -475,6 +668,33 @@ public class Disputes {
     public UpdateDisputeEvidenceResponse updateEvidence(
             String accountID, String disputeID,
             String evidenceID, UpdateEvidence updateEvidence) {
+        return updateEvidence(accountID, disputeID, evidenceID,
+            updateEvidence, Optional.empty());
+    }
+
+    /**
+     * Updates dispute evidence by ID.
+     * 
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param accountID 
+     * @param disputeID 
+     * @param evidenceID 
+     * @param updateEvidence 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateDisputeEvidenceResponse updateEvidence(
+            String accountID, String disputeID,
+            String evidenceID, UpdateEvidence updateEvidence,
+            Optional<Options> options) {
         UpdateDisputeEvidenceRequest request =
             UpdateDisputeEvidenceRequest
                 .builder()
@@ -484,7 +704,7 @@ public class Disputes {
                 .updateEvidence(updateEvidence)
                 .build();
         RequestOperation<UpdateDisputeEvidenceRequest, UpdateDisputeEvidenceResponse> operation
-              = new UpdateDisputeEvidence.Sync(sdkConfiguration, _headers);
+              = new UpdateDisputeEvidence.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -525,6 +745,31 @@ public class Disputes {
     public DeleteDisputeEvidenceFileResponse deleteEvidence(
             String accountID, String disputeID,
             String evidenceID) {
+        return deleteEvidence(accountID, disputeID, evidenceID,
+            Optional.empty());
+    }
+
+    /**
+     * Deletes dispute evidence by ID.
+     * 
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param accountID 
+     * @param disputeID 
+     * @param evidenceID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DeleteDisputeEvidenceFileResponse deleteEvidence(
+            String accountID, String disputeID,
+            String evidenceID, Optional<Options> options) {
         DeleteDisputeEvidenceFileRequest request =
             DeleteDisputeEvidenceFileRequest
                 .builder()
@@ -533,7 +778,7 @@ public class Disputes {
                 .evidenceID(evidenceID)
                 .build();
         RequestOperation<DeleteDisputeEvidenceFileRequest, DeleteDisputeEvidenceFileResponse> operation
-              = new DeleteDisputeEvidenceFile.Sync(sdkConfiguration, _headers);
+              = new DeleteDisputeEvidenceFile.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -574,6 +819,31 @@ public class Disputes {
     public GetDisputeEvidenceDataResponse getEvidenceData(
             String accountID, String disputeID,
             String evidenceID) {
+        return getEvidenceData(accountID, disputeID, evidenceID,
+            Optional.empty());
+    }
+
+    /**
+     * Downloads dispute evidence data by ID.
+     * 
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID 
+     * @param disputeID 
+     * @param evidenceID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetDisputeEvidenceDataResponse getEvidenceData(
+            String accountID, String disputeID,
+            String evidenceID, Optional<Options> options) {
         GetDisputeEvidenceDataRequest request =
             GetDisputeEvidenceDataRequest
                 .builder()
@@ -582,7 +852,7 @@ public class Disputes {
                 .evidenceID(evidenceID)
                 .build();
         RequestOperation<GetDisputeEvidenceDataRequest, GetDisputeEvidenceDataResponse> operation
-              = new GetDisputeEvidenceData.Sync(sdkConfiguration, _headers);
+              = new GetDisputeEvidenceData.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

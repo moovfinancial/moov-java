@@ -9,13 +9,17 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CapabilityID;
 import io.moov.sdk.operations.GetCapability;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetCapabilityRequestBuilder {
 
     private String accountID;
     private CapabilityID capabilityID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -34,6 +38,18 @@ public class GetCapabilityRequestBuilder {
         this.capabilityID = capabilityID;
         return this;
     }
+                
+    public GetCapabilityRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetCapabilityRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetCapabilityRequest buildRequest() {
@@ -45,9 +61,12 @@ public class GetCapabilityRequestBuilder {
     }
 
     public GetCapabilityResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetCapabilityRequest, GetCapabilityResponse> operation
-              = new GetCapability.Sync(sdkConfiguration, _headers);
+              = new GetCapability.Sync(sdkConfiguration, options, _headers);
         GetCapabilityRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

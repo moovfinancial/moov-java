@@ -9,8 +9,10 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.LinkCard;
 import io.moov.sdk.models.components.LinkCardWaitFor;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class LinkCardRequestBuilder {
@@ -18,6 +20,7 @@ public class LinkCardRequestBuilder {
     private Optional<? extends LinkCardWaitFor> xWaitFor = Optional.empty();
     private String accountID;
     private LinkCard linkCard;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -48,6 +51,18 @@ public class LinkCardRequestBuilder {
         this.linkCard = linkCard;
         return this;
     }
+                
+    public LinkCardRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public LinkCardRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private LinkCardRequest buildRequest() {
@@ -60,9 +75,12 @@ public class LinkCardRequestBuilder {
     }
 
     public LinkCardResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<LinkCardRequest, LinkCardResponse> operation
-              = new io.moov.sdk.operations.LinkCard.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.LinkCard.Sync(sdkConfiguration, options, _headers);
         LinkCardRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

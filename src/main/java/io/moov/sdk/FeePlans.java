@@ -47,6 +47,7 @@ import io.moov.sdk.operations.ListResidualFees;
 import io.moov.sdk.operations.ListResiduals;
 import io.moov.sdk.operations.RetrieveFees;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
 import java.util.List;
 import java.util.Optional;
@@ -85,8 +86,24 @@ public class FeePlans {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListFeePlanAgreementsResponse listFeePlanAgreements(ListFeePlanAgreementsRequest request) {
+        return listFeePlanAgreements(request, Optional.empty());
+    }
+
+    /**
+     * List all fee plan agreements associated with an account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListFeePlanAgreementsResponse listFeePlanAgreements(ListFeePlanAgreementsRequest request, Optional<Options> options) {
         RequestOperation<ListFeePlanAgreementsRequest, ListFeePlanAgreementsResponse> operation
-              = new ListFeePlanAgreements.Sync(sdkConfiguration, _headers);
+              = new ListFeePlanAgreements.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -118,6 +135,26 @@ public class FeePlans {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateFeePlanAgreementsResponse createFeePlanAgreements(String accountID, CreateFeePlanAgreement createFeePlanAgreement) {
+        return createFeePlanAgreements(accountID, createFeePlanAgreement, Optional.empty());
+    }
+
+    /**
+     * Creates the subscription of a fee plan to a merchant account. Merchants are required to accept the
+     * fee plan terms prior to activation.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.write` scope.
+     * 
+     * @param accountID 
+     * @param createFeePlanAgreement 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateFeePlanAgreementsResponse createFeePlanAgreements(
+            String accountID, CreateFeePlanAgreement createFeePlanAgreement,
+            Optional<Options> options) {
         CreateFeePlanAgreementsRequest request =
             CreateFeePlanAgreementsRequest
                 .builder()
@@ -125,7 +162,7 @@ public class FeePlans {
                 .createFeePlanAgreement(createFeePlanAgreement)
                 .build();
         RequestOperation<CreateFeePlanAgreementsRequest, CreateFeePlanAgreementsResponse> operation
-              = new CreateFeePlanAgreements.Sync(sdkConfiguration, _headers);
+              = new CreateFeePlanAgreements.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -156,7 +193,7 @@ public class FeePlans {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListFeePlansResponse listFeePlans(String accountID) {
-        return listFeePlans(accountID, Optional.empty());
+        return listFeePlans(accountID, Optional.empty(), Optional.empty());
     }
 
     /**
@@ -173,6 +210,26 @@ public class FeePlans {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListFeePlansResponse listFeePlans(String accountID, Optional<? extends List<String>> planIDs) {
+        return listFeePlans(accountID, planIDs, Optional.empty());
+    }
+
+    /**
+     * List all fee plans available for use by an account. This is intended to be used by an account when
+     * selecting a fee plan to apply to a connected account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param accountID 
+     * @param planIDs A comma-separated list of plan IDs to filter the results by.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListFeePlansResponse listFeePlans(
+            String accountID, Optional<? extends List<String>> planIDs,
+            Optional<Options> options) {
         ListFeePlansRequest request =
             ListFeePlansRequest
                 .builder()
@@ -180,7 +237,7 @@ public class FeePlans {
                 .planIDs(planIDs)
                 .build();
         RequestOperation<ListFeePlansRequest, ListFeePlansResponse> operation
-              = new ListFeePlans.Sync(sdkConfiguration, _headers);
+              = new ListFeePlans.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -209,8 +266,24 @@ public class FeePlans {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListFeeRevenueResponse listFeeRevenue(ListFeeRevenueRequest request) {
+        return listFeeRevenue(request, Optional.empty());
+    }
+
+    /**
+     * Used by a partner. Retrieve revenue generated from merchant fees.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListFeeRevenueResponse listFeeRevenue(ListFeeRevenueRequest request, Optional<Options> options) {
         RequestOperation<ListFeeRevenueRequest, ListFeeRevenueResponse> operation
-              = new ListFeeRevenue.Sync(sdkConfiguration, _headers);
+              = new ListFeeRevenue.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -239,8 +312,24 @@ public class FeePlans {
      * @throws RuntimeException subclass if the API call fails
      */
     public RetrieveFeesResponse retrieveFees(RetrieveFeesRequest request) {
+        return retrieveFees(request, Optional.empty());
+    }
+
+    /**
+     * Retrieve fees assessed to an account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public RetrieveFeesResponse retrieveFees(RetrieveFeesRequest request, Optional<Options> options) {
         RequestOperation<RetrieveFeesRequest, RetrieveFeesResponse> operation
-              = new RetrieveFees.Sync(sdkConfiguration, _headers);
+              = new RetrieveFees.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -269,7 +358,7 @@ public class FeePlans {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListFeesFetchResponse listFeesFetch(String accountID) {
-        return listFeesFetch(accountID, Optional.empty());
+        return listFeesFetch(accountID, Optional.empty(), Optional.empty());
     }
 
     /**
@@ -285,6 +374,25 @@ public class FeePlans {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListFeesFetchResponse listFeesFetch(String accountID, Optional<? extends ListFeesFetchRequest> listFeesFetchRequest) {
+        return listFeesFetch(accountID, listFeesFetchRequest, Optional.empty());
+    }
+
+    /**
+     * List fees associated with an account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID 
+     * @param listFeesFetchRequest Array of fee IDs to fetch.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListFeesFetchResponse listFeesFetch(
+            String accountID, Optional<? extends ListFeesFetchRequest> listFeesFetchRequest,
+            Optional<Options> options) {
         io.moov.sdk.models.operations.ListFeesFetchRequest request =
             io.moov.sdk.models.operations.ListFeesFetchRequest
                 .builder()
@@ -292,7 +400,7 @@ public class FeePlans {
                 .listFeesFetchRequest(listFeesFetchRequest)
                 .build();
         RequestOperation<io.moov.sdk.models.operations.ListFeesFetchRequest, ListFeesFetchResponse> operation
-              = new ListFeesFetch.Sync(sdkConfiguration, _headers);
+              = new ListFeesFetch.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -321,8 +429,24 @@ public class FeePlans {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListPartnerPricingAgreementsResponse listPartnerPricingAgreements(ListPartnerPricingAgreementsRequest request) {
+        return listPartnerPricingAgreements(request, Optional.empty());
+    }
+
+    /**
+     * List all partner pricing agreements associated with an account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListPartnerPricingAgreementsResponse listPartnerPricingAgreements(ListPartnerPricingAgreementsRequest request, Optional<Options> options) {
         RequestOperation<ListPartnerPricingAgreementsRequest, ListPartnerPricingAgreementsResponse> operation
-              = new ListPartnerPricingAgreements.Sync(sdkConfiguration, _headers);
+              = new ListPartnerPricingAgreements.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -351,8 +475,24 @@ public class FeePlans {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListResidualsResponse listResiduals(ListResidualsRequest request) {
+        return listResiduals(request, Optional.empty());
+    }
+
+    /**
+     * List all residuals associated with an account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListResidualsResponse listResiduals(ListResidualsRequest request, Optional<Options> options) {
         RequestOperation<ListResidualsRequest, ListResidualsResponse> operation
-              = new ListResiduals.Sync(sdkConfiguration, _headers);
+              = new ListResiduals.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -382,6 +522,25 @@ public class FeePlans {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetResidualResponse getResidual(String accountID, String residualID) {
+        return getResidual(accountID, residualID, Optional.empty());
+    }
+
+    /**
+     * Get a residual associated with an account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param accountID 
+     * @param residualID Unique identifier for this residual payment calculation.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetResidualResponse getResidual(
+            String accountID, String residualID,
+            Optional<Options> options) {
         GetResidualRequest request =
             GetResidualRequest
                 .builder()
@@ -389,7 +548,7 @@ public class FeePlans {
                 .residualID(residualID)
                 .build();
         RequestOperation<GetResidualRequest, GetResidualResponse> operation
-              = new GetResidual.Sync(sdkConfiguration, _headers);
+              = new GetResidual.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -418,8 +577,24 @@ public class FeePlans {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListResidualFeesResponse listResidualFees(ListResidualFeesRequest request) {
+        return listResidualFees(request, Optional.empty());
+    }
+
+    /**
+     * List all fees associated with a residual.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListResidualFeesResponse listResidualFees(ListResidualFeesRequest request, Optional<Options> options) {
         RequestOperation<ListResidualFeesRequest, ListResidualFeesResponse> operation
-              = new ListResidualFees.Sync(sdkConfiguration, _headers);
+              = new ListResidualFees.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

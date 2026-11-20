@@ -10,7 +10,9 @@ import io.moov.sdk.models.operations.GetAvatarRequestBuilder;
 import io.moov.sdk.models.operations.GetAvatarResponse;
 import io.moov.sdk.operations.GetAvatar;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class Avatars {
@@ -46,13 +48,29 @@ public class Avatars {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetAvatarResponse get(String uniqueID) {
+        return get(uniqueID, Optional.empty());
+    }
+
+    /**
+     * Get avatar image for an account using a unique ID.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/profile-enrichment.read` scope.
+     * 
+     * @param uniqueID Any unique ID associated with an account such as accountID, representativeID, routing number, or userID.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetAvatarResponse get(String uniqueID, Optional<Options> options) {
         GetAvatarRequest request =
             GetAvatarRequest
                 .builder()
                 .uniqueID(uniqueID)
                 .build();
         RequestOperation<GetAvatarRequest, GetAvatarResponse> operation
-              = new GetAvatar.Sync(sdkConfiguration, _headers);
+              = new GetAvatar.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

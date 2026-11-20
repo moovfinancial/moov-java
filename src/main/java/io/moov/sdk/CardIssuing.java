@@ -26,7 +26,9 @@ import io.moov.sdk.operations.GetFullIssuedCard;
 import io.moov.sdk.operations.GetIssuedCard;
 import io.moov.sdk.operations.ListIssuedCards;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class CardIssuing {
@@ -63,6 +65,25 @@ public class CardIssuing {
      * @throws RuntimeException subclass if the API call fails
      */
     public RequestCardResponse request(String accountID, RequestCard requestCard) {
+        return request(accountID, requestCard, Optional.empty());
+    }
+
+    /**
+     * Request a virtual card be issued.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
+     * 
+     * @param accountID The Moov business account for which the card is to be issued.
+     * @param requestCard 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public RequestCardResponse request(
+            String accountID, RequestCard requestCard,
+            Optional<Options> options) {
         RequestCardRequest request =
             RequestCardRequest
                 .builder()
@@ -70,7 +91,7 @@ public class CardIssuing {
                 .requestCard(requestCard)
                 .build();
         RequestOperation<RequestCardRequest, RequestCardResponse> operation
-              = new io.moov.sdk.operations.RequestCard.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.RequestCard.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -99,8 +120,24 @@ public class CardIssuing {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListIssuedCardsResponse list(ListIssuedCardsRequest request) {
+        return list(request, Optional.empty());
+    }
+
+    /**
+     * List Moov issued cards existing for the account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListIssuedCardsResponse list(ListIssuedCardsRequest request, Optional<Options> options) {
         RequestOperation<ListIssuedCardsRequest, ListIssuedCardsResponse> operation
-              = new ListIssuedCards.Sync(sdkConfiguration, _headers);
+              = new ListIssuedCards.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -130,6 +167,25 @@ public class CardIssuing {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetIssuedCardResponse get(String accountID, String issuedCardID) {
+        return get(accountID, issuedCardID, Optional.empty());
+    }
+
+    /**
+     * Retrieve a single issued card associated with a Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
+     * @param accountID The Moov business account for which the card was issued.
+     * @param issuedCardID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetIssuedCardResponse get(
+            String accountID, String issuedCardID,
+            Optional<Options> options) {
         GetIssuedCardRequest request =
             GetIssuedCardRequest
                 .builder()
@@ -137,7 +193,7 @@ public class CardIssuing {
                 .issuedCardID(issuedCardID)
                 .build();
         RequestOperation<GetIssuedCardRequest, GetIssuedCardResponse> operation
-              = new GetIssuedCard.Sync(sdkConfiguration, _headers);
+              = new GetIssuedCard.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -170,6 +226,27 @@ public class CardIssuing {
     public UpdateIssuedCardResponse update(
             String accountID, String issuedCardID,
             UpdateIssuedCard updateIssuedCard) {
+        return update(accountID, issuedCardID, updateIssuedCard,
+            Optional.empty());
+    }
+
+    /**
+     * Update a Moov issued card.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
+     * 
+     * @param accountID The Moov business account for which the card was issued.
+     * @param issuedCardID 
+     * @param updateIssuedCard 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateIssuedCardResponse update(
+            String accountID, String issuedCardID,
+            UpdateIssuedCard updateIssuedCard, Optional<Options> options) {
         UpdateIssuedCardRequest request =
             UpdateIssuedCardRequest
                 .builder()
@@ -178,7 +255,7 @@ public class CardIssuing {
                 .updateIssuedCard(updateIssuedCard)
                 .build();
         RequestOperation<UpdateIssuedCardRequest, UpdateIssuedCardResponse> operation
-              = new io.moov.sdk.operations.UpdateIssuedCard.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.UpdateIssuedCard.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -212,6 +289,27 @@ public class CardIssuing {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetFullIssuedCardResponse getFull(String accountID, String issuedCardID) {
+        return getFull(accountID, issuedCardID, Optional.empty());
+    }
+
+    /**
+     * Get issued card with PAN, CVV, and expiration.
+     * 
+     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read-private` scope.
+     * 
+     * @param accountID The Moov business account for which the card was issued.
+     * @param issuedCardID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetFullIssuedCardResponse getFull(
+            String accountID, String issuedCardID,
+            Optional<Options> options) {
         GetFullIssuedCardRequest request =
             GetFullIssuedCardRequest
                 .builder()
@@ -219,7 +317,7 @@ public class CardIssuing {
                 .issuedCardID(issuedCardID)
                 .build();
         RequestOperation<GetFullIssuedCardRequest, GetFullIssuedCardResponse> operation
-              = new GetFullIssuedCard.Sync(sdkConfiguration, _headers);
+              = new GetFullIssuedCard.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

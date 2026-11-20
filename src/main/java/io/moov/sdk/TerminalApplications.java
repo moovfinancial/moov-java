@@ -26,7 +26,9 @@ import io.moov.sdk.operations.DeleteTerminalApplication;
 import io.moov.sdk.operations.GetTerminalApplication;
 import io.moov.sdk.operations.ListTerminalApplications;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class TerminalApplications {
@@ -62,8 +64,24 @@ public class TerminalApplications {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateTerminalApplicationResponse create(CreateTerminalApplication request) {
+        return create(request, Optional.empty());
+    }
+
+    /**
+     * Create a new terminal application.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/terminal-applications.write` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateTerminalApplicationResponse create(CreateTerminalApplication request, Optional<Options> options) {
         RequestOperation<CreateTerminalApplication, CreateTerminalApplicationResponse> operation
-              = new io.moov.sdk.operations.CreateTerminalApplication.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateTerminalApplication.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -91,8 +109,23 @@ public class TerminalApplications {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListTerminalApplicationsResponse listDirect() {
+        return list(Optional.empty());
+    }
+
+    /**
+     * List all the terminal applications for a Moov Account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/terminal-applications.read` scope.
+     * 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListTerminalApplicationsResponse list(Optional<Options> options) {
         RequestlessOperation<ListTerminalApplicationsResponse> operation
-            = new ListTerminalApplications.Sync(sdkConfiguration, _headers);
+            = new ListTerminalApplications.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest());
     }
 
@@ -121,13 +154,29 @@ public class TerminalApplications {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetTerminalApplicationResponse get(String terminalApplicationID) {
+        return get(terminalApplicationID, Optional.empty());
+    }
+
+    /**
+     * Fetch a specific terminal application.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/terminal-applications.read` scope.
+     * 
+     * @param terminalApplicationID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetTerminalApplicationResponse get(String terminalApplicationID, Optional<Options> options) {
         GetTerminalApplicationRequest request =
             GetTerminalApplicationRequest
                 .builder()
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         RequestOperation<GetTerminalApplicationRequest, GetTerminalApplicationResponse> operation
-              = new GetTerminalApplication.Sync(sdkConfiguration, _headers);
+              = new GetTerminalApplication.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -156,13 +205,29 @@ public class TerminalApplications {
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteTerminalApplicationResponse delete(String terminalApplicationID) {
+        return delete(terminalApplicationID, Optional.empty());
+    }
+
+    /**
+     * Delete a specific terminal application.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/terminal-applications.write` scope.
+     * 
+     * @param terminalApplicationID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DeleteTerminalApplicationResponse delete(String terminalApplicationID, Optional<Options> options) {
         DeleteTerminalApplicationRequest request =
             DeleteTerminalApplicationRequest
                 .builder()
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         RequestOperation<DeleteTerminalApplicationRequest, DeleteTerminalApplicationResponse> operation
-              = new DeleteTerminalApplication.Sync(sdkConfiguration, _headers);
+              = new DeleteTerminalApplication.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -194,6 +259,26 @@ public class TerminalApplications {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateTerminalApplicationVersionResponse createVersion(String terminalApplicationID, TerminalApplicationVersion terminalApplicationVersion) {
+        return createVersion(terminalApplicationID, terminalApplicationVersion, Optional.empty());
+    }
+
+    /**
+     * Register a new version of a terminal application. For Android applications, this is used to register
+     * a new version code of the application.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/terminal-applications.write` scope.
+     * 
+     * @param terminalApplicationID 
+     * @param terminalApplicationVersion Describes a terminal application version.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateTerminalApplicationVersionResponse createVersion(
+            String terminalApplicationID, TerminalApplicationVersion terminalApplicationVersion,
+            Optional<Options> options) {
         CreateTerminalApplicationVersionRequest request =
             CreateTerminalApplicationVersionRequest
                 .builder()
@@ -201,7 +286,7 @@ public class TerminalApplications {
                 .terminalApplicationVersion(terminalApplicationVersion)
                 .build();
         RequestOperation<CreateTerminalApplicationVersionRequest, CreateTerminalApplicationVersionResponse> operation
-              = new CreateTerminalApplicationVersion.Sync(sdkConfiguration, _headers);
+              = new CreateTerminalApplicationVersion.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

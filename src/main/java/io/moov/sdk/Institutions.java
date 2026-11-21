@@ -14,6 +14,7 @@ import io.moov.sdk.models.operations.SearchInstitutionsResponse;
 import io.moov.sdk.operations.ListInstitutions;
 import io.moov.sdk.operations.SearchInstitutions;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.Deprecated;
 import java.lang.Long;
 import java.lang.String;
@@ -66,7 +67,8 @@ public class Institutions {
      * @throws RuntimeException subclass if the API call fails
      */
     public SearchInstitutionsResponse searchInstitutionsDirect() {
-        return searchInstitutions(Optional.empty(), Optional.empty(), Optional.empty());
+        return searchInstitutions(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -92,6 +94,34 @@ public class Institutions {
     public SearchInstitutionsResponse searchInstitutions(
             Optional<String> name, Optional<String> routingNumber,
             Optional<Long> limit) {
+        return searchInstitutions(name, routingNumber, limit,
+            Optional.empty());
+    }
+
+    /**
+     * Search for financial institutions by name or routing number.
+     * 
+     * <p>This endpoint returns metadata about each matched institution, including basic identifying details
+     * (such as name, routing number, and address) and information about which payment services they
+     * support (e.g., ACH, RTP, and Wire).
+     * 
+     * <p>This can be used to validate a financial institution before initiating payment activity, or to check
+     * which payment rails are available for a given routing number.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/institutions.read` scope.
+     * 
+     * @param name Name of the financial institution. Either `name` or `routingNumber` is required.
+     * @param routingNumber Routing number for a financial institution. Either `routingNumber` or `name` is required.
+     * @param limit Maximum results returned by a search.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public SearchInstitutionsResponse searchInstitutions(
+            Optional<String> name, Optional<String> routingNumber,
+            Optional<Long> limit, Optional<Options> options) {
         SearchInstitutionsRequest request =
             SearchInstitutionsRequest
                 .builder()
@@ -100,7 +130,7 @@ public class Institutions {
                 .limit(limit)
                 .build();
         RequestOperation<SearchInstitutionsRequest, SearchInstitutionsResponse> operation
-              = new SearchInstitutions.Sync(sdkConfiguration, _headers);
+              = new SearchInstitutions.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -139,7 +169,7 @@ public class Institutions {
     @Deprecated
     public ListInstitutionsResponse searchDirect() {
         return search(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -164,6 +194,34 @@ public class Institutions {
     public ListInstitutionsResponse search(
             Optional<String> name, Optional<String> routingNumber,
             Optional<String> state, Optional<Long> limit) {
+        return search(name, routingNumber, state,
+            limit, Optional.empty());
+    }
+
+    /**
+     * This endpoint has been deprecated and will be removed in a future release. Use
+     * [/institutions](https://docs.moov.io/api/enrichment/institutions/get/).
+     * 
+     * <p>Search for institutions by either their name or routing number.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/fed.read` scope.
+     * 
+     * @param name Name of the financial institution. Either `name` or `routingNumber` is required.
+     * @param routingNumber Routing number for a financial institution. Either `routingNumber` or `name` is required.
+     * @param state The state where a financial institution is based.
+     * @param limit Maximum results returned by a search.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
+     */
+    @Deprecated
+    public ListInstitutionsResponse search(
+            Optional<String> name, Optional<String> routingNumber,
+            Optional<String> state, Optional<Long> limit,
+            Optional<Options> options) {
         ListInstitutionsRequest request =
             ListInstitutionsRequest
                 .builder()
@@ -173,7 +231,7 @@ public class Institutions {
                 .limit(limit)
                 .build();
         RequestOperation<ListInstitutionsRequest, ListInstitutionsResponse> operation
-              = new ListInstitutions.Sync(sdkConfiguration, _headers);
+              = new ListInstitutions.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -19,7 +19,9 @@ import io.moov.sdk.models.operations.UpsertUnderwritingResponse;
 import io.moov.sdk.operations.GetUnderwriting;
 import io.moov.sdk.operations.SaveUnderwriting;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class Underwriting {
@@ -61,13 +63,32 @@ public class Underwriting {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetUnderwritingResponse get(String accountID) {
+        return get(accountID, Optional.empty());
+    }
+
+    /**
+     * Retrieve underwriting associated with a given Moov account.
+     * 
+     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to
+     * learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param accountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetUnderwritingResponse get(String accountID, Optional<Options> options) {
         GetUnderwritingRequest request =
             GetUnderwritingRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<GetUnderwritingRequest, GetUnderwritingResponse> operation
-              = new GetUnderwriting.Sync(sdkConfiguration, _headers);
+              = new GetUnderwriting.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -103,6 +124,28 @@ public class Underwriting {
      * @throws RuntimeException subclass if the API call fails
      */
     public SaveUnderwritingResponse save(String accountID, UpsertUnderwriting upsertUnderwriting) {
+        return save(accountID, upsertUnderwriting, Optional.empty());
+    }
+
+    /**
+     * Create or update the account's underwriting.
+     * 
+     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to
+     * learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.write` scope.
+     * 
+     * @param accountID 
+     * @param upsertUnderwriting 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public SaveUnderwritingResponse save(
+            String accountID, UpsertUnderwriting upsertUnderwriting,
+            Optional<Options> options) {
         SaveUnderwritingRequest request =
             SaveUnderwritingRequest
                 .builder()
@@ -110,7 +153,7 @@ public class Underwriting {
                 .upsertUnderwriting(upsertUnderwriting)
                 .build();
         RequestOperation<SaveUnderwritingRequest, SaveUnderwritingResponse> operation
-              = new SaveUnderwriting.Sync(sdkConfiguration, _headers);
+              = new SaveUnderwriting.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -146,6 +189,28 @@ public class Underwriting {
      * @throws RuntimeException subclass if the API call fails
      */
     public UpsertUnderwritingResponse upsert(String accountID, UpdateUnderwriting updateUnderwriting) {
+        return upsert(accountID, updateUnderwriting, Optional.empty());
+    }
+
+    /**
+     * Create or update the account's underwriting.
+     * 
+     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to
+     * learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.write` scope.
+     * 
+     * @param accountID 
+     * @param updateUnderwriting 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpsertUnderwritingResponse upsert(
+            String accountID, UpdateUnderwriting updateUnderwriting,
+            Optional<Options> options) {
         UpsertUnderwritingRequest request =
             UpsertUnderwritingRequest
                 .builder()
@@ -153,7 +218,7 @@ public class Underwriting {
                 .updateUnderwriting(updateUnderwriting)
                 .build();
         RequestOperation<UpsertUnderwritingRequest, UpsertUnderwritingResponse> operation
-              = new io.moov.sdk.operations.UpsertUnderwriting.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.UpsertUnderwriting.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

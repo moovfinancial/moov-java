@@ -14,7 +14,9 @@ import io.moov.sdk.models.operations.ListWalletTransactionsResponse;
 import io.moov.sdk.operations.GetWalletTransaction;
 import io.moov.sdk.operations.ListWalletTransactions;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class WalletTransactions {
@@ -56,8 +58,27 @@ public class WalletTransactions {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListWalletTransactionsResponse list(ListWalletTransactionsRequest request) {
+        return list(request, Optional.empty());
+    }
+
+    /**
+     * List all the transactions associated with a particular Moov wallet.
+     * 
+     * <p>Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to
+     * learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListWalletTransactionsResponse list(ListWalletTransactionsRequest request, Optional<Options> options) {
         RequestOperation<ListWalletTransactionsRequest, ListWalletTransactionsResponse> operation
-              = new ListWalletTransactions.Sync(sdkConfiguration, _headers);
+              = new ListWalletTransactions.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -96,6 +117,30 @@ public class WalletTransactions {
     public GetWalletTransactionResponse get(
             String accountID, String walletID,
             String transactionID) {
+        return get(accountID, walletID, transactionID,
+            Optional.empty());
+    }
+
+    /**
+     * Get details on a specific wallet transaction.
+     * 
+     * <p>Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to
+     * learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
+     * @param accountID 
+     * @param walletID 
+     * @param transactionID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetWalletTransactionResponse get(
+            String accountID, String walletID,
+            String transactionID, Optional<Options> options) {
         GetWalletTransactionRequest request =
             GetWalletTransactionRequest
                 .builder()
@@ -104,7 +149,7 @@ public class WalletTransactions {
                 .transactionID(transactionID)
                 .build();
         RequestOperation<GetWalletTransactionRequest, GetWalletTransactionResponse> operation
-              = new GetWalletTransaction.Sync(sdkConfiguration, _headers);
+              = new GetWalletTransaction.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

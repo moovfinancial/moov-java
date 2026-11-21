@@ -19,7 +19,9 @@ import io.moov.sdk.operations.CreateBrand;
 import io.moov.sdk.operations.GetBrand;
 import io.moov.sdk.operations.UpsertBrand;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class Branding {
@@ -56,6 +58,25 @@ public class Branding {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateBrandResponse create(String accountID, BrandProperties brandProperties) {
+        return create(accountID, brandProperties, Optional.empty());
+    }
+
+    /**
+     * Create brand properties for the specified account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/branding.write` scope.
+     * 
+     * @param accountID 
+     * @param brandProperties 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateBrandResponse create(
+            String accountID, BrandProperties brandProperties,
+            Optional<Options> options) {
         CreateBrandRequest request =
             CreateBrandRequest
                 .builder()
@@ -63,7 +84,7 @@ public class Branding {
                 .brandProperties(brandProperties)
                 .build();
         RequestOperation<CreateBrandRequest, CreateBrandResponse> operation
-              = new CreateBrand.Sync(sdkConfiguration, _headers);
+              = new CreateBrand.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -93,6 +114,25 @@ public class Branding {
      * @throws RuntimeException subclass if the API call fails
      */
     public UpsertBrandResponse upsert(String accountID, BrandProperties brandProperties) {
+        return upsert(accountID, brandProperties, Optional.empty());
+    }
+
+    /**
+     * Create or replace brand properties for the specified account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/branding.write` scope.
+     * 
+     * @param accountID 
+     * @param brandProperties 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpsertBrandResponse upsert(
+            String accountID, BrandProperties brandProperties,
+            Optional<Options> options) {
         UpsertBrandRequest request =
             UpsertBrandRequest
                 .builder()
@@ -100,7 +140,7 @@ public class Branding {
                 .brandProperties(brandProperties)
                 .build();
         RequestOperation<UpsertBrandRequest, UpsertBrandResponse> operation
-              = new UpsertBrand.Sync(sdkConfiguration, _headers);
+              = new UpsertBrand.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -129,13 +169,29 @@ public class Branding {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetBrandResponse get(String accountID) {
+        return get(accountID, Optional.empty());
+    }
+
+    /**
+     * Get brand properties for the specified account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/branding.read` scope.
+     * 
+     * @param accountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetBrandResponse get(String accountID, Optional<Options> options) {
         GetBrandRequest request =
             GetBrandRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<GetBrandRequest, GetBrandResponse> operation
-              = new GetBrand.Sync(sdkConfiguration, _headers);
+              = new GetBrand.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

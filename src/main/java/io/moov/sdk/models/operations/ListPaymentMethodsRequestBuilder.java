@@ -9,8 +9,10 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.PaymentMethodType;
 import io.moov.sdk.operations.ListPaymentMethods;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.util.Optional;
 
 public class ListPaymentMethodsRequestBuilder {
@@ -18,6 +20,7 @@ public class ListPaymentMethodsRequestBuilder {
     private String accountID;
     private Optional<String> sourceID = Optional.empty();
     private Optional<? extends PaymentMethodType> paymentMethodType = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -54,6 +57,18 @@ public class ListPaymentMethodsRequestBuilder {
         this.paymentMethodType = paymentMethodType;
         return this;
     }
+                
+    public ListPaymentMethodsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public ListPaymentMethodsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private ListPaymentMethodsRequest buildRequest() {
@@ -66,9 +81,12 @@ public class ListPaymentMethodsRequestBuilder {
     }
 
     public ListPaymentMethodsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<ListPaymentMethodsRequest, ListPaymentMethodsResponse> operation
-              = new ListPaymentMethods.Sync(sdkConfiguration, _headers);
+              = new ListPaymentMethods.Sync(sdkConfiguration, options, _headers);
         ListPaymentMethodsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

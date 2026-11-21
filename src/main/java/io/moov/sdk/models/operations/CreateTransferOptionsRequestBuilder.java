@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateTransferOptions;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class CreateTransferOptionsRequestBuilder {
 
     private String accountID;
     private CreateTransferOptions createTransferOptions;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class CreateTransferOptionsRequestBuilder {
         this.createTransferOptions = createTransferOptions;
         return this;
     }
+                
+    public CreateTransferOptionsRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public CreateTransferOptionsRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private CreateTransferOptionsRequest buildRequest() {
@@ -44,9 +60,12 @@ public class CreateTransferOptionsRequestBuilder {
     }
 
     public CreateTransferOptionsResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<CreateTransferOptionsRequest, CreateTransferOptionsResponse> operation
-              = new io.moov.sdk.operations.CreateTransferOptions.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateTransferOptions.Sync(sdkConfiguration, options, _headers);
         CreateTransferOptionsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

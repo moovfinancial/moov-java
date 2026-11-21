@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetProduct;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetProductRequestBuilder {
 
     private String accountID;
     private String productID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class GetProductRequestBuilder {
         this.productID = productID;
         return this;
     }
+                
+    public GetProductRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetProductRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetProductRequest buildRequest() {
@@ -44,9 +60,12 @@ public class GetProductRequestBuilder {
     }
 
     public GetProductResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetProductRequest, GetProductResponse> operation
-              = new GetProduct.Sync(sdkConfiguration, _headers);
+              = new GetProduct.Sync(sdkConfiguration, options, _headers);
         GetProductRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

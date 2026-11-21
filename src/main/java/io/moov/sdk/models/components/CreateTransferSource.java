@@ -11,13 +11,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 /**
  * CreateTransferSource
  * 
- * <p>Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or
- * a `transferID`.
+ * <p>Where funds for a transfer originate. For the source, you must include exactly one of
+ * `paymentMethodID`, `paymentToken`, or `transferID`.
  */
 public class CreateTransferSource {
     /**
@@ -34,16 +35,20 @@ public class CreateTransferSource {
     @JsonProperty("paymentMethodID")
     private Optional<String> paymentMethodID;
 
-
+    /**
+     * A single-use payment token to use as the transfer's source.
+     * 
+     * <p>The payment is authorized when the transfer is created.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("paymentToken")
-    private Optional<String> paymentToken;
+    private Optional<? extends CreateTransferPaymentToken> paymentToken;
 
     @JsonCreator
     public CreateTransferSource(
             @JsonProperty("transferID") Optional<String> transferID,
             @JsonProperty("paymentMethodID") Optional<String> paymentMethodID,
-            @JsonProperty("paymentToken") Optional<String> paymentToken) {
+            @JsonProperty("paymentToken") Optional<? extends CreateTransferPaymentToken> paymentToken) {
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
         Utils.checkNotNull(paymentToken, "paymentToken");
@@ -71,9 +76,15 @@ public class CreateTransferSource {
         return paymentMethodID;
     }
 
+    /**
+     * A single-use payment token to use as the transfer's source.
+     * 
+     * <p>The payment is authorized when the transfer is created.
+     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> paymentToken() {
-        return paymentToken;
+    public Optional<CreateTransferPaymentToken> paymentToken() {
+        return (Optional<CreateTransferPaymentToken>) paymentToken;
     }
 
     public static Builder builder() {
@@ -117,14 +128,24 @@ public class CreateTransferSource {
         return this;
     }
 
-    public CreateTransferSource withPaymentToken(String paymentToken) {
+    /**
+     * A single-use payment token to use as the transfer's source.
+     * 
+     * <p>The payment is authorized when the transfer is created.
+     */
+    public CreateTransferSource withPaymentToken(CreateTransferPaymentToken paymentToken) {
         Utils.checkNotNull(paymentToken, "paymentToken");
         this.paymentToken = Optional.ofNullable(paymentToken);
         return this;
     }
 
 
-    public CreateTransferSource withPaymentToken(Optional<String> paymentToken) {
+    /**
+     * A single-use payment token to use as the transfer's source.
+     * 
+     * <p>The payment is authorized when the transfer is created.
+     */
+    public CreateTransferSource withPaymentToken(Optional<? extends CreateTransferPaymentToken> paymentToken) {
         Utils.checkNotNull(paymentToken, "paymentToken");
         this.paymentToken = paymentToken;
         return this;
@@ -166,7 +187,7 @@ public class CreateTransferSource {
 
         private Optional<String> paymentMethodID = Optional.empty();
 
-        private Optional<String> paymentToken = Optional.empty();
+        private Optional<? extends CreateTransferPaymentToken> paymentToken = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -209,13 +230,23 @@ public class CreateTransferSource {
         }
 
 
-        public Builder paymentToken(String paymentToken) {
+        /**
+         * A single-use payment token to use as the transfer's source.
+         * 
+         * <p>The payment is authorized when the transfer is created.
+         */
+        public Builder paymentToken(CreateTransferPaymentToken paymentToken) {
             Utils.checkNotNull(paymentToken, "paymentToken");
             this.paymentToken = Optional.ofNullable(paymentToken);
             return this;
         }
 
-        public Builder paymentToken(Optional<String> paymentToken) {
+        /**
+         * A single-use payment token to use as the transfer's source.
+         * 
+         * <p>The payment is authorized when the transfer is created.
+         */
+        public Builder paymentToken(Optional<? extends CreateTransferPaymentToken> paymentToken) {
             Utils.checkNotNull(paymentToken, "paymentToken");
             this.paymentToken = paymentToken;
             return this;

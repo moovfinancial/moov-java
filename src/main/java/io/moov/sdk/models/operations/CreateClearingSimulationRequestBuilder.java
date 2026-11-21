@@ -8,14 +8,18 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateClearingSimulation;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class CreateClearingSimulationRequestBuilder {
 
     private String accountID;
     private String authorizationID;
     private CreateClearingSimulation createClearingSimulation;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -40,6 +44,18 @@ public class CreateClearingSimulationRequestBuilder {
         this.createClearingSimulation = createClearingSimulation;
         return this;
     }
+                
+    public CreateClearingSimulationRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public CreateClearingSimulationRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private CreateClearingSimulationRequest buildRequest() {
@@ -52,9 +68,12 @@ public class CreateClearingSimulationRequestBuilder {
     }
 
     public CreateClearingSimulationResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<CreateClearingSimulationRequest, CreateClearingSimulationResponse> operation
-              = new io.moov.sdk.operations.CreateClearingSimulation.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.CreateClearingSimulation.Sync(sdkConfiguration, options, _headers);
         CreateClearingSimulationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

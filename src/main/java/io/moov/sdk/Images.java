@@ -36,6 +36,7 @@ import io.moov.sdk.operations.UpdateImage;
 import io.moov.sdk.operations.UpdateImageMetadata;
 import io.moov.sdk.operations.UploadImage;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -66,7 +67,8 @@ public class Images {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListImageMetadataResponse list(String accountID) {
-        return list(accountID, Optional.empty(), Optional.empty());
+        return list(accountID, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -81,6 +83,23 @@ public class Images {
     public ListImageMetadataResponse list(
             String accountID, Optional<Long> skip,
             Optional<Long> count) {
+        return list(accountID, skip, count,
+            Optional.empty());
+    }
+
+    /**
+     * List metadata for all images in the specified account.
+     * 
+     * @param accountID 
+     * @param skip 
+     * @param count 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListImageMetadataResponse list(
+            String accountID, Optional<Long> skip,
+            Optional<Long> count, Optional<Options> options) {
         ListImageMetadataRequest request =
             ListImageMetadataRequest
                 .builder()
@@ -89,7 +108,7 @@ public class Images {
                 .count(count)
                 .build();
         RequestOperation<ListImageMetadataRequest, ListImageMetadataResponse> operation
-              = new ListImageMetadata.Sync(sdkConfiguration, _headers);
+              = new ListImageMetadata.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -115,6 +134,23 @@ public class Images {
      * @throws RuntimeException subclass if the API call fails
      */
     public UploadImageResponse upload(String accountID, ImageUploadRequestMultiPart imageUploadRequestMultiPart) {
+        return upload(accountID, imageUploadRequestMultiPart, Optional.empty());
+    }
+
+    /**
+     * Upload a new PNG, JPEG, or WebP image with optional metadata.
+     * Duplicate images return the existing image's metadata with a 409 status. Requests larger than 16MB
+     * will be rejected.
+     * 
+     * @param accountID 
+     * @param imageUploadRequestMultiPart 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UploadImageResponse upload(
+            String accountID, ImageUploadRequestMultiPart imageUploadRequestMultiPart,
+            Optional<Options> options) {
         UploadImageRequest request =
             UploadImageRequest
                 .builder()
@@ -122,7 +158,7 @@ public class Images {
                 .imageUploadRequestMultiPart(imageUploadRequestMultiPart)
                 .build();
         RequestOperation<UploadImageRequest, UploadImageResponse> operation
-              = new UploadImage.Sync(sdkConfiguration, _headers);
+              = new UploadImage.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -144,6 +180,21 @@ public class Images {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetImageMetadataResponse getMetadata(String accountID, String imageID) {
+        return getMetadata(accountID, imageID, Optional.empty());
+    }
+
+    /**
+     * Retrieve metadata for a specific image by its ID.
+     * 
+     * @param accountID 
+     * @param imageID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetImageMetadataResponse getMetadata(
+            String accountID, String imageID,
+            Optional<Options> options) {
         GetImageMetadataRequest request =
             GetImageMetadataRequest
                 .builder()
@@ -151,7 +202,7 @@ public class Images {
                 .imageID(imageID)
                 .build();
         RequestOperation<GetImageMetadataRequest, GetImageMetadataResponse> operation
-              = new GetImageMetadata.Sync(sdkConfiguration, _headers);
+              = new GetImageMetadata.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -184,6 +235,27 @@ public class Images {
     public UpdateImageResponse update(
             String accountID, String imageID,
             ImageUploadRequestMultiPart imageUploadRequestMultiPart) {
+        return update(accountID, imageID, imageUploadRequestMultiPart,
+            Optional.empty());
+    }
+
+    /**
+     * Replace an existing image and, optionally, its metadata.
+     * 
+     * <p>This endpoint replaces the existing image with the new PNG, JPEG, or WebP. Omit
+     * the metadata form section to keep existing metadata. Duplicate images, and requests larger than 16MB
+     * will be rejected.
+     * 
+     * @param accountID 
+     * @param imageID 
+     * @param imageUploadRequestMultiPart 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateImageResponse update(
+            String accountID, String imageID,
+            ImageUploadRequestMultiPart imageUploadRequestMultiPart, Optional<Options> options) {
         UpdateImageRequest request =
             UpdateImageRequest
                 .builder()
@@ -192,7 +264,7 @@ public class Images {
                 .imageUploadRequestMultiPart(imageUploadRequestMultiPart)
                 .build();
         RequestOperation<UpdateImageRequest, UpdateImageResponse> operation
-              = new UpdateImage.Sync(sdkConfiguration, _headers);
+              = new UpdateImage.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -220,6 +292,24 @@ public class Images {
      * @throws RuntimeException subclass if the API call fails
      */
     public DeleteImageResponse delete(String accountID, String imageID) {
+        return delete(accountID, imageID, Optional.empty());
+    }
+
+    /**
+     * Disable an image by its ID.
+     * 
+     * <p>Disabled images are still be accessible via their public URL, and cannot be assigned
+     * to products or line-items.
+     * 
+     * @param accountID 
+     * @param imageID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DeleteImageResponse delete(
+            String accountID, String imageID,
+            Optional<Options> options) {
         DeleteImageRequest request =
             DeleteImageRequest
                 .builder()
@@ -227,7 +317,7 @@ public class Images {
                 .imageID(imageID)
                 .build();
         RequestOperation<DeleteImageRequest, DeleteImageResponse> operation
-              = new DeleteImage.Sync(sdkConfiguration, _headers);
+              = new DeleteImage.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -252,6 +342,23 @@ public class Images {
     public UpdateImageMetadataResponse updateMetadata(
             String accountID, String imageID,
             ImageMetadataRequest imageMetadataRequest) {
+        return updateMetadata(accountID, imageID, imageMetadataRequest,
+            Optional.empty());
+    }
+
+    /**
+     * Replace the metadata for an existing image.
+     * 
+     * @param accountID 
+     * @param imageID 
+     * @param imageMetadataRequest Request body for creating or updating image metadata.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateImageMetadataResponse updateMetadata(
+            String accountID, String imageID,
+            ImageMetadataRequest imageMetadataRequest, Optional<Options> options) {
         UpdateImageMetadataRequest request =
             UpdateImageMetadataRequest
                 .builder()
@@ -260,7 +367,7 @@ public class Images {
                 .imageMetadataRequest(imageMetadataRequest)
                 .build();
         RequestOperation<UpdateImageMetadataRequest, UpdateImageMetadataResponse> operation
-              = new UpdateImageMetadata.Sync(sdkConfiguration, _headers);
+              = new UpdateImageMetadata.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -281,7 +388,8 @@ public class Images {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetPublicImageResponse getPublic(String publicID) {
-        return getPublic(Optional.empty(), publicID, Optional.empty());
+        return getPublic(Optional.empty(), publicID, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -300,6 +408,27 @@ public class Images {
     public GetPublicImageResponse getPublic(
             Optional<String> ifNoneMatch, String publicID,
             Optional<String> size) {
+        return getPublic(ifNoneMatch, publicID, size,
+            Optional.empty());
+    }
+
+    /**
+     * Get an image by its public ID.
+     * 
+     * @param ifNoneMatch 
+     * @param publicID 
+     * @param size Optional parameter to request a resized version of the image (WxH).
+     *         
+     *         If either dimension is 0, the image will be scaled proportionally based on
+     *         the non-zero dimension. Dimensions are capped at 2048 pixels. A default size
+     *         of 400x400 will be used if this parameter is omitted.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetPublicImageResponse getPublic(
+            Optional<String> ifNoneMatch, String publicID,
+            Optional<String> size, Optional<Options> options) {
         GetPublicImageRequest request =
             GetPublicImageRequest
                 .builder()
@@ -308,7 +437,7 @@ public class Images {
                 .size(size)
                 .build();
         RequestOperation<GetPublicImageRequest, GetPublicImageResponse> operation
-              = new GetPublicImage.Sync(sdkConfiguration, _headers);
+              = new GetPublicImage.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

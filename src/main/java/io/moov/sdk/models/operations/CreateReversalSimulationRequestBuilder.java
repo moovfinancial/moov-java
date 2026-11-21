@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.CreateReversalSimulation;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class CreateReversalSimulationRequestBuilder {
 
     private String accountID;
     private String authorizationID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class CreateReversalSimulationRequestBuilder {
         this.authorizationID = authorizationID;
         return this;
     }
+                
+    public CreateReversalSimulationRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public CreateReversalSimulationRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private CreateReversalSimulationRequest buildRequest() {
@@ -44,9 +60,12 @@ public class CreateReversalSimulationRequestBuilder {
     }
 
     public CreateReversalSimulationResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<CreateReversalSimulationRequest, CreateReversalSimulationResponse> operation
-              = new CreateReversalSimulation.Sync(sdkConfiguration, _headers);
+              = new CreateReversalSimulation.Sync(sdkConfiguration, options, _headers);
         CreateReversalSimulationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

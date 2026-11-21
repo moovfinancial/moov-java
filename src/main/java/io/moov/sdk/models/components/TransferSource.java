@@ -60,18 +60,18 @@ public class TransferSource {
     private Optional<? extends TransferPaymentMethodsCard> card;
 
     /**
-     * Describes an Apple Pay token on a Moov account.
+     * Describes the Apple Pay token used as a transfer's source.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("applePay")
-    private Optional<? extends ApplePayResponse> applePay;
+    private Optional<? extends TransferApplePay> applePay;
 
     /**
-     * Describes a Google Pay token on a Moov account.
+     * Describes the Google Pay token used as a transfer's source.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("googlePay")
-    private Optional<? extends GooglePayResponse> googlePay;
+    private Optional<? extends TransferGooglePay> googlePay;
 
     /**
      * Describes payment card details captured with tap or in-person payment.
@@ -89,8 +89,8 @@ public class TransferSource {
             @JsonProperty("bankAccount") Optional<? extends TransferPaymentMethodsBankAccount> bankAccount,
             @JsonProperty("wallet") Optional<? extends TransferPaymentMethodsWallet> wallet,
             @JsonProperty("card") Optional<? extends TransferPaymentMethodsCard> card,
-            @JsonProperty("applePay") Optional<? extends ApplePayResponse> applePay,
-            @JsonProperty("googlePay") Optional<? extends GooglePayResponse> googlePay,
+            @JsonProperty("applePay") Optional<? extends TransferApplePay> applePay,
+            @JsonProperty("googlePay") Optional<? extends TransferGooglePay> googlePay,
             @JsonProperty("terminalCard") Optional<? extends TransferTerminalCard> terminalCard) {
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
@@ -174,21 +174,21 @@ public class TransferSource {
     }
 
     /**
-     * Describes an Apple Pay token on a Moov account.
+     * Describes the Apple Pay token used as a transfer's source.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<ApplePayResponse> applePay() {
-        return (Optional<ApplePayResponse>) applePay;
+    public Optional<TransferApplePay> applePay() {
+        return (Optional<TransferApplePay>) applePay;
     }
 
     /**
-     * Describes a Google Pay token on a Moov account.
+     * Describes the Google Pay token used as a transfer's source.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GooglePayResponse> googlePay() {
-        return (Optional<GooglePayResponse>) googlePay;
+    public Optional<TransferGooglePay> googlePay() {
+        return (Optional<TransferGooglePay>) googlePay;
     }
 
     /**
@@ -321,9 +321,9 @@ public class TransferSource {
     }
 
     /**
-     * Describes an Apple Pay token on a Moov account.
+     * Describes the Apple Pay token used as a transfer's source.
      */
-    public TransferSource withApplePay(ApplePayResponse applePay) {
+    public TransferSource withApplePay(TransferApplePay applePay) {
         Utils.checkNotNull(applePay, "applePay");
         this.applePay = Optional.ofNullable(applePay);
         return this;
@@ -331,18 +331,18 @@ public class TransferSource {
 
 
     /**
-     * Describes an Apple Pay token on a Moov account.
+     * Describes the Apple Pay token used as a transfer's source.
      */
-    public TransferSource withApplePay(Optional<? extends ApplePayResponse> applePay) {
+    public TransferSource withApplePay(Optional<? extends TransferApplePay> applePay) {
         Utils.checkNotNull(applePay, "applePay");
         this.applePay = applePay;
         return this;
     }
 
     /**
-     * Describes a Google Pay token on a Moov account.
+     * Describes the Google Pay token used as a transfer's source.
      */
-    public TransferSource withGooglePay(GooglePayResponse googlePay) {
+    public TransferSource withGooglePay(TransferGooglePay googlePay) {
         Utils.checkNotNull(googlePay, "googlePay");
         this.googlePay = Optional.ofNullable(googlePay);
         return this;
@@ -350,9 +350,9 @@ public class TransferSource {
 
 
     /**
-     * Describes a Google Pay token on a Moov account.
+     * Describes the Google Pay token used as a transfer's source.
      */
-    public TransferSource withGooglePay(Optional<? extends GooglePayResponse> googlePay) {
+    public TransferSource withGooglePay(Optional<? extends TransferGooglePay> googlePay) {
         Utils.checkNotNull(googlePay, "googlePay");
         this.googlePay = googlePay;
         return this;
@@ -440,9 +440,9 @@ public class TransferSource {
 
         private Optional<? extends TransferPaymentMethodsCard> card = Optional.empty();
 
-        private Optional<? extends ApplePayResponse> applePay = Optional.empty();
+        private Optional<? extends TransferApplePay> applePay = Optional.empty();
 
-        private Optional<? extends GooglePayResponse> googlePay = Optional.empty();
+        private Optional<? extends TransferGooglePay> googlePay = Optional.empty();
 
         private Optional<? extends TransferTerminalCard> terminalCard = Optional.empty();
 
@@ -567,18 +567,18 @@ public class TransferSource {
 
 
         /**
-         * Describes an Apple Pay token on a Moov account.
+         * Describes the Apple Pay token used as a transfer's source.
          */
-        public Builder applePay(ApplePayResponse applePay) {
+        public Builder applePay(TransferApplePay applePay) {
             Utils.checkNotNull(applePay, "applePay");
             this.applePay = Optional.ofNullable(applePay);
             return this;
         }
 
         /**
-         * Describes an Apple Pay token on a Moov account.
+         * Describes the Apple Pay token used as a transfer's source.
          */
-        public Builder applePay(Optional<? extends ApplePayResponse> applePay) {
+        public Builder applePay(Optional<? extends TransferApplePay> applePay) {
             Utils.checkNotNull(applePay, "applePay");
             this.applePay = applePay;
             return this;
@@ -586,18 +586,18 @@ public class TransferSource {
 
 
         /**
-         * Describes a Google Pay token on a Moov account.
+         * Describes the Google Pay token used as a transfer's source.
          */
-        public Builder googlePay(GooglePayResponse googlePay) {
+        public Builder googlePay(TransferGooglePay googlePay) {
             Utils.checkNotNull(googlePay, "googlePay");
             this.googlePay = Optional.ofNullable(googlePay);
             return this;
         }
 
         /**
-         * Describes a Google Pay token on a Moov account.
+         * Describes the Google Pay token used as a transfer's source.
          */
-        public Builder googlePay(Optional<? extends GooglePayResponse> googlePay) {
+        public Builder googlePay(Optional<? extends TransferGooglePay> googlePay) {
             Utils.checkNotNull(googlePay, "googlePay");
             this.googlePay = googlePay;
             return this;

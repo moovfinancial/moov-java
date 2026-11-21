@@ -14,8 +14,10 @@ import io.moov.sdk.models.operations.ListReceiptsResponse;
 import io.moov.sdk.operations.CreateReceipts;
 import io.moov.sdk.operations.ListReceipts;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
 import java.util.List;
+import java.util.Optional;
 
 
 public class Receipts {
@@ -51,8 +53,24 @@ public class Receipts {
      * @throws RuntimeException subclass if the API call fails
      */
     public CreateReceiptsResponse create(List<ReceiptRequest> request) {
+        return create(request, Optional.empty());
+    }
+
+    /**
+     * Create receipts for transfers and scheduled transfers.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateReceiptsResponse create(List<ReceiptRequest> request, Optional<Options> options) {
         RequestOperation<List<ReceiptRequest>, CreateReceiptsResponse> operation
-              = new CreateReceipts.Sync(sdkConfiguration, _headers);
+              = new CreateReceipts.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -81,13 +99,29 @@ public class Receipts {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListReceiptsResponse list(String id) {
+        return list(id, Optional.empty());
+    }
+
+    /**
+     * List receipts by transferID, scheduleID, or occurrenceID.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param id The transfer, schedule, or transfer occurrence ID to filter receipts by.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListReceiptsResponse list(String id, Optional<Options> options) {
         ListReceiptsRequest request =
             ListReceiptsRequest
                 .builder()
                 .id(id)
                 .build();
         RequestOperation<ListReceiptsRequest, ListReceiptsResponse> operation
-              = new ListReceipts.Sync(sdkConfiguration, _headers);
+              = new ListReceipts.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

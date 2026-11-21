@@ -57,6 +57,13 @@ Only use this endpoint if you have provided Moov with a copy of your PCI attesta
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/card-metadata.read` scope.
+* [tokenize](#tokenize) - Exchange card data for a single-use payment token. Use the token as `source.paymentToken.token` when
+[creating a transfer](https://docs.moov.io/api/money-movement/transfers/create/).
+
+Tokenizing does not link the card to an account, verify the card, or contact the card networks.
+The card is authorized when the transfer is created.
+
+Call this endpoint directly from the browser using Moov's card Drop, so card data never reaches your servers.
 
 ## link
 
@@ -465,3 +472,86 @@ public class Application {
 | models/errors/GenericError             | 400, 409                               | application/json                       |
 | models/errors/CardMetadataRequestError | 422                                    | application/json                       |
 | models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
+
+## tokenize
+
+Exchange card data for a single-use payment token. Use the token as `source.paymentToken.token` when
+[creating a transfer](https://docs.moov.io/api/money-movement/transfers/create/).
+
+Tokenizing does not link the card to an account, verify the card, or contact the card networks.
+The card is authorized when the transfer is created.
+
+Call this endpoint directly from the browser using Moov's card Drop, so card data never reaches your servers.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="createPaymentToken" method="post" path="/tokenize" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.*;
+import io.moov.sdk.models.errors.CreatePaymentTokenError;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.CreatePaymentTokenResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws GenericError, CreatePaymentTokenError, Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        CreatePaymentToken req = CreatePaymentToken.builder()
+                .card(CreatePaymentTokenCard.builder()
+                    .cardNumber("4111111111111111")
+                    .cardCvv("123")
+                    .expiration(CardExpiration.builder()
+                        .month("01")
+                        .year("21")
+                        .build())
+                    .billingAddress(CardAddress.builder()
+                        .postalCode("80301")
+                        .addressLine1("123 Main Street")
+                        .addressLine2("Apt 302")
+                        .city("Boulder")
+                        .stateOrProvince("CO")
+                        .country("US")
+                        .build())
+                    .holderName("Jules Jackson")
+                    .build())
+                .build();
+
+        CreatePaymentTokenResponse res = sdk.cards().tokenize()
+                .request(req)
+                .call();
+
+        if (res.paymentToken().isPresent()) {
+            System.out.println(res.paymentToken().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                       | Type                                                            | Required                                                        | Description                                                     |
+| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| `request`                                                       | [CreatePaymentToken](../../models/shared/CreatePaymentToken.md) | :heavy_check_mark:                                              | The request object to use for the request.                      |
+
+### Response
+
+**[CreatePaymentTokenResponse](../../models/operations/CreatePaymentTokenResponse.md)**
+
+### Errors
+
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| models/errors/GenericError            | 400, 409                              | application/json                      |
+| models/errors/CreatePaymentTokenError | 422                                   | application/json                      |
+| models/errors/APIException            | 4XX, 5XX                              | \*/\*                                 |

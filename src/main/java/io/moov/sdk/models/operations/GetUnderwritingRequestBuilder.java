@@ -8,12 +8,16 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetUnderwriting;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetUnderwritingRequestBuilder {
 
     private String accountID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -26,6 +30,18 @@ public class GetUnderwritingRequestBuilder {
         this.accountID = accountID;
         return this;
     }
+                
+    public GetUnderwritingRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetUnderwritingRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetUnderwritingRequest buildRequest() {
@@ -36,9 +52,12 @@ public class GetUnderwritingRequestBuilder {
     }
 
     public GetUnderwritingResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetUnderwritingRequest, GetUnderwritingResponse> operation
-              = new GetUnderwriting.Sync(sdkConfiguration, _headers);
+              = new GetUnderwriting.Sync(sdkConfiguration, options, _headers);
         GetUnderwritingRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

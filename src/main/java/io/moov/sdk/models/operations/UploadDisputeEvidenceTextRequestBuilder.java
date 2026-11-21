@@ -9,14 +9,18 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateEvidenceText;
 import io.moov.sdk.operations.UploadDisputeEvidenceText;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class UploadDisputeEvidenceTextRequestBuilder {
 
     private String accountID;
     private String disputeID;
     private CreateEvidenceText createEvidenceText;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -41,6 +45,18 @@ public class UploadDisputeEvidenceTextRequestBuilder {
         this.createEvidenceText = createEvidenceText;
         return this;
     }
+                
+    public UploadDisputeEvidenceTextRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public UploadDisputeEvidenceTextRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private UploadDisputeEvidenceTextRequest buildRequest() {
@@ -53,9 +69,12 @@ public class UploadDisputeEvidenceTextRequestBuilder {
     }
 
     public UploadDisputeEvidenceTextResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<UploadDisputeEvidenceTextRequest, UploadDisputeEvidenceTextResponse> operation
-              = new UploadDisputeEvidenceText.Sync(sdkConfiguration, _headers);
+              = new UploadDisputeEvidenceText.Sync(sdkConfiguration, options, _headers);
         UploadDisputeEvidenceTextRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

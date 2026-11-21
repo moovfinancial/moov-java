@@ -8,13 +8,17 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.DeleteInvoice;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class DeleteInvoiceRequestBuilder {
 
     private String accountID;
     private String invoiceID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -33,6 +37,18 @@ public class DeleteInvoiceRequestBuilder {
         this.invoiceID = invoiceID;
         return this;
     }
+                
+    public DeleteInvoiceRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public DeleteInvoiceRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private DeleteInvoiceRequest buildRequest() {
@@ -44,9 +60,12 @@ public class DeleteInvoiceRequestBuilder {
     }
 
     public DeleteInvoiceResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<DeleteInvoiceRequest, DeleteInvoiceResponse> operation
-              = new DeleteInvoice.Sync(sdkConfiguration, _headers);
+              = new DeleteInvoice.Sync(sdkConfiguration, options, _headers);
         DeleteInvoiceRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

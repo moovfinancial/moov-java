@@ -8,12 +8,16 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetTerminalApplication;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetTerminalApplicationRequestBuilder {
 
     private String terminalApplicationID;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -26,6 +30,18 @@ public class GetTerminalApplicationRequestBuilder {
         this.terminalApplicationID = terminalApplicationID;
         return this;
     }
+                
+    public GetTerminalApplicationRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetTerminalApplicationRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetTerminalApplicationRequest buildRequest() {
@@ -36,9 +52,12 @@ public class GetTerminalApplicationRequestBuilder {
     }
 
     public GetTerminalApplicationResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetTerminalApplicationRequest, GetTerminalApplicationResponse> operation
-              = new GetTerminalApplication.Sync(sdkConfiguration, _headers);
+              = new GetTerminalApplication.Sync(sdkConfiguration, options, _headers);
         GetTerminalApplicationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -8,8 +8,10 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetBankAccountAttestationEligibility;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -18,6 +20,7 @@ public class GetBankAccountAttestationEligibilityRequestBuilder {
     private String accountID;
     private String bankAccountID;
     private Optional<LocalDate> attestedAt = Optional.empty();
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -48,6 +51,18 @@ public class GetBankAccountAttestationEligibilityRequestBuilder {
         this.attestedAt = attestedAt;
         return this;
     }
+                
+    public GetBankAccountAttestationEligibilityRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetBankAccountAttestationEligibilityRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private GetBankAccountAttestationEligibilityRequest buildRequest() {
@@ -60,9 +75,12 @@ public class GetBankAccountAttestationEligibilityRequestBuilder {
     }
 
     public GetBankAccountAttestationEligibilityResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<GetBankAccountAttestationEligibilityRequest, GetBankAccountAttestationEligibilityResponse> operation
-              = new GetBankAccountAttestationEligibility.Sync(sdkConfiguration, _headers);
+              = new GetBankAccountAttestationEligibility.Sync(sdkConfiguration, options, _headers);
         GetBankAccountAttestationEligibilityRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

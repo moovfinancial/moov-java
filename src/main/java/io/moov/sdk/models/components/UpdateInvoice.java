@@ -53,7 +53,7 @@ public class UpdateInvoice {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
-    private Optional<? extends InvoiceStatus> status;
+    private Optional<? extends UpdateInvoiceStatus> status;
 
     /**
      * Payment options to update on the invoice.
@@ -73,7 +73,7 @@ public class UpdateInvoice {
             @JsonProperty("lineItems") Optional<? extends CreateInvoiceLineItemsUpdate> lineItems,
             @JsonProperty("invoiceDate") JsonNullable<OffsetDateTime> invoiceDate,
             @JsonProperty("dueDate") JsonNullable<OffsetDateTime> dueDate,
-            @JsonProperty("status") Optional<? extends InvoiceStatus> status,
+            @JsonProperty("status") Optional<? extends UpdateInvoiceStatus> status,
             @JsonProperty("payment") Optional<? extends InvoicePaymentOptionsUpdate> payment,
             @JsonProperty("amountDetails") Optional<? extends AmountDetailsUpdate> amountDetails) {
         Utils.checkNotNull(description, "description");
@@ -135,8 +135,8 @@ public class UpdateInvoice {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<InvoiceStatus> status() {
-        return (Optional<InvoiceStatus>) status;
+    public Optional<UpdateInvoiceStatus> status() {
+        return (Optional<UpdateInvoiceStatus>) status;
     }
 
     /**
@@ -226,7 +226,7 @@ public class UpdateInvoice {
      * - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid`
      * finalizes the invoice and sends an email with a payment link to the customer.
      */
-    public UpdateInvoice withStatus(InvoiceStatus status) {
+    public UpdateInvoice withStatus(UpdateInvoiceStatus status) {
         Utils.checkNotNull(status, "status");
         this.status = Optional.ofNullable(status);
         return this;
@@ -244,7 +244,7 @@ public class UpdateInvoice {
      * - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid`
      * finalizes the invoice and sends an email with a payment link to the customer.
      */
-    public UpdateInvoice withStatus(Optional<? extends InvoiceStatus> status) {
+    public UpdateInvoice withStatus(Optional<? extends UpdateInvoiceStatus> status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
@@ -332,7 +332,7 @@ public class UpdateInvoice {
 
         private JsonNullable<OffsetDateTime> dueDate = JsonNullable.undefined();
 
-        private Optional<? extends InvoiceStatus> status = Optional.empty();
+        private Optional<? extends UpdateInvoiceStatus> status = Optional.empty();
 
         private Optional<? extends InvoicePaymentOptionsUpdate> payment = Optional.empty();
 
@@ -412,7 +412,7 @@ public class UpdateInvoice {
          * - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid`
          * finalizes the invoice and sends an email with a payment link to the customer.
          */
-        public Builder status(InvoiceStatus status) {
+        public Builder status(UpdateInvoiceStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = Optional.ofNullable(status);
             return this;
@@ -429,7 +429,7 @@ public class UpdateInvoice {
          * - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid`
          * finalizes the invoice and sends an email with a payment link to the customer.
          */
-        public Builder status(Optional<? extends InvoiceStatus> status) {
+        public Builder status(Optional<? extends UpdateInvoiceStatus> status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;

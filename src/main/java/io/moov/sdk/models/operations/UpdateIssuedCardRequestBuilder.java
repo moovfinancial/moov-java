@@ -8,14 +8,18 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpdateIssuedCard;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
+import java.time.Duration;
+import java.util.Optional;
 
 public class UpdateIssuedCardRequestBuilder {
 
     private String accountID;
     private String issuedCardID;
     private UpdateIssuedCard updateIssuedCard;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -40,6 +44,18 @@ public class UpdateIssuedCardRequestBuilder {
         this.updateIssuedCard = updateIssuedCard;
         return this;
     }
+                
+    public UpdateIssuedCardRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public UpdateIssuedCardRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
 
     private UpdateIssuedCardRequest buildRequest() {
@@ -52,9 +68,12 @@ public class UpdateIssuedCardRequestBuilder {
     }
 
     public UpdateIssuedCardResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<UpdateIssuedCardRequest, UpdateIssuedCardResponse> operation
-              = new io.moov.sdk.operations.UpdateIssuedCard.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.UpdateIssuedCard.Sync(sdkConfiguration, options, _headers);
         UpdateIssuedCardRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

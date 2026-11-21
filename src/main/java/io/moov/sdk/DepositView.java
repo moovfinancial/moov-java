@@ -11,7 +11,9 @@ import io.moov.sdk.models.operations.CreateDepositAccountRequestBuilder;
 import io.moov.sdk.models.operations.CreateDepositAccountResponse;
 import io.moov.sdk.operations.CreateDepositAccount;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class DepositView {
@@ -62,6 +64,34 @@ public class DepositView {
     public CreateDepositAccountResponse create(
             String accountID, SourceSystem xSourceSystem,
             byte[] requestBody) {
+        return create(accountID, xSourceSystem, requestBody,
+            Optional.empty());
+    }
+
+    /**
+     * Ingest a deposit account into the deposit view from a core banking source system.
+     * 
+     * <p>The request body is a raw byte payload whose format depends on the core banking
+     * system that produced it. Set the `X-Source-System` header to identify that system
+     * so the payload can be parsed correctly.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.write` scope.
+     * 
+     * @param accountID 
+     * @param xSourceSystem Identifies the core banking source system that produced the deposit account payload.
+     *         
+     *         The expected format of the request body depends on this value, so it must be supplied
+     *         in the `X-Source-System` header on every request.
+     * @param requestBody 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateDepositAccountResponse create(
+            String accountID, SourceSystem xSourceSystem,
+            byte[] requestBody, Optional<Options> options) {
         CreateDepositAccountRequest request =
             CreateDepositAccountRequest
                 .builder()
@@ -70,7 +100,7 @@ public class DepositView {
                 .requestBody(requestBody)
                 .build();
         RequestOperation<CreateDepositAccountRequest, CreateDepositAccountResponse> operation
-              = new CreateDepositAccount.Sync(sdkConfiguration, _headers);
+              = new CreateDepositAccount.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

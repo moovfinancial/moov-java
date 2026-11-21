@@ -9,11 +9,15 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CardMetadataRequest;
 import io.moov.sdk.operations.GetCardMetadata;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import io.moov.sdk.utils.Utils;
+import java.time.Duration;
+import java.util.Optional;
 
 public class GetCardMetadataRequestBuilder {
 
     private CardMetadataRequest request;
+    private Optional<Duration> timeout = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -26,11 +30,26 @@ public class GetCardMetadataRequestBuilder {
         this.request = request;
         return this;
     }
+                
+    public GetCardMetadataRequestBuilder timeout(Duration timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = Optional.of(timeout);
+        return this;
+    }
+
+    public GetCardMetadataRequestBuilder timeout(Optional<Duration> timeout) {
+        Utils.checkNotNull(timeout, "timeout");
+        this.timeout = timeout;
+        return this;
+    }
 
     public GetCardMetadataResponse call() {
-        
+        Optional<Options> options = Optional.of(Options.builder()
+            .timeout(timeout)
+            .build());
+
         RequestOperation<CardMetadataRequest, GetCardMetadataResponse> operation
-              = new GetCardMetadata.Sync(sdkConfiguration, _headers);
+              = new GetCardMetadata.Sync(sdkConfiguration, options, _headers);
 
         return operation.handleResponse(operation.doRequest(request));
     }

@@ -6,9 +6,12 @@ package io.moov.sdk;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.models.components.CardMetadataRequest;
+import io.moov.sdk.models.components.CreatePaymentToken;
 import io.moov.sdk.models.components.LinkCard;
 import io.moov.sdk.models.components.LinkCardWaitFor;
 import io.moov.sdk.models.components.UpdateCard;
+import io.moov.sdk.models.operations.CreatePaymentTokenRequestBuilder;
+import io.moov.sdk.models.operations.CreatePaymentTokenResponse;
 import io.moov.sdk.models.operations.DisableCardRequest;
 import io.moov.sdk.models.operations.DisableCardRequestBuilder;
 import io.moov.sdk.models.operations.DisableCardResponse;
@@ -31,6 +34,7 @@ import io.moov.sdk.operations.GetCard;
 import io.moov.sdk.operations.GetCardMetadata;
 import io.moov.sdk.operations.ListCards;
 import io.moov.sdk.utils.Headers;
+import io.moov.sdk.utils.Options;
 import java.lang.String;
 import java.util.Optional;
 
@@ -109,7 +113,8 @@ public class Cards {
      * @throws RuntimeException subclass if the API call fails
      */
     public LinkCardResponse link(String accountID, LinkCard linkCard) {
-        return link(Optional.empty(), accountID, linkCard);
+        return link(Optional.empty(), accountID, linkCard,
+            Optional.empty());
     }
 
     /**
@@ -148,6 +153,47 @@ public class Cards {
     public LinkCardResponse link(
             Optional<? extends LinkCardWaitFor> xWaitFor, String accountID,
             LinkCard linkCard) {
+        return link(xWaitFor, accountID, linkCard,
+            Optional.empty());
+    }
+
+    /**
+     * Link a card to an existing Moov account.
+     * 
+     * <p>Read our [accept card payments
+     * guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more.
+     * 
+     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
+     * 
+     * <p>During card linking, the provided data will be verified by submitting a $0 authorization (account
+     * verification) request.
+     * If `merchantAccountID` is provided, the authorization request will contain that account's statement
+     * descriptor and address.
+     * Otherwise, the platform account's profile will be used. If no statement descriptor has been set, the
+     * authorization will
+     * use the account's name instead.
+     * 
+     * <p>It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if
+     * the newly linked
+     * card is intended to be used right away. If this header is not included, the caller will need to poll
+     * the [List Payment
+     * Methods](https://docs.moov.io/api/sources/payment-methods/list/)
+     * endpoint to wait for the new payment methods to be available for use.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * 
+     * @param xWaitFor 
+     * @param accountID 
+     * @param linkCard 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public LinkCardResponse link(
+            Optional<? extends LinkCardWaitFor> xWaitFor, String accountID,
+            LinkCard linkCard, Optional<Options> options) {
         LinkCardRequest request =
             LinkCardRequest
                 .builder()
@@ -156,7 +202,7 @@ public class Cards {
                 .linkCard(linkCard)
                 .build();
         RequestOperation<LinkCardRequest, LinkCardResponse> operation
-              = new io.moov.sdk.operations.LinkCard.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.LinkCard.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -191,13 +237,32 @@ public class Cards {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListCardsResponse list(String accountID) {
+        return list(accountID, Optional.empty());
+    }
+
+    /**
+     * List all the active cards associated with a Moov account.
+     * 
+     * <p>Read our [accept card payments
+     * guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/cards.read` scope.
+     * 
+     * @param accountID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListCardsResponse list(String accountID, Optional<Options> options) {
         ListCardsRequest request =
             ListCardsRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<ListCardsRequest, ListCardsResponse> operation
-              = new ListCards.Sync(sdkConfiguration, _headers);
+              = new ListCards.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -233,6 +298,28 @@ public class Cards {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetCardResponse get(String accountID, String cardID) {
+        return get(accountID, cardID, Optional.empty());
+    }
+
+    /**
+     * Fetch a specific card associated with a Moov account.
+     * 
+     * <p>Read our [accept card payments
+     * guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/cards.read` scope.
+     * 
+     * @param accountID 
+     * @param cardID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetCardResponse get(
+            String accountID, String cardID,
+            Optional<Options> options) {
         GetCardRequest request =
             GetCardRequest
                 .builder()
@@ -240,7 +327,7 @@ public class Cards {
                 .cardID(cardID)
                 .build();
         RequestOperation<GetCardRequest, GetCardResponse> operation
-              = new GetCard.Sync(sdkConfiguration, _headers);
+              = new GetCard.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -295,6 +382,38 @@ public class Cards {
     public UpdateCardResponse update(
             String accountID, String cardID,
             UpdateCard updateCard) {
+        return update(accountID, cardID, updateCard,
+            Optional.empty());
+    }
+
+    /**
+     * Update a linked card and/or resubmit it for verification.
+     * 
+     * <p>If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the
+     * card. Updating the expiration
+     * date or
+     * address will update the information stored on file for the card but will not be verified.
+     * 
+     * <p>Read our [accept card payments
+     * guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#reverify-a-card) to learn
+     * more.
+     * 
+     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * 
+     * @param accountID 
+     * @param cardID 
+     * @param updateCard 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateCardResponse update(
+            String accountID, String cardID,
+            UpdateCard updateCard, Optional<Options> options) {
         UpdateCardRequest request =
             UpdateCardRequest
                 .builder()
@@ -303,7 +422,7 @@ public class Cards {
                 .updateCard(updateCard)
                 .build();
         RequestOperation<UpdateCardRequest, UpdateCardResponse> operation
-              = new io.moov.sdk.operations.UpdateCard.Sync(sdkConfiguration, _headers);
+              = new io.moov.sdk.operations.UpdateCard.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -333,6 +452,25 @@ public class Cards {
      * @throws RuntimeException subclass if the API call fails
      */
     public DisableCardResponse disable(String accountID, String cardID) {
+        return disable(accountID, cardID, Optional.empty());
+    }
+
+    /**
+     * Disables a card associated with a Moov account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * 
+     * @param accountID 
+     * @param cardID 
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public DisableCardResponse disable(
+            String accountID, String cardID,
+            Optional<Options> options) {
         DisableCardRequest request =
             DisableCardRequest
                 .builder()
@@ -340,7 +478,7 @@ public class Cards {
                 .cardID(cardID)
                 .build();
         RequestOperation<DisableCardRequest, DisableCardResponse> operation
-              = new DisableCard.Sync(sdkConfiguration, _headers);
+              = new DisableCard.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -373,8 +511,81 @@ public class Cards {
      * @throws RuntimeException subclass if the API call fails
      */
     public GetCardMetadataResponse getMetadata(CardMetadataRequest request) {
+        return getMetadata(request, Optional.empty());
+    }
+
+    /**
+     * Look up metadata for a card without linking it to a Moov account.
+     * 
+     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/card-metadata.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetCardMetadataResponse getMetadata(CardMetadataRequest request, Optional<Options> options) {
         RequestOperation<CardMetadataRequest, GetCardMetadataResponse> operation
-              = new GetCardMetadata.Sync(sdkConfiguration, _headers);
+              = new GetCardMetadata.Sync(sdkConfiguration, options, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Exchange card data for a single-use payment token. Use the token as `source.paymentToken.token` when
+     * [creating a transfer](https://docs.moov.io/api/money-movement/transfers/create/).
+     * 
+     * <p>Tokenizing does not link the card to an account, verify the card, or contact the card networks.
+     * The card is authorized when the transfer is created.
+     * 
+     * <p>Call this endpoint directly from the browser using Moov's card Drop, so card data never reaches your
+     * servers.
+     * 
+     * @return The call builder
+     */
+    public CreatePaymentTokenRequestBuilder tokenize() {
+        return new CreatePaymentTokenRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Exchange card data for a single-use payment token. Use the token as `source.paymentToken.token` when
+     * [creating a transfer](https://docs.moov.io/api/money-movement/transfers/create/).
+     * 
+     * <p>Tokenizing does not link the card to an account, verify the card, or contact the card networks.
+     * The card is authorized when the transfer is created.
+     * 
+     * <p>Call this endpoint directly from the browser using Moov's card Drop, so card data never reaches your
+     * servers.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreatePaymentTokenResponse tokenize(CreatePaymentToken request) {
+        return tokenize(request, Optional.empty());
+    }
+
+    /**
+     * Exchange card data for a single-use payment token. Use the token as `source.paymentToken.token` when
+     * [creating a transfer](https://docs.moov.io/api/money-movement/transfers/create/).
+     * 
+     * <p>Tokenizing does not link the card to an account, verify the card, or contact the card networks.
+     * The card is authorized when the transfer is created.
+     * 
+     * <p>Call this endpoint directly from the browser using Moov's card Drop, so card data never reaches your
+     * servers.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreatePaymentTokenResponse tokenize(CreatePaymentToken request, Optional<Options> options) {
+        RequestOperation<CreatePaymentToken, CreatePaymentTokenResponse> operation
+              = new io.moov.sdk.operations.CreatePaymentToken.Sync(sdkConfiguration, options, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
